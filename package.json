@@ -1,4 +1,7 @@
 {
+  "dependencies": {
+    "@nestjs/mapped-types": "*"
+  },
     "name": "full-stack-turbo",
     "private": true,
     "devDependencies": {
