@@ -1,0 +1,92 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Users {
+  id String @id @default(cuid())
+  username String @unique
+  email String @unique
+  password String
+  avatarUrl String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  chats ChatMember[]
+  messages Message[]
+  messageStatus MessageStatus[]
+}
+
+model Chat {
+  id String @id @default(cuid())
+  name String?
+  isGroup Boolean @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  members ChatMember[]
+  messages Message[]
+}
+
+model ChatMember {
+  id String @id @default(cuid())
+  user Users @relation(fields: [userId], references: [id])
+  userId String
+  chat Chat @relation(fields: [chatId], references: [id])
+  chatId String
+  joinedAt DateTime @default(now())
+
+  @@unique([userId, chatId])
+}
+
+model Message {
+    id String @id @default(cuid())
+    chat Chat @relation(fields: [chatId], references: [id], onDelete: Cascade)
+    chatId String
+    sender Users @relation(fields: [senderId], references: [id], onDelete: Cascade)
+    senderId String
+    content String
+    type MessageType @default(TEXT)
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    messageStatus MessageStatus[]
+    attachments Attachment[]
+
+    @@index([chatId])
+    @@index([senderId])
+}
+
+model MessageStatus {
+    id String @id @default(cuid())
+    message Message @relation(fields: [messageId], references: [id])
+    messageId String
+    user Users @relation(fields: [userId], references: [id])
+    userId String
+    readAt DateTime?
+}
+
+model Attachment {
+      id String @id @default(cuid())
+    message Message @relation(fields: [messageId], references: [id])
+    messageId String
+    url String
+    type String
+    createdAt DateTime @default(now())
+}
+
+enum MessageType {
+  TEXT
+  IMAGE
+  VIDEO
+  FILE
+}
