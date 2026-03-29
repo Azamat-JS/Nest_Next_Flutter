@@ -1,5 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
+import { NotFoundError } from 'rxjs';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
@@ -24,7 +25,7 @@ export class UsersService {
             where: { id }
         });
         if (!foundUser) {
-            throw new Error('User not found');
+            throw new NotFoundException('User not found');
         }
         return this.prisma.users.update({
             where: { id },
