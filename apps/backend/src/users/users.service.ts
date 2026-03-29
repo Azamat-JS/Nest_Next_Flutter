@@ -17,4 +17,20 @@ export class UsersService {
             }
         })
     }
+
+    async updateUser(id: string, updateUserInput: Prisma.UsersUpdateInput) {
+
+        const foundUser = await this.prisma.users.findUnique({
+            where: { id }
+        });
+        if (!foundUser) {
+            throw new Error('User not found');
+        }
+        return this.prisma.users.update({
+            where: { id },
+            data: {
+                ...updateUserInput,
+            }
+        })
+    }
 }
