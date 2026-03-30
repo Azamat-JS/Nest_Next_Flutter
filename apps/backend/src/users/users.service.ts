@@ -11,6 +11,16 @@ export class UsersService {
         return this.prisma.users.findMany({});
     }
 
+    async getUserById(id: string) {
+        const foundUser = await this.prisma.users.findUnique({
+            where: { id }
+        });
+        if (!foundUser) {
+            throw new NotFoundException('User not found');
+        }
+        return foundUser;
+    }
+
     async createUser(createUserInput: Prisma.UsersCreateInput) {
         const hashedPassword = await bcrypt.hash(createUserInput.password, 10);
         createUserInput.password = hashedPassword;
@@ -36,4 +46,18 @@ export class UsersService {
             }
         })
     }
+
+    async deleteUser(id: string) {
+        const foundUser = await this.prisma.users.findUnique({
+            where: { id }
+        })
+        if (!foundUser) {
+            throw new NotFoundException('User not found');
+        }
+        await this.prisma.users.delete({
+            where: { id }
+        });
+        return { message: 'User deleted successfully' };
+    }
+
 }
