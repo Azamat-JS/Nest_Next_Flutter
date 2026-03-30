@@ -17,7 +17,7 @@ export function CardDemo() {
             <CardHeader>
                 <CardTitle>Login to your account</CardTitle>
                 <CardDescription>
-                    Enter your email below to login to your account
+                    Enter your username and email below to login to your account
                 </CardDescription>
                 <CardAction>
                     <Button variant="link">Sign Up</Button>
@@ -26,6 +26,15 @@ export function CardDemo() {
             <CardContent>
                 <form>
                     <div className="flex flex-col gap-6">
+                        <div className="grid gap-2">
+                            <Label htmlFor="email">Username</Label>
+                            <Input
+                                id="email"
+                                type="email"
+                                placeholder="Johndoe"
+                                required
+                            />
+                        </div>
                         <div className="grid gap-2">
                             <Label htmlFor="email">Email</Label>
                             <Input
