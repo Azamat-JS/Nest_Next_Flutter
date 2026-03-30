@@ -1,0 +1,109 @@
+
+> frontend@0.1.0 dev /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend
+> next dev -p 4000
+
+[1m[38;2;173;127;168m▲ Next.js 16.2.1[39m[22m (Turbopack)
+- Local:         http://localhost:4000
+- Network:       http://192.168.13.88:4000
+- Environments: .env.local
+[32m[1m✓[22m[39m Ready in 271ms
+[33m[1m⚠[22m[39m Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /Users/azamatabdullayev/Desktop/full-stack-turbo/pnpm-workspace.yaml as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend/pnpm-workspace.yaml
+
+
+ GET / [32m200[39m in 2.5s[2m (next.js: 2.5s, application-code: 80ms)[22m
+[36m[browser][39m [33mImage with src "http://localhost:4000/vercel.svg" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.[39m
+[32m[1m✓[22m[39m Compiled in 232ms
+ GET / [32m200[39m in 17ms[2m (next.js: 4ms, application-code: 13ms)[22m
+ GET /logo.png [33m404[39m in 118ms[2m (next.js: 106ms, application-code: 13ms)[22m
+[31m[1m⨯[22m[39m The requested resource isn't a valid image for /logo.png received [1mnull[22m
+ GET / [32m200[39m in 113ms[2m (next.js: 39ms, application-code: 74ms)[22m
+ GET / [32m200[39m in 15ms[2m (next.js: 2ms, application-code: 13ms)[22m
+ GET / [32m200[39m in 56ms[2m (next.js: 1339µs, application-code: 55ms)[22m
+ GET / [32m200[39m in 16ms[2m (next.js: 4ms, application-code: 12ms)[22m
+ GET / [32m200[39m in 17ms[2m (next.js: 3ms, application-code: 14ms)[22m
+ GET / [32m200[39m in 17ms[2m (next.js: 5ms, application-code: 12ms)[22m
+ GET / [32m200[39m in 19ms[2m (next.js: 7ms, application-code: 12ms)[22m
+ GET / [32m200[39m in 38ms[2m (next.js: 5ms, application-code: 33ms)[22m
+ GET / [32m200[39m in 22ms[2m (next.js: 5ms, application-code: 17ms)[22m
+ GET / [32m200[39m in 16ms[2m (next.js: 4ms, application-code: 13ms)[22m
+ GET / [32m200[39m in 13ms[2m (next.js: 3ms, application-code: 10ms)[22m
+ GET / [32m200[39m in 13ms[2m (next.js: 3ms, application-code: 10ms)[22m
+ GET / [32m200[39m in 13ms[2m (next.js: 3ms, application-code: 10ms)[22m
+ GET / [32m200[39m in 18ms[2m (next.js: 1350µs, application-code: 17ms)[22m
+ GET / [32m200[39m in 42ms[2m (next.js: 5ms, application-code: 37ms)[22m
+ GET / [32m200[39m in 19ms[2m (next.js: 6ms, application-code: 13ms)[22m
+ GET / [32m200[39m in 14ms[2m (next.js: 3ms, application-code: 11ms)[22m
+ GET / [32m200[39m in 16ms[2m (next.js: 3ms, application-code: 13ms)[22m
+ GET / [32m200[39m in 31ms[2m (next.js: 3ms, application-code: 28ms)[22m
+[32m[1m✓[22m[39m Compiled in 88ms
+ GET / [32m200[39m in 15ms[2m (next.js: 3ms, application-code: 12ms)[22m
+ GET / [32m200[39m in 13ms[2m (next.js: 3ms, application-code: 10ms)[22m
+[32m[1m✓[22m[39m Compiled in 20ms
+[32m[1m✓[22m[39m Compiled in 28ms
+ GET / [32m200[39m in 37ms[2m (next.js: 5ms, application-code: 32ms)[22m
+[32m[1m✓[22m[39m Compiled in 24ms
+[32m[1m✓[22m[39m Compiled in 20ms
+[32m[1m✓[22m[39m Compiled in 14ms
+[32m[1m✓[22m[39m Compiled in 16ms
+ GET / [32m200[39m in 147ms[2m (next.js: 54ms, application-code: 93ms)[22m
+ GET / [32m200[39m in 77ms[2m (next.js: 29ms, application-code: 48ms)[22m
+ GET / [32m200[39m in 23ms[2m (next.js: 1491µs, application-code: 22ms)[22m
+ GET / [32m200[39m in 7ms[2m (next.js: 900µs, application-code: 6ms)[22m
+ GET / [32m200[39m in 7ms[2m (next.js: 807µs, application-code: 6ms)[22m
+ GET / [32m200[39m in 14ms[2m (next.js: 3ms, application-code: 11ms)[22m
+ GET / [32m200[39m in 92ms[2m (next.js: 3ms, application-code: 89ms)[22m
+ GET / [32m200[39m in 38ms[2m (next.js: 4ms, application-code: 33ms)[22m
+ GET / [32m200[39m in 74ms[2m (next.js: 5ms, application-code: 70ms)[22m
+ GET / [32m200[39m in 14ms[2m (next.js: 2ms, application-code: 12ms)[22m
+ GET / [32m200[39m in 14ms[2m (next.js: 2ms, application-code: 12ms)[22m
+ GET / [32m200[39m in 15ms[2m (next.js: 3ms, application-code: 13ms)[22m
+ GET / [32m200[39m in 151ms[2m (next.js: 32ms, application-code: 118ms)[22m
+ GET / [32m200[39m in 14ms[2m (next.js: 3ms, application-code: 11ms)[22m
+ GET / [32m200[39m in 14ms[2m (next.js: 2ms, application-code: 11ms)[22m
+ GET / [32m200[39m in 13ms[2m (next.js: 2ms, application-code: 11ms)[22m
+ GET / [32m200[39m in 14ms[2m (next.js: 2ms, application-code: 12ms)[22m
+ GET / [32m200[39m in 14ms[2m (next.js: 2ms, application-code: 11ms)[22m
+ GET / [32m200[39m in 16ms[2m (next.js: 2ms, application-code: 14ms)[22m
+ GET / [32m200[39m in 16ms[2m (next.js: 3ms, application-code: 13ms)[22m
+ GET / [32m200[39m in 24ms[2m (next.js: 3ms, application-code: 22ms)[22m
+ GET / [32m200[39m in 17ms[2m (next.js: 4ms, application-code: 14ms)[22m
+[32m[1m✓[22m[39m Compiled in 68ms
+ GET / [32m200[39m in 13ms[2m (next.js: 1362µs, application-code: 12ms)[22m
+ GET / [32m200[39m in 223ms[2m (next.js: 72ms, application-code: 151ms)[22m
+ GET / [32m200[39m in 25ms[2m (next.js: 10ms, application-code: 15ms)[22m
+ GET / [32m200[39m in 131ms[2m (next.js: 30ms, application-code: 101ms)[22m
+ GET / [32m200[39m in 22ms[2m (next.js: 3ms, application-code: 19ms)[22m
+ GET / [32m200[39m in 10ms[2m (next.js: 844µs, application-code: 9ms)[22m
+[32m[1m✓[22m[39m Compiled in 23ms
+[32m[1m✓[22m[39m Compiled in 21ms
+[32m[1m✓[22m[39m Compiled in 160ms
+ GET / [32m200[39m in 136ms[2m (next.js: 71ms, application-code: 65ms)[22m
+ GET / [32m200[39m in 25ms[2m (next.js: 9ms, application-code: 16ms)[22m
+ GET / [32m200[39m in 27ms[2m (next.js: 713µs, application-code: 26ms)[22m
+ GET / [32m200[39m in 31ms[2m (next.js: 814µs, application-code: 30ms)[22m
+ GET / [32m200[39m in 24ms[2m (next.js: 768µs, application-code: 23ms)[22m
+ GET / [32m200[39m in 12ms[2m (next.js: 1617µs, application-code: 11ms)[22m
+[32m[1m✓[22m[39m Compiled in 0ms
+[36m[browser][39m A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackErro

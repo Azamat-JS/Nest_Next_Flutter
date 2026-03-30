@@ -1,8 +1,10 @@
 import { CardDemo } from "@/components/AuthForm";
+import Header from "@/components/Header";
 
 export default function Home() {
   return (
     <main className="min-h-screen">
+      <Header />
       <h1 className="text-4xl font-bold text-center mt-10">Welcome to the Full Stack Turbo App!</h1>
       <p className="text-center mt-4 text-lg">This is the frontend of your full stack application.</p>
       <div className="flex flex-col gap-2 justify-center mt-10">
