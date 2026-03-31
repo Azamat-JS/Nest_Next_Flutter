@@ -101,3 +101,273 @@
  GET / [32m200[39m in 82ms[2m (next.js: 44ms, application-code: 37ms)[22m
  GET / [31m500[39m in 131ms[2m (next.js: 73ms, application-code: 58ms)[22m
  GET / [31m500[39m in 5ms[2m (next.js: 2ms, application-code: 3ms)[22m
+[36m[browser][39m [31mUncaught Error: ./apps/frontend/src/app/home/page.tsx:12:1
+Export default doesn't exist in target module
+  10 | } from "@/components/ui/table"
+  11 | import { useAuthStore } from "@/lib/zustand"
+> 12 | import jwtDecode from "jwt-decode"
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  13 | const invoices = [
+  14 |     {
+  15 |         invoice: "INV001",
+
+The export default was not found in module [project]/apps/frontend/node_modules/.pnpm/jwt-decode@4.0.0/node_modules/jwt-decode/build/esm/index.js [app-rsc] (ecmascript).
+Did you mean to import InvalidTokenError?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+[39m
+[31m    at <unknown> (Error: ./apps/frontend/src/app/home/page.tsx:12:1)
+    at <unknown> (Error: (./apps/frontend/src/app/home/page.tsx:12:1)[39m
+[32m[1m✓[22m[39m Compiled in 12ms
+ GET / [32m200[39m in 175ms[2m (next.js: 39ms, application-code: 135ms)[22m
+[31m[1m⨯[22m[39m TypeError: useSyncExternalStore only works in Client Components. Add the "use client" directive at the top of the file to use it. Read more: https://nextjs.org/docs/messages/react-client-hook-in-server-component
+    at HomePage (src/app/home/page.tsx:65:31)
+  [90m63 |[0m
+  [90m64 |[0m [36mconst[0m [33mHomePage[0m = () => {
+[31m[1m>[0m [90m65 |[0m     [36mconst[0m token = useAuthStore((state) => state.token);
+  [90m   |[0m                               [31m[1m^[0m
+  [90m66 |[0m     [36mconst[0m user = token ? jwtDecode<[33mTokenPayload[0m>(token) : [36mnull[0m
+  [90m67 |[0m     console.log(user);
+  [90m68 |[0m     [36mreturn[0m ( {
+  digest: [32m'531040096'[39m
+}
+ GET /home [31m500[39m in 73ms[2m (next.js: 25ms, application-code: 48ms)[22m
+[36m[browser][39m [31mUncaught TypeError: useSyncExternalStore only works in Client Components. Add the "use client" directive at the top of the file to use it. Read more: https://nextjs.org/docs/messages/react-client-hook-in-server-component[39m
+[31m    at HomePage (src/app/home/page.tsx:65:31)[39m
+  [90m63 |[0m
+  [90m64 |[0m [36mconst[0m [33mHomePage[0m = () => {
+[31m[1m>[0m [90m65 |[0m     [36mconst[0m token = useAuthStore((state) => state.token);
+  [90m   |[0m                               [31m[1m^[0m
+  [90m66 |[0m     [36mconst[0m user = token ? jwtDecode<[33mTokenPayload[0m>(token) : [36mnull[0m
+  [90m67 |[0m     console.log(user);
+  [90m68 |[0m     [36mreturn[0m (
+[1mnull[22m
+ GET /home [32m200[39m in 131ms[2m (next.js: 47ms, application-code: 85ms)[22m
+[32m[1m✓[22m[39m Compiled in 194ms
+ GET /home [32m200[39m in 124ms[2m (next.js: 56ms, application-code: 67ms)[22m
+ GET /home [32m200[39m in 36ms[2m (next.js: 2ms, application-code: 34ms)[22m
+ GET /home [32m200[39m in 11ms[2m (next.js: 1594µs, application-code: 10ms)[22m
+[32m[1m✓[22m[39m Compiled in 16ms
+[36m[browser][39m Each child in a list should have a unique "key" prop.
+
+Check the render method of `TableBody`. It was passed a child from HomePage. See https://react.dev/link/warning-keys for more information. 
+[31m    at Set.forEach (<anonymous>)[39m [2m(<anonymous>)[22m
+[32m[1m✓[22m[39m Compiled in 33ms
+ GET / [32m200[39m in 151ms[2m (next.js: 24ms, application-code: 127ms)[22m
+[32m[1m✓[22m[39m Compiled in 27ms
+[32m[1m✓[22m[39m Compiled in 17ms
+[36m[browser][39m ./apps/frontend/src/app/page.tsx:4:9
+'const' declarations must be initialized
+  2 |
+  3 | export default function Home() {
+> 4 |   const isAuth
+    |         ^^^^^^
+  5 |   return (
+  6 |     <main className="min-h-screen">
+  7 |       <h1 className="text-4xl font-bold text-center mt-10">Welcome to the Full Stack Turbo App!</h1>
+
+Parsing ecmascript source code failed 
+[36m[browser][39m ./apps/frontend/src/app/page.tsx:8:4
+Expression expected
+   6 |   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+   7 |   return (
+>  8 |    if (isAuthenticated) {
+     |    ^^
+   9 |     return (
+  10 |       <HomePage />
+  11 |     )
+
+Parsing ecmascript source code failed 
+[36m[browser][39m ./apps/frontend/src/app/page.tsx:8:4
+Expression expected
+   6 |   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+   7 |   return (
+>  8 |    if (isAuthenticated) {
+     |    ^^
+   9 |     return (
+  10 |       <HomePage />
+  11 |     )
+
+Parsing ecmascript source code failed 
+[31m[1m⨯[22m[39m TypeError: useSyncExternalStore only works in Client Components. Add the "use client" directive at the top of the file to use it. Read more: https://nextjs.org/docs/messages/react-client-hook-in-server-component
+    at Home (src/app/page.tsx:6:39)
+  [90m4 |[0m
+  [90m5 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mHome[0m() {
+[31m[1m>[0m [90m6 |[0m   [36mconst[0m isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  [90m  |[0m                                       [31m[1m^[0m
+  [90m7 |[0m   [36mif[0m (isAuthenticated) {
+  [90m8 |[0m     [36mreturn[0m (
+  [90m9 |[0m       <[33mHomePage[0m /> {
+  digest: [32m'2809858184'[39m
+}
+[31m[1m⨯[22m[39m TypeError: useSyncExternalStore only works in Client Components. Add the "use client" directive at the top of the file to use it. Read more: https://nextjs.org/docs/messages/react-client-hook-in-server-component
+    at Home (src/app/page.tsx:6:39)
+  [90m4 |[0m
+  [90m5 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mHome[0m() {
+[31m[1m>[0m [90m6 |[0m   [36mconst[0m isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  [90m  |[0m                                       [31m[1m^[0m
+  [90m7 |[0m   [36mif[0m (isAuthenticated) {
+  [90m8 |[0m     [36mreturn[0m (
+  [90m9 |[0m       <[33mHomePage[0m /> {
+  digest: [32m'2809858184'[39m
+}
+[31m[1m⨯[22m[39m TypeError: useSyncExternalStore only works in Client Components. Add the "use client" directive at the top of the file to use it. Read more: https://nextjs.org/docs/messages/react-client-hook-in-server-component
+    at Home (src/app/page.tsx:6:39)
+  [90m4 |[0m
+  [90m5 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mHome[0m() {
+[31m[1m>[0m [90m6 |[0m   [36mconst[0m isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  [90m  |[0m                                       [31m[1m^[0m
+  [90m7 |[0m   [36mif[0m (isAuthenticated) {
+  [90m8 |[0m     [36mreturn[0m (
+  [90m9 |[0m       <[33mHomePage[0m /> {
+  digest: [32m'2809858184'[39m
+}
+ GET / [32m200[39m in 164ms[2m (next.js: 65ms, application-code: 99ms)[22m
+[31m[1m⨯[22m[39m TypeError: useSyncExternalStore only works in Client Components. Add the "use client" directive at the top of the file to use it. Read more: https://nextjs.org/docs/messages/react-client-hook-in-server-component
+    at Home (src/app/page.tsx:6:39)
+  [90m4 |[0m
+  [90m5 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mHome[0m() {
+[31m[1m>[0m [90m6 |[0m   [36mconst[0m isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  [90m  |[0m                                       [31m[1m^[0m
+  [90m7 |[0m   [36mif[0m (isAuthenticated) {
+  [90m8 |[0m     [36mreturn[0m (
+  [90m9 |[0m       <[33mHomePage[0m /> {
+  digest: [32m'2809858184'[39m
+}
+ GET / [32m200[39m in 51ms[2m (next.js: 1311µs, application-code: 49ms)[22m
+[31m[1m⨯[22m[39m TypeError: useSyncExternalStore only works in Client Components. Add the "use client" directive at the top of the file to use it. Read more: https://nextjs.org/docs/messages/react-client-hook-in-server-component
+    at Home (src/app/page.tsx:6:39)
+  [90m4 |[0m
+  [90m5 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mHome[0m() {
+[31m[1m>[0m [90m6 |[0m   [36mconst[0m isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  [90m  |[0m                                       [31m[1m^[0m
+  [90m7 |[0m   [36mif[0m (isAuthenticated) {
+  [90m8 |[0m     [36mreturn[0m (
+  [90m9 |[0m       <[33mHomePage[0m /> {
+  digest: [32m'2809858184'[39m
+}
+ GET / [32m200[39m in 54ms[2m (next.js: 1769µs, application-code: 52ms)[22m
+[31m[1m⨯[22m[39m TypeError: useSyncExternalStore only works in Client Components. Add the "use client" directive at the top of the file to use it. Read more: https://nextjs.org/docs/messages/react-client-hook-in-server-component
+    at Home (src/app/page.tsx:6:39)
+  [90m4 |[0m
+  [90m5 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mHome[0m() {
+[31m[1m>[0m [90m6 |[0m   [36mconst[0m isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  [90m  |[0m                                       [31m[1m^[0m
+  [90m7 |[0m   [36mif[0m (isAuthenticated) {
+  [90m8 |[0m     [36mreturn[0m (
+  [90m9 |[0m       <[33mHomePage[0m /> {
+  digest: [32m'2809858184'[39m
+}
+ GET / [32m200[39m in 53ms[2m (next.js: 2ms, application-code: 51ms)[22m
+[31m[1m⨯[22m[39m TypeError: useSyncExternalStore only works in Client Components. Add the "use client" directive at the top of the file to use it. Read more: https://nextjs.org/docs/messages/react-client-hook-in-server-component
+    at Home (src/app/page.tsx:6:39)
+  [90m4 |[0m
+  [90m5 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mHome[0m() {
+[31m[1m>[0m [90m6 |[0m   [36mconst[0m isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  [90m  |[0m                                       [31m[1m^[0m
+  [90m7 |[0m   [36mif[0m (isAuthenticated) {
+  [90m8 |[0m     [36mreturn[0m (
+  [90m9 |[0m       <[33mHomePage[0m /> {
+  digest: [32m'2809858184'[39m
+}
+ GET / [32m200[39m in 49ms[2m (next.js: 1740µs, application-code: 47ms)[22m
+ GET / [32m200[39m in 34ms[2m (next.js: 1911µs, application-code: 32ms)[22m
+ GET / [32m200[39m in 20ms[2m (next.js: 2ms, application-code: 18ms)[22m
+[36m[browser][39m [31mUncaught TypeError: useSyncExternalStore only works in Client Components. Add the "use client" directive at the top of the file to use it. Read more: https://nextjs.org/docs/messages/react-client-hook-in-server-component[39m
+[31m    at Home (src/app/page.tsx:6:39)[39m
+  [90m4 |[0m
+  [90m5 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mHome[0m() {
+[31m[1m>[0m [90m6 |[0m   [36mconst[0m isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  [90m  |[0m                                       [31m[1m^[0m
+  [90m7 |[0m   [36mif[0m (isAuthenticated) {
+  [90m8 |[0m     [36mreturn[0m (
+  [90m9 |[0m       <[33mHomePage[0m />
+[31m[1m⨯[22m[39m TypeError: useSyncExternalStore only works in Client Components. Add the "use client" directive at the top of the file to use it. Read more: https://nextjs.org/docs/messages/react-client-hook-in-server-component
+    at Home (src/app/page.tsx:6:39)
+  [90m4 |[0m
+  [90m5 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mHome[0m() {
+[31m[1m>[0m [90m6 |[0m   [36mconst[0m isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  [90m  |[0m                                       [31m[1m^[0m
+  [90m7 |[0m   [36mif[0m (isAuthenticated) {
+  [90m8 |[0m     [36mreturn[0m (
+  [90m9 |[0m       <[33mHomePage[0m /> {
+  digest: [32m'2809858184'[39m
+}
+[32m[1m✓[22m[39m Compiled in 80ms
+[33m[1m⚠[22m[39m Fast Refresh had to perform a full reload due to a runtime error.
+ GET / [31m500[39m in 111ms[2m (next.js: 26ms, application-code: 85ms)[22m
+[36m[browser][39m [31mUncaught TypeError: useSyncExternalStore only works in Client Components. Add the "use client" directive at the top of the file to use it. Read more: https://nextjs.org/docs/messages/react-client-hook-in-server-component[39m
+[31m    at Home (about://React/Server/file:///Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend/.next/dev/server/chunks/ssr/%5Broot-of-the-server%5D__0amr0ka._.js?0:140:187)[39m
+ GET /? [32m200[39m in 159ms[2m (next.js: 69ms, application-code: 90ms)[22m
+[36m[browser][39m Each child in a list should have a unique "key" prop.
+
+Check the render method of `TableBody`. It was passed a child from HomePage. See https://react.dev/link/warning-keys for more information. 
+[32m[1m✓[22m[39m Compiled in 14ms
+[32m[1m✓[22m[39m Compiled in 25ms
+[32m[1m✓[22m[39m Compiled in 1793ms
+ GET / [32m200[39m in 1118ms[2m (next.js: 749ms, application-code: 368ms)[22m
+ GET / [32m200[39m in 283ms[2m (next.js: 38ms, application-code: 245ms)[22m
+ GET / [32m200[39m in 32ms[2m (next.js: 3ms, application-code: 28ms)[22m
+ GET / [32m200[39m in 251ms[2m (next.js: 1144µs, application-code: 250ms)[22m
+[32m[1m✓[22m[39m Compiled in 207ms
+ GET / [32m200[39m in 460ms[2m (next.js: 133ms, application-code: 327ms)[22m
+ GET / [32m200[39m in 258ms[2m (next.js: 43ms, application-code: 216ms)[22m
+ GET / [32m200[39m in 22ms[2m (next.js: 2ms, application-code: 20ms)[22m
+ GET / [32m200[39m in 269ms[2m (next.js: 76ms, application-code: 193ms)[22m
+[36m[browser][39m Each child in a list should have a unique "key" prop.
+
+Check the render method of `TableBody`. It was passed a child from HomePage. See https://react.dev/link/warning-keys for more information. 
+[32m[1m✓[22m[39m Compiled in 90ms
+ GET / [32m200[39m in 250ms[2m (next.js: 40ms, application-code: 210ms)[22m
+ GET / [32m200[39m in 25ms[2m (next.js: 1884µs, application-code: 23ms)[22m
+ GET / [32m200[39m in 263ms[2m (next.js: 68ms, application-code: 195ms)[22m
+[36m[browser][39m Each child in a list should have a unique "key" prop.
+
+Check the render method of `TableBody`. It was passed a child from HomePage. See https://react.dev/link/warning-keys for more information. 
+[36m[browser][39m In HTML, text nodes cannot be a child of <tbody>.
+This will cause a hydration error.
+
+  ...
+    <HTTPAccessFallbackBoundary notFound={{...}} forbidden={undefined} unauthorized={undefined}>
+      <HTTPAccessFallbackErrorBoundary pathname="/" notFound={{...}} forbidden={undefined} unauthorized={undefined} ...>
+        <RedirectBoundary>
+          <RedirectErrorBoundary router={{...}}>
+            <InnerLayoutRouter url="/" tree={[...]} params={{}} cacheNode={{rsc:{...}, ...}} segmentPath={[...]} ...>
+              <SegmentViewNode type="page" pagePath="page.tsx">
+                <SegmentTrieNode>
+                <ClientPageRoot Component={function Home} serverProvidedParams={{...}}>
+                  <Home params={Promise} searchParams={Promise}>
+                    <HomePage>
+                      <Table className="mt-5">
+                        <div data-slot="table-cont..." className="relative w...">
+                          <table data-slot="table" className="w-full cap...">
+                            <TableCaption>
+                            <TableHeader>
+                            <TableBody>
+>                             <tbody data-slot="table-body" className={"[&_tr:last-child]:border-0"}>
+>                               key=
+                                ...
+                            ...
+              ...
+            ...
+ 
+[31m    at Set.forEach (<anonymous>)[39m [2m(<anonymous>)[22m
+[36m[browser][39m Each child in a list should have a unique "key" prop.
+
+Check the render method of `tbody`. It was passed a child from HomePage. See https://react.dev/link/warning-keys for more information. 
+[31m    at Set.forEach (<anonymous>)[39m [2m(<anonymous>)[22m
+[32m[1m✓[22m[39m Compiled in 40ms
+[32m[1m✓[22m[39m Compiled in 22ms
+[32m[1m✓[22m[39m Compiled in 28ms
+[32m[1m✓[22m[39m Compiled in 17ms
+ GET / [32m200[39m in 54ms[2m (next.js: 15ms, application-code: 38ms)[22m
+[36m[browser][39m Each child in a list should have a unique "key" prop.
+
+Check the render method of `TableBody`. It was passed a child from HomePage. See https://react.dev/link/warning-keys for more information. 
+ GET / [32m200[39m in 9ms[2m (next.js: 3ms, application-code: 5ms)[22m
+ GET / [32m200[39m in 16ms[2m (next.js: 1773µs, application-code: 15ms)[22m
+ GET / [32m200[39m in 47ms[2m (next.js: 3ms, application-code: 44ms)[22m
+[36m[browser][39m Each child in a list should have a unique "key" prop.
+
+Check the render method of `TableBody`. It was passed a child from HomePage. See https://react.dev/link/warning-keys for more information. 
+[?25h

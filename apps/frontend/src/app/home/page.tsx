@@ -90,7 +90,7 @@ const HomePage = () => {
     console.log(user);
     return (
         <>
-            <Table className="mt-5">
+            <Table key={user?.email} className="mt-5">
                 <TableCaption>A list of all users.</TableCaption>
                 <TableHeader>
                     <TableRow>
@@ -98,7 +98,7 @@ const HomePage = () => {
                         <TableHead>Email</TableHead>
                     </TableRow>
                 </TableHeader>
-                <TableBody>
+                <TableBody key={user?.email}>
                     {users.map((u) => (
 
                         <TableRow key={u.userId}>

@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { ModeToggle } from "./mode-toggle"
+import { DropdownMenuDemo } from "./DropDownMenu"
 
 export const Header = () => {
     return (
@@ -10,6 +10,7 @@ export const Header = () => {
                 <Link href="/about" className="hover:text-gray-400 cursor-pointer">About</Link>
                 <Link href="/contact" className="hover:text-gray-400 cursor-pointer">Contact</Link>
                 <Link href="/cart" className="hover:text-gray-400 cursor-pointer">Cart</Link>
+                <DropdownMenuDemo />
             </div>
         </div>
     )
