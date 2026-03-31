@@ -11,9 +11,15 @@ export class UsersController {
     return this.usersService.getAllUsers()
   }
 
-  @Post()
+  @Post('register')
   async createUser(@Body() createUserDto: CreateUserDto) {
     return this.usersService.createUser(createUserDto);
+  }
+
+
+  @Post('login')
+  async loginUser(@Body() loginDto: { email: string, password: string }) {
+    return this.usersService.loginUser(loginDto.email, loginDto.password);
   }
 
   @Get(':id')
