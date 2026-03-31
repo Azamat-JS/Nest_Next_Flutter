@@ -13,14 +13,12 @@ export class UsersController {
 
   @Post('register')
   async createUser(@Body() createUserDto: CreateUserDto) {
-    console.log(createUserDto)
     return this.usersService.createUser(createUserDto);
   }
 
 
   @Post('login')
   async loginUser(@Body() loginDto: { email: string, password: string }) {
-    console.log(loginDto)
     return this.usersService.loginUser(loginDto.email, loginDto.password);
   }
 

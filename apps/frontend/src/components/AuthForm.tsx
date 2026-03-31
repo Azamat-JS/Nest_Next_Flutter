@@ -50,11 +50,12 @@ export function CardDemo({ id, isLogin, toggle }: { id?: string, isLogin?: boole
                             'Content-Type': 'application/json'
                         }
                     })
-                    console.log(response);
+
                     if (response.status != 201) {
                         toast.error('Login failed!')
                         return;
                     }
+                    localStorage.setItem('token', response.data.token);
                     toast.success('Login successful!')
                     console.log(response.data);
                 } else {
