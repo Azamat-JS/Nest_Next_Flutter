@@ -1,3 +1,5 @@
+'use client'
+
 import { Button } from "@/components/ui/button"
 import {
     Card,
@@ -10,10 +12,29 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import * as z from "zod"
+import { toast } from "sonner"
+import { useForm } from "@tanstack/react-form"
+
+const formSchema = z.object({
+    username: z.string().min(2).max(100),
+    email: z.string().email(),
+    password: z.string().min(6).max(100),
+})
 
 export function CardDemo() {
+    const form = useForm({
+        defaultValues: {
+            username: "",
+            email: "",
+            password: ""
+        },
+        validators: {
+            onSubmit: formSchema
+        }
+    })
     return (
-        <Card className="w-full max-w-sm">
+        <Card className="w-full max-w-sm mt-5">
             <CardHeader>
                 <CardTitle>Login to your account</CardTitle>
                 <CardDescription>
@@ -24,7 +45,11 @@ export function CardDemo() {
                 </CardAction>
             </CardHeader>
             <CardContent>
-                <form>
+                <form
+                    onSubmit={(e) => {
+                        e.preventDefault()
+                        form.handleSubmit()
+                    }} className="flex flex-col gap-6">
                     <div className="flex flex-col gap-6">
                         <div className="grid gap-2">
                             <Label htmlFor="email">Username</Label>

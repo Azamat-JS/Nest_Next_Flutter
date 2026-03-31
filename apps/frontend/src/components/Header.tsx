@@ -10,7 +10,6 @@ export const Header = () => {
                 <p className="hover:text-gray-400 cursor-pointer">Contact</p>
                 <p className="hover:text-gray-400 cursor-pointer">Cart</p>
             </div>
-            <ModeToggle />
         </div>
     )
 }
