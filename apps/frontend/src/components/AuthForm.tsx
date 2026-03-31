@@ -25,14 +25,14 @@ import axios from "axios"
 
 export function CardDemo({ id, isLogin, toggle }: { id?: string, isLogin?: boolean, toggle?: () => void }) {
     const API = process.env.NEXT_PUBLIC_API_URL;
-const getSchema = (isLogin: boolean) =>
-  z.object({
-    username: isLogin
-      ? z.string()
-      : z.string().min(3),
-    email: z.string().email(),
-    password: z.string().min(6),
-  })
+    const getSchema = (isLogin: boolean) =>
+        z.object({
+            username: isLogin
+                ? z.string()
+                : z.string().min(3),
+            email: z.string().email(),
+            password: z.string().min(6),
+        })
     const form = useForm({
         defaultValues: {
             username: "",
@@ -45,7 +45,7 @@ const getSchema = (isLogin: boolean) =>
         onSubmit: async ({ value }) => {
             try {
                 if (isLogin) {
-                    const response = await axios.post(`${API}/users/login`, value, {
+                    const response = await axios.post(`${API}/users/login`, { email: value.email, password: value.password }, {
                         headers: {
                             'Content-Type': 'application/json'
                         }
@@ -58,7 +58,7 @@ const getSchema = (isLogin: boolean) =>
                     toast.success('Login successful!')
                     console.log(response.data);
                 } else {
-                    const response = await axios.post(`${API}/users/register`, value, {
+                    const response = await axios.post(`${API}/users/register`, { value }, {
                         headers: {
                             'Content-Type': 'application/json'
                         }
