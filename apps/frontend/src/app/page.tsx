@@ -1,5 +1,6 @@
 import { CardDemo } from "@/components/AuthForm";
 import Header from "@/components/Header";
+import LoginForm from "./(auth)/login";
 
 export default function Home() {
   return (
@@ -12,7 +13,7 @@ export default function Home() {
         <p className="text-center">Users</p>
       </div>
       <div className="flex justify-center min-h-[50vh] items-center">
-        <CardDemo />
+        <LoginForm />
       </div>
     </main>
   );

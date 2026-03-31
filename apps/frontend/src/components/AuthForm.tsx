@@ -23,16 +23,16 @@ import {
 } from "@/components/ui/field"
 import axios from "axios"
 
-
-
-const formSchema = z.object({
-    username: z.string().min(3, 'Username must be at least 3 characters').max(100),
-    email: z.string().email('Please enter a valid email'),
-    password: z.string().min(6, 'Password must be at least 6 characters').max(100),
-})
-
-export function CardDemo({ id, isLogin }: { id?: string, isLogin?: boolean }) {
+export function CardDemo({ id, isLogin, toggle }: { id?: string, isLogin?: boolean, toggle?: () => void }) {
     const API = process.env.NEXT_PUBLIC_API_URL;
+const getSchema = (isLogin: boolean) =>
+  z.object({
+    username: isLogin
+      ? z.string()
+      : z.string().min(3),
+    email: z.string().email(),
+    password: z.string().min(6),
+  })
     const form = useForm({
         defaultValues: {
             username: "",
@@ -40,32 +40,55 @@ export function CardDemo({ id, isLogin }: { id?: string, isLogin?: boolean }) {
             password: ""
         },
         validators: {
-            onSubmit: formSchema
+            onSubmit: getSchema(!!isLogin)
         },
         onSubmit: async ({ value }) => {
             try {
-                const response = await axios.post(`${API}/users/login`, JSON.stringify(value), {
-                    headers: {
-                        'Content-Type': 'application/json'
+                if (isLogin) {
+                    const response = await axios.post(`${API}/users/login`, value, {
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                    console.log(response);
+                    if (response.status != 201) {
+                        toast.error('Login failed!')
+                        return;
                     }
-                })
-                toast.success('Login successful!')
-                console.log(response.data);
+                    toast.success('Login successful!')
+                    console.log(response.data);
+                } else {
+                    const response = await axios.post(`${API}/users/register`, value, {
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                    if (response.status != 201) {
+                        toast.error('Registration failed!')
+                        return;
+                    }
+                    toast.success('Registration successful!')
+                    console.log(response.data);
+                }
             } catch (error) {
+                console.log(error);
                 toast.error('Login failed!')
             }
         },
     })
+
+    const updateFormState = () => {
+        isLogin ? !isLogin : isLogin;
+    }
     return (
         <Card className="w-full max-w-sm mt-5">
             <CardHeader>
-                <CardTitle>Login to your account</CardTitle>
+                <CardTitle>{isLogin ? 'Login' : 'Register'}</CardTitle>
                 <CardDescription>
-                    Enter your username and email below to login to your account
+                    {isLogin
+                        ? 'Enter your username and email below to login to your account'
+                        : 'Enter your details below to create an account'}
                 </CardDescription>
-                <CardAction>
-                    <Button variant="link">Sign Up</Button>
-                </CardAction>
             </CardHeader>
             <CardContent>
                 <form
@@ -78,7 +101,7 @@ export function CardDemo({ id, isLogin }: { id?: string, isLogin?: boolean }) {
                 >
                     <FieldGroup>
 
-                        {isLogin && (<form.Field
+                        {!isLogin && (<form.Field
                             name="username"
                             children={(field) => {
                                 const isInvalid =
@@ -162,7 +185,12 @@ export function CardDemo({ id, isLogin }: { id?: string, isLogin?: boolean }) {
                     </Button>
                 </form>
             </CardContent>
-            <CardFooter className="flex justify-end w-full">
+            <CardFooter className="flex justify-between w-full">
+                <CardAction>
+                    <Button variant="link" onClick={toggle}>
+                        {isLogin ? 'Don\'t have an account? Sign Up' : `Already have an account? Login`}
+                    </Button>
+                </CardAction>
                 <Button variant="link" className="text-blue-400">Forgot password?</Button>
             </CardFooter>
         </Card>
