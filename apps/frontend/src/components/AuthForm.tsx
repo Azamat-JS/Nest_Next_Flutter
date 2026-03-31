@@ -22,9 +22,12 @@ import {
 
 } from "@/components/ui/field"
 import axios from "axios"
+import { useAuthStore } from "@/lib/zustand"
 
 export function CardDemo({ id, isLogin, toggle }: { id?: string, isLogin?: boolean, toggle?: () => void }) {
     const API = process.env.NEXT_PUBLIC_API_URL;
+    const setToken = useAuthStore((state) => state.setToken);
+    const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
     const getSchema = (isLogin: boolean) =>
         z.object({
             username: isLogin
@@ -56,6 +59,8 @@ export function CardDemo({ id, isLogin, toggle }: { id?: string, isLogin?: boole
                         return;
                     }
                     localStorage.setItem('token', response.data.token);
+                    setToken(response.data.token);
+                    isAuthenticated
                     toast.success('Login successful!')
                     console.log(response.data);
                 } else {
