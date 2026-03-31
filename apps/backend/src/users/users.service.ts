@@ -2,10 +2,11 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class UsersService {
-    constructor(private readonly prisma: PrismaService) { }
+    constructor(private readonly prisma: PrismaService, private readonly jwtService: JwtService) { }
 
     async getAllUsers() {
         return this.prisma.users.findMany({});
@@ -29,6 +30,21 @@ export class UsersService {
                 ...createUserInput
             }
         })
+    }
+
+    async loginUser(email: string, password: string) {
+        const foundUser = await this.prisma.users.findUnique({
+            where: { email }
+        });
+        if (!foundUser) {
+            throw new NotFoundException('User not found');
+        }
+        const isPasswordValid = await bcrypt.compare(password, foundUser.password);
+        if (!isPasswordValid) {
+            throw new NotFoundException('Invalid credentials');
+        }
+        const token = this.jwtService.sign({ userId: foundUser.id });
+        return { token };
     }
 
     async updateUser(id: string, updateUserInput: Prisma.UsersUpdateInput) {

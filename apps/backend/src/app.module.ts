@@ -10,7 +10,7 @@ import { UsersModule } from './users/users.module';
     ConfigModule.forRoot({ envFilePath: '.env', isGlobal: true }),
     PrismaModule,
     ChatModule,
-    UsersModule
+    UsersModule,
   ],
   controllers: [],
   providers: [],
