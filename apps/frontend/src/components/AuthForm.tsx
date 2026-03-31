@@ -21,6 +21,7 @@ import {
     FieldLabel,
 
 } from "@/components/ui/field"
+import axios from "axios"
 
 
 
@@ -30,7 +31,8 @@ const formSchema = z.object({
     password: z.string().min(6, 'Password must be at least 6 characters').max(100),
 })
 
-export function CardDemo({ id }: { id?: string }) {
+export function CardDemo({ id, isLogin }: { id?: string, isLogin?: boolean }) {
+    const API = process.env.NEXT_PUBLIC_API_URL;
     const form = useForm({
         defaultValues: {
             username: "",
@@ -41,20 +43,17 @@ export function CardDemo({ id }: { id?: string }) {
             onSubmit: formSchema
         },
         onSubmit: async ({ value }) => {
-            toast("You submitted the following values:", {
-                description: (
-                    <pre className="mt-2 w-[320px] overflow-x-auto rounded-md bg-code p-4 text-code-foreground">
-                        <code>{JSON.stringify(value, null, 2)}</code>
-                    </pre>
-                ),
-                position: "bottom-right",
-                classNames: {
-                    content: "flex flex-col gap-2",
-                },
-                style: {
-                    "--border-radius": "calc(var(--radius)  + 4px)",
-                } as React.CSSProperties,
-            })
+            try {
+                const response = await axios.post(`${API}/users/login`, JSON.stringify(value), {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                toast.success('Login successful!')
+                console.log(response.data);
+            } catch (error) {
+                toast.error('Login failed!')
+            }
         },
     })
     return (
@@ -78,7 +77,8 @@ export function CardDemo({ id }: { id?: string }) {
                     className="flex flex-col gap-6"
                 >
                     <FieldGroup>
-                        <form.Field
+
+                        {isLogin && (<form.Field
                             name="username"
                             children={(field) => {
                                 const isInvalid =
@@ -94,7 +94,7 @@ export function CardDemo({ id }: { id?: string }) {
                                             onChange={(e) => field.handleChange(e.target.value)}
                                             aria-invalid={isInvalid}
                                             placeholder="Enter your username"
-                                            autoComplete="off"
+                                            autoComplete="on"
                                         />
                                         {isInvalid && (
                                             <FieldError errors={field.state.meta.errors} />
@@ -102,7 +102,7 @@ export function CardDemo({ id }: { id?: string }) {
                                     </Field>
                                 )
                             }}
-                        />
+                        />)}
                         <form.Field
                             name="email"
                             children={(field) => {
