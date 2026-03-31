@@ -1,3 +1,5 @@
+'use client'
+
 import {
     Table,
     TableBody,
@@ -8,6 +10,10 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
+import { useAuthStore } from "@/lib/zustand"
+import axios from "axios"
+import { jwtDecode } from "jwt-decode"
+import { useEffect, useState } from "react"
 const invoices = [
     {
         invoice: "INV001",
@@ -53,35 +59,67 @@ const invoices = [
     },
 ]
 
+type TokenPayload = {
+    userId: string;
+    email: string;
+    username: string;
+}
+
 const HomePage = () => {
+    const token = useAuthStore((state) => state.token);
+    const [users, setUsers] = useState<TokenPayload[]>([]);
+    const user = token ? jwtDecode<TokenPayload>(token) : null;
+    const API = process.env.NEXT_PUBLIC_API_URL;
+
+    useEffect(() => {
+        const getUsers = async () => {
+            try {
+                const res = await axios.get(`${API}/users`, { headers: { Authorization: `Bearer ${token}` } })
+                if (res.status === 200) {
+                    setUsers(res.data);
+                }
+            } catch (error) {
+                console.error("Error fetching users:", error);
+            }
+        }
+
+        if (token) {
+            getUsers();
+        }
+    }, [token]);
+    console.log(user);
     return (
-        <Table className="mt-5">
-            <TableCaption>A list of your recent invoices.</TableCaption>
-            <TableHeader>
-                <TableRow>
-                    <TableHead className="w-25">Invoice</TableHead>
-                    <TableHead>Status</TableHead>
-                    <TableHead>Method</TableHead>
-                    <TableHead className="text-right">Amount</TableHead>
-                </TableRow>
-            </TableHeader>
-            <TableBody>
-                {invoices.map((invoice) => (
-                    <TableRow key={invoice.invoice}>
-                        <TableCell className="font-medium">{invoice.invoice}</TableCell>
-                        <TableCell>{invoice.paymentStatus}</TableCell>
-                        <TableCell>{invoice.paymentMethod}</TableCell>
-                        <TableCell className="text-right">{invoice.totalAmount}</TableCell>
+        <>
+            <Table className="mt-5">
+                <TableCaption>A list of all users.</TableCaption>
+                <TableHeader>
+                    <TableRow>
+                        <TableHead className="w-25">Username</TableHead>
+                        <TableHead>Email</TableHead>
                     </TableRow>
-                ))}
-            </TableBody>
-            <TableFooter>
-                <TableRow>
-                    <TableCell colSpan={3}>Total</TableCell>
-                    <TableCell className="text-right">$2,500.00</TableCell>
-                </TableRow>
-            </TableFooter>
-        </Table>
+                </TableHeader>
+                <TableBody>
+                    {users.map((u) => (
+
+                        <TableRow key={u.userId}>
+                            <TableCell className={user?.username === u.username ? "font-medium bg-green-300 text-green-600" : ""}>
+                                {u.username}
+                            </TableCell>
+                            <TableCell className={user?.username === u.username ? "font-medium bg-green-300 text-green-600" : ""}>
+                                {u.email}
+                            </TableCell>
+                        </TableRow>
+                    ))}
+                </TableBody>
+                <TableFooter>
+                    <TableRow>
+                        <TableCell colSpan={3}>Total</TableCell>
+                        <TableCell className="text-right">{users.length}</TableCell>
+                    </TableRow>
+                </TableFooter>
+            </Table>
+        </>
+
     )
 }
 

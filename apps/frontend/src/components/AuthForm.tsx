@@ -64,7 +64,7 @@ export function CardDemo({ id, isLogin, toggle }: { id?: string, isLogin?: boole
                     toast.success('Login successful!')
                     console.log(response.data);
                 } else {
-                    const response = await axios.post(`${API}/users/register`, { value }, {
+                    const response = await axios.post(`${API}/users/register`, value, {
                         headers: {
                             'Content-Type': 'application/json'
                         }
@@ -184,10 +184,10 @@ export function CardDemo({ id, isLogin, toggle }: { id?: string, isLogin?: boole
                         />
                     </FieldGroup>
                     <Button type="submit" className="w-full">
-                        Login
+                        {isLogin ? 'Login' : 'Sign Up'}
                     </Button>
                     <Button variant="outline" className="w-full">
-                        Login with Google
+                        {isLogin ? 'Login' : 'Sign Up'} with Google
                     </Button>
                 </form>
             </CardContent>

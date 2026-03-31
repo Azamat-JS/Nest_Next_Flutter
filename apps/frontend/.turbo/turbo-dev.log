@@ -1,0 +1,103 @@
+
+> frontend@0.1.0 dev /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend
+> next dev -p 4000
+
+[1m[38;2;173;127;168m▲ Next.js 16.2.1[39m[22m (Turbopack)
+- Local:         http://localhost:4000
+- Network:       http://192.168.13.88:4000
+- Environments: .env.local
+[32m[1m✓[22m[39m Ready in 267ms
+[33m[1m⚠[22m[39m Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /Users/azamatabdullayev/Desktop/full-stack-turbo/pnpm-workspace.yaml as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend/pnpm-workspace.yaml
+
+
+ GET / [32m200[39m in 333ms[2m (next.js: 114ms, application-code: 219ms)[22m
+ GET / [32m200[39m in 706ms[2m (next.js: 332ms, application-code: 374ms)[22m
+ GET / [32m200[39m in 163ms[2m (next.js: 9ms, application-code: 154ms)[22m
+ GET / [32m200[39m in 224ms[2m (next.js: 11ms, application-code: 212ms)[22m
+ GET / [32m200[39m in 248ms[2m (next.js: 4ms, application-code: 244ms)[22m
+ GET / [32m200[39m in 260ms[2m (next.js: 6ms, application-code: 254ms)[22m
+ GET / [32m200[39m in 241ms[2m (next.js: 17ms, application-code: 225ms)[22m
+ GET / [32m200[39m in 150ms[2m (next.js: 4ms, application-code: 146ms)[22m
+ GET / [32m200[39m in 95ms[2m (next.js: 57ms, application-code: 38ms)[22m
+[32m[1m✓[22m[39m Compiled in 57ms
+ GET / [32m200[39m in 383ms[2m (next.js: 110ms, application-code: 273ms)[22m
+ GET / [32m200[39m in 215ms[2m (next.js: 3ms, application-code: 212ms)[22m
+ GET / [32m200[39m in 157ms[2m (next.js: 47ms, application-code: 110ms)[22m
+ GET / [32m200[39m in 205ms[2m (next.js: 4ms, application-code: 201ms)[22m
+ GET / [32m200[39m in 205ms[2m (next.js: 6ms, application-code: 199ms)[22m
+ GET / [32m200[39m in 185ms[2m (next.js: 16ms, application-code: 168ms)[22m
+ GET / [32m200[39m in 226ms[2m (next.js: 2ms, application-code: 224ms)[22m
+ GET / [32m200[39m in 138ms[2m (next.js: 62ms, application-code: 75ms)[22m
+ GET / [32m200[39m in 44ms[2m (next.js: 3ms, application-code: 41ms)[22m
+[32m[1m✓[22m[39m Compiled in 116ms
+[32m[1m✓[22m[39m Compiled in 28ms
+[32m[1m✓[22m[39m Compiled in 25ms
+[32m[1m✓[22m[39m Compiled in 14ms
+ GET / [32m200[39m in 90ms[2m (next.js: 11ms, application-code: 80ms)[22m
+ GET / [32m200[39m in 37ms[2m (next.js: 3ms, application-code: 34ms)[22m
+ GET / [32m200[39m in 592ms[2m (next.js: 130ms, application-code: 462ms)[22m
+ GET / [32m200[39m in 277ms[2m (next.js: 3ms, application-code: 274ms)[22m
+ GET / [32m200[39m in 69ms[2m (next.js: 6ms, application-code: 63ms)[22m
+ GET / [32m200[39m in 85ms[2m (next.js: 1851µs, application-code: 83ms)[22m
+ GET / [32m200[39m in 106ms[2m (next.js: 3ms, application-code: 103ms)[22m
+ GET / [32m200[39m in 99ms[2m (next.js: 2ms, application-code: 96ms)[22m
+ GET / [32m200[39m in 47ms[2m (next.js: 7ms, application-code: 40ms)[22m
+ GET / [32m200[39m in 16ms[2m (next.js: 4ms, application-code: 11ms)[22m
+ GET / [32m200[39m in 164ms[2m (next.js: 67ms, application-code: 98ms)[22m
+ GET / [32m200[39m in 81ms[2m (next.js: 38ms, application-code: 43ms)[22m
+ GET / [32m200[39m in 32ms[2m (next.js: 3ms, application-code: 29ms)[22m
+ GET / [32m200[39m in 23ms[2m (next.js: 3ms, application-code: 21ms)[22m
+ GET / [32m200[39m in 18ms[2m (next.js: 2ms, application-code: 16ms)[22m
+ GET /home [32m200[39m in 273ms[2m (next.js: 264ms, application-code: 9ms)[22m
+ GET /home [32m200[39m in 20ms[2m (next.js: 4ms, application-code: 16ms)[22m
+ GET /home [32m200[39m in 199ms[2m (next.js: 83ms, application-code: 117ms)[22m
+ GET /home [32m200[39m in 92ms[2m (next.js: 34ms, application-code: 58ms)[22m
+ GET /home [32m200[39m in 50ms[2m (next.js: 1523µs, application-code: 48ms)[22m
+ GET /home [32m200[39m in 40ms[2m (next.js: 2ms, application-code: 38ms)[22m
+ GET /home [32m200[39m in 26ms[2m (next.js: 1103µs, application-code: 25ms)[22m
+ GET /home [32m200[39m in 16ms[2m (next.js: 1240µs, application-code: 15ms)[22m
+ GET /home [32m200[39m in 1178ms[2m (next.js: 275ms, application-code: 904ms)[22m
+ GET /home [32m200[39m in 671ms[2m (next.js: 138ms, application-code: 533ms)[22m
+ GET /home [32m200[39m in 345ms[2m (next.js: 6ms, application-code: 339ms)[22m
+ GET /home [32m200[39m in 185ms[2m (next.js: 14ms, application-code: 171ms)[22m
+ GET /home [32m200[39m in 144ms[2m (next.js: 6ms, application-code: 138ms)[22m
+ GET /home [32m200[39m in 57ms[2m (next.js: 14ms, application-code: 44ms)[22m
+[32m[1m✓[22m[39m Compiled in 349ms
+ GET /home [32m200[39m in 1097ms[2m (next.js: 3ms, application-code: 1093ms)[22m
+ GET /home [32m200[39m in 964ms[2m (next.js: 238ms, application-code: 726ms)[22m
+ GET /home [32m200[39m in 491ms[2m (next.js: 7ms, application-code: 484ms)[22m
+ GET /home [32m200[39m in 551ms[2m (next.js: 37ms, application-code: 513ms)[22m
+ GET /home [32m200[39m in 427ms[2m (next.js: 4ms, application-code: 423ms)[22m
+ GET /home [32m200[39m in 341ms[2m (next.js: 65ms, application-code: 276ms)[22m
+ GET /home [32m200[39m in 129ms[2m (next.js: 12ms, application-code: 118ms)[22m
+ GET /home [32m200[39m in 1051ms[2m (next.js: 342ms, application-code: 708ms)[22m
+[32m[1m✓[22m[39m Compiled in 0ms
+ GET /home [32m200[39m in 1495ms[2m (next.js: 878ms, application-code: 617ms)[22m
+ GET /home [32m200[39m in 12ms[2m (next.js: 844µs, application-code: 12ms)[22m
+ GET /home [32m200[39m in 24ms[2m (next.js: 1796µs, application-code: 22ms)[22m
+ GET /home [32m200[39m in 133ms[2m (next.js: 45ms, application-code: 88ms)[22m
+ GET /home [32m200[39m in 20ms[2m (next.js: 9ms, application-code: 11ms)[22m
+ GET /home [32m200[39m in 82ms[2m (next.js: 1162µs, application-code: 81ms)[22m
+ GET /home [32m200[39m in 199ms[2m (next.js: 14ms, application-code: 185ms)[22m
+ GET /home [32m200[39m in 17ms[2m (next.js: 2ms, application-code: 15ms)[22m
+[32m[1m✓[22m[39m Compiled in 20ms
+ GET /home [32m200[39m in 49ms[2m (next.js: 3ms, application-code: 46ms)[22m
+ GET /login [33m404[39m in 78ms[2m (next.js: 46ms, application-code: 32ms)[22m
+ GET / [32m200[39m in 128ms[2m (next.js: 27ms, application-code: 101ms)[22m
+[32m[1m✓[22m[39m Compiled in 91ms
+ GET / [32m200[39m in 98ms[2m (next.js: 49ms, application-code: 49ms)[22m
+ GET / [32m200[39m in 23ms[2m (next.js: 1926µs, application-code: 21ms)[22m
+ GET / [32m200[39m in 23ms[2m (next.js: 1921µs, application-code: 21ms)[22m
+ GET / [32m200[39m in 14ms[2m (next.js: 3ms, application-code: 11ms)[22m
+ GET / [32m200[39m in 17ms[2m (next.js: 3ms, application-code: 15ms)[22m
+[32m[1m✓[22m[39m Compiled in 19ms
+ GET / [32m200[39m in 13ms[2m (next.js: 1274µs, application-code: 12ms)[22m
+[32m[1m✓[22m[39m Compiled in 14ms
+ GET / [32m200[39m in 82ms[2m (next.js: 44ms, application-code: 37ms)[22m
+ GET / [31m500[39m in 131ms[2m (next.js: 73ms, application-code: 58ms)[22m
+ GET / [31m500[39m in 5ms[2m (next.js: 2ms, application-code: 3ms)[22m
