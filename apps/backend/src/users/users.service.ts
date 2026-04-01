@@ -12,6 +12,16 @@ export class UsersService {
         return this.prisma.users.findMany({});
     }
 
+    async getMyProfile(userId: string) {
+        const foundUser = await this.prisma.users.findUnique({
+            where: { id: userId }
+        });
+        if (!foundUser) {
+            throw new NotFoundException('User not found');
+        }
+        return foundUser;
+    }
+
     async getUserById(id: string) {
         const foundUser = await this.prisma.users.findUnique({
             where: { id }
