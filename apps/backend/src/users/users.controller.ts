@@ -11,6 +11,8 @@ export class UsersController {
     return this.usersService.getAllUsers()
   }
 
+  @Get()
+
   @Post('register')
   async createUser(@Body() createUserDto: CreateUserDto) {
     return this.usersService.createUser(createUserDto);
