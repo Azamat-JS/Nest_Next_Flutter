@@ -1,37 +1,63 @@
-// import { useAuthStore } from '@/lib/zustand'
-// import axios from 'axios'
-// import { useState, useEffect } from 'react'
+'use client'
 
-// const ProfilePage = () => {
-//     const [profile, setProfile] = useState(null)
-//     const [loading, setLoading] = useState(true)
-//     const [error, setError] = useState(null)
-//     const {token} = useAuthStore((state) => state.token);
+import { TokenPayload } from '@/lib/token_payload'
+import { useAuthStore } from '@/lib/zustand'
+import axios from 'axios'
+import { useState, useEffect } from 'react'
 
-//     if(!token) {
-//         return <div>Please log in to view your profile.</div>
-//     }
-    
-//     useEffect(() => {
-//         const fetchProfile = async () => {
-//             try {
-//                 const res = await axios.get('/users/me', {
-//                     headers: {
-//                         Authorization: `Bearer ${token}`
-//                     }
-//                 })
-//                 setProfile(res.data)
-//             } catch (error) {
-//                 setError(error || 'Failed to fetch profile')
-//             } finally {
-//                 setLoading(false)
-//             }
-//         }
-//     }, [])
+const ProfilePage = () => {
+    const API = process.env.NEXT_PUBLIC_API_URL;
+    const [loading, setLoading] = useState(true)
+    const [error, setError] = useState<string | null>(null)
+    const token = useAuthStore((state) => state.token);
+    const [user, setUser] = useState<TokenPayload | null>(null);
 
-//   return (
-//     <div>ProfilePage</div>
-//   )
-// }
+    useEffect(() => {
+        if (!token) {
+            setLoading(false)
+            return
+        }
+        const fetchProfile = async () => {
+            setLoading(true)
+            setError(null)
+            try {
+                const res = await axios.get(`${API}/users/me`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                })
+                setUser(res.data)
+            } catch (error) {
+                console.error('Error fetching profile:', error)
+                setError(error instanceof Error ? error.message : 'An error occurred')
+            } finally {
+                setLoading(false)
+            }
+        }
+        fetchProfile();
+    }, [token, API]);
 
-// export default ProfilePage
+    if (!token) {
+        return <div>Please log in to view your profile.</div>
+    }
+    console.log(user)
+    return (
+        <div className='flex min-h-screen justify-center text-center'>
+            {loading ? (
+                <p>Loading...</p>
+            ) : error ? (
+                <p className='text-red-500'>{error}</p>
+            ) : user ? (
+                <div>
+                    <h1 className='text-2xl font-bold mb-4'>Profile</h1>
+                    <p><strong>Username:</strong> {user.username}</p>
+                    <p><strong>Email:</strong> {user.email}</p>
+                </div>
+            ) : (
+                <p>User not found.</p>
+            )}
+        </div>
+    )
+}
+
+export default ProfilePage

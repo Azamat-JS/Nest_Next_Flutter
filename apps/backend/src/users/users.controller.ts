@@ -16,7 +16,7 @@ export class UsersController {
   @UseGuards(JwtAuthGuard)
   @Get('me')
   async getMyProfile(@Req() req) {
-    return this.usersService.getUserById(req.user.id);
+    return this.usersService.getUserById(req.user.userId);
   }
 
   @Post('register')

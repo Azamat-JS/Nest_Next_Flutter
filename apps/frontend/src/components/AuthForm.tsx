@@ -60,9 +60,7 @@ export function CardDemo({ id, isLogin, toggle }: { id?: string, isLogin?: boole
                     }
                     localStorage.setItem('token', response.data.token);
                     setToken(response.data.token);
-                    isAuthenticated
                     toast.success('Login successful!')
-                    console.log(response.data);
                 } else {
                     const response = await axios.post(`${API}/users/register`, value, {
                         headers: {
@@ -77,15 +75,12 @@ export function CardDemo({ id, isLogin, toggle }: { id?: string, isLogin?: boole
                     console.log(response.data);
                 }
             } catch (error) {
-                console.log(error);
-                toast.error('Login failed!')
+                console.error(error);
+                toast.error(error instanceof Error ? error.message : 'An error occurred')
             }
         },
     })
 
-    const updateFormState = () => {
-        isLogin ? !isLogin : isLogin;
-    }
     return (
         <Card className="w-full max-w-sm mt-5">
             <CardHeader>

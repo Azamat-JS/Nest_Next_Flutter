@@ -10,60 +10,11 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
+import { TokenPayload } from "@/lib/token_payload"
 import { useAuthStore } from "@/lib/zustand"
 import axios from "axios"
 import { jwtDecode } from "jwt-decode"
 import { useEffect, useState } from "react"
-const invoices = [
-    {
-        invoice: "INV001",
-        paymentStatus: "Paid",
-        totalAmount: "$250.00",
-        paymentMethod: "Credit Card",
-    },
-    {
-        invoice: "INV002",
-        paymentStatus: "Pending",
-        totalAmount: "$150.00",
-        paymentMethod: "PayPal",
-    },
-    {
-        invoice: "INV003",
-        paymentStatus: "Unpaid",
-        totalAmount: "$350.00",
-        paymentMethod: "Bank Transfer",
-    },
-    {
-        invoice: "INV004",
-        paymentStatus: "Paid",
-        totalAmount: "$450.00",
-        paymentMethod: "Credit Card",
-    },
-    {
-        invoice: "INV005",
-        paymentStatus: "Paid",
-        totalAmount: "$550.00",
-        paymentMethod: "PayPal",
-    },
-    {
-        invoice: "INV006",
-        paymentStatus: "Pending",
-        totalAmount: "$200.00",
-        paymentMethod: "Bank Transfer",
-    },
-    {
-        invoice: "INV007",
-        paymentStatus: "Unpaid",
-        totalAmount: "$300.00",
-        paymentMethod: "Credit Card",
-    },
-]
-
-type TokenPayload = {
-    userId: string;
-    email: string;
-    username: string;
-}
 
 const HomePage = () => {
     const token = useAuthStore((state) => state.token);
@@ -90,10 +41,10 @@ const HomePage = () => {
     console.log(user);
     return (
         <>
-            <Table key={user?.email} className="mt-5">
+            <Table key={user?.userId} className="mt-5">
                 <TableCaption>A list of all users.</TableCaption>
                 <TableHeader>
-                    <TableRow>
+                    <TableRow key={user?.userId}>
                         <TableHead className="w-25">Username</TableHead>
                         <TableHead>Email</TableHead>
                     </TableRow>
