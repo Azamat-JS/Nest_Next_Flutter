@@ -23,7 +23,9 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   AuthRemoteDataSourceImpl(this.dioClient);
 
   @override
-  Future<UserModel?> getCurrentUser() {}
+  Future<UserModel?> getCurrentUser() {
+    return Future.value(null);
+  }
 
   @override
   Future<UserModel> signInWithEmailAndPassword({
