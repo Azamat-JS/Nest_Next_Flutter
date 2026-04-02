@@ -37,18 +37,18 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }
 
   @override
-  Future<void> signOut() {
-    // TODO: implement signOut
-    throw UnimplementedError();
-  }
-
-  @override
   Future<UserModel> signUpWithEmailAndPassword({
     required String username,
     required String email,
     required String password,
   }) {
     // TODO: implement signUpWithEmailAndPassword
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> signOut() {
+    // TODO: implement signOut
     throw UnimplementedError();
   }
 }
