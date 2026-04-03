@@ -40,12 +40,31 @@ class _LoginPageState extends State<LoginPage> {
                     ),
 
                     SizedBox(height: 30),
-                    AuthForm(hintText: 'Email', controller: emailController),
+                    AuthForm(
+                      hintText: 'Email',
+                      controller: emailController,
+                      keyboardType: TextInputType.emailAddress,
+                      validator: (value) {
+                        final v = value?.trim() ?? "";
+                        if (v.isEmpty) return 'Email is required';
+                        if (!v.contains('@') || !v.contains('.')) {
+                          return 'Invalid email';
+                        }
+                        return null;
+                      },
+                    ),
                     SizedBox(height: 20),
                     AuthForm(
                       hintText: 'Password',
                       controller: passwordController,
                       isObscure: true,
+                      keyboardType: TextInputType.text,
+                      validator: (value) {
+                        if ((value ?? '').length < 6) {
+                          return 'Password must be at least 6 characters';
+                        }
+                        return null;
+                      },
                     ),
                   ],
                 ),
