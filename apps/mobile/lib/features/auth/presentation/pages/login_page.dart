@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/features/auth/presentation/widgets/auth_button.dart';
 import 'package:mobile/features/auth/presentation/widgets/auth_form.dart';
 
 class LoginPage extends StatefulWidget {
+  MaterialPageRoute<dynamic> route() {
+    return MaterialPageRoute(builder: (_) => this);
+  }
+
   const LoginPage({super.key});
 
   @override
@@ -25,7 +30,7 @@ class _LoginPageState extends State<LoginPage> {
                   MediaQuery.of(context).padding.top,
             ),
             child: Padding(
-              padding: const EdgeInsets.all(15.0),
+              padding: const EdgeInsets.only(bottom: 20, right: 20, left: 20),
               child: Form(
                 key: _formKey,
                 child: Column(
@@ -66,6 +71,8 @@ class _LoginPageState extends State<LoginPage> {
                         return null;
                       },
                     ),
+                    SizedBox(height: 20),
+                    AuthGradientButton(text: 'Login', onPressed: () {}),
                   ],
                 ),
               ),
