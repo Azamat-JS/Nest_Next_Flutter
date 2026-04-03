@@ -28,15 +28,13 @@ class AuthRepositoryIml implements AuthRepository {
   Future<Either<Failure, UserEntity>> signInWithEmailAndPassword({
     required String email,
     required String password,
-  }) {
-    // TODO: implement signInWithEmailAndPassword
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<Either<Failure, void>> signOut() {
-    // TODO: implement signOut
-    throw UnimplementedError();
+  }) async {
+    return _getUser(
+      () async => await remoteDataSource.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      ),
+    );
   }
 
   @override
@@ -44,8 +42,36 @@ class AuthRepositoryIml implements AuthRepository {
     required String email,
     required String password,
     required String username,
-  }) {
-    // TODO: implement signUpWithEmailAndPassword
-    throw UnimplementedError();
+  }) async {
+    return _getUser(
+      () async => await remoteDataSource.signUpWithEmailAndPassword(
+        username: username,
+        email: email,
+        password: password,
+      ),
+    );
+  }
+
+  @override
+  Future<Either<Failure, void>> signOut() async {
+    try {
+      await remoteDataSource.signOut();
+      return right(null);
+    } catch (e) {
+      return left(Failure('An unexpected error occurred: $e'));
+    }
+  }
+
+  Future<Either<Failure, UserEntity>> _getUser(
+    Future<UserEntity> Function() getUserFunc,
+  ) async {
+    try {
+      final user = await getUserFunc();
+      return right(user);
+    } on ServerException catch (e) {
+      return left(Failure(e.message));
+    } catch (e) {
+      return left(Failure('An unexpected error occurred: $e'));
+    }
   }
 }
