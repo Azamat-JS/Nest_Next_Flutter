@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class AuthForm extends StatelessWidget {
+class AuthForm extends StatefulWidget {
   final String hintText;
   final bool isObscure;
   final TextEditingController controller;
@@ -12,14 +12,44 @@ class AuthForm extends StatelessWidget {
   });
 
   @override
+  State<AuthForm> createState() => _AuthFormState();
+}
+
+class _AuthFormState extends State<AuthForm> {
+  late bool _isOscureText;
+
+  @override
+  void initState() {
+    super.initState();
+    _isOscureText = widget.isObscure;
+  }
+
+  void _toggleObscureText() {
+    setState(() {
+      _isOscureText = !_isOscureText;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final isPasswordField = widget.isObscure;
     return TextFormField(
-      decoration: InputDecoration(hintText: hintText),
-      obscureText: isObscure,
-      controller: controller,
+      decoration: InputDecoration(
+        hintText: widget.hintText,
+        suffixIcon: isPasswordField
+            ? IconButton(
+                onPressed: _toggleObscureText,
+                icon: Icon(
+                  _isOscureText ? Icons.visibility_off : Icons.visibility,
+                ),
+              )
+            : null,
+      ),
+      obscureText: _isOscureText,
+      controller: widget.controller,
       validator: (value) {
         if (value!.isEmpty) {
-          return '$hintText cannot be empty';
+          return '${widget.hintText} cannot be empty';
         }
         return null;
       },
