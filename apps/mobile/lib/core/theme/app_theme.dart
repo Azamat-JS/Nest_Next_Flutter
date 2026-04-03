@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:mobile/core/theme/app_pallete.dart';
 
 class AppTheme {
-  static OutlineInputBorder _border([Color color = AppPallete.borderColor]) => OutlineInputBorder(
-    borderRadius: BorderRadius.circular(10),
-    borderSide: BorderSide(color: color, width: 3),
-  );
+  static OutlineInputBorder _border([Color color = AppPallete.borderColor]) =>
+      OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: BorderSide(color: color, width: 3),
+      );
   static final darkThemeMode = ThemeData.dark().copyWith(
     scaffoldBackgroundColor: AppPallete.backgroundColor,
     appBarTheme: const AppBarTheme(backgroundColor: AppPallete.backgroundColor),
@@ -14,6 +15,10 @@ class AppTheme {
       enabledBorder: _border(),
       focusedBorder: _border(AppPallete.gradient2),
       errorBorder: _border(AppPallete.errorColor),
-    )
+    ),
+    chipTheme: const ChipThemeData(
+      backgroundColor: AppPallete.backgroundColor,
+      side: BorderSide.none,
+    ),
   );
 }
