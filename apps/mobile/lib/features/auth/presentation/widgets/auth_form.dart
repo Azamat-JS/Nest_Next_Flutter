@@ -4,11 +4,15 @@ class AuthForm extends StatefulWidget {
   final String hintText;
   final bool isObscure;
   final TextEditingController controller;
+  final TextInputType? keyboardType;
+  final String? Function(String?)? validator;
   const AuthForm({
     super.key,
     required this.hintText,
     this.isObscure = false,
     required this.controller,
+    this.validator,
+    this.keyboardType,
   });
 
   @override
@@ -47,12 +51,15 @@ class _AuthFormState extends State<AuthForm> {
       ),
       obscureText: _isOscureText,
       controller: widget.controller,
-      validator: (value) {
-        if (value!.isEmpty) {
-          return '${widget.hintText} cannot be empty';
-        }
-        return null;
-      },
+      keyboardType: widget.keyboardType,
+      validator:
+          widget.validator ??
+          (value) {
+            if (value!.isEmpty) {
+              return '${widget.hintText} cannot be empty';
+            }
+            return null;
+          },
     );
   }
 }
