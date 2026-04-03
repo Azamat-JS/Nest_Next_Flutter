@@ -1,4 +1,4 @@
-import 'package:mobile/features/auth/domain/entities/user_entity.dart';
+import 'package:mobile/core/common/entities/user_entity.dart';
 
 class UserModel extends UserEntity {
   UserModel({required super.id, required super.username, required super.email});
