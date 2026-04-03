@@ -34,13 +34,28 @@ export class UsersService {
 
     async createUser(createUserInput: Prisma.UsersCreateInput) {
         const hashedPassword = await bcrypt.hash(createUserInput.password, 10);
-        createUserInput.password = hashedPassword;
-        return this.prisma.users.create({
+        const user = await this.prisma.users.create({
             data: {
-                ...createUserInput
+                ...createUserInput,
+                password: hashedPassword
             }
-        })
-    }
+        });
+
+        const accessToken = this.jwtService.sign({
+            userId: user.id,
+            email: user.email,
+            username: user.username
+        });
+
+        return {
+            user: {
+                id: user.id,
+                email: user.email,
+                username: user.username,
+            },
+            accessToken
+        }
+    };
 
     async loginUser(email: string, password: string) {
         const foundUser = await this.prisma.users.findUnique({
@@ -53,8 +68,15 @@ export class UsersService {
         if (!isPasswordValid) {
             throw new NotFoundException('Invalid credentials');
         }
-        const token = this.jwtService.sign({ userId: foundUser.id, email: foundUser.email, username: foundUser.username });
-        return { token };
+        const accessToken = this.jwtService.sign({ userId: foundUser.id, email: foundUser.email, username: foundUser.username });
+        return {
+            user: {
+                id: foundUser.id,
+                email: foundUser.email,
+                username: foundUser.username,
+            },
+            accessToken
+        }
     }
 
     async updateUser(id: string, updateUserInput: Prisma.UsersUpdateInput) {
