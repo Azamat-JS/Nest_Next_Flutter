@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
@@ -80,7 +80,7 @@ export class UsersService {
         }
         const isPasswordValid = await bcrypt.compare(password, foundUser.password);
         if (!isPasswordValid) {
-            throw new NotFoundException('Invalid credentials');
+            throw new UnauthorizedException('Invalid credentials');
         }
         const accessToken = this.jwtService.sign({ userId: foundUser.id, email: foundUser.email, username: foundUser.username });
         return {
