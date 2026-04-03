@@ -22,8 +22,8 @@ abstract interface class AuthRemoteDataSource {
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   final DioClient dioClient;
-  final FlutterSecureStorage secureStorage = const FlutterSecureStorage();
-  AuthRemoteDataSourceImpl(this.dioClient);
+  final FlutterSecureStorage secureStorage;
+  AuthRemoteDataSourceImpl(this.dioClient, this.secureStorage);
 
   @override
   Future<UserModel?> getCurrentUser() async {
