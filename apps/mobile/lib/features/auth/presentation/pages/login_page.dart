@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/core/theme/app_pallete.dart';
+import 'package:mobile/features/auth/presentation/pages/sign_up_page.dart';
 import 'package:mobile/features/auth/presentation/widgets/auth_button.dart';
 import 'package:mobile/features/auth/presentation/widgets/auth_form.dart';
 
 class LoginPage extends StatefulWidget {
-  MaterialPageRoute<dynamic> route() {
-    return MaterialPageRoute(builder: (_) => this);
+  static MaterialPageRoute<dynamic> route() {
+    return MaterialPageRoute(builder: (_) => LoginPage());
   }
 
   const LoginPage({super.key});
@@ -44,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
 
-                    SizedBox(height: 30),
+                    const SizedBox(height: 30),
                     AuthForm(
                       hintText: 'Email',
                       controller: emailController,
@@ -58,7 +60,7 @@ class _LoginPageState extends State<LoginPage> {
                         return null;
                       },
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     AuthForm(
                       hintText: 'Password',
                       controller: passwordController,
@@ -71,8 +73,30 @@ class _LoginPageState extends State<LoginPage> {
                         return null;
                       },
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     AuthGradientButton(text: 'Login', onPressed: () {}),
+                    const SizedBox(height: 20),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(context, SignUpPage.route());
+                      },
+                      child: RichText(
+                        text: TextSpan(
+                          text: "Don't have an account? ",
+                          style: Theme.of(context).textTheme.titleMedium,
+                          children: [
+                            TextSpan(
+                              text: 'Sign Up',
+                              style: Theme.of(context).textTheme.titleMedium
+                                  ?.copyWith(
+                                    color: AppPallete.gradient3,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
