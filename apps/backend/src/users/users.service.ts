@@ -9,12 +9,22 @@ export class UsersService {
     constructor(private readonly prisma: PrismaService, private readonly jwtService: JwtService) { }
 
     async getAllUsers() {
-        return this.prisma.users.findMany({});
+        return this.prisma.users.findMany({
+            select: {
+                id: true,
+                email: true,
+                username: true,
+            }
+        });
     }
 
     async getMyProfile(userId: string) {
         const foundUser = await this.prisma.users.findUnique({
-            where: { id: userId }
+            where: { id: userId }, select: {
+                id: true,
+                email: true,
+                username: true,
+            }
         });
         if (!foundUser) {
             throw new NotFoundException('User not found');
@@ -24,7 +34,11 @@ export class UsersService {
 
     async getUserById(id: string) {
         const foundUser = await this.prisma.users.findUnique({
-            where: { id }
+            where: { id }, select: {
+                id: true,
+                email: true,
+                username: true,
+            }
         });
         if (!foundUser) {
             throw new NotFoundException('User not found');
@@ -80,19 +94,33 @@ export class UsersService {
     }
 
     async updateUser(id: string, updateUserInput: Prisma.UsersUpdateInput) {
-
         const foundUser = await this.prisma.users.findUnique({
-            where: { id }
+            where: { id },
         });
+
         if (!foundUser) {
             throw new NotFoundException('User not found');
         }
-        return this.prisma.users.update({
+
+        if (typeof updateUserInput.password === 'string') {
+            updateUserInput.password = await bcrypt.hash(
+                updateUserInput.password,
+                10,
+            );
+        }
+
+        const updatedUser = await this.prisma.users.update({
             where: { id },
-            data: {
-                ...updateUserInput,
-            }
-        })
+            data: updateUserInput,
+        });
+
+        return {
+            user: {
+                id: updatedUser.id,
+                email: updatedUser.email,
+                username: updatedUser.username,
+            },
+        };
     }
 
     async deleteUser(id: string) {
