@@ -6,7 +6,7 @@
 - Local:         http://localhost:4000
 - Network:       http://192.168.13.88:4000
 - Environments: .env.local
-[32m[1m✓[22m[39m Ready in 241ms
+[32m[1m✓[22m[39m Ready in 260ms
 [33m[1m⚠[22m[39m Warning: Next.js inferred your workspace root, but it may not be correct.
  We detected multiple lockfiles and selected the directory of /Users/azamatabdullayev/Desktop/full-stack-turbo/pnpm-workspace.yaml as the root directory.
  To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
@@ -15,89 +15,8 @@
    * /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend/pnpm-workspace.yaml
 
 
-[1mnull[22m
- GET /home [32m200[39m in 243ms[2m (next.js: 102ms, application-code: 141ms)[22m
-[1mnull[22m
- GET /home [32m200[39m in 31ms[2m (next.js: 3ms, application-code: 28ms)[22m
-[32m[1m✓[22m[39m Compiled in 233ms
- GET /home [32m200[39m in 50ms[2m (next.js: 12ms, application-code: 38ms)[22m
- GET /home [32m200[39m in 50ms[2m (next.js: 5ms, application-code: 45ms)[22m
- GET / [32m200[39m in 51ms[2m (next.js: 34ms, application-code: 18ms)[22m
-[32m[1m✓[22m[39m Compiled in 215ms
- GET / [32m200[39m in 74ms[2m (next.js: 4ms, application-code: 70ms)[22m
- GET /profile [32m200[39m in 32ms[2m (next.js: 17ms, application-code: 15ms)[22m
- GET /home [32m200[39m in 25ms[2m (next.js: 6ms, application-code: 20ms)[22m
-[32m[1m✓[22m[39m Compiled in 23ms
-[32m[1m✓[22m[39m Compiled in 15ms
-[32m[1m✓[22m[39m Compiled in 25ms
- GET /home [32m200[39m in 53ms[2m (next.js: 9ms, application-code: 44ms)[22m
- GET / [32m200[39m in 30ms[2m (next.js: 10ms, application-code: 21ms)[22m
- GET /home [32m200[39m in 10ms[2m (next.js: 2ms, application-code: 7ms)[22m
-[36m[browser][39m Each child in a list should have a unique "key" prop.
-
-Check the render method of `TableBody`. It was passed a child from HomePage. See https://react.dev/link/warning-keys for more information. 
-[36m[browser][39m In HTML, <button> cannot be a descendant of <button>.
-This will cause a hydration error.
-
-  ...
-    <table data-slot="table" className="w-full cap...">
-      <TableCaption>
-      <TableHeader>
-      <TableBody>
-        <tbody data-slot="table-body" className={"[&_tr:la..."}>
-          <TableRow>
-            <tr data-slot="table-row" className="border-b t...">
-              <TableCell>
-              <TableCell>
-              <TableCell className="">
-                <td data-slot="table-cell" className={"p-2 alig..."}>
-                  <DropdownMenu>
-                    <MenuRoot data-slot="dropdown-menu">
-                      <FloatingTree externalTree={{nodesRef:{...}, ...}}>
-                        <DropdownMenuTrigger>
-                          <MenuTrigger data-slot="dropdown-m...">
->                           <button
->                             type="button"
->                             onClick={function onClick}
->                             onMouseDown={function onMouseDown}
->                             onKeyDown={function}
->                             onKeyUp={function onKeyUp}
->                             onPointerDown={function onPointerDown}
->                             tabIndex={0}
->                             disabled={false}
->                             aria-haspopup="menu"
->                             id="base-ui-_r_g_"
->                             data-slot="dropdown-menu-trigger"
->                             ref={function}
->                           >
-                              <Button variant="outline">
-                                <Button data-slot="button" className={"group/bu..."}>
->                                 <button
->                                   type="button"
->                                   onClick={function onClick}
->                                   onMouseDown={function onMouseDown}
->                                   onKeyDown={function}
->                                   onKeyUp={function onKeyUp}
->                                   onPointerDown={function onPointerDown}
->                                   tabIndex={0}
->                                   disabled={false}
->                                   data-slot="button"
->                                   ref={function}
->                                   className={"group/button inline-flex shrink-0 items-center justify-center rounded..."}
->                                 >
-                        ...
-          ...
-      ...
- 
-[36m[browser][39m <button> cannot contain a nested <button>.
-See this log for the ancestor stack trace. 
-[32m[1m✓[22m[39m Compiled in 18ms
- GET / [32m200[39m in 18ms[2m (next.js: 6ms, application-code: 12ms)[22m
-[32m[1m✓[22m[39m Compiled in 114ms
- GET /profile [32m200[39m in 27ms[2m (next.js: 6ms, application-code: 20ms)[22m
- GET / [32m200[39m in 27ms[2m (next.js: 7ms, application-code: 20ms)[22m
- GET /home [32m200[39m in 11ms[2m (next.js: 3ms, application-code: 8ms)[22m
- GET /home [32m200[39m in 69ms[2m (next.js: 12ms, application-code: 57ms)[22m
+ GET / [32m200[39m in 371ms[2m (next.js: 154ms, application-code: 217ms)[22m
+ GET / [32m200[39m in 44ms[2m (next.js: 5ms, application-code: 39ms)[22m
 [36m[browser][39m Each child in a list should have a unique "key" prop.
 
 Check the render method of `TableBody`. It was passed a child from HomePage. See https://react.dev/link/warning-keys for more information. 
@@ -142,4 +61,820 @@ This will cause a hydration error.
 >                                   onClick={function onClick}
 >                                   onMouseDown={function onMouseDown}
 >                                   onKeyDown={function}
->                                   onKeyUp={function 
+>                                   onKeyUp={function onKeyUp}
+>                                   onPointerDown={function onPointerDown}
+>                                   tabIndex={0}
+>                                   disabled={false}
+>                                   data-slot="button"
+>                                   ref={function}
+>                                   className={"group/button inline-flex shrink-0 items-center justify-center rounded..."}
+>                                 >
+                        ...
+          ...
+      ...
+ 
+[36m[browser][39m <button> cannot contain a nested <button>.
+See this log for the ancestor stack trace. 
+[32m[1m✓[22m[39m Compiled in 284ms
+[32m[1m✓[22m[39m Compiled in 27ms
+[32m[1m✓[22m[39m Compiled in 247ms
+[32m[1m✓[22m[39m Compiled in 105ms
+[32m[1m✓[22m[39m Compiled in 19ms
+[32m[1m✓[22m[39m Compiled in 20ms
+[32m[1m✓[22m[39m Compiled in 34ms
+[32m[1m✓[22m[39m Compiled in 30ms
+[32m[1m✓[22m[39m Compiled in 125ms
+[32m[1m✓[22m[39m Compiled in 21ms
+[32m[1m✓[22m[39m Compiled in 19ms
+[32m[1m✓[22m[39m Compiled in 18ms
+[32m[1m✓[22m[39m Compiled in 42ms
+[32m[1m✓[22m[39m Compiled in 18ms
+ GET / [32m200[39m in 42ms[2m (next.js: 8ms, application-code: 34ms)[22m
+[36m[browser][39m Each child in a list should have a unique "key" prop.
+
+Check the render method of `TableBody`. It was passed a child from HomePage. See https://react.dev/link/warning-keys for more information. 
+[36m[browser][39m In HTML, <button> cannot be a descendant of <button>.
+This will cause a hydration error.
+
+  ...
+    <table data-slot="table" className="w-full cap...">
+      <TableCaption>
+      <TableHeader>
+      <TableBody>
+        <tbody data-slot="table-body" className={"[&_tr:la..."}>
+          <TableRow>
+            <tr data-slot="table-row" className="border-b t...">
+              <TableCell>
+              <TableCell>
+              <TableCell className="">
+                <td data-slot="table-cell" className={"p-2 alig..."}>
+                  <DropdownMenu>
+                    <MenuRoot data-slot="dropdown-menu">
+                      <FloatingTree externalTree={{nodesRef:{...}, ...}}>
+                        <DropdownMenuTrigger>
+                          <MenuTrigger data-slot="dropdown-m...">
+>                           <button
+>                             type="button"
+>                             onClick={function onClick}
+>                             onMouseDown={function onMouseDown}
+>                             onKeyDown={function}
+>                             onKeyUp={function onKeyUp}
+>                             onPointerDown={function onPointerDown}
+>                             tabIndex={0}
+>                             disabled={false}
+>                             aria-haspopup="menu"
+>                             id="base-ui-_r_4_"
+>                             data-slot="dropdown-menu-trigger"
+>                             ref={function}
+>                           >
+                              <Button variant="outline">
+                                <Button data-slot="button" className={"group/bu..."}>
+>                                 <button
+>                                   type="button"
+>                                   onClick={function onClick}
+>                                   onMouseDown={function onMouseDown}
+>                                   onKeyDown={function}
+>                                   onKeyUp={function onKeyUp}
+>                                   onPointerDown={function onPointerDown}
+>                                   tabIndex={0}
+>                                   disabled={false}
+>                                   data-slot="button"
+>                                   ref={function}
+>                                   className={"group/button inline-flex shrink-0 items-center justify-center rounded..."}
+>                                 >
+                        ...
+          ...
+      ...
+ 
+[36m[browser][39m <button> cannot contain a nested <button>.
+See this log for the ancestor stack trace. 
+[32m[1m✓[22m[39m Compiled in 24ms
+[36m[browser][39m React does not recognize the `asChild` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `aschild` instead. If you accidentally passed it from a parent component, remove it from the DOM element. 
+[32m[1m✓[22m[39m Compiled in 19ms
+[32m[1m✓[22m[39m Compiled in 81ms
+[32m[1m✓[22m[39m Compiled in 193ms
+ GET / [32m200[39m in 110ms[2m (next.js: 53ms, application-code: 56ms)[22m
+ GET / [32m200[39m in 28ms[2m (next.js: 1947µs, application-code: 26ms)[22m
+ GET / [32m200[39m in 32ms[2m (next.js: 1196µs, application-code: 31ms)[22m
+ GET / [32m200[39m in 24ms[2m (next.js: 1249µs, application-code: 23ms)[22m
+ GET / [32m200[39m in 15ms[2m (next.js: 1324µs, application-code: 14ms)[22m
+[32m[1m✓[22m[39m Compiled in 146ms
+ GET / [32m200[39m in 161ms[2m (next.js: 59ms, application-code: 102ms)[22m
+ GET / [32m200[39m in 77ms[2m (next.js: 31ms, application-code: 46ms)[22m
+ GET / [32m200[39m in 23ms[2m (next.js: 1763µs, application-code: 21ms)[22m
+ GET / [32m200[39m in 12ms[2m (next.js: 1148µs, application-code: 10ms)[22m
+[32m[1m✓[22m[39m Compiled in 152ms
+[36m[browser][39m ./apps/frontend/src/app/home/page.tsx:98:74
+Expression expected
+   96 |                                     <DropdownMenuContent align="start">
+   97 |                                         <DropdownMenuGroup>
+>  98 |                                             <DropdownMenuItem onClick={ }>
+      |                                                                          ^
+   99 |                                                 <Edit /> Update
+  100 |                                             </DropdownMenuItem>
+  101 |                                             <DropdownMenuItem className="text-red-500">
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./apps/frontend/src/app/home/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/frontend/src/app/home/page.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Server Component] 
+[36m[browser][39m ./apps/frontend/src/app/home/page.tsx:98:74
+Expression expected
+   96 |                                     <DropdownMenuContent align="start">
+   97 |                                         <DropdownMenuGroup>
+>  98 |                                             <DropdownMenuItem onClick={ }>
+      |                                                                          ^
+   99 |                                                 <Edit /> Update
+  100 |                                             </DropdownMenuItem>
+  101 |                                             <DropdownMenuItem className="text-red-500">
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./apps/frontend/src/app/home/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/frontend/src/app/home/page.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Server Component] 
+ GET / [32m200[39m in 409ms[2m (next.js: 53ms, application-code: 356ms)[22m
+ GET / [32m200[39m in 302ms[2m (next.js: 59ms, application-code: 243ms)[22m
+ GET / [32m200[39m in 37ms[2m (next.js: 4ms, application-code: 33ms)[22m
+ GET / [32m200[39m in 311ms[2m (next.js: 77ms, application-code: 233ms)[22m
+[36m[browser][39m [31mUncaught TypeError: Cannot destructure property 'store' of '(0 , __TURBOPACK__imported__module__$5b$project$5d2f$apps$2f$frontend$2f$node_modules$2f2e$pnpm$2f40$base$2d$ui$2b$react$40$1$2e$3$2e$0_$40$types$2b$react$40$19$2e$2$2e$14_react$2d$dom$40$19$2e$2$2e$4_react$40$19$2e$2$2e$4_$5f$react$40$19$2e$2$2e$4$2f$node_modules$2f40$base$2d$ui$2f$react$2f$esm$2f$dialog$2f$root$2f$DialogRootContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__.useDialogRootContext)(...)' as it is undefined.[39m
+[31m    at DialogPortal (src/components/ui/dialog.tsx:19:10)
+    at DialogContent (src/components/ui/dialog.tsx:51:5)
+    at HomePage (src/app/home/page.tsx:139:13)
+    at Home (src/app/page.tsx:11:7)[39m
+  [90m17 |[0m
+  [90m18 |[0m [36mfunction[0m [33mDialogPortal[0m({ ...props }: [33mDialogPrimitive[0m.[33mPortal[0m.[33mProps[0m) {
+[31m[1m>[0m [90m19 |[0m   [36mreturn[0m <[33mDialogPrimitive[0m.[33mPortal[0m data-slot=[32m"dialog-portal"[0m {...props} />
+  [90m   |[0m          [31m[1m^[0m
+  [90m20 |[0m }
+  [90m21 |[0m
+  [90m22 |[0m [36mfunction[0m [33mDialogClose[0m({ ...props }: [33mDialogPrimitive[0m.[33mClose[0m.[33mProps[0m) {
+[33m[1m⚠[22m[39m Fast Refresh had to perform a full reload due to a runtime error.
+ GET / [32m200[39m in 31ms[2m (next.js: 6ms, application-code: 26ms)[22m
+[32m[1m✓[22m[39m Compiled in 21ms
+[36m[browser][39m In HTML, <button> cannot be a descendant of <button>.
+This will cause a hydration error.
+
+  ...
+    <DialogPortal data-slot="dialog-portal">
+      <FloatingPortal ref={null} data-slot="dialog-portal">
+        <div>
+        <InternalBackdrop>
+        <DialogOverlay>
+        <DialogPopup data-slot="dialog-con..." className="fixed top-...">
+          <FloatingFocusManager context={{...}} openInteractionType={null} disabled={false} closeOnFocusOut={true} ...>
+            <FocusGuard>
+            <div data-open="" tabIndex={-1} data-base-ui-focusable="" id="_r_0_" role="dialog" onKeyDown={function} ...>
+              <DialogHeader>
+              <FieldGroup>
+              <DialogFooter>
+                <div data-slot="dialog-footer" className="-mx-4 -mb-...">
+                  <DialogClose>
+                    <DialogClose data-slot="dialog-close">
+>                     <button
+>                       type="button"
+>                       onClick={function onClick}
+>                       onMouseDown={function onMouseDown}
+>                       onKeyDown={function}
+>                       onKeyUp={function onKeyUp}
+>                       onPointerDown={function onPointerDown}
+>                       tabIndex={0}
+>                       disabled={false}
+>                       data-slot="dialog-close"
+>                       ref={function}
+>                     >
+                        <Button variant="outline">
+                          <Button data-slot="button" className={"group/bu..."}>
+>                           <button
+>                             type="button"
+>                             onClick={function onClick}
+>                             onMouseDown={function onMouseDown}
+>                             onKeyDown={function}
+>                             onKeyUp={function onKeyUp}
+>                             onPointerDown={function onPointerDown}
+>                             tabIndex={0}
+>                             disabled={false}
+>                             data-slot="button"
+>                             ref={function}
+>                             className={"group/button inline-flex shrink-0 items-center justify-center rounded-lg bo..."}
+>                           >
+                  ...
+              ...
+            ...
+ 
+[36m[browser][39m <button> cannot contain a nested <button>.
+See this log for the ancestor stack trace. 
+[36m[browser][39m Each child in a list should have a unique "key" prop.
+
+Check the render method of `TableBody`. It was passed a child from HomePage. See https://react.dev/link/warning-keys for more information. 
+[32m[1m✓[22m[39m Compiled in 19ms
+[31m[1m⨯[22m[39m ./apps/frontend/src/app/home/page.tsx:150:77
+Expression expected
+  [90m148 |[0m                         <[33mField[0m>
+  [90m149 |[0m                             <[33mLabel[0m htmlFor=[32m"name-1"[0m>[33mName[0m</[33mLabel[0m>
+[31m[1m>[0m [90m150 |[0m                             <[33mInput[0m id=[32m"name-1"[0m name=[32m"name"[0m defaultValue={ } />
+  [90m    |[0m                                                                             [31m[1m^[0m
+  [90m151 |[0m                         </[33mField[0m>
+  [90m152 |[0m                         <[33mField[0m>
+  [90m153 |[0m                             <[33mLabel[0m htmlFor=[32m"username-1"[0m>[33mUsername[0m</[33mLabel[0m>
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./apps/frontend/src/app/home/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/frontend/src/app/home/page.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Server Component]
+
+
+
+./apps/frontend/src/app/home/page.tsx:150:78
+Expression expected
+  [90m148 |[0m                         <[33mField[0m>
+  [90m149 |[0m                             <[33mLabel[0m htmlFor=[32m"name-1"[0m>[33mName[0m</[33mLabel[0m>
+[31m[1m>[0m [90m150 |[0m                             <[33mInput[0m id=[32m"name-1"[0m name=[32m"name"[0m defaultValue={ } />
+  [90m    |[0m                                                                              [31m[1m^[0m
+  [90m151 |[0m                         </[33mField[0m>
+  [90m152 |[0m                         <[33mField[0m>
+  [90m153 |[0m                             <[33mLabel[0m htmlFor=[32m"username-1"[0m>[33mUsername[0m</[33mLabel[0m>
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./apps/frontend/src/app/home/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/frontend/src/app/home/page.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Server Component]
+
+
+
+./apps/frontend/src/app/home/page.tsx:151:25
+Expression expected
+  [90m149 |[0m                             <[33mLabel[0m htmlFor=[32m"name-1"[0m>[33mName[0m</[33mLabel[0m>
+  [90m150 |[0m                             <[33mInput[0m id=[32m"name-1"[0m name=[32m"name"[0m defaultValue={ } />
+[31m[1m>[0m [90m151 |[0m                         </[33mField[0m>
+  [90m    |[0m                         [31m[1m^[0m
+  [90m152 |[0m                         <[33mField[0m>
+  [90m153 |[0m                             <[33mLabel[0m htmlFor=[32m"username-1"[0m>[33mUsername[0m</[33mLabel[0m>
+  [90m154 |[0m                             <[33mInput[0m id=[32m"username-1"[0m name=[32m"username"[0m defaultValue=[32m"@peduarte"[0m />
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./apps/frontend/src/app/home/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/frontend/src/app/home/page.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Server Component]
+
+
+
+./apps/frontend/src/app/home/page.tsx:151:26
+Unterminated regexp literal
+  [90m149 |[0m                             <[33mLabel[0m htmlFor=[32m"name-1"[0m>[33mName[0m</[33mLabel[0m>
+  [90m150 |[0m                             <[33mInput[0m id=[32m"name-1"[0m name=[32m"name"[0m defaultValue={ } />
+[31m[1m>[0m [90m151 |[0m                         </[33mField[0m>
+  [90m    |[0m                          [31m[1m^^^^^^^[0m
+  [90m152 |[0m                         <[33mField[0m>
+  [90m153 |[0m                             <[33mLabel[0m htmlFor=[32m"username-1"[0m>[33mUsername[0m</[33mLabel[0m>
+  [90m154 |[0m                             <[33mInput[0m id=[32m"username-1"[0m name=[32m"username"[0m defaultValue=[32m"@peduarte"[0m />
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./apps/frontend/src/app/home/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/frontend/src/app/home/page.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Server Component]
+
+
+[36m[browser][39m ./apps/frontend/src/app/home/page.tsx:151:25
+Expression expected
+  149 |                             <Label htmlFor="name-1">Name</Label>
+  150 |                             <Input id="name-1" name="name" defaultValue={ } />
+> 151 |                         </Field>
+      |                         ^
+  152 |                         <Field>
+  153 |                             <Label htmlFor="username-1">Username</Label>
+  154 |                             <Input id="username-1" name="username" defaultValue="@peduarte" />
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./apps/frontend/src/app/home/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/frontend/src/app/home/page.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Server Component] 
+[36m[browser][39m ./apps/frontend/src/app/home/page.tsx:151:26
+Unterminated regexp literal
+  149 |                             <Label htmlFor="name-1">Name</Label>
+  150 |                             <Input id="name-1" name="name" defaultValue={ } />
+> 151 |                         </Field>
+      |                          ^^^^^^^
+  152 |                         <Field>
+  153 |                             <Label htmlFor="username-1">Username</Label>
+  154 |                             <Input id="username-1" name="username" defaultValue="@peduarte" />
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./apps/frontend/src/app/home/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/frontend/src/app/home/page.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Server Component] 
+ GET / [31m500[39m in 200ms[2m (next.js: 107ms, application-code: 93ms)[22m
+[31m[1m⨯[22m[39m ./apps/frontend/src/app/home/page.tsx:150:77
+Expression expected
+  [90m148 |[0m                         <[33mField[0m>
+  [90m149 |[0m                             <[33mLabel[0m htmlFor=[32m"name-1"[0m>[33mName[0m</[33mLabel[0m>
+[31m[1m>[0m [90m150 |[0m                             <[33mInput[0m id=[32m"name-1"[0m name=[32m"name"[0m defaultValue={ } />
+  [90m    |[0m                                                                             [31m[1m^[0m
+  [90m151 |[0m                         </[33mField[0m>
+  [90m152 |[0m                         <[33mField[0m>
+  [90m153 |[0m                             <[33mLabel[0m htmlFor=[32m"username-1"[0m>[33mUsername[0m</[33mLabel[0m>
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./apps/frontend/src/app/home/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/frontend/src/app/home/page.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Server Component]
+
+
+
+./apps/frontend/src/app/home/page.tsx:150:78
+Expression expected
+  [90m148 |[0m                         <[33mField[0m>
+  [90m149 |[0m                             <[33mLabel[0m htmlFor=[32m"name-1"[0m>[33mName[0m</[33mLabel[0m>
+[31m[1m>[0m [90m150 |[0m                             <[33mInput[0m id=[32m"name-1"[0m name=[32m"name"[0m defaultValue={ } />
+  [90m    |[0m                                                                              [31m[1m^[0m
+  [90m151 |[0m                         </[33mField[0m>
+  [90m152 |[0m                         <[33mField[0m>
+  [90m153 |[0m                             <[33mLabel[0m htmlFor=[32m"username-1"[0m>[33mUsername[0m</[33mLabel[0m>
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./apps/frontend/src/app/home/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/frontend/src/app/home/page.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Server Component]
+
+
+
+./apps/frontend/src/app/home/page.tsx:151:25
+Expression expected
+  [90m149 |[0m                             <[33mLabel[0m htmlFor=[32m"name-1"[0m>[33mName[0m</[33mLabel[0m>
+  [90m150 |[0m                             <[33mInput[0m id=[32m"name-1"[0m name=[32m"name"[0m defaultValue={ } />
+[31m[1m>[0m [90m151 |[0m                         </[33mField[0m>
+  [90m    |[0m                         [31m[1m^[0m
+  [90m152 |[0m                         <[33mField[0m>
+  [90m153 |[0m                             <[33mLabel[0m htmlFor=[32m"username-1"[0m>[33mUsername[0m</[33mLabel[0m>
+  [90m154 |[0m                             <[33mInput[0m id=[32m"username-1"[0m name=[32m"username"[0m defaultValue=[32m"@peduarte"[0m />
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./apps/frontend/src/app/home/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/frontend/src/app/home/page.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Server Component]
+
+
+
+./apps/frontend/src/app/home/page.tsx:151:26
+Unterminated regexp literal
+  [90m149 |[0m                             <[33mLabel[0m htmlFor=[32m"name-1"[0m>[33mName[0m</[33mLabel[0m>
+  [90m150 |[0m                             <[33mInput[0m id=[32m"name-1"[0m name=[32m"name"[0m defaultValue={ } />
+[31m[1m>[0m [90m151 |[0m                         </[33mField[0m>
+  [90m    |[0m                          [31m[1m^^^^^^^[0m
+  [90m152 |[0m                         <[33mField[0m>
+  [90m153 |[0m                             <[33mLabel[0m htmlFor=[32m"username-1"[0m>[33mUsername[0m</[33mLabel[0m>
+  [90m154 |[0m                             <[33mInput[0m id=[32m"username-1"[0m name=[32m"username"[0m defaultValue=[32m"@peduarte"[0m />
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./apps/frontend/src/app/home/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/frontend/src/app/home/page.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Server Component]
+
+
+ GET / [31m500[39m in 7ms[2m (next.js: 4ms, application-code: 4ms)[22m
+[36m[browser][39m ./apps/frontend/src/app/home/page.tsx:151:25
+Expression expected
+  149 |                             <Label htmlFor="name-1">Name</Label>
+  150 |                             <Input id="name-1" name="name" defaultValue={ } />
+> 151 |                         </Field>
+      |                         ^
+  152 |                         <Field>
+  153 |                             <Label htmlFor="username-1">Username</Label>
+  154 |                             <Input id="username-1" name="username" defaultValue="@peduarte" />
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./apps/frontend/src/app/home/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/frontend/src/app/home/page.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Server Component] 
+[36m[browser][39m ./apps/frontend/src/app/home/page.tsx:151:26
+Unterminated regexp literal
+  149 |                             <Label htmlFor="name-1">Name</Label>
+  150 |                             <Input id="name-1" name="name" defaultValue={ } />
+> 151 |                         </Field>
+      |                          ^^^^^^^
+  152 |                         <Field>
+  153 |                             <Label htmlFor="username-1">Username</Label>
+  154 |                             <Input id="username-1" name="username" defaultValue="@peduarte" />
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./apps/frontend/src/app/home/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/frontend/src/app/home/page.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Server Component] 
+[36m[browser][39m [31mUncaught Error: ./apps/frontend/src/app/home/page.tsx:151:25
+Expression expected
+  149 |                             <Label htmlFor="name-1">Name</Label>
+  150 |                             <Input id="name-1" name="name" defaultValue={ } />
+> 151 |                         </Field>
+      |                         ^
+  152 |                         <Field>
+  153 |                             <Label htmlFor="username-1">Username</Label>
+  154 |                             <Input id="username-1" name="username" defaultValue="@peduarte" />
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./apps/frontend/src/app/home/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/frontend/src/app/home/page.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Server Component]
+
+[39m
+[31m    at <unknown> (Error: ./apps/frontend/src/app/home/page.tsx:151:25)
+    at <unknown> (Error: (./apps/frontend/src/app/home/page.tsx:151:25)[39m
+[36m[browser][39m ./apps/frontend/src/app/home/page.tsx:151:25
+Expression expected
+  149 |                             <Label htmlFor="name-1">Name</Label>
+  150 |                             <Input id="name-1" name="name" defaultValue={ } />
+> 151 |                         </Field>
+      |                         ^
+  152 |                         <Field>
+  153 |                             <Label htmlFor="username-1">Username</Label>
+  154 |                             <Input id="username-1" name="username" defaultValue="@peduarte" />
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./apps/frontend/src/app/home/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/frontend/src/app/home/page.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Server Component] 
+[36m[browser][39m ./apps/frontend/src/app/home/page.tsx:151:26
+Unterminated regexp literal
+  149 |                             <Label htmlFor="name-1">Name</Label>
+  150 |                             <Input id="name-1" name="name" defaultValue={ } />
+> 151 |                         </Field>
+      |                          ^^^^^^^
+  152 |                         <Field>
+  153 |                             <Label htmlFor="username-1">Username</Label>
+  154 |                             <Input id="username-1" name="username" defaultValue="@peduarte" />
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./apps/frontend/src/app/home/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/frontend/src/app/home/page.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Server Component] 
+[36m[browser][39m ./apps/frontend/src/app/home/page.tsx:152:25
+Expression expected
+  150 |                             <Label htmlFor="name-1">Name</Label>
+  151 |                             <Input id="name-1" name="name" defaultValue={ } />
+> 152 |                         </Field>
+      |                         ^
+  153 |                         <Field>
+  154 |                             <Label htmlFor="username-1">Username</Label>
+  155 |                             <Input id="username-1" name="username" defaultValue="@peduarte" />
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./apps/frontend/src/app/home/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/frontend/src/app/home/page.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Server Component] 
+[36m[browser][39m ./apps/frontend/src/app/home/page.tsx:152:26
+Unterminated regexp literal
+  150 |                             <Label htmlFor="name-1">Name</Label>
+  151 |                             <Input id="name-1" name="name" defaultValue={ } />
+> 152 |                         </Field>
+      |                          ^^^^^^^
+  153 |                         <Field>
+  154 |                             <Label htmlFor="username-1">Username</Label>
+  155 |                             <Input id="username-1" name="username" defaultValue="@peduarte" />
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./apps/frontend/src/app/home/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/frontend/src/app/home/page.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Server Component] 
+[36m[browser][39m ./apps/frontend/src/app/home/page.tsx:152:25
+Expression expected
+  150 |                             <Label htmlFor="name-1">Name</Label>
+  151 |                             <Input id="name-1" name="name" defaultValue={ } />
+> 152 |                         </Field>
+      |                         ^
+  153 |                         <Field>
+  154 |                             <Label htmlFor="username-1">Username</Label>
+  155 |                             <Input id="username-1" name="username" defaultValue="@peduarte" />
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./apps/frontend/src/app/home/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/frontend/src/app/home/page.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Server Component] 
+[36m[browser][39m ./apps/frontend/src/app/home/page.tsx:152:26
+Unterminated regexp literal
+  150 |                             <Label htmlFor="name-1">Name</Label>
+  151 |                             <Input id="name-1" name="name" defaultValue={ } />
+> 152 |                         </Field>
+      |                          ^^^^^^^
+  153 |                         <Field>
+  154 |                             <Label htmlFor="username-1">Username</Label>
+  155 |                             <Input id="username-1" name="username" defaultValue="@peduarte" />
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./apps/frontend/src/app/home/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/frontend/src/app/home/page.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Server Component] 
+[36m[browser][39m ./apps/frontend/src/app/home/page.tsx:152:25
+Expression expected
+  150 |                             <Label htmlFor="name-1">Name</Label>
+  151 |                             <Input id="name-1" name="name" defaultValue={ } />
+> 152 |                         </Field>
+      |                         ^
+  153 |                         <Field>
+  154 |                             <Label htmlFor="username-1">Username</Label>
+  155 |                             <Input id="username-1" name="username" defaultValue="@peduarte" />
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./apps/frontend/src/app/home/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/frontend/src/app/home/page.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Server Component] 
+[36m[browser][39m ./apps/frontend/src/app/home/page.tsx:152:26
+Unterminated regexp literal
+  150 |                             <Label htmlFor="name-1">Name</Label>
+  151 |                             <Input id="name-1" name="name" defaultValue={ } />
+> 152 |                         </Field>
+      |                          ^^^^^^^
+  153 |                         <Field>
+  154 |                             <Label htmlFor="username-1">Username</Label>
+  155 |                             <Input id="username-1" name="username" defaultValue="@peduarte" />
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./apps/frontend/src/app/home/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/frontend/src/app/home/page.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Server Component] 
+[36m[browser][39m ./apps/frontend/src/app/home/page.tsx:152:25
+Expression expected
+  150 |                             <Label htmlFor="name-1">Name</Label>
+  151 |                             <Input id="name-1" name="name" defaultValue={ } />
+> 152 |                         </Field>
+      |                         ^
+  153 |                         <Field>
+  154 |                             <Label htmlFor="username-1">Username</Label>
+  155 |                             <Input id="username-1" name="username" defaultValue="@peduarte" />
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./apps/frontend/src/app/home/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/frontend/src/app/home/page.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Server Component] 
+[36m[browser][39m ./apps/frontend/src/app/home/page.tsx:152:26
+Unterminated regexp literal
+  150 |                             <Label htmlFor="name-1">Name</Label>
+  151 |                             <Input id="name-1" name="name" defaultValue={ } />
+> 152 |                         </Field>
+      |                          ^^^^^^^
+  153 |                         <Field>
+  154 |                             <Label htmlFor="username-1">Username</Label>
+  155 |                             <Input id="username-1" name="username" defaultValue="@peduarte" />
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./apps/frontend/src/app/home/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/frontend/src/app/home/page.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Client Component SSR]
+    ./apps/frontend/src/app/page.tsx [Server Component] 
+ GET / [32m200[39m in 242ms[2m (next.js: 56ms, application-code: 186ms)[22m
+[36m[browser][39m Each child in a list should have a unique "key" prop.
+
+Check the render method of `TableBody`. It was passed a child from HomePage. See https://react.dev/link/warning-keys for more information. 
+[36m[browser][39m In HTML, <button> cannot be a descendant of <button>.
+This will cause a hydration error.
+
+  ...
+    <table data-slot="table" className="w-full cap...">
+      <TableCaption>
+      <TableHeader>
+      <TableBody>
+        <tbody data-slot="table-body" className={"[&_tr:la..."}>
+          <TableRow>
+            <tr data-slot="table-row" className="border-b t...">
+              <TableCell>
+              <TableCell>
+              <TableCell className="">
+                <td data-slot="table-cell" className={"p-2 alig..."}>
+                  <DropdownMenu>
+                    <MenuRoot data-slot="dropdown-menu">
+                      <FloatingTree externalTree={{nodesRef:{...}, ...}}>
+                        <DropdownMenuTrigger>
+                          <MenuTrigger data-slot="dropdown-m...">
+>                           <button
+>                             type="button"
+>                             onClick={function onClick}
+>                             onMouseDown={function onMouseDown}
+>                             onKeyDown={function}
+>                             onKeyUp={function onKeyUp}
+>                             onPointerDown={function onPointerDown}
+>                             tabIndex={0}
+>                             disabled={false}
+>                             aria-haspopup="menu"
+>                             id="base-ui-_r_6_"
+>                             data-slot="dropdown-menu-trigger"
+>                             ref={function}
+>                           >
+                              <Button variant="outline">
+                                <Button data-slot="button" className={"group/bu..."}>
+>                                 <button
+>                                   type="button"
+>                                   onClick={function onClick}
+>                                   onMouseDown={function onMouseDown}
+>                                   onKeyDown={function}
+>                                   onKeyUp={function onKeyUp}
+>                                   onPointerDown={function onPointerDown}
+>                                   tabIndex={0}
+>                                   disabled={false}
+>                                   data-slot="button"
+>                                   ref={function}
+>                                   className={"group/button inline-flex shrink-0 items-center justify-center rounded..."}
+>                                 >
+                        ...
+          ...
+      ...
+ 
+[36m[browser][39m <button> cannot contain a nested <button>.
+See this log for the ancestor stack trace. 
+[32m[1m✓[22m[39m Compiled in 18ms
+[?25h

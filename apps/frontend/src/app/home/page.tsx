@@ -22,8 +22,6 @@ import {
     DropdownMenuContent,
     DropdownMenuGroup,
     DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuShortcut,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Edit, Menu, Trash } from "lucide-react"
@@ -46,6 +44,8 @@ const HomePage = () => {
     const [users, setUsers] = useState<TokenPayload[]>([]);
     const user = token ? jwtDecode<TokenPayload>(token) : null;
     const API = process.env.NEXT_PUBLIC_API_URL;
+    const [openUpdate, setOpenUpdate] = useState(false);
+    const [selectedUser, setSelectedUser] = useState<TokenPayload | null>(null);
 
     useEffect(() => {
         const getUsers = async () => {
@@ -94,48 +94,16 @@ const HomePage = () => {
                                             <Menu />
                                         </Button>
                                     </DropdownMenuTrigger>
-                                    <DropdownMenuContent className="w-40" align="start">
+                                    <DropdownMenuContent align="start">
                                         <DropdownMenuGroup>
-                                            <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                                            <DropdownMenuItem>
-                                                <Dialog>
-                                                    <form>
-                                                        <DialogTrigger>
-                                                            <Button variant="outline"><Edit /></Button>
-                                                        </DialogTrigger>
-                                                        <DialogContent className="sm:max-w-sm">
-                                                            <DialogHeader>
-                                                                <DialogTitle>Edit profile</DialogTitle>
-                                                                <DialogDescription>
-                                                                    Make changes to your profile here. Click save when you&apos;re
-                                                                    done.
-                                                                </DialogDescription>
-                                                            </DialogHeader>
-                                                            <FieldGroup>
-                                                                <Field>
-                                                                    <Label htmlFor="name-1">Name</Label>
-                                                                    <Input id="name-1" name="name" defaultValue="Pedro Duarte" />
-                                                                </Field>
-                                                                <Field>
-                                                                    <Label htmlFor="username-1">Username</Label>
-                                                                    <Input id="username-1" name="username" defaultValue="@peduarte" />
-                                                                </Field>
-                                                            </FieldGroup>
-                                                            <DialogFooter>
-                                                                <DialogClose>
-                                                                    <Button variant="outline">Cancel</Button>
-                                                                </DialogClose>
-                                                                <Button type="submit">Save changes</Button>
-                                                            </DialogFooter>
-                                                        </DialogContent>
-                                                    </form>
-                                                </Dialog>
+                                            <DropdownMenuItem onClick={() => { setOpenUpdate(true); setSelectedUser(u) }}>
+                                                <Edit /> Update
                                             </DropdownMenuItem>
-                                            <DropdownMenuItem>
+                                            <DropdownMenuItem className="text-red-500">
                                                 <Dialog>
                                                     <form>
                                                         <DialogTrigger>
-                                                            <Button variant="outline"><Trash /></Button>
+                                                            <Button variant="outline"><Trash /> Delete</Button>
                                                         </DialogTrigger>
                                                         <DialogContent className="sm:max-w-sm">
                                                             <DialogHeader>
@@ -144,16 +112,6 @@ const HomePage = () => {
                                                                     Are you sure to delete this user?
                                                                 </DialogDescription>
                                                             </DialogHeader>
-                                                            <FieldGroup>
-                                                                <Field>
-                                                                    <Label htmlFor="name-1">Username</Label>
-                                                                    <Input id="name-1" name="name" defaultValue="Pedro Duarte" />
-                                                                </Field>
-                                                                <Field>
-                                                                    <Label htmlFor="username-1">Email</Label>
-                                                                    <Input id="username-1" name="username" defaultValue="@peduarte" />
-                                                                </Field>
-                                                            </FieldGroup>
                                                             <DialogFooter>
                                                                 <DialogClose>
                                                                     <Button variant="outline">Cancel</Button>
@@ -178,6 +136,33 @@ const HomePage = () => {
                     </TableRow>
                 </TableFooter>
             </Table>
+            <Dialog open={openUpdate} onOpenChange={setOpenUpdate}>
+                <DialogContent className="sm:max-w-sm">
+                    <DialogHeader>
+                        <DialogTitle>Edit profile</DialogTitle>
+                        <DialogDescription>
+                            Make changes to your profile here. Click save when you&apos;re
+                            done.
+                        </DialogDescription>
+                    </DialogHeader>
+                    <FieldGroup>
+                        <Field>
+                            <Label htmlFor="name-1">Username</Label>
+                            <Input id="name-1" name="name" defaultValue={selectedUser?.username || ""} />
+                        </Field>
+                        <Field>
+                            <Label htmlFor="email-1">Email</Label>
+                            <Input id="username-1" name="username" defaultValue={selectedUser?.email || ""} />
+                        </Field>
+                    </FieldGroup>
+                    <DialogFooter>
+                        <DialogClose>
+                            <Button variant="outline">Cancel</Button>
+                        </DialogClose>
+                        <Button type="submit">Update</Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
         </>
 
     )
