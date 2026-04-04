@@ -59,8 +59,9 @@ export function CardDemo({ id, isLogin, toggle }: { id?: string, isLogin?: boole
                         toast.error('Login failed!')
                         return;
                     }
-                    localStorage.setItem('token', response.data.token);
-                    setToken(response.data.token);
+                    localStorage.setItem('token', response.data.accessToken);
+                    setToken(response.data.accessToken);
+
                     toast.success('Login successful!')
                     router.push('/home')
                 } else {
