@@ -23,11 +23,12 @@ import {
 } from "@/components/ui/field"
 import axios from "axios"
 import { useAuthStore } from "@/lib/stores/authStore"
+import { useRouter } from "next/navigation"
 
 export function CardDemo({ id, isLogin, toggle }: { id?: string, isLogin?: boolean, toggle?: () => void }) {
     const API = process.env.NEXT_PUBLIC_API_URL;
     const setToken = useAuthStore((state) => state.setToken);
-    const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+    const router = useRouter();
     const getSchema = (isLogin: boolean) =>
         z.object({
             username: isLogin
@@ -61,6 +62,7 @@ export function CardDemo({ id, isLogin, toggle }: { id?: string, isLogin?: boole
                     localStorage.setItem('token', response.data.token);
                     setToken(response.data.token);
                     toast.success('Login successful!')
+                    router.push('/home')
                 } else {
                     const response = await axios.post(`${API}/users/register`, value, {
                         headers: {
@@ -72,6 +74,7 @@ export function CardDemo({ id, isLogin, toggle }: { id?: string, isLogin?: boole
                         return;
                     }
                     toast.success('Registration successful!')
+                    router.push('/home')
                 }
             } catch (error: any) {
                 toast.error(
