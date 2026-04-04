@@ -1,0 +1,145 @@
+
+> frontend@0.1.0 dev /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend
+> next dev -p 4000
+
+[1m[38;2;173;127;168m▲ Next.js 16.2.1[39m[22m (Turbopack)
+- Local:         http://localhost:4000
+- Network:       http://192.168.13.88:4000
+- Environments: .env.local
+[32m[1m✓[22m[39m Ready in 241ms
+[33m[1m⚠[22m[39m Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /Users/azamatabdullayev/Desktop/full-stack-turbo/pnpm-workspace.yaml as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend/pnpm-workspace.yaml
+
+
+[1mnull[22m
+ GET /home [32m200[39m in 243ms[2m (next.js: 102ms, application-code: 141ms)[22m
+[1mnull[22m
+ GET /home [32m200[39m in 31ms[2m (next.js: 3ms, application-code: 28ms)[22m
+[32m[1m✓[22m[39m Compiled in 233ms
+ GET /home [32m200[39m in 50ms[2m (next.js: 12ms, application-code: 38ms)[22m
+ GET /home [32m200[39m in 50ms[2m (next.js: 5ms, application-code: 45ms)[22m
+ GET / [32m200[39m in 51ms[2m (next.js: 34ms, application-code: 18ms)[22m
+[32m[1m✓[22m[39m Compiled in 215ms
+ GET / [32m200[39m in 74ms[2m (next.js: 4ms, application-code: 70ms)[22m
+ GET /profile [32m200[39m in 32ms[2m (next.js: 17ms, application-code: 15ms)[22m
+ GET /home [32m200[39m in 25ms[2m (next.js: 6ms, application-code: 20ms)[22m
+[32m[1m✓[22m[39m Compiled in 23ms
+[32m[1m✓[22m[39m Compiled in 15ms
+[32m[1m✓[22m[39m Compiled in 25ms
+ GET /home [32m200[39m in 53ms[2m (next.js: 9ms, application-code: 44ms)[22m
+ GET / [32m200[39m in 30ms[2m (next.js: 10ms, application-code: 21ms)[22m
+ GET /home [32m200[39m in 10ms[2m (next.js: 2ms, application-code: 7ms)[22m
+[36m[browser][39m Each child in a list should have a unique "key" prop.
+
+Check the render method of `TableBody`. It was passed a child from HomePage. See https://react.dev/link/warning-keys for more information. 
+[36m[browser][39m In HTML, <button> cannot be a descendant of <button>.
+This will cause a hydration error.
+
+  ...
+    <table data-slot="table" className="w-full cap...">
+      <TableCaption>
+      <TableHeader>
+      <TableBody>
+        <tbody data-slot="table-body" className={"[&_tr:la..."}>
+          <TableRow>
+            <tr data-slot="table-row" className="border-b t...">
+              <TableCell>
+              <TableCell>
+              <TableCell className="">
+                <td data-slot="table-cell" className={"p-2 alig..."}>
+                  <DropdownMenu>
+                    <MenuRoot data-slot="dropdown-menu">
+                      <FloatingTree externalTree={{nodesRef:{...}, ...}}>
+                        <DropdownMenuTrigger>
+                          <MenuTrigger data-slot="dropdown-m...">
+>                           <button
+>                             type="button"
+>                             onClick={function onClick}
+>                             onMouseDown={function onMouseDown}
+>                             onKeyDown={function}
+>                             onKeyUp={function onKeyUp}
+>                             onPointerDown={function onPointerDown}
+>                             tabIndex={0}
+>                             disabled={false}
+>                             aria-haspopup="menu"
+>                             id="base-ui-_r_g_"
+>                             data-slot="dropdown-menu-trigger"
+>                             ref={function}
+>                           >
+                              <Button variant="outline">
+                                <Button data-slot="button" className={"group/bu..."}>
+>                                 <button
+>                                   type="button"
+>                                   onClick={function onClick}
+>                                   onMouseDown={function onMouseDown}
+>                                   onKeyDown={function}
+>                                   onKeyUp={function onKeyUp}
+>                                   onPointerDown={function onPointerDown}
+>                                   tabIndex={0}
+>                                   disabled={false}
+>                                   data-slot="button"
+>                                   ref={function}
+>                                   className={"group/button inline-flex shrink-0 items-center justify-center rounded..."}
+>                                 >
+                        ...
+          ...
+      ...
+ 
+[36m[browser][39m <button> cannot contain a nested <button>.
+See this log for the ancestor stack trace. 
+[32m[1m✓[22m[39m Compiled in 18ms
+ GET / [32m200[39m in 18ms[2m (next.js: 6ms, application-code: 12ms)[22m
+[32m[1m✓[22m[39m Compiled in 114ms
+ GET /profile [32m200[39m in 27ms[2m (next.js: 6ms, application-code: 20ms)[22m
+ GET / [32m200[39m in 27ms[2m (next.js: 7ms, application-code: 20ms)[22m
+ GET /home [32m200[39m in 11ms[2m (next.js: 3ms, application-code: 8ms)[22m
+ GET /home [32m200[39m in 69ms[2m (next.js: 12ms, application-code: 57ms)[22m
+[36m[browser][39m Each child in a list should have a unique "key" prop.
+
+Check the render method of `TableBody`. It was passed a child from HomePage. See https://react.dev/link/warning-keys for more information. 
+[36m[browser][39m In HTML, <button> cannot be a descendant of <button>.
+This will cause a hydration error.
+
+  ...
+    <table data-slot="table" className="w-full cap...">
+      <TableCaption>
+      <TableHeader>
+      <TableBody>
+        <tbody data-slot="table-body" className={"[&_tr:la..."}>
+          <TableRow>
+            <tr data-slot="table-row" className="border-b t...">
+              <TableCell>
+              <TableCell>
+              <TableCell className="">
+                <td data-slot="table-cell" className={"p-2 alig..."}>
+                  <DropdownMenu>
+                    <MenuRoot data-slot="dropdown-menu">
+                      <FloatingTree externalTree={{nodesRef:{...}, ...}}>
+                        <DropdownMenuTrigger>
+                          <MenuTrigger data-slot="dropdown-m...">
+>                           <button
+>                             type="button"
+>                             onClick={function onClick}
+>                             onMouseDown={function onMouseDown}
+>                             onKeyDown={function}
+>                             onKeyUp={function onKeyUp}
+>                             onPointerDown={function onPointerDown}
+>                             tabIndex={0}
+>                             disabled={false}
+>                             aria-haspopup="menu"
+>                             id="base-ui-_r_4_"
+>                             data-slot="dropdown-menu-trigger"
+>                             ref={function}
+>                           >
+                              <Button variant="outline">
+                                <Button data-slot="button" className={"group/bu..."}>
+>                                 <button
+>                                   type="button"
+>                                   onClick={function onClick}
+>                                   onMouseDown={function onMouseDown}
+>                                   onKeyDown={function}
+>                                   onKeyUp={function 
