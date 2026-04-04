@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile/core/common/cubit/auth_check_cubit.dart';
 import 'package:mobile/core/theme/app_theme.dart';
 import 'package:mobile/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:mobile/features/auth/presentation/pages/home_page.dart';
 import 'package:mobile/features/auth/presentation/pages/login_page.dart';
 import 'package:mobile/init_dependencies.dart';
 
@@ -34,7 +35,17 @@ class _MyAppState extends State<MyApp> {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.darkThemeMode,
-      home: LoginPage(),
+      home: BlocSelector<AuthCheckCubit, AuthCheckState, bool>(
+        selector: (state) {
+          return state is AuthUserLoggedIn;
+        },
+        builder: (context, isLoggedIn) {
+          if (isLoggedIn) {
+            return HomePage();
+          }
+          return LoginPage();
+        },
+      ),
     );
   }
 }

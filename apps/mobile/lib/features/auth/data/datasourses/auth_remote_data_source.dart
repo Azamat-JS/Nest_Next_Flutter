@@ -29,6 +29,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   Future<UserModel?> getCurrentUser() async {
     try {
       final response = await dioClient.dio.get('/users/me');
+      print(response);
       return UserModel.fromJson(response.data as Map<String, dynamic>);
     } on DioException {
       return null;
@@ -46,10 +47,10 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         data: {'email': email, 'password': password},
       );
       final data = response.data as Map<String, dynamic>;
-      if (data['access_token'] != null) {
+      if (data['accessToken'] != null) {
         await secureStorage.write(
           key: 'access_token',
-          value: data['access_token'] as String,
+          value: data['accessToken'] as String,
         );
       }
       return UserModel.fromJson(data['user'] as Map<String, dynamic>);
@@ -71,14 +72,15 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         '/users/register',
         data: {'username': username, 'email': email, 'password': password},
       );
-
+      print(response);
       final data = response.data as Map<String, dynamic>;
-      if (data['access_token'] != null) {
+      if (data['accessToken'] != null) {
         await secureStorage.write(
           key: 'access_token',
-          value: data['access_token'] as String,
+          value: data['accessToken'] as String,
         );
       }
+      print('REGISTER RESPONSE: ${response.data}');
       return UserModel.fromJson(data['user'] as Map<String, dynamic>);
     } on DioException catch (e) {
       throw Exception(

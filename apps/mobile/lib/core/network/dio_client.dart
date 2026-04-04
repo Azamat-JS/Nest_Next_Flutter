@@ -13,7 +13,7 @@ class DioClient {
   late final Dio dio =
       Dio(
           BaseOptions(
-            baseUrl: 'http://localhost:3000',
+            baseUrl: 'http://localhost:3002',
             connectTimeout: const Duration(seconds: 10),
             receiveTimeout: const Duration(seconds: 10),
             sendTimeout: const Duration(seconds: 10),

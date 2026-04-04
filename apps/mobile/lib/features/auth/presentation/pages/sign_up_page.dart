@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile/core/theme/app_pallete.dart';
 import 'package:mobile/core/utils/show_snackbar.dart';
 import 'package:mobile/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:mobile/features/auth/presentation/pages/home_page.dart';
 import 'package:mobile/features/auth/presentation/pages/login_page.dart';
 import 'package:mobile/features/auth/presentation/widgets/auth_button.dart';
 import 'package:mobile/features/auth/presentation/widgets/auth_form.dart';
@@ -52,6 +53,12 @@ class _SignUpPageState extends State<SignUpPage> {
                 listener: (context, state) {
                   if (state is AuthFailure) {
                     showSnackbar(context, state.message);
+                  }
+                  if (state is AuthSuccess) {
+                    Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(builder: (_) => HomePage()),
+                      (route) => false,
+                    );
                   }
                 },
                 builder: (context, state) {
