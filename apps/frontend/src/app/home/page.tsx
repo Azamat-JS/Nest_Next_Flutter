@@ -15,6 +15,7 @@ import { useAuthStore } from "@/lib/zustand"
 import axios from "axios"
 import { jwtDecode } from "jwt-decode"
 import { useEffect, useState } from "react"
+import { toast } from "sonner"
 
 const HomePage = () => {
     const token = useAuthStore((state) => state.token);
@@ -29,8 +30,10 @@ const HomePage = () => {
                 if (res.status === 200) {
                     setUsers(res.data);
                 }
-            } catch (error) {
-                console.error("Error fetching users:", error);
+            } catch (error: any) {
+                toast.error(
+                    error.response?.data?.message ?? 'Something went wrong'
+                );
             }
         }
 

@@ -72,11 +72,11 @@ export function CardDemo({ id, isLogin, toggle }: { id?: string, isLogin?: boole
                         return;
                     }
                     toast.success('Registration successful!')
-                    console.log(response.data);
                 }
-            } catch (error) {
-                console.error(error);
-                toast.error(error instanceof Error ? error.message : 'An error occurred')
+            } catch (error: any) {
+                toast.error(
+                    error.response?.data?.message ?? 'Something went wrong'
+                );
             }
         },
     })
