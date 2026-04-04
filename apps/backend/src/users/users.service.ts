@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
@@ -47,27 +47,38 @@ export class UsersService {
     }
 
     async createUser(createUserInput: Prisma.UsersCreateInput) {
-        const hashedPassword = await bcrypt.hash(createUserInput.password, 10);
-        const user = await this.prisma.users.create({
-            data: {
-                ...createUserInput,
-                password: hashedPassword
-            }
-        });
+        try {
+            const hashedPassword = await bcrypt.hash(createUserInput.password, 10);
+            const user = await this.prisma.users.create({
+                data: {
+                    ...createUserInput,
+                    password: hashedPassword
+                }
+            });
 
-        const accessToken = this.jwtService.sign({
-            userId: user.id,
-            email: user.email,
-            username: user.username
-        });
-
-        return {
-            user: {
-                id: user.id,
+            const accessToken = this.jwtService.sign({
+                userId: user.id,
                 email: user.email,
-                username: user.username,
-            },
-            accessToken
+                username: user.username
+            });
+
+            return {
+                user: {
+                    id: user.id,
+                    email: user.email,
+                    username: user.username,
+                },
+                accessToken
+            }
+        } catch (error) {
+            if (
+                error instanceof Prisma.PrismaClientKnownRequestError &&
+                error.code === 'P2002'
+            ) {
+                throw new BadRequestException('Username already exists');
+            }
+
+            throw error;
         }
     };
 

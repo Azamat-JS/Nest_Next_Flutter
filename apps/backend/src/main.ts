@@ -6,9 +6,7 @@ import { AppConfig } from './lib/config';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const config = app.get(AppConfig);
-  app.enableCors({
-    origin: 'http://localhost:4000',
-  });
+  app.enableCors();
   await app.listen(config.PORT ?? 3000, () => {
     console.log('server is running on port ' + config.PORT)
   });
