@@ -15,7 +15,7 @@ import {
     DropdownMenuSubTrigger,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { useAuthStore } from "@/lib/zustand"
+import { useAuthStore } from "@/lib/stores/authStore"
 import { Menu } from "lucide-react"
 import { useRouter } from "next/navigation"
 

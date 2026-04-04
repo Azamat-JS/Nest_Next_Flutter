@@ -1,6 +1,6 @@
 'use client'
 
-import { useAuthStore } from "@/lib/zustand";
+import { useAuthStore } from "@/lib/stores/authStore";
 import LoginForm from "./(auth)/login";
 import HomePage from "./home/page";
 

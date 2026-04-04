@@ -1,7 +1,7 @@
 'use client'
 
-import { TokenPayload } from '@/lib/token_payload'
-import { useAuthStore } from '@/lib/zustand'
+import { TokenPayload } from '@/lib/types/token_payload'
+import { useAuthStore } from '@/lib/stores/authStore'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 

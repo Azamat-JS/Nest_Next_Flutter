@@ -22,7 +22,7 @@ import {
 
 } from "@/components/ui/field"
 import axios from "axios"
-import { useAuthStore } from "@/lib/zustand"
+import { useAuthStore } from "@/lib/stores/authStore"
 
 export function CardDemo({ id, isLogin, toggle }: { id?: string, isLogin?: boolean, toggle?: () => void }) {
     const API = process.env.NEXT_PUBLIC_API_URL;
