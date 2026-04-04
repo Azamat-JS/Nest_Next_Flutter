@@ -35,7 +35,6 @@ class DioClient {
               handler.next(options);
             },
             onError: (error, handler) async {
-              // Example: if access token expired
               if (error.response?.statusCode == 401) {
                 final refreshToken = await _storage.read(key: 'refresh_token');
 
