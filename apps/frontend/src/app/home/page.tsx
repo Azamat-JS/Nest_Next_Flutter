@@ -45,7 +45,9 @@ const HomePage = () => {
     const user = token ? jwtDecode<TokenPayload>(token) : null;
     const API = process.env.NEXT_PUBLIC_API_URL;
     const [openUpdate, setOpenUpdate] = useState(false);
+    const [openDelete, setOpenDelete] = useState(false);
     const [selectedUser, setSelectedUser] = useState<TokenPayload | null>(null);
+
 
     const getUsers = async () => {
         try {
@@ -78,6 +80,19 @@ const HomePage = () => {
                 await getUsers();
             }
             return null;
+        } catch (error: any) {
+            toast.error(error.response?.data?.message ?? 'Something went wrong')
+        }
+    }
+
+    const handleDeleteUser = async (userId: string) => {
+        try {
+            const res = await axios.delete(`${API}/users/${userId}`, { headers: { Authorization: `Bearer ${token}` } })
+            if (res.status === 200) {
+                toast.success('User deleted successfully!')
+                setOpenDelete(false);
+                await getUsers();
+            }
         } catch (error: any) {
             toast.error(error.response?.data?.message ?? 'Something went wrong')
         }
@@ -115,28 +130,8 @@ const HomePage = () => {
                                             <DropdownMenuItem onClick={() => { setOpenUpdate(true); setSelectedUser(u) }}>
                                                 <Edit /> Update
                                             </DropdownMenuItem>
-                                            <DropdownMenuItem className="text-red-500">
-                                                <Dialog>
-                                                    <form>
-                                                        <DialogTrigger>
-                                                            <Button variant="outline"><Trash /> Delete</Button>
-                                                        </DialogTrigger>
-                                                        <DialogContent className="sm:max-w-sm">
-                                                            <DialogHeader>
-                                                                <DialogTitle>Delete profile</DialogTitle>
-                                                                <DialogDescription>
-                                                                    Are you sure to delete this user?
-                                                                </DialogDescription>
-                                                            </DialogHeader>
-                                                            <DialogFooter>
-                                                                <DialogClose>
-                                                                    <Button variant="outline">Cancel</Button>
-                                                                </DialogClose>
-                                                                <Button type="submit" variant="destructive">Delete</Button>
-                                                            </DialogFooter>
-                                                        </DialogContent>
-                                                    </form>
-                                                </Dialog>
+                                            <DropdownMenuItem onClick={() => { setOpenDelete(true); setSelectedUser(u) }} className="text-red-500">
+                                                <Trash /> Delete
                                             </DropdownMenuItem>
                                         </DropdownMenuGroup>
                                     </DropdownMenuContent>
@@ -152,6 +147,8 @@ const HomePage = () => {
                     </TableRow>
                 </TableFooter>
             </Table>
+
+            {/* update user modal */}
             <Dialog open={openUpdate} onOpenChange={setOpenUpdate}>
                 <DialogContent className="sm:max-w-sm">
                     <DialogHeader>
@@ -179,6 +176,30 @@ const HomePage = () => {
                     </DialogFooter>
                 </DialogContent>
             </Dialog>
+
+            {/* delete user modal */}
+            <Dialog open={openDelete} onOpenChange={setOpenDelete}>
+                <form>
+                    <DialogTrigger>
+                        <Button variant="outline"><Trash /> Delete</Button>
+                    </DialogTrigger>
+                    <DialogContent className="sm:max-w-sm">
+                        <DialogHeader>
+                            <DialogTitle>Delete profile</DialogTitle>
+                            <DialogDescription>
+                                Are you sure to delete this user?
+                            </DialogDescription>
+                        </DialogHeader>
+                        <DialogFooter>
+                            <DialogClose>
+                                <Button variant="outline">Cancel</Button>
+                            </DialogClose>
+                            <Button type="submit" onClick={() => selectedUser && handleDeleteUser(selectedUser.id)} variant="destructive">Delete</Button>
+                        </DialogFooter>
+                    </DialogContent>
+                </form>
+            </Dialog>
+
         </>
 
     )
