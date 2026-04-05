@@ -47,31 +47,47 @@ const HomePage = () => {
     const [openUpdate, setOpenUpdate] = useState(false);
     const [selectedUser, setSelectedUser] = useState<TokenPayload | null>(null);
 
-    useEffect(() => {
-        const getUsers = async () => {
-            try {
-                const res = await axios.get(`${API}/users`, { headers: { Authorization: `Bearer ${token}` } })
-                if (res.status === 200) {
-                    setUsers(res.data);
-                }
-                console.log(res.data)
-            } catch (error: any) {
-                toast.error(
-                    error.response?.data?.message ?? 'Something went wrong'
-                );
+    const getUsers = async () => {
+        try {
+            const res = await axios.get(`${API}/users`, { headers: { Authorization: `Bearer ${token}` } })
+            if (res.status === 200) {
+                setUsers(res.data);
             }
+        } catch (error: any) {
+            toast.error(
+                error.response?.data?.message ?? 'Something went wrong'
+            );
         }
+    };
+
+    useEffect(() => {
 
         if (token) {
             getUsers();
         }
     }, [token]);
+    console.log(selectedUser)
+
+    const handleUpdateUser = async (user: TokenPayload) => {
+        try {
+            const res = await axios.put(`${API}/users/${user.id}`, user, { headers: { Authorization: `Bearer ${token}` } });
+            console.log(user.id)
+            if (res.status === 200) {
+                toast.success('User data updated!')
+                setOpenUpdate(false);
+                await getUsers();
+            }
+            return null;
+        } catch (error: any) {
+            toast.error(error.response?.data?.message ?? 'Something went wrong')
+        }
+    }
     return (
         <>
-            <Table key={user?.userId} className="mt-5">
+            <Table key={user?.id} className="mt-5">
                 <TableCaption>A list of all users.</TableCaption>
                 <TableHeader>
-                    <TableRow key={user?.userId}>
+                    <TableRow key={user?.id}>
                         <TableHead className="w-25">Username</TableHead>
                         <TableHead>Email</TableHead>
                         <TableHead>Actions</TableHead>
@@ -80,7 +96,7 @@ const HomePage = () => {
                 <TableBody key={user?.email}>
                     {users.map((u) => (
 
-                        <TableRow key={u.userId}>
+                        <TableRow key={u.id}>
                             <TableCell className={user?.username === u.username ? "font-medium bg-green-300 text-green-600" : ""}>
                                 {u.username}
                             </TableCell>
@@ -148,18 +164,18 @@ const HomePage = () => {
                     <FieldGroup>
                         <Field>
                             <Label htmlFor="name-1">Username</Label>
-                            <Input id="name-1" name="name" defaultValue={selectedUser?.username || ""} />
+                            <Input id="name-1" name="name" onChange={(e) => setSelectedUser(prev => prev ? { ...prev, username: e.target.value } : prev)} defaultValue={selectedUser?.username || ""} value={selectedUser?.username || ""} />
                         </Field>
                         <Field>
                             <Label htmlFor="email-1">Email</Label>
-                            <Input id="username-1" name="username" defaultValue={selectedUser?.email || ""} />
+                            <Input id="username-1" name="username" onChange={(e) => setSelectedUser(prev => prev ? { ...prev, email: e.target.value } : prev)} value={selectedUser?.email} defaultValue={selectedUser?.email || ""} />
                         </Field>
                     </FieldGroup>
                     <DialogFooter>
                         <DialogClose>
                             <Button variant="outline">Cancel</Button>
                         </DialogClose>
-                        <Button type="submit">Update</Button>
+                        <Button type="submit" onClick={() => selectedUser && handleUpdateUser(selectedUser)}>Update</Button>
                     </DialogFooter>
                 </DialogContent>
             </Dialog>
