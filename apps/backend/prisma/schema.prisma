@@ -12,21 +12,40 @@ datasource db {
 }
 
 model Users {
-  id String @id @default(cuid())
-  username String @unique
-  email String @unique
-  password String
-  role String?
-  avatarUrl String?
+  id         String   @id @default(cuid())
+  username   String   @unique
+  email      String   @unique
+  password   String
+  role       String?
+  avatarUrl  String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  groupId    String?
+  group      Groups?  @relation("StudentGroup", fields: [groupId], references: [id])
+
+  teachingGroups Groups[] @relation("TeacherGroups")
+
+  chats         ChatMember[]
+  messages      Message[]
+  messageStatus MessageStatus[]
+
+  @@map("Users")
+}
+
+model Groups {
+  id        String @id @default(cuid())
+  name      String @unique
+
+  teacherId String
+  teacher   Users  @relation("TeacherGroups", fields: [teacherId], references: [id])
+
+  students  Users[] @relation("StudentGroup")
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  chats ChatMember[]
-  messages Message[]
-  messageStatus MessageStatus[]
-
-    @@map("Users")
-
+  @@map("Groups")
 }
 
 model Chat {

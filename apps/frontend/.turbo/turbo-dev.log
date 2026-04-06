@@ -6,7 +6,7 @@
 - Local:         http://localhost:4000
 - Network:       http://192.168.13.92:4000
 - Environments: .env.local
-[32m[1m✓[22m[39m Ready in 269ms
+[32m[1m✓[22m[39m Ready in 285ms
 [33m[1m⚠[22m[39m Warning: Next.js inferred your workspace root, but it may not be correct.
  We detected multiple lockfiles and selected the directory of /Users/azamatabdullayev/Desktop/full-stack-turbo/pnpm-workspace.yaml as the root directory.
  To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
@@ -15,30 +15,26 @@
    * /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend/pnpm-workspace.yaml
 
 
- GET / [32m200[39m in 274ms[2m (next.js: 96ms, application-code: 178ms)[22m
-[36m[browser][39m Each child in a list should have a unique "key" prop.
-
-Check the render method of `TableBody`. It was passed a child from HomePage. See https://react.dev/link/warning-keys for more information. 
+ GET / [32m200[39m in 316ms[2m (next.js: 115ms, application-code: 201ms)[22m
 [36m[browser][39m In HTML, <button> cannot be a descendant of <button>.
 This will cause a hydration error.
 
   ...
-    <table data-slot="table" className="w-full cap...">
-      <TableCaption>
-      <TableHeader>
-      <TableBody>
-        <tbody data-slot="table-body" className={"[&_tr:la..."}>
-          <TableRow>
-            <tr data-slot="table-row" className="border-b t...">
-              <TableCell>
-              <TableCell>
-              <TableCell className="">
-                <td data-slot="table-cell" className={"p-2 alig..."}>
-                  <DropdownMenu>
-                    <MenuRoot data-slot="dropdown-menu">
-                      <FloatingTree externalTree={{nodesRef:{...}, ...}}>
-                        <DropdownMenuTrigger>
-                          <MenuTrigger data-slot="dropdown-m...">
+    <RedirectBoundary>
+      <RedirectErrorBoundary router={{...}}>
+        <InnerLayoutRouter url="/" tree={[...]} params={{}} cacheNode={{rsc:{...}, ...}} segmentPath={[...]} ...>
+          <SegmentViewNode type="page" pagePath="page.tsx">
+            <SegmentTrieNode>
+            <ClientPageRoot Component={function Home} serverProvidedParams={{...}}>
+              <Home params={Promise} searchParams={Promise}>
+                <HomePage>
+                  <Table>
+                  <Dialog>
+                  <Dialog open={false} onOpenChange={function bound dispatchSetState}>
+                    <DialogRoot data-slot="dialog" open={false} onOpenChange={function bound dispatchSetState}>
+                      <form>
+                        <DialogTrigger>
+                          <DialogTrigger data-slot="dialog-tri...">
 >                           <button
 >                             type="button"
 >                             onClick={function onClick}
@@ -48,9 +44,9 @@ This will cause a hydration error.
 >                             onPointerDown={function onPointerDown}
 >                             tabIndex={0}
 >                             disabled={false}
->                             aria-haspopup="menu"
->                             id="base-ui-_r_6_"
->                             data-slot="dropdown-menu-trigger"
+>                             data-base-ui-click-trigger=""
+>                             id="base-ui-_r_4_"
+>                             data-slot="dialog-trigger"
 >                             ref={function}
 >                           >
                               <Button variant="outline">
@@ -70,179 +66,31 @@ This will cause a hydration error.
 >                                 >
                         ...
           ...
-      ...
+        ...
  
 [36m[browser][39m <button> cannot contain a nested <button>.
 See this log for the ancestor stack trace. 
-[32m[1m✓[22m[39m Compiled in 268ms
-[32m[1m✓[22m[39m Compiled in 179ms
-[31m[1m⨯[22m[39m ./apps/frontend/src/app/home/page.tsx:74:9
-Expression expected
-  [90m72 |[0m             [36mconst[0m res = [36mawait[0m axios.put([32m`[0m${[33mAPI[0m[32m}/users/[0m${user.userId[32m}`[0m, user, { headers: { [33mAuthorization[0m: [32m`Bearer [0m${token[32m}`[0m } });
-  [90m73 |[0m             [36mif[0m (res.status === [35m201[0m)
-[31m[1m>[0m [90m74 |[0m         } [36mcatch[0m (error: any) {
-  [90m   |[0m         [31m[1m^[0m
-  [90m75 |[0m             toast.error(error.response?.data?.message ?? [32m'Something went wrong'[0m)
-  [90m76 |[0m         }
-  [90m77 |[0m     }
-
-Parsing ecmascript source code failed
-
-Import traces:
-  Client Component Browser:
-    ./apps/frontend/src/app/home/page.tsx [Client Component Browser]
-    ./apps/frontend/src/app/page.tsx [Client Component Browser]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./apps/frontend/src/app/home/page.tsx [Client Component SSR]
-    ./apps/frontend/src/app/page.tsx [Client Component SSR]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-
- GET / [31m500[39m in 159ms[2m (next.js: 93ms, application-code: 66ms)[22m
-[31m[1m⨯[22m[39m ./apps/frontend/src/app/home/page.tsx:74:9
-Expression expected
-  [90m72 |[0m             [36mconst[0m res = [36mawait[0m axios.put([32m`[0m${[33mAPI[0m[32m}/users/[0m${user.userId[32m}`[0m, user, { headers: { [33mAuthorization[0m: [32m`Bearer [0m${token[32m}`[0m } });
-  [90m73 |[0m             [36mif[0m (res.status === [35m201[0m)
-[31m[1m>[0m [90m74 |[0m         } [36mcatch[0m (error: any) {
-  [90m   |[0m         [31m[1m^[0m
-  [90m75 |[0m             toast.error(error.response?.data?.message ?? [32m'Something went wrong'[0m)
-  [90m76 |[0m         }
-  [90m77 |[0m     }
-
-Parsing ecmascript source code failed
-
-Import traces:
-  Client Component Browser:
-    ./apps/frontend/src/app/home/page.tsx [Client Component Browser]
-    ./apps/frontend/src/app/page.tsx [Client Component Browser]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./apps/frontend/src/app/home/page.tsx [Client Component SSR]
-    ./apps/frontend/src/app/page.tsx [Client Component SSR]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-
- GET / [31m500[39m in 10ms[2m (next.js: 5ms, application-code: 4ms)[22m
-[36m[browser][39m [31mUncaught Error: ./apps/frontend/src/app/home/page.tsx:74:9
-Expression expected
-  72 |             const res = await axios.put(`${API}/users/${user.userId}`, user, { headers: { Authorization: `Bearer ${token}` } });
-  73 |             if (res.status === 201)
-> 74 |         } catch (error: any) {
-     |         ^
-  75 |             toast.error(error.response?.data?.message ?? 'Something went wrong')
-  76 |         }
-  77 |     }
-
-Parsing ecmascript source code failed
-
-Import traces:
-  Client Component Browser:
-    ./apps/frontend/src/app/home/page.tsx [Client Component Browser]
-    ./apps/frontend/src/app/page.tsx [Client Component Browser]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./apps/frontend/src/app/home/page.tsx [Client Component SSR]
-    ./apps/frontend/src/app/page.tsx [Client Component SSR]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-[39m
-[31m    at <unknown> (Error: ./apps/frontend/src/app/home/page.tsx:74:9)
-    at <unknown> (Error: (./apps/frontend/src/app/home/page.tsx:74:9)[39m
-[36m[browser][39m ./apps/frontend/src/app/home/page.tsx:74:9
-Expression expected
-  72 |             const res = await axios.put(`${API}/users/${user.userId}`, user, { headers: { Authorization: `Bearer ${token}` } });
-  73 |             if (res.status === 201)
-> 74 |         } catch (error: any) {
-     |         ^
-  75 |             toast.error(error.response?.data?.message ?? 'Something went wrong')
-  76 |         }
-  77 |     }
-
-Parsing ecmascript source code failed
-
-Import traces:
-  Client Component Browser:
-    ./apps/frontend/src/app/home/page.tsx [Client Component Browser]
-    ./apps/frontend/src/app/page.tsx [Client Component Browser]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./apps/frontend/src/app/home/page.tsx [Client Component SSR]
-    ./apps/frontend/src/app/page.tsx [Client Component SSR]
-    ./apps/frontend/src/app/page.tsx [Server Component] 
-[36m[browser][39m ./apps/frontend/src/app/home/page.tsx:74:9
-Expression expected
-  72 |             const res = await axios.put(`${API}/users/${user.userId}`, user, { headers: { Authorization: `Bearer ${token}` } });
-  73 |             if (res.status === 201)
-> 74 |         } catch (error: any) {
-     |         ^
-  75 |             toast.error(error.response?.data?.message ?? 'Something went wrong')
-  76 |         }
-  77 |     }
-
-Parsing ecmascript source code failed
-
-Import traces:
-  Client Component Browser:
-    ./apps/frontend/src/app/home/page.tsx [Client Component Browser]
-    ./apps/frontend/src/app/page.tsx [Client Component Browser]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./apps/frontend/src/app/home/page.tsx [Client Component SSR]
-    ./apps/frontend/src/app/page.tsx [Client Component SSR]
-    ./apps/frontend/src/app/page.tsx [Server Component] 
-[36m[browser][39m ./apps/frontend/src/app/home/page.tsx:74:9
-Expression expected
-  72 |             const res = await axios.put(`${API}/users/${user.userId}`, user, { headers: { Authorization: `Bearer ${token}` } });
-  73 |             if (res.status === 201)
-> 74 |         } catch (error: any) {
-     |         ^
-  75 |             toast.error(error.response?.data?.message ?? 'Something went wrong')
-  76 |         }
-  77 |     }
-
-Parsing ecmascript source code failed
-
-Import traces:
-  Client Component Browser:
-    ./apps/frontend/src/app/home/page.tsx [Client Component Browser]
-    ./apps/frontend/src/app/page.tsx [Client Component Browser]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./apps/frontend/src/app/home/page.tsx [Client Component SSR]
-    ./apps/frontend/src/app/page.tsx [Client Component SSR]
-    ./apps/frontend/src/app/page.tsx [Server Component] 
-[32m[1m✓[22m[39m Compiled in 170ms
- GET / [32m200[39m in 1182ms[2m (next.js: 163ms, application-code: 1019ms)[22m
-[36m[browser][39m Each child in a list should have a unique "key" prop.
-
-Check the render method of `TableBody`. It was passed a child from HomePage. See https://react.dev/link/warning-keys for more information. 
+ GET /home [32m200[39m in 63ms[2m (next.js: 24ms, application-code: 38ms)[22m
+ GET / [32m200[39m in 40ms[2m (next.js: 5ms, application-code: 35ms)[22m
 [36m[browser][39m In HTML, <button> cannot be a descendant of <button>.
 This will cause a hydration error.
 
   ...
-    <table data-slot="table" className="w-full cap...">
-      <TableCaption>
-      <TableHeader>
-      <TableBody>
-        <tbody data-slot="table-body" className={"[&_tr:la..."}>
-          <TableRow>
-            <tr data-slot="table-row" className="border-b t...">
-              <TableCell>
-              <TableCell>
-              <TableCell className="">
-                <td data-slot="table-cell" className={"p-2 alig..."}>
-                  <DropdownMenu>
-                    <MenuRoot data-slot="dropdown-menu">
-                      <FloatingTree externalTree={{nodesRef:{...}, ...}}>
-                        <DropdownMenuTrigger>
-                          <MenuTrigger data-slot="dropdown-m...">
+    <RedirectBoundary>
+      <RedirectErrorBoundary router={{...}}>
+        <InnerLayoutRouter url="/" tree={[...]} params={{}} cacheNode={{rsc:{...}, ...}} segmentPath={[...]} ...>
+          <SegmentViewNode type="page" pagePath="page.tsx">
+            <SegmentTrieNode>
+            <ClientPageRoot Component={function Home} serverProvidedParams={{...}}>
+              <Home params={Promise} searchParams={Promise}>
+                <HomePage>
+                  <Table>
+                  <Dialog>
+                  <Dialog open={false} onOpenChange={function bound dispatchSetState}>
+                    <DialogRoot data-slot="dialog" open={false} onOpenChange={function bound dispatchSetState}>
+                      <form>
+                        <DialogTrigger>
+                          <DialogTrigger data-slot="dialog-tri...">
 >                           <button
 >                             type="button"
 >                             onClick={function onClick}
@@ -252,9 +100,9 @@ This will cause a hydration error.
 >                             onPointerDown={function onPointerDown}
 >                             tabIndex={0}
 >                             disabled={false}
->                             aria-haspopup="menu"
->                             id="base-ui-_r_6_"
->                             data-slot="dropdown-menu-trigger"
+>                             data-base-ui-click-trigger=""
+>                             id="base-ui-_r_4_"
+>                             data-slot="dialog-trigger"
 >                             ref={function}
 >                           >
                               <Button variant="outline">
@@ -274,796 +122,28 @@ This will cause a hydration error.
 >                                 >
                         ...
           ...
-      ...
+        ...
  
 [36m[browser][39m <button> cannot contain a nested <button>.
 See this log for the ancestor stack trace. 
- GET / [32m200[39m in 46ms[2m (next.js: 6ms, application-code: 39ms)[22m
-[36m[browser][39m Each child in a list should have a unique "key" prop.
-
-Check the render method of `TableBody`. It was passed a child from HomePage. See https://react.dev/link/warning-keys for more information. 
+[1mnull[22m
+ GET /home [32m200[39m in 129ms[2m (next.js: 5ms, application-code: 123ms)[22m
 [36m[browser][39m In HTML, <button> cannot be a descendant of <button>.
 This will cause a hydration error.
 
   ...
-    <table data-slot="table" className="w-full cap...">
-      <TableCaption>
-      <TableHeader>
-      <TableBody>
-        <tbody data-slot="table-body" className={"[&_tr:la..."}>
-          <TableRow>
-            <tr data-slot="table-row" className="border-b t...">
-              <TableCell>
-              <TableCell>
-              <TableCell className="">
-                <td data-slot="table-cell" className={"p-2 alig..."}>
-                  <DropdownMenu>
-                    <MenuRoot data-slot="dropdown-menu">
-                      <FloatingTree externalTree={{nodesRef:{...}, ...}}>
-                        <DropdownMenuTrigger>
-                          <MenuTrigger data-slot="dropdown-m...">
->                           <button
->                             type="button"
->                             onClick={function onClick}
->                             onMouseDown={function onMouseDown}
->                             onKeyDown={function}
->                             onKeyUp={function onKeyUp}
->                             onPointerDown={function onPointerDown}
->                             tabIndex={0}
->                             disabled={false}
->                             aria-haspopup="menu"
->                             id="base-ui-_r_6_"
->                             data-slot="dropdown-menu-trigger"
->                             ref={function}
->                           >
-                              <Button variant="outline">
-                                <Button data-slot="button" className={"group/bu..."}>
->                                 <button
->                                   type="button"
->                                   onClick={function onClick}
->                                   onMouseDown={function onMouseDown}
->                                   onKeyDown={function}
->                                   onKeyUp={function onKeyUp}
->                                   onPointerDown={function onPointerDown}
->                                   tabIndex={0}
->                                   disabled={false}
->                                   data-slot="button"
->                                   ref={function}
->                                   className={"group/button inline-flex shrink-0 items-center justify-center rounded..."}
->                                 >
-                        ...
-          ...
-      ...
- 
-[36m[browser][39m <button> cannot contain a nested <button>.
-See this log for the ancestor stack trace. 
-[32m[1m✓[22m[39m Compiled in 18ms
- GET / [32m200[39m in 48ms[2m (next.js: 9ms, application-code: 39ms)[22m
-[36m[browser][39m Each child in a list should have a unique "key" prop.
-
-Check the render method of `TableBody`. It was passed a child from HomePage. See https://react.dev/link/warning-keys for more information. 
-[36m[browser][39m In HTML, <button> cannot be a descendant of <button>.
-This will cause a hydration error.
-
-  ...
-    <table data-slot="table" className="w-full cap...">
-      <TableCaption>
-      <TableHeader>
-      <TableBody>
-        <tbody data-slot="table-body" className={"[&_tr:la..."}>
-          <TableRow>
-            <tr data-slot="table-row" className="border-b t...">
-              <TableCell>
-              <TableCell>
-              <TableCell className="">
-                <td data-slot="table-cell" className={"p-2 alig..."}>
-                  <DropdownMenu>
-                    <MenuRoot data-slot="dropdown-menu">
-                      <FloatingTree externalTree={{nodesRef:{...}, ...}}>
-                        <DropdownMenuTrigger>
-                          <MenuTrigger data-slot="dropdown-m...">
->                           <button
->                             type="button"
->                             onClick={function onClick}
->                             onMouseDown={function onMouseDown}
->                             onKeyDown={function}
->                             onKeyUp={function onKeyUp}
->                             onPointerDown={function onPointerDown}
->                             tabIndex={0}
->                             disabled={false}
->                             aria-haspopup="menu"
->                             id="base-ui-_r_6_"
->                             data-slot="dropdown-menu-trigger"
->                             ref={function}
->                           >
-                              <Button variant="outline">
-                                <Button data-slot="button" className={"group/bu..."}>
->                                 <button
->                                   type="button"
->                                   onClick={function onClick}
->                                   onMouseDown={function onMouseDown}
->                                   onKeyDown={function}
->                                   onKeyUp={function onKeyUp}
->                                   onPointerDown={function onPointerDown}
->                                   tabIndex={0}
->                                   disabled={false}
->                                   data-slot="button"
->                                   ref={function}
->                                   className={"group/button inline-flex shrink-0 items-center justify-center rounded..."}
->                                 >
-                        ...
-          ...
-      ...
- 
-[36m[browser][39m <button> cannot contain a nested <button>.
-See this log for the ancestor stack trace. 
-[32m[1m✓[22m[39m Compiled in 19ms
-[32m[1m✓[22m[39m Compiled in 21ms
- GET / [32m200[39m in 52ms[2m (next.js: 8ms, application-code: 44ms)[22m
-[36m[browser][39m In HTML, <button> cannot be a descendant of <button>.
-This will cause a hydration error.
-
-  ...
-    <table data-slot="table" className="w-full cap...">
-      <TableCaption>
-      <TableHeader>
-      <TableBody>
-        <tbody data-slot="table-body" className={"[&_tr:la..."}>
-          <TableRow>
-            <tr data-slot="table-row" className="border-b t...">
-              <TableCell>
-              <TableCell>
-              <TableCell className="">
-                <td data-slot="table-cell" className={"p-2 alig..."}>
-                  <DropdownMenu>
-                    <MenuRoot data-slot="dropdown-menu">
-                      <FloatingTree externalTree={{nodesRef:{...}, ...}}>
-                        <DropdownMenuTrigger>
-                          <MenuTrigger data-slot="dropdown-m...">
->                           <button
->                             type="button"
->                             onClick={function onClick}
->                             onMouseDown={function onMouseDown}
->                             onKeyDown={function}
->                             onKeyUp={function onKeyUp}
->                             onPointerDown={function onPointerDown}
->                             tabIndex={0}
->                             disabled={false}
->                             aria-haspopup="menu"
->                             id="base-ui-_r_6_"
->                             data-slot="dropdown-menu-trigger"
->                             ref={function}
->                           >
-                              <Button variant="outline">
-                                <Button data-slot="button" className={"group/bu..."}>
->                                 <button
->                                   type="button"
->                                   onClick={function onClick}
->                                   onMouseDown={function onMouseDown}
->                                   onKeyDown={function}
->                                   onKeyUp={function onKeyUp}
->                                   onPointerDown={function onPointerDown}
->                                   tabIndex={0}
->                                   disabled={false}
->                                   data-slot="button"
->                                   ref={function}
->                                   className={"group/button inline-flex shrink-0 items-center justify-center rounded..."}
->                                 >
-                        ...
-          ...
-      ...
- 
-[36m[browser][39m <button> cannot contain a nested <button>.
-See this log for the ancestor stack trace. 
- GET / [32m200[39m in 48ms[2m (next.js: 5ms, application-code: 43ms)[22m
-[36m[browser][39m In HTML, <button> cannot be a descendant of <button>.
-This will cause a hydration error.
-
-  ...
-    <table data-slot="table" className="w-full cap...">
-      <TableCaption>
-      <TableHeader>
-      <TableBody>
-        <tbody data-slot="table-body" className={"[&_tr:la..."}>
-          <TableRow>
-            <tr data-slot="table-row" className="border-b t...">
-              <TableCell>
-              <TableCell>
-              <TableCell className="">
-                <td data-slot="table-cell" className={"p-2 alig..."}>
-                  <DropdownMenu>
-                    <MenuRoot data-slot="dropdown-menu">
-                      <FloatingTree externalTree={{nodesRef:{...}, ...}}>
-                        <DropdownMenuTrigger>
-                          <MenuTrigger data-slot="dropdown-m...">
->                           <button
->                             type="button"
->                             onClick={function onClick}
->                             onMouseDown={function onMouseDown}
->                             onKeyDown={function}
->                             onKeyUp={function onKeyUp}
->                             onPointerDown={function onPointerDown}
->                             tabIndex={0}
->                             disabled={false}
->                             aria-haspopup="menu"
->                             id="base-ui-_r_6_"
->                             data-slot="dropdown-menu-trigger"
->                             ref={function}
->                           >
-                              <Button variant="outline">
-                                <Button data-slot="button" className={"group/bu..."}>
->                                 <button
->                                   type="button"
->                                   onClick={function onClick}
->                                   onMouseDown={function onMouseDown}
->                                   onKeyDown={function}
->                                   onKeyUp={function onKeyUp}
->                                   onPointerDown={function onPointerDown}
->                                   tabIndex={0}
->                                   disabled={false}
->                                   data-slot="button"
->                                   ref={function}
->                                   className={"group/button inline-flex shrink-0 items-center justify-center rounded..."}
->                                 >
-                        ...
-          ...
-      ...
- 
-[36m[browser][39m <button> cannot contain a nested <button>.
-See this log for the ancestor stack trace. 
- GET / [32m200[39m in 55ms[2m (next.js: 4ms, application-code: 51ms)[22m
-[36m[browser][39m In HTML, <button> cannot be a descendant of <button>.
-This will cause a hydration error.
-
-  ...
-    <table data-slot="table" className="w-full cap...">
-      <TableCaption>
-      <TableHeader>
-      <TableBody>
-        <tbody data-slot="table-body" className={"[&_tr:la..."}>
-          <TableRow>
-            <tr data-slot="table-row" className="border-b t...">
-              <TableCell>
-              <TableCell>
-              <TableCell className="">
-                <td data-slot="table-cell" className={"p-2 alig..."}>
-                  <DropdownMenu>
-                    <MenuRoot data-slot="dropdown-menu">
-                      <FloatingTree externalTree={{nodesRef:{...}, ...}}>
-                        <DropdownMenuTrigger>
-                          <MenuTrigger data-slot="dropdown-m...">
->                           <button
->                             type="button"
->                             onClick={function onClick}
->                             onMouseDown={function onMouseDown}
->                             onKeyDown={function}
->                             onKeyUp={function onKeyUp}
->                             onPointerDown={function onPointerDown}
->                             tabIndex={0}
->                             disabled={false}
->                             aria-haspopup="menu"
->                             id="base-ui-_r_6_"
->                             data-slot="dropdown-menu-trigger"
->                             ref={function}
->                           >
-                              <Button variant="outline">
-                                <Button data-slot="button" className={"group/bu..."}>
->                                 <button
->                                   type="button"
->                                   onClick={function onClick}
->                                   onMouseDown={function onMouseDown}
->                                   onKeyDown={function}
->                                   onKeyUp={function onKeyUp}
->                                   onPointerDown={function onPointerDown}
->                                   tabIndex={0}
->                                   disabled={false}
->                                   data-slot="button"
->                                   ref={function}
->                                   className={"group/button inline-flex shrink-0 items-center justify-center rounded..."}
->                                 >
-                        ...
-          ...
-      ...
- 
-[36m[browser][39m <button> cannot contain a nested <button>.
-See this log for the ancestor stack trace. 
-[32m[1m✓[22m[39m Compiled in 21ms
-[31m[1m⨯[22m[39m ./apps/frontend/src/app/home/page.tsx:165:140
-Expected '</', got 'ident'
-  [90m163 |[0m                         <[33mField[0m>
-  [90m164 |[0m                             <[33mLabel[0m htmlFor=[32m"name-1"[0m>[33mUsername[0m</[33mLabel[0m>
-[31m[1m>[0m [90m165 |[0m                             <[33mInput[0m id=[32m"name-1"[0m name=[32m"name"[0m defaultValue={selectedUser?.username || [32m""[0m} value={selectedUser?.username || [32m""[0m onCh} />
-  [90m    |[0m                                                                                                                                            [31m[1m^^^^[0m
-  [90m166 |[0m                         </[33mField[0m>
-  [90m167 |[0m                         <[33mField[0m>
-  [90m168 |[0m                             <[33mLabel[0m htmlFor=[32m"email-1"[0m>[33mEmail[0m</[33mLabel[0m>
-
-Parsing ecmascript source code failed
-
-Import traces:
-  Client Component Browser:
-    ./apps/frontend/src/app/home/page.tsx [Client Component Browser]
-    ./apps/frontend/src/app/page.tsx [Client Component Browser]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./apps/frontend/src/app/home/page.tsx [Client Component SSR]
-    ./apps/frontend/src/app/page.tsx [Client Component SSR]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-
- GET / [31m500[39m in 13ms[2m (next.js: 6ms, application-code: 7ms)[22m
-[31m[1m⨯[22m[39m ./apps/frontend/src/app/home/page.tsx:165:140
-Expected '</', got 'ident'
-  [90m163 |[0m                         <[33mField[0m>
-  [90m164 |[0m                             <[33mLabel[0m htmlFor=[32m"name-1"[0m>[33mUsername[0m</[33mLabel[0m>
-[31m[1m>[0m [90m165 |[0m                             <[33mInput[0m id=[32m"name-1"[0m name=[32m"name"[0m defaultValue={selectedUser?.username || [32m""[0m} value={selectedUser?.username || [32m""[0m onCh} />
-  [90m    |[0m                                                                                                                                            [31m[1m^^^^[0m
-  [90m166 |[0m                         </[33mField[0m>
-  [90m167 |[0m                         <[33mField[0m>
-  [90m168 |[0m                             <[33mLabel[0m htmlFor=[32m"email-1"[0m>[33mEmail[0m</[33mLabel[0m>
-
-Parsing ecmascript source code failed
-
-Import traces:
-  Client Component Browser:
-    ./apps/frontend/src/app/home/page.tsx [Client Component Browser]
-    ./apps/frontend/src/app/page.tsx [Client Component Browser]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./apps/frontend/src/app/home/page.tsx [Client Component SSR]
-    ./apps/frontend/src/app/page.tsx [Client Component SSR]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-
- GET / [31m500[39m in 6ms[2m (next.js: 3ms, application-code: 4ms)[22m
-[36m[browser][39m [31mUncaught Error: ./apps/frontend/src/app/home/page.tsx:165:140
-Expected '</', got 'ident'
-  163 |                         <Field>
-  164 |                             <Label htmlFor="name-1">Username</Label>
-> 165 |                             <Input id="name-1" name="name" defaultValue={selectedUser?.username || ""} value={selectedUser?.username || "" onCh} />
-      |                                                                                                                                            ^^^^
-  166 |                         </Field>
-  167 |                         <Field>
-  168 |                             <Label htmlFor="email-1">Email</Label>
-
-Parsing ecmascript source code failed
-
-Import traces:
-  Client Component Browser:
-    ./apps/frontend/src/app/home/page.tsx [Client Component Browser]
-    ./apps/frontend/src/app/page.tsx [Client Component Browser]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./apps/frontend/src/app/home/page.tsx [Client Component SSR]
-    ./apps/frontend/src/app/page.tsx [Client Component SSR]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-[39m
-[31m    at <unknown> (Error: ./apps/frontend/src/app/home/page.tsx:165:140)
-    at <unknown> (Error: (./apps/frontend/src/app/home/page.tsx:165:140)[39m
-[32m[1m✓[22m[39m Compiled in 25ms
- GET / [32m200[39m in 21ms[2m (next.js: 1294µs, application-code: 19ms)[22m
-[31m[1m⨯[22m[39m ./apps/frontend/src/app/home/page.tsx:165:117
-Expected '</', got ')'
-  [90m163 |[0m ...
-  [90m164 |[0m ...or=[32m"name-1"[0m>[33mUsername[0m</[33mLabel[0m>
-[31m[1m>[0m [90m165 |[0m ...[32mame-1"[0m name=[32m"name"[0m onChange={(e) => selectedUser(prev => prev ? { ...prev, })} defaultValue={selectedUser?.username || [32m""[0m} value={selectedUser?.username...
-  [90m    |[0m                                                                                [31m[1m^[0m
-  [90m166 |[0m ...
-  [90m167 |[0m ...
-  [90m168 |[0m ...or=[32m"email-1"[0m>[33mEmail[0m</[33mLabel[0m>
-
-Parsing ecmascript source code failed
-
-Import traces:
-  Client Component Browser:
-    ./apps/frontend/src/app/home/page.tsx [Client Component Browser]
-    ./apps/frontend/src/app/page.tsx [Client Component Browser]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./apps/frontend/src/app/home/page.tsx [Client Component SSR]
-    ./apps/frontend/src/app/page.tsx [Client Component SSR]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-
- GET / [31m500[39m in 9ms[2m (next.js: 4ms, application-code: 5ms)[22m
-[31m[1m⨯[22m[39m ./apps/frontend/src/app/home/page.tsx:165:117
-Expected '</', got ')'
-  [90m163 |[0m ...
-  [90m164 |[0m ...or=[32m"name-1"[0m>[33mUsername[0m</[33mLabel[0m>
-[31m[1m>[0m [90m165 |[0m ...[32mame-1"[0m name=[32m"name"[0m onChange={(e) => selectedUser(prev => prev ? { ...prev, })} defaultValue={selectedUser?.username || [32m""[0m} value={selectedUser?.username...
-  [90m    |[0m                                                                                [31m[1m^[0m
-  [90m166 |[0m ...
-  [90m167 |[0m ...
-  [90m168 |[0m ...or=[32m"email-1"[0m>[33mEmail[0m</[33mLabel[0m>
-
-Parsing ecmascript source code failed
-
-Import traces:
-  Client Component Browser:
-    ./apps/frontend/src/app/home/page.tsx [Client Component Browser]
-    ./apps/frontend/src/app/page.tsx [Client Component Browser]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./apps/frontend/src/app/home/page.tsx [Client Component SSR]
-    ./apps/frontend/src/app/page.tsx [Client Component SSR]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-
- GET / [31m500[39m in 6ms[2m (next.js: 3ms, application-code: 4ms)[22m
-[36m[browser][39m [31mUncaught Error: ./apps/frontend/src/app/home/page.tsx:165:117
-Expected '</', got ')'
-  163 | ...
-  164 | ...or="name-1">Username</Label>
-> 165 | ...ame-1" name="name" onChange={(e) => selectedUser(prev => prev ? { ...prev, })} defaultValue={selectedUser?.username || ""} value={selectedUser?.username...
-      |                                                                                ^
-  166 | ...
-  167 | ...
-  168 | ...or="email-1">Email</Label>
-
-Parsing ecmascript source code failed
-
-Import traces:
-  Client Component Browser:
-    ./apps/frontend/src/app/home/page.tsx [Client Component Browser]
-    ./apps/frontend/src/app/page.tsx [Client Component Browser]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./apps/frontend/src/app/home/page.tsx [Client Component SSR]
-    ./apps/frontend/src/app/page.tsx [Client Component SSR]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-[39m
-[31m    at <unknown> (Error: ./apps/frontend/src/app/home/page.tsx:165:117)
-    at <unknown> (Error: (./apps/frontend/src/app/home/page.tsx:165:117)[39m
-[32m[1m✓[22m[39m Compiled in 23ms
- GET / [32m200[39m in 16ms[2m (next.js: 1396µs, application-code: 15ms)[22m
-[32m[1m✓[22m[39m Compiled in 20ms
-[32m[1m✓[22m[39m Compiled in 15ms
-[32m[1m✓[22m[39m Compiled in 21ms
-[32m[1m✓[22m[39m Compiled in 14ms
-[36m[browser][39m In HTML, <button> cannot be a descendant of <button>.
-This will cause a hydration error.
-
-  ...
-    <table data-slot="table" className="w-full cap...">
-      <TableCaption>
-      <TableHeader>
-      <TableBody>
-        <tbody data-slot="table-body" className={"[&_tr:la..."}>
-          <TableRow>
-            <tr data-slot="table-row" className="border-b t...">
-              <TableCell>
-              <TableCell>
-              <TableCell className="">
-                <td data-slot="table-cell" className={"p-2 alig..."}>
-                  <DropdownMenu>
-                    <MenuRoot data-slot="dropdown-menu">
-                      <FloatingTree externalTree={{nodesRef:{...}, ...}}>
-                        <DropdownMenuTrigger>
-                          <MenuTrigger data-slot="dropdown-m...">
->                           <button
->                             type="button"
->                             onClick={function onClick}
->                             onMouseDown={function onMouseDown}
->                             onKeyDown={function}
->                             onKeyUp={function onKeyUp}
->                             onPointerDown={function onPointerDown}
->                             tabIndex={0}
->                             disabled={false}
->                             aria-haspopup="menu"
->                             id="base-ui-_r_6_"
->                             data-slot="dropdown-menu-trigger"
->                             ref={function}
->                           >
-                              <Button variant="outline">
-                                <Button data-slot="button" className={"group/bu..."}>
->                                 <button
->                                   type="button"
->                                   onClick={function onClick}
->                                   onMouseDown={function onMouseDown}
->                                   onKeyDown={function}
->                                   onKeyUp={function onKeyUp}
->                                   onPointerDown={function onPointerDown}
->                                   tabIndex={0}
->                                   disabled={false}
->                                   data-slot="button"
->                                   ref={function}
->                                   className={"group/button inline-flex shrink-0 items-center justify-center rounded..."}
->                                 >
-                        ...
-          ...
-      ...
- 
-[36m[browser][39m <button> cannot contain a nested <button>.
-See this log for the ancestor stack trace. 
- GET / [32m200[39m in 54ms[2m (next.js: 7ms, application-code: 47ms)[22m
-[36m[browser][39m In HTML, <button> cannot be a descendant of <button>.
-This will cause a hydration error.
-
-  ...
-    <table data-slot="table" className="w-full cap...">
-      <TableCaption>
-      <TableHeader>
-      <TableBody>
-        <tbody data-slot="table-body" className={"[&_tr:la..."}>
-          <TableRow>
-            <tr data-slot="table-row" className="border-b t...">
-              <TableCell>
-              <TableCell>
-              <TableCell className="">
-                <td data-slot="table-cell" className={"p-2 alig..."}>
-                  <DropdownMenu>
-                    <MenuRoot data-slot="dropdown-menu">
-                      <FloatingTree externalTree={{nodesRef:{...}, ...}}>
-                        <DropdownMenuTrigger>
-                          <MenuTrigger data-slot="dropdown-m...">
->                           <button
->                             type="button"
->                             onClick={function onClick}
->                             onMouseDown={function onMouseDown}
->                             onKeyDown={function}
->                             onKeyUp={function onKeyUp}
->                             onPointerDown={function onPointerDown}
->                             tabIndex={0}
->                             disabled={false}
->                             aria-haspopup="menu"
->                             id="base-ui-_r_6_"
->                             data-slot="dropdown-menu-trigger"
->                             ref={function}
->                           >
-                              <Button variant="outline">
-                                <Button data-slot="button" className={"group/bu..."}>
->                                 <button
->                                   type="button"
->                                   onClick={function onClick}
->                                   onMouseDown={function onMouseDown}
->                                   onKeyDown={function}
->                                   onKeyUp={function onKeyUp}
->                                   onPointerDown={function onPointerDown}
->                                   tabIndex={0}
->                                   disabled={false}
->                                   data-slot="button"
->                                   ref={function}
->                                   className={"group/button inline-flex shrink-0 items-center justify-center rounded..."}
->                                 >
-                        ...
-          ...
-      ...
- 
-[36m[browser][39m <button> cannot contain a nested <button>.
-See this log for the ancestor stack trace. 
-[32m[1m✓[22m[39m Compiled in 16ms
-[32m[1m✓[22m[39m Compiled in 20ms
-[32m[1m✓[22m[39m Compiled in 15ms
-[32m[1m✓[22m[39m Compiled in 17ms
- GET / [32m200[39m in 50ms[2m (next.js: 9ms, application-code: 41ms)[22m
-[36m[browser][39m In HTML, <button> cannot be a descendant of <button>.
-This will cause a hydration error.
-
-  ...
-    <table data-slot="table" className="w-full cap...">
-      <TableCaption>
-      <TableHeader>
-      <TableBody>
-        <tbody data-slot="table-body" className={"[&_tr:la..."}>
-          <TableRow>
-            <tr data-slot="table-row" className="border-b t...">
-              <TableCell>
-              <TableCell>
-              <TableCell className="">
-                <td data-slot="table-cell" className={"p-2 alig..."}>
-                  <DropdownMenu>
-                    <MenuRoot data-slot="dropdown-menu">
-                      <FloatingTree externalTree={{nodesRef:{...}, ...}}>
-                        <DropdownMenuTrigger>
-                          <MenuTrigger data-slot="dropdown-m...">
->                           <button
->                             type="button"
->                             onClick={function onClick}
->                             onMouseDown={function onMouseDown}
->                             onKeyDown={function}
->                             onKeyUp={function onKeyUp}
->                             onPointerDown={function onPointerDown}
->                             tabIndex={0}
->                             disabled={false}
->                             aria-haspopup="menu"
->                             id="base-ui-_r_6_"
->                             data-slot="dropdown-menu-trigger"
->                             ref={function}
->                           >
-                              <Button variant="outline">
-                                <Button data-slot="button" className={"group/bu..."}>
->                                 <button
->                                   type="button"
->                                   onClick={function onClick}
->                                   onMouseDown={function onMouseDown}
->                                   onKeyDown={function}
->                                   onKeyUp={function onKeyUp}
->                                   onPointerDown={function onPointerDown}
->                                   tabIndex={0}
->                                   disabled={false}
->                                   data-slot="button"
->                                   ref={function}
->                                   className={"group/button inline-flex shrink-0 items-center justify-center rounded..."}
->                                 >
-                        ...
-          ...
-      ...
- 
-[36m[browser][39m <button> cannot contain a nested <button>.
-See this log for the ancestor stack trace. 
-[32m[1m✓[22m[39m Compiled in 20ms
-[32m[1m✓[22m[39m Compiled in 17ms
-[32m[1m✓[22m[39m Compiled in 17ms
-[32m[1m✓[22m[39m Compiled in 18ms
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[31m    at Set.forEach (<anonymous>)[39m [2m(<anonymous>)[22m
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[31m    at Set.forEach (<anonymous>)[39m [2m(<anonymous>)[22m
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[31m    at Set.forEach (<anonymous>)[39m [2m(<anonymous>)[22m
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[31m    at Set.forEach (<anonymous>)[39m [2m(<anonymous>)[22m
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[31m    at Set.forEach (<anonymous>)[39m [2m(<anonymous>)[22m
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[31m    at Set.forEach (<anonymous>)[39m [2m(<anonymous>)[22m
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[31m    at Set.forEach (<anonymous>)[39m [2m(<anonymous>)[22m
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[31m    at Set.forEach (<anonymous>)[39m [2m(<anonymous>)[22m
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[31m    at Set.forEach (<anonymous>)[39m [2m(<anonymous>)[22m
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[31m    at Set.forEach (<anonymous>)[39m [2m(<anonymous>)[22m
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[31m    at Set.forEach (<anonymous>)[39m [2m(<anonymous>)[22m
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[31m    at Set.forEach (<anonymous>)[39m [2m(<anonymous>)[22m
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[31m    at Set.forEach (<anonymous>)[39m [2m(<anonymous>)[22m
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[31m    at Set.forEach (<anonymous>)[39m [2m(<anonymous>)[22m
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[31m    at Set.forEach (<anonymous>)[39m [2m(<anonymous>)[22m
-[32m[1m✓[22m[39m Compiled in 17ms
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[31m    at Set.forEach (<anonymous>)[39m [2m(<anonymous>)[22m
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[31m    at Set.forEach (<anonymous>)[39m [2m(<anonymous>)[22m
-[32m[1m✓[22m[39m Compiled in 20ms
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
-[36m[browser][39m A component is changing the controlled state of openProp to be uncontrolled. Elements should not switch from uncontrolled to controlled (or vice versa). 
+    <HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>
+      <RedirectBoundary>
+        <RedirectErrorBoundary router={{...}}>
+          <InnerLayoutRouter url="/home" tree={[...]} params={{}} cacheNode={{rsc:{...}, ...}} segmentPath={[...]} ...>
+            <SegmentViewNode type="page" pagePath="home/page.tsx">
+              <SegmentTrieNode>
+              <ClientPageRoot Component={function HomePage} serverProvidedParams={{...}}>
+                <HomePage params={Promise} searchParams={Promise}>
+                  <Table>
+                  <Dialog>
+                  <Dialog open={false} onOpenChange={function bound dispatchSetState}>
+                    <DialogRoot data-slot="dialog" open={false} onOpenChange={function bound dispatchSetState}>
+                      <form>
+                        <DialogTrigger>
+                    
