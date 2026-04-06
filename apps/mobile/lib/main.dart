@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile/core/common/cubit/auth_check_cubit.dart';
 import 'package:mobile/core/theme/app_theme.dart';
 import 'package:mobile/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:mobile/features/auth/presentation/pages/home_page.dart';
 import 'package:mobile/features/auth/presentation/pages/login_page.dart';
+import 'package:mobile/features/home/presentation/pages/main_screen.dart';
 import 'package:mobile/init_dependencies.dart';
 
 void main() async {
@@ -41,7 +41,7 @@ class _MyAppState extends State<MyApp> {
         },
         builder: (context, isLoggedIn) {
           if (isLoggedIn) {
-            return HomePage();
+            return MainScreen();
           }
           return LoginPage();
         },

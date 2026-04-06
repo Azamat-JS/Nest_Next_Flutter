@@ -59,7 +59,6 @@ model Chat {
   messages Message[]
 
     @@map("Chat")
-
 }
 
 model ChatMember {
