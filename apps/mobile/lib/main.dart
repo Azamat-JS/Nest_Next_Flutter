@@ -34,7 +34,6 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.darkThemeMode,
       home: BlocSelector<AuthCheckCubit, AuthCheckState, bool>(
         selector: (state) {
           return state is AuthUserLoggedIn;
