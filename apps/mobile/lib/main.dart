@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile/core/common/cubit/auth_check_cubit.dart';
-import 'package:mobile/core/theme/app_theme.dart';
 import 'package:mobile/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:mobile/features/auth/presentation/pages/login_page.dart';
 import 'package:mobile/features/home/presentation/pages/main_screen.dart';
+import 'package:mobile/features/home/presentation/pages/navbar_page.dart';
 import 'package:mobile/init_dependencies.dart';
 
 void main() async {
@@ -42,7 +42,7 @@ class _MyAppState extends State<MyApp> {
           if (isLoggedIn) {
             return MainScreen();
           }
-          return LoginPage();
+          return NavbarPage();
         },
       ),
     );
