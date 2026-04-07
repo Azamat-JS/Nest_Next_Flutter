@@ -26,6 +26,8 @@ export class GroupService {
     return await this.prisma.groups.findMany({
       select: {
         name: true,
+        teacherId: true,
+        createdAt: true,
         teacher: {
           select: {
             username: true
@@ -35,15 +37,45 @@ export class GroupService {
     })
   }
 
-  findOne(id: string) {
-    return `This action returns a #${id} group`;
+  async findOne(id: string) {
+    const group = await this.prisma.groups.findFirst({
+      where: { id },
+      select: {
+        name: true,
+        teacherId: true,
+        createdAt: true,
+        teacher: {
+          select: {
+            username: true,
+          }
+        }
+      }
+    })
+    if (!group) {
+      throw new NotFoundException(
+        'Group not found'
+      )
+    }
+    return group;
   }
 
-  update(id: string, updateGroupDto: UpdateGroupDto) {
-    return `This action updates a #${id} group`;
+  async update(id: string, updateGroupDto: UpdateGroupDto) {
+
+    const group = await this.prisma.groups.findUnique({ where: { id } });
+    if (!group) throw new NotFoundException('Group not found')
+
+    return await this.prisma.groups.update({
+      where: { id }, data: updateGroupDto,
+    });
+
   }
 
-  remove(id: string) {
-    return `This action removes a #${id} group`;
+  async remove(id: string) {
+    const group = await this.prisma.groups.findUnique({ where: { id } });
+    if (!group) throw new NotFoundException(
+      'Group not found'
+    )
+    await this.prisma.groups.delete({ where: { id } });
+    return { message: 'Group deleted successfully!' }
   }
 }
