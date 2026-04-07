@@ -12,6 +12,10 @@ export class UpdateGroupDto {
     name?: string;
 
     @IsOptional()
+    @IsString()
+    teacherId?: string;
+
+    @IsOptional()
     @IsArray()
     @ArrayUnique()
     @IsString({ each: true })
@@ -22,5 +26,4 @@ export class UpdateGroupDto {
     @ArrayUnique()
     @IsString({ each: true })
     removeStudentIds?: string[];
-
 }

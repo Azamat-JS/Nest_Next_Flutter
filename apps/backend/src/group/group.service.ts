@@ -62,14 +62,57 @@ export class GroupService {
   }
 
   async update(id: string, updateGroupDto: UpdateGroupDto) {
-
-    const group = await this.prisma.groups.findUnique({ where: { id } });
-    if (!group) throw new NotFoundException('Group not found')
-
-    return await this.prisma.groups.update({
-      where: { id }, data: updateGroupDto,
+    const group = await this.prisma.groups.findUnique({
+      where: { id },
     });
 
+    if (!group) {
+      throw new NotFoundException('Group not found');
+    }
+
+    if (updateGroupDto.teacherId) {
+      const teacher = await this.prisma.users.findFirst({
+        where: { id: updateGroupDto.teacherId, role: 'teacher' }
+      });
+
+      if (!teacher) {
+        throw new NotFoundException('Teacher not found')
+      }
+    }
+
+    return await this.prisma.groups.update({
+      where: { id },
+      data: {
+        ...(updateGroupDto.name && {
+          name: updateGroupDto.name,
+        }),
+
+        ...(updateGroupDto.teacherId && {
+          teacher: {
+            connect: {
+              id: updateGroupDto.teacherId,
+            },
+          },
+        }),
+
+        ...((updateGroupDto.addStudentIds?.length ||
+          updateGroupDto.removeStudentIds?.length) && {
+          students: {
+            ...(updateGroupDto.addStudentIds?.length && {
+              connect: updateGroupDto.addStudentIds.map((studentId) => ({
+                id: studentId,
+              })),
+            }),
+
+            ...(updateGroupDto.removeStudentIds?.length && {
+              disconnect: updateGroupDto.removeStudentIds.map((studentId) => ({
+                id: studentId,
+              })),
+            }),
+          },
+        }),
+      },
+    });
   }
 
   async remove(id: string) {

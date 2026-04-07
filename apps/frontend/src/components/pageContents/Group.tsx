@@ -96,38 +96,50 @@ const GroupComponent = () => {
     }
     return (
         <>
-            {groups.map((u) => (
-                <Table key={u?.id} className="mt-5">
-                    <TableCaption>A list of all users.</TableCaption>
-                    <TableHeader>
-                        <TableRow >
-                            <TableHead className="w-25">Username</TableHead>
-                            <TableHead>Email</TableHead>
-                            <TableHead>Actions</TableHead>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody >
+            <Table className="mt-5">
+                <TableCaption>A list of all groups.</TableCaption>
 
-                        <TableRow>
-                            <TableCell >
-                                {u.name}
-                            </TableCell>
+                <TableHeader>
+                    <TableRow>
+                        <TableHead className="w-25">Group Name</TableHead>
+                        <TableHead>Teacher Name</TableHead>
+                        <TableHead>Actions</TableHead>
+                    </TableRow>
+                </TableHeader>
+
+                <TableBody>
+                    {groups.map((u) => (
+                        <TableRow key={u.id}>
+                            <TableCell>{u.name}</TableCell>
+
+                            <TableCell>{u.teacher.username}</TableCell>
+
                             <TableCell>
-                                {u.teacher.username}
-                            </TableCell>
-                            <TableCell >
                                 <DropdownMenu>
                                     <DropdownMenuTrigger>
                                         <Button variant="outline">
                                             <Menu />
                                         </Button>
                                     </DropdownMenuTrigger>
+
                                     <DropdownMenuContent align="start">
                                         <DropdownMenuGroup>
-                                            <DropdownMenuItem onClick={() => { setOpenUpdate(true); setSelectedGroup(u) }}>
+                                            <DropdownMenuItem
+                                                onClick={() => {
+                                                    setOpenUpdate(true);
+                                                    setSelectedGroup(u);
+                                                }}
+                                            >
                                                 <Edit /> Update
                                             </DropdownMenuItem>
-                                            <DropdownMenuItem onClick={() => { setOpenDelete(true); setSelectedGroup(u) }} className="text-red-500">
+
+                                            <DropdownMenuItem
+                                                onClick={() => {
+                                                    setOpenDelete(true);
+                                                    setSelectedGroup(u);
+                                                }}
+                                                className="text-red-500"
+                                            >
                                                 <Trash /> Delete
                                             </DropdownMenuItem>
                                         </DropdownMenuGroup>
@@ -135,17 +147,18 @@ const GroupComponent = () => {
                                 </DropdownMenu>
                             </TableCell>
                         </TableRow>
-                    </TableBody>
-                    <TableFooter>
-                        <TableRow>
-                            <TableCell colSpan={3}>Total</TableCell>
-                            <TableCell className="text-right">{groups.length}</TableCell>
-                        </TableRow>
-                    </TableFooter>
-                </Table>
-            ))}
+                    ))}
+                </TableBody>
 
-            {/* update user modal */}
+                <TableFooter>
+                    <TableRow>
+                        <TableCell colSpan={2}>Total</TableCell>
+                        <TableCell className="text-right">{groups.length}</TableCell>
+                    </TableRow>
+                </TableFooter>
+            </Table>
+
+            {/* update group modal */}
             <Dialog open={openUpdate} onOpenChange={setOpenUpdate}>
                 <DialogContent className="sm:max-w-sm">
                     <DialogHeader>
@@ -157,12 +170,12 @@ const GroupComponent = () => {
                     </DialogHeader>
                     <FieldGroup>
                         <Field>
-                            <Label htmlFor="name-1">Username</Label>
-                            <Input id="name-1" name="name" onChange={(e) => setSelectedGroup(prev => prev ? { ...prev, username: e.target.value } : prev)} defaultValue={selectedGroup?.name || ""} value={selectedGroup?.name || ""} />
+                            <Label htmlFor="name-1">Group name</Label>
+                            <Input id="name-1" name="name" onChange={(e) => setSelectedGroup(prev => prev ? { ...prev, name: e.target.value } : prev)} defaultValue={selectedGroup?.name || ""} value={selectedGroup?.name || ""} />
                         </Field>
                         <Field>
-                            <Label htmlFor="email-1">Email</Label>
-                            <Input id="username-1" name="username" onChange={(e) => setSelectedGroup(prev => prev ? { ...prev, email: e.target.value } : prev)} value={selectedGroup?.teacher.username} defaultValue={selectedGroup?.teacher.username || ""} />
+                            <Label htmlFor="email-1">Teacher Name</Label>
+                            <Input id="username-1" name="username" onChange={(e) => setSelectedGroup(prev => prev ? { ...prev, teacherId: e.target.value } : prev)} value={selectedGroup?.teacher.username} defaultValue={selectedGroup?.teacher.username || ""} />
                         </Field>
                     </FieldGroup>
                     <DialogFooter>
@@ -174,14 +187,14 @@ const GroupComponent = () => {
                 </DialogContent>
             </Dialog>
 
-            {/* delete user modal */}
+            {/* delete group modal */}
             <Dialog open={openDelete} onOpenChange={setOpenDelete}>
                 <form>
                     <DialogContent className="sm:max-w-sm">
                         <DialogHeader>
-                            <DialogTitle>Delete profile</DialogTitle>
+                            <DialogTitle>Delete Group</DialogTitle>
                             <DialogDescription>
-                                Are you sure to delete this user?
+                                Are you sure to delete this group?
                             </DialogDescription>
                         </DialogHeader>
                         <DialogFooter>
