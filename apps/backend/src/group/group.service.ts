@@ -6,22 +6,33 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export class GroupService {
   constructor(private readonly prisma: PrismaService) { }
   async create(createGroupDto: CreateGroupDto, teacherId: string) {
-    const teacher = await this.prisma.users.findUnique({ where: { id: teacherId, role: 'teacher' } });
+    const teacher = await this.prisma.users.findFirst({ where: { id: teacherId, role: 'teacher' } });
     if (!teacher) {
       throw new NotFoundException('Teacher not found')
     }
     const newGroup = await this.prisma.groups.create({
       data: {
-        ...createGroupDto,
-        teacherId: teacherId
+        name: createGroupDto.name,
+        teacher: {
+          connect: { id: teacherId }
+        }
       }
     });
 
     return newGroup;
   }
 
-  findAll() {
-    return `This action returns all group`;
+  async findAll() {
+    return await this.prisma.groups.findMany({
+      select: {
+        name: true,
+        teacher: {
+          select: {
+            username: true
+          }
+        }
+      }
+    })
   }
 
   findOne(id: string) {

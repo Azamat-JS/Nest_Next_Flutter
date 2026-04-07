@@ -14,7 +14,7 @@ export class GroupController {
     return this.groupService.create(createGroupDto, teacherId);
   }
 
-  @Get()
+  @Get('all')
   findAll() {
     return this.groupService.findAll();
   }
