@@ -179,7 +179,6 @@ const Home = () => {
             {/* delete user modal */}
             <Dialog open={openDelete} onOpenChange={setOpenDelete}>
                 <form>
-                    <Button variant="outline"><Trash /> Delete</Button>
                     <DialogContent className="sm:max-w-sm">
                         <DialogHeader>
                             <DialogTitle>Delete profile</DialogTitle>

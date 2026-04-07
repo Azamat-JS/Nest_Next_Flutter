@@ -6,7 +6,7 @@
 - Local:         http://localhost:4000
 - Network:       http://192.168.13.92:4000
 - Environments: .env.local
-[32m[1m✓[22m[39m Ready in 301ms
+[32m[1m✓[22m[39m Ready in 276ms
 [33m[1m⚠[22m[39m Warning: Next.js inferred your workspace root, but it may not be correct.
  We detected multiple lockfiles and selected the directory of /Users/azamatabdullayev/Desktop/full-stack-turbo/pnpm-workspace.yaml as the root directory.
  To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
@@ -15,123 +15,7 @@
    * /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend/pnpm-workspace.yaml
 
 
- GET / [32m200[39m in 282ms[2m (next.js: 99ms, application-code: 184ms)[22m
-[36m[browser][39m In HTML, <button> cannot be a descendant of <button>.
-This will cause a hydration error.
-
-  ...
-    <RedirectBoundary>
-      <RedirectErrorBoundary router={{...}}>
-        <InnerLayoutRouter url="/" tree={[...]} params={{}} cacheNode={{rsc:{...}, ...}} segmentPath={[...]} ...>
-          <SegmentViewNode type="page" pagePath="page.tsx">
-            <SegmentTrieNode>
-            <ClientPageRoot Component={function Home} serverProvidedParams={{...}}>
-              <Home params={Promise} searchParams={Promise}>
-                <HomePage>
-                  <Table>
-                  <Dialog>
-                  <Dialog open={false} onOpenChange={function bound dispatchSetState}>
-                    <DialogRoot data-slot="dialog" open={false} onOpenChange={function bound dispatchSetState}>
-                      <form>
-                        <DialogTrigger>
-                          <DialogTrigger data-slot="dialog-tri...">
->                           <button
->                             type="button"
->                             onClick={function onClick}
->                             onMouseDown={function onMouseDown}
->                             onKeyDown={function}
->                             onKeyUp={function onKeyUp}
->                             onPointerDown={function onPointerDown}
->                             tabIndex={0}
->                             disabled={false}
->                             data-base-ui-click-trigger=""
->                             id="base-ui-_r_4_"
->                             data-slot="dialog-trigger"
->                             ref={function}
->                           >
-                              <Button variant="outline">
-                                <Button data-slot="button" className={"group/bu..."}>
->                                 <button
->                                   type="button"
->                                   onClick={function onClick}
->                                   onMouseDown={function onMouseDown}
->                                   onKeyDown={function}
->                                   onKeyUp={function onKeyUp}
->                                   onPointerDown={function onPointerDown}
->                                   tabIndex={0}
->                                   disabled={false}
->                                   data-slot="button"
->                                   ref={function}
->                                   className={"group/button inline-flex shrink-0 items-center justify-center rounded..."}
->                                 >
-                        ...
-          ...
-        ...
- 
-[36m[browser][39m <button> cannot contain a nested <button>.
-See this log for the ancestor stack trace. 
-[32m[1m✓[22m[39m Compiled in 252ms
-[32m[1m✓[22m[39m Compiled in 31ms
-[36m[browser][39m React does not recognize the `asChild` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `aschild` instead. If you accidentally passed it from a parent component, remove it from the DOM element. 
- GET / [32m200[39m in 54ms[2m (next.js: 16ms, application-code: 38ms)[22m
-[36m[browser][39m In HTML, <button> cannot be a descendant of <button>.
-This will cause a hydration error.
-
-  ...
-    <RedirectBoundary>
-      <RedirectErrorBoundary router={{...}}>
-        <InnerLayoutRouter url="/" tree={[...]} params={{}} cacheNode={{rsc:{...}, ...}} segmentPath={[...]} ...>
-          <SegmentViewNode type="page" pagePath="page.tsx">
-            <SegmentTrieNode>
-            <ClientPageRoot Component={function Home} serverProvidedParams={{...}}>
-              <Home params={Promise} searchParams={Promise}>
-                <HomePage>
-                  <Table>
-                  <Dialog>
-                  <Dialog open={false} onOpenChange={function bound dispatchSetState}>
-                    <DialogRoot data-slot="dialog" open={false} onOpenChange={function bound dispatchSetState}>
-                      <form>
-                        <DialogTrigger>
-                          <DialogTrigger data-slot="dialog-tri...">
->                           <button
->                             type="button"
->                             onClick={function onClick}
->                             onMouseDown={function onMouseDown}
->                             onKeyDown={function}
->                             onKeyUp={function onKeyUp}
->                             onPointerDown={function onPointerDown}
->                             tabIndex={0}
->                             disabled={false}
->                             data-base-ui-click-trigger=""
->                             id="base-ui-_r_4_"
->                             data-slot="dialog-trigger"
->                             ref={function}
->                           >
-                              <Button variant="outline">
-                                <Button data-slot="button" className={"group/bu..."}>
->                                 <button
->                                   type="button"
->                                   onClick={function onClick}
->                                   onMouseDown={function onMouseDown}
->                                   onKeyDown={function}
->                                   onKeyUp={function onKeyUp}
->                                   onPointerDown={function onPointerDown}
->                                   tabIndex={0}
->                                   disabled={false}
->                                   data-slot="button"
->                                   ref={function}
->                                   className={"group/button inline-flex shrink-0 items-center justify-center rounded..."}
->                                 >
-                        ...
-          ...
-        ...
- 
-[36m[browser][39m <button> cannot contain a nested <button>.
-See this log for the ancestor stack trace. 
-[36m[browser][39m React does not recognize the `asChild` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `aschild` instead. If you accidentally passed it from a parent component, remove it from the DOM element. 
-[32m[1m✓[22m[39m Compiled in 25ms
-[32m[1m✓[22m[39m Compiled in 101ms
- GET / [32m200[39m in 35ms[2m (next.js: 6ms, application-code: 29ms)[22m
+ GET / [32m200[39m in 268ms[2m (next.js: 98ms, application-code: 170ms)[22m
 [36m[browser][39m In HTML, <button> cannot be a descendant of <button>.
 This will cause a hydration error.
 
@@ -187,451 +71,84 @@ This will cause a hydration error.
  
 [36m[browser][39m <button> cannot contain a nested <button>.
 See this log for the ancestor stack trace. 
-[31m[1m⨯[22m[39m ./apps/frontend/src/app/page.tsx:5:1
-[1m[31mModule not found[39m[22m: Can't resolve [32m'./home/page'[39m
-  [90m3 |[0m [36mimport[0m { useAuthStore } [36mfrom[0m [32m"@/lib/stores/authStore"[0m;
-  [90m4 |[0m [36mimport[0m [33mLoginForm[0m [36mfrom[0m [32m"./(auth)/login"[0m;
-[31m[1m>[0m [90m5 |[0m [36mimport[0m [33mHomePage[0m [36mfrom[0m [32m"./home/page"[0m;
-  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
-  [90m6 |[0m
-  [90m7 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mHome[0m() {
-  [90m8 |[0m   [36mconst[0m isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-
-
-
-Import traces:
-  Client Component Browser:
-    ./apps/frontend/src/app/page.tsx [Client Component Browser]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./apps/frontend/src/app/page.tsx [Client Component SSR]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-[31m[1m⨯[22m[39m ./apps/frontend/src/app/page.tsx:5:1
-[1m[31mModule not found[39m[22m: Can't resolve [32m'./home/page'[39m
-  [90m3 |[0m [36mimport[0m { useAuthStore } [36mfrom[0m [32m"@/lib/stores/authStore"[0m;
-  [90m4 |[0m [36mimport[0m [33mLoginForm[0m [36mfrom[0m [32m"./(auth)/login"[0m;
-[31m[1m>[0m [90m5 |[0m [36mimport[0m [33mHomePage[0m [36mfrom[0m [32m"./home/page"[0m;
-  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
-  [90m6 |[0m
-  [90m7 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mHome[0m() {
-  [90m8 |[0m   [36mconst[0m isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-
-
-
-Import traces:
-  Client Component Browser:
-    ./apps/frontend/src/app/page.tsx [Client Component Browser]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./apps/frontend/src/app/page.tsx [Client Component SSR]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-[31m[1m⨯[22m[39m ./apps/frontend/src/app/page.tsx:5:1
-[1m[31mModule not found[39m[22m: Can't resolve [32m'./home/page'[39m
-  [90m3 |[0m [36mimport[0m { useAuthStore } [36mfrom[0m [32m"@/lib/stores/authStore"[0m;
-  [90m4 |[0m [36mimport[0m [33mLoginForm[0m [36mfrom[0m [32m"./(auth)/login"[0m;
-[31m[1m>[0m [90m5 |[0m [36mimport[0m [33mHomePage[0m [36mfrom[0m [32m"./home/page"[0m;
-  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
-  [90m6 |[0m
-  [90m7 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mHome[0m() {
-  [90m8 |[0m   [36mconst[0m isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-
-
-
-Import traces:
-  Client Component Browser:
-    ./apps/frontend/src/app/page.tsx [Client Component Browser]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./apps/frontend/src/app/page.tsx [Client Component SSR]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-[31m[1m⨯[22m[39m ./apps/frontend/src/app/page.tsx:5:1
-[1m[31mModule not found[39m[22m: Can't resolve [32m'./home/page'[39m
-  [90m3 |[0m [36mimport[0m { useAuthStore } [36mfrom[0m [32m"@/lib/stores/authStore"[0m;
-  [90m4 |[0m [36mimport[0m [33mLoginForm[0m [36mfrom[0m [32m"./(auth)/login"[0m;
-[31m[1m>[0m [90m5 |[0m [36mimport[0m [33mHomePage[0m [36mfrom[0m [32m"./home/page"[0m;
-  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
-  [90m6 |[0m
-  [90m7 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mHome[0m() {
-  [90m8 |[0m   [36mconst[0m isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-
-
-
-Import traces:
-  Client Component Browser:
-    ./apps/frontend/src/app/page.tsx [Client Component Browser]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./apps/frontend/src/app/page.tsx [Client Component SSR]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-[31m[1m⨯[22m[39m ./apps/frontend/src/app/page.tsx:5:1
-[1m[31mModule not found[39m[22m: Can't resolve [32m'./home/page'[39m
-  [90m3 |[0m [36mimport[0m { useAuthStore } [36mfrom[0m [32m"@/lib/stores/authStore"[0m;
-  [90m4 |[0m [36mimport[0m [33mLoginForm[0m [36mfrom[0m [32m"./(auth)/login"[0m;
-[31m[1m>[0m [90m5 |[0m [36mimport[0m [33mHomePage[0m [36mfrom[0m [32m"./home/page"[0m;
-  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
-  [90m6 |[0m
-  [90m7 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mHome[0m() {
-  [90m8 |[0m   [36mconst[0m isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-
-
-
-Import traces:
-  Client Component Browser:
-    ./apps/frontend/src/app/page.tsx [Client Component Browser]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./apps/frontend/src/app/page.tsx [Client Component SSR]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-[31m[1m⨯[22m[39m ./apps/frontend/src/app/page.tsx:5:1
-[1m[31mModule not found[39m[22m: Can't resolve [32m'./home/page'[39m
-  [90m3 |[0m [36mimport[0m { useAuthStore } [36mfrom[0m [32m"@/lib/stores/authStore"[0m;
-  [90m4 |[0m [36mimport[0m [33mLoginForm[0m [36mfrom[0m [32m"./(auth)/login"[0m;
-[31m[1m>[0m [90m5 |[0m [36mimport[0m [33mHomePage[0m [36mfrom[0m [32m"./home/page"[0m;
-  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
-  [90m6 |[0m
-  [90m7 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mHome[0m() {
-  [90m8 |[0m   [36mconst[0m isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-
-
-
-Import traces:
-  Client Component Browser:
-    ./apps/frontend/src/app/page.tsx [Client Component Browser]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./apps/frontend/src/app/page.tsx [Client Component SSR]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-[31m[1m⨯[22m[39m ./apps/frontend/src/app/page.tsx:5:1
-[1m[31mModule not found[39m[22m: Can't resolve [32m'./home/page'[39m
-  [90m3 |[0m [36mimport[0m { useAuthStore } [36mfrom[0m [32m"@/lib/stores/authStore"[0m;
-  [90m4 |[0m [36mimport[0m [33mLoginForm[0m [36mfrom[0m [32m"./(auth)/login"[0m;
-[31m[1m>[0m [90m5 |[0m [36mimport[0m [33mHomePage[0m [36mfrom[0m [32m"./home/page"[0m;
-  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
-  [90m6 |[0m
-  [90m7 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mHome[0m() {
-  [90m8 |[0m   [36mconst[0m isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-
-
-
-Import traces:
-  Client Component Browser:
-    ./apps/frontend/src/app/page.tsx [Client Component Browser]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./apps/frontend/src/app/page.tsx [Client Component SSR]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-[31m[1m⨯[22m[39m ./apps/frontend/src/app/page.tsx:5:1
-[1m[31mModule not found[39m[22m: Can't resolve [32m'./home/page'[39m
-  [90m3 |[0m [36mimport[0m { useAuthStore } [36mfrom[0m [32m"@/lib/stores/authStore"[0m;
-  [90m4 |[0m [36mimport[0m [33mLoginForm[0m [36mfrom[0m [32m"./(auth)/login"[0m;
-[31m[1m>[0m [90m5 |[0m [36mimport[0m [33mHomePage[0m [36mfrom[0m [32m"./home/page"[0m;
-  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
-  [90m6 |[0m
-  [90m7 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mHome[0m() {
-  [90m8 |[0m   [36mconst[0m isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-
-
-
-Import traces:
-  Client Component Browser:
-    ./apps/frontend/src/app/page.tsx [Client Component Browser]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./apps/frontend/src/app/page.tsx [Client Component SSR]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-[31m[1m⨯[22m[39m ./apps/frontend/src/app/page.tsx:5:1
-[1m[31mModule not found[39m[22m: Can't resolve [32m'./home/page'[39m
-  [90m3 |[0m [36mimport[0m { useAuthStore } [36mfrom[0m [32m"@/lib/stores/authStore"[0m;
-  [90m4 |[0m [36mimport[0m [33mLoginForm[0m [36mfrom[0m [32m"./(auth)/login"[0m;
-[31m[1m>[0m [90m5 |[0m [36mimport[0m [33mHomePage[0m [36mfrom[0m [32m"./home/page"[0m;
-  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
-  [90m6 |[0m
-  [90m7 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mHome[0m() {
-  [90m8 |[0m   [36mconst[0m isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-
-
-
-Import traces:
-  Client Component Browser:
-    ./apps/frontend/src/app/page.tsx [Client Component Browser]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./apps/frontend/src/app/page.tsx [Client Component SSR]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-[31m[1m⨯[22m[39m ./apps/frontend/src/app/page.tsx:5:1
-[1m[31mModule not found[39m[22m: Can't resolve [32m'./home/page'[39m
-  [90m3 |[0m [36mimport[0m { useAuthStore } [36mfrom[0m [32m"@/lib/stores/authStore"[0m;
-  [90m4 |[0m [36mimport[0m [33mLoginForm[0m [36mfrom[0m [32m"./(auth)/login"[0m;
-[31m[1m>[0m [90m5 |[0m [36mimport[0m [33mHomePage[0m [36mfrom[0m [32m"./home/page"[0m;
-  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
-  [90m6 |[0m
-  [90m7 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mHome[0m() {
-  [90m8 |[0m   [36mconst[0m isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-
-
-
-Import traces:
-  Client Component Browser:
-    ./apps/frontend/src/app/page.tsx [Client Component Browser]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./apps/frontend/src/app/page.tsx [Client Component SSR]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-[31m[1m⨯[22m[39m ./apps/frontend/src/app/page.tsx:5:1
-[1m[31mModule not found[39m[22m: Can't resolve [32m'./home/page'[39m
-  [90m3 |[0m [36mimport[0m { useAuthStore } [36mfrom[0m [32m"@/lib/stores/authStore"[0m;
-  [90m4 |[0m [36mimport[0m [33mLoginForm[0m [36mfrom[0m [32m"./(auth)/login"[0m;
-[31m[1m>[0m [90m5 |[0m [36mimport[0m [33mHomePage[0m [36mfrom[0m [32m"./home/page"[0m;
-  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
-  [90m6 |[0m
-  [90m7 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mHome[0m() {
-  [90m8 |[0m   [36mconst[0m isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-
-
-
-Import traces:
-  Client Component Browser:
-    ./apps/frontend/src/app/page.tsx [Client Component Browser]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./apps/frontend/src/app/page.tsx [Client Component SSR]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-[31m[1m⨯[22m[39m ./apps/frontend/src/app/page.tsx:5:1
-[1m[31mModule not found[39m[22m: Can't resolve [32m'./home/page'[39m
-  [90m3 |[0m [36mimport[0m { useAuthStore } [36mfrom[0m [32m"@/lib/stores/authStore"[0m;
-  [90m4 |[0m [36mimport[0m [33mLoginForm[0m [36mfrom[0m [32m"./(auth)/login"[0m;
-[31m[1m>[0m [90m5 |[0m [36mimport[0m [33mHomePage[0m [36mfrom[0m [32m"./home/page"[0m;
-  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
-  [90m6 |[0m
-  [90m7 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mHome[0m() {
-  [90m8 |[0m   [36mconst[0m isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-
-
-
-Import traces:
-  Client Component Browser:
-    ./apps/frontend/src/app/page.tsx [Client Component Browser]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./apps/frontend/src/app/page.tsx [Client Component SSR]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-[31m[1m⨯[22m[39m ./apps/frontend/src/app/page.tsx:5:1
-[1m[31mModule not found[39m[22m: Can't resolve [32m'./home/page'[39m
-  [90m3 |[0m [36mimport[0m { useAuthStore } [36mfrom[0m [32m"@/lib/stores/authStore"[0m;
-  [90m4 |[0m [36mimport[0m [33mLoginForm[0m [36mfrom[0m [32m"./(auth)/login"[0m;
-[31m[1m>[0m [90m5 |[0m [36mimport[0m [33mHomePage[0m [36mfrom[0m [32m"./home/page"[0m;
-  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
-  [90m6 |[0m
-  [90m7 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mHome[0m() {
-  [90m8 |[0m   [36mconst[0m isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-
-
-
-Import traces:
-  Client Component Browser:
-    ./apps/frontend/src/app/page.tsx [Client Component Browser]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./apps/frontend/src/app/page.tsx [Client Component SSR]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-[31m[1m⨯[22m[39m ./apps/frontend/src/app/page.tsx:5:1
-[1m[31mModule not found[39m[22m: Can't resolve [32m'./home/page'[39m
-  [90m3 |[0m [36mimport[0m { useAuthStore } [36mfrom[0m [32m"@/lib/stores/authStore"[0m;
-  [90m4 |[0m [36mimport[0m [33mLoginForm[0m [36mfrom[0m [32m"./(auth)/login"[0m;
-[31m[1m>[0m [90m5 |[0m [36mimport[0m [33mHomePage[0m [36mfrom[0m [32m"./home/page"[0m;
-  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
-  [90m6 |[0m
-  [90m7 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mHome[0m() {
-  [90m8 |[0m   [36mconst[0m isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-
-
-
-Import traces:
-  Client Component Browser:
-    ./apps/frontend/src/app/page.tsx [Client Component Browser]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./apps/frontend/src/app/page.tsx [Client Component SSR]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-[31m[1m⨯[22m[39m ./apps/frontend/src/app/page.tsx:5:1
-[1m[31mModule not found[39m[22m: Can't resolve [32m'./home/page'[39m
-  [90m3 |[0m [36mimport[0m { useAuthStore } [36mfrom[0m [32m"@/lib/stores/authStore"[0m;
-  [90m4 |[0m [36mimport[0m [33mLoginForm[0m [36mfrom[0m [32m"./(auth)/login"[0m;
-[31m[1m>[0m [90m5 |[0m [36mimport[0m [33mHomePage[0m [36mfrom[0m [32m"./home/page"[0m;
-  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
-  [90m6 |[0m
-  [90m7 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mHome[0m() {
-  [90m8 |[0m   [36mconst[0m isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-
-
-
-Import traces:
-  Client Component Browser:
-    ./apps/frontend/src/app/page.tsx [Client Component Browser]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./apps/frontend/src/app/page.tsx [Client Component SSR]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-[31m[1m⨯[22m[39m ./apps/frontend/src/app/page.tsx:5:1
-[1m[31mModule not found[39m[22m: Can't resolve [32m'./home/page'[39m
-  [90m3 |[0m [36mimport[0m { useAuthStore } [36mfrom[0m [32m"@/lib/stores/authStore"[0m;
-  [90m4 |[0m [36mimport[0m [33mLoginForm[0m [36mfrom[0m [32m"./(auth)/login"[0m;
-[31m[1m>[0m [90m5 |[0m [36mimport[0m [33mHomePage[0m [36mfrom[0m [32m"./home/page"[0m;
-  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
-  [90m6 |[0m
-  [90m7 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mHome[0m() {
-  [90m8 |[0m   [36mconst[0m isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-
-
-
-Import traces:
-  Client Component Browser:
-    ./apps/frontend/src/app/page.tsx [Client Component Browser]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./apps/frontend/src/app/page.tsx [Client Component SSR]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-[31m[1m⨯[22m[39m ./apps/frontend/src/app/page.tsx:5:1
-[1m[31mModule not found[39m[22m: Can't resolve [32m'./home/page'[39m
-  [90m3 |[0m [36mimport[0m { useAuthStore } [36mfrom[0m [32m"@/lib/stores/authStore"[0m;
-  [90m4 |[0m [36mimport[0m [33mLoginForm[0m [36mfrom[0m [32m"./(auth)/login"[0m;
-[31m[1m>[0m [90m5 |[0m [36mimport[0m [33mHomePage[0m [36mfrom[0m [32m"./home/page"[0m;
-  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
-  [90m6 |[0m
-  [90m7 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mHome[0m() {
-  [90m8 |[0m   [36mconst[0m isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-
-
-
-Import traces:
-  Client Component Browser:
-    ./apps/frontend/src/app/page.tsx [Client Component Browser]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./apps/frontend/src/app/page.tsx [Client Component SSR]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-[31m[1m⨯[22m[39m ./apps/frontend/src/app/page.tsx:5:1
-[1m[31mModule not found[39m[22m: Can't resolve [32m'./home/page'[39m
-  [90m3 |[0m [36mimport[0m { useAuthStore } [36mfrom[0m [32m"@/lib/stores/authStore"[0m;
-  [90m4 |[0m [36mimport[0m [33mLoginForm[0m [36mfrom[0m [32m"./(auth)/login"[0m;
-[31m[1m>[0m [90m5 |[0m [36mimport[0m [33mHomePage[0m [36mfrom[0m [32m"./home/page"[0m;
-  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
-  [90m6 |[0m
-  [90m7 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mHome[0m() {
-  [90m8 |[0m   [36mconst[0m isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-
-
-
-Import traces:
-  Client Component Browser:
-    ./apps/frontend/src/app/page.tsx [Client Component Browser]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./apps/frontend/src/app/page.tsx [Client Component SSR]
-    ./apps/frontend/src/app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-[31m[1m⨯[22m[39m ./apps/frontend/src/app/page.tsx:5:1
-[1m[31mModule not found[39m[22m: Can't resolve [32m'./home/page'[39m
-  [90m3 |[0m [36mimport[0m { useAuthStore } [36mfrom[0m [32m"@/lib/stores/authStore"[0m;
-  [90m4 |[0m [36mimport[0m [33mLoginForm[0m [36mfrom[0m [32m"./(auth)/login"[0m;
-[31m[1m>[0m [90m5 |[0m [36mimport[0m [33mHomePage[0m [36mfrom[0m [32m"./home/page"[0m;
-  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
-  [90m6 |[0m
-  [90m7 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mHome[0m() {
-  [90m8 |[0m   [36mconst[0m isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-
-
-
-Import traces:
-  Client Component Browser:
-    ./apps/frontend/src/app/page.tsx [Client Component Browser]
-    ./apps/frontend/src/app/page.tsx [
+ GET / [32m200[39m in 47ms[2m (next.js: 6ms, application-code: 41ms)[22m
+[36m[browser][39m In HTML, <button> cannot be a descendant of <button>.
+This will cause a hydration error.
+
+  ...
+    <table data-slot="table" className="w-full cap...">
+      <TableCaption>
+      <TableHeader>
+      <TableBody>
+        <tbody data-slot="table-body" className={"[&_tr:la..."}>
+          <TableRow>
+            <tr data-slot="table-row" className="border-b t...">
+              <TableCell>
+              <TableCell>
+              <TableCell className="">
+                <td data-slot="table-cell" className={"p-2 alig..."}>
+                  <DropdownMenu>
+                    <MenuRoot data-slot="dropdown-menu">
+                      <FloatingTree externalTree={{nodesRef:{...}, ...}}>
+                        <DropdownMenuTrigger>
+                          <MenuTrigger data-slot="dropdown-m...">
+>                           <button
+>                             type="button"
+>                             onClick={function onClick}
+>                             onMouseDown={function onMouseDown}
+>                             onKeyDown={function}
+>                             onKeyUp={function onKeyUp}
+>                             onPointerDown={function onPointerDown}
+>                             tabIndex={0}
+>                             disabled={false}
+>                             aria-haspopup="menu"
+>                             id="base-ui-_r_8_"
+>                             data-slot="dropdown-menu-trigger"
+>                             ref={function}
+>                           >
+                              <Button variant="outline">
+                                <Button data-slot="button" className={"group/bu..."}>
+>                                 <button
+>                                   type="button"
+>                                   onClick={function onClick}
+>                                   onMouseDown={function onMouseDown}
+>                                   onKeyDown={function}
+>                                   onKeyUp={function onKeyUp}
+>                                   onPointerDown={function onPointerDown}
+>                                   tabIndex={0}
+>                                   disabled={false}
+>                                   data-slot="button"
+>                                   ref={function}
+>                                   className={"group/button inline-flex shrink-0 items-center justify-center rounded..."}
+>                                 >
+                        ...
+          ...
+      ...
+ 
+[36m[browser][39m <button> cannot contain a nested <button>.
+See this log for the ancestor stack trace. 
+ GET / [32m200[39m in 28ms[2m (next.js: 5ms, application-code: 23ms)[22m
+[36m[browser][39m In HTML, <button> cannot be a descendant of <button>.
+This will cause a hydration error.
+
+  ...
+    <table data-slot="table" className="w-full cap...">
+      <TableCaption>
+      <TableHeader>
+      <TableBody>
+        <tbody data-slot="table-body" className={"[&_tr:la..."}>
+          <TableRow>
+            <tr data-slot="table-row" className="border-b t...">
+              <TableCell>
+              <TableCell>
+              <TableCell className="">
+                <td data-slot="table-cell" className={"p-2 alig..."}>
+                  <DropdownMenu>
+                    <MenuRoot data-slot="dropdown-menu">
+                      <FloatingTree externalTree={{nodesRef:{...}, ...}}>
+                        <DropdownMenuTrigger>
+                          <MenuTrigger data-slot="dropdown-m...">
+>                           <button
+>                             type="button"
+>                             onClick={function onClick}
+>                             onMouseDown={fu
