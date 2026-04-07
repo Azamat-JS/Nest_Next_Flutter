@@ -1,8 +1,7 @@
+import GroupComponent from "@/components/pageContents/Group"
 
 const GroupsPage = () => {
-    return (
-        <div>GroupsPage</div>
-    )
+    return <GroupComponent />
 }
 
 export default GroupsPage

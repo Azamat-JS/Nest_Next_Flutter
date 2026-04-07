@@ -25,6 +25,7 @@ export class GroupService {
   async findAll() {
     return await this.prisma.groups.findMany({
       select: {
+        id: true,
         name: true,
         teacherId: true,
         createdAt: true,
@@ -41,6 +42,7 @@ export class GroupService {
     const group = await this.prisma.groups.findFirst({
       where: { id },
       select: {
+        id: true,
         name: true,
         teacherId: true,
         createdAt: true,
