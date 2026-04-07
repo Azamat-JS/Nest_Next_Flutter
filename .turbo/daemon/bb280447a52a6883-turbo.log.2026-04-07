@@ -739,3 +739,8 @@
 2026-04-07T11:55:53.010513Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/dist/src/group/group.service.d.ts"), AnchoredSystemPathBuf("apps/backend/dist/src/group/group.service.js"), AnchoredSystemPathBuf("apps/backend/dist/src/group/group.service.js.map"), AnchoredSystemPathBuf("apps/backend/dist/tsconfig.build.tsbuildinfo")}
 2026-04-07T11:55:53.010520Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
 2026-04-07T11:55:53.049182Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2026-04-07T12:02:16.509310Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/users/users.service.ts")}
+2026-04-07T12:02:16.509318Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-04-07T12:02:16.810434Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/dist/src/users/users.service.js.map"), AnchoredSystemPathBuf("apps/backend/dist/src/users/users.service.js"), AnchoredSystemPathBuf("apps/backend/dist/src/users/users.service.d.ts"), AnchoredSystemPathBuf("apps/backend/dist/tsconfig.build.tsbuildinfo")}
+2026-04-07T12:02:16.810442Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-04-07T12:02:16.841187Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
