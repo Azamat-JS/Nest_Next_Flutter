@@ -33,13 +33,12 @@ import {
     DialogFooter,
     DialogHeader,
     DialogTitle,
-    DialogTrigger,
 } from "@/components/ui/dialog"
 import { Field, FieldGroup } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
-const HomePage = () => {
+const Home = () => {
     const token = useAuthStore((state) => state.token);
     const [users, setUsers] = useState<TokenPayload[]>([]);
     const user = token ? jwtDecode<TokenPayload>(token) : null;
@@ -203,4 +202,4 @@ const HomePage = () => {
     )
 }
 
-export default HomePage
+export default Home
