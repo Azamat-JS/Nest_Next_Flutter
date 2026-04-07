@@ -3,6 +3,7 @@ import { PrismaModule } from './prisma/prisma.module';
 import { ChatModule } from './chat/chat.module';
 import { UsersModule } from './users/users.module';
 import { ConfigifyModule } from '@itgorillaz/configify';
+import { GroupModule } from './group/group.module';
 
 
 @Module({
@@ -11,6 +12,7 @@ import { ConfigifyModule } from '@itgorillaz/configify';
     PrismaModule,
     ChatModule,
     UsersModule,
+    GroupModule,
   ],
   controllers: [],
   providers: [],

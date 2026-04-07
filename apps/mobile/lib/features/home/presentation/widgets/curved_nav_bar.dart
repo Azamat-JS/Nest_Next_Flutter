@@ -13,9 +13,9 @@ class CurvedNavBar extends StatefulWidget {
 
 class _CurvedNavBarState extends State<CurvedNavBar> {
   final items = [
-    const Icon(Icons.home, size: 30),
-    const Icon(Icons.person, size: 30),
-    const Icon(Icons.message, size: 30),
+    const Icon(Icons.home, size: 30, color: Colors.white),
+    const Icon(Icons.person, size: 30, color: Colors.white),
+    const Icon(Icons.message, size: 30, color: Colors.white),
   ];
   List pages = const [HomePage(), ChatPage(), ProfilePage()];
   int _selectedIndex = 0;

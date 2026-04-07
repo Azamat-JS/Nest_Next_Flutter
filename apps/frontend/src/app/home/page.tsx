@@ -180,9 +180,7 @@ const HomePage = () => {
             {/* delete user modal */}
             <Dialog open={openDelete} onOpenChange={setOpenDelete}>
                 <form>
-                    <DialogTrigger>
-                        <Button variant="outline"><Trash /> Delete</Button>
-                    </DialogTrigger>
+                    <Button variant="outline"><Trash /> Delete</Button>
                     <DialogContent className="sm:max-w-sm">
                         <DialogHeader>
                             <DialogTitle>Delete profile</DialogTitle>

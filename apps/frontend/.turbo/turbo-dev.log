@@ -6,7 +6,7 @@
 - Local:         http://localhost:4000
 - Network:       http://192.168.13.92:4000
 - Environments: .env.local
-[32m[1m✓[22m[39m Ready in 285ms
+[32m[1m✓[22m[39m Ready in 301ms
 [33m[1m⚠[22m[39m Warning: Next.js inferred your workspace root, but it may not be correct.
  We detected multiple lockfiles and selected the directory of /Users/azamatabdullayev/Desktop/full-stack-turbo/pnpm-workspace.yaml as the root directory.
  To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
@@ -15,7 +15,7 @@
    * /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend/pnpm-workspace.yaml
 
 
- GET / [32m200[39m in 316ms[2m (next.js: 115ms, application-code: 201ms)[22m
+ GET / [32m200[39m in 282ms[2m (next.js: 99ms, application-code: 184ms)[22m
 [36m[browser][39m In HTML, <button> cannot be a descendant of <button>.
 This will cause a hydration error.
 
@@ -70,8 +70,10 @@ This will cause a hydration error.
  
 [36m[browser][39m <button> cannot contain a nested <button>.
 See this log for the ancestor stack trace. 
- GET /home [32m200[39m in 63ms[2m (next.js: 24ms, application-code: 38ms)[22m
- GET / [32m200[39m in 40ms[2m (next.js: 5ms, application-code: 35ms)[22m
+[32m[1m✓[22m[39m Compiled in 252ms
+[32m[1m✓[22m[39m Compiled in 31ms
+[36m[browser][39m React does not recognize the `asChild` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `aschild` instead. If you accidentally passed it from a parent component, remove it from the DOM element. 
+ GET / [32m200[39m in 54ms[2m (next.js: 16ms, application-code: 38ms)[22m
 [36m[browser][39m In HTML, <button> cannot be a descendant of <button>.
 This will cause a hydration error.
 
@@ -126,24 +128,7 @@ This will cause a hydration error.
  
 [36m[browser][39m <button> cannot contain a nested <button>.
 See this log for the ancestor stack trace. 
-[1mnull[22m
- GET /home [32m200[39m in 129ms[2m (next.js: 5ms, application-code: 123ms)[22m
-[36m[browser][39m In HTML, <button> cannot be a descendant of <button>.
-This will cause a hydration error.
-
-  ...
-    <HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>
-      <RedirectBoundary>
-        <RedirectErrorBoundary router={{...}}>
-          <InnerLayoutRouter url="/home" tree={[...]} params={{}} cacheNode={{rsc:{...}, ...}} segmentPath={[...]} ...>
-            <SegmentViewNode type="page" pagePath="home/page.tsx">
-              <SegmentTrieNode>
-              <ClientPageRoot Component={function HomePage} serverProvidedParams={{...}}>
-                <HomePage params={Promise} searchParams={Promise}>
-                  <Table>
-                  <Dialog>
-                  <Dialog open={false} onOpenChange={function bound dispatchSetState}>
-                    <DialogRoot data-slot="dialog" open={false} onOpenChange={function bound dispatchSetState}>
-                      <form>
-                        <DialogTrigger>
-                    
+[36m[browser][39m React does not recognize the `asChild` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `aschild` instead. If you accidentally passed it from a parent component, remove it from the DOM element. 
+[32m[1m✓[22m[39m Compiled in 25ms
+[32m[1m✓[22m[39m Compiled in 101ms
+ GET / [32m200[39m in 35ms[2m (next.js: 6ms, application-code: 29ms)[22m

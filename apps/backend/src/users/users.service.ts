@@ -14,6 +14,7 @@ export class UsersService {
                 id: true,
                 email: true,
                 username: true,
+                role: true,
             }
         });
     }
@@ -24,6 +25,7 @@ export class UsersService {
                 id: true,
                 email: true,
                 username: true,
+                role: true,
             }
         });
         if (!foundUser) {
@@ -38,6 +40,7 @@ export class UsersService {
                 id: true,
                 email: true,
                 username: true,
+                role: true
             }
         });
         if (!foundUser) {
@@ -59,7 +62,8 @@ export class UsersService {
             const accessToken = this.jwtService.sign({
                 userId: user.id,
                 email: user.email,
-                username: user.username
+                username: user.username,
+                role: user.role,
             });
 
             return {
@@ -67,6 +71,7 @@ export class UsersService {
                     id: user.id,
                     email: user.email,
                     username: user.username,
+                    role: user.role,
                 },
                 accessToken
             }
@@ -93,12 +98,13 @@ export class UsersService {
         if (!isPasswordValid) {
             throw new UnauthorizedException('Invalid credentials');
         }
-        const accessToken = this.jwtService.sign({ userId: foundUser.id, email: foundUser.email, username: foundUser.username });
+        const accessToken = this.jwtService.sign({ userId: foundUser.id, email: foundUser.email, username: foundUser.username, role: foundUser.role });
         return {
             user: {
                 id: foundUser.id,
                 email: foundUser.email,
                 username: foundUser.username,
+                role: foundUser.role,
             },
             accessToken
         }
@@ -130,6 +136,7 @@ export class UsersService {
                 id: updatedUser.id,
                 email: updatedUser.email,
                 username: updatedUser.username,
+                role: updatedUser.role,
             },
         };
     }
