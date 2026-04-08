@@ -120,9 +120,7 @@ const Home = () => {
                             <TableCell className={user?.username === u.username ? "font-medium bg-green-300 text-green-600" : ""}>
                                 <DropdownMenu>
                                     <DropdownMenuTrigger>
-                                        <Button variant="outline">
-                                            <Menu />
-                                        </Button>
+                                        <Menu />
                                     </DropdownMenuTrigger>
                                     <DropdownMenuContent align="start">
                                         <DropdownMenuGroup>
@@ -169,7 +167,7 @@ const Home = () => {
                     </FieldGroup>
                     <DialogFooter>
                         <DialogClose>
-                            <Button variant="outline">Cancel</Button>
+                            Cancel
                         </DialogClose>
                         <Button type="submit" onClick={() => selectedUser && handleUpdateUser(selectedUser)}>Update</Button>
                     </DialogFooter>
@@ -188,7 +186,7 @@ const Home = () => {
                         </DialogHeader>
                         <DialogFooter>
                             <DialogClose>
-                                <Button variant="outline">Cancel</Button>
+                                Cancel
                             </DialogClose>
                             <Button type="submit" onClick={() => selectedUser && handleDeleteUser(selectedUser.id)} variant="destructive">Delete</Button>
                         </DialogFooter>
