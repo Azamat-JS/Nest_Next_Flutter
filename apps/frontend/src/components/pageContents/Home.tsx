@@ -160,11 +160,11 @@ const Home = () => {
                     <FieldGroup>
                         <Field>
                             <Label htmlFor="name-1">Username</Label>
-                            <Input id="name-1" name="name" onChange={(e) => setSelectedUser(prev => prev ? { ...prev, username: e.target.value } : prev)} defaultValue={selectedUser?.username || ""} value={selectedUser?.username || ""} />
+                            <Input id="name-1" name="name" onChange={(e) => setSelectedUser(prev => prev ? { ...prev, username: e.target.value } : prev)} value={selectedUser?.username || ""} />
                         </Field>
                         <Field>
                             <Label htmlFor="email-1">Email</Label>
-                            <Input id="username-1" name="username" onChange={(e) => setSelectedUser(prev => prev ? { ...prev, email: e.target.value } : prev)} value={selectedUser?.email} defaultValue={selectedUser?.email || ""} />
+                            <Input id="username-1" name="username" onChange={(e) => setSelectedUser(prev => prev ? { ...prev, email: e.target.value } : prev)} value={selectedUser?.email} />
                         </Field>
                     </FieldGroup>
                     <DialogFooter>

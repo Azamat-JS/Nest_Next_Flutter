@@ -134,10 +134,8 @@ const GroupComponent = () => {
 
                             <TableCell>
                                 <DropdownMenu>
-                                    <DropdownMenuTrigger>
-                                        <Button variant="outline">
-                                            <Menu />
-                                        </Button>
+                                    <DropdownMenuTrigger asChild>
+                                        <Menu />
                                     </DropdownMenuTrigger>
 
                                     <DropdownMenuContent align="start">
@@ -212,7 +210,7 @@ const GroupComponent = () => {
                     </FieldGroup>
                     <DialogFooter>
                         <DialogClose>
-                            <Button variant="outline">Cancel</Button>
+                            Cancel
                         </DialogClose>
                         <Button type="submit" onClick={() => selectedGroup && handleUpdateUser(selectedGroup)}>Update</Button>
                     </DialogFooter>
@@ -230,8 +228,8 @@ const GroupComponent = () => {
                             </DialogDescription>
                         </DialogHeader>
                         <DialogFooter>
-                            <DialogClose>
-                                <Button variant="outline">Cancel</Button>
+                            <DialogClose >
+                                Cancel
                             </DialogClose>
                             <Button type="submit" onClick={() => selectedGroup && handleDeleteGroup(selectedGroup.id)} variant="destructive">Delete</Button>
                         </DialogFooter>
