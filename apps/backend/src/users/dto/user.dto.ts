@@ -12,6 +12,10 @@ export class CreateUserDto {
     @IsNotEmpty()
     @IsString()
     password!: string;
+
+    @IsNotEmpty()
+    @IsString()
+    role!: string;
 }
 
 export class UpdateUserDto {
@@ -26,6 +30,10 @@ export class UpdateUserDto {
     @IsOptional()
     @IsString()
     password?: string;
+
+    @IsOptional()
+    @IsString()
+    role?: string;
 }
 
 export class LoginDto {

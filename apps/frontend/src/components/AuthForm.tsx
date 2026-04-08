@@ -19,7 +19,6 @@ import {
     FieldError,
     FieldGroup,
     FieldLabel,
-
 } from "@/components/ui/field"
 import axios from "axios"
 import { useAuthStore } from "@/lib/stores/authStore"
@@ -36,12 +35,14 @@ export function CardDemo({ id, isLogin, toggle }: { id?: string, isLogin?: boole
                 : z.string().min(3),
             email: z.string().email(),
             password: z.string().min(6),
+            role: isLogin ? z.string() : z.string().min(3),
         })
     const form = useForm({
         defaultValues: {
             username: "",
             email: "",
-            password: ""
+            password: "",
+            role: "",
         },
         validators: {
             onSubmit: getSchema(!!isLogin)
@@ -49,7 +50,7 @@ export function CardDemo({ id, isLogin, toggle }: { id?: string, isLogin?: boole
         onSubmit: async ({ value }) => {
             try {
                 if (isLogin) {
-                    const response = await axios.post(`${API}/users/login`, { email: value.email, password: value.password }, {
+                    const response = await axios.post(`${API}/users/login`, { email: value.email, password: value.password, role: value.role }, {
                         headers: {
                             'Content-Type': 'application/json'
                         }
@@ -112,6 +113,7 @@ export function CardDemo({ id, isLogin, toggle }: { id?: string, isLogin?: boole
                                 const isInvalid =
                                     field.state.meta.isTouched && !field.state.meta.isValid
                                 return (
+
                                     <Field data-invalid={isInvalid}>
                                         <FieldLabel htmlFor={field.name}>Username</FieldLabel>
                                         <Input
@@ -128,6 +130,7 @@ export function CardDemo({ id, isLogin, toggle }: { id?: string, isLogin?: boole
                                             <FieldError errors={field.state.meta.errors} />
                                         )}
                                     </Field>
+
                                 )
                             }}
                         />)}
@@ -181,6 +184,32 @@ export function CardDemo({ id, isLogin, toggle }: { id?: string, isLogin?: boole
                                 )
                             }}
                         />
+                        {!isLogin && (<form.Field
+                            name="role"
+                            children={(field) => {
+                                const isInvalid =
+                                    field.state.meta.isTouched && !field.state.meta.isValid
+                                return (
+
+                                    <Field data-invalid={isInvalid}>
+                                        <FieldLabel htmlFor={field.name}>Role</FieldLabel>
+                                        <Input
+                                            id={field.name}
+                                            name={field.name}
+                                            value={field.state.value}
+                                            onBlur={field.handleBlur}
+                                            onChange={(e) => field.handleChange(e.target.value)}
+                                            aria-invalid={isInvalid}
+                                            placeholder="Enter a role"
+                                            autoComplete="on"
+                                        />
+                                        {isInvalid && (
+                                            <FieldError errors={field.state.meta.errors} />
+                                        )}
+                                    </Field>
+                                )
+                            }}
+                        />)}
                     </FieldGroup>
                     <Button type="submit" className="w-full">
                         {isLogin ? 'Login' : 'Sign Up'}

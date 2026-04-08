@@ -1,18 +1,12 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
 import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuGroup,
     DropdownMenuItem,
     DropdownMenuLabel,
-    DropdownMenuPortal,
-    DropdownMenuSeparator,
     DropdownMenuShortcut,
-    DropdownMenuSub,
-    DropdownMenuSubContent,
-    DropdownMenuSubTrigger,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { useAuthStore } from "@/lib/stores/authStore"
@@ -25,6 +19,7 @@ export function DropdownMenuDemo() {
 
     const handleLogout = () => {
         setToken(null);
+        localStorage.setItem("token", "");
         router.push('/');
     }
     return (
