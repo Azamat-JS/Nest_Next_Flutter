@@ -49,6 +49,10 @@ export class UsersService {
         return foundUser;
     }
 
+    async getAllTeachers() {
+        return await this.prisma.users.findMany({ where: { role: "teacher" } });
+    }
+
     async createUser(createUserInput: Prisma.UsersCreateInput) {
         try {
             const hashedPassword = await bcrypt.hash(createUserInput.password, 10);

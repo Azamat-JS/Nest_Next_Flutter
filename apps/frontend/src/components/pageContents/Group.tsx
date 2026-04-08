@@ -36,6 +36,15 @@ import { Field, FieldGroup } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { GroupType } from "@/lib/types/groups"
+import {
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectLabel,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select"
 
 const GroupComponent = () => {
     const token = useAuthStore((state) => state.token);
@@ -175,7 +184,21 @@ const GroupComponent = () => {
                         </Field>
                         <Field>
                             <Label htmlFor="email-1">Teacher Name</Label>
-                            <Input id="username-1" name="username" onChange={(e) => setSelectedGroup(prev => prev ? { ...prev, teacherId: e.target.value } : prev)} value={selectedGroup?.teacher.username} defaultValue={selectedGroup?.teacher.username || ""} />
+                            <Select>
+                                <SelectTrigger className="w-full max-w-48">
+                                    <SelectValue placeholder="Select a fruit" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <SelectGroup>
+                                        <SelectLabel>Select a new teacher</SelectLabel>
+                                        <SelectItem value="apple">Apple</SelectItem>
+                                        <SelectItem value="banana">Banana</SelectItem>
+                                        <SelectItem value="blueberry">Blueberry</SelectItem>
+                                        <SelectItem value="grapes">Grapes</SelectItem>
+                                        <SelectItem value="pineapple">Pineapple</SelectItem>
+                                    </SelectGroup>
+                                </SelectContent>
+                            </Select>
                         </Field>
                     </FieldGroup>
                     <DialogFooter>

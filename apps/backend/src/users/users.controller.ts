@@ -30,6 +30,11 @@ export class UsersController {
     return this.usersService.loginUser(loginDto.email, loginDto.password);
   }
 
+  @Get('teachers')
+  async getAllTeachers() {
+    return this.usersService.getAllTeachers();
+  }
+
   @Get(':id')
   async getUserById(@Param('id') id: string) {
     return this.usersService.getUserById(id);
