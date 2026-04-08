@@ -5,9 +5,9 @@ import { DropdownMenuDemo } from "./DropDownMenu"
 import { usePathname } from "next/navigation"
 
 const navLinks = [
-    { name: 'Products', href: '/home' },
+    { name: 'Users', href: '/home' },
     { name: 'Groups', href: '/groups' },
-    { name: 'Contact', href: '/profile' },
+    { name: 'Profile', href: '/profile' },
     { name: 'Cart', href: '/#' },
 ]
 

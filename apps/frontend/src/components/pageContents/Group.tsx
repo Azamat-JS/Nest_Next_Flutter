@@ -55,7 +55,6 @@ const GroupComponent = () => {
     const API = process.env.NEXT_PUBLIC_API_URL;
     const [openUpdate, setOpenUpdate] = useState(false);
     const [openDelete, setOpenDelete] = useState(false);
-    const [openTeachers, setOpenTeachers] = useState(false);
     const [selectedGroup, setSelectedGroup] = useState<GroupType | null>(null);
 
 
