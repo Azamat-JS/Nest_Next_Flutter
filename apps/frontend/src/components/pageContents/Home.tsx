@@ -24,7 +24,7 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Edit, Menu, Trash } from "lucide-react"
+import { Edit, List, Menu, Trash } from "lucide-react"
 import {
     Dialog,
     DialogClose,
@@ -41,6 +41,7 @@ import { Label } from "@/components/ui/label"
 const Home = () => {
     const token = useAuthStore((state) => state.token);
     const [users, setUsers] = useState<TokenPayload[]>([]);
+    const [count, setCount] = useState<number>(0)
     const user = token ? jwtDecode<TokenPayload>(token) : null;
     const API = process.env.NEXT_PUBLIC_API_URL;
     const [openUpdate, setOpenUpdate] = useState(false);
@@ -97,30 +98,33 @@ const Home = () => {
         }
     }
     return (
-        <>
-            <Table key={user?.id} className="mt-5">
+        <div className="mt-5">
+            <Table key={user?.id} className="table-fixed">
                 <TableCaption>A list of all users.</TableCaption>
                 <TableHeader>
                     <TableRow key={user?.id}>
-                        <TableHead className="w-25">Username</TableHead>
-                        <TableHead>Email</TableHead>
-                        <TableHead>Actions</TableHead>
+                        <TableHead className="w-12 text-center">&#8470;</TableHead>
+                        <TableHead className="w-48 text-center">Username</TableHead>
+                        <TableHead className="w-72 text-center">Email</TableHead>
+                        <TableHead className="w-24 text-center">Actions</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody key={user?.email}>
-                    {users.map((u) => (
-
+                    {users.map((u, idx) => (
                         <TableRow key={u.id}>
-                            <TableCell className={user?.username === u.username ? "font-medium bg-green-300 text-green-600" : ""}>
+                            <TableCell className={user?.username === u.username ? "font-medium text-center bg-green-300 text-green-600" : "text-center"}>
+                                {idx + 1}
+                            </TableCell>
+                            <TableCell className={user?.username === u.username ? "font-medium text-center bg-green-300 text-green-600" : "text-center"}>
                                 {u.username}
                             </TableCell>
-                            <TableCell className={user?.username === u.username ? "font-medium bg-green-300 text-green-600" : ""}>
+                            <TableCell className={user?.username === u.username ? "font-medium text-center bg-green-300 text-green-600" : "text-center"}>
                                 {u.email}
                             </TableCell>
-                            <TableCell className={user?.username === u.username ? "font-medium bg-green-300 text-green-600" : ""}>
+                            <TableCell className={user?.username === u.username ? "font-medium text-center bg-green-300 text-green-600" : "text-center"}>
                                 <DropdownMenu>
                                     <DropdownMenuTrigger>
-                                        <Menu />
+                                        <Menu className="h-5 w-5" />
                                     </DropdownMenuTrigger>
                                     <DropdownMenuContent align="start">
                                         <DropdownMenuGroup>
@@ -137,12 +141,6 @@ const Home = () => {
                         </TableRow>
                     ))}
                 </TableBody>
-                <TableFooter>
-                    <TableRow>
-                        <TableCell colSpan={3}>Total</TableCell>
-                        <TableCell className="text-right">{users.length}</TableCell>
-                    </TableRow>
-                </TableFooter>
             </Table>
 
             {/* update user modal */}
@@ -193,7 +191,7 @@ const Home = () => {
                     </DialogContent>
                 </form>
             </Dialog>
-        </>
+        </div>
 
     )
 }
