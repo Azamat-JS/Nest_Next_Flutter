@@ -75,6 +75,8 @@ export function CardDemo({ id, isLogin, toggle }: { id?: string, isLogin?: boole
                         toast.error('Registration failed!')
                         return;
                     }
+                    localStorage.setItem('token', response.data.accessToken);
+                    setToken(response.data.accessToken);
                     toast.success('Registration successful!')
                     router.push('/home')
                 }
