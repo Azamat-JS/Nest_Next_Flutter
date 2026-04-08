@@ -29,9 +29,11 @@ export function DropdownMenuDemo() {
     }
     return (
         <DropdownMenu>
-            <DropdownMenuTrigger render={<Button variant="outline">
-                <Menu className="h-4 w-4" />
-            </Button>} />
+            <DropdownMenuTrigger asChild>
+                <button>
+                    <Menu className="h-4 w-4" />
+                </button>
+            </DropdownMenuTrigger>
             <DropdownMenuContent className="w-40" align="start">
                 <DropdownMenuGroup>
                     <DropdownMenuLabel>My Account</DropdownMenuLabel>

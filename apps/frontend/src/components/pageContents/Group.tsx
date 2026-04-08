@@ -51,9 +51,11 @@ const GroupComponent = () => {
     const token = useAuthStore((state) => state.token);
     const [groups, setGroups] = useState<GroupType[]>([]);
     const [teachers, setTeachers] = useState<TokenPayload[]>([]);
+    const [selectedTeacher, setSelectedTeacher] = useState<TokenPayload | null>(null);
     const API = process.env.NEXT_PUBLIC_API_URL;
     const [openUpdate, setOpenUpdate] = useState(false);
     const [openDelete, setOpenDelete] = useState(false);
+    const [openTeachers, setOpenTeachers] = useState(false);
     const [selectedGroup, setSelectedGroup] = useState<GroupType | null>(null);
 
 
@@ -106,9 +108,10 @@ const GroupComponent = () => {
 
     const getAllTeachers = async () => {
         try {
-
-        } catch (error) {
-
+            const res = await axios.get(`${API}/users/teachers`, { headers: { Authorization: `Bearer ${token}` } });
+            setTeachers(res.data);
+        } catch (error: any) {
+            toast.error(error.response?.data?.message ?? 'Something went wrong')
         }
     }
 
@@ -130,7 +133,7 @@ const GroupComponent = () => {
                         <TableRow key={u.id}>
                             <TableCell>{u.name}</TableCell>
 
-                            <TableCell>{u.teacher.username}</TableCell>
+                            <TableCell>{u.teacher!.username}</TableCell>
 
                             <TableCell>
                                 <DropdownMenu>
@@ -187,22 +190,29 @@ const GroupComponent = () => {
                     <FieldGroup>
                         <Field>
                             <Label htmlFor="name-1">Group name</Label>
-                            <Input id="name-1" name="name" onChange={(e) => setSelectedGroup(prev => prev ? { ...prev, name: e.target.value } : prev)} defaultValue={selectedGroup?.name || ""} value={selectedGroup?.name || ""} />
+                            <Input id="name-1" name="name" onChange={(e) => setSelectedGroup(prev => prev ? { ...prev, name: e.target.value } : prev)} value={selectedGroup?.name || ""} />
                         </Field>
                         <Field>
                             <Label htmlFor="email-1">Teacher Name</Label>
-                            <Select>
+                            <Select
+                                value={selectedTeacher?.id || ""}
+                                onValueChange={(val: string) => {
+                                    const teacher = teachers.find(t => t.id === val) || null;
+                                    setSelectedTeacher(teacher);
+                                    setSelectedGroup(prev => prev ? { ...prev, teacher } : prev);
+                                }}
+                            >
                                 <SelectTrigger className="w-full max-w-48">
-                                    <SelectValue placeholder="Select a fruit" />
+                                    <SelectValue placeholder="Select a teacher" />
                                 </SelectTrigger>
                                 <SelectContent>
                                     <SelectGroup>
                                         <SelectLabel>Select a new teacher</SelectLabel>
-                                        <SelectItem value="apple">Apple</SelectItem>
-                                        <SelectItem value="banana">Banana</SelectItem>
-                                        <SelectItem value="blueberry">Blueberry</SelectItem>
-                                        <SelectItem value="grapes">Grapes</SelectItem>
-                                        <SelectItem value="pineapple">Pineapple</SelectItem>
+                                        {teachers.map(t => (
+                                            <SelectItem key={t.id} value={t.id}>
+                                                {t.username}
+                                            </SelectItem>
+                                        ))}
                                     </SelectGroup>
                                 </SelectContent>
                             </Select>
