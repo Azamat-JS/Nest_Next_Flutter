@@ -5,8 +5,8 @@ import { PrismaService } from 'src/prisma/prisma.service';
 @Injectable()
 export class GroupService {
   constructor(private readonly prisma: PrismaService) { }
-  async create(createGroupDto: CreateGroupDto, teacherId: string) {
-    const teacher = await this.prisma.users.findFirst({ where: { id: teacherId, role: 'teacher' } });
+  async create(createGroupDto: CreateGroupDto) {
+    const teacher = await this.prisma.users.findFirst({ where: { id: createGroupDto.teacherId, role: 'teacher' } });
     if (!teacher) {
       throw new NotFoundException('Teacher not found')
     }
@@ -14,7 +14,7 @@ export class GroupService {
       data: {
         name: createGroupDto.name,
         teacher: {
-          connect: { id: teacherId }
+          connect: { id: createGroupDto.teacherId }
         }
       }
     });

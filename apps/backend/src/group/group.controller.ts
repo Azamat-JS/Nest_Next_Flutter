@@ -9,9 +9,8 @@ export class GroupController {
 
   @UseGuards(JwtAuthGuard)
   @Post()
-  create(@Body() createGroupDto: CreateGroupDto, @Req() req) {
-    const teacherId = req.user.userId;
-    return this.groupService.create(createGroupDto, teacherId);
+  create(@Body() createGroupDto: CreateGroupDto) {
+    return this.groupService.create(createGroupDto);
   }
 
   @Get('all')

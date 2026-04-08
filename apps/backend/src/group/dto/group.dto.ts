@@ -4,6 +4,10 @@ export class CreateGroupDto {
     @IsNotEmpty()
     @IsString()
     name!: string;
+
+    @IsNotEmpty()
+    @IsString()
+    teacherId!: string;
 }
 
 export class UpdateGroupDto {

@@ -46,6 +46,7 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 import { TokenPayload } from "@/lib/types/token_payload"
+import { DrawerScrollableContent } from "../Drawer"
 
 const GroupComponent = () => {
     const token = useAuthStore((state) => state.token);
@@ -55,6 +56,7 @@ const GroupComponent = () => {
     const API = process.env.NEXT_PUBLIC_API_URL;
     const [openUpdate, setOpenUpdate] = useState(false);
     const [openDelete, setOpenDelete] = useState(false);
+    const [openCreate, setOpenCreate] = useState(false);
     const [selectedGroup, setSelectedGroup] = useState<GroupType | null>(null);
 
 
@@ -121,10 +123,17 @@ const GroupComponent = () => {
     }
 
     useEffect(() => {
+        if (openCreate && token) {
+            getAllTeachers();
+        }
+    }, [openCreate, token]);
+
+    useEffect(() => {
         if (openUpdate && token) {
             getAllTeachers();
         }
     }, [openUpdate, token]);
+
 
     return (
         <>
@@ -258,7 +267,10 @@ const GroupComponent = () => {
                     </DialogContent>
                 </form>
             </Dialog>
+            <div className="w-full flex justify-end p-5">
 
+                <DrawerScrollableContent openCreate={openCreate} setOpenCreate={setOpenCreate} teachers={teachers} />
+            </div>
         </>
 
     )
