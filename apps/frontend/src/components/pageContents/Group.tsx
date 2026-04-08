@@ -45,10 +45,12 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
+import { TokenPayload } from "@/lib/types/token_payload"
 
 const GroupComponent = () => {
     const token = useAuthStore((state) => state.token);
     const [groups, setGroups] = useState<GroupType[]>([]);
+    const [teachers, setTeachers] = useState<TokenPayload[]>([]);
     const API = process.env.NEXT_PUBLIC_API_URL;
     const [openUpdate, setOpenUpdate] = useState(false);
     const [openDelete, setOpenDelete] = useState(false);
@@ -61,8 +63,6 @@ const GroupComponent = () => {
             if (res.status === 200) {
                 setGroups(res.data);
             }
-            console.log(groups)
-            console.log(token)
         } catch (error: any) {
             toast.error(
                 error.response?.data?.message ?? 'Something went wrong'
@@ -103,6 +103,15 @@ const GroupComponent = () => {
             toast.error(error.response?.data?.message ?? 'Something went wrong')
         }
     }
+
+    const getAllTeachers = async () => {
+        try {
+
+        } catch (error) {
+
+        }
+    }
+
     return (
         <>
             <Table className="mt-5">

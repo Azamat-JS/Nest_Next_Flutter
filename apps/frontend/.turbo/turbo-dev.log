@@ -1,0 +1,131 @@
+
+> frontend@0.1.0 dev /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend
+> next dev -p 4000
+
+[1m[38;2;173;127;168m▲ Next.js 16.2.1[39m[22m (Turbopack)
+- Local:         http://localhost:4000
+- Network:       http://192.168.13.92:4000
+- Environments: .env.local
+[32m[1m✓[22m[39m Ready in 277ms
+[33m[1m⚠[22m[39m Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /Users/azamatabdullayev/Desktop/full-stack-turbo/pnpm-workspace.yaml as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend/pnpm-workspace.yaml
+
+
+ GET / [32m200[39m in 309ms[2m (next.js: 114ms, application-code: 195ms)[22m
+[36m[browser][39m In HTML, <button> cannot be a descendant of <button>.
+This will cause a hydration error.
+
+  ...
+    <table data-slot="table" className="w-full cap...">
+      <TableCaption>
+      <TableHeader>
+      <TableBody>
+        <tbody data-slot="table-body" className={"[&_tr:la..."}>
+          <TableRow>
+            <tr data-slot="table-row" className="border-b t...">
+              <TableCell>
+              <TableCell>
+              <TableCell className="">
+                <td data-slot="table-cell" className={"p-2 alig..."}>
+                  <DropdownMenu>
+                    <MenuRoot data-slot="dropdown-menu">
+                      <FloatingTree externalTree={{nodesRef:{...}, ...}}>
+                        <DropdownMenuTrigger>
+                          <MenuTrigger data-slot="dropdown-m...">
+>                           <button
+>                             type="button"
+>                             onClick={function onClick}
+>                             onMouseDown={function onMouseDown}
+>                             onKeyDown={function}
+>                             onKeyUp={function onKeyUp}
+>                             onPointerDown={function onPointerDown}
+>                             tabIndex={0}
+>                             disabled={false}
+>                             aria-haspopup="menu"
+>                             id="base-ui-_r_8_"
+>                             data-slot="dropdown-menu-trigger"
+>                             ref={function}
+>                           >
+                              <Button variant="outline">
+                                <Button data-slot="button" className={"group/bu..."}>
+>                                 <button
+>                                   type="button"
+>                                   onClick={function onClick}
+>                                   onMouseDown={function onMouseDown}
+>                                   onKeyDown={function}
+>                                   onKeyUp={function onKeyUp}
+>                                   onPointerDown={function onPointerDown}
+>                                   tabIndex={0}
+>                                   disabled={false}
+>                                   data-slot="button"
+>                                   ref={function}
+>                                   className={"group/button inline-flex shrink-0 items-center justify-center rounded..."}
+>                                 >
+                        ...
+          ...
+      ...
+ 
+[36m[browser][39m <button> cannot contain a nested <button>.
+See this log for the ancestor stack trace. 
+ GET /groups [32m200[39m in 48ms[2m (next.js: 30ms, application-code: 18ms)[22m
+[33m[1m⚠[22m[39m Fast Refresh had to perform a full reload due to a runtime error.
+[32m[1m✓[22m[39m Compiled in 370ms
+[31m[1m⨯[22m[39m ReferenceError: Select is not defined
+    at GroupComponent (src/components/pageContents/Group.tsx:178:30)
+  [90m176 |[0m                         <[33mField[0m>
+  [90m177 |[0m                             <[33mLabel[0m htmlFor=[32m"email-1"[0m>[33mTeacher[0m [33mName[0m</[33mLabel[0m>
+[31m[1m>[0m [90m178 |[0m                             <[33mSelect[0m>
+  [90m    |[0m                              [31m[1m^[0m
+  [90m179 |[0m                                 <[33mSelectTrigger[0m className=[32m"w-full max-w-48"[0m>
+  [90m180 |[0m                                     <[33mSelectValue[0m placeholder=[32m"Select a fruit"[0m />
+  [90m181 |[0m                                 </[33mSelectTrigger[0m> {
+  digest: [32m'1693130999'[39m
+}
+ GET /groups [31m500[39m in 87ms[2m (next.js: 9ms, application-code: 77ms)[22m
+[33m[1m⚠[22m[39m Fast Refresh had to perform a full reload due to a runtime error.
+[31m[1m⨯[22m[39m ReferenceError: Select is not defined
+    at GroupComponent (src/components/pageContents/Group.tsx:178:30)
+  [90m176 |[0m                         <[33mField[0m>
+  [90m177 |[0m                             <[33mLabel[0m htmlFor=[32m"email-1"[0m>[33mTeacher[0m [33mName[0m</[33mLabel[0m>
+[31m[1m>[0m [90m178 |[0m                             <[33mSelect[0m>
+  [90m    |[0m                              [31m[1m^[0m
+  [90m179 |[0m                                 <[33mSelectTrigger[0m className=[32m"w-full max-w-48"[0m>
+  [90m180 |[0m                                     <[33mSelectValue[0m placeholder=[32m"Select a fruit"[0m />
+  [90m181 |[0m                                 </[33mSelectTrigger[0m> {
+  digest: [32m'1693130999'[39m
+}
+[32m[1m✓[22m[39m Compiled in 112ms
+ GET /groups [31m500[39m in 34ms[2m (next.js: 3ms, application-code: 31ms)[22m
+[32m[1m✓[22m[39m Compiled in 365ms
+[33m[1m⚠[22m[39m Fast Refresh had to perform a full reload due to a runtime error.
+ GET /groups [32m200[39m in 186ms[2m (next.js: 49ms, application-code: 137ms)[22m
+[32m[1m✓[22m[39m Compiled in 17ms
+[32m[1m✓[22m[39m Compiled in 24ms
+[36m[browser][39m In HTML, <button> cannot be a descendant of <button>.
+This will cause a hydration error.
+
+  ...
+    <table data-slot="table" className="w-full cap...">
+      <TableCaption>
+      <TableHeader>
+      <TableBody>
+        <tbody data-slot="table-body" className={"[&_tr:la..."}>
+          <TableRow>
+            <tr data-slot="table-row" className="border-b t...">
+              <TableCell>
+              <TableCell>
+              <TableCell>
+                <td data-slot="table-cell" className={"p-2 alig..."}>
+                  <DropdownMenu>
+                    <MenuRoot data-slot="dropdown-menu">
+                      <FloatingTree externalTree={{nodesRef:{...}, ...}}>
+                        <DropdownMenuTrigger>
+                          <MenuTrigger data-slot="dropdown-m...">
+>                           <button
+>                             type="button"
+>                             onClick={function onClick}
+>                             onMouseDown={function onMous
