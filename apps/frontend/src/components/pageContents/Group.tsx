@@ -78,20 +78,26 @@ const GroupComponent = () => {
         }
     }, [token]);
 
-    const handleUpdateUser = async (group: GroupType) => {
+    const handleUpdateGroup = async (group: GroupType) => {
         try {
-            const res = await axios.put(`${API}/group/${group.id}`, group, { headers: { Authorization: `Bearer ${token}` } });
-            console.log(group.id)
+            const res = await axios.put(
+                `${API}/group/${group.id}`,
+                {
+                    name: group.name,
+                    teacherId: selectedTeacher!.id
+                },
+                { headers: { Authorization: `Bearer ${token}` } }
+            );
+
             if (res.status === 200) {
-                toast.success('Group data updated!')
+                toast.success('Group data updated!');
                 setOpenUpdate(false);
                 await getGroups();
             }
-            return null;
         } catch (error: any) {
-            toast.error(error.response?.data?.message ?? 'Something went wrong')
+            toast.error(error.response?.data?.message ?? 'Something went wrong');
         }
-    }
+    };
 
     const handleDeleteGroup = async (groupId: string) => {
         try {
@@ -114,6 +120,12 @@ const GroupComponent = () => {
             toast.error(error.response?.data?.message ?? 'Something went wrong')
         }
     }
+
+    useEffect(() => {
+        if (openUpdate && token) {
+            getAllTeachers();
+        }
+    }, [openUpdate, token]);
 
     return (
         <>
@@ -200,12 +212,13 @@ const GroupComponent = () => {
                                     const teacher = teachers.find(t => t.id === val) || null;
                                     setSelectedTeacher(teacher);
                                     setSelectedGroup(prev => prev ? { ...prev, teacher } : prev);
+
                                 }}
                             >
                                 <SelectTrigger className="w-full max-w-48">
                                     <SelectValue placeholder="Select a teacher" />
                                 </SelectTrigger>
-                                <SelectContent>
+                                <SelectContent position="popper">
                                     <SelectGroup>
                                         <SelectLabel>Select a new teacher</SelectLabel>
                                         {teachers.map(t => (
@@ -222,7 +235,7 @@ const GroupComponent = () => {
                         <DialogClose>
                             Cancel
                         </DialogClose>
-                        <Button type="submit" onClick={() => selectedGroup && handleUpdateUser(selectedGroup)}>Update</Button>
+                        <Button type="submit" onClick={() => selectedGroup && handleUpdateGroup(selectedGroup)}>Update</Button>
                     </DialogFooter>
                 </DialogContent>
             </Dialog>

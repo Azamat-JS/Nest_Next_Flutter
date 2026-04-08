@@ -62918,4 +62918,149 @@ This will cause a hydration error.
                     <Primitive.div asChild={true} ref={function}>
                       <Primitive.div.Slot ref={function}>
                         <Primitive.div.SlotClone ref={function}>
-                          <Primitive.button type="button" id="radix-_r_0_" a
+                          <Primitive.button type="button" id="radix-_r_0_" aria-haspopup="menu" aria-expanded={false} ...>
+>                           <button
+>                             type="button"
+>                             id="radix-_r_0_"
+>                             aria-haspopup="menu"
+>                             aria-expanded={false}
+>                             aria-controls={undefined}
+>                             data-state="closed"
+>                             data-disabled={undefined}
+>                             disabled={false}
+>                             data-slot="dropdown-menu-trigger"
+>                             onPointerDown={function handleEvent}
+>                             onKeyDown={function handleEvent}
+>                             ref={function}
+>                           >
+                              <Button variant="outline">
+>                               <button
+>                                 data-slot="button"
+>                                 data-variant="outline"
+>                                 data-size="default"
+>                                 className={"group/button inline-flex shrink-0 items-center justify-center rounded-4..."}
+>                               >
+            ...
+ 
+[36m[browser][39m <button> cannot contain a nested <button>.
+See this log for the ancestor stack trace. 
+ GET /groups [32m200[39m in 26ms[2m (next.js: 7ms, application-code: 19ms)[22m
+ GET /groups [32m200[39m in 29ms[2m (next.js: 2ms, application-code: 27ms)[22m
+ GET /home [32m200[39m in 26ms[2m (next.js: 3ms, application-code: 23ms)[22m
+[36m[browser][39m In HTML, <button> cannot be a descendant of <button>.
+This will cause a hydration error.
+
+  ...
+    <Popper __scopePopper={{Menu:[...], ...}}>
+      <PopperProvider scope={{Menu:[...], ...}} anchor={null} onAnchorChange={function bound dispatchSetState}>
+        <MenuProvider scope={{Menu:[...], ...}} open={false} onOpenChange={function useCallbackRef.useMemo} ...>
+          <MenuProvider scope={{Menu:[...], ...}} onClose={function Menu.useCallback} ...>
+            <DropdownMenuTrigger>
+              <DropdownMenuTrigger data-slot="dropdown-m...">
+                <MenuAnchor asChild={true} __scopeMenu={{Menu:[...], ...}}>
+                  <PopperAnchor __scopePopper={{Menu:[...], ...}} asChild={true} ref={null}>
+                    <Primitive.div asChild={true} ref={function}>
+                      <Primitive.div.Slot ref={function}>
+                        <Primitive.div.SlotClone ref={function}>
+                          <Primitive.button type="button" id="radix-_r_r_" aria-haspopup="menu" aria-expanded={false} ...>
+>                           <button
+>                             type="button"
+>                             id="radix-_r_r_"
+>                             aria-haspopup="menu"
+>                             aria-expanded={false}
+>                             aria-controls={undefined}
+>                             data-state="closed"
+>                             data-disabled={undefined}
+>                             disabled={false}
+>                             data-slot="dropdown-menu-trigger"
+>                             onPointerDown={function handleEvent}
+>                             onKeyDown={function handleEvent}
+>                             ref={function}
+>                           >
+                              <Button variant="outline">
+>                               <button
+>                                 data-slot="button"
+>                                 data-variant="outline"
+>                                 data-size="default"
+>                                 className={"group/button inline-flex shrink-0 items-center justify-center rounded-4..."}
+>                               >
+            ...
+ 
+[36m[browser][39m <button> cannot contain a nested <button>.
+See this log for the ancestor stack trace. 
+[32m[1m✓[22m[39m Compiled in 23ms
+[1mnull[22m
+ GET /home [32m200[39m in 46ms[2m (next.js: 7ms, application-code: 40ms)[22m
+ GET /profile [32m200[39m in 42ms[2m (next.js: 23ms, application-code: 19ms)[22m
+ GET / [32m200[39m in 24ms[2m (next.js: 15ms, application-code: 9ms)[22m
+ GET /groups [32m200[39m in 20ms[2m (next.js: 4ms, application-code: 16ms)[22m
+ GET /home [32m200[39m in 28ms[2m (next.js: 5ms, application-code: 23ms)[22m
+ GET /groups [32m200[39m in 28ms[2m (next.js: 4ms, application-code: 24ms)[22m
+[32m[1m✓[22m[39m Compiled in 28ms
+[32m[1m✓[22m[39m Compiled in 19ms
+[32m[1m✓[22m[39m Compiled in 21ms
+[32m[1m✓[22m[39m Compiled in 185ms
+ GET /groups [32m200[39m in 252ms[2m (next.js: 54ms, application-code: 198ms)[22m
+ GET /groups [32m200[39m in 152ms[2m (next.js: 142ms, application-code: 10ms)[22m
+ GET /groups [32m200[39m in 9ms[2m (next.js: 968µs, application-code: 8ms)[22m
+ GET /groups [32m200[39m in 164ms[2m (next.js: 3ms, application-code: 160ms)[22m
+[32m[1m✓[22m[39m Compiled in 23ms
+ GET /profile [32m200[39m in 43ms[2m (next.js: 25ms, application-code: 18ms)[22m
+ GET / [32m200[39m in 42ms[2m (next.js: 23ms, application-code: 19ms)[22m
+[32m[1m✓[22m[39m Compiled in 24ms
+[32m[1m✓[22m[39m Compiled in 154ms
+[32m[1m✓[22m[39m Compiled in 17ms
+[32m[1m✓[22m[39m Compiled in 325ms
+[36m[browser][39m A component is changing an uncontrolled input to be controlled. This is likely caused by the value changing from undefined to a defined value, which should not happen. Decide between using a controlled or uncontrolled input element for the lifetime of the component. More info: https://react.dev/link/controlled-components 
+ GET /home [32m200[39m in 22ms[2m (next.js: 11ms, application-code: 11ms)[22m
+ GET /profile [32m200[39m in 30ms[2m (next.js: 9ms, application-code: 21ms)[22m
+ GET /home [32m200[39m in 29ms[2m (next.js: 3ms, application-code: 25ms)[22m
+[1mnull[22m
+ GET /home [32m200[39m in 58ms[2m (next.js: 3ms, application-code: 55ms)[22m
+ GET / [32m200[39m in 23ms[2m (next.js: 8ms, application-code: 15ms)[22m
+[32m[1m✓[22m[39m Compiled in 25ms
+ GET / [32m200[39m in 26ms[2m (next.js: 11ms, application-code: 15ms)[22m
+ GET /home [32m200[39m in 14ms[2m (next.js: 3ms, application-code: 11ms)[22m
+ GET /groups [32m200[39m in 32ms[2m (next.js: 10ms, application-code: 22ms)[22m
+[32m[1m✓[22m[39m Compiled in 23ms
+ GET /groups [32m200[39m in 50ms[2m (next.js: 9ms, application-code: 41ms)[22m
+[32m[1m✓[22m[39m Compiled in 23ms
+[31m[1m⨯[22m[39m ./apps/frontend/src/components/pageContents/Group.tsx:120:5
+Expression expected
+  [90m118 |[0m     useEffect(() => {
+  [90m119 |[0m         [36mif[0m (openUpdate)
+[31m[1m>[0m [90m120 |[0m     })
+  [90m    |[0m     [31m[1m^[0m
+  [90m121 |[0m
+  [90m122 |[0m     [36mreturn[0m (
+  [90m123 |[0m         <>
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./apps/frontend/src/components/pageContents/Group.tsx
+    ./apps/frontend/src/app/(pages)/groups/page.tsx
+
+
+ GET /groups [31m500[39m in 11ms[2m (next.js: 6ms, application-code: 5ms)[22m
+[31m[1m⨯[22m[39m ./apps/frontend/src/components/pageContents/Group.tsx:120:5
+Expression expected
+  [90m118 |[0m     useEffect(() => {
+  [90m119 |[0m         [36mif[0m (openUpdate)
+[31m[1m>[0m [90m120 |[0m     })
+  [90m    |[0m     [31m[1m^[0m
+  [90m121 |[0m
+  [90m122 |[0m     [36mreturn[0m (
+  [90m123 |[0m         <>
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./apps/frontend/src/components/pageContents/Group.tsx
+    ./apps/frontend/src/app/(pages)/groups/page.tsx
+
+
+ GET /groups [31m500[39m in 7ms[2m (next.js: 2ms, application-code: 4ms)[22m
+[32m[1m✓[22m[39m Compiled in 30ms
