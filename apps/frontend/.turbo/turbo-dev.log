@@ -1,0 +1,91 @@
+
+> frontend@0.1.0 dev /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend
+> next dev -p 4000
+
+[1m[38;2;173;127;168m▲ Next.js 16.2.1[39m[22m (Turbopack)
+- Local:         http://localhost:4000
+- Network:       http://192.168.13.92:4000
+- Environments: .env.local
+[32m[1m✓[22m[39m Ready in 261ms
+[33m[1m⚠[22m[39m Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /Users/azamatabdullayev/Desktop/full-stack-turbo/pnpm-workspace.yaml as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend/pnpm-workspace.yaml
+
+
+ GET /groups [32m200[39m in 254ms[2m (next.js: 103ms, application-code: 151ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[32m[1m✓[22m[39m Compiled in 27ms
+[36m[browser][39m The final argument passed to useEffect changed size between renders. The order and size of this array must remain constant.
+
+Previous: [false, eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbW5wejVpZGgwMDAwYzd2MnQxcGNxaDQ1IiwiZW1haWwiOiJqYXN1ckBnbWFpbC5jb20iLCJ1c2VybmFtZSI6Ikphc3VyIiwicm9sZSI6InN0dWRlbnQiLCJpYXQiOjE3NzU2NDg1MDgsImV4cCI6MTc3NTk0ODUwOH0.8Xls2VSrNbdZjvdJQDlb0G5JyjMhJNngwgtz81HMCtY]
+Incoming: [false, eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbW5wejVpZGgwMDAwYzd2MnQxcGNxaDQ1IiwiZW1haWwiOiJqYXN1ckBnbWFpbC5jb20iLCJ1c2VybmFtZSI6Ikphc3VyIiwicm9sZSI6InN0dWRlbnQiLCJpYXQiOjE3NzU2NDg1MDgsImV4cCI6MTc3NTk0ODUwOH0.8Xls2VSrNbdZjvdJQDlb0G5JyjMhJNngwgtz81HMCtY, true] 
+[31m    at GroupComponent (src/components/pageContents/Group.tsx:125:14)
+    at Set.forEach (<anonymous>)[39m
+  [90m123 |[0m     }
+  [90m124 |[0m
+[31m[1m>[0m [90m125 |[0m     useEffect(() => {
+  [90m    |[0m              [31m[1m^[0m
+  [90m126 |[0m         [36mif[0m (openUpdate && token) {
+  [90m127 |[0m             getAllTeachers();
+  [90m128 |[0m         } [2m(src/components/pageContents/Group.tsx:125:14)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m The final argument passed to useEffect changed size between renders. The order and size of this array must remain constant.
+
+Previous: [false, eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbW5wejVpZGgwMDAwYzd2MnQxcGNxaDQ1IiwiZW1haWwiOiJqYXN1ckBnbWFpbC5jb20iLCJ1c2VybmFtZSI6Ikphc3VyIiwicm9sZSI6InN0dWRlbnQiLCJpYXQiOjE3NzU2NDg1MDgsImV4cCI6MTc3NTk0ODUwOH0.8Xls2VSrNbdZjvdJQDlb0G5JyjMhJNngwgtz81HMCtY, true]
+Incoming: [false, eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbW5wejVpZGgwMDAwYzd2MnQxcGNxaDQ1IiwiZW1haWwiOiJqYXN1ckBnbWFpbC5jb20iLCJ1c2VybmFtZSI6Ikphc3VyIiwicm9sZSI6InN0dWRlbnQiLCJpYXQiOjE3NzU2NDg1MDgsImV4cCI6MTc3NTk0ODUwOH0.8Xls2VSrNbdZjvdJQDlb0G5JyjMhJNngwgtz81HMCtY] 
+[31m    at GroupComponent (src/components/pageContents/Group.tsx:125:14)
+    at Set.forEach (<anonymous>)[39m
+  [90m123 |[0m     }
+  [90m124 |[0m
+[31m[1m>[0m [90m125 |[0m     useEffect(() => {
+  [90m    |[0m              [31m[1m^[0m
+  [90m126 |[0m         [36mif[0m (openUpdate && token) {
+  [90m127 |[0m             getAllTeachers();
+  [90m128 |[0m         } [2m(src/components/pageContents/Group.tsx:125:14)[22m
+[32m[1m✓[22m[39m Compiled in 22ms
+ GET /groups [32m200[39m in 45ms[2m (next.js: 9ms, application-code: 37ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[32m[1m✓[22m[39m Compiled in 19ms
+[32m[1m✓[22m[39m Compiled in 18ms
+[32m[1m✓[22m[39m Compiled in 103ms
+ GET /groups [32m200[39m in 60ms[2m (next.js: 11ms, application-code: 49ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[32m[1m✓[22m[39m Compiled in 19ms
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[32m[1m✓[22m[39m Compiled in 18ms
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[32m[1m✓[22m[39m Compiled in 20ms
+[32m[1m✓[22m[39m Compiled in 16ms
+[32m[1m✓[22m[39m Compiled in 20ms
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[32m[1m✓[22m[39m Compiled in 16ms
+[32m[1m✓[22m[39m Compiled in 21ms
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+ GET /groups [32m200[39m in 53ms[2m (next.js: 9ms, application-code: 44ms)[22m
+[32m[1m✓[22m[39m Compiled in 19ms
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[32m[1m✓[22m[39m Compiled in 18ms
+[32m[1m✓[22m[39m Compiled in 126ms
+[32m[1m✓[22m[39m Compiled in 103ms
+[32m[1m✓[22m[39m Compiled in 47ms
+ GET /groups [32m200[39m in 23ms[2m (next.js: 4ms, application-code: 19ms)[22m

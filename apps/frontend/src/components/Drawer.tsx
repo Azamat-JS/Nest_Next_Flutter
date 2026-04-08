@@ -35,7 +35,7 @@ import { useState, useEffect } from 'react'
 import { Label } from "./ui/label"
 import { TokenPayload } from "@/lib/types/token_payload"
 
-export function DrawerScrollableContent({ openCreate, setOpenCreate, teachers }: { openCreate: boolean, setOpenCreate: any, teachers: TokenPayload[] }) {
+export function DrawerScrollableContent({ openCreate, setOpenCreate, teachers, onGroupCreated }: { openCreate: boolean, setOpenCreate: any, teachers: TokenPayload[], onGroupCreated: () => void }) {
     const [selectedTeacher, setSelectedTeacher] = useState<TokenPayload | null>(null);
     const API = process.env.NEXT_PUBLIC_API_URL;
     const token = useAuthStore((state) => state.token);
@@ -56,6 +56,8 @@ export function DrawerScrollableContent({ openCreate, setOpenCreate, teachers }:
             try {
                 await axios.post(`${API}/group`, value, { headers: { Authorization: `Bearer ${token}` } })
                 setOpenCreate(false)
+                toast.success('A new group created!')
+                onGroupCreated();
             } catch (error: any) {
                 toast.error(
                     error.response?.data?.message ?? 'Something went wrong'

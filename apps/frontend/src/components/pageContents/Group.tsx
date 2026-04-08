@@ -269,7 +269,7 @@ const GroupComponent = () => {
             </Dialog>
             <div className="w-full flex justify-end p-5">
 
-                <DrawerScrollableContent openCreate={openCreate} setOpenCreate={setOpenCreate} teachers={teachers} />
+                <DrawerScrollableContent openCreate={openCreate} setOpenCreate={setOpenCreate} teachers={teachers} onGroupCreated={getGroups} />
             </div>
         </>
 
