@@ -1,6 +1,6 @@
 import GroupComponent from "@/components/pageContents/Group"
 
-const GroupsPage = () => {
+const GroupsPage = async () => {
     return <GroupComponent />
 }
 
