@@ -41,7 +41,6 @@ import { Label } from "@/components/ui/label"
 const Home = () => {
     const token = useAuthStore((state) => state.token);
     const [users, setUsers] = useState<TokenPayload[]>([]);
-    const [count, setCount] = useState<number>(0)
     const user = token ? jwtDecode<TokenPayload>(token) : null;
     const API = process.env.NEXT_PUBLIC_API_URL;
     const [openUpdate, setOpenUpdate] = useState(false);
@@ -103,11 +102,11 @@ const Home = () => {
                 <TableCaption>A list of all users.</TableCaption>
                 <TableHeader>
                     <TableRow key={user?.id}>
-                        <TableHead className="w-12 text-center">&#8470;</TableHead>
-                        <TableHead className="w-48 text-center">Username</TableHead>
-                        <TableHead className="w-72 text-center">Email</TableHead>
-                        <TableHead className="w-72 text-center">Role</TableHead>
-                        <TableHead className="w-24 text-center">Actions</TableHead>
+                        <TableHead className="w-12 text-center text-lg font-bold">&#8470;</TableHead>
+                        <TableHead className="w-48 text-center text-lg font-bold">Username</TableHead>
+                        <TableHead className="w-72 text-center text-lg font-bold">Email</TableHead>
+                        <TableHead className="w-72 text-center text-lg font-bold">Role</TableHead>
+                        <TableHead className="w-24 text-center text-lg font-bold">Actions</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody key={user?.email}>
@@ -167,7 +166,7 @@ const Home = () => {
                             <Input id="username-1" name="email" onChange={(e) => setSelectedUser(prev => prev ? { ...prev, email: e.target.value } : prev)} value={selectedUser?.email} />
                         </Field>
                         <Field>
-                            <Label htmlFor="role-1">Email</Label>
+                            <Label htmlFor="role-1">Role</Label>
                             <Input id="username-1" name="role" onChange={(e) => setSelectedUser(prev => prev ? { ...prev, role: e.target.value } : prev)} value={selectedUser?.role || ""} />
                         </Field>
                     </FieldGroup>

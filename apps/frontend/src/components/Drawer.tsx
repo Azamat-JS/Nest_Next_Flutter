@@ -116,7 +116,7 @@ export function GroupDrawer({ openCreate, setOpenCreate, teachers, onGroupCreate
                                 name="teacherId"
                                 children={(field) => (
                                     <Field>
-                                        <Label>Teacher Name</Label>
+                                        <Label>Teacher</Label>
                                         <Select
                                             value={selectedTeacher?.id || ""}
                                             onValueChange={(val: string) => {
