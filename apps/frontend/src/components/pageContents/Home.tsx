@@ -106,6 +106,7 @@ const Home = () => {
                         <TableHead className="w-12 text-center">&#8470;</TableHead>
                         <TableHead className="w-48 text-center">Username</TableHead>
                         <TableHead className="w-72 text-center">Email</TableHead>
+                        <TableHead className="w-72 text-center">Role</TableHead>
                         <TableHead className="w-24 text-center">Actions</TableHead>
                     </TableRow>
                 </TableHeader>
@@ -120,6 +121,9 @@ const Home = () => {
                             </TableCell>
                             <TableCell className={user?.username === u.username ? "font-medium text-center bg-green-300 text-green-600" : "text-center"}>
                                 {u.email}
+                            </TableCell>
+                            <TableCell className={user?.username === u.username ? "font-medium text-center bg-green-300 text-green-600" : "text-center"}>
+                                {u.role}
                             </TableCell>
                             <TableCell className={user?.username === u.username ? "font-medium text-center bg-green-300 text-green-600" : "text-center"}>
                                 <DropdownMenu>
@@ -160,7 +164,11 @@ const Home = () => {
                         </Field>
                         <Field>
                             <Label htmlFor="email-1">Email</Label>
-                            <Input id="username-1" name="username" onChange={(e) => setSelectedUser(prev => prev ? { ...prev, email: e.target.value } : prev)} value={selectedUser?.email} />
+                            <Input id="username-1" name="email" onChange={(e) => setSelectedUser(prev => prev ? { ...prev, email: e.target.value } : prev)} value={selectedUser?.email} />
+                        </Field>
+                        <Field>
+                            <Label htmlFor="role-1">Email</Label>
+                            <Input id="username-1" name="role" onChange={(e) => setSelectedUser(prev => prev ? { ...prev, role: e.target.value } : prev)} value={selectedUser?.role || ""} />
                         </Field>
                     </FieldGroup>
                     <DialogFooter>

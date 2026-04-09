@@ -3,6 +3,7 @@ export type TokenPayload = {
     email: string;
     username: string;
     password?: string | null;
+    role?: string | null;
 }
 
 

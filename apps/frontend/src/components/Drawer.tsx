@@ -31,11 +31,11 @@ import {
 } from "@/components/ui/select"
 import axios from "axios"
 import { useAuthStore } from "@/lib/stores/authStore"
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Label } from "./ui/label"
 import { TokenPayload } from "@/lib/types/token_payload"
 
-export function DrawerScrollableContent({ openCreate, setOpenCreate, teachers, onGroupCreated }: { openCreate: boolean, setOpenCreate: any, teachers: TokenPayload[], onGroupCreated: () => void }) {
+export function GroupDrawer({ openCreate, setOpenCreate, teachers, onGroupCreated }: { openCreate: boolean, setOpenCreate: any, teachers: TokenPayload[], onGroupCreated: () => void }) {
     const [selectedTeacher, setSelectedTeacher] = useState<TokenPayload | null>(null);
     const API = process.env.NEXT_PUBLIC_API_URL;
     const token = useAuthStore((state) => state.token);

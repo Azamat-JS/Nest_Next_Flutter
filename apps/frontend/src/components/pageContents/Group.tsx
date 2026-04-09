@@ -5,7 +5,6 @@ import {
     TableBody,
     TableCaption,
     TableCell,
-    TableFooter,
     TableHead,
     TableHeader,
     TableRow,
@@ -46,7 +45,7 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 import { TokenPayload } from "@/lib/types/token_payload"
-import { DrawerScrollableContent } from "../Drawer"
+import { GroupDrawer } from "../Drawer"
 
 const GroupComponent = () => {
     const token = useAuthStore((state) => state.token);
@@ -136,29 +135,31 @@ const GroupComponent = () => {
 
 
     return (
-        <>
+        <div className="mt-5">
             <Table className="mt-5">
                 <TableCaption>A list of all groups.</TableCaption>
 
                 <TableHeader>
                     <TableRow>
-                        <TableHead className="w-25">Group Name</TableHead>
-                        <TableHead>Teacher Name</TableHead>
-                        <TableHead>Actions</TableHead>
+                        <TableHead className="w-12 text-center text-lg font-bold">&#8470;</TableHead>
+                        <TableHead className="w-48 text-center text-lg font-bold">Group Name</TableHead>
+                        <TableHead className="w-72 text-center text-lg font-bold">Teacher Name</TableHead>
+                        <TableHead className="w-24 text-start font-bold  text-lg">Actions</TableHead>
                     </TableRow>
                 </TableHeader>
 
                 <TableBody>
-                    {groups.map((u) => (
+                    {groups.map((u, idx) => (
                         <TableRow key={u.id}>
-                            <TableCell>{u.name}</TableCell>
+                            <TableCell className="text-center">{idx + 1}</TableCell>
+                            <TableCell className="text-center">{u.name}</TableCell>
 
-                            <TableCell>{u.teacher!.username}</TableCell>
+                            <TableCell className="text-center">{u.teacher!.username}</TableCell>
 
                             <TableCell>
                                 <DropdownMenu>
                                     <DropdownMenuTrigger asChild>
-                                        <Menu />
+                                        <Menu className="w-5 h-5" />
                                     </DropdownMenuTrigger>
 
                                     <DropdownMenuContent align="start">
@@ -189,12 +190,6 @@ const GroupComponent = () => {
                     ))}
                 </TableBody>
 
-                <TableFooter>
-                    <TableRow>
-                        <TableCell colSpan={2}>Total</TableCell>
-                        <TableCell className="text-right">{groups.length}</TableCell>
-                    </TableRow>
-                </TableFooter>
             </Table>
 
             {/* update group modal */}
@@ -269,9 +264,9 @@ const GroupComponent = () => {
             </Dialog>
             <div className="w-full flex justify-end p-5">
 
-                <DrawerScrollableContent openCreate={openCreate} setOpenCreate={setOpenCreate} teachers={teachers} onGroupCreated={getGroups} />
+                <GroupDrawer openCreate={openCreate} setOpenCreate={setOpenCreate} teachers={teachers} onGroupCreated={getGroups} />
             </div>
-        </>
+        </div>
 
     )
 }
