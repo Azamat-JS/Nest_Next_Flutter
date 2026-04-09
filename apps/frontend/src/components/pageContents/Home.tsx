@@ -24,7 +24,7 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Edit, List, Menu, Trash } from "lucide-react"
+import { Edit, Menu, Trash } from "lucide-react"
 import {
     Dialog,
     DialogClose,
@@ -46,7 +46,6 @@ const Home = () => {
     const [openUpdate, setOpenUpdate] = useState(false);
     const [openDelete, setOpenDelete] = useState(false);
     const [selectedUser, setSelectedUser] = useState<TokenPayload | null>(null);
-
 
     const getUsers = async () => {
         try {

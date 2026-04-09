@@ -35,6 +35,11 @@ export class UsersController {
     return this.usersService.getAllTeachers();
   }
 
+  @Get('students')
+  async getAllStudents() {
+    return this.usersService.getAllStudents();
+  }
+
   @Get(':id')
   async getUserById(@Param('id') id: string) {
     return this.usersService.getUserById(id);

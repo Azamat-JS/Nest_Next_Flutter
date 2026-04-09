@@ -121,6 +121,8 @@ const GroupComponent = () => {
         }
     }
 
+    const getAllStudents = async () => { }
+
     useEffect(() => {
         if (openCreate && token) {
             getAllTeachers();
