@@ -39,11 +39,13 @@ export class GroupService {
         createdAt: true,
         teacher: {
           select: {
+            id: true,
             username: true
           }
         },
         students: {
           select: {
+            id: true,
             username: true,
             email: true
           }
@@ -62,11 +64,13 @@ export class GroupService {
         createdAt: true,
         teacher: {
           select: {
+            id: true,
             username: true,
           }
         },
         students: {
           select: {
+            id: true,
             username: true,
             email: true
           }

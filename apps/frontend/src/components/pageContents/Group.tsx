@@ -134,6 +134,16 @@ const GroupComponent = () => {
     }
 
     useEffect(() => {
+        if (selectedGroup && students.length > 0) {
+            setSelectedStudentIds(
+                (selectedGroup.students || [])
+                    .map((s) => s.id)
+                    .filter((id): id is string => Boolean(id))
+            );
+        }
+    }, [selectedGroup, students]);
+
+    useEffect(() => {
         if (openCreate && token) {
             getAllTeachers();
             getAllStudents();
@@ -182,7 +192,6 @@ const GroupComponent = () => {
                                                 onClick={() => {
                                                     setSelectedGroup(u);
                                                     setSelectedTeacher(u.teacher ?? null);
-                                                    setSelectedStudentIds((u.students || []).map((s) => s.id).filter((id): id is string => Boolean(id)));
                                                     setOpenUpdate(true);
                                                 }}
                                             >
@@ -253,36 +262,35 @@ const GroupComponent = () => {
                             <Label>Students</Label>
 
                             <div className="max-h-48 overflow-y-auto border rounded-md p-3 space-y-2">
-                                {students.map((student) => {
+                                {students.map((student, idx) => {
                                     const checked = selectedStudentIds.includes(student.id);
 
                                     return (
-                                        <React.Fragment key={student.id}>
 
+                                        <label
+                                            key={student.id ?? `student-${idx}`}
+                                            className="flex items-center gap-2 cursor-pointer"
+                                        >
+                                            <input
+                                                type="checkbox"
+                                                checked={checked}
+                                                onChange={(e) => {
+                                                    if (!student.id) return;
+                                                    if (e.target.checked) {
+                                                        setSelectedStudentIds((prev) => [
+                                                            ...prev,
+                                                            student.id,
+                                                        ]);
+                                                    } else {
+                                                        setSelectedStudentIds((prev) =>
+                                                            prev.filter((id) => id !== student.id)
+                                                        );
+                                                    }
+                                                }}
+                                            />
 
-                                            <label
-                                                className="flex items-center gap-2 cursor-pointer"
-                                            >
-                                                <input
-                                                    type="checkbox"
-                                                    checked={checked}
-                                                    onChange={(e) => {
-                                                        if (e.target.checked) {
-                                                            setSelectedStudentIds((prev) => [
-                                                                ...prev,
-                                                                student.id,
-                                                            ]);
-                                                        } else {
-                                                            setSelectedStudentIds((prev) =>
-                                                                prev.filter((id) => id !== student.id)
-                                                            );
-                                                        }
-                                                    }}
-                                                />
-
-                                                <span>{student.username}</span>
-                                            </label>
-                                        </React.Fragment>
+                                            <span>{student.username}</span>
+                                        </label>
                                     );
                                 })}
                             </div>

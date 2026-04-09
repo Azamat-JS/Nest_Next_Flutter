@@ -131,3 +131,124 @@ Import trace:
 [32m[1m✓[22m[39m Compiled in 17ms
 [36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
 [36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[32m[1m✓[22m[39m Compiled in 17ms
+[32m[1m✓[22m[39m Compiled in 19ms
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[32m[1m✓[22m[39m Compiled in 19ms
+[32m[1m✓[22m[39m Compiled in 98ms
+[32m[1m✓[22m[39m Compiled in 21ms
+[32m[1m✓[22m[39m Compiled in 19ms
+[32m[1m✓[22m[39m Compiled in 19ms
+[32m[1m✓[22m[39m Compiled in 20ms
+[32m[1m✓[22m[39m Compiled in 21ms
+[32m[1m✓[22m[39m Compiled in 57ms
+ GET /groups [32m200[39m in 21ms[2m (next.js: 7ms, application-code: 14ms)[22m
+[32m[1m✓[22m[39m Compiled in 19ms
+[32m[1m✓[22m[39m Compiled in 21ms
+[32m[1m✓[22m[39m Compiled in 30ms
+[32m[1m✓[22m[39m Compiled in 19ms
+[36m[browser][39m ./apps/frontend/src/components/pageContents/Group.tsx:183:77
+Expected '</', got ')'
+  181 |                                                     setSelectedGroup(u);
+  182 |                                                     setSelectedTeacher(u.teacher ?? null);
+> 183 |                                                     setSelectedStudentIds(u.)
+      |                                                                             ^
+  184 |                                                     setOpenUpdate(true);
+  185 |                                                 }}
+  186 |                                             >
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./apps/frontend/src/components/pageContents/Group.tsx
+    ./apps/frontend/src/app/(pages)/groups/page.tsx 
+[36m[browser][39m ./apps/frontend/src/components/pageContents/Group.tsx:183:77
+Expected '</', got ')'
+  181 |                                                     setSelectedGroup(u);
+  182 |                                                     setSelectedTeacher(u.teacher ?? null);
+> 183 |                                                     setSelectedStudentIds(u.)
+      |                                                                             ^
+  184 |                                                     setOpenUpdate(true);
+  185 |                                                 }}
+  186 |                                             >
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./apps/frontend/src/components/pageContents/Group.tsx
+    ./apps/frontend/src/app/(pages)/groups/page.tsx 
+ GET /groups [32m200[39m in 52ms[2m (next.js: 7ms, application-code: 45ms)[22m
+[36m[browser][39m [31mUncaught TypeError: Cannot read properties of undefined (reading 'map')[39m
+[31m    at onClick (src/components/pageContents/Group.tsx:184:86)
+    at div (<anonymous>)
+    at DropdownMenuItem (src/components/ui/dropdown-menu.tsx:71:5)
+    at <unknown> (src/components/pageContents/Group.tsx:180:45)
+    at Array.map (<anonymous>)
+    at GroupComponent (src/components/pageContents/Group.tsx:165:29)
+    at GroupsPage (src/app/(pages)/groups/page.tsx:4:12)[39m
+  [90m182 |[0m                                                     setSelectedGroup(u);
+  [90m183 |[0m                                                     setSelectedTeacher(u.teacher ?? [36mnull[0m);
+[31m[1m>[0m [90m184 |[0m                                                     setSelectedStudentIds(u.students.map((s) => s.id) ?? [])
+  [90m    |[0m                                                                                      [31m[1m^[0m
+  [90m185 |[0m                                                     setOpenUpdate([36mtrue[0m);
+  [90m186 |[0m                                                 }}
+  [90m187 |[0m                                             >
+[36m[browser][39m [31mUncaught TypeError: Cannot read properties of undefined (reading 'map')[39m
+[31m    at onClick (src/components/pageContents/Group.tsx:184:86)
+    at div (<anonymous>)
+    at DropdownMenuItem (src/components/ui/dropdown-menu.tsx:71:5)
+    at <unknown> (src/components/pageContents/Group.tsx:180:45)
+    at Array.map (<anonymous>)
+    at GroupComponent (src/components/pageContents/Group.tsx:165:29)
+    at GroupsPage (src/app/(pages)/groups/page.tsx:4:12)[39m
+  [90m182 |[0m                                                     setSelectedGroup(u);
+  [90m183 |[0m                                                     setSelectedTeacher(u.teacher ?? [36mnull[0m);
+[31m[1m>[0m [90m184 |[0m                                                     setSelectedStudentIds(u.students.map((s) => s.id) ?? [])
+  [90m    |[0m                                                                                      [31m[1m^[0m
+  [90m185 |[0m                                                     setOpenUpdate([36mtrue[0m);
+  [90m186 |[0m                                                 }}
+  [90m187 |[0m                                             >
+[32m[1m✓[22m[39m Compiled in 23ms
+ GET /groups [32m200[39m in 50ms[2m (next.js: 6ms, application-code: 45ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+ GET /groups [32m200[39m in 50ms[2m (next.js: 4ms, application-code: 46ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[32m[1m✓[22m[39m Compiled in 15ms
+[32m[1m✓[22m[39m Compiled in 17ms
+[32m[1m✓[22m[39m Compiled in 19ms
+[32m[1m✓[22m[39m Compiled in 21ms
+ GET /groups [32m200[39m in 49ms[2m (next.js: 10ms, application-code: 39ms)[22m
+ GET /groups [32m200[39m in 51ms[2m (next.js: 6ms, application-code: 45ms)[22m
+[32m[1m✓[22m[39m Compiled in 19ms
+ GET /groups [32m200[39m in 52ms[2m (next.js: 11ms, application-code: 41ms)[22m
+[36m[browser][39m Each child in a list should have a unique "key" prop.
+
+Check the render method of `GroupComponent`. See https://react.dev/link/warning-keys for more information. 
+[32m[1m✓[22m[39m Compiled in 35ms
+ GET /groups [32m200[39m in 57ms[2m (next.js: 12ms, application-code: 45ms)[22m
+[36m[browser][39m Each child in a list should have a unique "key" prop.
+
+Check the render method of `GroupComponent`. See https://react.dev/link/warning-keys for more information. 
+[32m[1m✓[22m[39m Compiled in 17ms
+[32m[1m✓[22m[39m Compiled in 18ms
+[32m[1m✓[22m[39m Compiled in 17ms
+ GET /groups [32m200[39m in 55ms[2m (next.js: 10ms, application-code: 45ms)[22m
+[36m[browser][39m Each child in a list should have a unique "key" prop.
+
+Check the render method of `GroupComponent`. See https://react.dev/link/warning-keys for more information. 
+ GET /groups [32m200[39m in 50ms[2m (next.js: 4ms, application-code: 45ms)[22m
+ GET /groups [32m200[39m in 47ms[2m (next.js: 3ms, application-code: 43ms)[22m
+[36m[browser][39m Each child in a list should have a unique "key" prop.
+
+Check the render method of `GroupComponent`. See https://react.dev/link/warning-keys for more information. 
