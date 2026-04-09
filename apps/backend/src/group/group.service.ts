@@ -41,7 +41,13 @@ export class GroupService {
           select: {
             username: true
           }
-        }
+        },
+        students: {
+          select: {
+            username: true,
+            email: true
+          }
+        },
       }
     })
   }
@@ -57,6 +63,12 @@ export class GroupService {
         teacher: {
           select: {
             username: true,
+          }
+        },
+        students: {
+          select: {
+            username: true,
+            email: true
           }
         }
       }
@@ -103,20 +115,9 @@ export class GroupService {
           },
         }),
 
-        ...((updateGroupDto.addStudentIds?.length ||
-          updateGroupDto.removeStudentIds?.length) && {
+        ...(updateGroupDto.studentIds && {
           students: {
-            ...(updateGroupDto.addStudentIds?.length && {
-              connect: updateGroupDto.addStudentIds.map((studentId) => ({
-                id: studentId,
-              })),
-            }),
-
-            ...(updateGroupDto.removeStudentIds?.length && {
-              disconnect: updateGroupDto.removeStudentIds.map((studentId) => ({
-                id: studentId,
-              })),
-            }),
+            set: updateGroupDto.studentIds.map((id) => ({ id })),
           },
         }),
       },

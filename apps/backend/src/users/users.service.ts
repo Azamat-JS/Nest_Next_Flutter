@@ -54,7 +54,14 @@ export class UsersService {
     }
 
     async getAllStudents() {
-        return await this.prisma.users.findMany({ where: { role: "student" } });
+        return await this.prisma.users.findMany({
+            where: { role: "student" }, select: {
+                username: true,
+                email: true,
+                avatarUrl: true,
+                role: true,
+            }
+        });
     }
 
     async createUser(createUserInput: Prisma.UsersCreateInput) {

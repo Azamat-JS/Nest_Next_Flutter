@@ -1,5 +1,5 @@
 'use client'
-
+import React from 'react';
 import {
     Table,
     TableBody,
@@ -58,6 +58,7 @@ const GroupComponent = () => {
     const [openDelete, setOpenDelete] = useState(false);
     const [openCreate, setOpenCreate] = useState(false);
     const [selectedGroup, setSelectedGroup] = useState<GroupType | null>(null);
+    const [selectedStudentIds, setSelectedStudentIds] = useState<string[]>([]);
 
 
     const getGroups = async () => {
@@ -85,7 +86,8 @@ const GroupComponent = () => {
                 `${API}/group/${group.id}`,
                 {
                     name: group.name,
-                    teacherId: selectedTeacher!.id
+                    teacherId: selectedTeacher!.id,
+                    studentIds: selectedStudentIds.filter(Boolean),
                 },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
@@ -141,6 +143,7 @@ const GroupComponent = () => {
     useEffect(() => {
         if (openUpdate && token) {
             getAllTeachers();
+            getAllStudents();
         }
     }, [openUpdate, token]);
 
@@ -177,8 +180,10 @@ const GroupComponent = () => {
                                         <DropdownMenuGroup>
                                             <DropdownMenuItem
                                                 onClick={() => {
-                                                    setOpenUpdate(true);
                                                     setSelectedGroup(u);
+                                                    setSelectedTeacher(u.teacher ?? null);
+                                                    setSelectedStudentIds((u.students || []).map((s) => s.id).filter((id): id is string => Boolean(id)));
+                                                    setOpenUpdate(true);
                                                 }}
                                             >
                                                 <Edit /> Update
@@ -243,6 +248,44 @@ const GroupComponent = () => {
                                     </SelectGroup>
                                 </SelectContent>
                             </Select>
+                        </Field>
+                        <Field>
+                            <Label>Students</Label>
+
+                            <div className="max-h-48 overflow-y-auto border rounded-md p-3 space-y-2">
+                                {students.map((student) => {
+                                    const checked = selectedStudentIds.includes(student.id);
+
+                                    return (
+                                        <React.Fragment key={student.id}>
+
+
+                                            <label
+                                                className="flex items-center gap-2 cursor-pointer"
+                                            >
+                                                <input
+                                                    type="checkbox"
+                                                    checked={checked}
+                                                    onChange={(e) => {
+                                                        if (e.target.checked) {
+                                                            setSelectedStudentIds((prev) => [
+                                                                ...prev,
+                                                                student.id,
+                                                            ]);
+                                                        } else {
+                                                            setSelectedStudentIds((prev) =>
+                                                                prev.filter((id) => id !== student.id)
+                                                            );
+                                                        }
+                                                    }}
+                                                />
+
+                                                <span>{student.username}</span>
+                                            </label>
+                                        </React.Fragment>
+                                    );
+                                })}
+                            </div>
                         </Field>
                     </FieldGroup>
                     <DialogFooter>

@@ -29,11 +29,5 @@ export class UpdateGroupDto {
     @IsArray()
     @ArrayUnique()
     @IsString({ each: true })
-    addStudentIds?: string[];
-
-    @IsOptional()
-    @IsArray()
-    @ArrayUnique()
-    @IsString({ each: true })
-    removeStudentIds?: string[];
+    studentIds?: string[];
 }
