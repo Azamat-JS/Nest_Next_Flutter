@@ -207,9 +207,9 @@ const GroupComponent = () => {
             <Dialog open={openUpdate} onOpenChange={setOpenUpdate}>
                 <DialogContent className="sm:max-w-sm">
                     <DialogHeader>
-                        <DialogTitle>Edit profile</DialogTitle>
+                        <DialogTitle>Edit Group</DialogTitle>
                         <DialogDescription>
-                            Make changes to your profile here. Click save when you&apos;re
+                            Make changes to the group here. Click save when you&apos;re
                             done.
                         </DialogDescription>
                     </DialogHeader>

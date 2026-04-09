@@ -57,6 +57,8 @@ export function GroupDrawer({ openCreate, setOpenCreate, teachers, students, onG
         onSubmit: async ({ value }) => {
             try {
                 await axios.post(`${API}/group`, value, { headers: { Authorization: `Bearer ${token}` } })
+                form.reset()
+                setSelectedTeacher(null)
                 setOpenCreate(false)
                 toast.success('A new group created!')
                 onGroupCreated();

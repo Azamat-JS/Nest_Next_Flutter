@@ -1,0 +1,133 @@
+
+> frontend@0.1.0 dev /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend
+> next dev -p 4000
+
+[1m[38;2;173;127;168m▲ Next.js 16.2.1[39m[22m (Turbopack)
+- Local:         http://localhost:4000
+- Network:       http://192.168.13.92:4000
+- Environments: .env.local
+[32m[1m✓[22m[39m Ready in 270ms
+[33m[1m⚠[22m[39m Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /Users/azamatabdullayev/Desktop/full-stack-turbo/pnpm-workspace.yaml as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend/pnpm-workspace.yaml
+
+
+ GET / [32m200[39m in 267ms[2m (next.js: 103ms, application-code: 163ms)[22m
+ GET /groups [32m200[39m in 25ms[2m (next.js: 13ms, application-code: 12ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[32m[1m✓[22m[39m Compiled in 291ms
+[32m[1m✓[22m[39m Compiled in 25ms
+[32m[1m✓[22m[39m Compiled in 36ms
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[32m[1m✓[22m[39m Compiled in 21ms
+[32m[1m✓[22m[39m Compiled in 17ms
+[32m[1m✓[22m[39m Compiled in 35ms
+[32m[1m✓[22m[39m Compiled in 16ms
+[32m[1m✓[22m[39m Compiled in 18ms
+[32m[1m✓[22m[39m Compiled in 19ms
+[32m[1m✓[22m[39m Compiled in 16ms
+[32m[1m✓[22m[39m Compiled in 36ms
+[32m[1m✓[22m[39m Compiled in 18ms
+[32m[1m✓[22m[39m Compiled in 17ms
+[32m[1m✓[22m[39m Compiled in 32ms
+[32m[1m✓[22m[39m Compiled in 36ms
+[32m[1m✓[22m[39m Compiled in 19ms
+[32m[1m✓[22m[39m Compiled in 22ms
+[32m[1m✓[22m[39m Compiled in 36ms
+[32m[1m✓[22m[39m Compiled in 41ms
+[32m[1m✓[22m[39m Compiled in 21ms
+[32m[1m✓[22m[39m Compiled in 326ms
+ GET /groups [32m200[39m in 92ms[2m (next.js: 20ms, application-code: 72ms)[22m
+[36m[browser][39m ./apps/frontend/src/components/pageContents/Group.tsx:49:1
+Export DrawerScrollableContent doesn't exist in target module
+  47 | } from "@/components/ui/select"
+  48 | import { TokenPayload } from "@/lib/types/token_payload"
+> 49 | import { DrawerScrollableContent } from "../Drawer"
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  50 |
+  51 | const GroupComponent = () => {
+  52 |     const token = useAuthStore((state) => state.token);
+
+The export DrawerScrollableContent was not found in module [project]/apps/frontend/src/components/Drawer.tsx [app-client] (ecmascript).
+Did you mean to import GroupDrawer?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./apps/frontend/src/components/pageContents/Group.tsx
+    ./apps/frontend/src/app/(pages)/groups/page.tsx 
+[36m[browser][39m ./apps/frontend/src/components/pageContents/Group.tsx:49:1
+Export DrawerScrollableContent doesn't exist in target module
+  47 | } from "@/components/ui/select"
+  48 | import { TokenPayload } from "@/lib/types/token_payload"
+> 49 | import { DrawerScrollableContent } from "../Drawer"
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  50 |
+  51 | const GroupComponent = () => {
+  52 |     const token = useAuthStore((state) => state.token);
+
+The export DrawerScrollableContent was not found in module [project]/apps/frontend/src/components/Drawer.tsx [app-ssr] (ecmascript).
+Did you mean to import GroupDrawer?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./apps/frontend/src/components/pageContents/Group.tsx
+    ./apps/frontend/src/app/(pages)/groups/page.tsx 
+ GET / [32m200[39m in 26ms[2m (next.js: 7ms, application-code: 19ms)[22m
+ GET /home [32m200[39m in 37ms[2m (next.js: 14ms, application-code: 23ms)[22m
+[32m[1m✓[22m[39m Compiled in 99ms
+[32m[1m✓[22m[39m Compiled in 17ms
+[32m[1m✓[22m[39m Compiled in 57ms
+[32m[1m✓[22m[39m Compiled in 20ms
+[1mnull[22m
+ GET /home [32m200[39m in 67ms[2m (next.js: 8ms, application-code: 59ms)[22m
+ GET /groups [32m200[39m in 30ms[2m (next.js: 6ms, application-code: 24ms)[22m
+ GET /profile [32m200[39m in 32ms[2m (next.js: 20ms, application-code: 12ms)[22m
+ GET / [32m200[39m in 25ms[2m (next.js: 5ms, application-code: 20ms)[22m
+ GET /profile [32m200[39m in 27ms[2m (next.js: 4ms, application-code: 23ms)[22m
+ GET /home [32m200[39m in 26ms[2m (next.js: 5ms, application-code: 21ms)[22m
+ GET /groups [32m200[39m in 29ms[2m (next.js: 4ms, application-code: 25ms)[22m
+ GET /profile [32m200[39m in 25ms[2m (next.js: 4ms, application-code: 21ms)[22m
+ GET /home [32m200[39m in 23ms[2m (next.js: 4ms, application-code: 19ms)[22m
+ GET /groups [32m200[39m in 23ms[2m (next.js: 4ms, application-code: 19ms)[22m
+ GET /home [32m200[39m in 26ms[2m (next.js: 4ms, application-code: 22ms)[22m
+[32m[1m✓[22m[39m Compiled in 81ms
+[32m[1m✓[22m[39m Compiled in 21ms
+[32m[1m✓[22m[39m Compiled in 57ms
+[32m[1m✓[22m[39m Compiled in 24ms
+ GET /groups [32m200[39m in 24ms[2m (next.js: 4ms, application-code: 20ms)[22m
+ GET /home [32m200[39m in 28ms[2m (next.js: 7ms, application-code: 20ms)[22m
+ GET /groups [32m200[39m in 29ms[2m (next.js: 3ms, application-code: 26ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[32m[1m✓[22m[39m Compiled in 20ms
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+ GET /groups [32m200[39m in 76ms[2m (next.js: 11ms, application-code: 65ms)[22m
+[32m[1m✓[22m[39m Compiled in 114ms
+[32m[1m✓[22m[39m Compiled in 18ms
+[32m[1m✓[22m[39m Compiled in 88ms
+[32m[1m✓[22m[39m Compiled in 574ms
+[32m[1m✓[22m[39m Compiled in 23ms
+[32m[1m✓[22m[39m Compiled in 33ms
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[32m[1m✓[22m[39m Compiled in 16ms
+[32m[1m✓[22m[39m Compiled in 22ms
+[32m[1m✓[22m[39m Compiled in 20ms
+[32m[1m✓[22m[39m Compiled in 18ms
+[32m[1m✓[22m[39m Compiled in 18ms
+[32m[1m✓[22m[39m Compiled in 19ms
+[32m[1m✓[22m[39m Compiled in 17ms
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
