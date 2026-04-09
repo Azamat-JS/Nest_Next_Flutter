@@ -46,8 +46,12 @@ import {
 } from "@/components/ui/select"
 import { TokenPayload } from "@/lib/types/token_payload"
 import { GroupDrawer } from "../Drawer"
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+
 
 const GroupComponent = () => {
+    const router = useRouter();
     const token = useAuthStore((state) => state.token);
     const [groups, setGroups] = useState<GroupType[]>([]);
     const [teachers, setTeachers] = useState<TokenPayload[]>([]);
@@ -174,7 +178,8 @@ const GroupComponent = () => {
 
                 <TableBody>
                     {groups.map((u, idx) => (
-                        <TableRow key={u.id}>
+                        <TableRow key={u.id} className="cursor-pointer hover:bg-muted/50"
+                            onClick={() => router.push(`/groups/${u.id}`)}>
                             <TableCell className="text-center">{idx + 1}</TableCell>
                             <TableCell className="text-center">{u.name}</TableCell>
 
