@@ -8,6 +8,12 @@ export class CreateGroupDto {
     @IsNotEmpty()
     @IsString()
     teacherId!: string;
+
+    @IsOptional()
+    @IsArray()
+    @ArrayUnique()
+    @IsString({ each: true })
+    studentIds?: string[];
 }
 
 export class UpdateGroupDto {

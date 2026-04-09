@@ -10,12 +10,20 @@ export class GroupService {
     if (!teacher) {
       throw new NotFoundException('Teacher not found')
     }
+    const studentIds = createGroupDto.studentIds?.filter(Boolean) ?? [];
     const newGroup = await this.prisma.groups.create({
       data: {
         name: createGroupDto.name,
         teacher: {
           connect: { id: createGroupDto.teacherId }
-        }
+        },
+        ...(studentIds?.length > 0 && {
+          students: {
+            connect: studentIds.map((id) => ({
+              id
+            }))
+          }
+        })
       }
     });
 

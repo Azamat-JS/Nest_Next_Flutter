@@ -51,6 +51,7 @@ const GroupComponent = () => {
     const token = useAuthStore((state) => state.token);
     const [groups, setGroups] = useState<GroupType[]>([]);
     const [teachers, setTeachers] = useState<TokenPayload[]>([]);
+    const [students, setStudents] = useState<TokenPayload[]>([]);
     const [selectedTeacher, setSelectedTeacher] = useState<TokenPayload | null>(null);
     const API = process.env.NEXT_PUBLIC_API_URL;
     const [openUpdate, setOpenUpdate] = useState(false);
@@ -121,11 +122,19 @@ const GroupComponent = () => {
         }
     }
 
-    const getAllStudents = async () => { }
+    const getAllStudents = async () => {
+        try {
+            const res = await axios.get(`${API}/users/students`, { headers: { Authorization: `Bearer ${token}` } });
+            setStudents(res.data);
+        } catch (error: any) {
+            toast.error(error.response?.data?.message ?? 'Something went wrong')
+        }
+    }
 
     useEffect(() => {
         if (openCreate && token) {
             getAllTeachers();
+            getAllStudents();
         }
     }, [openCreate, token]);
 
@@ -266,7 +275,7 @@ const GroupComponent = () => {
             </Dialog>
             <div className="w-full flex justify-end p-5">
 
-                <GroupDrawer openCreate={openCreate} setOpenCreate={setOpenCreate} teachers={teachers} onGroupCreated={getGroups} />
+                <GroupDrawer openCreate={openCreate} setOpenCreate={setOpenCreate} teachers={teachers} students={students} onGroupCreated={getGroups} />
             </div>
         </div>
 

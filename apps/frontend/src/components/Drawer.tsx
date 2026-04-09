@@ -35,19 +35,21 @@ import { useState } from 'react'
 import { Label } from "./ui/label"
 import { TokenPayload } from "@/lib/types/token_payload"
 
-export function GroupDrawer({ openCreate, setOpenCreate, teachers, onGroupCreated }: { openCreate: boolean, setOpenCreate: any, teachers: TokenPayload[], onGroupCreated: () => void }) {
+export function GroupDrawer({ openCreate, setOpenCreate, teachers, students, onGroupCreated }: { openCreate: boolean, setOpenCreate: any, teachers: TokenPayload[], students: TokenPayload[], onGroupCreated: () => void }) {
     const [selectedTeacher, setSelectedTeacher] = useState<TokenPayload | null>(null);
     const API = process.env.NEXT_PUBLIC_API_URL;
     const token = useAuthStore((state) => state.token);
     const getSchema = () =>
         z.object({
             name: z.string().min(2),
-            teacherId: z.string()
+            teacherId: z.string(),
+            studentIds: z.array(z.string()),
         })
     const form = useForm({
         defaultValues: {
             name: "",
             teacherId: "",
+            studentIds: [] as string[],
         },
         validators: {
             onSubmit: getSchema()
@@ -139,6 +141,43 @@ export function GroupDrawer({ openCreate, setOpenCreate, teachers, onGroupCreate
                                                 </SelectGroup>
                                             </SelectContent>
                                         </Select>
+                                    </Field>
+                                )}
+                            />
+                            <form.Field
+                                name="studentIds"
+                                children={(field) => (
+                                    <Field>
+                                        <Label>Students</Label>
+
+                                        <div className="max-h-48 overflow-y-auto rounded-md border p-3 space-y-2">
+                                            {students.map((student) => {
+                                                const checked = field.state.value.includes(student.id);
+
+                                                return (
+                                                    <label
+                                                        key={student.id}
+                                                        className="flex items-center gap-2 cursor-pointer"
+                                                    >
+                                                        <input
+                                                            type="checkbox"
+                                                            checked={checked}
+                                                            onChange={(e) => {
+                                                                if (e.target.checked) {
+                                                                    field.handleChange([...field.state.value, student.id]);
+                                                                } else {
+                                                                    field.handleChange(
+                                                                        field.state.value.filter((id) => id !== student.id)
+                                                                    );
+                                                                }
+                                                            }}
+                                                        />
+
+                                                        <span>{student.username}</span>
+                                                    </label>
+                                                );
+                                            })}
+                                        </div>
                                     </Field>
                                 )}
                             />
