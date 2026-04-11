@@ -28,6 +28,7 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
         try {
             const res = await axios.get(`${API}/group/${groupId}`, { headers: { Authorization: `Bearer ${token}` } })
             setGroup(res.data)
+            setStudents(res.data.students)
         } catch (error: any) {
             toast.error(error.response?.data?.message ?? 'Something went wrong!')
         }
@@ -42,9 +43,9 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
 
     return (
         <div className='flex flex-col w-full'>
-            <header className='flex justify-center text-center'>
-                <h1 className='font-bold text-3xl text-center'>{group?.name}</h1>
-                <h2 className='font-medium text-xl text-center'>{group?.teacher?.username}</h2>
+            <header className='flex items-center gap-6 justify-center text-center'>
+                <h1 className='font-bold text-3xl text-center'>Group: {group?.name}</h1>
+                <h2 className='font-medium text-xl text-center'>Teacher: {group?.teacher?.username}</h2>
             </header>
             <Table>
                 <TableCaption>Students of the group.</TableCaption>
@@ -52,22 +53,23 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
                     <TableRow>
                         <TableHead className="w-12 text-center font-bold text-lg">&#8470;</TableHead>
                         <TableHead className="w-48 text-center font-bold text-lg">Name</TableHead>
-                        <TableHead className="w-24 text-center font-bold text-lg">Actions</TableHead>
+                        <TableHead className="w-48 text-center font-bold text-lg">Email</TableHead>
+                        <TableHead className="w-24 text-start font-bold text-lg">Actions</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {students.map((s) => (
+                    {students.map((s, idx) => (
                         <TableRow key={s.id}>
-                            <TableCell className="font-medium">{s.username}</TableCell>
-                            <TableCell>{s.email}</TableCell>
-                            <TableCell><Menu className='h-5 w-5' /></TableCell>
+                            <TableCell className="text-center">{idx + 1}</TableCell>
+                            <TableCell className="text-center">{s.username}</TableCell>
+                            <TableCell className="text-center">{s.email}</TableCell>
+                            <TableCell className=''><Menu className='h-5 w-5' /></TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
                 <TableFooter>
                     <TableRow>
-                        <TableCell colSpan={3}>Total</TableCell>
-                        <TableCell className="text-right">$2,500.00</TableCell>
+                        <TableCell colSpan={3}>Total: {students.length} students</TableCell>
                     </TableRow>
                 </TableFooter>
             </Table>
