@@ -1,0 +1,122 @@
+
+> frontend@0.1.0 dev /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend
+> next dev -p 4000
+
+[1m[38;2;173;127;168m▲ Next.js 16.2.1[39m[22m (Turbopack)
+- Local:         http://localhost:4000
+- Network:       http://192.168.13.92:4000
+- Environments: .env.local
+[32m[1m✓[22m[39m Ready in 240ms
+[33m[1m⚠[22m[39m Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /Users/azamatabdullayev/Desktop/full-stack-turbo/pnpm-workspace.yaml as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend/pnpm-workspace.yaml
+
+
+[]
+ GET /groups?page=1&limit=5 [32m200[39m in 275ms[2m (next.js: 107ms, application-code: 168ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[32m[1m✓[22m[39m Compiled in 205ms
+[]
+ GET /groups?page=1&limit=5 [32m200[39m in 56ms[2m (next.js: 12ms, application-code: 44ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[32m[1m✓[22m[39m Compiled in 30ms
+[]
+ GET /groups?page=1&limit=5 [32m200[39m in 63ms[2m (next.js: 7ms, application-code: 56ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[32m[1m✓[22m[39m Compiled in 28ms
+teachers: [90mundefined[39m
+students: [90mundefined[39m
+[]
+ GET /groups?page=1&limit=5 [32m200[39m in 34ms[2m (next.js: 3ms, application-code: 31ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+teachers: [90mundefined[39m
+students: [90mundefined[39m
+[]
+ GET /groups?page=1&limit=5 [32m200[39m in 57ms[2m (next.js: 5ms, application-code: 52ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+teachers: [90mundefined[39m
+students: [90mundefined[39m
+[]
+ GET /groups?page=1&limit=5 [32m200[39m in 38ms[2m (next.js: 1819µs, application-code: 36ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[32m[1m✓[22m[39m Compiled in 20ms
+teachers: [90mundefined[39m
+students: [90mundefined[39m
+[31m[1m⨯[22m[39m TypeError: Cannot read properties of undefined (reading 'map')
+    at GroupComponent (src/components/pageContents/Group.tsx:310:51)
+  [90m308 |[0m                                     <[33mSelectGroup[0m>
+  [90m309 |[0m                                         <[33mSelectLabel[0m>[33mSelect[0m a [36mnew[0m teacher</[33mSelectLabel[0m>
+[31m[1m>[0m [90m310 |[0m                                         {teachers.map(t => (
+  [90m    |[0m                                                   [31m[1m^[0m
+  [90m311 |[0m                                             <[33mSelectItem[0m key={t.id} value={t.id}>
+  [90m312 |[0m                                                 {t.username}
+  [90m313 |[0m                                             </[33mSelectItem[0m> {
+  digest: [32m'3704782931'[39m
+}
+ GET /groups?page=1&limit=5 [32m200[39m in 66ms[2m (next.js: 7ms, application-code: 58ms)[22m
+[36m[browser][39m [31mUncaught Error: Switched to client rendering because the server rendering errored:
+
+Cannot read properties of undefined (reading 'map')[39m
+[31m    at GroupComponent (src/components/pageContents/Group.tsx:310:51)[39m
+  [90m308 |[0m                                     <[33mSelectGroup[0m>
+  [90m309 |[0m                                         <[33mSelectLabel[0m>[33mSelect[0m a [36mnew[0m teacher</[33mSelectLabel[0m>
+[31m[1m>[0m [90m310 |[0m                                         {teachers.map(t => (
+  [90m    |[0m                                                   [31m[1m^[0m
+  [90m311 |[0m                                             <[33mSelectItem[0m key={t.id} value={t.id}>
+  [90m312 |[0m                                                 {t.username}
+  [90m313 |[0m                                             </[33mSelectItem[0m>
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[32m[1m✓[22m[39m Compiled in 24ms
+teachers: [90mundefined[39m
+students: [90mundefined[39m
+[]
+ GET /groups?page=1&limit=5 [32m200[39m in 59ms[2m (next.js: 7ms, application-code: 52ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+ GET /groups/cmnoh0p550000u8v2nihbtf1o [32m200[39m in 273ms[2m (next.js: 260ms, application-code: 13ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 30ms[2m (next.js: 8ms, application-code: 22ms)[22m
+ GET /home [32m200[39m in 47ms[2m (next.js: 34ms, application-code: 13ms)[22m
+ GET /groups [32m200[39m in 26ms[2m (next.js: 4ms, application-code: 21ms)[22m
+[32m[1m✓[22m[39m Compiled in 19ms
+[32m[1m✓[22m[39m Compiled in 99ms
+[32m[1m✓[22m[39m Compiled in 18ms
+[32m[1m✓[22m[39m Compiled in 22ms
+[32m[1m✓[22m[39m Compiled in 20ms
+[32m[1m✓[22m[39m Compiled in 23ms
+[]
+ GET /groups [32m200[39m in 51ms[2m (next.js: 6ms, application-code: 45ms)[22m
+[32m[1m✓[22m[39m Compiled in 33ms
+ GET /groups?limit=5&page=1 [32m200[39m in 22ms[2m (next.js: 5ms, application-code: 16ms)[22m
+[32m[1m✓[22m[39m Compiled in 31ms
+[32m[1m✓[22m[39m Compiled in 18ms
+[32m[1m✓[22m[39m Compiled in 34ms
+[32m[1m✓[22m[39m Compiled in 19ms
+[32m[1m✓[22m[39m Compiled in 18ms
+[32m[1m✓[22m[39m Compiled in 18ms
+[32m[1m✓[22m[39m Compiled in 20ms
+ GET /groups?limit=5&page=1 [32m200[39m in 15ms[2m (next.js: 2ms, application-code: 13ms)[22m
+[32m[1m✓[22m[39m Compiled in 19ms
+[32m[1m✓[22m[39m Compiled in 23ms
+[32m[1m✓[22m[39m Compiled in 19ms
+[32m[1m✓[22m[39m Compiled in 21ms
+[32m[1m✓[22m[39m Compiled in 20ms
+[32m[1m✓[22m[39m Compiled in 17ms
+[32m[1m✓[22m[39m Compiled in 22ms
+[32m[1m✓[22m[39m Compiled in 24ms
+[32m[1m✓[22m[39m Compiled in 22ms
+[32m[1m✓[22m[39m Compiled in 18ms
+[32m[1m✓[22m[39m Compiled in 19ms

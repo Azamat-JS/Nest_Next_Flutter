@@ -232,45 +232,50 @@ const GroupComponent = () => {
             </Table>
 
             {/* pagination */}
-            <div className="flex items-center justify-between gap-4">
-                <Field orientation="horizontal" className="w-fit">
-                    <FieldLabel htmlFor="select-rows-per-page">Rows per page</FieldLabel>
-                    <Select value={String(limit)} onValueChange={(val) => {
-                        const params = new URLSearchParams(searchParams.toString());
-                        params.set('limit', val);
-                        params.set('page', '1');
-                        router.push(`?${params.toString()}`);
-                    }}>
-                        <SelectTrigger className="w-20" id="select-rows-per-page">
-                            <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent align="start">
-                            <SelectGroup>
-                                <SelectItem value="5" >5</SelectItem>
-                                <SelectItem value="10">10</SelectItem>
-                                <SelectItem value="15">15</SelectItem>
-                                <SelectItem value="20">20</SelectItem>
-                            </SelectGroup>
-                        </SelectContent>
-                    </Select>
-                </Field>
-                <Pagination>
-                    <PaginationContent>
-                        <PaginationItem>
-                            <PaginationPrevious href={`?page=${Math.max(1, page - 1)}&limit=${limit}`} />
-                        </PaginationItem>
-                        {Array.from({ length: lastPage }).map((_, idx) => (
-                            <PaginationItem key={idx}>
-                                <PaginationLink href={`?page=${idx + 1}&limit=${limit}`} isActive={page === idx + 1}>{idx + 1}</PaginationLink>
-                            </PaginationItem>
-                        )
-                        )}
+            <div className="grid grid-cols-2 items-center mt-4">
 
-                        <PaginationItem>
-                            <PaginationNext href={`?page=${Math.min(lastPage, page + 1)}&limit=${limit}`} />
-                        </PaginationItem>
-                    </PaginationContent>
-                </Pagination>
+                <div className="flex justify-center">
+                    <Field orientation="horizontal" className="w-fit">
+                        <FieldLabel htmlFor="select-rows-per-page">Rows per page</FieldLabel>
+                        <Select value={String(limit)} onValueChange={(val) => {
+                            const params = new URLSearchParams(searchParams.toString());
+                            params.set('limit', val);
+                            params.set('page', '1');
+                            router.push(`?${params.toString()}`);
+                        }}>
+                            <SelectTrigger className="w-20" id="select-rows-per-page">
+                                <SelectValue />
+                            </SelectTrigger>
+                            <SelectContent align="start">
+                                <SelectGroup>
+                                    <SelectItem value="5" >5</SelectItem>
+                                    <SelectItem value="10">10</SelectItem>
+                                    <SelectItem value="15">15</SelectItem>
+                                    <SelectItem value="20">20</SelectItem>
+                                </SelectGroup>
+                            </SelectContent>
+                        </Select>
+                    </Field>
+                </div>
+                <div className="flex justify-end">
+                    <Pagination>
+                        <PaginationContent>
+                            <PaginationItem>
+                                <PaginationPrevious href={`?page=${Math.max(1, page - 1)}&limit=${limit}`} />
+                            </PaginationItem>
+                            {Array.from({ length: lastPage }).map((_, idx) => (
+                                <PaginationItem key={idx}>
+                                    <PaginationLink href={`?page=${idx + 1}&limit=${limit}`} isActive={page === idx + 1}>{idx + 1}</PaginationLink>
+                                </PaginationItem>
+                            )
+                            )}
+
+                            <PaginationItem>
+                                <PaginationNext href={`?page=${Math.min(lastPage, page + 1)}&limit=${limit}`} />
+                            </PaginationItem>
+                        </PaginationContent>
+                    </Pagination>
+                </div>
             </div>
 
             {/* update group modal */}
