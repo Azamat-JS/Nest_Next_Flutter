@@ -32,7 +32,6 @@ export class GroupService {
 
   async findAll(query: PaginationDto) {
     const { limit = 10, page = 1 } = query;
-
     const skip = (page - 1) * limit;
 
     const [data, total] = await Promise.all([

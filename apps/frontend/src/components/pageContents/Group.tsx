@@ -75,9 +75,9 @@ const GroupComponent = () => {
 
     const getGroups = async () => {
         try {
-            const res = await axios.get(`${API}/group/all`, { headers: { Authorization: `Bearer ${token}` } })
+            const res = await axios.get(`${API}/group/all?page=${2}&limit=${3}`, { headers: { Authorization: `Bearer ${token}` } })
             if (res.status === 200) {
-                setGroups(res.data);
+                setGroups(res.data.data);
             }
         } catch (error: any) {
             toast.error(

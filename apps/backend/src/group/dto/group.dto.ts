@@ -36,19 +36,11 @@ export class UpdateGroupDto {
 
 export class PaginationDto {
     @IsOptional()
-    @Type(() => Number)
-    @IsInt()
-    @Min(0)
-    offset?: number;
-
-    @IsOptional()
-    @Type(() => Number)
     @IsInt()
     @Min(1)
     limit?: number;
 
     @IsOptional()
-    @Type(() => Number)
     @IsInt()
     @Min(1)
     page?: number;
