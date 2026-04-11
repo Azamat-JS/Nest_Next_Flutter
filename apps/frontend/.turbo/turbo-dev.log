@@ -1,0 +1,122 @@
+
+> frontend@0.1.0 dev /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend
+> next dev -p 4000
+
+[1m[38;2;173;127;168m▲ Next.js 16.2.1[39m[22m (Turbopack)
+- Local:         http://localhost:4000
+- Network:       http://192.168.13.92:4000
+- Environments: .env.local
+[32m[1m✓[22m[39m Ready in 330ms
+[33m[1m⚠[22m[39m Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /Users/azamatabdullayev/Desktop/full-stack-turbo/pnpm-workspace.yaml as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend/pnpm-workspace.yaml
+
+
+ GET / [32m200[39m in 286ms[2m (next.js: 116ms, application-code: 169ms)[22m
+ GET /groups [32m200[39m in 54ms[2m (next.js: 36ms, application-code: 18ms)[22m
+ GET /groups/cmnoh2pc90001u8v2vwfqb97i [32m200[39m in 252ms[2m (next.js: 240ms, application-code: 12ms)[22m
+[32m[1m✓[22m[39m Compiled in 503ms
+[32m[1m✓[22m[39m Compiled in 30ms
+[32m[1m✓[22m[39m Compiled in 25ms
+[32m[1m✓[22m[39m Compiled in 23ms
+ GET /groups [32m200[39m in 29ms[2m (next.js: 8ms, application-code: 21ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 32ms[2m (next.js: 13ms, application-code: 19ms)[22m
+ GET /groups [32m200[39m in 27ms[2m (next.js: 4ms, application-code: 23ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 17ms[2m (next.js: 4ms, application-code: 13ms)[22m
+[32m[1m✓[22m[39m Compiled in 18ms
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 60ms[2m (next.js: 10ms, application-code: 50ms)[22m
+[32m[1m✓[22m[39m Compiled in 20ms
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 55ms[2m (next.js: 13ms, application-code: 42ms)[22m
+[32m[1m✓[22m[39m Compiled in 24ms
+[32m[1m✓[22m[39m Compiled in 41ms
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 100ms[2m (next.js: 8ms, application-code: 93ms)[22m
+[32m[1m✓[22m[39m Compiled in 16ms
+[32m[1m✓[22m[39m Compiled in 18ms
+[32m[1m✓[22m[39m Compiled in 23ms
+[32m[1m✓[22m[39m Compiled in 19ms
+[32m[1m✓[22m[39m Compiled in 22ms
+[32m[1m✓[22m[39m Compiled in 21ms
+[32m[1m✓[22m[39m Compiled in 23ms
+[32m[1m✓[22m[39m Compiled in 41ms
+[32m[1m✓[22m[39m Compiled in 22ms
+[32m[1m✓[22m[39m Compiled in 21ms
+[32m[1m✓[22m[39m Compiled in 145ms
+[32m[1m✓[22m[39m Compiled in 297ms
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 161ms[2m (next.js: 66ms, application-code: 95ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 33ms[2m (next.js: 1995µs, application-code: 31ms)[22m
+[32m[1m✓[22m[39m Compiled in 20ms
+[32m[1m✓[22m[39m Compiled in 39ms
+[32m[1m✓[22m[39m Compiled in 38ms
+[32m[1m✓[22m[39m Compiled in 23ms
+[32m[1m✓[22m[39m Compiled in 40ms
+[32m[1m✓[22m[39m Compiled in 35ms
+[32m[1m✓[22m[39m Compiled in 37ms
+[32m[1m✓[22m[39m Compiled in 16ms
+[32m[1m✓[22m[39m Compiled in 23ms
+[32m[1m✓[22m[39m Compiled in 22ms
+[32m[1m✓[22m[39m Compiled in 21ms
+[32m[1m✓[22m[39m Compiled in 23ms
+[32m[1m✓[22m[39m Compiled in 19ms
+[32m[1m✓[22m[39m Compiled in 127ms
+ GET /home [32m200[39m in 51ms[2m (next.js: 36ms, application-code: 15ms)[22m
+[32m[1m✓[22m[39m Compiled in 532ms
+[1mnull[22m
+ GET /home [32m200[39m in 118ms[2m (next.js: 100ms, application-code: 17ms)[22m
+ GET /home [32m200[39m in 206ms[2m (next.js: 54ms, application-code: 152ms)[22m
+ GET /home [32m200[39m in 135ms[2m (next.js: 1542µs, application-code: 133ms)[22m
+[32m[1m✓[22m[39m Compiled in 23ms
+[32m[1m✓[22m[39m Compiled in 29ms
+ GET /profile [32m200[39m in 53ms[2m (next.js: 36ms, application-code: 17ms)[22m
+ GET /home [32m200[39m in 10ms[2m (next.js: 2ms, application-code: 8ms)[22m
+ GET /groups [32m200[39m in 41ms[2m (next.js: 25ms, application-code: 16ms)[22m
+ GET /groups/cmnoh2pc90001u8v2vwfqb97i [32m200[39m in 39ms[2m (next.js: 21ms, application-code: 18ms)[22m
+ GET /groups [32m200[39m in 25ms[2m (next.js: 4ms, application-code: 21ms)[22m
+ GET /groups/cmnoh2pc90001u8v2vwfqb97i [32m200[39m in 22ms[2m (next.js: 7ms, application-code: 15ms)[22m
+ GET /home [32m200[39m in 25ms[2m (next.js: 4ms, application-code: 21ms)[22m
+ GET /groups [32m200[39m in 22ms[2m (next.js: 3ms, application-code: 19ms)[22m
+ GET /groups/cmnoh2pc90001u8v2vwfqb97i [32m200[39m in 24ms[2m (next.js: 5ms, application-code: 19ms)[22m
+ GET /home [32m200[39m in 22ms[2m (next.js: 3ms, application-code: 19ms)[22m
+[32m[1m✓[22m[39m Compiled in 108ms
+ GET /groups [32m200[39m in 31ms[2m (next.js: 8ms, application-code: 23ms)[22m
+ GET /groups/cmnoh2pc90001u8v2vwfqb97i [32m200[39m in 22ms[2m (next.js: 6ms, application-code: 16ms)[22m
+[32m[1m✓[22m[39m Compiled in 17ms
+ GET /groups [32m200[39m in 26ms[2m (next.js: 6ms, application-code: 20ms)[22m
+ GET /groups/cmnoh2pc90001u8v2vwfqb97i [32m200[39m in 30ms[2m (next.js: 9ms, application-code: 22ms)[22m
+[32m[1m✓[22m[39m Compiled in 19ms
+ GET /groups [32m200[39m in 21ms[2m (next.js: 6ms, application-code: 16ms)[22m
+ GET /groups/cmnoh2pc90001u8v2vwfqb97i [32m200[39m in 32ms[2m (next.js: 9ms, application-code: 23ms)[22m
+ GET /groups [32m200[39m in 25ms[2m (next.js: 5ms, application-code: 20ms)[22m
+[32m[1m✓[22m[39m Compiled in 18ms
+[36m[browser][39m Each child in a list should have a unique "key" prop.
+
+Check the render method of `Field`. See https://react.dev/link/warning-keys for more information. 
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[32m[1m✓[22m[39m Compiled in 65ms
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+ GET /groups [32m200[39m in 97ms[2m (next.js: 7ms, application-code: 90ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m Each child in a list should have a unique "key" prop.
+
+Check the render method of `Field`. See https://react.dev/link/warning-keys for more information. 
+[32m[1m✓[22m[39m Compiled in 22ms
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[32m[1m✓[22m[39m Compiled in 124ms
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[]
+ GET /groups [32m200[39m in 42ms[2m (next.js: 6ms, application-code: 36ms)[22m
+[]
+ GET /groups [32m200[39m in 47ms[2m (next.js: 3ms, application-code: 44ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[32m[1m✓[22m[39m Compiled in 36ms
+[32m[1m✓[22m[39m Compiled in 22ms
+[32m[1m✓[22m[39m Compiled in 286ms
+ GET /groups [32m200[39m in 114ms[2m (next.js: 53ms, application-code: 60ms)[22m

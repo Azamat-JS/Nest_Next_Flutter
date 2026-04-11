@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Delete, Put, UseGuards, Req } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Put, UseGuards, Req, Query } from '@nestjs/common';
 import { GroupService } from './group.service';
 import { CreateGroupDto, UpdateGroupDto } from './dto/group.dto';
 import { JwtAuthGuard } from 'src/lib/guards/jwt.guard';
@@ -14,8 +14,8 @@ export class GroupController {
   }
 
   @Get('all')
-  findAll() {
-    return this.groupService.findAll();
+  findAll(@Query('offset') skip?: string, @Query('limit') take?: string) {
+    return this.groupService.findAll(skip, take);
   }
 
   @Get(':id')

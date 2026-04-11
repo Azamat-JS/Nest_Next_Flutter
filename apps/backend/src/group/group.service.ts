@@ -30,7 +30,7 @@ export class GroupService {
     return newGroup;
   }
 
-  async findAll() {
+  async findAll(skip?: string, take?: string) {
     return await this.prisma.groups.findMany({
       select: {
         id: true,
@@ -50,7 +50,9 @@ export class GroupService {
             email: true
           }
         },
-      }
+      },
+      skip: skip ? parseInt(skip) : undefined,
+      take: take ? parseInt(take) : undefined,
     })
   }
 

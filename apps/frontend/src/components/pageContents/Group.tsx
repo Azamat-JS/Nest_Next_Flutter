@@ -44,10 +44,18 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
+import {
+    Pagination,
+    PaginationContent,
+    PaginationEllipsis,
+    PaginationItem,
+    PaginationLink,
+    PaginationNext,
+    PaginationPrevious,
+} from "@/components/ui/pagination"
 import { TokenPayload } from "@/lib/types/token_payload"
 import { GroupDrawer } from "../Drawer"
 import { useRouter } from 'next/navigation';
-import Link from 'next/link';
 
 
 const GroupComponent = () => {
@@ -223,6 +231,30 @@ const GroupComponent = () => {
                 </TableBody>
 
             </Table>
+            <Pagination>
+                <PaginationContent>
+                    <PaginationItem>
+                        <PaginationPrevious href="#" />
+                    </PaginationItem>
+                    <PaginationItem>
+                        <PaginationLink href="#">1</PaginationLink>
+                    </PaginationItem>
+                    <PaginationItem>
+                        <PaginationLink href="#" isActive>
+                            2
+                        </PaginationLink>
+                    </PaginationItem>
+                    <PaginationItem>
+                        <PaginationLink href="#">3</PaginationLink>
+                    </PaginationItem>
+                    <PaginationItem>
+                        <PaginationEllipsis />
+                    </PaginationItem>
+                    <PaginationItem>
+                        <PaginationNext href="#" />
+                    </PaginationItem>
+                </PaginationContent>
+            </Pagination>
 
             {/* update group modal */}
             <Dialog open={openUpdate} onOpenChange={setOpenUpdate}>
