@@ -15,7 +15,7 @@ export const Header = () => {
     const pathname = usePathname();
     return (
         <div className="w-full h-16 flex items-center justify-between mt-5 px-10">
-            <h1 className="text-2xl font-bold">My App</h1>
+            <h1 className="text-2xl font-bold">Educational Center</h1>
             <div className="flex gap-4 text-xl mr-5">
                 {navLinks.map((link) => {
                     const isActive = pathname === link.href;

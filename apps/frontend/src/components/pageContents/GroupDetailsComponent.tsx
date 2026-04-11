@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/table"
 import { TokenPayload } from '@/lib/types/token_payload';
 import { Menu } from 'lucide-react';
+import { Badge } from '../ui/badge';
 
 const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
     const [group, setGroup] = useState<GroupType>();
@@ -44,8 +45,8 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
     return (
         <div className='flex flex-col w-full'>
             <header className='flex items-center gap-6 justify-center text-center'>
-                <h1 className='font-bold text-3xl text-center'>Group: {group?.name}</h1>
-                <h2 className='font-medium text-xl text-center'>Teacher: {group?.teacher?.username}</h2>
+                <Badge className='w-40 h-8 font-semibold text-lg'>{group?.name}</Badge> -
+                <Badge className='w-40 h-8 text-lg' variant="outline">Teacher: {group?.teacher?.username}</Badge>
             </header>
             <Table>
                 <TableCaption>Students of the group.</TableCaption>

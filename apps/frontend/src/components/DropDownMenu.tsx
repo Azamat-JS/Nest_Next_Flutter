@@ -10,7 +10,7 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { useAuthStore } from "@/lib/stores/authStore"
-import { Menu } from "lucide-react"
+import { Menu, LogOut, User, Settings } from "lucide-react"
 import { useRouter } from "next/navigation"
 
 export function DropdownMenuDemo() {
@@ -33,16 +33,16 @@ export function DropdownMenuDemo() {
                 <DropdownMenuGroup>
                     <DropdownMenuLabel>My Account</DropdownMenuLabel>
                     <DropdownMenuItem onClick={handleLogout}>
+                        <LogOut className="h-4 w-4" />
                         Logout
-                        <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
                     </DropdownMenuItem>
                     <DropdownMenuItem onClick={() => router.push('/profile')}>
+                        <User className="w-4 h-4" />
                         Profile
-                        <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
                     </DropdownMenuItem>
                     <DropdownMenuItem>
+                        <Settings className="h-4 w-4" />
                         Settings
-                        <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
                     </DropdownMenuItem>
                 </DropdownMenuGroup>
             </DropdownMenuContent>
