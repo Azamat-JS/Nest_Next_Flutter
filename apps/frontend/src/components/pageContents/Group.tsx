@@ -194,7 +194,8 @@ const GroupComponent = () => {
                                     <DropdownMenuContent align="start">
                                         <DropdownMenuGroup>
                                             <DropdownMenuItem
-                                                onClick={() => {
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
                                                     setSelectedGroup(u);
                                                     setSelectedTeacher(u.teacher ?? null);
                                                     setOpenUpdate(true);
@@ -204,7 +205,8 @@ const GroupComponent = () => {
                                             </DropdownMenuItem>
 
                                             <DropdownMenuItem
-                                                onClick={() => {
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
                                                     setOpenDelete(true);
                                                     setSelectedGroup(u);
                                                 }}

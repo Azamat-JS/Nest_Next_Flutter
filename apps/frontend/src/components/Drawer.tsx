@@ -70,6 +70,8 @@ export function GroupDrawer({ openCreate, setOpenCreate, teachers, students, onG
         },
     })
 
+    console.log(students)
+
     return (
         <Drawer direction="right" open={openCreate} onOpenChange={setOpenCreate}>
             <DrawerTrigger asChild>

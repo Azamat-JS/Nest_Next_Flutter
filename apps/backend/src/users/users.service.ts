@@ -56,6 +56,7 @@ export class UsersService {
     async getAllStudents() {
         return await this.prisma.users.findMany({
             where: { role: "student" }, select: {
+                id: true,
                 username: true,
                 email: true,
                 avatarUrl: true,
