@@ -1,5 +1,5 @@
 'use client'
-import React from 'react';
+import { useSearchParams } from "next/navigation"
 import {
     Table,
     TableBody,
@@ -60,6 +60,9 @@ import { useRouter } from 'next/navigation';
 
 const GroupComponent = () => {
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const page = searchParams.get('page') ?? 1;
+    const limit = searchParams.get('limit') ?? 10;
     const token = useAuthStore((state) => state.token);
     const [groups, setGroups] = useState<GroupType[]>([]);
     const [teachers, setTeachers] = useState<TokenPayload[]>([]);
@@ -75,7 +78,7 @@ const GroupComponent = () => {
 
     const getGroups = async () => {
         try {
-            const res = await axios.get(`${API}/group/all?page=${2}&limit=${3}`, { headers: { Authorization: `Bearer ${token}` } })
+            const res = await axios.get(`${API}/group/all?page=${page}&limit=${limit}`, { headers: { Authorization: `Bearer ${token}` } })
             if (res.status === 200) {
                 setGroups(res.data.data);
             }
