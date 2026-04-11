@@ -90,7 +90,7 @@ const GroupComponent = () => {
             const res = await axios.get(`${API}/users/teachers`, { headers: { Authorization: `Bearer ${token}` } });
             return res.data;
         },
-        enabled: !!token && (openCreate || openUpdate),
+        enabled: !!token,
         staleTime: 1000 * 60 * 5,
     })
 
@@ -100,12 +100,12 @@ const GroupComponent = () => {
             const res = await axios.get(`${API}/users/students`, { headers: { Authorization: `Bearer ${token}` } });
             return res.data;
         },
-        enabled: !!token && (openCreate || openUpdate),
+        enabled: !!token,
         staleTime: 1000 * 60 * 5,
     })
 
-    const students: TokenPayload[] = studentData?.data ?? [];
-    const teachers: TokenPayload[] = teacherData?.data ?? [];
+    const students: TokenPayload[] = studentData ?? [];
+    const teachers: TokenPayload[] = teacherData ?? [];
 
 
     const handleUpdateGroup = async (group: GroupType) => {
