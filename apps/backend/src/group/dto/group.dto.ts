@@ -1,4 +1,5 @@
-import { ArrayUnique, IsArray, IsNotEmpty, IsOptional, IsString } from "class-validator";
+import { Type } from "class-transformer";
+import { ArrayUnique, IsArray, IsInt, IsNotEmpty, IsOptional, IsString, Min } from "class-validator";
 
 export class CreateGroupDto {
     @IsNotEmpty()
@@ -30,4 +31,25 @@ export class UpdateGroupDto {
     @ArrayUnique()
     @IsString({ each: true })
     studentIds?: string[];
+}
+
+
+export class PaginationDto {
+    @IsOptional()
+    @Type(() => Number)
+    @IsInt()
+    @Min(0)
+    offset?: number;
+
+    @IsOptional()
+    @Type(() => Number)
+    @IsInt()
+    @Min(1)
+    limit?: number;
+
+    @IsOptional()
+    @Type(() => Number)
+    @IsInt()
+    @Min(1)
+    page?: number;
 }

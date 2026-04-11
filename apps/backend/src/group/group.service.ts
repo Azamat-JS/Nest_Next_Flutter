@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreateGroupDto, UpdateGroupDto } from './dto/group.dto';
+import { CreateGroupDto, PaginationDto, UpdateGroupDto } from './dto/group.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
@@ -30,30 +30,47 @@ export class GroupService {
     return newGroup;
   }
 
-  async findAll(skip?: string, take?: string) {
-    return await this.prisma.groups.findMany({
-      select: {
-        id: true,
-        name: true,
-        teacherId: true,
-        createdAt: true,
-        teacher: {
-          select: {
-            id: true,
-            username: true
-          }
+  async findAll(query: PaginationDto) {
+    const { limit = 10, page = 1 } = query;
+
+    const skip = (page - 1) * limit;
+
+    const [data, total] = await Promise.all([
+      await this.prisma.groups.findMany({
+        skip,
+        take: limit,
+        select: {
+          id: true,
+          name: true,
+          teacherId: true,
+          createdAt: true,
+          teacher: {
+            select: {
+              id: true,
+              username: true
+            }
+          },
+          students: {
+            select: {
+              id: true,
+              username: true,
+              email: true
+            }
+          },
         },
-        students: {
-          select: {
-            id: true,
-            username: true,
-            email: true
-          }
-        },
-      },
-      skip: skip ? parseInt(skip) : undefined,
-      take: take ? parseInt(take) : undefined,
-    })
+      }),
+      this.prisma.groups.count(),
+    ]);
+
+    return {
+      data,
+      meta: {
+        total,
+        page,
+        last_page: Math.ceil(total / limit),
+        limit,
+      }
+    }
   }
 
   async findOne(id: string) {
