@@ -31,7 +31,7 @@ import {
     DialogHeader,
     DialogTitle,
 } from "@/components/ui/dialog"
-import { Field, FieldGroup } from "@/components/ui/field"
+import { Field, FieldGroup, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { GroupType, PaginationType } from "@/lib/types/groups"
@@ -64,8 +64,6 @@ const GroupComponent = () => {
     const page = Number(searchParams.get('page') ?? 1);
     const limit = Number(searchParams.get('limit') ?? 10);
     const token = useAuthStore((state) => state.token);
-    const [teachers, setTeachers] = useState<TokenPayload[]>([]);
-    const [students, setStudents] = useState<TokenPayload[]>([]);
     const [selectedTeacher, setSelectedTeacher] = useState<TokenPayload | null>(null);
     const API = process.env.NEXT_PUBLIC_API_URL;
     const [openUpdate, setOpenUpdate] = useState(false);
@@ -84,8 +82,30 @@ const GroupComponent = () => {
         },
         enabled: !!token,
         staleTime: 1000 * 60 * 5,
-
     })
+
+    const { data: teacherData, isLoading: teacherLoading } = useQuery({
+        queryKey: ['teachers'],
+        queryFn: async () => {
+            const res = await axios.get(`${API}/users/teachers`, { headers: { Authorization: `Bearer ${token}` } });
+            return res.data;
+        },
+        enabled: !!token && (openCreate || openUpdate),
+        staleTime: 1000 * 60 * 5,
+    })
+
+    const { data: studentData, isLoading: studentLoading } = useQuery({
+        queryKey: ['students'],
+        queryFn: async () => {
+            const res = await axios.get(`${API}/users/students`, { headers: { Authorization: `Bearer ${token}` } });
+            return res.data;
+        },
+        enabled: !!token && (openCreate || openUpdate),
+        staleTime: 1000 * 60 * 5,
+    })
+
+    const students: TokenPayload[] = studentData?.data ?? [];
+    const teachers: TokenPayload[] = teacherData?.data ?? [];
 
 
     const handleUpdateGroup = async (group: GroupType) => {
@@ -104,7 +124,8 @@ const GroupComponent = () => {
                 toast.success('Group data updated!');
                 setOpenUpdate(false);
                 await queryClient.invalidateQueries({
-                    queryKey: ['groups']
+                    queryKey: ['groups'],
+                    exact: false,
                 })
             }
         } catch (error: any) {
@@ -119,7 +140,8 @@ const GroupComponent = () => {
                 toast.success('Group deleted successfully!')
                 setOpenDelete(false);
                 await queryClient.invalidateQueries({
-                    queryKey: ['groups']
+                    queryKey: ['groups'],
+                    exact: false,
                 })
             }
         } catch (error: any) {
@@ -127,23 +149,6 @@ const GroupComponent = () => {
         }
     }
 
-    const getAllTeachers = async () => {
-        try {
-            const res = await axios.get(`${API}/users/teachers`, { headers: { Authorization: `Bearer ${token}` } });
-            setTeachers(res.data);
-        } catch (error: any) {
-            toast.error(error.response?.data?.message ?? 'Something went wrong')
-        }
-    }
-
-    const getAllStudents = async () => {
-        try {
-            const res = await axios.get(`${API}/users/students`, { headers: { Authorization: `Bearer ${token}` } });
-            setStudents(res.data);
-        } catch (error: any) {
-            toast.error(error.response?.data?.message ?? 'Something went wrong')
-        }
-    }
 
     useEffect(() => {
         if (selectedGroup && students.length > 0) {
@@ -155,22 +160,13 @@ const GroupComponent = () => {
         }
     }, [selectedGroup, students]);
 
-    useEffect(() => {
-        if (openCreate && token) {
-            getAllTeachers();
-            getAllStudents();
-        }
-    }, [openCreate, token]);
-
-    useEffect(() => {
-        if (openUpdate && token) {
-            getAllTeachers();
-            getAllStudents();
-        }
-    }, [openUpdate, token]);
-
     const groups: GroupType[] = data?.data ?? []
     const meta: PaginationType = data?.meta ?? {}
+    const lastPage = meta?.last_page ?? 1;
+
+    if (isLoading) {
+        return <div>Loading...</div>
+    }
 
 
     return (
@@ -191,7 +187,7 @@ const GroupComponent = () => {
                     {groups.map((u, idx) => (
                         <TableRow key={u.id} className="cursor-pointer hover:bg-muted/50"
                             onClick={() => router.push(`/groups/${u.id}`)}>
-                            <TableCell className="text-center">{idx + 1}</TableCell>
+                            <TableCell className="text-center">{(page - 1) * limit + idx + 1}</TableCell>
                             <TableCell className="text-center">{u.name}</TableCell>
 
                             <TableCell className="text-center">{u.teacher!.username}</TableCell>
@@ -234,23 +230,48 @@ const GroupComponent = () => {
                 </TableBody>
 
             </Table>
-            <Pagination>
-                <PaginationContent>
-                    <PaginationItem>
-                        <PaginationPrevious href="#" />
-                    </PaginationItem>
-                    {Array.from({ length: meta?.last_page ?? 1 }).map((_, idx) => (
-                        <PaginationItem key={idx}>
-                            <PaginationLink href={`?page=${idx + 1}&limit=${limit}`} isActive={page === idx + 1}>{idx + 1}</PaginationLink>
-                        </PaginationItem>
-                    )
-                    )}
 
-                    <PaginationItem>
-                        <PaginationNext href="#" />
-                    </PaginationItem>
-                </PaginationContent>
-            </Pagination>
+            {/* pagination */}
+            <div className="flex items-center justify-between gap-4">
+                <Field orientation="horizontal" className="w-fit">
+                    <FieldLabel htmlFor="select-rows-per-page">Rows per page</FieldLabel>
+                    <Select value={String(limit)} onValueChange={(val) => {
+                        const params = new URLSearchParams(searchParams.toString());
+                        params.set('limit', val);
+                        params.set('page', '1');
+                        router.push(`?${params.toString()}`);
+                    }}>
+                        <SelectTrigger className="w-20" id="select-rows-per-page">
+                            <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent align="start">
+                            <SelectGroup>
+                                <SelectItem value="5" >5</SelectItem>
+                                <SelectItem value="10">10</SelectItem>
+                                <SelectItem value="15">15</SelectItem>
+                                <SelectItem value="20">20</SelectItem>
+                            </SelectGroup>
+                        </SelectContent>
+                    </Select>
+                </Field>
+                <Pagination>
+                    <PaginationContent>
+                        <PaginationItem>
+                            <PaginationPrevious href={`?page=${Math.max(1, page - 1)}&limit=${limit}`} />
+                        </PaginationItem>
+                        {Array.from({ length: lastPage }).map((_, idx) => (
+                            <PaginationItem key={idx}>
+                                <PaginationLink href={`?page=${idx + 1}&limit=${limit}`} isActive={page === idx + 1}>{idx + 1}</PaginationLink>
+                            </PaginationItem>
+                        )
+                        )}
+
+                        <PaginationItem>
+                            <PaginationNext href={`?page=${Math.min(lastPage, page + 1)}&limit=${limit}`} />
+                        </PaginationItem>
+                    </PaginationContent>
+                </Pagination>
+            </div>
 
             {/* update group modal */}
             <Dialog open={openUpdate} onOpenChange={setOpenUpdate}>
@@ -362,7 +383,8 @@ const GroupComponent = () => {
             <div className="w-full flex justify-end p-5">
 
                 <GroupDrawer openCreate={openCreate} setOpenCreate={setOpenCreate} teachers={teachers} students={students} onGroupCreated={() => queryClient.invalidateQueries({
-                    queryKey: ['groups']
+                    queryKey: ['groups'],
+                    exact: false,
                 })} />
             </div>
         </div>

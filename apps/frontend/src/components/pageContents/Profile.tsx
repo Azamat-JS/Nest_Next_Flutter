@@ -36,7 +36,6 @@ const Profile = () => {
     if (!token) {
         return <div>Please log in to view your profile.</div>
     }
-    console.log(user)
     return (
         <div className='flex min-h-screen justify-center text-center'>
             {user ? (

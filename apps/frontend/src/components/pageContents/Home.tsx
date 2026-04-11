@@ -66,12 +66,10 @@ const Home = () => {
             getUsers();
         }
     }, [token]);
-    console.log(selectedUser)
 
     const handleUpdateUser = async (user: TokenPayload) => {
         try {
             const res = await axios.put(`${API}/users/${user.id}`, user, { headers: { Authorization: `Bearer ${token}` } });
-            console.log(user.id)
             if (res.status === 200) {
                 toast.success('User data updated!')
                 setOpenUpdate(false);
