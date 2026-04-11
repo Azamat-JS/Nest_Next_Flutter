@@ -34,7 +34,7 @@ import {
 import { Field, FieldGroup } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { GroupType } from "@/lib/types/groups"
+import { GroupType, PaginationType } from "@/lib/types/groups"
 import {
     Select,
     SelectContent,
@@ -47,7 +47,6 @@ import {
 import {
     Pagination,
     PaginationContent,
-    PaginationEllipsis,
     PaginationItem,
     PaginationLink,
     PaginationNext,
@@ -56,15 +55,15 @@ import {
 import { TokenPayload } from "@/lib/types/token_payload"
 import { GroupDrawer } from "../Drawer"
 import { useRouter } from 'next/navigation';
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 
 
 const GroupComponent = () => {
     const router = useRouter();
     const searchParams = useSearchParams();
-    const page = searchParams.get('page') ?? 1;
-    const limit = searchParams.get('limit') ?? 10;
+    const page = Number(searchParams.get('page') ?? 1);
+    const limit = Number(searchParams.get('limit') ?? 10);
     const token = useAuthStore((state) => state.token);
-    const [groups, setGroups] = useState<GroupType[]>([]);
     const [teachers, setTeachers] = useState<TokenPayload[]>([]);
     const [students, setStudents] = useState<TokenPayload[]>([]);
     const [selectedTeacher, setSelectedTeacher] = useState<TokenPayload | null>(null);
@@ -74,26 +73,20 @@ const GroupComponent = () => {
     const [openCreate, setOpenCreate] = useState(false);
     const [selectedGroup, setSelectedGroup] = useState<GroupType | null>(null);
     const [selectedStudentIds, setSelectedStudentIds] = useState<string[]>([]);
+    const queryClient = useQueryClient();
 
 
-    const getGroups = async () => {
-        try {
+    const { data, isLoading } = useQuery({
+        queryKey: ['groups', page, limit, token],
+        queryFn: async () => {
             const res = await axios.get(`${API}/group/all?page=${page}&limit=${limit}`, { headers: { Authorization: `Bearer ${token}` } })
-            if (res.status === 200) {
-                setGroups(res.data.data);
-            }
-        } catch (error: any) {
-            toast.error(
-                error.response?.data?.message ?? 'Something went wrong'
-            );
-        }
-    };
+            return res.data
+        },
+        enabled: !!token,
+        staleTime: 1000 * 60 * 5,
 
-    useEffect(() => {
-        if (token) {
-            getGroups();
-        }
-    }, [token]);
+    })
+
 
     const handleUpdateGroup = async (group: GroupType) => {
         try {
@@ -110,7 +103,9 @@ const GroupComponent = () => {
             if (res.status === 200) {
                 toast.success('Group data updated!');
                 setOpenUpdate(false);
-                await getGroups();
+                await queryClient.invalidateQueries({
+                    queryKey: ['groups']
+                })
             }
         } catch (error: any) {
             toast.error(error.response?.data?.message ?? 'Something went wrong');
@@ -123,7 +118,9 @@ const GroupComponent = () => {
             if (res.status === 200) {
                 toast.success('Group deleted successfully!')
                 setOpenDelete(false);
-                await getGroups();
+                await queryClient.invalidateQueries({
+                    queryKey: ['groups']
+                })
             }
         } catch (error: any) {
             toast.error(error.response?.data?.message ?? 'Something went wrong')
@@ -171,6 +168,9 @@ const GroupComponent = () => {
             getAllStudents();
         }
     }, [openUpdate, token]);
+
+    const groups: GroupType[] = data?.data ?? []
+    const meta: PaginationType = data?.meta ?? {}
 
 
     return (
@@ -239,20 +239,13 @@ const GroupComponent = () => {
                     <PaginationItem>
                         <PaginationPrevious href="#" />
                     </PaginationItem>
-                    <PaginationItem>
-                        <PaginationLink href="#">1</PaginationLink>
-                    </PaginationItem>
-                    <PaginationItem>
-                        <PaginationLink href="#" isActive>
-                            2
-                        </PaginationLink>
-                    </PaginationItem>
-                    <PaginationItem>
-                        <PaginationLink href="#">3</PaginationLink>
-                    </PaginationItem>
-                    <PaginationItem>
-                        <PaginationEllipsis />
-                    </PaginationItem>
+                    {Array.from({ length: meta?.last_page ?? 1 }).map((_, idx) => (
+                        <PaginationItem key={idx}>
+                            <PaginationLink href={`?page=${idx + 1}&limit=${limit}`} isActive={page === idx + 1}>{idx + 1}</PaginationLink>
+                        </PaginationItem>
+                    )
+                    )}
+
                     <PaginationItem>
                         <PaginationNext href="#" />
                     </PaginationItem>
@@ -368,7 +361,9 @@ const GroupComponent = () => {
             </Dialog>
             <div className="w-full flex justify-end p-5">
 
-                <GroupDrawer openCreate={openCreate} setOpenCreate={setOpenCreate} teachers={teachers} students={students} onGroupCreated={getGroups} />
+                <GroupDrawer openCreate={openCreate} setOpenCreate={setOpenCreate} teachers={teachers} students={students} onGroupCreated={() => queryClient.invalidateQueries({
+                    queryKey: ['groups']
+                })} />
             </div>
         </div>
 

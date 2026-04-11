@@ -6,6 +6,14 @@ export type GroupType = {
     teacherId: string;
     teacher: TokenPayload | null;
     students: TokenPayload[];
+    createdAt: Date;
+}
+
+export type PaginationType = {
+    total: number;
+    page: number;
+    last_page: number;
+    limit: number;
 }
 
 
