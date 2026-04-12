@@ -15,6 +15,8 @@ export class UsersService {
 
         const [data, total] = await Promise.all([
             await this.prisma.users.findMany({
+                skip,
+                take: limit,
                 select: {
                     id: true,
                     email: true,

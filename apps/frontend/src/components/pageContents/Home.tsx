@@ -13,7 +13,7 @@ import { TokenPayload } from "@/lib/types/token_payload"
 import { useAuthStore } from "@/lib/stores/authStore"
 import axios from "axios"
 import { jwtDecode } from "jwt-decode"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { toast } from "sonner"
 import { Button } from "@/components/ui/button"
 import {
@@ -58,7 +58,6 @@ import { PaginationType } from "@/lib/types/groups"
 
 const Home = () => {
     const token = useAuthStore((state) => state.token);
-    const [users, setUsers] = useState<TokenPayload[]>([]);
     const user = token ? jwtDecode<TokenPayload>(token) : null;
     const API = process.env.NEXT_PUBLIC_API_URL;
     const [openUpdate, setOpenUpdate] = useState(false);
@@ -112,8 +111,13 @@ const Home = () => {
         }
     })
 
+    const users: TokenPayload[] = data?.data ?? [];
     const meta: PaginationType = data?.meta ?? {}
     const lastPage = meta?.last_page ?? 1;
+
+    if (isLoading) {
+        return <div>Loading...</div>
+    }
 
     return (
         <div className="mt-5">
@@ -132,7 +136,7 @@ const Home = () => {
                     {users.map((u, idx) => (
                         <TableRow key={u.id}>
                             <TableCell className={user?.username === u.username ? "font-medium text-center bg-green-300 text-green-600" : "text-center"}>
-                                {idx + 1}
+                                {(page - 1) * limit + idx + 1}
                             </TableCell>
                             <TableCell className={user?.username === u.username ? "font-medium text-center bg-green-300 text-green-600" : "text-center"}>
                                 {u.username}
