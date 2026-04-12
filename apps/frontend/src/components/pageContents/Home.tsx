@@ -53,7 +53,7 @@ import { Field, FieldGroup, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useQuery, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { PaginationType } from "@/lib/types/groups"
 
 const Home = () => {
@@ -66,55 +66,51 @@ const Home = () => {
     const [selectedUser, setSelectedUser] = useState<TokenPayload | null>(null);
     const router = useRouter();
     const searchParams = useSearchParams();
+    const queryClient = useQueryClient();
     const page = Number(searchParams.get('page') ?? 1);
     const limit = Number(searchParams.get('limit') ?? 10);
 
-    const getUsers = async () => {
-        try {
-            const res = await axios.get(`${API}/users`, { headers: { Authorization: `Bearer ${token}` } })
-            if (res.status === 200) {
-                setUsers(res.data);
-            }
-        } catch (error: any) {
-            toast.error(
-                error.response?.data?.message ?? 'Something went wrong'
-            );
-        }
-    };
+    const { data, isLoading } = useQuery({
+        queryKey: ['users', page, limit, token],
+        queryFn: async () => {
+            const res = await axios.get(`${API}/users?page=${page}&limit=${limit}`, { headers: { Authorization: `Bearer ${token}` } })
+            return res.data
+        },
+        enabled: !!token,
+        staleTime: 1000 * 60 * 5,
+    })
 
-    useEffect(() => {
-
-        if (token) {
-            getUsers();
+    const updateUserMutation = useMutation({
+        mutationFn: async (user: TokenPayload) => {
+            return axios.put(`${API}/users/${user.id}`, user, { headers: { Authorization: `Bearer ${token}` } });
+        },
+        onSuccess: () => {
+            toast.success('User data updated!');
+            setOpenUpdate(false);
+            queryClient.invalidateQueries({
+                queryKey: ['users'],
+            })
+        },
+        onError: (error: any) => {
+            toast.error(error.response?.data?.message ?? 'Something went wrong');
         }
-    }, [token]);
+    })
 
-    const handleUpdateUser = async (user: TokenPayload) => {
-        try {
-            const res = await axios.put(`${API}/users/${user.id}`, user, { headers: { Authorization: `Bearer ${token}` } });
-            if (res.status === 200) {
-                toast.success('User data updated!')
-                setOpenUpdate(false);
-                await getUsers();
-            }
-            return null;
-        } catch (error: any) {
-            toast.error(error.response?.data?.message ?? 'Something went wrong')
+    const deleteUserMutation = useMutation({
+        mutationFn: async (userId: string) => {
+            return axios.delete(`${API}/users/${userId}`, { headers: { Authorization: `Bearer ${token}` } });
+        },
+        onSuccess: () => {
+            toast.success('User deleted successfully!');
+            setOpenDelete(false);
+            queryClient.invalidateQueries({
+                queryKey: ['users'],
+            })
+        },
+        onError: (error: any) => {
+            toast.error(error.response?.data?.message ?? "Something went wrong")
         }
-    }
-
-    const handleDeleteUser = async (userId: string) => {
-        try {
-            const res = await axios.delete(`${API}/users/${userId}`, { headers: { Authorization: `Bearer ${token}` } })
-            if (res.status === 200) {
-                toast.success('User deleted successfully!')
-                setOpenDelete(false);
-                await getUsers();
-            }
-        } catch (error: any) {
-            toast.error(error.response?.data?.message ?? 'Something went wrong')
-        }
-    }
+    })
 
     const meta: PaginationType = data?.meta ?? {}
     const lastPage = meta?.last_page ?? 1;
@@ -244,7 +240,7 @@ const Home = () => {
                         <DialogClose>
                             Cancel
                         </DialogClose>
-                        <Button type="submit" onClick={() => selectedUser && handleUpdateUser(selectedUser)}>Update</Button>
+                        <Button type="submit" onClick={() => selectedUser && updateUserMutation.mutate(selectedUser)}>Update</Button>
                     </DialogFooter>
                 </DialogContent>
             </Dialog>
@@ -263,7 +259,7 @@ const Home = () => {
                             <DialogClose>
                                 Cancel
                             </DialogClose>
-                            <Button type="submit" onClick={() => selectedUser && handleDeleteUser(selectedUser.id)} variant="destructive">Delete</Button>
+                            <Button type="submit" onClick={() => selectedUser && deleteUserMutation.mutate(selectedUser.id)} variant="destructive">Delete</Button>
                         </DialogFooter>
                     </DialogContent>
                 </form>
