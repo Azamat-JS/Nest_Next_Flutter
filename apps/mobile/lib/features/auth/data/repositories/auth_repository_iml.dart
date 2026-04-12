@@ -20,7 +20,7 @@ class AuthRepositoryIml implements AuthRepository {
     } on ServerException catch (e) {
       return left(Failure(e.message));
     } catch (e) {
-      return left(Failure('An unexpected error occurred: $e'));
+      return left(Failure('Unexpected error occurred'));
     }
   }
 
@@ -58,7 +58,7 @@ class AuthRepositoryIml implements AuthRepository {
       await remoteDataSource.signOut();
       return right(null);
     } catch (e) {
-      return left(Failure('An unexpected error occurred: $e'));
+      return left(Failure('Unexpected error occurred'));
     }
   }
 
@@ -71,7 +71,7 @@ class AuthRepositoryIml implements AuthRepository {
     } on ServerException catch (e) {
       return left(Failure(e.message));
     } catch (e) {
-      return left(Failure('An unexpected error occurred: $e'));
+      return left(Failure('Unexpected error occurred'));
     }
   }
 }
