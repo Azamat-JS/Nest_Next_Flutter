@@ -5,7 +5,6 @@ import {
     TableBody,
     TableCaption,
     TableCell,
-    TableFooter,
     TableHead,
     TableHeader,
     TableRow,
@@ -34,9 +33,28 @@ import {
     DialogHeader,
     DialogTitle,
 } from "@/components/ui/dialog"
-import { Field, FieldGroup } from "@/components/ui/field"
+import {
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select"
+import {
+    Pagination,
+    PaginationContent,
+    PaginationItem,
+    PaginationLink,
+    PaginationNext,
+    PaginationPrevious,
+} from "@/components/ui/pagination"
+import { Field, FieldGroup, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useQuery, useQueryClient } from '@tanstack/react-query'
+import { PaginationType } from "@/lib/types/groups"
 
 const Home = () => {
     const token = useAuthStore((state) => state.token);
@@ -46,6 +64,10 @@ const Home = () => {
     const [openUpdate, setOpenUpdate] = useState(false);
     const [openDelete, setOpenDelete] = useState(false);
     const [selectedUser, setSelectedUser] = useState<TokenPayload | null>(null);
+    const router = useRouter();
+    const searchParams = useSearchParams();
+    const page = Number(searchParams.get('page') ?? 1);
+    const limit = Number(searchParams.get('limit') ?? 10);
 
     const getUsers = async () => {
         try {
@@ -93,6 +115,10 @@ const Home = () => {
             toast.error(error.response?.data?.message ?? 'Something went wrong')
         }
     }
+
+    const meta: PaginationType = data?.meta ?? {}
+    const lastPage = meta?.last_page ?? 1;
+
     return (
         <div className="mt-5">
             <Table key={user?.id} className="table-fixed">
@@ -142,6 +168,53 @@ const Home = () => {
                     ))}
                 </TableBody>
             </Table>
+
+            {/* pagination */}
+            <div className="grid grid-cols-2 items-center mt-4">
+
+                <div className="flex justify-center">
+                    <Field orientation="horizontal" className="w-fit">
+                        <FieldLabel htmlFor="select-rows-per-page">Rows per page</FieldLabel>
+                        <Select value={String(limit)} onValueChange={(val) => {
+                            const params = new URLSearchParams(searchParams.toString());
+                            params.set('limit', val);
+                            params.set('page', '1');
+                            router.push(`?${params.toString()}`);
+                        }}>
+                            <SelectTrigger className="w-20" id="select-rows-per-page">
+                                <SelectValue />
+                            </SelectTrigger>
+                            <SelectContent align="start">
+                                <SelectGroup>
+                                    <SelectItem value="5" >5</SelectItem>
+                                    <SelectItem value="10">10</SelectItem>
+                                    <SelectItem value="15">15</SelectItem>
+                                    <SelectItem value="20">20</SelectItem>
+                                </SelectGroup>
+                            </SelectContent>
+                        </Select>
+                    </Field>
+                </div>
+                <div className="flex justify-end">
+                    <Pagination>
+                        <PaginationContent>
+                            <PaginationItem>
+                                <PaginationPrevious href={`?page=${Math.max(1, page - 1)}&limit=${limit}`} />
+                            </PaginationItem>
+                            {Array.from({ length: lastPage }).map((_, idx) => (
+                                <PaginationItem key={idx}>
+                                    <PaginationLink href={`?page=${idx + 1}&limit=${limit}`} isActive={page === idx + 1}>{idx + 1}</PaginationLink>
+                                </PaginationItem>
+                            )
+                            )}
+
+                            <PaginationItem>
+                                <PaginationNext href={`?page=${Math.min(lastPage, page + 1)}&limit=${limit}`} />
+                            </PaginationItem>
+                        </PaginationContent>
+                    </Pagination>
+                </div>
+            </div>
 
             {/* update user modal */}
             <Dialog open={openUpdate} onOpenChange={setOpenUpdate}>

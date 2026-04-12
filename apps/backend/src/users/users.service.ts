@@ -3,20 +3,37 @@ import { Prisma } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
+import { PaginationDto } from 'src/group/dto/group.dto';
 
 @Injectable()
 export class UsersService {
     constructor(private readonly prisma: PrismaService, private readonly jwtService: JwtService) { }
 
-    async getAllUsers() {
-        return this.prisma.users.findMany({
-            select: {
-                id: true,
-                email: true,
-                username: true,
-                role: true,
+    async getAllUsers(query: PaginationDto) {
+        const { limit = 10, page = 1 } = query;
+        const skip = (page - 1) * limit;
+
+        const [data, total] = await Promise.all([
+            await this.prisma.users.findMany({
+                select: {
+                    id: true,
+                    email: true,
+                    username: true,
+                    role: true,
+                }
+            }),
+            this.prisma.users.count(),
+        ]);
+
+        return {
+            data,
+            meta: {
+                total,
+                page,
+                last_page: Math.ceil(total / limit),
+                limit,
             }
-        });
+        }
     }
 
     async getMyProfile(userId: string) {
