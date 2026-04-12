@@ -1,4 +1,3 @@
-import 'package:mobile/core/common/entities/user_entity.dart';
 import 'package:mobile/features/auth/data/models/user_model.dart';
 import 'package:mobile/features/groups/domain/entities/group_entity.dart';
 

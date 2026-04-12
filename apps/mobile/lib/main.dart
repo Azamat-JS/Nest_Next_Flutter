@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:mobile/core/common/cubit/auth_check_cubit.dart';
 import 'package:mobile/features/auth/presentation/bloc/auth_bloc.dart';
 
@@ -10,6 +11,7 @@ import 'package:mobile/init_dependencies.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initDependencies();
+  await dotenv.load(fileName: ".env");
   runApp(
     MultiBlocProvider(
       providers: [
