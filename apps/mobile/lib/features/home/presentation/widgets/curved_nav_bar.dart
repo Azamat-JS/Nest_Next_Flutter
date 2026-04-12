@@ -30,7 +30,7 @@ class _CurvedNavBarState extends State<CurvedNavBar> {
         backgroundColor: Colors.transparent,
         color: Colors.purple,
         buttonBackgroundColor: Colors.amber,
-        height: 60,
+        height: 70,
         items: items,
         index: _selectedIndex,
         onTap: (index) {

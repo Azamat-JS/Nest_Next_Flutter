@@ -1,4 +1,4 @@
-import 'package:fpdart/src/either.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:mobile/core/errors/failures.dart';
 import 'package:mobile/core/usecase/usecase.dart';
 import 'package:mobile/core/common/entities/user_entity.dart';

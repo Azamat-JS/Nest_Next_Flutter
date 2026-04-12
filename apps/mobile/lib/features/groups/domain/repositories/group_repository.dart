@@ -1,0 +1,12 @@
+import 'package:fpdart/fpdart.dart';
+import 'package:mobile/core/errors/failures.dart';
+import 'package:mobile/features/groups/domain/entities/group_entity.dart';
+
+abstract interface class GroupRepository {
+  Future<Either<Failure, PaginatedGroupsEntity>> getGroups({
+    required int page,
+    required int limit,
+  });
+
+  Future<Either<Failure, GroupEntity>> getGroupById({required String id});
+}
