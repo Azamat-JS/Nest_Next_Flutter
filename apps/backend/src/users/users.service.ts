@@ -21,6 +21,7 @@ export class UsersService {
                     id: true,
                     email: true,
                     username: true,
+                    avatarUrl: true,
                     role: true,
                 }
             }),
@@ -44,6 +45,7 @@ export class UsersService {
                 id: true,
                 email: true,
                 username: true,
+                avatarUrl: true,
                 role: true,
             }
         });
@@ -59,6 +61,7 @@ export class UsersService {
                 id: true,
                 email: true,
                 username: true,
+                avatarUrl: true,
                 role: true
             }
         });
@@ -69,7 +72,15 @@ export class UsersService {
     }
 
     async getAllTeachers() {
-        return await this.prisma.users.findMany({ where: { role: "teacher" } });
+        return await this.prisma.users.findMany({
+            where: { role: "teacher" }, select: {
+                id: true,
+                username: true,
+                email: true,
+                avatarUrl: true,
+                role: true,
+            }
+        });
     }
 
     async getAllStudents() {
@@ -172,6 +183,9 @@ export class UsersService {
                 email: updatedUser.email,
                 username: updatedUser.username,
                 role: updatedUser.role,
+                avatarUrl: updatedUser.avatarUrl,
+                createdAt: updatedUser.createdAt,
+                updatedAt: updatedUser.updatedAt,
             },
         };
     }
