@@ -14,7 +14,7 @@ export class GroupService {
     const studentIds = createGroupDto.studentIds?.filter(Boolean) ?? [];
 
     const newGroup = await this.prisma.$transaction(async (tx) => {
-      const newGroup = await tx.groups.create({
+      const group = await tx.groups.create({
         data: {
           name: createGroupDto.name,
           teacher: {
@@ -27,11 +27,11 @@ export class GroupService {
         await tx.studentGroup.createMany({
           data: studentIds.map((studentId) => ({
             studentId,
-            groupId: newGroup.id,
+            groupId: group.id,
           }))
         })
       }
-
+      return group;
     })
 
     return newGroup;
@@ -168,9 +168,6 @@ export class GroupService {
                 id: updateGroupDto.teacherId,
               },
             },
-          }),
-
-          ...(studentIds && {
           }),
         },
       });
