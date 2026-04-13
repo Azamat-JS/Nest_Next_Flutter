@@ -5,9 +5,9 @@ import 'package:mobile/features/auth/data/datasourses/auth_remote_data_source.da
 import 'package:mobile/core/common/entities/user_entity.dart';
 import 'package:mobile/features/auth/domain/repositories/auth_repository.dart';
 
-class AuthRepositoryIml implements AuthRepository {
+class AuthRepositoryImpl implements AuthRepository {
   final AuthRemoteDataSource remoteDataSource;
-  AuthRepositoryIml(this.remoteDataSource);
+  AuthRepositoryImpl(this.remoteDataSource);
 
   @override
   Future<Either<Failure, UserEntity>> getCurrentUser() async {

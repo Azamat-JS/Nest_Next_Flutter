@@ -44,4 +44,6 @@ class PaginatedGroupsEntity {
       limit: limit ?? this.limit,
     );
   }
+
+  bool get hasMore => data.length < total;
 }

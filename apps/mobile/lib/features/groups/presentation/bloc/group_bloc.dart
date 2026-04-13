@@ -4,16 +4,13 @@ import 'package:mobile/core/errors/failures.dart';
 import 'package:mobile/features/groups/domain/entities/group_entity.dart';
 import 'package:mobile/features/groups/domain/usecases/group_all.dart';
 import 'package:mobile/features/groups/domain/usecases/group_by_id.dart';
+import 'package:mobile/features/groups/domain/usecases/group_use_case.dart';
 part 'group_event.dart';
 part 'group_state.dart';
 
 class GroupBloc extends Bloc<GroupEvent, GroupState> {
-  final GroupAll _groupAll;
-  final GroupById _groupById;
-  GroupBloc({required GroupAll groupAll, required GroupById groupById})
-    : _groupAll = groupAll,
-      _groupById = groupById,
-      super(GroupState()) {
+  final GroupUseCases _useCases;
+  GroupBloc(this._useCases) : super(GroupState()) {
     on<FetchGroups>(_onFetchGroups);
     on<FetchGroupById>(_onFetchGroupById);
     on<LoadMoreGroups>(_onLoadMoreGroups);
@@ -21,7 +18,7 @@ class GroupBloc extends Bloc<GroupEvent, GroupState> {
 
   void _onFetchGroups(FetchGroups event, Emitter<GroupState> emit) async {
     emit(state.copyWith(isLoading: true, clearFailure: true));
-    final res = await _groupAll(
+    final res = await _useCases.groupAll(
       GroupAllParams(page: event.page, limit: event.limit),
     );
     return res.fold(
@@ -32,7 +29,7 @@ class GroupBloc extends Bloc<GroupEvent, GroupState> {
 
   void _onFetchGroupById(FetchGroupById event, Emitter<GroupState> emit) async {
     emit(state.copyWith(isLoading: true, clearFailure: true));
-    final res = await _groupById(GroupByIdParams(id: event.id));
+    final res = await _useCases.groupById(GroupByIdParams(id: event.id));
     return res.fold(
       (fail) => emit(state.copyWith(isLoading: false, failure: fail)),
       (group) => emit(state.copyWith(isLoading: false, selectedGroup: group)),
@@ -41,8 +38,9 @@ class GroupBloc extends Bloc<GroupEvent, GroupState> {
 
   void _onLoadMoreGroups(LoadMoreGroups event, Emitter<GroupState> emit) async {
     if (state.isLoading) return;
+    if (state.groups?.hasMore == false) return;
     emit(state.copyWith(isLoading: true, clearFailure: true));
-    final res = await _groupAll(
+    final res = await _useCases.groupAll(
       GroupAllParams(page: event.nextPage, limit: 10),
     );
 
@@ -52,7 +50,11 @@ class GroupBloc extends Bloc<GroupEvent, GroupState> {
       final current = state.groups;
       final updatedGroups = current == null
           ? newGroups
-          : current.copyWith(data: [...current.data, ...newGroups.data]);
+          : current.copyWith(
+              data: [...current.data, ...newGroups.data],
+              page: newGroups.page,
+              total: newGroups.total,
+            );
 
       emit(state.copyWith(isLoading: false, groups: updatedGroups));
     });

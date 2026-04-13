@@ -3,7 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:mobile/core/common/cubit/auth_check_cubit.dart';
 import 'package:mobile/core/network/dio_client.dart';
 import 'package:mobile/features/auth/data/datasourses/auth_remote_data_source.dart';
-import 'package:mobile/features/auth/data/repositories/auth_repository_iml.dart';
+import 'package:mobile/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:mobile/features/auth/domain/repositories/auth_repository.dart';
 import 'package:mobile/features/auth/domain/usecases/current_user.dart';
 import 'package:mobile/features/auth/domain/usecases/logout_user.dart';
@@ -15,6 +15,7 @@ import 'package:mobile/features/groups/data/repositories/group_repository_impl.d
 import 'package:mobile/features/groups/domain/repositories/group_repository.dart';
 import 'package:mobile/features/groups/domain/usecases/group_all.dart';
 import 'package:mobile/features/groups/domain/usecases/group_by_id.dart';
+import 'package:mobile/features/groups/domain/usecases/group_use_case.dart';
 import 'package:mobile/features/groups/presentation/bloc/group_bloc.dart';
 
 final serviceLocator = GetIt.instance;
@@ -22,9 +23,10 @@ final serviceLocator = GetIt.instance;
 Future<void> initDependencies() async {
   serviceLocator.registerLazySingleton(() => DioClient());
   serviceLocator.registerLazySingleton(() => FlutterSecureStorage());
-  serviceLocator.registerLazySingleton(() => AuthCheckCubit());
+  serviceLocator.registerSingleton(() => AuthCheckCubit());
 
   _initAuth();
+  _initGroup();
 }
 
 void _initAuth() {
@@ -36,7 +38,7 @@ void _initAuth() {
       ),
     )
     ..registerLazySingleton<AuthRepository>(
-      () => AuthRepositoryIml(serviceLocator<AuthRemoteDataSource>()),
+      () => AuthRepositoryImpl(serviceLocator<AuthRemoteDataSource>()),
     )
     ..registerLazySingleton<UserSignUp>(
       () => UserSignUp(serviceLocator<AuthRepository>()),
@@ -62,17 +64,26 @@ void _initAuth() {
 }
 
 void _initGroup() {
-  serviceLocator..registerLazySingleton<GroupRemoteDataSource>(
-    () => GroupRemoteDataSourceImpl(serviceLocator<DioClient>()),
-  )
-  ..registerLazySingleton<GroupRepository>(() => GroupRepositoryImpl(serviceLocator<GroupRemoteDataSource>())
-  )
-  ..registerLazySingleton<GroupAll>(() => GroupAll(serviceLocator<GroupRepository>())
-  )
-  ..registerLazySingleton<GroupById>(() => GroupById(serviceLocator<GroupRepository>()))
-  ..registerFactory<GroupBloc>(
-    () => GroupBloc(
-      
+  serviceLocator
+    ..registerLazySingleton<GroupRemoteDataSource>(
+      () => GroupRemoteDataSourceImpl(serviceLocator<DioClient>()),
     )
-  )
+    ..registerLazySingleton<GroupRepository>(
+      () => GroupRepositoryImpl(serviceLocator<GroupRemoteDataSource>()),
+    )
+    ..registerLazySingleton<GroupAll>(
+      () => GroupAll(serviceLocator<GroupRepository>()),
+    )
+    ..registerLazySingleton<GroupById>(
+      () => GroupById(serviceLocator<GroupRepository>()),
+    )
+    ..registerLazySingleton(
+      () => GroupUseCases(
+        serviceLocator<GroupAll>(),
+        serviceLocator<GroupById>(),
+      ),
+    )
+    ..registerFactory<GroupBloc>(
+      () => GroupBloc(serviceLocator<GroupUseCases>()),
+    );
 }
