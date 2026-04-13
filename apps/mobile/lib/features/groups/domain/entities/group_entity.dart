@@ -30,4 +30,18 @@ class PaginatedGroupsEntity {
     required this.page,
     required this.limit,
   });
+
+  PaginatedGroupsEntity copyWith({
+    List<GroupEntity>? data,
+    int? total,
+    int? page,
+    int? limit,
+  }) {
+    return PaginatedGroupsEntity(
+      data: data ?? this.data,
+      total: total ?? this.total,
+      page: page ?? this.page,
+      limit: limit ?? this.limit,
+    );
+  }
 }

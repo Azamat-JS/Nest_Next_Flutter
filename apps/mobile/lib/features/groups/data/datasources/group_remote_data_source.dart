@@ -12,10 +12,10 @@ abstract interface class GroupRemoteDataSource {
   });
 }
 
-class GroupDataSourceImpl implements GroupRemoteDataSource {
+class GroupRemoteDataSourceImpl implements GroupRemoteDataSource {
   final DioClient dioClient;
 
-  GroupDataSourceImpl(this.dioClient);
+  GroupRemoteDataSourceImpl(this.dioClient);
 
   @override
   Future<GroupModel> getGroupById({required String id}) async {

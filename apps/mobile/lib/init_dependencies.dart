@@ -10,6 +10,12 @@ import 'package:mobile/features/auth/domain/usecases/logout_user.dart';
 import 'package:mobile/features/auth/domain/usecases/user_login.dart';
 import 'package:mobile/features/auth/domain/usecases/user_sign_up.dart';
 import 'package:mobile/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:mobile/features/groups/data/datasources/group_remote_data_source.dart';
+import 'package:mobile/features/groups/data/repositories/group_repository_impl.dart';
+import 'package:mobile/features/groups/domain/repositories/group_repository.dart';
+import 'package:mobile/features/groups/domain/usecases/group_all.dart';
+import 'package:mobile/features/groups/domain/usecases/group_by_id.dart';
+import 'package:mobile/features/groups/presentation/bloc/group_bloc.dart';
 
 final serviceLocator = GetIt.instance;
 
@@ -53,4 +59,20 @@ void _initAuth() {
         authCheckCubit: serviceLocator<AuthCheckCubit>(),
       ),
     );
+}
+
+void _initGroup() {
+  serviceLocator..registerLazySingleton<GroupRemoteDataSource>(
+    () => GroupRemoteDataSourceImpl(serviceLocator<DioClient>()),
+  )
+  ..registerLazySingleton<GroupRepository>(() => GroupRepositoryImpl(serviceLocator<GroupRemoteDataSource>())
+  )
+  ..registerLazySingleton<GroupAll>(() => GroupAll(serviceLocator<GroupRepository>())
+  )
+  ..registerLazySingleton<GroupById>(() => GroupById(serviceLocator<GroupRepository>()))
+  ..registerFactory<GroupBloc>(
+    () => GroupBloc(
+      
+    )
+  )
 }
