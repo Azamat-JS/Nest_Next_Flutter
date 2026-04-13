@@ -16,5 +16,6 @@ final class FetchGroupById extends GroupEvent {
 
 final class LoadMoreGroups extends GroupEvent {
   final int nextPage;
-  LoadMoreGroups(this.nextPage);
+  final int limit;
+  LoadMoreGroups(this.nextPage, this.limit);
 }

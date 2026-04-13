@@ -5,12 +5,14 @@ import 'package:mobile/features/groups/domain/entities/group_entity.dart';
 import 'package:mobile/features/groups/domain/usecases/group_all.dart';
 import 'package:mobile/features/groups/domain/usecases/group_by_id.dart';
 import 'package:mobile/features/groups/domain/usecases/group_use_case.dart';
+import 'package:mobile/features/groups/domain/usecases/merge_groups.dart';
 part 'group_event.dart';
 part 'group_state.dart';
 
 class GroupBloc extends Bloc<GroupEvent, GroupState> {
   final GroupUseCases _useCases;
-  GroupBloc(this._useCases) : super(GroupState()) {
+  final MergeGroupsService _merge;
+  GroupBloc(this._useCases, this._merge) : super(GroupState()) {
     on<FetchGroups>(_onFetchGroups);
     on<FetchGroupById>(_onFetchGroupById);
     on<LoadMoreGroups>(_onLoadMoreGroups);
@@ -21,7 +23,7 @@ class GroupBloc extends Bloc<GroupEvent, GroupState> {
     final res = await _useCases.groupAll(
       GroupAllParams(page: event.page, limit: event.limit),
     );
-    return res.fold(
+    res.fold(
       (failure) => emit(state.copyWith(isLoading: false, failure: failure)),
       (groups) => emit(state.copyWith(isLoading: false, groups: groups)),
     );
@@ -30,7 +32,7 @@ class GroupBloc extends Bloc<GroupEvent, GroupState> {
   void _onFetchGroupById(FetchGroupById event, Emitter<GroupState> emit) async {
     emit(state.copyWith(isLoading: true, clearFailure: true));
     final res = await _useCases.groupById(GroupByIdParams(id: event.id));
-    return res.fold(
+    res.fold(
       (fail) => emit(state.copyWith(isLoading: false, failure: fail)),
       (group) => emit(state.copyWith(isLoading: false, selectedGroup: group)),
     );
@@ -38,25 +40,23 @@ class GroupBloc extends Bloc<GroupEvent, GroupState> {
 
   void _onLoadMoreGroups(LoadMoreGroups event, Emitter<GroupState> emit) async {
     if (state.isLoading) return;
-    if (state.groups?.hasMore == false) return;
+    final groups = state.groups;
+    if (groups != null && !groups.hasMore) return;
     emit(state.copyWith(isLoading: true, clearFailure: true));
     final res = await _useCases.groupAll(
-      GroupAllParams(page: event.nextPage, limit: 10),
+      GroupAllParams(page: event.nextPage, limit: event.limit),
     );
 
     res.fold((fail) => emit(state.copyWith(isLoading: false, failure: fail)), (
       newGroups,
     ) {
-      final current = state.groups;
-      final updatedGroups = current == null
-          ? newGroups
-          : current.copyWith(
-              data: [...current.data, ...newGroups.data],
-              page: newGroups.page,
-              total: newGroups.total,
-            );
-
-      emit(state.copyWith(isLoading: false, groups: updatedGroups));
+      final old = state.groups;
+      if (old == null) {
+        emit(state.copyWith(isLoading: false, groups: newGroups));
+        return;
+      }
+      final updated = _merge(old, newGroups);
+      emit(state.copyWith(isLoading: false, groups: updated));
     });
   }
 }
