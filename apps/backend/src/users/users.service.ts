@@ -1,5 +1,5 @@
 import { BadRequestException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
+import { Prisma, UserRole } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
@@ -14,7 +14,7 @@ export class UsersService {
         const skip = (page - 1) * limit;
 
         const [data, total] = await Promise.all([
-            await this.prisma.users.findMany({
+            this.prisma.users.findMany({
                 skip,
                 take: limit,
                 select: {
@@ -73,7 +73,7 @@ export class UsersService {
 
     async getAllTeachers() {
         return await this.prisma.users.findMany({
-            where: { role: "teacher" }, select: {
+            where: { role: UserRole.TEACHER }, select: {
                 id: true,
                 username: true,
                 email: true,
@@ -85,7 +85,7 @@ export class UsersService {
 
     async getAllStudents() {
         return await this.prisma.users.findMany({
-            where: { role: "student" }, select: {
+            where: { role: UserRole.STUDENT }, select: {
                 id: true,
                 username: true,
                 email: true,

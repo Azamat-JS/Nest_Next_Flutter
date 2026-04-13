@@ -16,21 +16,47 @@ model Users {
   username   String   @unique
   email      String   @unique
   password   String
-  role       String?
+  role       UserRole @default(STUDENT)
   avatarUrl  String?
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
-
-  groupId    String?
-  group      Groups?  @relation("StudentGroup", fields: [groupId], references: [id])
 
   teachingGroups Groups[] @relation("TeacherGroups")
 
   chats         ChatMember[]
   messages      Message[]
   messageStatus MessageStatus[]
+  parents ParentStudent[] @relation("StudentRelations")
+  children ParentStudent[] @relation("ParentRelations")
+  studentGroups StudentGroup[]
 
   @@map("Users")
+}
+
+model ParentStudent {
+  id String @id @default(cuid())
+  parentId String
+  parent Users @relation("ParentRelations", fields: [parentId], references: [id])
+
+  studentId String
+  student Users @relation("StudentRelations", fields: [studentId], references: [id])
+
+  @@unique([parentId, studentId])
+  @@map("ParentStudent")
+}
+
+model StudentGroup {
+    id String @id @default(cuid())
+    studentId String
+    student Users @relation(fields: [studentId], references: [id])
+
+    groupId String
+    group Groups @relation(fields: [groupId], references: [id])
+
+    joinedAt DateTime @default(now())
+
+    @@unique([studentId, groupId])
+    @@map("StudentGroup")
 }
 
 model Groups {
@@ -39,9 +65,7 @@ model Groups {
 
   teacherId String
   teacher   Users  @relation("TeacherGroups", fields: [teacherId], references: [id])
-
-  students  Users[] @relation("StudentGroup")
-
+  students StudentGroup[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -51,7 +75,7 @@ model Groups {
 model Chat {
   id String @id @default(cuid())
   name String?
-  isGroup Boolean @default(false)
+  type ChatType
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -68,6 +92,8 @@ model ChatMember {
   chat Chat @relation(fields: [chatId], references: [id])
   chatId String
   joinedAt DateTime @default(now())
+  isAdmin Boolean @default(false)
+  isMuted Boolean @default(false)
 
   @@unique([userId, chatId])
 
@@ -85,6 +111,7 @@ model Message {
     type MessageType @default(TEXT)
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
+    deliveredAt DateTime?
 
     messageStatus MessageStatus[]
     attachments Attachment[]
@@ -124,4 +151,16 @@ enum MessageType {
   IMAGE
   VIDEO
   FILE
+}
+
+enum ChatType {
+  DIRECT
+  GROUP
+}
+
+enum UserRole {
+  ADMIN
+  TEACHER
+  PARENT
+  STUDENT
 }

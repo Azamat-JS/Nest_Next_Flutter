@@ -1,31 +1,38 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateGroupDto, PaginationDto, UpdateGroupDto } from './dto/group.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { UserRole } from '@prisma/client';
 
 @Injectable()
 export class GroupService {
   constructor(private readonly prisma: PrismaService) { }
   async create(createGroupDto: CreateGroupDto) {
-    const teacher = await this.prisma.users.findFirst({ where: { id: createGroupDto.teacherId, role: 'teacher' } });
+    const teacher = await this.prisma.users.findFirst({ where: { id: createGroupDto.teacherId, role: UserRole.TEACHER } });
     if (!teacher) {
       throw new NotFoundException('Teacher not found')
     }
     const studentIds = createGroupDto.studentIds?.filter(Boolean) ?? [];
-    const newGroup = await this.prisma.groups.create({
-      data: {
-        name: createGroupDto.name,
-        teacher: {
-          connect: { id: createGroupDto.teacherId }
-        },
-        ...(studentIds?.length > 0 && {
-          students: {
-            connect: studentIds.map((id) => ({
-              id
-            }))
-          }
+
+    const newGroup = await this.prisma.$transaction(async (tx) => {
+      const newGroup = await tx.groups.create({
+        data: {
+          name: createGroupDto.name,
+          teacher: {
+            connect: { id: createGroupDto.teacherId }
+          },
+        }
+      });
+
+      if (studentIds.length > 0) {
+        await tx.studentGroup.createMany({
+          data: studentIds.map((studentId) => ({
+            studentId,
+            groupId: newGroup.id,
+          }))
         })
       }
-    });
+
+    })
 
     return newGroup;
   }
@@ -35,7 +42,7 @@ export class GroupService {
     const skip = (page - 1) * limit;
 
     const [data, total] = await Promise.all([
-      await this.prisma.groups.findMany({
+      this.prisma.groups.findMany({
         skip,
         take: limit,
         select: {
@@ -51,9 +58,13 @@ export class GroupService {
           },
           students: {
             select: {
-              id: true,
-              username: true,
-              email: true
+              student: {
+                select: {
+                  id: true,
+                  username: true,
+                  email: true
+                }
+              }
             }
           },
         },
@@ -88,9 +99,13 @@ export class GroupService {
         },
         students: {
           select: {
-            id: true,
-            username: true,
-            email: true
+            student: {
+              select: {
+                id: true,
+                username: true,
+                email: true
+              }
+            }
           }
         }
       }
@@ -104,6 +119,7 @@ export class GroupService {
   }
 
   async update(id: string, updateGroupDto: UpdateGroupDto) {
+    const studentIds = updateGroupDto.studentIds?.filter(Boolean) ?? [];
     const group = await this.prisma.groups.findUnique({
       where: { id },
     });
@@ -114,36 +130,65 @@ export class GroupService {
 
     if (updateGroupDto.teacherId) {
       const teacher = await this.prisma.users.findFirst({
-        where: { id: updateGroupDto.teacherId, role: 'teacher' }
-      });
+        where: { id: updateGroupDto.teacherId, role: UserRole.TEACHER },
+        select: {
+          id: true,
+          username: true,
+        }
+      })
 
       if (!teacher) {
         throw new NotFoundException('Teacher not found')
       }
     }
 
-    return await this.prisma.groups.update({
-      where: { id },
-      data: {
-        ...(updateGroupDto.name && {
-          name: updateGroupDto.name,
-        }),
-
-        ...(updateGroupDto.teacherId && {
-          teacher: {
-            connect: {
-              id: updateGroupDto.teacherId,
-            },
-          },
-        }),
-
-        ...(updateGroupDto.studentIds && {
-          students: {
-            set: updateGroupDto.studentIds.map((id) => ({ id })),
-          },
-        }),
+    const students = await this.prisma.users.findMany({
+      where: {
+        id: { in: studentIds },
+        role: UserRole.STUDENT,
       },
+      select: { id: true }
     });
+
+    if (students.length !== studentIds.length) {
+      throw new NotFoundException('Some students not found or invalid');
+    }
+
+    await this.prisma.$transaction(async (tx) => {
+      await tx.groups.update({
+        where: { id },
+        data: {
+          ...(updateGroupDto.name && {
+            name: updateGroupDto.name,
+          }),
+
+          ...(updateGroupDto.teacherId && {
+            teacher: {
+              connect: {
+                id: updateGroupDto.teacherId,
+              },
+            },
+          }),
+
+          ...(studentIds && {
+          }),
+        },
+      });
+
+      await tx.studentGroup.deleteMany({
+        where: { groupId: id }
+      });
+
+      if (studentIds.length) {
+        await tx.studentGroup.createMany({
+          data: studentIds.map((studentId) => ({
+            studentId,
+            groupId: id,
+          }))
+        })
+      }
+    })
+    return this.findOne(id);
   }
 
   async remove(id: string) {

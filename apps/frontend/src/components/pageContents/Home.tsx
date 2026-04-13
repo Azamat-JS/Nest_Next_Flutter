@@ -145,7 +145,7 @@ const Home = () => {
                                 {u.email}
                             </TableCell>
                             <TableCell className={user?.username === u.username ? "font-medium text-center bg-green-300 text-green-600" : "text-center"}>
-                                {u.role}
+                                {u.role?.toLowerCase()}
                             </TableCell>
                             <TableCell className={user?.username === u.username ? "font-medium text-center bg-green-300 text-green-600" : "text-center"}>
                                 <DropdownMenu>
