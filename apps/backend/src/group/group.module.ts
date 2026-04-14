@@ -5,6 +5,7 @@ import { ConfigifyModule } from '@itgorillaz/configify';
 import { JwtModule } from '@nestjs/jwt';
 import { AppConfig } from 'src/lib/config';
 import { CreateGroupUseCase } from './usecases';
+import { UpdateGroupUseCase } from './usecases/update-group.usecase';
 
 @Module({
   imports: [
@@ -18,6 +19,6 @@ import { CreateGroupUseCase } from './usecases';
     }),
   ],
   controllers: [GroupController],
-  providers: [GroupRepository, CreateGroupUseCase],
+  providers: [GroupRepository, CreateGroupUseCase, UpdateGroupUseCase],
 })
 export class GroupModule { }

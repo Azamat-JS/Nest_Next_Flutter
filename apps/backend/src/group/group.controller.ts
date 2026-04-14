@@ -3,10 +3,13 @@ import { GroupRepository } from './group.service';
 import { CreateGroupDto, PaginationDto, UpdateGroupDto } from './dto/group.dto';
 import { JwtAuthGuard } from 'src/lib/guards/jwt.guard';
 import { CreateGroupUseCase } from './usecases';
+import { UpdateGroupUseCase } from './usecases/update-group.usecase';
 
 @Controller('group')
 export class GroupController {
-  constructor(private readonly groupService: GroupRepository, private readonly createGroupUseCase: CreateGroupUseCase) { }
+  constructor(private readonly groupService: GroupRepository, private readonly createGroupUseCase: CreateGroupUseCase,
+    private readonly updateGroupUseCase: UpdateGroupUseCase,
+  ) { }
 
   @UseGuards(JwtAuthGuard)
   @Post()
@@ -27,7 +30,7 @@ export class GroupController {
   @UseGuards(JwtAuthGuard)
   @Put(':id')
   update(@Param('id') id: string, @Body() updateGroupDto: UpdateGroupDto) {
-    return this.groupService.update(id, updateGroupDto);
+    return this.updateGroupUseCase.execute(id, updateGroupDto);
   }
 
   @UseGuards(JwtAuthGuard)

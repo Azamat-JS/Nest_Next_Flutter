@@ -100,31 +100,7 @@ export class GroupRepository {
     }
     return group;
   }
-
-  async update(id: string, updateGroupDto: UpdateGroupDto) {
-    const studentIds = updateGroupDto.studentIds?.filter(Boolean) ?? [];
-    const group = await this.prisma.groups.findUnique({
-      where: { id },
-    });
-
-    if (!group) {
-      throw new NotFoundException('Group not found');
-    }
-
-    if (updateGroupDto.teacherId) {
-      const teacher = await this.prisma.users.findFirst({
-        where: { id: updateGroupDto.teacherId, role: UserRole.TEACHER },
-        select: {
-          id: true,
-          username: true,
-        }
-      })
-
-      if (!teacher) {
-        throw new NotFoundException('Teacher not found')
-      }
-    }
-
+  async findStudentByIds(studentIds: string[]) {
     const students = await this.prisma.users.findMany({
       where: {
         id: { in: studentIds },
@@ -136,39 +112,24 @@ export class GroupRepository {
     if (students.length !== studentIds.length) {
       throw new NotFoundException('Some students not found or invalid');
     }
+    return students;
+  }
 
-    await this.prisma.$transaction(async (tx) => {
-      await tx.groups.update({
-        where: { id },
-        data: {
-          ...(updateGroupDto.name && {
-            name: updateGroupDto.name,
-          }),
+  async update(tx: Prisma.TransactionClient, id: string, data: Prisma.GroupsUpdateInput) {
+    await tx.groups.update({
+      where: { id },
+      data,
+    });
 
-          ...(updateGroupDto.teacherId && {
-            teacher: {
-              connect: {
-                id: updateGroupDto.teacherId,
-              },
-            },
-          }),
-        },
-      });
+  }
 
-      await tx.studentGroup.deleteMany({
-        where: { groupId: id }
-      });
-
-      if (studentIds.length) {
-        await tx.studentGroup.createMany({
-          data: studentIds.map((studentId) => ({
-            studentId,
-            groupId: id,
-          }))
-        })
-      }
+  async createStudents(tx: Prisma.TransactionClient, studentIds: string[], groupId: string) {
+    return tx.studentGroup.createMany({
+      data: studentIds.map((studentId) => ({
+        studentId,
+        groupId,
+      }))
     })
-    return this.findOne(id);
   }
 
   async remove(id: string) {
