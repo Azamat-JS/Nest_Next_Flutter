@@ -16,6 +16,7 @@ import 'package:mobile/features/groups/domain/repositories/group_repository.dart
 import 'package:mobile/features/groups/domain/usecases/group_all.dart';
 import 'package:mobile/features/groups/domain/usecases/group_by_id.dart';
 import 'package:mobile/features/groups/domain/usecases/group_use_case.dart';
+import 'package:mobile/features/groups/domain/usecases/merge_groups.dart';
 import 'package:mobile/features/groups/presentation/bloc/group_bloc.dart';
 
 final serviceLocator = GetIt.instance;
@@ -71,16 +72,18 @@ void _initGroup() {
     ..registerLazySingleton<GroupRepository>(
       () => GroupRepositoryImpl(serviceLocator<GroupRemoteDataSource>()),
     )
-    ..registerLazySingleton<GroupAll>(
-      () => GroupAll(serviceLocator<GroupRepository>()),
+    ..registerLazySingleton<GetGroupsUseCase>(
+      () => GetGroupsUseCase(serviceLocator<GroupRepository>()),
     )
-    ..registerLazySingleton<GroupById>(
-      () => GroupById(serviceLocator<GroupRepository>()),
+    ..registerLazySingleton<GetGroupByIdUseCase>(
+      () => GetGroupByIdUseCase(serviceLocator<GroupRepository>()),
     )
+    ..registerLazySingleton<MergeGroupsUseCase>(() => MergeGroupsUseCase())
     ..registerLazySingleton(
       () => GroupUseCases(
-        serviceLocator<GroupAll>(),
-        serviceLocator<GroupById>(),
+        serviceLocator<GetGroupsUseCase>(),
+        serviceLocator<GetGroupByIdUseCase>(),
+        serviceLocator<MergeGroupsUseCase>(),
       ),
     )
     ..registerFactory<GroupBloc>(

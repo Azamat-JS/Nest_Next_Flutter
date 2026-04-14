@@ -5,14 +5,12 @@ import 'package:mobile/features/groups/domain/entities/group_entity.dart';
 import 'package:mobile/features/groups/domain/usecases/group_all.dart';
 import 'package:mobile/features/groups/domain/usecases/group_by_id.dart';
 import 'package:mobile/features/groups/domain/usecases/group_use_case.dart';
-import 'package:mobile/features/groups/domain/usecases/merge_groups.dart';
 part 'group_event.dart';
 part 'group_state.dart';
 
 class GroupBloc extends Bloc<GroupEvent, GroupState> {
   final GroupUseCases _useCases;
-  final MergeGroupsService _merge;
-  GroupBloc(this._useCases, this._merge) : super(GroupState()) {
+  GroupBloc(this._useCases) : super(GroupState()) {
     on<FetchGroups>(_onFetchGroups);
     on<FetchGroupById>(_onFetchGroupById);
     on<LoadMoreGroups>(_onLoadMoreGroups);
@@ -55,7 +53,7 @@ class GroupBloc extends Bloc<GroupEvent, GroupState> {
         emit(state.copyWith(isLoading: false, groups: newGroups));
         return;
       }
-      final updated = _merge(old, newGroups);
+      final updated = _useCases.merge(old, newGroups);
       emit(state.copyWith(isLoading: false, groups: updated));
     });
   }

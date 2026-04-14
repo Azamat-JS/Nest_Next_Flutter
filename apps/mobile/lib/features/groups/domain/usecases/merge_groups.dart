@@ -1,6 +1,6 @@
 import 'package:mobile/features/groups/domain/entities/group_entity.dart';
 
-class MergeGroupsService {
+class MergeGroupsUseCase {
   PaginatedGroupsEntity call(
     PaginatedGroupsEntity old,
     PaginatedGroupsEntity newData,
