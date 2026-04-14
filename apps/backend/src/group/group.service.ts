@@ -1,40 +1,23 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateGroupDto, PaginationDto, UpdateGroupDto } from './dto/group.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { UserRole } from '@prisma/client';
+import { Prisma, UserRole } from '@prisma/client';
 
 @Injectable()
-export class GroupService {
+export class GroupRepository {
   constructor(private readonly prisma: PrismaService) { }
-  async create(createGroupDto: CreateGroupDto) {
-    const teacher = await this.prisma.users.findFirst({ where: { id: createGroupDto.teacherId, role: UserRole.TEACHER } });
-    if (!teacher) {
-      throw new NotFoundException('Teacher not found')
-    }
-    const studentIds = createGroupDto.studentIds?.filter(Boolean) ?? [];
+  async createGroup(tx: Prisma.TransactionClient, data: Prisma.GroupsCreateInput) {
+    return tx.groups.create({ data });
+  }
 
-    const newGroup = await this.prisma.$transaction(async (tx) => {
-      const group = await tx.groups.create({
-        data: {
-          name: createGroupDto.name,
-          teacher: {
-            connect: { id: createGroupDto.teacherId }
-          },
-        }
-      });
+  async createStudentGroup(tx: Prisma.TransactionClient, data: Prisma.StudentGroupCreateManyInput[]) {
+    return tx.studentGroup.createMany({ data })
+  }
 
-      if (studentIds.length > 0) {
-        await tx.studentGroup.createMany({
-          data: studentIds.map((studentId) => ({
-            studentId,
-            groupId: group.id,
-          }))
-        })
-      }
-      return group;
-    })
-
-    return newGroup;
+  async findTeacherById(id: string) {
+    return this.prisma.users.findFirst({
+      where: { id, role: UserRole.TEACHER }
+    });
   }
 
   async findAll(query: PaginationDto) {

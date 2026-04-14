@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
-import { GroupService } from './group.service';
+import { GroupRepository } from './group.service';
 import { GroupController } from './group.controller';
 import { ConfigifyModule } from '@itgorillaz/configify';
 import { JwtModule } from '@nestjs/jwt';
 import { AppConfig } from 'src/lib/config';
+import { CreateGroupUseCase } from './usecases';
 
 @Module({
   imports: [
@@ -17,6 +18,6 @@ import { AppConfig } from 'src/lib/config';
     }),
   ],
   controllers: [GroupController],
-  providers: [GroupService],
+  providers: [GroupRepository, CreateGroupUseCase],
 })
 export class GroupModule { }

@@ -1,16 +1,17 @@
 import { Controller, Get, Post, Body, Param, Delete, Put, UseGuards, Req, Query } from '@nestjs/common';
-import { GroupService } from './group.service';
+import { GroupRepository } from './group.service';
 import { CreateGroupDto, PaginationDto, UpdateGroupDto } from './dto/group.dto';
 import { JwtAuthGuard } from 'src/lib/guards/jwt.guard';
+import { CreateGroupUseCase } from './usecases';
 
 @Controller('group')
 export class GroupController {
-  constructor(private readonly groupService: GroupService) { }
+  constructor(private readonly groupService: GroupRepository, private readonly createGroupUseCase: CreateGroupUseCase) { }
 
   @UseGuards(JwtAuthGuard)
   @Post()
   create(@Body() createGroupDto: CreateGroupDto) {
-    return this.groupService.create(createGroupDto);
+    return this.createGroupUseCase.execute(createGroupDto);
   }
 
   @Get('all')
