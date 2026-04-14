@@ -6,5 +6,5 @@ import 'package:mobile/core/network/dio_client.dart';
 Future<void> initCore() async {
   serviceLocator.registerLazySingleton(() => DioClient());
   serviceLocator.registerLazySingleton(() => FlutterSecureStorage());
-  serviceLocator.registerSingleton(() => AuthCheckCubit());
+  serviceLocator.registerSingleton(AuthCheckCubit());
 }
