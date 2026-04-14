@@ -4,7 +4,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { PaginationDto } from 'src/group/dto/group.dto';
-import { UpdateUserDto } from './dto/user.dto';
+import { CreateUserDto, UpdateUserDto } from './dto/user.dto';
 
 @Injectable()
 export class UsersService {
@@ -96,7 +96,7 @@ export class UsersService {
         });
     }
 
-    async createUser(createUserInput: Prisma.UsersCreateInput) {
+    async createUser(createUserInput: CreateUserDto) {
         try {
             const normalizedRole = createUserInput.role.toUpperCase() as UserRole;
             const hashedPassword = await bcrypt.hash(createUserInput.password, 10);

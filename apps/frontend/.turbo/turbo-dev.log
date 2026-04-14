@@ -1,0 +1,30 @@
+
+> frontend@0.1.0 dev /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend
+> next dev -p 4000
+
+[1m[38;2;173;127;168m▲ Next.js 16.2.1[39m[22m (Turbopack)
+- Local:         http://localhost:4000
+- Network:       http://192.168.13.92:4000
+- Environments: .env.local
+[32m[1m✓[22m[39m Ready in 244ms
+[33m[1m⚠[22m[39m Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /Users/azamatabdullayev/Desktop/full-stack-turbo/pnpm-workspace.yaml as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend/pnpm-workspace.yaml
+
+
+[]
+ GET /groups/cmnq4oz3e0005xkv21be71kiu [32m200[39m in 486ms[2m (next.js: 336ms, application-code: 151ms)[22m
+ GET /home [32m200[39m in 55ms[2m (next.js: 39ms, application-code: 16ms)[22m
+ GET /groups [32m200[39m in 52ms[2m (next.js: 35ms, application-code: 17ms)[22m
+ GET /home [32m200[39m in 26ms[2m (next.js: 4ms, application-code: 22ms)[22m
+[32m[1m✓[22m[39m Compiled in 269ms
+ GET /home [32m200[39m in 60ms[2m (next.js: 5ms, application-code: 55ms)[22m
+ GET /home [32m200[39m in 41ms[2m (next.js: 3ms, application-code: 38ms)[22m
+ GET /home [32m200[39m in 14ms[2m (next.js: 1168µs, application-code: 12ms)[22m
+ GET /home [32m200[39m in 43ms[2m (next.js: 3ms, application-code: 40ms)[22m
+ GET /home [32m200[39m in 26ms[2m (next.js: 3ms, application-code: 23ms)[22m
+ GET /home [32m200[39m in 12ms[2m (next.js: 1461µs, application-code: 11ms)[22m
+[?25h
