@@ -4,6 +4,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { PaginationDto } from 'src/group/dto/group.dto';
+import { UpdateUserDto } from './dto/user.dto';
 
 @Injectable()
 export class UsersService {
@@ -97,11 +98,13 @@ export class UsersService {
 
     async createUser(createUserInput: Prisma.UsersCreateInput) {
         try {
+            const normalizedRole = createUserInput.role.toUpperCase() as UserRole;
             const hashedPassword = await bcrypt.hash(createUserInput.password, 10);
             const user = await this.prisma.users.create({
                 data: {
                     ...createUserInput,
-                    password: hashedPassword
+                    role: normalizedRole,
+                    password: hashedPassword,
                 }
             });
 
@@ -109,16 +112,10 @@ export class UsersService {
                 userId: user.id,
                 email: user.email,
                 username: user.username,
-                role: user.role,
+                role: normalizedRole,
             });
 
             return {
-                user: {
-                    id: user.id,
-                    email: user.email,
-                    username: user.username,
-                    role: user.role,
-                },
                 accessToken
             }
         } catch (error) {
@@ -146,17 +143,12 @@ export class UsersService {
         }
         const accessToken = this.jwtService.sign({ userId: foundUser.id, email: foundUser.email, username: foundUser.username, role: foundUser.role });
         return {
-            user: {
-                id: foundUser.id,
-                email: foundUser.email,
-                username: foundUser.username,
-                role: foundUser.role,
-            },
             accessToken
         }
     }
 
-    async updateUser(id: string, updateUserInput: Prisma.UsersUpdateInput) {
+    async updateUser(id: string, updateUserInput: UpdateUserDto) {
+
         const foundUser = await this.prisma.users.findUnique({
             where: { id },
         });
@@ -171,6 +163,10 @@ export class UsersService {
                 10,
             );
         }
+        if (updateUserInput.role) {
+            const normalizedRole = updateUserInput.role.toUpperCase() as UserRole;
+            updateUserInput.role = normalizedRole;
+        }
 
         const updatedUser = await this.prisma.users.update({
             where: { id },
@@ -182,7 +178,7 @@ export class UsersService {
                 id: updatedUser.id,
                 email: updatedUser.email,
                 username: updatedUser.username,
-                role: updatedUser.role,
+                role: updateUserInput.role,
                 avatarUrl: updatedUser.avatarUrl,
                 createdAt: updatedUser.createdAt,
                 updatedAt: updatedUser.updatedAt,
