@@ -237,7 +237,7 @@ const Home = () => {
                         </Field>
                         <Field>
                             <Label htmlFor="role-1">Role</Label>
-                            <Input id="username-1" name="role" onChange={(e) => setSelectedUser(prev => prev ? { ...prev, role: e.target.value } : prev)} value={selectedUser?.role || ""} />
+                            <Input id="username-1" name="role" onChange={(e) => setSelectedUser(prev => prev ? { ...prev, role: e.target.value } : prev)} value={selectedUser?.role?.toLowerCase() || ""} />
                         </Field>
                     </FieldGroup>
                     <DialogFooter>

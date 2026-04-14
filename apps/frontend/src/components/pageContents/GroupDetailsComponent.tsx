@@ -34,7 +34,7 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
             toast.error(error.response?.data?.message ?? 'Something went wrong!')
         }
     }
-
+    console.log(students);
     useEffect(() => {
         getOneGroup()
         if (group?.students.length) {

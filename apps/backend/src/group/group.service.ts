@@ -98,7 +98,10 @@ export class GroupRepository {
         'Group not found'
       )
     }
-    return group;
+    return {
+      ...group,
+      students: group.students.map(s => s.student)
+    }
   }
   async findStudentByIds(studentIds: string[]) {
     const students = await this.prisma.users.findMany({
