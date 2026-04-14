@@ -9,3 +9,8 @@ class GroupUseCases {
 
   GroupUseCases(this.groupAll, this.groupById, this.merge);
 }
+
+// class GroupWriteUseCases {
+//   final CreateGroupUseCase create;
+//   final UpdateGroupUseCase update;
+// }
