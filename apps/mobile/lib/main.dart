@@ -4,10 +4,11 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:mobile/core/common/cubit/auth_check_cubit.dart';
 import 'package:mobile/core/di/service_locator.dart';
 import 'package:mobile/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:mobile/features/auth/presentation/pages/login_page.dart';
 import 'package:mobile/features/groups/presentation/bloc/group_bloc.dart';
+import 'package:mobile/features/home/presentation/pages/home_page.dart';
 
 import 'package:mobile/features/home/presentation/pages/main_screen.dart';
-import 'package:mobile/features/home/presentation/pages/navbar_page.dart';
 import 'package:mobile/core/di/init_dependencies.dart';
 
 void main() async {
@@ -47,7 +48,7 @@ class _MyAppState extends State<MyApp> {
           if (isLoggedIn) {
             return MainScreen();
           }
-          return NavbarPage();
+          return LoginPage();
         },
       ),
     );
