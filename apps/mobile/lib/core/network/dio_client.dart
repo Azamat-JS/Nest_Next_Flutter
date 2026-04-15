@@ -13,7 +13,7 @@ class DioClient {
   late final Dio dio =
       Dio(
           BaseOptions(
-            baseUrl: const String.fromEnvironment('BASE_URL'),
+            baseUrl: "http://localhost:3002",
             connectTimeout: const Duration(seconds: 10),
             receiveTimeout: const Duration(seconds: 10),
             sendTimeout: const Duration(seconds: 10),
@@ -35,45 +35,8 @@ class DioClient {
               handler.next(options);
             },
             onError: (error, handler) async {
-              if (error.response?.statusCode == 401) {
-                final refreshToken = await _storage.read(key: 'refresh_token');
-
-                if (refreshToken != null) {
-                  try {
-                    final refreshResponse = await dio.post(
-                      '/auth/refresh',
-                      data: {'refreshToken': refreshToken},
-                      options: Options(
-                        headers: {
-                          // prevent old token from being attached
-                          'Authorization': null,
-                        },
-                      ),
-                    );
-
-                    final newAccessToken =
-                        refreshResponse.data['accessToken'] as String;
-
-                    await _storage.write(
-                      key: 'access_token',
-                      value: newAccessToken,
-                    );
-
-                    // Retry original request with new token
-                    final requestOptions = error.requestOptions;
-                    requestOptions.headers['Authorization'] =
-                        'Bearer $newAccessToken';
-
-                    final clonedResponse = await dio.fetch(requestOptions);
-
-                    return handler.resolve(clonedResponse);
-                  } catch (_) {
-                    await _storage.delete(key: 'access_token');
-                    await _storage.delete(key: 'refresh_token');
-                  }
-                }
-              }
-
+              if (error.response?.statusCode == 401) {}
+              print('Unauthorized');
               handler.next(error);
             },
           ),

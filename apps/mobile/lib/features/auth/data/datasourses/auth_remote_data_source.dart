@@ -45,6 +45,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         '/users/login',
         data: {'email': email, 'password': password},
       );
+      print('$response');
       final data = response.data as Map<String, dynamic>;
       if (data['accessToken'] != null) {
         await secureStorage.write(
@@ -54,6 +55,11 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       }
       return UserModel.fromJson(data['user'] as Map<String, dynamic>);
     } on DioException catch (e) {
+      print('❌ DIO ERROR');
+      print('STATUS: ${e.response?.statusCode}');
+      print('DATA: ${e.response?.data}');
+      print('MESSAGE: ${e.message}');
+
       throw Exception(
         e.response?.data['message'] ?? 'Failed to sign in: ${e.message}',
       );

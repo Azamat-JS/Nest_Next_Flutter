@@ -116,6 +116,12 @@ export class UsersService {
             });
 
             return {
+                user: {
+                    id: user.id,
+                    username: user.username,
+                    email: user.email,
+                    role: normalizedRole,
+                },
                 accessToken
             }
         } catch (error) {
@@ -143,6 +149,12 @@ export class UsersService {
         }
         const accessToken = this.jwtService.sign({ userId: foundUser.id, email: foundUser.email, username: foundUser.username, role: foundUser.role });
         return {
+            user: {
+                id: foundUser.id,
+                username: foundUser.username,
+                email: foundUser.email,
+                role: foundUser.role.toLowerCase(),
+            },
             accessToken
         }
     }
