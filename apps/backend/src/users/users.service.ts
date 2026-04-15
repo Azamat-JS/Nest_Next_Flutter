@@ -96,13 +96,21 @@ export class UsersService {
         });
     }
 
-    async createUser(createUserInput: CreateUserDto) {
+    async createUser(createUserDto: CreateUserDto) {
         try {
-            const normalizedRole = createUserInput.role.toUpperCase() as UserRole;
-            const hashedPassword = await bcrypt.hash(createUserInput.password, 10);
+            const existingUser = await this.prisma.users.findUnique({
+                where: { email: createUserDto.email },
+            });
+            if (existingUser) {
+                throw new BadRequestException('Email already exists');
+            }
+            console.log(createUserDto);
+
+            const normalizedRole = createUserDto.role.toUpperCase() as UserRole;
+            const hashedPassword = await bcrypt.hash(createUserDto.password, 10);
             const user = await this.prisma.users.create({
                 data: {
-                    ...createUserInput,
+                    ...createUserDto,
                     role: normalizedRole,
                     password: hashedPassword,
                 }
