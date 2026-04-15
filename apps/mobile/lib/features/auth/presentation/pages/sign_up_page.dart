@@ -6,6 +6,7 @@ import 'package:mobile/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:mobile/features/auth/presentation/pages/login_page.dart';
 import 'package:mobile/features/auth/presentation/widgets/auth_button.dart';
 import 'package:mobile/features/auth/presentation/widgets/auth_form.dart';
+import 'package:mobile/features/home/presentation/pages/main_screen.dart';
 
 class SignUpPage extends StatefulWidget {
   static MaterialPageRoute<dynamic> route() {
@@ -23,6 +24,7 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmController = TextEditingController();
   final TextEditingController usernameController = TextEditingController();
+  final TextEditingController roleController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -31,6 +33,7 @@ class _SignUpPageState extends State<SignUpPage> {
     passwordController.dispose();
     confirmController.dispose();
     usernameController.dispose();
+    roleController.dispose();
     super.dispose();
   }
 
@@ -53,7 +56,14 @@ class _SignUpPageState extends State<SignUpPage> {
                   if (state is AuthFailure) {
                     showSnackbar(context, state.message);
                   }
+                  if (state is AuthSuccess) {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (_) => MainScreen()),
+                    );
+                  }
                 },
+
                 builder: (context, state) {
                   final isLoading = state is AuthLoading;
                   return Form(
@@ -90,6 +100,12 @@ class _SignUpPageState extends State<SignUpPage> {
                           },
                         ),
                         const SizedBox(height: 20),
+                        AuthForm(
+                          hintText: 'Role',
+                          controller: roleController,
+                          keyboardType: TextInputType.text,
+                        ),
+                        const SizedBox(height: 30),
                         AuthForm(
                           hintText: 'Password',
                           controller: passwordController,
@@ -162,6 +178,7 @@ class _SignUpPageState extends State<SignUpPage> {
         username: usernameController.text.trim(),
         email: emailController.text.trim(),
         password: passwordController.text,
+        role: roleController.text.trim(),
       ),
     );
   }

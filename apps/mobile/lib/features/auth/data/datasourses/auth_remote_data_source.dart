@@ -8,6 +8,7 @@ abstract interface class AuthRemoteDataSource {
     required String username,
     required String email,
     required String password,
+    required String role,
   });
 
   Future<String> signInWithEmailAndPassword({
@@ -66,13 +67,20 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     required String username,
     required String email,
     required String password,
+    required String role,
   }) async {
     try {
       final response = await dioClient.dio.post(
         '/users/register',
-        data: {'username': username, 'email': email, 'password': password},
+        data: {
+          'username': username,
+          'email': email,
+          'password': password,
+          'role': role,
+        },
       );
       final data = response.data as Map<String, dynamic>;
+      print(data);
       if (data['accessToken'] != null) {
         await secureStorage.write(
           key: 'access_token',

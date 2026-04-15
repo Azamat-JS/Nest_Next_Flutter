@@ -14,13 +14,15 @@ class UserSignUp implements Usecase<void, UserSignUpParams> {
     }
     if (params.email.isEmpty ||
         params.password.isEmpty ||
-        params.username.isEmpty) {
+        params.username.isEmpty ||
+        params.role.isEmpty) {
       return left(Failure('All fields are required'));
     }
     await authRepository.signUpWithEmailAndPassword(
       username: params.username,
       email: params.email,
       password: params.password,
+      role: params.role,
     );
     return right(null);
   }
@@ -30,10 +32,12 @@ class UserSignUpParams {
   final String email;
   final String password;
   final String username;
+  final String role;
 
   UserSignUpParams({
     required this.email,
     required this.password,
     required this.username,
+    required this.role,
   });
 }
