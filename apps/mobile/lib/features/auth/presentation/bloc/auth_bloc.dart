@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile/core/common/cubit/auth_check_cubit.dart';
 import 'package:mobile/core/common/entities/user_entity.dart';
+import 'package:mobile/core/errors/failures.dart';
 import 'package:mobile/core/usecase/usecase.dart';
 import 'package:mobile/features/auth/domain/usecases/current_user.dart';
 import 'package:mobile/features/auth/domain/usecases/logout_user.dart';
@@ -40,46 +41,61 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   ) async {
     emit(AuthLoading());
     final res = await _currentUser(NoParams());
-    return res.fold(
-      (l) => emit(AuthFailure(l.message)),
-      (r) => _emitAuthSuccess(r, emit),
-    );
+    return res.fold((l) => emit(AuthFailure(l.message)), (user) {
+      _authCheckCubit.checkAuthStatus(user);
+      emit(AuthSuccess(user));
+    });
   }
 
   void _onUserSignUp(AuthSignUp event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
-    final res = await _signUp(
+    final signupRes = await _signUp(
       UserSignUpParams(
         username: event.username,
         email: event.email,
         password: event.password,
       ),
     );
-    res.fold(
-      (l) => emit(AuthFailure(l.message)),
-      (r) => _emitAuthSuccess(r, emit),
-    );
+
+    if (signupRes.isLeft()) {
+      final failure = signupRes.swap().getOrElse(
+        (_) => Failure('Unknown error'),
+      );
+      emit(AuthFailure(failure.message));
+      return;
+    }
+
+    final useRes = await _currentUser(NoParams());
+    useRes.fold((l) => emit(AuthFailure(l.message)), (user) {
+      _authCheckCubit.checkAuthStatus(user);
+      emit(AuthSuccess(user));
+    });
   }
 
   void _onUserLogin(AuthLogin event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
-    final res = await _login(
+    final loginRes = await _login(
       UserLoginParams(email: event.email, password: event.password),
     );
-    res.fold(
-      (l) => emit(AuthFailure(l.message)),
-      (r) => _emitAuthSuccess(r, emit),
-    );
+
+    if (loginRes.isLeft()) {
+      final failure = loginRes.swap().getOrElse(
+        (_) => Failure('Unknown error'),
+      );
+      emit(AuthFailure(failure.message));
+      return;
+    }
+
+    final useRes = await _currentUser(NoParams());
+    useRes.fold((l) => emit(AuthFailure(l.message)), (user) {
+      _authCheckCubit.checkAuthStatus(user);
+      emit(AuthSuccess(user));
+    });
   }
 
   void _onUserLogout(AuthLogout event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
     final res = await _logout(NoParams());
     res.fold((l) => emit(AuthFailure(l.message)), (_) => emit(AuthLoggedOut()));
-  }
-
-  void _emitAuthSuccess(UserEntity user, Emitter<AuthState> emit) {
-    _authCheckCubit.checkAuthStatus(user);
-    emit(AuthSuccess(user));
   }
 }

@@ -3,13 +3,13 @@ import 'package:mobile/core/errors/failures.dart';
 import 'package:mobile/core/common/entities/user_entity.dart';
 
 abstract interface class AuthRepository {
-  Future<Either<Failure, UserEntity>> signUpWithEmailAndPassword({
+  Future<Either<Failure, void>> signUpWithEmailAndPassword({
     required String email,
     required String password,
     required String username,
   });
 
-  Future<Either<Failure, UserEntity>> signInWithEmailAndPassword({
+  Future<Either<Failure, void>> signInWithEmailAndPassword({
     required String email,
     required String password,
   });

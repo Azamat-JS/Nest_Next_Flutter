@@ -36,7 +36,6 @@ class DioClient {
             },
             onError: (error, handler) async {
               if (error.response?.statusCode == 401) {}
-              print('Unauthorized');
               handler.next(error);
             },
           ),

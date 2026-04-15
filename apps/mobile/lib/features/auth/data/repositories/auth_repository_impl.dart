@@ -25,31 +25,41 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, UserEntity>> signInWithEmailAndPassword({
+  Future<Either<Failure, void>> signInWithEmailAndPassword({
     required String email,
     required String password,
   }) async {
-    return _getUser(
-      () async => await remoteDataSource.signInWithEmailAndPassword(
+    try {
+      await remoteDataSource.signInWithEmailAndPassword(
         email: email,
         password: password,
-      ),
-    );
+      );
+      return right(null);
+    } on ServerException catch (e) {
+      return left(Failure(e.message));
+    } catch (e) {
+      return left(Failure('Unexpected error occurred'));
+    }
   }
 
   @override
-  Future<Either<Failure, UserEntity>> signUpWithEmailAndPassword({
+  Future<Either<Failure, void>> signUpWithEmailAndPassword({
     required String email,
     required String password,
     required String username,
   }) async {
-    return _getUser(
-      () async => await remoteDataSource.signUpWithEmailAndPassword(
+    try {
+      await remoteDataSource.signUpWithEmailAndPassword(
         username: username,
         email: email,
         password: password,
-      ),
-    );
+      );
+      return right(null);
+    } on ServerException catch (e) {
+      return left(Failure(e.message));
+    } catch (e) {
+      return left(Failure('Unexpected error occurred'));
+    }
   }
 
   @override
@@ -57,19 +67,6 @@ class AuthRepositoryImpl implements AuthRepository {
     try {
       await remoteDataSource.signOut();
       return right(null);
-    } catch (e) {
-      return left(Failure('Unexpected error occurred'));
-    }
-  }
-
-  Future<Either<Failure, UserEntity>> _getUser(
-    Future<UserEntity> Function() getUserFunc,
-  ) async {
-    try {
-      final user = await getUserFunc();
-      return right(user);
-    } on ServerException catch (e) {
-      return left(Failure(e.message));
     } catch (e) {
       return left(Failure('Unexpected error occurred'));
     }

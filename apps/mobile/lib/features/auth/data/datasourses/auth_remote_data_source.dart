@@ -4,13 +4,13 @@ import 'package:mobile/core/network/dio_client.dart';
 import 'package:mobile/features/auth/data/models/user_model.dart';
 
 abstract interface class AuthRemoteDataSource {
-  Future<UserModel> signUpWithEmailAndPassword({
+  Future<String> signUpWithEmailAndPassword({
     required String username,
     required String email,
     required String password,
   });
 
-  Future<UserModel> signInWithEmailAndPassword({
+  Future<String> signInWithEmailAndPassword({
     required String email,
     required String password,
   });
@@ -36,7 +36,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }
 
   @override
-  Future<UserModel> signInWithEmailAndPassword({
+  Future<String> signInWithEmailAndPassword({
     required String email,
     required String password,
   }) async {
@@ -45,7 +45,6 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         '/users/login',
         data: {'email': email, 'password': password},
       );
-      print('$response');
       final data = response.data as Map<String, dynamic>;
       if (data['accessToken'] != null) {
         await secureStorage.write(
@@ -53,13 +52,9 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
           value: data['accessToken'] as String,
         );
       }
-      return UserModel.fromJson(data['user'] as Map<String, dynamic>);
+      final token = data['accessToken'] as String;
+      return token;
     } on DioException catch (e) {
-      print('❌ DIO ERROR');
-      print('STATUS: ${e.response?.statusCode}');
-      print('DATA: ${e.response?.data}');
-      print('MESSAGE: ${e.message}');
-
       throw Exception(
         e.response?.data['message'] ?? 'Failed to sign in: ${e.message}',
       );
@@ -67,7 +62,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }
 
   @override
-  Future<UserModel> signUpWithEmailAndPassword({
+  Future<String> signUpWithEmailAndPassword({
     required String username,
     required String email,
     required String password,
@@ -84,7 +79,8 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
           value: data['accessToken'] as String,
         );
       }
-      return UserModel.fromJson(data['user'] as Map<String, dynamic>);
+      final token = data['accessToken'] as String;
+      return token;
     } on DioException catch (e) {
       throw Exception(
         e.response?.data['message'] ?? 'Failed to sign up: ${e.message}',
