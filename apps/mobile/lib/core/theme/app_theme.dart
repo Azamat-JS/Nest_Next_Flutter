@@ -13,7 +13,7 @@ class AppTheme {
     inputDecorationTheme: InputDecorationTheme(
       contentPadding: EdgeInsets.all(27),
       enabledBorder: _border(),
-      focusedBorder: _border(AppPallete.gradient2),
+      focusedBorder: _border(const Color.fromARGB(255, 86, 163, 226)),
       errorBorder: _border(AppPallete.errorColor),
     ),
     chipTheme: const ChipThemeData(

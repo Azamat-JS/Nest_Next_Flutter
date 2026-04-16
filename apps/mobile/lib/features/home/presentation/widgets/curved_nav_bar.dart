@@ -14,8 +14,8 @@ class CurvedNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return CurvedNavigationBar(
       backgroundColor: Colors.transparent,
-      color: Colors.purple,
-      buttonBackgroundColor: Colors.amber,
+      color: Colors.blue,
+      buttonBackgroundColor: Colors.lightBlueAccent,
       height: 70,
       items: const [
         Icon(Icons.home, size: 30, color: Colors.white),
