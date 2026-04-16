@@ -7,7 +7,7 @@ import 'package:mobile/core/theme/app_theme.dart';
 import 'package:mobile/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:mobile/features/auth/presentation/pages/login_page.dart';
 import 'package:mobile/features/groups/presentation/bloc/group_bloc.dart';
-import 'package:mobile/features/groups/presentation/pages/groups_page.dart';
+import 'package:mobile/features/groups/presentation/pages/my_groups_page.dart';
 import 'package:mobile/features/home/presentation/pages/main_screen.dart';
 import 'package:mobile/core/di/init_dependencies.dart';
 
@@ -47,7 +47,7 @@ class _MyAppState extends State<MyApp> {
         },
         builder: (context, isLoggedIn) {
           if (isLoggedIn) {
-            return GroupsPage();
+            return MyGroupsPage();
           }
           return LoginPage();
         },

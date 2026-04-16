@@ -19,3 +19,5 @@ final class LoadMoreGroups extends GroupEvent {
   final int limit;
   LoadMoreGroups(this.nextPage, this.limit);
 }
+
+final class GroupFailure extends GroupEvent {}
