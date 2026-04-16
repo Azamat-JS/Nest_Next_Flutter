@@ -61,6 +61,7 @@ Widget _buildHeader(BuildContext context, TextEditingController controller) {
                       context.read<GroupBloc>().add(
                         FetchGroupById(controller.text),
                       );
+                      print('Search button pressed');
                     },
                   ),
                   focusColor: Colors.lightBlue,
@@ -80,7 +81,6 @@ Widget _buildBody(BuildContext context) {
     listener: (context, state) {
       if (state.failure != null) {
         showSnackbar(context, state.failure!.message);
-        context.read<GroupBloc>().add(GroupFailure());
       }
     },
     builder: (context, state) {

@@ -14,9 +14,6 @@ class GroupBloc extends Bloc<GroupEvent, GroupState> {
     on<FetchGroups>(_onFetchGroups);
     on<FetchGroupById>(_onFetchGroupById);
     on<LoadMoreGroups>(_onLoadMoreGroups);
-    on<GroupFailure>((event, emit) {
-      emit(state.copyWith(clearFailure: true));
-    });
   }
 
   void _onFetchGroups(FetchGroups event, Emitter<GroupState> emit) async {
