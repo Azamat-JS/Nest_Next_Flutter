@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile/core/utils/show_snackbar.dart';
 import 'package:mobile/features/groups/presentation/bloc/group_bloc.dart';
-import 'package:mobile/features/home/presentation/pages/home_page.dart';
+import 'package:mobile/features/groups/presentation/pages/group_details_page.dart';
 
 class MyGroupsPage extends StatefulWidget {
   const MyGroupsPage({super.key});
@@ -73,11 +73,9 @@ Widget _buildHeader(BuildContext context, TextEditingController controller) {
                             : () {
                                 final id = controller.text.trim();
                                 if (id.isEmpty) return;
-                                print(id);
                                 context.read<GroupBloc>().add(
                                   FetchGroupById(id),
                                 );
-                                print('Search button pressed');
                               },
                       );
                     },
@@ -117,7 +115,12 @@ Widget _buildBody(BuildContext context) {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => HomePage()),
+                    MaterialPageRoute(
+                      builder: (context) => GroupDetailsPage(
+                        students: state.selectedGroup!.students,
+                        teacher: state.selectedGroup!.teacher,
+                      ),
+                    ),
                   );
                 },
                 child: Card.outlined(
