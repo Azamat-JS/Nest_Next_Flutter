@@ -7,7 +7,7 @@ class GroupDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Group Details')),
-      body: Center(),
+      body: Center(child: Column()),
     );
   }
 }
