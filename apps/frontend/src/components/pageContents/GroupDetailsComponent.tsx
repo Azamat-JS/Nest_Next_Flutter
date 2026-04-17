@@ -30,11 +30,11 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
             const res = await axios.get(`${API}/group/${groupId}`, { headers: { Authorization: `Bearer ${token}` } })
             setGroup(res.data)
             setStudents(res.data.students)
+            console.log(res.data);
         } catch (error: any) {
             toast.error(error.response?.data?.message ?? 'Something went wrong!')
         }
     }
-    console.log(students);
     useEffect(() => {
         getOneGroup()
         if (group?.students.length) {

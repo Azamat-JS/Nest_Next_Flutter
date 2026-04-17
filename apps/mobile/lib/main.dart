@@ -49,7 +49,7 @@ class _MyAppState extends State<MyApp> {
           if (isLoggedIn) {
             return MyGroupsPage();
           }
-          return LoginPage();
+          return MyGroupsPage();
         },
       ),
     );

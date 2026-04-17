@@ -36,7 +36,9 @@ export class GroupRepository {
           teacher: {
             select: {
               id: true,
-              username: true
+              username: true,
+              email: true,
+              role: true,
             }
           },
           students: {
@@ -45,7 +47,8 @@ export class GroupRepository {
                 select: {
                   id: true,
                   username: true,
-                  email: true
+                  email: true,
+                  role: true,
                 }
               }
             }
@@ -78,6 +81,8 @@ export class GroupRepository {
           select: {
             id: true,
             username: true,
+            email: true,
+            role: true,
           }
         },
         students: {
@@ -86,7 +91,9 @@ export class GroupRepository {
               select: {
                 id: true,
                 username: true,
-                email: true
+                email: true,
+                role: true,
+
               }
             }
           }

@@ -55,13 +55,30 @@ Widget _buildHeader(BuildContext context, TextEditingController controller) {
                 decoration: InputDecoration(
                   hintText: 'Search your groups...',
                   border: InputBorder.none,
-                  suffixIcon: IconButton(
-                    icon: const Icon(Icons.search, size: 28),
-                    onPressed: () {
-                      context.read<GroupBloc>().add(
-                        FetchGroupById(controller.text),
+                  suffixIcon: BlocBuilder<GroupBloc, GroupState>(
+                    builder: (context, state) {
+                      return IconButton(
+                        icon: state.isLoading
+                            ? const SizedBox(
+                                height: 20,
+                                width: 20,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                ),
+                              )
+                            : const Icon(Icons.search, size: 28),
+                        onPressed: state.isLoading
+                            ? null
+                            : () {
+                                final id = controller.text.trim();
+                                if (id.isEmpty) return;
+                                print(id);
+                                context.read<GroupBloc>().add(
+                                  FetchGroupById(id),
+                                );
+                                print('Search button pressed');
+                              },
                       );
-                      print('Search button pressed');
                     },
                   ),
                   focusColor: Colors.lightBlue,
@@ -84,10 +101,18 @@ Widget _buildBody(BuildContext context) {
       }
     },
     builder: (context, state) {
-      return Container(
-        alignment: Alignment.center,
-        child: Column(children: [Text(state.selectedGroup?.name ?? '')]),
-      );
+      if (state.isLoading) {
+        return const Center(child: CircularProgressIndicator());
+      }
+      if (state.failure != null) {
+        return Center(child: Text('Error occurred'));
+      }
+      if (state.selectedGroup != null) {
+        return Center(
+          child: Column(children: [Text(state.selectedGroup?.name ?? '')]),
+        );
+      }
+      return const Center(child: Text('No group found'));
     },
   );
 }

@@ -28,11 +28,23 @@ class GroupBloc extends Bloc<GroupEvent, GroupState> {
   }
 
   void _onFetchGroupById(FetchGroupById event, Emitter<GroupState> emit) async {
-    emit(state.copyWith(isLoading: true, clearFailure: true));
+    emit(
+      state.copyWith(
+        isLoading: true,
+        clearFailure: true,
+        clearSelectedGroup: true,
+      ),
+    );
     final res = await _useCases.groupById(GroupByIdParams(id: event.id));
     res.fold(
-      (fail) => emit(state.copyWith(isLoading: false, failure: fail)),
-      (group) => emit(state.copyWith(isLoading: false, selectedGroup: group)),
+      (fail) {
+        print("FAILURE: $fail");
+        emit(state.copyWith(isLoading: false, failure: fail));
+      },
+      (group) {
+        print("SUCCESS GROUP: ${group.name}");
+        emit(state.copyWith(isLoading: false, selectedGroup: group));
+      },
     );
   }
 

@@ -1,5 +1,4 @@
 import 'package:fpdart/fpdart.dart';
-import 'package:mobile/core/errors/exceptions.dart';
 import 'package:mobile/core/errors/failures.dart';
 import 'package:mobile/features/groups/data/datasources/group_remote_data_source.dart';
 import 'package:mobile/features/groups/domain/entities/group_entity.dart';
@@ -16,8 +15,9 @@ class GroupRepositoryImpl implements GroupRepository {
     try {
       final group = await remoteDataSource.getGroupById(id: id);
       return right(group);
-    } on ServerException {
-      return left(Failure('Failed to fetch group'));
+    } catch (e) {
+      print(e);
+      return left(Failure('Failed to fetch group: $e'));
     }
   }
 
@@ -29,8 +29,8 @@ class GroupRepositoryImpl implements GroupRepository {
     try {
       final groups = await remoteDataSource.getGroups(page: page, limit: limit);
       return right(groups);
-    } on ServerException {
-      return left(Failure('Failed to fetch groups'));
+    } catch (e) {
+      return left(Failure('Failed to fetch groups: $e'));
     }
   }
 }
