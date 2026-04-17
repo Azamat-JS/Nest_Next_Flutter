@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile/core/utils/show_snackbar.dart';
 import 'package:mobile/features/groups/presentation/bloc/group_bloc.dart';
+import 'package:mobile/features/home/presentation/pages/home_page.dart';
 
 class MyGroupsPage extends StatefulWidget {
   const MyGroupsPage({super.key});
@@ -109,7 +110,55 @@ Widget _buildBody(BuildContext context) {
       }
       if (state.selectedGroup != null) {
         return Center(
-          child: Column(children: [Text(state.selectedGroup?.name ?? '')]),
+          child: Column(
+            children: [
+              SizedBox(height: 30),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HomePage()),
+                  );
+                },
+                child: Card.outlined(
+                  margin: const EdgeInsets.symmetric(horizontal: 12),
+                  elevation: 3,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 60,
+                      vertical: 15,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          state.selectedGroup?.name ?? '',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.blue,
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          "Teacher: ${state.selectedGroup?.teacher.username}",
+                          style: TextStyle(fontSize: 16),
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          "Students: ${state.selectedGroup?.students.length ?? 0}",
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         );
       }
       return const Center(child: Text('No group found'));
