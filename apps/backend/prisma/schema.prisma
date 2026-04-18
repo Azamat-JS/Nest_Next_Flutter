@@ -29,7 +29,10 @@ model Users {
   parents       ParentStudent[] @relation("StudentRelations")
   children      ParentStudent[] @relation("ParentRelations")
   studentGroups StudentGroup[]
+  scoreEvents   ScoreEvent[]
+  studentScore  StudentScore?
 
+  @@index([email])
   @@map("Users")
 }
 
@@ -73,8 +76,39 @@ model Groups {
   createdAt DateTime       @default(now())
   updatedAt DateTime       @updatedAt
 
+  scoreEvents ScoreEvent[]
+
   @@index([teacherId])
   @@map("Groups")
+}
+
+model ScoreEvent {
+    id   String @id @default(cuid())
+    studentId String
+    student Users @relation(fields: [studentId], references: [id])
+
+    type ScoreType
+    value Int
+
+    groupId String
+    group Groups @relation(fields: [groupId], references: [id])
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    @@index([studentId])
+    @@index([groupId])
+    @@map("ScoreEvent")
+}
+
+model StudentScore{
+  studentId String @id
+  student Users @relation(fields: [studentId], references: [id])
+
+  total Int @default(0)
+  updatedAt DateTime @updatedAt
+
+  @@index([studentId])
+  @@map("StudentScore")
 }
 
 model Chat {
@@ -163,4 +197,11 @@ enum UserRole {
   TEACHER
   PARENT
   STUDENT
+}
+
+enum ScoreType {
+  HOMEWORK
+  ATTENDANCE
+  EXAM
+  QUIZ
 }

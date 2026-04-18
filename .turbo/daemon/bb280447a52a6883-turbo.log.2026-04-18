@@ -173,3 +173,39 @@
 2026-04-18T10:35:46.707975Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
 2026-04-18T10:36:52.907029Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/mobile/lib/core/di/core_di.dart")}
 2026-04-18T10:36:52.907040Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2026-04-18T10:46:02.107946Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/prisma/schema.prisma")}
+2026-04-18T10:46:02.107965Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-04-18T10:46:15.306878Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/prisma/schema.prisma")}
+2026-04-18T10:46:15.306908Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-04-18T10:46:54.608204Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/prisma/schema.prisma")}
+2026-04-18T10:46:54.608213Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-04-18T10:47:13.008089Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/prisma/schema.prisma")}
+2026-04-18T10:47:13.008104Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-04-18T10:47:40.607289Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/prisma/schema.prisma")}
+2026-04-18T10:47:40.607299Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-04-18T10:47:50.108164Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/prisma/schema.prisma")}
+2026-04-18T10:47:50.108174Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-04-18T10:48:11.008204Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/prisma/schema.prisma")}
+2026-04-18T10:48:11.008218Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-04-18T10:48:57.907355Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/prisma/schema.prisma")}
+2026-04-18T10:48:57.907363Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-04-18T10:49:57.807201Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/prisma/schema.prisma")}
+2026-04-18T10:49:57.807210Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-04-18T10:50:17.108006Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/prisma/schema.prisma")}
+2026-04-18T10:50:17.108017Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-04-18T10:50:47.906916Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/prisma/schema.prisma")}
+2026-04-18T10:50:47.906927Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-04-18T10:51:07.706332Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/prisma/schema.prisma")}
+2026-04-18T10:51:07.706341Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-04-18T10:51:37.307382Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/prisma/schema.prisma")}
+2026-04-18T10:51:37.307392Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-04-18T10:53:29.107515Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/prisma/schema.prisma")}
+2026-04-18T10:53:29.107521Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-04-18T10:56:40.006050Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/prisma/migrations/20260418105639_added_score_model"), AnchoredSystemPathBuf("apps/backend/prisma/migrations/20260418105639_added_score_model/migration.sql"), AnchoredSystemPathBuf("apps/backend/prisma/migrations/migration_lock.toml")}
+2026-04-18T10:56:40.006082Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-04-18T10:56:46.505971Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/dist/src/prisma/prisma.module.d.ts"), AnchoredSystemPathBuf("apps/backend/dist/src/users/users.service.d.ts"), AnchoredSystemPathBuf("apps/backend/dist/src/main.d.ts"), AnchoredSystemPathBuf("apps/backend/dist/src/prisma/prisma.service.d.ts"), AnchoredSystemPathBuf("apps/backend/dist/src/app.module.d.ts")}
+2026-04-18T10:56:46.505978Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-04-18T10:56:46.635599Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2026-04-18T10:56:46.635687Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/dist/tsconfig.build.tsbuildinfo"), AnchoredSystemPathBuf("apps/backend/dist/src/group/group.module.d.ts"), AnchoredSystemPathBuf("apps/backend/dist/src/group/group.controller.d.ts"), AnchoredSystemPathBuf("apps/backend/dist/src/group/usecases/create-group.usecase.d.ts"), AnchoredSystemPathBuf("apps/backend/dist/src/users/dto/user.dto.d.ts"), AnchoredSystemPathBuf("apps/backend/dist/src/users/users.controller.d.ts"), AnchoredSystemPathBuf("apps/backend/dist/src/users/users.module.d.ts"), AnchoredSystemPathBuf("apps/backend/dist/src/group/group.service.d.ts"), AnchoredSystemPathBuf("apps/backend/dist/src/group/usecases/update-group.usecase.d.ts"), AnchoredSystemPathBuf("apps/backend/dist/src/group/usecases/index.d.ts")}
+2026-04-18T10:56:46.635692Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-04-18T10:56:46.635703Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
