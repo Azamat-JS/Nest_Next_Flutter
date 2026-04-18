@@ -4,6 +4,7 @@ import { ChatModule } from './chat/chat.module';
 import { UsersModule } from './users/users.module';
 import { ConfigifyModule } from '@itgorillaz/configify';
 import { GroupModule } from './group/group.module';
+import { StudentScoreModule } from './student_score/student_score.module';
 
 
 @Module({
@@ -13,6 +14,7 @@ import { GroupModule } from './group/group.module';
     ChatModule,
     UsersModule,
     GroupModule,
+    StudentScoreModule,
   ],
   controllers: [],
   providers: [],
