@@ -80,7 +80,6 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         },
       );
       final data = response.data as Map<String, dynamic>;
-      print(data);
       if (data['accessToken'] != null) {
         await secureStorage.write(
           key: 'access_token',

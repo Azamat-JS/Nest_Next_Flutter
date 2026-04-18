@@ -8,7 +8,7 @@ class AuthCheckCubit extends Cubit<AuthCheckState> {
   final AuthRemoteDataSource authRemoteDataSource;
   AuthCheckCubit(this.authRemoteDataSource) : super(AuthCheckInitial());
 
-  void checkAuthStatus(UserEntity? user) async {
+  Future<void> checkAuthStatus(UserEntity? user) async {
     emit(AuthChecking());
     final user = await authRemoteDataSource.getCurrentUser();
     if (user != null) {
