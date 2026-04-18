@@ -16,24 +16,31 @@ class GroupDetailsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Group Details')),
 
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Text('Teacher: ${teacher.username}'),
-          ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: students.length,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
-                final student = students[index];
-                return StudentCard(student: student);
-              },
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Teacher: ${teacher.username}'),
+            const SizedBox(height: 10),
+            Text('Students: ${students.length}'),
+            const SizedBox(height: 20),
+            SizedBox(
+              height: 200,
+              child: ListView.builder(
+                itemCount: students.length,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  final student = students[index];
+                  return SizedBox(
+                    width: 300,
+                    child: StudentCard(student: student),
+                  );
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
