@@ -41,15 +41,17 @@ class _MyAppState extends State<MyApp> {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.darkThemeMode,
-      home: BlocSelector<AuthCheckCubit, AuthCheckState, bool>(
-        selector: (state) {
-          return state is AuthUserLoggedIn;
-        },
-        builder: (context, isLoggedIn) {
-          if (isLoggedIn) {
+      home: BlocBuilder<AuthCheckCubit, AuthCheckState>(
+        builder: (context, state) {
+          if (state is AuthChecking) {
+            return const Scaffold(
+              body: Center(child: CircularProgressIndicator()),
+            );
+          }
+          if (state is AuthUserLoggedIn) {
             return MyGroupsPage();
           }
-          return MyGroupsPage();
+          return LoginPage();
         },
       ),
     );

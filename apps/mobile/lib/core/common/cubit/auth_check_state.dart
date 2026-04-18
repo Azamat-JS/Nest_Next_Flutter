@@ -9,3 +9,5 @@ final class AuthUserLoggedIn extends AuthCheckState {
   final UserEntity user;
   AuthUserLoggedIn(this.user);
 }
+
+final class AuthChecking extends AuthCheckState {}
