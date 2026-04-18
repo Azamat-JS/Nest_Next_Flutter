@@ -1,9 +1,8 @@
-import { Controller, Get, Post, Body, Param, Delete, Put, UseGuards, Req, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Put, UseGuards, Query } from '@nestjs/common';
 import { GroupRepository } from './group.service';
 import { CreateGroupDto, PaginationDto, UpdateGroupDto } from './dto/group.dto';
 import { JwtAuthGuard } from 'src/lib/guards/jwt.guard';
-import { CreateGroupUseCase } from './usecases';
-import { UpdateGroupUseCase } from './usecases/update-group.usecase';
+import { CreateGroupUseCase, UpdateGroupUseCase } from './usecases';
 
 @Controller('group')
 export class GroupController {

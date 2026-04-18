@@ -4,8 +4,7 @@ import { GroupController } from './group.controller';
 import { ConfigifyModule } from '@itgorillaz/configify';
 import { JwtModule } from '@nestjs/jwt';
 import { AppConfig } from 'src/lib/config';
-import { CreateGroupUseCase } from './usecases';
-import { UpdateGroupUseCase } from './usecases/update-group.usecase';
+import { CreateGroupUseCase, UpdateGroupUseCase } from './usecases';
 
 @Module({
   imports: [

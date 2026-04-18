@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreateGroupDto, PaginationDto, UpdateGroupDto } from './dto/group.dto';
+import { PaginationDto } from './dto/group.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { Prisma, UserRole } from '@prisma/client';
 
