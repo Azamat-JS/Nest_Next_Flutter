@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { ScoreDto } from './dto/score.dto';
 import { Prisma } from '@prisma/client/scripts/default-index.js';
@@ -17,6 +17,13 @@ export class StudentScoreRepository {
         })
     }
 
+    async getEventById(eventId: string) {
+        return this.prisma.scoreEvent.findUnique({
+            where: {
+                id: eventId,
+            }
+        })
+    }
 
     async addScore(tx: Prisma.TransactionClient, dto: ScoreDto) {
         return tx.scoreEvent.create({
@@ -29,7 +36,7 @@ export class StudentScoreRepository {
         })
     }
 
-    async updateTotalScore(tx: Prisma.TransactionClient, dto: ScoreDto) {
+    async updateTotalScore(tx: Prisma.TransactionClient, dto: ScoreDto, diff?: number) {
         return tx.studentScore.upsert({
             where: {
                 studentId_groupId: {
@@ -39,7 +46,7 @@ export class StudentScoreRepository {
             },
             update: {
                 total: {
-                    increment: dto.score,
+                    increment: diff,
                 }
             },
             create: {
@@ -48,6 +55,13 @@ export class StudentScoreRepository {
                 total: dto.score,
             }
         })
+    }
+
+    async updateEvent(tx: Prisma.TransactionClient, dto: ScoreDto, eventId: string) {
+        return tx.scoreEvent.update({
+            where: { id: eventId },
+            data: { value:  dto.score},
+        });
     }
 
     async findScoreByTypeAndStudentAndGroup(studentId: string, groupId: string, scoreType: ScoreType) {
@@ -62,20 +76,20 @@ export class StudentScoreRepository {
 
     async findTotalScoreByStudentAndGroup(studentId: string, groupId: string) {
         const score = this.prisma.studentScore.findUnique({
-            where:{
+            where: {
                 studentId_groupId: {
                     studentId,
                     groupId,
                 },
-                select: {
-                    total: true,
-                }
+            },
+            select: {
+                total: true,
             }
         });
 
-        if(!score){
+        if (!score) {
             return 0;
-        }else{
+        } else {
             return score
         }
     }
@@ -86,7 +100,7 @@ export class StudentScoreRepository {
 
         return this.prisma.scoreEvent.findFirst({
             where: {
-                studentId, 
+                studentId,
                 groupId,
                 type: ScoreType.ATTENDANCE,
                 createdAt: {
