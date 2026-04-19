@@ -164,7 +164,7 @@ const GroupComponent = () => {
     const meta: PaginationType = data?.meta ?? {}
     const lastPage = meta?.last_page ?? 1;
 
-    if (isLoading) {
+    if (isLoading || teacherLoading || studentLoading) {
         return <div>Loading...</div>
     }
 

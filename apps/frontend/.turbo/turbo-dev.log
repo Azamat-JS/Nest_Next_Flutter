@@ -1,0 +1,128 @@
+
+> frontend@0.1.0 dev /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend
+> next dev -p 4000
+
+[1m[38;2;173;127;168m▲ Next.js 16.2.1[39m[22m (Turbopack)
+- Local:         http://localhost:4000
+- Network:       http://192.168.13.93:4000
+- Environments: .env.local
+[32m[1m✓[22m[39m Ready in 363ms
+[33m[1m⚠[22m[39m Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /Users/azamatabdullayev/Desktop/full-stack-turbo/pnpm-workspace.yaml as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend/pnpm-workspace.yaml
+
+
+ GET / [32m200[39m in 309ms[2m (next.js: 125ms, application-code: 184ms)[22m
+ GET /groups [32m200[39m in 59ms[2m (next.js: 42ms, application-code: 17ms)[22m
+ GET /groups/cmnoh0p550000u8v2nihbtf1o [32m200[39m in 243ms[2m (next.js: 231ms, application-code: 12ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 12ms[2m (next.js: 2ms, application-code: 10ms)[22m
+[32m[1m✓[22m[39m Compiled in 245ms
+[32m[1m✓[22m[39m Compiled in 228ms
+[32m[1m✓[22m[39m Compiled in 152ms
+[32m[1m✓[22m[39m Compiled in 38ms
+[32m[1m✓[22m[39m Compiled in 1590ms
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 159ms[2m (next.js: 71ms, application-code: 88ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 65ms[2m (next.js: 1303µs, application-code: 64ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 32ms[2m (next.js: 6ms, application-code: 26ms)[22m
+[32m[1m✓[22m[39m Compiled in 20ms
+[32m[1m✓[22m[39m Compiled in 49ms
+[32m[1m✓[22m[39m Compiled in 226ms
+[32m[1m✓[22m[39m Compiled in 275ms
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 241ms[2m (next.js: 88ms, application-code: 153ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 34ms[2m (next.js: 4ms, application-code: 29ms)[22m
+[32m[1m✓[22m[39m Compiled in 22ms
+[32m[1m✓[22m[39m Compiled in 24ms
+[32m[1m✓[22m[39m Compiled in 21ms
+[32m[1m✓[22m[39m Compiled in 20ms
+[32m[1m✓[22m[39m Compiled in 18ms
+[32m[1m✓[22m[39m Compiled in 22ms
+[32m[1m✓[22m[39m Compiled in 21ms
+[32m[1m✓[22m[39m Compiled in 20ms
+[31m[1m⨯[22m[39m ./apps/frontend/src/components/AddScoreDrawer.tsx:121:102
+Expected '</', got ')'
+  [90m119 |[0m
+  [90m120 |[0m                                                                 [36mif[0m (existingIndex >= [35m0[0m) {
+[31m[1m>[0m [90m121 |[0m                                                                     [36mreturn[0m prev.map((item, index) => )
+  [90m    |[0m                                                                                                      [31m[1m^[0m
+  [90m122 |[0m                                                                 } [36melse[0m {
+  [90m123 |[0m                                                                     updated.push({ studentId: s.id, score });
+  [90m124 |[0m                                                                     [36mreturn[0m updated;
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component Browser]
+    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component Browser]
+    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Server Component]
+    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component SSR]
+    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component SSR]
+    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Server Component]
+    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
+
+
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [31m500[39m in 157ms[2m (next.js: 72ms, application-code: 85ms)[22m
+[31m[1m⨯[22m[39m ./apps/frontend/src/components/AddScoreDrawer.tsx:121:102
+Expected '</', got ')'
+  [90m119 |[0m
+  [90m120 |[0m                                                                 [36mif[0m (existingIndex >= [35m0[0m) {
+[31m[1m>[0m [90m121 |[0m                                                                     [36mreturn[0m prev.map((item, index) => )
+  [90m    |[0m                                                                                                      [31m[1m^[0m
+  [90m122 |[0m                                                                 } [36melse[0m {
+  [90m123 |[0m                                                                     updated.push({ studentId: s.id, score });
+  [90m124 |[0m                                                                     [36mreturn[0m updated;
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component Browser]
+    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component Browser]
+    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Server Component]
+    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component SSR]
+    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component SSR]
+    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Server Component]
+    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
+
+
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [31m500[39m in 7ms[2m (next.js: 4ms, application-code: 4ms)[22m
+[36m[browser][39m [31mUncaught Error: ./apps/frontend/src/components/AddScoreDrawer.tsx:121:102
+Expected '</', got ')'
+  119 |
+  120 |                                                                 if (existingIndex >= 0) {
+> 121 |                                                                     return prev.map((item, index) => )
+      |                                                                                                      ^
+  122 |                                                                 } else {
+  123 |                                                                     updated.push({ studentId: s.id, score });
+  124 |                                                                     return updated;
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component Browser]
+    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component Browser]
+    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Server Component]
+    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component SSR]
+    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component SSR]
+    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Server Component]
+    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
+
+[39m
+[31m    at <unknown> (Error: ./apps/frontend/src/components/AddScoreDrawer.tsx:121:102)
+    at <unknown> (Error: (./apps/frontend/src/components/AddScoreDrawer.tsx:121:102)[39m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 211ms[2m (next.js: 52ms, application-code: 160ms)[22m
+[32m[1m✓[22m[39m Compiled in 21ms
+[32m[1m✓[22m[39m Compiled in 16ms

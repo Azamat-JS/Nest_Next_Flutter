@@ -17,12 +17,25 @@ import {
 import { Menu } from 'lucide-react';
 import { Badge } from '../ui/badge';
 import { TokenPayload } from '@/lib/types/token_payload';
+import AddScoreDrawer from '../AddScoreDrawer';
+import { useQuery } from '@tanstack/react-query';
 
 const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
     const [group, setGroup] = useState<GroupType>();
     const [students, setStudents] = useState<TokenPayload[]>([])
     const token = useAuthStore((state) => state.token);
+    const [openCreate, setOpenCreate] = useState(false);
     const API = process.env.NEXT_PUBLIC_API_URL;
+
+    const { data, isLoading, isSuccess } = useQuery({
+        queryKey: ["group", groupId],
+        queryFn: async () => {
+            const res = await axios.get(`${API}/group/${groupId}`, { headers: { Authorization: `Bearer ${token}` } });
+            return res.data;
+        },
+        enabled: !!token && !!groupId,
+        staleTime: 1000 * 60 * 5,
+    })
 
 
     const getOneGroup = async () => {
@@ -30,7 +43,6 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
             const res = await axios.get(`${API}/group/${groupId}`, { headers: { Authorization: `Bearer ${token}` } })
             setGroup(res.data)
             setStudents(res.data.students)
-            console.log(res.data);
         } catch (error: any) {
             toast.error(error.response?.data?.message ?? 'Something went wrong!')
         }
@@ -74,6 +86,7 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
                     </TableRow>
                 </TableFooter>
             </Table>
+            <AddScoreDrawer openCreate={openCreate} setOpenCreate={setOpenCreate} students={students} groupId={groupId} />
         </div>
     )
 }

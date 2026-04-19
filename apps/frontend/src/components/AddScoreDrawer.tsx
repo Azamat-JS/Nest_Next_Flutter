@@ -109,18 +109,18 @@ const AddScoreDrawer = ({ openCreate, setOpenCreate, students, groupId }: { open
                                                         type="number"
                                                         placeholder="Enter score"
                                                         onChange={(e) => {
-                                                            const score = Number(e.target.value);
+                                                            const value = e.target.value;
                                                             form.setFieldValue("students", (prev) => {
-                                                                const updated = [...prev];
-                                                                const existingIndex = updated.findIndex((item) => item.studentId === s.id);
+                                                                if (value === '') {
+                                                                    return prev.filter((item) => item.studentId !== s.id);
+                                                                }
+                                                                const score = Number(e.target.value);
+                                                                const existingIndex = prev.findIndex((item) => item.studentId === s.id);
 
                                                                 if (existingIndex >= 0) {
-                                                                    updated[existingIndex].score = score;
-                                                                    return updated;
-                                                                } else {
-                                                                    updated.push({ studentId: s.id, score });
-                                                                    return updated;
+                                                                    return prev.map((student) => student.studentId === s.id ? { ...student, score } : student);
                                                                 }
+                                                                return [...prev, { studentId: s.id, score }];
                                                             })
                                                         }}
                                                     />
