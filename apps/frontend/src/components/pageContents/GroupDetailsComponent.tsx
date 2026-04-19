@@ -21,8 +21,6 @@ import AddScoreDrawer from '../AddScoreDrawer';
 import { useQuery } from '@tanstack/react-query';
 
 const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
-    const [group, setGroup] = useState<GroupType>();
-    const [students, setStudents] = useState<TokenPayload[]>([])
     const token = useAuthStore((state) => state.token);
     const [openCreate, setOpenCreate] = useState(false);
     const API = process.env.NEXT_PUBLIC_API_URL;
@@ -37,22 +35,12 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
         staleTime: 1000 * 60 * 5,
     })
 
-
-    const getOneGroup = async () => {
-        try {
-            const res = await axios.get(`${API}/group/${groupId}`, { headers: { Authorization: `Bearer ${token}` } })
-            setGroup(res.data)
-            setStudents(res.data.students)
-        } catch (error: any) {
-            toast.error(error.response?.data?.message ?? 'Something went wrong!')
-        }
+    if (!isSuccess || !data?.group?.students) {
+        return <div>Loading...</div>;
     }
-    useEffect(() => {
-        getOneGroup()
-        if (group?.students.length) {
-            setStudents(group.students);
-        }
-    }, [groupId, token])
+    const group: GroupType = data.group;
+    const students: TokenPayload[] = data?.group?.students?.length > 0 ? data.group.students : [];
+
 
     return (
         <div className='flex flex-col w-full'>
