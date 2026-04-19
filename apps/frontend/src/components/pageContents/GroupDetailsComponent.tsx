@@ -74,7 +74,9 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
                     </TableRow>
                 </TableFooter>
             </Table>
-            <AddScoreDrawer openCreate={openCreate} setOpenCreate={setOpenCreate} students={students} groupId={groupId} />
+            <div className='flex justify-end mr-5 mt-4'>
+                <AddScoreDrawer openCreate={openCreate} setOpenCreate={setOpenCreate} students={students} groupId={groupId} />
+            </div>
         </div>
     )
 }

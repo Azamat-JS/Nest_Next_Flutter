@@ -28,9 +28,9 @@ import { Toggle } from "@/components/ui/toggle"
 import { ScoreType } from '@/lib/types/score_type';
 
 
-
 const AddScoreDrawer = ({ openCreate, setOpenCreate, students, groupId }: { openCreate: boolean, setOpenCreate: any, students: TokenPayload[], groupId: string }) => {
     const [type, setType] = useState<ScoreType>('HOMEWORK');
+    const [globalScore, setGlobalScore] = useState<number>(0);
     const API = process.env.NEXT_PUBLIC_API_URL;
     const token = useAuthStore((state) => state.token);
     const getSchema = () =>
@@ -45,19 +45,17 @@ const AddScoreDrawer = ({ openCreate, setOpenCreate, students, groupId }: { open
 
     const form = useForm({
         defaultValues: {
-            students: [{
-                studentId: '',
-                score: 0,
-            }],
+            students: [] as { studentId: string, score: number }[],
         },
         validators: {
             onSubmit: getSchema()
         },
         onSubmit: async ({ value }) => {
             try {
-                axios.post(`${API}/student-score/bulk`, { groupId, scoreType: type, students: value.students }, { headers: { Authorization: `Bearer ${token}` } });
+                await axios.post(`${API}/student-score/bulk`, { groupId, scoreType: type, students: value.students }, { headers: { Authorization: `Bearer ${token}` } });
                 form.reset()
                 setOpenCreate(false)
+                setGlobalScore(0)
                 toast.success('Scores added successfully!')
             } catch (error: any) {
                 toast.error(
@@ -94,19 +92,25 @@ const AddScoreDrawer = ({ openCreate, setOpenCreate, students, groupId }: { open
                     >
                         <FieldGroup>
                             <form.Field
-                                name="students[0].score"
+                                name="students"
                                 children={(field) => {
+                                    const allSelected = students.length > 0 &&
+                                        students.every(s =>
+                                            form.state.values.students.some(st => st.studentId === s.id)
+                                        );
                                     const isInvalid =
                                         field.state.meta.isTouched && !field.state.meta.isValid
                                     return (
-                                        <Field data-invalid={isInvalid}>
-                                            <FieldLabel htmlFor={field.name}>Score</FieldLabel>
+                                        type === 'HOMEWORK' ? <Field data-invalid={isInvalid}>
+                                            <FieldLabel htmlFor={field.name} className='font-bold flex justify-end'>Score</FieldLabel>
                                             {students.map((s) => (
                                                 <div key={s.id} className="flex items-center gap-2">
                                                     <span className='w-32'>{s.username}</span>
-
                                                     <Input
                                                         type="number"
+                                                        value={
+                                                            form.state.values.students.find(st => st.studentId === s.id)?.score ?? ''
+                                                        }
                                                         placeholder="Enter score"
                                                         onChange={(e) => {
                                                             const value = e.target.value;
@@ -129,6 +133,62 @@ const AddScoreDrawer = ({ openCreate, setOpenCreate, students, groupId }: { open
                                             {isInvalid && (
                                                 <FieldError errors={field.state.meta.errors} />
                                             )}
+                                        </Field> : <Field>
+
+                                            <FieldLabel htmlFor={field.name} className='font-bold flex justify-end'>Select All</FieldLabel>
+                                            <Input
+                                                type="number"
+                                                placeholder="Enter Attendance Score"
+                                                value={globalScore}
+                                                onChange={(e) => {
+                                                    const value = Number(e.target.value);
+                                                    setGlobalScore(value);
+                                                    form.setFieldValue("students", (prev) =>
+                                                        prev.map((s) => ({ ...s, score: value }))
+                                                    )
+                                                }}
+                                            />
+                                            <div className="flex items-center gap-2 mt-2">
+                                                <input
+                                                    type="checkbox"
+                                                    checked={allSelected}
+                                                    onChange={(e) => {
+                                                        if (e.target.checked) {
+                                                            form.setFieldValue("students", students.map((s) => ({
+                                                                studentId: s.id,
+                                                                score: globalScore,
+                                                            })))
+                                                        } else {
+                                                            form.setFieldValue("students", []);
+                                                        }
+                                                    }}
+                                                />
+                                                <span className='text-sm'>Apply to all students</span>
+                                            </div>
+
+                                            {students.map((s) => {
+                                                const checked = form.state.values.students.some((st) => st.studentId === s.id);
+                                                return (
+                                                    <div key={s.id} className="flex items-center gap-2">
+                                                        <input
+                                                            type="checkbox"
+                                                            checked={checked}
+                                                            onChange={(e) => {
+
+                                                                form.setFieldValue("students", (prev) => {
+                                                                    if (e.target.checked) {
+                                                                        return [...prev, { studentId: s.id, score: globalScore }];
+                                                                    } else {
+                                                                        return prev.filter((item) => item.studentId !== s.id);
+                                                                    }
+                                                                })
+
+                                                            }}
+                                                        />
+                                                        <span className="text-sm w-32">{s.username}</span>
+                                                    </div>
+                                                )
+                                            })}
                                         </Field>
                                     )
                                 }}
