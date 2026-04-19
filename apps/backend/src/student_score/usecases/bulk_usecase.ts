@@ -11,7 +11,7 @@ export class BulkAddScoreUseCase {
         const { groupId, scoreType, students } = dto;
 
         return this.prisma.$transaction(async (tx) => {
-            const results = [];
+            const results: any[] = [];
 
             for (const student of students) {
                 const { studentId, score } = student;
@@ -26,6 +26,24 @@ export class BulkAddScoreUseCase {
                         throw new BadRequestException(`Attendance already marked for ${studentId}`);
                     }
                 }
+
+                const studentGroup = await this.studentScoreRepo.findStudentWithGroup(studentId, groupId);
+
+                if (!studentGroup) {
+                    throw new BadRequestException(`Student ${studentId} is not part of the group`);
+                }
+
+                const scoreDto = {
+                    studentId,
+                    groupId,
+                    scoreType,
+                    score,
+                };
+
+                const addedScore = await this.studentScoreRepo.addScore(tx, scoreDto);
+                await this.studentScoreRepo.updateTotalScore(tx, scoreDto);
+                results.push(addedScore);
+
             }
         })
     }
