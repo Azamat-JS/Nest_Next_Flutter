@@ -1,6 +1,9 @@
-'use client'
-
-import { Button } from "@/components/ui/button"
+"use client";
+import { useAuthStore } from '@/lib/stores/authStore';
+import axios from 'axios';
+import { useState } from 'react';
+import { Button } from "@/components/ui/button";
+import { Label } from "./ui/label"
 import {
     Drawer,
     DrawerClose,
@@ -20,35 +23,24 @@ import {
     FieldGroup,
     FieldLabel,
 } from "@/components/ui/field"
-import {
-    Select,
-    SelectContent,
-    SelectGroup,
-    SelectItem,
-    SelectLabel,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select"
-import axios from "axios"
-import { useAuthStore } from "@/lib/stores/authStore"
-import { useState } from 'react'
-import { Label } from "./ui/label"
-import { TokenPayload } from "@/lib/types/token_payload"
+import { TokenPayload } from '@/lib/types/token_payload';
+import { Toggle } from "@/components/ui/toggle"
+import { ScoreType } from '@/lib/types/score_type';
 
-export function GroupDrawer({ openCreate, setOpenCreate, teachers, students, onGroupCreated }: { openCreate: boolean, setOpenCreate: any, teachers: TokenPayload[], students: TokenPayload[], onGroupCreated: () => void }) {
-    const [selectedTeacher, setSelectedTeacher] = useState<TokenPayload | null>(null);
+
+
+const AddScoreDrawer = ({ openCreate, setOpenCreate, students, groupId }: { openCreate: boolean, setOpenCreate: any, students: TokenPayload[], groupId: string }) => {
+    const [type, setType] = useState<ScoreType>('HOMEWORK');
     const API = process.env.NEXT_PUBLIC_API_URL;
     const token = useAuthStore((state) => state.token);
     const getSchema = () =>
         z.object({
-            name: z.string().min(2),
-            teacherId: z.string(),
-            studentIds: z.array(z.string()),
+            score: z.number(),
+            studentIds: z.array(z.string()).min(1, "At least one student must be selected"),
         })
     const form = useForm({
         defaultValues: {
-            name: "",
-            teacherId: "",
+            score: 0,
             studentIds: [] as string[],
         },
         validators: {
@@ -56,12 +48,11 @@ export function GroupDrawer({ openCreate, setOpenCreate, teachers, students, onG
         },
         onSubmit: async ({ value }) => {
             try {
-                await axios.post(`${API}/group`, value, { headers: { Authorization: `Bearer ${token}` } })
+                const requests = value.studentIds.map((studentId) => axios.post(`${API}/student-score/add`, value, { headers: { Authorization: `Bearer ${token}` } }))
+                await Promise.all(requests)
                 form.reset()
-                setSelectedTeacher(null)
                 setOpenCreate(false)
-                toast.success('A new group created!')
-                onGroupCreated();
+                toast.success('Scores added successfully!')
             } catch (error: any) {
                 toast.error(
                     error.response?.data?.message ?? 'Something went wrong'
@@ -69,17 +60,24 @@ export function GroupDrawer({ openCreate, setOpenCreate, teachers, students, onG
             }
         },
     })
-
     return (
         <Drawer direction="right" open={openCreate} onOpenChange={setOpenCreate}>
             <DrawerTrigger asChild>
-                <Button variant="default" className="text-md">Add Group</Button>
+                <Button variant="default" className="text-md">Add Score</Button>
             </DrawerTrigger>
             <DrawerContent>
                 <DrawerHeader>
-                    <DrawerTitle className="text-xl font-bold">Create a new Group</DrawerTitle>
+                    <DrawerTitle className="text-xl font-bold">Add Scores to Students</DrawerTitle>
                 </DrawerHeader>
                 <div className="no-scrollbar overflow-y-auto px-4">
+                    <div className="flex flex-wrap items-center gap-2">
+                        <Toggle variant="outline" aria-label="Homework" pressed={type === 'HOMEWORK'} onPressedChange={(pressed) => pressed && setType('HOMEWORK')}>
+                            Homework
+                        </Toggle>
+                        <Toggle variant="outline" aria-label="Attendance" pressed={type === 'ATTENDANCE'} onPressedChange={(pressed) => pressed && setType('ATTENDANCE')}>
+                            Attendance
+                        </Toggle>
+                    </div>
                     <form
                         id="create-group-form"
                         onSubmit={(e) => {
@@ -89,10 +87,8 @@ export function GroupDrawer({ openCreate, setOpenCreate, teachers, students, onG
                         className="flex flex-col gap-6"
                     >
                         <FieldGroup>
-
-
                             <form.Field
-                                name="name"
+                                name="score"
                                 children={(field) => {
                                     const isInvalid =
                                         field.state.meta.isTouched && !field.state.meta.isValid
@@ -102,11 +98,12 @@ export function GroupDrawer({ openCreate, setOpenCreate, teachers, students, onG
                                             <Input
                                                 id={field.name}
                                                 name={field.name}
+                                                type="number"
                                                 value={field.state.value}
                                                 onBlur={field.handleBlur}
-                                                onChange={(e) => field.handleChange(e.target.value)}
+                                                onChange={(e) => field.handleChange(Number(e.target.value))}
                                                 aria-invalid={isInvalid}
-                                                placeholder="Enter a group name"
+                                                placeholder="Enter a score"
                                                 autoComplete="off"
                                             />
                                             {isInvalid && (
@@ -115,36 +112,6 @@ export function GroupDrawer({ openCreate, setOpenCreate, teachers, students, onG
                                         </Field>
                                     )
                                 }}
-                            />
-                            <form.Field
-                                name="teacherId"
-                                children={(field) => (
-                                    <Field>
-                                        <Label>Teacher</Label>
-                                        <Select
-                                            value={selectedTeacher?.id || ""}
-                                            onValueChange={(val: string) => {
-                                                const teacher = teachers.find(t => t.id === val) || null;
-                                                setSelectedTeacher(teacher);
-                                                field.handleChange(val);
-                                            }}
-                                        >
-                                            <SelectTrigger className="w-full max-w-48">
-                                                <SelectValue placeholder="Select a teacher" />
-                                            </SelectTrigger>
-                                            <SelectContent position="popper">
-                                                <SelectGroup>
-                                                    <SelectLabel>Select a teacher</SelectLabel>
-                                                    {teachers.map((t) => (
-                                                        <SelectItem key={t.id} value={t.id}>
-                                                            {t.username}
-                                                        </SelectItem>
-                                                    ))}
-                                                </SelectGroup>
-                                            </SelectContent>
-                                        </Select>
-                                    </Field>
-                                )}
                             />
                             <form.Field
                                 name="studentIds"
@@ -194,5 +161,8 @@ export function GroupDrawer({ openCreate, setOpenCreate, teachers, students, onG
                 </DrawerFooter>
             </DrawerContent>
         </Drawer>
+
     )
 }
+
+export default AddScoreDrawer

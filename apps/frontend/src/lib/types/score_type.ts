@@ -1,0 +1,1 @@
+export type ScoreType = 'HOMEWORK' | 'ATTENDANCE' | 'EXAM';

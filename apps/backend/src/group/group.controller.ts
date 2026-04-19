@@ -23,7 +23,6 @@ export class GroupController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    console.log(id)
     return this.groupService.findOne(id);
   }
 

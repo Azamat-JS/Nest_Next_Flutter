@@ -46,7 +46,7 @@ export class StudentScoreRepository {
             },
             update: {
                 total: {
-                    increment: diff,
+                    increment: diff ?? dto.score,
                 }
             },
             create: {
@@ -60,7 +60,7 @@ export class StudentScoreRepository {
     async updateEvent(tx: Prisma.TransactionClient, dto: ScoreDto, eventId: string) {
         return tx.scoreEvent.update({
             where: { id: eventId },
-            data: { value:  dto.score},
+            data: { value: dto.score },
         });
     }
 

@@ -14,9 +14,9 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-import { TokenPayload } from '@/lib/types/token_payload';
 import { Menu } from 'lucide-react';
 import { Badge } from '../ui/badge';
+import { TokenPayload } from '@/lib/types/token_payload';
 
 const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
     const [group, setGroup] = useState<GroupType>();
