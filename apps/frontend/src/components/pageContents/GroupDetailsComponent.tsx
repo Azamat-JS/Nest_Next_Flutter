@@ -35,11 +35,11 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
         staleTime: 1000 * 60 * 5,
     })
 
-    if (!isSuccess || !data?.group?.students) {
+    if (!isSuccess) {
         return <div>Loading...</div>;
     }
-    const group: GroupType = data.group;
-    const students: TokenPayload[] = data?.group?.students?.length > 0 ? data.group.students : [];
+    const group: GroupType = data;
+    const students: TokenPayload[] = data?.students?.length > 0 ? data.students : [];
 
 
     return (
