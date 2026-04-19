@@ -35,21 +35,27 @@ const AddScoreDrawer = ({ openCreate, setOpenCreate, students, groupId }: { open
     const token = useAuthStore((state) => state.token);
     const getSchema = () =>
         z.object({
-            score: z.number(),
-            studentIds: z.array(z.string()).min(1, "At least one student must be selected"),
+            students: z.array(
+                z.object({
+                    studentId: z.string(),
+                    score: z.number().min(1),
+                })
+            ).min(1, "At least one student must be selected"),
         })
+
     const form = useForm({
         defaultValues: {
-            score: 0,
-            studentIds: [] as string[],
+            students: [{
+                studentId: '',
+                score: 0,
+            }],
         },
         validators: {
             onSubmit: getSchema()
         },
         onSubmit: async ({ value }) => {
             try {
-                const requests = value.studentIds.map((studentId) => axios.post(`${API}/student-score/add`, value, { headers: { Authorization: `Bearer ${token}` } }))
-                await Promise.all(requests)
+                axios.post(`${API}/student-score/bulk`, { groupId, scoreType: type, students: value.students }, { headers: { Authorization: `Bearer ${token}` } });
                 form.reset()
                 setOpenCreate(false)
                 toast.success('Scores added successfully!')
@@ -88,67 +94,44 @@ const AddScoreDrawer = ({ openCreate, setOpenCreate, students, groupId }: { open
                     >
                         <FieldGroup>
                             <form.Field
-                                name="score"
+                                name="students[0].score"
                                 children={(field) => {
                                     const isInvalid =
                                         field.state.meta.isTouched && !field.state.meta.isValid
                                     return (
                                         <Field data-invalid={isInvalid}>
-                                            <FieldLabel htmlFor={field.name}>Name</FieldLabel>
-                                            <Input
-                                                id={field.name}
-                                                name={field.name}
-                                                type="number"
-                                                value={field.state.value}
-                                                onBlur={field.handleBlur}
-                                                onChange={(e) => field.handleChange(Number(e.target.value))}
-                                                aria-invalid={isInvalid}
-                                                placeholder="Enter a score"
-                                                autoComplete="off"
-                                            />
+                                            <FieldLabel htmlFor={field.name}>Score</FieldLabel>
+                                            {students.map((s) => (
+                                                <div key={s.id} className="flex items-center gap-2">
+                                                    <span className='w-32'>{s.username}</span>
+
+                                                    <Input
+                                                        type="number"
+                                                        placeholder="Enter score"
+                                                        onChange={(e) => {
+                                                            const score = Number(e.target.value);
+                                                            form.setFieldValue("students", (prev) => {
+                                                                const updated = [...prev];
+                                                                const existingIndex = updated.findIndex((item) => item.studentId === s.id);
+
+                                                                if (existingIndex >= 0) {
+                                                                    updated[existingIndex].score = score;
+                                                                    return updated;
+                                                                } else {
+                                                                    updated.push({ studentId: s.id, score });
+                                                                    return updated;
+                                                                }
+                                                            })
+                                                        }}
+                                                    />
+                                                </div>
+                                            ))}
                                             {isInvalid && (
                                                 <FieldError errors={field.state.meta.errors} />
                                             )}
                                         </Field>
                                     )
                                 }}
-                            />
-                            <form.Field
-                                name="studentIds"
-                                children={(field) => (
-                                    <Field>
-                                        <Label>Students</Label>
-
-                                        <div className="max-h-48 overflow-y-auto rounded-md border p-3 space-y-2">
-                                            {students.map((student) => {
-                                                const checked = field.state.value.includes(student.id);
-
-                                                return (
-                                                    <label
-                                                        key={student.id}
-                                                        className="flex items-center gap-2 cursor-pointer"
-                                                    >
-                                                        <input
-                                                            type="checkbox"
-                                                            checked={checked}
-                                                            onChange={(e) => {
-                                                                if (e.target.checked) {
-                                                                    field.handleChange([...field.state.value, student.id]);
-                                                                } else {
-                                                                    field.handleChange(
-                                                                        field.state.value.filter((id) => id !== student.id)
-                                                                    );
-                                                                }
-                                                            }}
-                                                        />
-
-                                                        <span>{student.username}</span>
-                                                    </label>
-                                                );
-                                            })}
-                                        </div>
-                                    </Field>
-                                )}
                             />
                         </FieldGroup>
                     </form>
