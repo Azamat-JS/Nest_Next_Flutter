@@ -33,28 +33,28 @@ const AddScoreDrawer = ({ openCreate, setOpenCreate, students, groupId }: { open
     const [globalScore, setGlobalScore] = useState<number>(0);
     const API = process.env.NEXT_PUBLIC_API_URL;
     const token = useAuthStore((state) => state.token);
-    const getSchema = () =>
-        z.object({
-            students: z.array(
-                z.object({
-                    studentId: z.string(),
-                    score: z.number().min(1),
-                })
-            ).min(1, "At least one student must be selected"),
-        })
+    const schema = z.object({
+        students: z.array(
+            z.object({
+                studentId: z.string(),
+                score: z.number(),
+            })
+        ),
+    });
+
+    type FormValues = z.infer<typeof schema>;
 
     const form = useForm({
         defaultValues: {
-            students: [] as { studentId: string, score: number }[],
+            students: [] as FormValues["students"],
         },
         validators: {
-            onSubmit: getSchema()
+            onSubmit: schema,
         },
         onSubmit: async ({ value }) => {
             try {
                 await axios.post(`${API}/student-score/bulk`, { groupId, scoreType: type, students: value.students }, { headers: { Authorization: `Bearer ${token}` } });
                 form.reset()
-                setOpenCreate(false)
                 setGlobalScore(0)
                 toast.success('Scores added successfully!')
             } catch (error: any) {
@@ -75,10 +75,22 @@ const AddScoreDrawer = ({ openCreate, setOpenCreate, students, groupId }: { open
                 </DrawerHeader>
                 <div className="no-scrollbar overflow-y-auto px-4">
                     <div className="flex flex-wrap items-center gap-2">
-                        <Toggle variant="outline" aria-label="Homework" pressed={type === 'HOMEWORK'} onPressedChange={(pressed) => pressed && setType('HOMEWORK')}>
+                        <Toggle variant="outline" onPressedChange={(pressed) => {
+                            if (pressed) {
+                                setType('HOMEWORK')
+                                form.setFieldValue("students", [])
+                                setGlobalScore(0)
+                            }
+                        }} aria-label="Homework" pressed={type === 'HOMEWORK'}>
                             Homework
                         </Toggle>
-                        <Toggle variant="outline" aria-label="Attendance" pressed={type === 'ATTENDANCE'} onPressedChange={(pressed) => pressed && setType('ATTENDANCE')}>
+                        <Toggle variant="outline" aria-label="Attendance" pressed={type === 'ATTENDANCE'} onPressedChange={(pressed) => {
+                            if (pressed) {
+                                setType('ATTENDANCE')
+                                form.setFieldValue("students", [])
+                                setGlobalScore(0)
+                            }
+                        }}>
                             Attendance
                         </Toggle>
                     </div>
@@ -88,7 +100,7 @@ const AddScoreDrawer = ({ openCreate, setOpenCreate, students, groupId }: { open
                             e.preventDefault()
                             form.handleSubmit()
                         }}
-                        className="flex flex-col gap-6"
+                        className="flex flex-col gap-6 scroll-auto mt-4"
                     >
                         <FieldGroup>
                             <form.Field
@@ -102,7 +114,7 @@ const AddScoreDrawer = ({ openCreate, setOpenCreate, students, groupId }: { open
                                         field.state.meta.isTouched && !field.state.meta.isValid
                                     return (
                                         type === 'HOMEWORK' ? <Field data-invalid={isInvalid}>
-                                            <FieldLabel htmlFor={field.name} className='font-bold flex justify-end'>Score</FieldLabel>
+                                            <FieldLabel htmlFor={field.name} className='font-bold flex justify-end'>Homework Score</FieldLabel>
                                             {students.map((s) => (
                                                 <div key={s.id} className="flex items-center gap-2">
                                                     <span className='w-32'>{s.username}</span>
@@ -135,7 +147,7 @@ const AddScoreDrawer = ({ openCreate, setOpenCreate, students, groupId }: { open
                                             )}
                                         </Field> : <Field>
 
-                                            <FieldLabel htmlFor={field.name} className='font-bold flex justify-end'>Select All</FieldLabel>
+                                            <FieldLabel htmlFor={field.name} className='font-bold flex justify-end'>Attendance score</FieldLabel>
                                             <Input
                                                 type="number"
                                                 placeholder="Enter Attendance Score"
@@ -147,11 +159,14 @@ const AddScoreDrawer = ({ openCreate, setOpenCreate, students, groupId }: { open
                                                         prev.map((s) => ({ ...s, score: value }))
                                                     )
                                                 }}
+                                                className="mb-2"
                                             />
                                             <div className="flex items-center gap-2 mt-2">
                                                 <input
                                                     type="checkbox"
                                                     checked={allSelected}
+                                                    disabled={students.length === 0}
+                                                    className="h-3 w-3"
                                                     onChange={(e) => {
                                                         if (e.target.checked) {
                                                             form.setFieldValue("students", students.map((s) => ({
@@ -163,7 +178,7 @@ const AddScoreDrawer = ({ openCreate, setOpenCreate, students, groupId }: { open
                                                         }
                                                     }}
                                                 />
-                                                <span className='text-sm'>Apply to all students</span>
+                                                <span className="font-bold">Select All</span>
                                             </div>
 
                                             {students.map((s) => {
@@ -172,6 +187,8 @@ const AddScoreDrawer = ({ openCreate, setOpenCreate, students, groupId }: { open
                                                     <div key={s.id} className="flex items-center gap-2">
                                                         <input
                                                             type="checkbox"
+                                                            className="h-3 w-3"
+                                                            disabled={students.length === 0}
                                                             checked={checked}
                                                             onChange={(e) => {
 
@@ -185,7 +202,7 @@ const AddScoreDrawer = ({ openCreate, setOpenCreate, students, groupId }: { open
 
                                                             }}
                                                         />
-                                                        <span className="text-sm w-32">{s.username}</span>
+                                                        <span className="w-32 ">{s.username}</span>
                                                     </div>
                                                 )
                                             })}

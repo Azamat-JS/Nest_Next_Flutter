@@ -6,7 +6,7 @@
 - Local:         http://localhost:4000
 - Network:       http://192.168.13.93:4000
 - Environments: .env.local
-[32m[1m✓[22m[39m Ready in 363ms
+[32m[1m✓[22m[39m Ready in 243ms
 [33m[1m⚠[22m[39m Warning: Next.js inferred your workspace root, but it may not be correct.
  We detected multiple lockfiles and selected the directory of /Users/azamatabdullayev/Desktop/full-stack-turbo/pnpm-workspace.yaml as the root directory.
  To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
@@ -15,776 +15,105 @@
    * /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend/pnpm-workspace.yaml
 
 
- GET / [32m200[39m in 309ms[2m (next.js: 125ms, application-code: 184ms)[22m
- GET /groups [32m200[39m in 59ms[2m (next.js: 42ms, application-code: 17ms)[22m
- GET /groups/cmnoh0p550000u8v2nihbtf1o [32m200[39m in 243ms[2m (next.js: 231ms, application-code: 12ms)[22m
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 12ms[2m (next.js: 2ms, application-code: 10ms)[22m
-[32m[1m✓[22m[39m Compiled in 245ms
-[32m[1m✓[22m[39m Compiled in 228ms
-[32m[1m✓[22m[39m Compiled in 152ms
-[32m[1m✓[22m[39m Compiled in 38ms
-[32m[1m✓[22m[39m Compiled in 1590ms
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 159ms[2m (next.js: 71ms, application-code: 88ms)[22m
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 65ms[2m (next.js: 1303µs, application-code: 64ms)[22m
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 32ms[2m (next.js: 6ms, application-code: 26ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 659ms[2m (next.js: 430ms, application-code: 229ms)[22m
+[32m[1m✓[22m[39m Compiled in 317ms
+[32m[1m✓[22m[39m Compiled in 25ms
 [32m[1m✓[22m[39m Compiled in 20ms
-[32m[1m✓[22m[39m Compiled in 49ms
-[32m[1m✓[22m[39m Compiled in 226ms
-[32m[1m✓[22m[39m Compiled in 275ms
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 241ms[2m (next.js: 88ms, application-code: 153ms)[22m
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 34ms[2m (next.js: 4ms, application-code: 29ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[32m[1m✓[22m[39m Compiled in 143ms
+[32m[1m✓[22m[39m Compiled in 20ms
+[32m[1m✓[22m[39m Compiled in 23ms
 [32m[1m✓[22m[39m Compiled in 22ms
+[32m[1m✓[22m[39m Compiled in 23ms
+[32m[1m✓[22m[39m Compiled in 58ms
 [32m[1m✓[22m[39m Compiled in 24ms
 [32m[1m✓[22m[39m Compiled in 21ms
 [32m[1m✓[22m[39m Compiled in 20ms
-[32m[1m✓[22m[39m Compiled in 18ms
-[32m[1m✓[22m[39m Compiled in 22ms
 [32m[1m✓[22m[39m Compiled in 21ms
-[32m[1m✓[22m[39m Compiled in 20ms
-[31m[1m⨯[22m[39m ./apps/frontend/src/components/AddScoreDrawer.tsx:121:102
-Expected '</', got ')'
-  [90m119 |[0m
-  [90m120 |[0m                                                                 [36mif[0m (existingIndex >= [35m0[0m) {
-[31m[1m>[0m [90m121 |[0m                                                                     [36mreturn[0m prev.map((item, index) => )
-  [90m    |[0m                                                                                                      [31m[1m^[0m
-  [90m122 |[0m                                                                 } [36melse[0m {
-  [90m123 |[0m                                                                     updated.push({ studentId: s.id, score });
-  [90m124 |[0m                                                                     [36mreturn[0m updated;
-
-Parsing ecmascript source code failed
-
-Import traces:
-  Client Component Browser:
-    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component Browser]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component Browser]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Server Component]
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component SSR]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component SSR]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Server Component]
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
-
-
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [31m500[39m in 157ms[2m (next.js: 72ms, application-code: 85ms)[22m
-[31m[1m⨯[22m[39m ./apps/frontend/src/components/AddScoreDrawer.tsx:121:102
-Expected '</', got ')'
-  [90m119 |[0m
-  [90m120 |[0m                                                                 [36mif[0m (existingIndex >= [35m0[0m) {
-[31m[1m>[0m [90m121 |[0m                                                                     [36mreturn[0m prev.map((item, index) => )
-  [90m    |[0m                                                                                                      [31m[1m^[0m
-  [90m122 |[0m                                                                 } [36melse[0m {
-  [90m123 |[0m                                                                     updated.push({ studentId: s.id, score });
-  [90m124 |[0m                                                                     [36mreturn[0m updated;
-
-Parsing ecmascript source code failed
-
-Import traces:
-  Client Component Browser:
-    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component Browser]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component Browser]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Server Component]
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component SSR]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component SSR]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Server Component]
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
-
-
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [31m500[39m in 7ms[2m (next.js: 4ms, application-code: 4ms)[22m
-[36m[browser][39m [31mUncaught Error: ./apps/frontend/src/components/AddScoreDrawer.tsx:121:102
-Expected '</', got ')'
-  119 |
-  120 |                                                                 if (existingIndex >= 0) {
-> 121 |                                                                     return prev.map((item, index) => )
-      |                                                                                                      ^
-  122 |                                                                 } else {
-  123 |                                                                     updated.push({ studentId: s.id, score });
-  124 |                                                                     return updated;
-
-Parsing ecmascript source code failed
-
-Import traces:
-  Client Component Browser:
-    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component Browser]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component Browser]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Server Component]
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component SSR]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component SSR]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Server Component]
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
-
-[39m
-[31m    at <unknown> (Error: ./apps/frontend/src/components/AddScoreDrawer.tsx:121:102)
-    at <unknown> (Error: (./apps/frontend/src/components/AddScoreDrawer.tsx:121:102)[39m
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 211ms[2m (next.js: 52ms, application-code: 160ms)[22m
-[32m[1m✓[22m[39m Compiled in 21ms
-[32m[1m✓[22m[39m Compiled in 16ms
-[32m[1m✓[22m[39m Compiled in 27ms
-[32m[1m✓[22m[39m Compiled in 21ms
-[32m[1m✓[22m[39m Compiled in 20ms
-[31m[1m⨯[22m[39m ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx:40:75
-Expression expected
-  [90m38 |[0m
-  [90m39 |[0m     [36mlet[0m students: [33mTokenPayload[0m[];
-[31m[1m>[0m [90m40 |[0m     data.group.students.length > [35m0[0m && isSuccess ? students : [33mTokenPayload[0m[] = data.group.students;
-  [90m   |[0m                                                                           [31m[1m^[0m
-  [90m41 |[0m
-  [90m42 |[0m
-  [90m43 |[0m     [36mreturn[0m (
-
-Parsing ecmascript source code failed
-
-Import trace:
-  Server Component:
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx
-
-
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [31m500[39m in 12ms[2m (next.js: 7ms, application-code: 5ms)[22m
-[31m[1m⨯[22m[39m ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx:40:75
-Expression expected
-  [90m38 |[0m
-  [90m39 |[0m     [36mlet[0m students: [33mTokenPayload[0m[];
-[31m[1m>[0m [90m40 |[0m     data.group.students.length > [35m0[0m && isSuccess ? students : [33mTokenPayload[0m[] = data.group.students;
-  [90m   |[0m                                                                           [31m[1m^[0m
-  [90m41 |[0m
-  [90m42 |[0m
-  [90m43 |[0m     [36mreturn[0m (
-
-Parsing ecmascript source code failed
-
-Import trace:
-  Server Component:
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx
-
-
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [31m500[39m in 7ms[2m (next.js: 3ms, application-code: 4ms)[22m
-[32m[1m✓[22m[39m Compiled in 96ms
-[36m[browser][39m [31mUncaught Error: ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx:40:75
-Expression expected
-  38 |
-  39 |     let students: TokenPayload[];
-> 40 |     data.group.students.length > 0 && isSuccess ? students : TokenPayload[] = data.group.students;
-     |                                                                           ^
-  41 |
-  42 |
-  43 |     return (
-
-Parsing ecmascript source code failed
-
-Import trace:
-  Server Component:
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx
-
-[39m
-[31m    at <unknown> (Error: ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx:40:75)
-    at <unknown> (Error: (./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx:40:75)[39m
-[31m[1m⨯[22m[39m TypeError: Cannot read properties of undefined (reading 'map')
-    at GroupDetailsComponent (src/components/pageContents/GroupDetailsComponent.tsx:59:31)
-  [90m57 |[0m                 </[33mTableHeader[0m>
-  [90m58 |[0m                 <[33mTableBody[0m>
-[31m[1m>[0m [90m59 |[0m                     {students.map((s, idx) => (
-  [90m   |[0m                               [31m[1m^[0m
-  [90m60 |[0m                         <[33mTableRow[0m key={s.id}>
-  [90m61 |[0m                             <[33mTableCell[0m className=[32m"text-center"[0m>{idx + [35m1[0m}</[33mTableCell[0m>
-  [90m62 |[0m                             <[33mTableCell[0m className=[32m"text-center"[0m>{s.username}</[33mTableCell[0m> {
-  digest: [32m'938971644'[39m
-}
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 211ms[2m (next.js: 52ms, application-code: 159ms)[22m
-[32m[1m✓[22m[39m Compiled in 19ms
-[32m[1m✓[22m[39m Compiled in 18ms
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 50ms[2m (next.js: 15ms, application-code: 35ms)[22m
- GET /home [32m200[39m in 43ms[2m (next.js: 31ms, application-code: 12ms)[22m
- GET /groups [32m200[39m in 44ms[2m (next.js: 25ms, application-code: 19ms)[22m
- GET /groups/cmnoh0p550000u8v2nihbtf1o [32m200[39m in 26ms[2m (next.js: 7ms, application-code: 19ms)[22m
-[32m[1m✓[22m[39m Compiled in 33ms
- GET /groups/cmnoh0p550000u8v2nihbtf1o [32m200[39m in 50ms[2m (next.js: 11ms, application-code: 39ms)[22m
-[32m[1m✓[22m[39m Compiled in 26ms
- GET /groups/cmnoh0p550000u8v2nihbtf1o [32m200[39m in 50ms[2m (next.js: 10ms, application-code: 40ms)[22m
-[32m[1m✓[22m[39m Compiled in 18ms
-[32m[1m✓[22m[39m Compiled in 26ms
- GET /groups [32m200[39m in 30ms[2m (next.js: 5ms, application-code: 25ms)[22m
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 30ms[2m (next.js: 10ms, application-code: 20ms)[22m
-[32m[1m✓[22m[39m Compiled in 26ms
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 53ms[2m (next.js: 14ms, application-code: 39ms)[22m
-[32m[1m✓[22m[39m Compiled in 33ms
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 52ms[2m (next.js: 13ms, application-code: 39ms)[22m
-[32m[1m✓[22m[39m Compiled in 22ms
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 77ms[2m (next.js: 13ms, application-code: 64ms)[22m
-[32m[1m✓[22m[39m Compiled in 22ms
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 51ms[2m (next.js: 12ms, application-code: 40ms)[22m
-[32m[1m✓[22m[39m Compiled in 18ms
-[32m[1m✓[22m[39m Compiled in 18ms
-[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
-[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
-[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
-[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
-[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
-[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
-[32m[1m✓[22m[39m Compiled in 35ms
-[32m[1m✓[22m[39m Compiled in 22ms
-[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
-[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
-[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
-[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
-[32m[1m✓[22m[39m Compiled in 23ms
-[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
-[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
-[32m[1m✓[22m[39m Compiled in 23ms
-[32m[1m✓[22m[39m Compiled in 22ms
-[32m[1m✓[22m[39m Compiled in 21ms
-[32m[1m✓[22m[39m Compiled in 21ms
-[32m[1m✓[22m[39m Compiled in 20ms
-[32m[1m✓[22m[39m Compiled in 22ms
-[32m[1m✓[22m[39m Compiled in 17ms
-[32m[1m✓[22m[39m Compiled in 23ms
-[32m[1m✓[22m[39m Compiled in 20ms
-[32m[1m✓[22m[39m Compiled in 19ms
-[32m[1m✓[22m[39m Compiled in 22ms
-[32m[1m✓[22m[39m Compiled in 20ms
-[32m[1m✓[22m[39m Compiled in 21ms
-[32m[1m✓[22m[39m Compiled in 18ms
-[32m[1m✓[22m[39m Compiled in 17ms
-[32m[1m✓[22m[39m Compiled in 16ms
-[32m[1m✓[22m[39m Compiled in 30ms
-[31m[1m⨯[22m[39m ./apps/frontend/src/components/AddScoreDrawer.tsx:139:58
-Expected '</', got '('
-  [90m137 |[0m                                                 placeholder=[32m"Enter Attendance Score"[0m
-  [90m138 |[0m                                                 value={globalScore}
-[31m[1m>[0m [90m139 |[0m                                                 onChange=(e) => { }
-  [90m    |[0m                                                          [31m[1m^[0m
-  [90m140 |[0m                                             />
-  [90m141 |[0m                                         </[33mField[0m>
-  [90m142 |[0m                                     )
-
-Parsing ecmascript source code failed
-
-Import traces:
-  Client Component Browser:
-    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component Browser]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component Browser]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Server Component]
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component SSR]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component SSR]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Server Component]
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
-
-
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [31m500[39m in 17ms[2m (next.js: 8ms, application-code: 10ms)[22m
-[31m[1m⨯[22m[39m ./apps/frontend/src/components/AddScoreDrawer.tsx:139:58
-Expected '</', got '('
-  [90m137 |[0m                                                 placeholder=[32m"Enter Attendance Score"[0m
-  [90m138 |[0m                                                 value={globalScore}
-[31m[1m>[0m [90m139 |[0m                                                 onChange=(e) => { }
-  [90m    |[0m                                                          [31m[1m^[0m
-  [90m140 |[0m                                             />
-  [90m141 |[0m                                         </[33mField[0m>
-  [90m142 |[0m                                     )
-
-Parsing ecmascript source code failed
-
-Import traces:
-  Client Component Browser:
-    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component Browser]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component Browser]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Server Component]
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component SSR]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component SSR]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Server Component]
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
-
-
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [31m500[39m in 5ms[2m (next.js: 2ms, application-code: 3ms)[22m
-[32m[1m✓[22m[39m Compiled in 28ms
-[36m[browser][39m [31mUncaught Error: ./apps/frontend/src/components/AddScoreDrawer.tsx:139:58
-Expected '</', got '('
-  137 |                                                 placeholder="Enter Attendance Score"
-  138 |                                                 value={globalScore}
-> 139 |                                                 onChange=(e) => { }
-      |                                                          ^
-  140 |                                             />
-  141 |                                         </Field>
-  142 |                                     )
-
-Parsing ecmascript source code failed
-
-Import traces:
-  Client Component Browser:
-    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component Browser]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component Browser]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Server Component]
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component SSR]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component SSR]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Server Component]
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
-
-[39m
-[31m    at <unknown> (Error: ./apps/frontend/src/components/AddScoreDrawer.tsx:139:58)
-    at <unknown> (Error: (./apps/frontend/src/components/AddScoreDrawer.tsx:139:58)[39m
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 207ms[2m (next.js: 53ms, application-code: 154ms)[22m
-[32m[1m✓[22m[39m Compiled in 17ms
 [32m[1m✓[22m[39m Compiled in 37ms
-[31m[1m⨯[22m[39m ./apps/frontend/src/components/AddScoreDrawer.tsx:143:73
-Expected '</', got ')'
-  [90m141 |[0m                                                     setGlobalScore(value);
-  [90m142 |[0m                                                     form.setFieldValue([32m"students"[0m, (prev) => {
-[31m[1m>[0m [90m143 |[0m                                                         prev.map((s) => )
-  [90m    |[0m                                                                         [31m[1m^[0m
-  [90m144 |[0m                                                     })
-  [90m145 |[0m
-  [90m146 |[0m                                                 }}
-
-Parsing ecmascript source code failed
-
-Import traces:
-  Client Component Browser:
-    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component Browser]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component Browser]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Server Component]
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component SSR]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component SSR]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Server Component]
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
-
-
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [31m500[39m in 12ms[2m (next.js: 6ms, application-code: 5ms)[22m
-[31m[1m⨯[22m[39m ./apps/frontend/src/components/AddScoreDrawer.tsx:143:73
-Expected '</', got ')'
-  [90m141 |[0m                                                     setGlobalScore(value);
-  [90m142 |[0m                                                     form.setFieldValue([32m"students"[0m, (prev) => {
-[31m[1m>[0m [90m143 |[0m                                                         prev.map((s) => )
-  [90m    |[0m                                                                         [31m[1m^[0m
-  [90m144 |[0m                                                     })
-  [90m145 |[0m
-  [90m146 |[0m                                                 }}
-
-Parsing ecmascript source code failed
-
-Import traces:
-  Client Component Browser:
-    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component Browser]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component Browser]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Server Component]
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component SSR]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component SSR]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Server Component]
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
-
-
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [31m500[39m in 7ms[2m (next.js: 3ms, application-code: 4ms)[22m
-[36m[browser][39m [31mUncaught Error: ./apps/frontend/src/components/AddScoreDrawer.tsx:143:73
-Expected '</', got ')'
-  141 |                                                     setGlobalScore(value);
-  142 |                                                     form.setFieldValue("students", (prev) => {
-> 143 |                                                         prev.map((s) => )
-      |                                                                         ^
-  144 |                                                     })
-  145 |
-  146 |                                                 }}
-
-Parsing ecmascript source code failed
-
-Import traces:
-  Client Component Browser:
-    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component Browser]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component Browser]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Server Component]
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component SSR]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component SSR]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Server Component]
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
-
-[39m
-[31m    at <unknown> (Error: ./apps/frontend/src/components/AddScoreDrawer.tsx:143:73)
-    at <unknown> (Error: (./apps/frontend/src/components/AddScoreDrawer.tsx:143:73)[39m
-[32m[1m✓[22m[39m Compiled in 30ms
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 207ms[2m (next.js: 50ms, application-code: 157ms)[22m
-[32m[1m✓[22m[39m Compiled in 19ms
-[32m[1m✓[22m[39m Compiled in 21ms
-[32m[1m✓[22m[39m Compiled in 19ms
-[32m[1m✓[22m[39m Compiled in 43ms
-[32m[1m✓[22m[39m Compiled in 19ms
-[32m[1m✓[22m[39m Compiled in 18ms
+[32m[1m✓[22m[39m Compiled in 33ms
 [32m[1m✓[22m[39m Compiled in 22ms
-[31m[1m⨯[22m[39m ./apps/frontend/src/components/AddScoreDrawer.tsx:154:53
-Expected '</', got '}'
-  [90m152 |[0m                                                     onChange={(e) => {
-  [90m153 |[0m                                                         [36mconst[0m
-[31m[1m>[0m [90m154 |[0m                                                     }}
-  [90m    |[0m                                                     [31m[1m^[0m
-  [90m155 |[0m                                                 />
-  [90m156 |[0m                                             </div>
-  [90m157 |[0m                                         </[33mField[0m>
-
-Parsing ecmascript source code failed
-
-Import traces:
-  Client Component Browser:
-    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component Browser]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component Browser]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Server Component]
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component SSR]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component SSR]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Server Component]
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
-
-
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [31m500[39m in 13ms[2m (next.js: 7ms, application-code: 6ms)[22m
-[31m[1m⨯[22m[39m ./apps/frontend/src/components/AddScoreDrawer.tsx:154:53
-Expected '</', got '}'
-  [90m152 |[0m                                                     onChange={(e) => {
-  [90m153 |[0m                                                         [36mconst[0m
-[31m[1m>[0m [90m154 |[0m                                                     }}
-  [90m    |[0m                                                     [31m[1m^[0m
-  [90m155 |[0m                                                 />
-  [90m156 |[0m                                             </div>
-  [90m157 |[0m                                         </[33mField[0m>
-
-Parsing ecmascript source code failed
-
-Import traces:
-  Client Component Browser:
-    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component Browser]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component Browser]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Server Component]
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component SSR]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component SSR]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Server Component]
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
-
-
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [31m500[39m in 8ms[2m (next.js: 3ms, application-code: 5ms)[22m
-[32m[1m✓[22m[39m Compiled in 26ms
-[36m[browser][39m [31mUncaught Error: ./apps/frontend/src/components/AddScoreDrawer.tsx:154:53
-Expected '</', got '}'
-  152 |                                                     onChange={(e) => {
-  153 |                                                         const
-> 154 |                                                     }}
-      |                                                     ^
-  155 |                                                 />
-  156 |                                             </div>
-  157 |                                         </Field>
-
-Parsing ecmascript source code failed
-
-Import traces:
-  Client Component Browser:
-    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component Browser]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component Browser]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Server Component]
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component SSR]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component SSR]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Server Component]
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
-
-[39m
-[31m    at <unknown> (Error: ./apps/frontend/src/components/AddScoreDrawer.tsx:154:53)
-    at <unknown> (Error: (./apps/frontend/src/components/AddScoreDrawer.tsx:154:53)[39m
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 214ms[2m (next.js: 52ms, application-code: 162ms)[22m
-[31m[1m⨯[22m[39m ./apps/frontend/src/components/AddScoreDrawer.tsx:154:114
-Expected '</', got ')'
-  [90m152 |[0m                                                     onChange={(e) => {
-  [90m153 |[0m                                                         [36mif[0m (e.target.checked) {
-[31m[1m>[0m [90m154 |[0m                                                             form.setFieldValue([32m"students"[0m, students.map((s) => ()))
-  [90m    |[0m                                                                                                                  [31m[1m^[0m
-  [90m155 |[0m                                                         }
-  [90m156 |[0m                                                     }}
-  [90m157 |[0m                                                 />
-
-Parsing ecmascript source code failed
-
-Import traces:
-  Client Component Browser:
-    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component Browser]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component Browser]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Server Component]
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component SSR]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component SSR]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Server Component]
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
-
-
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [31m500[39m in 12ms[2m (next.js: 6ms, application-code: 5ms)[22m
-[31m[1m⨯[22m[39m ./apps/frontend/src/components/AddScoreDrawer.tsx:154:114
-Expected '</', got ')'
-  [90m152 |[0m                                                     onChange={(e) => {
-  [90m153 |[0m                                                         [36mif[0m (e.target.checked) {
-[31m[1m>[0m [90m154 |[0m                                                             form.setFieldValue([32m"students"[0m, students.map((s) => ()))
-  [90m    |[0m                                                                                                                  [31m[1m^[0m
-  [90m155 |[0m                                                         }
-  [90m156 |[0m                                                     }}
-  [90m157 |[0m                                                 />
-
-Parsing ecmascript source code failed
-
-Import traces:
-  Client Component Browser:
-    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component Browser]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component Browser]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Server Component]
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component SSR]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component SSR]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Server Component]
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
-
-
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [31m500[39m in 6ms[2m (next.js: 1991µs, application-code: 4ms)[22m
-[36m[browser][39m [31mUncaught Error: ./apps/frontend/src/components/AddScoreDrawer.tsx:154:114
-Expected '</', got ')'
-  152 |                                                     onChange={(e) => {
-  153 |                                                         if (e.target.checked) {
-> 154 |                                                             form.setFieldValue("students", students.map((s) => ()))
-      |                                                                                                                  ^
-  155 |                                                         }
-  156 |                                                     }}
-  157 |                                                 />
-
-Parsing ecmascript source code failed
-
-Import traces:
-  Client Component Browser:
-    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component Browser]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component Browser]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Server Component]
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component SSR]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component SSR]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Server Component]
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
-
-[39m
-[31m    at <unknown> (Error: ./apps/frontend/src/components/AddScoreDrawer.tsx:154:114)
-    at <unknown> (Error: (./apps/frontend/src/components/AddScoreDrawer.tsx:154:114)[39m
-[32m[1m✓[22m[39m Compiled in 24ms
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 192ms[2m (next.js: 49ms, application-code: 143ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[32m[1m✓[22m[39m Compiled in 22ms
 [32m[1m✓[22m[39m Compiled in 20ms
-[32m[1m✓[22m[39m Compiled in 46ms
-[31m[1m⨯[22m[39m ./apps/frontend/src/components/AddScoreDrawer.tsx:166:68
-Expected '</', got ')'
-  [90m164 |[0m                                             </div>
-  [90m165 |[0m
-[31m[1m>[0m [90m166 |[0m                                             {students.map((s) => ())}
-  [90m    |[0m                                                                    [31m[1m^[0m
-  [90m167 |[0m                                         </[33mField[0m>
-  [90m168 |[0m                                     )
-  [90m169 |[0m                                 }}
-
-Parsing ecmascript source code failed
-
-Import traces:
-  Client Component Browser:
-    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component Browser]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component Browser]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Server Component]
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component SSR]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component SSR]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Server Component]
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
-
-
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [31m500[39m in 9ms[2m (next.js: 4ms, application-code: 5ms)[22m
-[31m[1m⨯[22m[39m ./apps/frontend/src/components/AddScoreDrawer.tsx:166:68
-Expected '</', got ')'
-  [90m164 |[0m                                             </div>
-  [90m165 |[0m
-[31m[1m>[0m [90m166 |[0m                                             {students.map((s) => ())}
-  [90m    |[0m                                                                    [31m[1m^[0m
-  [90m167 |[0m                                         </[33mField[0m>
-  [90m168 |[0m                                     )
-  [90m169 |[0m                                 }}
-
-Parsing ecmascript source code failed
-
-Import traces:
-  Client Component Browser:
-    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component Browser]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component Browser]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Server Component]
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component SSR]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component SSR]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Server Component]
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
-
-
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [31m500[39m in 6ms[2m (next.js: 1973µs, application-code: 4ms)[22m
-[32m[1m✓[22m[39m Compiled in 27ms
-[36m[browser][39m [31mUncaught Error: ./apps/frontend/src/components/AddScoreDrawer.tsx:166:68
-Expected '</', got ')'
-  164 |                                             </div>
-  165 |
-> 166 |                                             {students.map((s) => ())}
-      |                                                                    ^
-  167 |                                         </Field>
-  168 |                                     )
-  169 |                                 }}
-
-Parsing ecmascript source code failed
-
-Import traces:
-  Client Component Browser:
-    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component Browser]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component Browser]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Server Component]
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component SSR]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component SSR]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Server Component]
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
-
-[39m
-[31m    at <unknown> (Error: ./apps/frontend/src/components/AddScoreDrawer.tsx:166:68)
-    at <unknown> (Error: (./apps/frontend/src/components/AddScoreDrawer.tsx:166:68)[39m
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 179ms[2m (next.js: 38ms, application-code: 141ms)[22m
-[31m[1m⨯[22m[39m ./apps/frontend/src/components/AddScoreDrawer.tsx:171:45
-Expected '</', got '}'
-  [90m169 |[0m                                                     
-  [90m170 |[0m                                                 )
-[31m[1m>[0m [90m171 |[0m                                             })}
-  [90m    |[0m                                             [31m[1m^[0m
-  [90m172 |[0m                                         </[33mField[0m>
-  [90m173 |[0m                                     )
-  [90m174 |[0m                                 }}
-
-Parsing ecmascript source code failed
-
-Import traces:
-  Client Component Browser:
-    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component Browser]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component Browser]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Server Component]
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component SSR]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component SSR]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Server Component]
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
-
-
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [31m500[39m in 9ms[2m (next.js: 5ms, application-code: 4ms)[22m
-[31m[1m⨯[22m[39m ./apps/frontend/src/components/AddScoreDrawer.tsx:171:45
-Expected '</', got '}'
-  [90m169 |[0m                                                     
-  [90m170 |[0m                                                 )
-[31m[1m>[0m [90m171 |[0m                                             })}
-  [90m    |[0m                                             [31m[1m^[0m
-  [90m172 |[0m                                         </[33mField[0m>
-  [90m173 |[0m                                     )
-  [90m174 |[0m                                 }}
-
-Parsing ecmascript source code failed
-
-Import traces:
-  Client Component Browser:
-    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component Browser]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component Browser]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Server Component]
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component SSR]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component SSR]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Server Component]
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
-
-
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [31m500[39m in 6ms[2m (next.js: 2ms, application-code: 4ms)[22m
-[36m[browser][39m [31mUncaught Error: ./apps/frontend/src/components/AddScoreDrawer.tsx:171:45
-Expected '</', got '}'
-  169 |                                                     
-  170 |                                                 )
-> 171 |                                             })}
-      |                                             ^
-  172 |                                         </Field>
-  173 |                                     )
-  174 |                                 }}
-
-Parsing ecmascript source code failed
-
-Import traces:
-  Client Component Browser:
-    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component Browser]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component Browser]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Server Component]
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component SSR]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component SSR]
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Server Component]
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
-
-[39m
-[31m    at <unknown> (Error: ./apps/frontend/src/components/AddScoreDrawer.tsx:171:45)
-    at <unknown> (Error: (./apps/frontend/src/components/AddScoreDrawer.tsx:171:45)[39m
-[32m[1m✓[22m[39m Compiled in 29ms
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 194ms[2m (next.js: 49ms, application-code: 145ms)[22m
+[32m[1m✓[22m[39m Compiled in 45ms
+[32m[1m✓[22m[39m Compiled in 21ms
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[32m[1m✓[22m[39m Compiled in 23ms
+[32m[1m✓[22m[39m Compiled in 19ms
+[32m[1m✓[22m[39m Compiled in 19ms
+[32m[1m✓[22m[39m Compiled in 22ms
+[32m[1m✓[22m[39m Compiled in 26ms
+[32m[1m✓[22m[39m Compiled in 21ms
 [32m[1m✓[22m[39m Compiled in 18ms
-[31m[1m⨯[22m[39m ./apps/frontend/src/components/AddScoreDrawer.tsx:175:110
-Expected '</', got ')'
-  [90m173 |[0m                                                             onChange={(e) => {
-  [90m174 |[0m                                                                 [36mif[0m (e.target.checked) {
-[31m[1m>[0m [90m175 |[0m                                                                     form.setFieldValue([32m"students"[0m, (prev) => )
-  [90m    |[0m                                                                                                              [31m[1m^[0m
-  [90m176 |[0m                                                                 }
-  [90m177 |[0m                                                             }}
-  [90m178 |[0m                                                         />
+[32m[1m✓[22m[39m Compiled in 38ms
+[32m[1m✓[22m[39m Compiled in 33ms
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+ GET /groups [32m200[39m in 60ms[2m (next.js: 44ms, application-code: 16ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 32ms[2m (next.js: 12ms, application-code: 20ms)[22m
+ GET /groups [32m200[39m in 26ms[2m (next.js: 3ms, application-code: 22ms)[22m
+ GET /groups/cmnq4oz3e0005xkv21be71kiu [32m200[39m in 30ms[2m (next.js: 8ms, application-code: 22ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[32m[1m✓[22m[39m Compiled in 21ms
+[32m[1m✓[22m[39m Compiled in 23ms
+[32m[1m✓[22m[39m Compiled in 19ms
+[32m[1m✓[22m[39m Compiled in 24ms
+[31m[1m⨯[22m[39m ./apps/frontend/src/components/AddScoreDrawer.tsx:81:25
+Expected '</', got '}'
+  [90m79 |[0m                         <[33mToggle[0m variant=[32m"outline"[0m onPressedChange={(pressed) => {
+  [90m80 |[0m                             [36mif[0m (pressed)
+[31m[1m>[0m [90m81 |[0m                         }} aria-label=[32m"Homework"[0m pressed={[36mtype[0m === [32m'HOMEWORK'[0m} onPressedChange={(pressed) => pressed && setType([32m'HOMEWORK'[0m)}>
+  [90m   |[0m                         [31m[1m^[0m
+  [90m82 |[0m                             [33mHomework[0m
+  [90m83 |[0m                         </[33mToggle[0m>
+  [90m84 |[0m                         <[33mToggle[0m variant=[32m"outline"[0m aria-label=[32m"Attendance"[0m pressed={[36mtype[0m === [32m'ATTENDANCE'[0m} onPressedChange={(pressed) => pressed && setT...
 
 Parsing ecmascript source code failed
 
 Import traces:
   Client Component Browser:
     ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component Browser]
- 
+    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component Browser]
+    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Server Component]
+    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component SSR]
+    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component SSR]
+    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Server Component]
+    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
+
+
+ GET /groups/cmnq4oz3e0005xkv21be71kiu [31m500[39m in 148ms[2m (next.js: 70ms, application-code: 79ms)[22m
+[31m[1m⨯[22m[39m ./apps/frontend/src/components/AddScoreDrawer.tsx:81:25
+Expected '</', got '}'
+  [90m79 |[0m                         <[33mToggle[0m variant=[32m"outline"[0m onPressedChange={(pressed) => {
+  [90m80 |[0m                             [36mif[0m (pressed)
+[31m[1m>[0m [90m81 |[0m                         }} aria-label=[32m"Homework"[0m pressed={[36mtype[0m === [32m'HOMEWORK'[0m} onPressedChange={(pressed) => pressed && setType([32m'HOMEWORK'[0m)}>
+  [90m   |[0m                         [31m[1m^[0m
+  [90m82 |[0m                             [33mHomework[0m
+  [90m83 |[0m                         </[33mToggle[0m>
+  [90m84 |[0m                         <[33mToggle[0m variant=[32m"outline"[0m aria-label=[32m"Attendance"[0m pressed={[36mtype[0m === [32m'ATTENDANCE'[0m} onPressedChange={(pressed) => pressed && setT...
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component Browser]
+    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component Browser]
+    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Server Component]
+    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component SSR]
+    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component SSR]
+    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Server Component]
+    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
+
+
+ GET /groups/cmnq4oz3e0005xkv21be71kiu [31m500[39m in 9ms[2m (next.js: 4ms, application-code: 5ms)[22m

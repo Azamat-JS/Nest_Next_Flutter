@@ -1,1 +1,1 @@
-export type ScoreType = 'HOMEWORK' | 'ATTENDANCE' | 'EXAM';
+export type ScoreType = 'HOMEWORK' | 'ATTENDANCE';
