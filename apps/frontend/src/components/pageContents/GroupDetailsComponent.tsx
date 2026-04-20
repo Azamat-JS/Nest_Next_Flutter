@@ -2,7 +2,7 @@
 import { useAuthStore } from '@/lib/stores/authStore';
 import { GroupType } from '@/lib/types/groups';
 import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { toast } from 'sonner';
 import {
     Table,
@@ -19,7 +19,7 @@ import { Badge } from '../ui/badge';
 import { TokenPayload } from '@/lib/types/token_payload';
 import AddScoreDrawer from '../AddScoreDrawer';
 import { useSuspenseQuery } from '@tanstack/react-query';
-import { GroupStudentScore } from '@/lib/types/score_type';
+import { StudentScoreRow } from '@/lib/types/score_type';
 
 const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
     const token = useAuthStore((state) => state.token);
@@ -34,17 +34,24 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
         },
     })
 
-    const { data: studentData } = useSuspenseQuery({
+    const { data: studentScores } = useSuspenseQuery({
         queryKey: ["students", groupId],
         queryFn: async () => {
-            const res = await axios.get(`${API}/group/all/students/${groupId}`, { headers: { Authorization: `Bearer ${token}` } });
+            const res = await axios.get(`${API}/student-score/all/students/${groupId}`, { headers: { Authorization: `Bearer ${token}` } });
             return res.data;
         },
     })
 
+
     const group: GroupType = data;
     const students: TokenPayload[] = data?.students?.length > 0 ? data.students : [];
-    const studentScores: GroupStudentScore[] = studentData;
+
+    const rows: StudentScoreRow[] = studentScores;
+    console.log(rows)
+    const scoreMap = new Map<string, StudentScoreRow>();
+    studentScores.forEach((s: StudentScoreRow) => {
+        scoreMap.set(s.studentId, s);
+    })
 
     return (
         <div className='flex flex-col w-full'>
@@ -65,14 +72,17 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {students.map((s, idx) => (
-                        <TableRow key={s.id}>
+                    {students.map((s, idx) => {
+                        const score = scoreMap.get(s.id);
+                        return (<TableRow key={s.id}>
                             <TableCell className="text-center">{idx + 1}</TableCell>
                             <TableCell className="text-center">{s.username}</TableCell>
-                            <TableCell className="text-center">{s.email}</TableCell>
+                            <TableCell className="text-center">{score?.homework ?? 0}</TableCell>
+                            <TableCell className="text-center">{score?.attendance ?? 0}</TableCell>
+                            <TableCell className="text-center">{score?.total ?? 0}</TableCell>
                             <TableCell className=''><Menu className='h-5 w-5' /></TableCell>
-                        </TableRow>
-                    ))}
+                        </TableRow>)
+                    })}
                 </TableBody>
                 <TableFooter>
                     <TableRow>

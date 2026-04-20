@@ -167,27 +167,66 @@ export class StudentScoreRepository {
     }
 
     async getAllStudentsScoreByGroup(groupId: string) {
-        return this.prisma.scoreEvent.findMany({
-            where: {
-                groupId,
-            },
-            select: {
-                studentId: true,
-                type: true,
+        const grouped = await this.prisma.scoreEvent.groupBy({
+            by: ['studentId', 'type'],
+            where: { groupId },
+            _sum: {
                 value: true,
-                createdAt: true,
-                student: {
-                    select: {
-                        username: true,
-                    },
-                },
-            },
-            orderBy: {
-                createdAt: 'desc',
             },
         });
-    }
 
+        const students = await this.prisma.users.findMany({
+            where: {
+                scoreEvents: {
+                    some: { groupId },
+                },
+            },
+            select: {
+                id: true,
+                username: true,
+            },
+        });
+
+        // 3. Create student map (O(1) lookup)
+        const studentMap = new Map(
+            students.map((s) => [s.id, s.username])
+        );
+
+        // 4. Transform grouped data into final shape
+        const resultMap = new Map<
+            string,
+            {
+                studentId: string;
+                username: string;
+                homework: number;
+                attendance: number;
+                total: number;
+            }
+        >();
+
+        for (const g of grouped) {
+            const { studentId, type, _sum } = g;
+            const value = _sum.value ?? 0;
+
+            if (!resultMap.has(studentId)) {
+                resultMap.set(studentId, {
+                    studentId,
+                    username: studentMap.get(studentId) || '',
+                    homework: 0,
+                    attendance: 0,
+                    total: 0,
+                });
+            }
+
+            const entry = resultMap.get(studentId)!;
+
+            if (type === 'HOMEWORK') entry.homework = value;
+            if (type === 'ATTENDANCE') entry.attendance = value;
+
+            entry.total += value;
+        }
+        return Array.from(resultMap.values());
+    }
 
     async deleteMany() {
         return this.prisma.$transaction(async (tx) => {

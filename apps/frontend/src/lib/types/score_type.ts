@@ -1,13 +1,10 @@
 export type ScoreType = 'HOMEWORK' | 'ATTENDANCE';
 
-export type GroupStudentScore = {
+export type StudentScoreRow = {
     studentId: string;
-    type: ScoreType;
-    value: number;
-    createdAt: Date;
-    student: StudentUsername;
+    username: string;
+    homework: number;
+    attendance: number;
+    total: number;
 }
 
-type StudentUsername = {
-    username: string;
-}
