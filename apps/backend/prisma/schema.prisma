@@ -104,11 +104,11 @@ model ScoreEvent {
 
 model StudentScore{
   studentId String
-    groupId String
+  groupId String
 
   student Users @relation(fields: [studentId], references: [id])
 
-    group Groups @relation(fields: [groupId], references: [id])
+  group Groups @relation(fields: [groupId], references: [id])
 
   total Int @default(0)
   updatedAt DateTime @updatedAt

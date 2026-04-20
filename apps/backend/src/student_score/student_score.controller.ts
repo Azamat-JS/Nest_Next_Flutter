@@ -1,14 +1,20 @@
 import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { StudentScoreRepository } from './student_score.service';
 import { ScoreDto } from './dto/score.dto';
-import { AddScoreUseCase, UpdateScoreUseCase } from './usecases';
+import { AddScoreUseCase, UpdateScoreUseCase, BulkAddScoreUseCase } from './usecases';
 import { BulkScoreDto } from './dto/bulk.dto';
 
 @Controller('student-score')
 export class StudentScoreController {
   constructor(private readonly studentScoreRepo: StudentScoreRepository, private readonly addScoreUseCase: AddScoreUseCase,
     private readonly updateScoreUseCase: UpdateScoreUseCase,
+    private readonly bulkAddScoreUseCase: BulkAddScoreUseCase,
   ) { }
+
+  @Get("all/students/:groupId")
+  async getAllStudentsScore(@Param('groupId') groupId: string) {
+    return this.studentScoreRepo.getAllStudentsScoreByGroup(groupId);
+  }
 
   @Get("total/:studentId/:groupId")
   async getTotalScore(@Param('studentId') studentId: string, @Param('groupId') groupId: string) {
@@ -26,7 +32,9 @@ export class StudentScoreController {
   }
 
   @Post("bulk")
-  async bulkAddScores(@Body() body: BulkScoreDto) { }
+  async bulkAddScores(@Body() body: BulkScoreDto) {
+    return this.bulkAddScoreUseCase.execute(body);
+  }
 
   @Put("update/:eventId")
   async updateScore(

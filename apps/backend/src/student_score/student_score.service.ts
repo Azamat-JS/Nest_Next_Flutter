@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { ScoreDto } from './dto/score.dto';
 import { Prisma } from '@prisma/client/scripts/default-index.js';
@@ -106,6 +106,17 @@ export class StudentScoreRepository {
                 createdAt: {
                     gte: todayStart,
                 }
+            }
+        })
+    }
+
+    async getAllStudentsScoreByGroup(groupId: string) {
+        return this.prisma.scoreEvent.findMany({
+            where: {
+                groupId,
+            },
+            include: {
+                student: true,
             }
         })
     }
