@@ -151,3 +151,126 @@ Import map: aliased to relative './src/components/Spinner' inside of [project]/a
 https://nextjs.org/docs/messages/module-not-found
 
 
+[31m[1m⨯[22m[39m ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx:3:1
+[1m[31mModule not found[39m[22m: Can't resolve [32m'@/components/Spinner'[39m
+  [90m1 |[0m [36mimport[0m [33mGroupDetailsComponent[0m [36mfrom[0m [32m"@/components/pageContents/GroupDetailsComponent"[0m;
+  [90m2 |[0m [36mimport[0m { [33mSuspense[0m } [36mfrom[0m [32m"react"[0m;
+[31m[1m>[0m [90m3 |[0m [36mimport[0m [33mSpinner[0m [36mfrom[0m [32m"@/components/Spinner"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m
+  [90m5 |[0m [36mconst[0m [33mGroupDetails[0m = [36masync[0m ({ params }: { params: [33mPromise[0m<{ groupId: string }> }) => {
+  [90m6 |[0m     [36mconst[0m groupId = ([36mawait[0m params).groupId;
+
+Import map: aliased to relative './src/components/Spinner' inside of [project]/apps/frontend
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[31m[1m⨯[22m[39m ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx:3:1
+[1m[31mModule not found[39m[22m: Can't resolve [32m'@/components/Spinner'[39m
+  [90m1 |[0m [36mimport[0m [33mGroupDetailsComponent[0m [36mfrom[0m [32m"@/components/pageContents/GroupDetailsComponent"[0m;
+  [90m2 |[0m [36mimport[0m { [33mSuspense[0m } [36mfrom[0m [32m"react"[0m;
+[31m[1m>[0m [90m3 |[0m [36mimport[0m [33mSpinner[0m [36mfrom[0m [32m"@/components/Spinner"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m
+  [90m5 |[0m [36mconst[0m [33mGroupDetails[0m = [36masync[0m ({ params }: { params: [33mPromise[0m<{ groupId: string }> }) => {
+  [90m6 |[0m     [36mconst[0m groupId = ([36mawait[0m params).groupId;
+
+Import map: aliased to relative './src/components/Spinner' inside of [project]/apps/frontend
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[31m[1m⨯[22m[39m ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx:3:1
+[1m[31mModule not found[39m[22m: Can't resolve [32m'@/components/Spinner'[39m
+  [90m1 |[0m [36mimport[0m [33mGroupDetailsComponent[0m [36mfrom[0m [32m"@/components/pageContents/GroupDetailsComponent"[0m;
+  [90m2 |[0m [36mimport[0m { [33mSuspense[0m } [36mfrom[0m [32m"react"[0m;
+[31m[1m>[0m [90m3 |[0m [36mimport[0m [33mSpinner[0m [36mfrom[0m [32m"@/components/Spinner"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m
+  [90m5 |[0m [36mconst[0m [33mGroupDetails[0m = [36masync[0m ({ params }: { params: [33mPromise[0m<{ groupId: string }> }) => {
+  [90m6 |[0m     [36mconst[0m groupId = ([36mawait[0m params).groupId;
+
+Import map: aliased to relative './src/components/Spinner' inside of [project]/apps/frontend
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[32m[1m✓[22m[39m Compiled in 165ms
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 909ms[2m (next.js: 180ms, application-code: 729ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 418ms[2m (next.js: 57ms, application-code: 361ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 107ms[2m (next.js: 4ms, application-code: 103ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 380ms[2m (next.js: 16ms, application-code: 365ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 17ms[2m (next.js: 4ms, application-code: 13ms)[22m
+[32m[1m✓[22m[39m Compiled in 21ms
+[32m[1m✓[22m[39m Compiled in 19ms
+[32m[1m✓[22m[39m Compiled in 165ms
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 78ms[2m (next.js: 34ms, application-code: 45ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 12ms[2m (next.js: 1136µs, application-code: 10ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 19ms[2m (next.js: 4ms, application-code: 14ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 15ms[2m (next.js: 3ms, application-code: 11ms)[22m
+[31m[1m⨯[22m[39m ReferenceError: ErrorBoundary is not defined
+    at GroupDetails (src/app/(pages)/groups/[groupId]/page.tsx:8:10)
+  [90m 6 |[0m     [36mconst[0m groupId = ([36mawait[0m params).groupId;
+  [90m 7 |[0m     [36mreturn[0m (
+[31m[1m>[0m [90m 8 |[0m         <[33mErrorBoundary[0m fallback={<div>[33mSomething[0m went wrong!</div>}>
+  [90m   |[0m          [31m[1m^[0m
+  [90m 9 |[0m
+  [90m10 |[0m             <[33mSuspense[0m fallback={<[33mSpinner[0m />}>
+  [90m11 |[0m                 <[33mGroupDetailsComponent[0m groupId={groupId} /> {
+  digest: [32m'4089161441'[39m
+}
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 22ms[2m (next.js: 5ms, application-code: 17ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 149ms[2m (next.js: 82ms, application-code: 66ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 42ms[2m (next.js: 2ms, application-code: 40ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 35ms[2m (next.js: 2ms, application-code: 33ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 35ms[2m (next.js: 1156µs, application-code: 33ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 22ms[2m (next.js: 1501µs, application-code: 20ms)[22m
+[31m[1m⨯[22m[39m ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx:2:1
+[1m[31mModule not found[39m[22m: Can't resolve [32m'@/components/Spinner'[39m
+  [90m1 |[0m [36mimport[0m [33mGroupDetailsComponent[0m [36mfrom[0m [32m"@/components/pageContents/GroupDetailsComponent"[0m;
+[31m[1m>[0m [90m2 |[0m [36mimport[0m [33mSpinner[0m [36mfrom[0m [32m"@/components/Spinner"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m3 |[0m [36mimport[0m { [33mErrorBoundary[0m } [36mfrom[0m [32m"react-error-boundary"[0m
+  [90m4 |[0m [36mimport[0m { [33mSuspense[0m } [36mfrom[0m [32m"react"[0m;
+  [90m5 |[0m
+
+Import map: aliased to relative './src/components/Spinner' inside of [project]/apps/frontend
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[31m[1m⨯[22m[39m ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx:2:1
+[1m[31mModule not found[39m[22m: Can't resolve [32m'@/components/Spinner'[39m
+  [90m1 |[0m [36mimport[0m [33mGroupDetailsComponent[0m [36mfrom[0m [32m"@/components/pageContents/GroupDetailsComponent"[0m;
+[31m[1m>[0m [90m2 |[0m [36mimport[0m [33mSpinner[0m [36mfrom[0m [32m"@/components/Spinner"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m3 |[0m [36mimport[0m { [33mErrorBoundary[0m } [36mfrom[0m [32m"react-error-boundary"[0m
+  [90m4 |[0m [36mimport[0m { [33mSuspense[0m } [36mfrom[0m [32m"react"[0m;
+  [90m5 |[0m
+
+Import map: aliased to relative './src/components/Spinner' inside of [project]/apps/frontend
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[31m[1m⨯[22m[39m ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx:2:1
+[1m[31mModule not found[39m[22m: Can't resolve [32m'@/components/Spinner'[39m
+  [90m1 |[0m [36mimport[0m [33mGroupDetailsComponent[0m [36mfrom[0m [32m"@/components/pageContents/GroupDetailsComponent"[0m;
+[31m[1m>[0m [90m2 |[0m [36mimport[0m [33mSpinner[0m [36mfrom[0m [32m"@/components/Spinner"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m3 |[0m [36mimport[0m { [33mErrorBoundary[0m } [36mfrom[0m [32m"react-error-boundary"[0m
+  [90m4 |[0m [36mimport[0m { [33mSuspense[0m } [36mfrom[0m [32m"react"[0m;
+  [90m5 |[0m
+
+Import map: aliased to relative './src/components/Spinner' inside of [project]/apps/frontend
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
