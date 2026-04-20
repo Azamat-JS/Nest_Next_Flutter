@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "StudentScore" ADD COLUMN     "attendance" INTEGER NOT NULL DEFAULT 0,
+ADD COLUMN     "homework" INTEGER NOT NULL DEFAULT 0;

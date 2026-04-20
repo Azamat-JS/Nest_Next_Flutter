@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Delete, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { StudentScoreRepository } from './student_score.service';
 import { ScoreDto } from './dto/score.dto';
 import { AddScoreUseCase, UpdateScoreUseCase, BulkAddScoreUseCase } from './usecases';
@@ -45,5 +45,10 @@ export class StudentScoreController {
       body,
       eventId,
     );
+  }
+
+  @Delete("delete/all")
+  async deleteAll() {
+    return this.studentScoreRepo.deleteMany();
   }
 }

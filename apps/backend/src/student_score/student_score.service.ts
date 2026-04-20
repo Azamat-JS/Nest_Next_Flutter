@@ -45,9 +45,9 @@ export class StudentScoreRepository {
                 }
             },
             update: {
-                total: {
-                    increment: diff ?? dto.score,
-                }
+                total: { increment: diff ?? dto.score },
+                homework: dto.scoreType === "HOMEWORK" ? { increment: diff ?? dto.score } : undefined,
+                attendance: dto.scoreType === "ATTENDANCE" ? { increment: diff ?? dto.score } : undefined,
             },
             create: {
                 studentId: dto.studentId,
@@ -135,7 +135,10 @@ export class StudentScoreRepository {
 
         return {
             total: total?.total || 0,
-            todayEvents,
+            today: {
+                homework: todayEvents.filter(e => e.type === "HOMEWORK").reduce((acc, curr) => acc + curr.value, 0),
+                attendance: todayEvents.filter(e => e.type === "ATTENDANCE").reduce((acc, curr) => acc + curr.value, 0),
+            },
         }
     }
     async findTodayScoreWithType(
@@ -183,5 +186,13 @@ export class StudentScoreRepository {
                 createdAt: 'desc',
             },
         });
+    }
+
+
+    async deleteMany() {
+        return this.prisma.$transaction(async (tx) => {
+            await tx.scoreEvent.deleteMany();
+            await tx.studentScore.deleteMany();
+        })
     }
 }

@@ -111,6 +111,8 @@ model StudentScore{
   group Groups @relation(fields: [groupId], references: [id])
 
   total Int @default(0)
+  homework Int @default(0)
+  attendance Int @default(0)
   updatedAt DateTime @updatedAt
 
   @@index([studentId])
