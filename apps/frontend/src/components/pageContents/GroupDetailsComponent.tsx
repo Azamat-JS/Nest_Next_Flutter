@@ -18,26 +18,21 @@ import { Menu } from 'lucide-react';
 import { Badge } from '../ui/badge';
 import { TokenPayload } from '@/lib/types/token_payload';
 import AddScoreDrawer from '../AddScoreDrawer';
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 
 const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
     const token = useAuthStore((state) => state.token);
     const [openCreate, setOpenCreate] = useState(false);
     const API = process.env.NEXT_PUBLIC_API_URL;
 
-    const { data, isLoading, isSuccess } = useQuery({
+    const { data } = useSuspenseQuery({
         queryKey: ["group", groupId],
         queryFn: async () => {
             const res = await axios.get(`${API}/group/${groupId}`, { headers: { Authorization: `Bearer ${token}` } });
             return res.data;
         },
-        enabled: !!token && !!groupId,
-        staleTime: 1000 * 60 * 5,
     })
 
-    if (!isSuccess) {
-        return <div>Loading...</div>;
-    }
     const group: GroupType = data;
     const students: TokenPayload[] = data?.students?.length > 0 ? data.students : [];
 

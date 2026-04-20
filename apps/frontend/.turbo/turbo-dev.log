@@ -1,0 +1,153 @@
+
+> frontend@0.1.0 dev /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend
+> next dev -p 4000
+
+[1m[38;2;173;127;168m▲ Next.js 16.2.1[39m[22m (Turbopack)
+- Local:         http://localhost:4000
+- Network:       http://192.168.13.93:4000
+- Environments: .env.local
+[32m[1m✓[22m[39m Ready in 301ms
+[33m[1m⚠[22m[39m Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /Users/azamatabdullayev/Desktop/full-stack-turbo/pnpm-workspace.yaml as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend/pnpm-workspace.yaml
+
+
+ GET / [32m200[39m in 299ms[2m (next.js: 117ms, application-code: 182ms)[22m
+ GET /groups [32m200[39m in 50ms[2m (next.js: 32ms, application-code: 18ms)[22m
+ GET /groups/cmnoh0p550000u8v2nihbtf1o [32m200[39m in 256ms[2m (next.js: 245ms, application-code: 10ms)[22m
+ GET /groups [32m200[39m in 25ms[2m (next.js: 4ms, application-code: 21ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 32ms[2m (next.js: 9ms, application-code: 23ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+ GET /home [32m200[39m in 30ms[2m (next.js: 19ms, application-code: 11ms)[22m
+ GET /groups [32m200[39m in 29ms[2m (next.js: 7ms, application-code: 22ms)[22m
+ GET /groups [32m200[39m in 13ms[2m (next.js: 2ms, application-code: 11ms)[22m
+[32m[1m✓[22m[39m Compiled in 366ms
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 31ms[2m (next.js: 11ms, application-code: 20ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[32m[1m✓[22m[39m Compiled in 341ms
+[31m[1m⨯[22m[39m ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx:83:1
+Unexpected token. Did you mean `[35m{'}[39m'}` or `&rbrace;`?
+  [90m81 |[0m             </div>
+  [90m82 |[0m             )
+[31m[1m>[0m [90m83 |[0m }
+  [90m   |[0m [31m[1m^[0m
+  [90m84 |[0m
+  [90m85 |[0m             [36mexport[0m [36mdefault[0m [33mGroupDetailsComponent[0m
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx
+    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx
+
+
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [31m500[39m in 159ms[2m (next.js: 73ms, application-code: 86ms)[22m
+[31m[1m⨯[22m[39m ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx:83:1
+Unexpected token. Did you mean `[35m{'}[39m'}` or `&rbrace;`?
+  [90m81 |[0m             </div>
+  [90m82 |[0m             )
+[31m[1m>[0m [90m83 |[0m }
+  [90m   |[0m [31m[1m^[0m
+  [90m84 |[0m
+  [90m85 |[0m             [36mexport[0m [36mdefault[0m [33mGroupDetailsComponent[0m
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx
+    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx
+
+
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [31m500[39m in 7ms[2m (next.js: 3ms, application-code: 4ms)[22m
+[31m[1m⨯[22m[39m ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx:83:1
+Unexpected token. Did you mean `[35m{'}[39m'}` or `&rbrace;`?
+  [90m81 |[0m             </div>
+  [90m82 |[0m             )
+[31m[1m>[0m [90m83 |[0m }
+  [90m   |[0m [31m[1m^[0m
+  [90m84 |[0m
+  [90m85 |[0m             [36mexport[0m [36mdefault[0m [33mGroupDetailsComponent[0m
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx
+    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx
+
+
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [31m500[39m in 8ms[2m (next.js: 4ms, application-code: 3ms)[22m
+[31m[1m⨯[22m[39m ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx:83:1
+Unexpected token. Did you mean `[35m{'}[39m'}` or `&rbrace;`?
+  [90m81 |[0m             </div>
+  [90m82 |[0m             )
+[31m[1m>[0m [90m83 |[0m }
+  [90m   |[0m [31m[1m^[0m
+  [90m84 |[0m
+  [90m85 |[0m             [36mexport[0m [36mdefault[0m [33mGroupDetailsComponent[0m
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx
+    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx
+
+
+[36m[browser][39m [31mUncaught Error: ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx:83:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  81 |             </div>
+  82 |             )
+> 83 | }
+     | ^
+  84 |
+  85 |             export default GroupDetailsComponent
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx
+    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx
+
+[39m
+[31m    at <unknown> (Error: ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx:83:1)
+    at <unknown> (Error: (./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx:83:1)[39m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 193ms[2m (next.js: 48ms, application-code: 145ms)[22m
+[31m[1m⨯[22m[39m ReferenceError: Spinner is not defined
+    at GroupDetails (src/app/(pages)/groups/[groupId]/page.tsx:7:30)
+  [90m 5 |[0m     [36mconst[0m groupId = ([36mawait[0m params).groupId;
+  [90m 6 |[0m     [36mreturn[0m (
+[31m[1m>[0m [90m 7 |[0m         <[33mSuspense[0m fallback={<[33mSpinner[0m />}>
+  [90m   |[0m                              [31m[1m^[0m
+  [90m 8 |[0m
+  [90m 9 |[0m             <[33mGroupDetailsComponent[0m groupId={groupId} />)
+  [90m10 |[0m         </[33mSuspense[0m> {
+  digest: [32m'1720596863'[39m
+}
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 21ms[2m (next.js: 4ms, application-code: 17ms)[22m
+[31m[1m⨯[22m[39m ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx:3:1
+[1m[31mModule not found[39m[22m: Can't resolve [32m'@/components/Spinner'[39m
+  [90m1 |[0m [36mimport[0m [33mGroupDetailsComponent[0m [36mfrom[0m [32m"@/components/pageContents/GroupDetailsComponent"[0m;
+  [90m2 |[0m [36mimport[0m { [33mSuspense[0m } [36mfrom[0m [32m"react"[0m;
+[31m[1m>[0m [90m3 |[0m [36mimport[0m [33mSpinner[0m [36mfrom[0m [32m"@/components/Spinner"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m
+  [90m5 |[0m [36mconst[0m [33mGroupDetails[0m = [36masync[0m ({ params }: { params: [33mPromise[0m<{ groupId: string }> }) => {
+  [90m6 |[0m     [36mconst[0m groupId = ([36mawait[0m params).groupId;
+
+Import map: aliased to relative './src/components/Spinner' inside of [project]/apps/frontend
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
