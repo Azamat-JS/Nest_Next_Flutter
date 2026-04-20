@@ -274,3 +274,118 @@ Import map: aliased to relative './src/components/Spinner' inside of [project]/a
 https://nextjs.org/docs/messages/module-not-found
 
 
+[31m[1m⨯[22m[39m ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx:2:1
+[1m[31mModule not found[39m[22m: Can't resolve [32m'@/components/Spinner'[39m
+  [90m1 |[0m [36mimport[0m [33mGroupDetailsComponent[0m [36mfrom[0m [32m"@/components/pageContents/GroupDetailsComponent"[0m;
+[31m[1m>[0m [90m2 |[0m [36mimport[0m [33mSpinner[0m [36mfrom[0m [32m"@/components/Spinner"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m3 |[0m [36mimport[0m { [33mErrorBoundary[0m } [36mfrom[0m [32m"react-error-boundary"[0m
+  [90m4 |[0m [36mimport[0m { [33mSuspense[0m } [36mfrom[0m [32m"react"[0m;
+  [90m5 |[0m
+
+Import map: aliased to relative './src/components/Spinner' inside of [project]/apps/frontend
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[31m[1m⨯[22m[39m ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx:2:1
+[1m[31mModule not found[39m[22m: Can't resolve [32m'@/components/Spinner'[39m
+  [90m1 |[0m [36mimport[0m [33mGroupDetailsComponent[0m [36mfrom[0m [32m"@/components/pageContents/GroupDetailsComponent"[0m;
+[31m[1m>[0m [90m2 |[0m [36mimport[0m [33mSpinner[0m [36mfrom[0m [32m"@/components/Spinner"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m3 |[0m [36mimport[0m { [33mErrorBoundary[0m } [36mfrom[0m [32m"react-error-boundary"[0m
+  [90m4 |[0m [36mimport[0m { [33mSuspense[0m } [36mfrom[0m [32m"react"[0m;
+  [90m5 |[0m
+
+Import map: aliased to relative './src/components/Spinner' inside of [project]/apps/frontend
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [31m500[39m in 20ms[2m (next.js: 12ms, application-code: 8ms)[22m
+[31m[1m⨯[22m[39m ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx:2:1
+[1m[31mModule not found[39m[22m: Can't resolve [32m'@/components/Spinner'[39m
+  [90m1 |[0m [36mimport[0m [33mGroupDetailsComponent[0m [36mfrom[0m [32m"@/components/pageContents/GroupDetailsComponent"[0m;
+[31m[1m>[0m [90m2 |[0m [36mimport[0m [33mSpinner[0m [36mfrom[0m [32m"@/components/Spinner"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m3 |[0m [36mimport[0m { [33mErrorBoundary[0m } [36mfrom[0m [32m"react-error-boundary"[0m
+  [90m4 |[0m [36mimport[0m { [33mSuspense[0m } [36mfrom[0m [32m"react"[0m;
+  [90m5 |[0m
+
+Import map: aliased to relative './src/components/Spinner' inside of [project]/apps/frontend
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [31m500[39m in 5ms[2m (next.js: 2ms, application-code: 3ms)[22m
+[31m[1m⨯[22m[39m ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx:2:1
+[1m[31mModule not found[39m[22m: Can't resolve [32m'@/components/Spinner'[39m
+  [90m1 |[0m [36mimport[0m [33mGroupDetailsComponent[0m [36mfrom[0m [32m"@/components/pageContents/GroupDetailsComponent"[0m;
+[31m[1m>[0m [90m2 |[0m [36mimport[0m [33mSpinner[0m [36mfrom[0m [32m"@/components/Spinner"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m3 |[0m [36mimport[0m { [33mErrorBoundary[0m } [36mfrom[0m [32m"react-error-boundary"[0m
+  [90m4 |[0m [36mimport[0m { [33mSuspense[0m } [36mfrom[0m [32m"react"[0m;
+  [90m5 |[0m
+
+Import map: aliased to relative './src/components/Spinner' inside of [project]/apps/frontend
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [31m500[39m in 6ms[2m (next.js: 2ms, application-code: 4ms)[22m
+[36m[browser][39m [31mUncaught Error: ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx:2:1
+Module not found: Can't resolve '@/components/Spinner'
+  1 | import GroupDetailsComponent from "@/components/pageContents/GroupDetailsComponent";
+> 2 | import Spinner from "@/components/Spinner";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  3 | import { ErrorBoundary } from "react-error-boundary"
+  4 | import { Suspense } from "react";
+  5 |
+
+Import map: aliased to relative './src/components/Spinner' inside of [project]/apps/frontend
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+[39m
+[31m    at <unknown> (Error: ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx:2:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (Error: (./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx:2:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)[39m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 1588ms[2m (next.js: 141ms, application-code: 1447ms)[22m
+[32m[1m✓[22m[39m Compiled in 136ms
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 88ms[2m (next.js: 35ms, application-code: 53ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 28ms[2m (next.js: 1248µs, application-code: 27ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 10ms[2m (next.js: 880µs, application-code: 9ms)[22m
+ GET /groups [32m200[39m in 37ms[2m (next.js: 21ms, application-code: 16ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 20ms[2m (next.js: 4ms, application-code: 16ms)[22m
+ GET /groups/cmnq4oz3e0005xkv21be71kiu [32m200[39m in 29ms[2m (next.js: 6ms, application-code: 23ms)[22m
+ GET /groups/cmnq4oz3e0005xkv21be71kiu [32m200[39m in 29ms[2m (next.js: 7ms, application-code: 22ms)[22m
+ GET /groups/cmnoh5xzt0003u8v2r1u72s2j [32m200[39m in 29ms[2m (next.js: 8ms, application-code: 21ms)[22m
+ GET /groups/cmnoh5xzt0003u8v2r1u72s2j [32m200[39m in 19ms[2m (next.js: 4ms, application-code: 15ms)[22m
+ GET /groups/cmnoh5xzt0003u8v2r1u72s2j [32m200[39m in 153ms[2m (next.js: 2ms, application-code: 151ms)[22m
+ GET /groups/cmnoh5xzt0003u8v2r1u72s2j [32m200[39m in 60ms[2m (next.js: 6ms, application-code: 54ms)[22m
+ GET /groups/cmnoh5xzt0003u8v2r1u72s2j [32m200[39m in 70ms[2m (next.js: 7ms, application-code: 63ms)[22m
+ GET /groups/cmnoh5xzt0003u8v2r1u72s2j [32m200[39m in 50ms[2m (next.js: 6ms, application-code: 44ms)[22m
+ GET /groups/cmnoh5xzt0003u8v2r1u72s2j [32m200[39m in 63ms[2m (next.js: 6ms, application-code: 56ms)[22m
+ GET /groups/cmnoh5xzt0003u8v2r1u72s2j [32m200[39m in 66ms[2m (next.js: 5ms, application-code: 62ms)[22m
+ GET /groups/cmnoh5xzt0003u8v2r1u72s2j [32m200[39m in 56ms[2m (next.js: 5ms, application-code: 51ms)[22m
+ GET /groups/cmnoh5xzt0003u8v2r1u72s2j [32m200[39m in 58ms[2m (next.js: 6ms, application-code: 51ms)[22m
+ GET /groups/cmnoh5xzt0003u8v2r1u72s2j [32m200[39m in 16ms[2m (next.js: 3ms, application-code: 13ms)[22m
+ GET /groups/cmnoh5xzt0003u8v2r1u72s2j [32m200[39m in 84ms[2m (next.js: 5ms, application-code: 79ms)[22m
+ GET /groups/cmnoh5xzt0003u8v2r1u72s2j [32m200[39m in 52ms[2m (next.js: 6ms, application-code: 46ms)[22m
+ GET /groups/cmnoh5xzt0003u8v2r1u72s2j [32m200[39m in 52ms[2m (next.js: 7ms, application-code: 45ms)[22m
+ GET /groups/cmnoh5xzt0003u8v2r1u72s2j [32m200[39m in 51ms[2m (next.js: 6ms, application-code: 45ms)[22m
+ GET /groups/cmnoh5xzt0003u8v2r1u72s2j [32m200[39m in 35ms[2m (next.js: 3ms, application-code: 33ms)[22m
+ GET /groups/cmnoh5xzt0003u8v2r1u72s2j [32m200[39m in 48ms[2m (next.js: 7ms, application-code: 41ms)[22m
+ GET /groups/cmnoh5xzt0003u8v2r1u72s2j [32m200[39m in 48ms[2m (next.js: 5ms, application-code: 43ms)[22m
+ GET /groups/cmnoh5xzt0003u8v2r1u72s2j [32m200[39m in 50ms[2m (next.js: 6ms, application-code: 44ms)[22m
+ GET /groups/cmnoh5xzt0003u8v2r1u72s2j [32m200[39m in 49ms[2m (next.js: 7ms, application-code: 42ms)[22m
+ GET /groups [32m200[39m in 27ms[2m (next.js: 6ms, application-code: 20ms)[22m
+ GET /groups [32m200[39m in 86ms[2m (next.js: 68ms, application-code: 18ms)[22m
+ GET /groups [32m200[39m in 10ms[2m (next.js: 880µs, application-code: 9ms)[22m
+ GET /groups [32m200[39m in 51ms[2m (next.js: 3ms, application-code: 48ms)[22m

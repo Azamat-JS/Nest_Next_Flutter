@@ -1,5 +1,9 @@
 import { RouteLoader } from "@/components/shared/RouteLoader";
 
 export default function Loading() {
-    return <RouteLoader label="Groups" />
+    return (
+        <div className="flex items-center justify-center h-screen">
+            <RouteLoader label="Groups" />
+        </div>
+    )
 }
