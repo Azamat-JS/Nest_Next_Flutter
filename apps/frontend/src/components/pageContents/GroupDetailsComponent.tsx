@@ -19,6 +19,7 @@ import { Badge } from '../ui/badge';
 import { TokenPayload } from '@/lib/types/token_payload';
 import AddScoreDrawer from '../AddScoreDrawer';
 import { useSuspenseQuery } from '@tanstack/react-query';
+import { GroupStudentScore } from '@/lib/types/score_type';
 
 const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
     const token = useAuthStore((state) => state.token);
@@ -43,7 +44,7 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
 
     const group: GroupType = data;
     const students: TokenPayload[] = data?.students?.length > 0 ? data.students : [];
-    const studentScores = studentData;
+    const studentScores: GroupStudentScore[] = studentData;
 
     return (
         <div className='flex flex-col w-full'>
@@ -57,6 +58,8 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
                     <TableRow>
                         <TableHead className="w-12 text-center font-bold text-lg">&#8470;</TableHead>
                         <TableHead className="w-48 text-center font-bold text-lg">Name</TableHead>
+                        <TableHead className="w-48 text-center font-bold text-lg">Homework</TableHead>
+                        <TableHead className="w-48 text-center font-bold text-lg">Attendance</TableHead>
                         <TableHead className="w-48 text-center font-bold text-lg">Total Score</TableHead>
                         <TableHead className="w-24 text-start font-bold text-lg">Actions</TableHead>
                     </TableRow>

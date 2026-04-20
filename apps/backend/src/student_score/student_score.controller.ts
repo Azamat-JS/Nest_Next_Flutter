@@ -16,10 +16,15 @@ export class StudentScoreController {
     return this.studentScoreRepo.getAllStudentsScoreByGroup(groupId);
   }
 
-  @Get("total/:studentId/:groupId")
-  async getTotalScore(@Param('studentId') studentId: string, @Param('groupId') groupId: string) {
-    return this.studentScoreRepo.findTotalScoreByStudentAndGroup(studentId, groupId);
+  @Get("today/students/:groupId")
+  async findTodayScore(@Param('groupId') groupId: string, @Param('studentId') studentId: string) {
+    return this.studentScoreRepo.findTodayScore(studentId, groupId);
   }
+
+  // @Get("group/scores/:groupId")
+  // async getTotalScore(@Param('groupId') groupId: string) {
+  //   return this.studentScoreRepo.findAllScoresByGroup(groupId);
+  // }
 
   @Post("add")
   async addScore(@Body() body: ScoreDto) {

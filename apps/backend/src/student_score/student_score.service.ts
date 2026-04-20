@@ -74,13 +74,35 @@ export class StudentScoreRepository {
         })
     }
 
-    async findTotalScoreByStudentAndGroup(studentId: string, groupId: string) {
+    // async findAllScoresByGroup(groupId: string) {
+    //     return this.prisma.scoreEvent.findMany({
+    //         where: {
+    //             groupId,
+    //         },
+    //         select: {
+    //             studentId: true,
+    //             type: true,
+    //             value: true,
+    //             createdAt: true,
+    //             student: {
+    //                 select: {
+    //                     username: true,
+    //                 },
+    //             },
+    //         },
+    //         orderBy: {
+    //             createdAt: 'desc',
+    //         },
+    //     });
+    // }
 
+    async findTodayScore(studentId: string, groupId: string) {
         const startOfDay = new Date();
         startOfDay.setHours(0, 0, 0, 0);
 
         const endOfDay = new Date();
         endOfDay.setHours(23, 59, 59, 999);
+
 
         const [total, todayEvents] = await Promise.all([
             this.prisma.studentScore.findUnique({
@@ -116,26 +138,29 @@ export class StudentScoreRepository {
             todayEvents,
         }
     }
-
-    async findTodayScore(studentId: string, groupId: string, type: ScoreType) {
+    async findTodayScoreWithType(
+        studentId: string,
+        groupId: string,
+        scoreType: ScoreType
+    ) {
         const startOfDay = new Date();
         startOfDay.setHours(0, 0, 0, 0);
 
         const endOfDay = new Date();
         endOfDay.setHours(23, 59, 59, 999);
 
-
         return this.prisma.scoreEvent.findFirst({
             where: {
                 studentId,
                 groupId,
-                type,
+                type: scoreType,
                 createdAt: {
                     gte: startOfDay,
                     lte: endOfDay,
-                }
-            }
-        })
+                },
+            },
+            select: { id: true },
+        });
     }
 
     async getAllStudentsScoreByGroup(groupId: string) {
@@ -151,9 +176,12 @@ export class StudentScoreRepository {
                 student: {
                     select: {
                         username: true,
-                    }
-                }
-            }
-        })
+                    },
+                },
+            },
+            orderBy: {
+                createdAt: 'desc',
+            },
+        });
     }
 }
