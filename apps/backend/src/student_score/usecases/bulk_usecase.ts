@@ -24,7 +24,7 @@ export class BulkAddScoreUseCase {
                 const restrictOncePerDayTypes = ["ATTENDANCE", "HOMEWORK"] as ScoreType[];
 
                 if (restrictOncePerDayTypes.includes(scoreType)) {
-                    const alreadyMarked = await this.studentScoreRepo.findTodayAttendance(studentId, groupId, scoreType);
+                    const alreadyMarked = await this.studentScoreRepo.findTodayScore(studentId, groupId, scoreType);
 
                     if (alreadyMarked) {
                         throw new BadRequestException(`The student already has a ${scoreType.toLowerCase()} score for today`);

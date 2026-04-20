@@ -33,9 +33,17 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
         },
     })
 
+    const { data: studentData } = useSuspenseQuery({
+        queryKey: ["students", groupId],
+        queryFn: async () => {
+            const res = await axios.get(`${API}/group/all/students/${groupId}`, { headers: { Authorization: `Bearer ${token}` } });
+            return res.data;
+        },
+    })
+
     const group: GroupType = data;
     const students: TokenPayload[] = data?.students?.length > 0 ? data.students : [];
-
+    const studentScores = studentData;
 
     return (
         <div className='flex flex-col w-full'>
@@ -49,7 +57,7 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
                     <TableRow>
                         <TableHead className="w-12 text-center font-bold text-lg">&#8470;</TableHead>
                         <TableHead className="w-48 text-center font-bold text-lg">Name</TableHead>
-                        <TableHead className="w-48 text-center font-bold text-lg">Email</TableHead>
+                        <TableHead className="w-48 text-center font-bold text-lg">Total Score</TableHead>
                         <TableHead className="w-24 text-start font-bold text-lg">Actions</TableHead>
                     </TableRow>
                 </TableHeader>

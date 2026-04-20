@@ -117,7 +117,7 @@ export class StudentScoreRepository {
         }
     }
 
-    async findTodayAttendance(studentId: string, groupId: string, type: ScoreType) {
+    async findTodayScore(studentId: string, groupId: string, type: ScoreType) {
         const startOfDay = new Date();
         startOfDay.setHours(0, 0, 0, 0);
 
@@ -143,8 +143,16 @@ export class StudentScoreRepository {
             where: {
                 groupId,
             },
-            include: {
-                student: true,
+            select: {
+                studentId: true,
+                type: true,
+                value: true,
+                createdAt: true,
+                student: {
+                    select: {
+                        username: true,
+                    }
+                }
             }
         })
     }
