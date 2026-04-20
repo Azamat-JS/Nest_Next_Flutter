@@ -2,6 +2,7 @@ import { BadRequestException, Injectable } from "@nestjs/common";
 import { StudentScoreRepository } from "../student_score.service";
 import { PrismaService } from "src/prisma/prisma.service";
 import { BulkScoreDto } from "../dto/bulk.dto";
+import { ScoreType } from "@prisma/client/edge";
 
 @Injectable()
 export class BulkAddScoreUseCase {
@@ -20,10 +21,13 @@ export class BulkAddScoreUseCase {
                     throw new BadRequestException('Score must be positive')
                 }
 
-                if (scoreType === 'ATTENDANCE') {
-                    const alreadyMarked = await this.studentScoreRepo.findTodayAttendance(studentId, groupId);
+                const restrictOncePerDayTypes = ["ATTENDANCE", "HOMEWORK"] as ScoreType[];
+
+                if (restrictOncePerDayTypes.includes(scoreType)) {
+                    const alreadyMarked = await this.studentScoreRepo.findTodayAttendance(studentId, groupId, scoreType);
+
                     if (alreadyMarked) {
-                        throw new BadRequestException(`Attendance already marked for ${studentId}`);
+                        throw new BadRequestException(`The student already has a ${scoreType.toLowerCase()} score for today`);
                     }
                 }
 

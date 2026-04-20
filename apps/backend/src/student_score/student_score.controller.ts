@@ -21,11 +21,6 @@ export class StudentScoreController {
     return this.studentScoreRepo.findTotalScoreByStudentAndGroup(studentId, groupId);
   }
 
-  @Get("attendance/:studentId/:groupId")
-  async getAttendance(@Param('studentId') studentId: string, @Param('groupId') groupId: string) {
-    return this.studentScoreRepo.findTodayAttendance(studentId, groupId);
-  }
-
   @Post("add")
   async addScore(@Body() body: ScoreDto) {
     return this.addScoreUseCase.execute(body);

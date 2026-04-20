@@ -75,7 +75,7 @@ export class StudentScoreRepository {
     }
 
     async findTotalScoreByStudentAndGroup(studentId: string, groupId: string) {
-        const score = this.prisma.studentScore.findUnique({
+        const totalScore = this.prisma.studentScore.findUnique({
             where: {
                 studentId_groupId: {
                     studentId,
@@ -87,24 +87,51 @@ export class StudentScoreRepository {
             }
         });
 
-        if (!score) {
-            return 0;
-        } else {
-            return score
+        const startOfDay = new Date();
+        startOfDay.setHours(0, 0, 0, 0);
+
+        const endOfDay = new Date();
+        endOfDay.setHours(23, 59, 59, 999);
+
+        const todayScoreEvents = this.prisma.scoreEvent.findMany({
+            where: {
+                studentId,
+                groupId,
+                createdAt: {
+                    gte: startOfDay,
+                    lte: endOfDay,
+                }
+            },
+            select: {
+                type: true,
+                value: true,
+            }
+        });
+
+        const [total, todayEvents] = await this.prisma.$transaction([totalScore, todayScoreEvents]);
+
+        return {
+            total: total?.total || 0,
+            todayEvents,
         }
     }
 
-    async findTodayAttendance(studentId: string, groupId: string) {
-        const todayStart = new Date();
-        todayStart.setHours(0, 0, 0, 0);
+    async findTodayAttendance(studentId: string, groupId: string, type: ScoreType) {
+        const startOfDay = new Date();
+        startOfDay.setHours(0, 0, 0, 0);
+
+        const endOfDay = new Date();
+        endOfDay.setHours(23, 59, 59, 999);
+
 
         return this.prisma.scoreEvent.findFirst({
             where: {
                 studentId,
                 groupId,
-                type: ScoreType.ATTENDANCE,
+                type,
                 createdAt: {
-                    gte: todayStart,
+                    gte: startOfDay,
+                    lte: endOfDay,
                 }
             }
         })
