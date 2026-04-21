@@ -20,11 +20,27 @@ import { TokenPayload } from '@/lib/types/token_payload';
 import AddScoreDrawer from '../AddScoreDrawer';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { StudentScoreRow } from '@/lib/types/score_type';
-import { useQueryClient } from "@tanstack/react-query";
+import { useQueryClient, useMutation } from "@tanstack/react-query";
+
+type UpdateScorePayload = {
+    studentId: string;
+    groupId: string;
+    homeworkScore?: string;
+    attendanceScore?: string;
+};
+
+type DeleteStudentPayload = {
+    studentId: string;
+    groupId: string;
+}
+
 
 const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
     const token = useAuthStore((state) => state.token);
     const [openCreate, setOpenCreate] = useState(false);
+    const [openUpdate, setOpenUpdate] = useState(false);
+    const [openDelete, setOpenDelete] = useState(false);
+    const [selectedStudent, setSelectedStudent] = useState<TokenPayload | null>(null);
     const API = process.env.NEXT_PUBLIC_API_URL;
     const queryClient = useQueryClient();
 
@@ -37,6 +53,43 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
             const res = await axios.get(`${API}/group/${groupId}`, { headers: { Authorization: `Bearer ${token}` } });
             return res.data;
         },
+    })
+
+    const updateScoresMutation = useMutation({
+        mutationFn: async (payload: UpdateScorePayload) => {
+            const { studentId, groupId, homeworkScore, attendanceScore } = payload;
+            return await axios.put(`${API}/student-score/${studentId}/${groupId}`, { homeworkScore, attendanceScore }, { headers: { Authorization: `Bearer ${token}` } });
+        },
+        onSuccess: () => {
+            toast.success('Scores updated successfully!');
+            setOpenUpdate(false);
+            queryClient.invalidateQueries({
+                queryKey: ['students', groupId],
+                exact: false,
+            })
+        },
+        onError: (error: any) => {
+            toast.error(error.response?.data?.message ?? 'Something went wrong');
+        }
+    })
+
+    const deleteStudentMutation = useMutation({
+        mutationFn: async (payload: DeleteStudentPayload) => {
+            const { studentId, groupId } = payload;
+            return await axios.delete(`${API}/student-score/${studentId}/${groupId}`, { headers: { Authorization: `Bearer ${token}` } });
+        },
+        onSuccess: () => {
+            toast.success('Student deleted successfully!');
+            setOpenDelete(false);
+            queryClient.invalidateQueries({
+                queryKey: ['students', groupId],
+                exact: false,
+            })
+        },
+        onError: (error: any) => {
+            toast.error(error.response?.data?.message ?? 'Something went wrong');
+
+        }
     })
 
     const { data: studentScores } = useSuspenseQuery({

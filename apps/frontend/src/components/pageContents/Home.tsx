@@ -81,7 +81,7 @@ const Home = () => {
 
     const updateUserMutation = useMutation({
         mutationFn: async (user: TokenPayload) => {
-            return axios.put(`${API}/users/${user.id}`, user, { headers: { Authorization: `Bearer ${token}` } });
+            return await axios.put(`${API}/users/${user.id}`, user, { headers: { Authorization: `Bearer ${token}` } });
         },
         onSuccess: () => {
             toast.success('User data updated!');
@@ -97,7 +97,7 @@ const Home = () => {
 
     const deleteUserMutation = useMutation({
         mutationFn: async (userId: string) => {
-            return axios.delete(`${API}/users/${userId}`, { headers: { Authorization: `Bearer ${token}` } });
+            return await axios.delete(`${API}/users/${userId}`, { headers: { Authorization: `Bearer ${token}` } });
         },
         onSuccess: () => {
             toast.success('User deleted successfully!');
