@@ -80,7 +80,7 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
     const updateScoresMutation = useMutation({
         mutationFn: async (payload: UpdateScorePayload) => {
             const { studentId, groupId, homeworkScore, attendanceScore } = payload;
-            return await axios.put(`${API}/student-score/${studentId}/${groupId}`, { homeworkScore, attendanceScore }, { headers: { Authorization: `Bearer ${token}` } });
+            return await axios.put(`${API}/student-score/update${studentId}/${groupId}`, { homeworkScore, attendanceScore }, { headers: { Authorization: `Bearer ${token}` } });
         },
         onSuccess: () => {
             toast.success('Scores updated successfully!');
@@ -101,7 +101,7 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
             return await axios.delete(`${API}/student-score/${studentId}/${groupId}`, { headers: { Authorization: `Bearer ${token}` } });
         },
         onSuccess: () => {
-            toast.success('Student deleted successfully!');
+            toast.success('Student deleted from this group!');
             setOpenDelete(false);
             queryClient.invalidateQueries({
                 queryKey: ['students', groupId],

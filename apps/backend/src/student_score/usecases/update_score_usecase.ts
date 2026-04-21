@@ -1,33 +1,31 @@
 import { BadRequestException, Injectable } from "@nestjs/common";
 import { PrismaService } from "src/prisma/prisma.service";
 import { StudentScoreRepository } from "../student_score.service";
-import { ScoreDto } from "../dto/score.dto";
+import { UpdateScoreDto } from "../dto/score.dto";
 
 @Injectable()
 export class UpdateScoreUseCase {
     constructor(private readonly studentScoreRepo: StudentScoreRepository, private readonly prisma: PrismaService) { }
-    async execute(dto: ScoreDto, eventId: string) {
-        const { score } = dto;
+    async execute(body: UpdateScoreDto, studentId: string, groupId: string) {
+        // const { homeworkScore, attendanceScore } = body;
 
-        if (score <= 0) {
-            throw new BadRequestException('Score must be positive');
-        }
+        // if (homeworkScore !== null && attendanceScore !== null) {
+        //     throw new BadRequestException('At least one score must be provided.');
+        // }
 
-        const event = await this.studentScoreRepo.getEventById(eventId);
+        // if (!event) {
+        //     throw new BadRequestException('Event not found');
+        // }
 
-        if (!event) {
-            throw new BadRequestException('Event not found');
-        }
+        // const diff = score - event.value;
 
-        const diff = score - event.value;
+        // return this.prisma.$transaction(async (tx) => {
+        //     await this.studentScoreRepo.updateEvent(tx, dto, eventId);
 
-        return this.prisma.$transaction(async (tx) => {
-            await this.studentScoreRepo.updateEvent(tx, dto, eventId);
+        //     await this.studentScoreRepo.updateTotalScore(tx, dto, diff);
 
-            await this.studentScoreRepo.updateTotalScore(tx, dto, diff);
-
-            return { updated: true };
-        });
+        //     return { updated: true };
+        // });
     }
 
 

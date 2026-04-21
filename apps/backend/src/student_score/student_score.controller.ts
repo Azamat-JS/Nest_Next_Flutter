@@ -1,6 +1,6 @@
 import { Body, Delete, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { StudentScoreRepository } from './student_score.service';
-import { ScoreDto } from './dto/score.dto';
+import { ScoreDto, UpdateScoreDto } from './dto/score.dto';
 import { AddScoreUseCase, UpdateScoreUseCase, BulkAddScoreUseCase } from './usecases';
 import { BulkScoreDto } from './dto/bulk.dto';
 
@@ -36,14 +36,16 @@ export class StudentScoreController {
     return this.bulkAddScoreUseCase.execute(body);
   }
 
-  @Put("update/:eventId")
+  @Put("update/:studentId/:groupId")
   async updateScore(
-    @Param('eventId') eventId: string,
-    @Body() body: ScoreDto,
+    @Param('studentId') studentId: string,
+    @Param('groupId') groupId: string,
+    @Body() body: UpdateScoreDto,
   ) {
     return this.updateScoreUseCase.execute(
       body,
-      eventId,
+      studentId,
+      groupId
     );
   }
 

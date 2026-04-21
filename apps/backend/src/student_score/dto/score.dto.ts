@@ -20,3 +20,13 @@ export class ScoreDto {
     @IsInt()
     score!: number;
 }
+
+export class UpdateScoreDto {
+    @IsOptional()
+    @IsInt()
+    homeworkScore?: number;
+
+    @IsOptional()
+    @IsInt()
+    attendanceScore?: number;
+}

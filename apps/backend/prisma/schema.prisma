@@ -93,12 +93,11 @@ model ScoreEvent {
 
     groupId String
     group Groups @relation(fields: [groupId], references: [id])
+    date DateTime
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
-
-    @@index([studentId, type, groupId])
-    @@index([studentId])
-    @@index([groupId])
+    @@unique([studentId, groupId, type, date])
+    @@index([studentId, groupId, type, date])
     @@map("ScoreEvent")
 }
 
@@ -115,9 +114,9 @@ model StudentScore{
   attendance Int @default(0)
   updatedAt DateTime @updatedAt
 
+  @@id([studentId, groupId])
   @@index([studentId])
   @@index([groupId])
-  @@id([studentId, groupId])
   @@map("StudentScore")
 }
 
