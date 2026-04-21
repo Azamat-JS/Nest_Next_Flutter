@@ -193,7 +193,7 @@ const GroupComponent = () => {
 
                             <TableCell className="text-center">{u.teacher!.username}</TableCell>
 
-                            <TableCell>
+                            <TableCell className="translate-x-5">
                                 <DropdownMenu>
                                     <DropdownMenuTrigger asChild>
                                         <Menu className="w-5 h-5" />
