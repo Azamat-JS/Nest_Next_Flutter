@@ -259,29 +259,28 @@ export class StudentScoreRepository {
         return Array.from(resultMap.values());
     }
 
-    async deleteStudent(studentId: string, groupId: string) {
-        return this.prisma.$transaction(async (tx) => {
-            await tx.scoreEvent.deleteMany({
-                where: {
-                    studentId,
-                    groupId,
-                },
-            });
-            await tx.studentScore.deleteMany({
-                where: {
-                    studentId,
-                    groupId,
-                },
-            });
+    async deleteStudent(tx: Prisma.TransactionClient, body: { studentId: string, groupId: string }) {
+        const { studentId, groupId } = body;
+        await tx.scoreEvent.deleteMany({
+            where: {
+                studentId,
+                groupId,
+            },
+        });
+        await tx.studentScore.deleteMany({
+            where: {
+                studentId,
+                groupId,
+            },
+        });
 
-            await tx.studentGroup.delete({
-                where: {
-                    studentId_groupId: {
-                        studentId,
-                        groupId,
-                    }
+        await tx.studentGroup.delete({
+            where: {
+                studentId_groupId: {
+                    studentId,
+                    groupId,
                 }
-            })
+            }
         })
     }
 
