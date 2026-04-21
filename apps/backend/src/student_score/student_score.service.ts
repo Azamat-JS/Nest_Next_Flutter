@@ -62,27 +62,30 @@ export class StudentScoreRepository {
 
     async updateTotalScore(tx: Prisma.TransactionClient, dto: ScoreDto) {
 
-        return tx.studentScore.update({
+        return tx.studentScore.upsert({
             where: {
                 studentId_groupId: {
                     studentId: dto.studentId,
                     groupId: dto.groupId,
                 }
             },
-            data: {
+            update: {
                 total: { increment: dto.score },
-                homework: dto.scoreType === "HOMEWORK" ? {
-                    increment: dto.score
-                } : undefined,
-                attendance: dto.scoreType === "ATTENDANCE" ? {
-                    increment: dto.score
-                } : undefined,
+                homework: dto.scoreType === "HOMEWORK" ? { increment: dto.score } : undefined,
+                attendance: dto.scoreType === "ATTENDANCE" ? { increment: dto.score } : undefined,
+            },
+            create: {
+                studentId: dto.studentId,
+                groupId: dto.groupId,
+                total: dto.score,
+                homework: dto.scoreType === "HOMEWORK" ? dto.score : 0,
+                attendance: dto.scoreType === "ATTENDANCE" ? dto.score : 0,
             }
         })
     }
 
-    async updateEvent(tx: Prisma.TransactionClient, dto: UpdateScoreDto, studentId: string, groupId: string, newValue: number) {
-        return tx.scoreEvent.upsert({
+    async updateEvent(tx: Prisma.TransactionClient, dto: UpdateScoreDto, studentId: string, groupId: string, value: number) {
+        return tx.scoreEvent.update({
             where: {
                 studentId_groupId_date_type: {
                     studentId,
@@ -91,15 +94,8 @@ export class StudentScoreRepository {
                     type: dto.type,
                 }
             },
-            create: {
-                studentId,
-                groupId,
-                date: dto.date,
-                value: newValue,
-                type: dto.type,
-            },
-            update: {
-                value: newValue,
+            data: {
+                value,
             }
         });
     }

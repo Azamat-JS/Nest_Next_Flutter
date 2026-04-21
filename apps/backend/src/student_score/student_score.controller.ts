@@ -40,10 +40,10 @@ export class StudentScoreController {
   async updateScore(
     @Param('studentId') studentId: string,
     @Param('groupId') groupId: string,
-    @Body() body: UpdateScoreDto,
+    @Body() dto: UpdateScoreDto,
   ) {
     return this.updateScoreUseCase.execute(
-      body,
+      dto,
       studentId,
       groupId
     );

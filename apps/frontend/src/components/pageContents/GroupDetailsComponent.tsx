@@ -23,7 +23,6 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Menu, Edit, Trash } from 'lucide-react';
 import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import { Badge } from '../ui/badge';
 import { TokenPayload } from '@/lib/types/token_payload';
 import AddScoreDrawer from '../AddScoreDrawer';
@@ -39,8 +38,9 @@ import {
     DialogHeader,
     DialogTitle,
 } from "@/components/ui/dialog"
-import { Field, FieldGroup, FieldLabel } from "@/components/ui/field"
+import { FieldGroup, } from "@/components/ui/field"
 import { Button } from '../ui/button';
+import { Select, SelectItem } from '../ui/select';
 
 type UpdateScorePayload = {
     studentId: string;
@@ -64,8 +64,10 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
     const [openUpdate, setOpenUpdate] = useState(false);
     const [openDelete, setOpenDelete] = useState(false);
     const [selectedStudent, setSelectedStudent] = useState<TokenPayload | null>(null);
-    const [homeworkScore, setHomeworkScore] = useState<string>("");
-    const [attendanceScore, setAttendanceScore] = useState<string>("");
+    const [homeworkScore, setHomeworkScore] = useState(0);
+    const [attendanceScore, setAttendanceScore] = useState(0);
+    const [type, setType] = useState<"HOMEWORK" | "ATTENDANCE">("HOMEWORK");
+    const [value, setValue] = useState<number>(0); ("HOMEWORK");
     const API = process.env.NEXT_PUBLIC_API_URL;
     const queryClient = useQueryClient();
 
@@ -88,7 +90,7 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
         onSuccess: () => {
             toast.success('Scores updated successfully!');
             setOpenUpdate(false);
-            queryClient.refetchQueries({
+            queryClient.invalidateQueries({
                 queryKey: ['students', groupId],
                 exact: false,
             })
@@ -209,20 +211,21 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
                         </DialogDescription>
                     </DialogHeader>
                     <FieldGroup>
-                        <Field>
-                            <Label htmlFor="homework-1">Homework Score</Label>
-                            <Input id="homework-1" name="homework" onChange={(e) => setHomeworkScore(e.target.value)} value={homeworkScore} />
-                        </Field>
-                        <Field>
-                            <Label htmlFor="attendance-1">Attendance Score</Label>
-                            <Input id="attendance-1" name="attendance" onChange={(e) => setAttendanceScore(e.target.value)} value={attendanceScore} />
-                        </Field>
+                        <Select onValueChange={(v: "HOMEWORK" | "ATTENDANCE") => setType(v)}>
+                            <SelectItem value="HOMEWORK">Homework</SelectItem>
+                            <SelectItem value="ATTENDANCE">Attendance</SelectItem>
+                        </Select>
+                        <Input
+                            type="number"
+                            value={value}
+                            onChange={(e) => setValue(Number(e.target.value))}
+                        />
                     </FieldGroup>
                     <DialogFooter>
                         <DialogClose>
                             Cancel
                         </DialogClose>
-                        <Button type="submit" onClick={() => selectedStudent && updateScoresMutation.mutate({ studentId: selectedStudent?.id, groupId, homeworkScore: homeworkScore, attendanceScore: attendanceScore })}>Update</Button>
+                        <Button type="submit" onClick={() => selectedStudent && updateScoresMutation.mutate({ studentId: selectedStudent?.id, groupId, date, type, value })}>Update</Button>
                     </DialogFooter>
                 </DialogContent>
             </Dialog>

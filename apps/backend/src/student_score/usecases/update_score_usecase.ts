@@ -6,11 +6,11 @@ import { UpdateScoreDto } from "../dto/score.dto";
 @Injectable()
 export class UpdateScoreUseCase {
     constructor(private readonly studentScoreRepo: StudentScoreRepository, private readonly prisma: PrismaService) { }
-    async execute(body: UpdateScoreDto, studentId: string, groupId: string) {
-        const { homeworkScore, attendanceScore } = body;
+    async execute(dto: UpdateScoreDto, studentId: string, groupId: string) {
+        const { type, value, date } = dto;
 
-        if (homeworkScore !== null && attendanceScore !== null) {
-            throw new BadRequestException('At least one score must be provided.');
+        if (value < 0) {
+            throw new BadRequestException('Score must be non-negative');
         }
 
         const studentGroup = await this.studentScoreRepo.findStudentWithGroup(studentId, groupId);
@@ -19,19 +19,19 @@ export class UpdateScoreUseCase {
             throw new BadRequestException('Student is not part of the group');
         }
 
-        const oldScore = await this.studentScoreRepo.findScoreEvent(studentId, groupId, body.type, body.date);
+        const oldScore = await this.studentScoreRepo.findScoreEvent(studentId, groupId, type, date);
 
         if (!oldScore) {
             throw new BadRequestException('No existing score found for the specified date and type');
         }
 
-        const oldValue = oldScore?.value ?? 0;
-        const newValue = body.homeworkScore ?? body.attendanceScore ?? 0;
-        const diff = newValue - oldValue;
+        const oldValue = oldScore.value;
+
 
         return this.prisma.$transaction(async (tx) => {
-            await this.studentScoreRepo.updateEvent(tx, body, studentId, groupId, newValue);
-            await this.studentScoreRepo.updateTotalScore(tx, { studentId, groupId, scoreType: body.type, date: body.date, score: diff });
+            await this.studentScoreRepo.updateEvent(tx, dto, studentId, groupId, value);
+            const diff = value - oldValue;
+            await this.studentScoreRepo.updateTotalScore(tx, { studentId, groupId, scoreType: type, date, score: diff });
 
         })
     }

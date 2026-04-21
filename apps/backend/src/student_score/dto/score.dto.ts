@@ -35,11 +35,7 @@ export class UpdateScoreDto {
     @Transform(({ value }) => value?.toUpperCase())
     type!: ScoreType;
 
-    @IsOptional()
+    @IsNotEmpty()
     @IsInt()
-    homeworkScore?: number;
-
-    @IsOptional()
-    @IsInt()
-    attendanceScore?: number;
+    value!: number;
 }
