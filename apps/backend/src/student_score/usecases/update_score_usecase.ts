@@ -19,7 +19,10 @@ export class UpdateScoreUseCase {
             throw new BadRequestException('Student is not part of the group');
         }
 
-        const oldScore = await this.studentScoreRepo.findScoreEvent(studentId, groupId, type, date);
+        const normalizedDate = new Date(date);
+        normalizedDate.setHours(0, 0, 0, 0);
+
+        const oldScore = await this.studentScoreRepo.findScoreEvent(studentId, groupId, type, normalizedDate);
 
         if (!oldScore) {
             throw new BadRequestException('No existing score found for the specified date and type');
@@ -27,11 +30,10 @@ export class UpdateScoreUseCase {
 
         const oldValue = oldScore.value;
 
-
         return this.prisma.$transaction(async (tx) => {
-            await this.studentScoreRepo.updateEvent(tx, dto, studentId, groupId, value);
+            await this.studentScoreRepo.updateEvent(tx, { ...dto, date: normalizedDate }, studentId, groupId, value);
             const diff = value - oldValue;
-            await this.studentScoreRepo.updateTotalScore(tx, { studentId, groupId, scoreType: type, date, score: diff });
+            await this.studentScoreRepo.updateTotalScore(tx, { studentId, groupId, scoreType: type, date: normalizedDate, score: diff });
 
         })
     }

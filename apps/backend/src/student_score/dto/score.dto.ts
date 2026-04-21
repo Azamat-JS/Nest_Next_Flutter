@@ -21,14 +21,13 @@ export class ScoreDto {
     score!: number;
 
     @IsOptional()
-    @IsString()
-    date!: string;
+    @IsDate()
+    date!: Date;
 }
 
 export class UpdateScoreDto {
-    @IsNotEmpty()
-    @IsString()
-    date!: string;
+    @IsDate()
+    date!: Date;
 
     @IsNotEmpty()
     @IsEnum(ScoreType)

@@ -40,7 +40,7 @@ import {
 } from "@/components/ui/dialog"
 import { FieldGroup, } from "@/components/ui/field"
 import { Button } from '../ui/button';
-import { Select, SelectItem } from '../ui/select';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 
 type UpdateScorePayload = {
     studentId: string;
@@ -212,8 +212,14 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
                     </DialogHeader>
                     <FieldGroup>
                         <Select onValueChange={(v: "HOMEWORK" | "ATTENDANCE") => setType(v)}>
-                            <SelectItem value="HOMEWORK">Homework</SelectItem>
-                            <SelectItem value="ATTENDANCE">Attendance</SelectItem>
+                            <SelectTrigger>
+                                <SelectValue placeholder="Select type" />
+                            </SelectTrigger>
+
+                            <SelectContent>
+                                <SelectItem value="HOMEWORK">Homework</SelectItem>
+                                <SelectItem value="ATTENDANCE">Attendance</SelectItem>
+                            </SelectContent>
                         </Select>
                         <Input
                             type="number"
