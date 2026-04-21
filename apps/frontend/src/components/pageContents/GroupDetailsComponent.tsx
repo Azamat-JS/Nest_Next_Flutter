@@ -20,11 +20,16 @@ import { TokenPayload } from '@/lib/types/token_payload';
 import AddScoreDrawer from '../AddScoreDrawer';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { StudentScoreRow } from '@/lib/types/score_type';
+import { useQueryClient } from "@tanstack/react-query";
 
 const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
     const token = useAuthStore((state) => state.token);
     const [openCreate, setOpenCreate] = useState(false);
     const API = process.env.NEXT_PUBLIC_API_URL;
+    const queryClient = useQueryClient();
+
+
+
 
     const { data } = useSuspenseQuery({
         queryKey: ["group", groupId],
@@ -91,7 +96,10 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
                 </TableFooter>
             </Table>
             <div className='flex justify-end mr-5 mt-4'>
-                <AddScoreDrawer openCreate={openCreate} setOpenCreate={setOpenCreate} students={students} groupId={groupId} />
+                <AddScoreDrawer openCreate={openCreate} setOpenCreate={setOpenCreate} students={students} groupId={groupId} onScoreAdded={() => queryClient.invalidateQueries({
+                    queryKey: ['students', groupId],
+                    exact: false,
+                })} />
             </div>
         </div>
     )

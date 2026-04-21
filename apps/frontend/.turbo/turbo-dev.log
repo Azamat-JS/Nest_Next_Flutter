@@ -6,7 +6,7 @@
 - Local:         http://localhost:4000
 - Network:       http://192.168.13.93:4000
 - Environments: .env.local
-[32m[1m✓[22m[39m Ready in 301ms
+[32m[1m✓[22m[39m Ready in 416ms
 [33m[1m⚠[22m[39m Warning: Next.js inferred your workspace root, but it may not be correct.
  We detected multiple lockfiles and selected the directory of /Users/azamatabdullayev/Desktop/full-stack-turbo/pnpm-workspace.yaml as the root directory.
  To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
@@ -15,895 +15,187 @@
    * /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend/pnpm-workspace.yaml
 
 
- GET / [32m200[39m in 299ms[2m (next.js: 117ms, application-code: 182ms)[22m
- GET /groups [32m200[39m in 50ms[2m (next.js: 32ms, application-code: 18ms)[22m
- GET /groups/cmnoh0p550000u8v2nihbtf1o [32m200[39m in 256ms[2m (next.js: 245ms, application-code: 10ms)[22m
+ GET / [32m200[39m in 299ms[2m (next.js: 125ms, application-code: 174ms)[22m
+ GET /groups [32m200[39m in 54ms[2m (next.js: 39ms, application-code: 16ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 255ms[2m (next.js: 240ms, application-code: 15ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[
+  {
+    studentId: [32m'cmnkampkh0003icv2q37yozix'[39m,
+    username: [32m'bekzod'[39m,
+    homework: [33m40[39m,
+    attendance: [33m0[39m,
+    total: [33m40[39m
+  },
+  {
+    studentId: [32m'cmnq721po0000hrv21wvb6zsf'[39m,
+    username: [32m'Javlon'[39m,
+    homework: [33m30[39m,
+    attendance: [33m0[39m,
+    total: [33m30[39m
+  },
+  {
+    studentId: [32m'cmnq74ink0001hrv254s9e0li'[39m,
+    username: [32m'Jamshid'[39m,
+    homework: [33m50[39m,
+    attendance: [33m0[39m,
+    total: [33m50[39m
+  }
+]
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 97ms[2m (next.js: 10ms, application-code: 87ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[
+  {
+    studentId: [32m'cmnkampkh0003icv2q37yozix'[39m,
+    username: [32m'bekzod'[39m,
+    homework: [33m40[39m,
+    attendance: [33m0[39m,
+    total: [33m40[39m
+  },
+  {
+    studentId: [32m'cmnq721po0000hrv21wvb6zsf'[39m,
+    username: [32m'Javlon'[39m,
+    homework: [33m30[39m,
+    attendance: [33m30[39m,
+    total: [33m60[39m
+  },
+  {
+    studentId: [32m'cmnq74ink0001hrv254s9e0li'[39m,
+    username: [32m'Jamshid'[39m,
+    homework: [33m50[39m,
+    attendance: [33m30[39m,
+    total: [33m80[39m
+  }
+]
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 67ms[2m (next.js: 10ms, application-code: 57ms)[22m
+[32m[1m✓[22m[39m Compiled in 1547ms
+[32m[1m✓[22m[39m Compiled in 249ms
+[32m[1m✓[22m[39m Compiled in 102ms
+[32m[1m✓[22m[39m Compiled in 46ms
+[32m[1m✓[22m[39m Compiled in 78ms
+[32m[1m✓[22m[39m Compiled in 23ms
+[
+  {
+    studentId: [32m'cmnkampkh0003icv2q37yozix'[39m,
+    username: [32m'bekzod'[39m,
+    homework: [33m40[39m,
+    attendance: [33m0[39m,
+    total: [33m40[39m
+  },
+  {
+    studentId: [32m'cmnq721po0000hrv21wvb6zsf'[39m,
+    username: [32m'Javlon'[39m,
+    homework: [33m30[39m,
+    attendance: [33m30[39m,
+    total: [33m60[39m
+  },
+  {
+    studentId: [32m'cmnq74ink0001hrv254s9e0li'[39m,
+    username: [32m'Jamshid'[39m,
+    homework: [33m50[39m,
+    attendance: [33m30[39m,
+    total: [33m80[39m
+  }
+]
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 82ms[2m (next.js: 15ms, application-code: 68ms)[22m
+ GET /groups [32m200[39m in 32ms[2m (next.js: 9ms, application-code: 23ms)[22m
+ GET /groups/cmnq4oz3e0005xkv21be71kiu [32m200[39m in 31ms[2m (next.js: 9ms, application-code: 23ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[32m[1m✓[22m[39m Compiled in 21ms
+[32m[1m✓[22m[39m Compiled in 20ms
+[32m[1m✓[22m[39m Compiled in 52ms
+ GET /groups [32m200[39m in 30ms[2m (next.js: 6ms, application-code: 23ms)[22m
+ GET /groups/cmnrbvz880000kvv2madn4kae [32m200[39m in 30ms[2m (next.js: 12ms, application-code: 18ms)[22m
+ GET /groups [32m200[39m in 25ms[2m (next.js: 4ms, application-code: 20ms)[22m
+ GET /groups/cmnoh0p550000u8v2nihbtf1o [32m200[39m in 28ms[2m (next.js: 7ms, application-code: 21ms)[22m
  GET /groups [32m200[39m in 25ms[2m (next.js: 4ms, application-code: 21ms)[22m
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 32ms[2m (next.js: 9ms, application-code: 23ms)[22m
-[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
-[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
- GET /home [32m200[39m in 30ms[2m (next.js: 19ms, application-code: 11ms)[22m
- GET /groups [32m200[39m in 29ms[2m (next.js: 7ms, application-code: 22ms)[22m
- GET /groups [32m200[39m in 13ms[2m (next.js: 2ms, application-code: 11ms)[22m
-[32m[1m✓[22m[39m Compiled in 366ms
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 31ms[2m (next.js: 11ms, application-code: 20ms)[22m
+ GET / [32m200[39m in 25ms[2m (next.js: 6ms, application-code: 19ms)[22m
+ GET /home [32m200[39m in 37ms[2m (next.js: 21ms, application-code: 16ms)[22m
+ GET /groups [32m200[39m in 27ms[2m (next.js: 4ms, application-code: 23ms)[22m
+ GET /groups/cmnoh0p550000u8v2nihbtf1o [32m200[39m in 14ms[2m (next.js: 3ms, application-code: 10ms)[22m
 [36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
 [36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
 [36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
 [36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
-[32m[1m✓[22m[39m Compiled in 341ms
-[31m[1m⨯[22m[39m ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx:83:1
-Unexpected token. Did you mean `[35m{'}[39m'}` or `&rbrace;`?
-  [90m81 |[0m             </div>
-  [90m82 |[0m             )
-[31m[1m>[0m [90m83 |[0m }
-  [90m   |[0m [31m[1m^[0m
-  [90m84 |[0m
-  [90m85 |[0m             [36mexport[0m [36mdefault[0m [33mGroupDetailsComponent[0m
-
-Parsing ecmascript source code failed
-
-Import trace:
-  Server Component:
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx
-
-
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [31m500[39m in 159ms[2m (next.js: 73ms, application-code: 86ms)[22m
-[31m[1m⨯[22m[39m ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx:83:1
-Unexpected token. Did you mean `[35m{'}[39m'}` or `&rbrace;`?
-  [90m81 |[0m             </div>
-  [90m82 |[0m             )
-[31m[1m>[0m [90m83 |[0m }
-  [90m   |[0m [31m[1m^[0m
-  [90m84 |[0m
-  [90m85 |[0m             [36mexport[0m [36mdefault[0m [33mGroupDetailsComponent[0m
-
-Parsing ecmascript source code failed
-
-Import trace:
-  Server Component:
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx
-
-
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [31m500[39m in 7ms[2m (next.js: 3ms, application-code: 4ms)[22m
-[31m[1m⨯[22m[39m ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx:83:1
-Unexpected token. Did you mean `[35m{'}[39m'}` or `&rbrace;`?
-  [90m81 |[0m             </div>
-  [90m82 |[0m             )
-[31m[1m>[0m [90m83 |[0m }
-  [90m   |[0m [31m[1m^[0m
-  [90m84 |[0m
-  [90m85 |[0m             [36mexport[0m [36mdefault[0m [33mGroupDetailsComponent[0m
-
-Parsing ecmascript source code failed
-
-Import trace:
-  Server Component:
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx
-
-
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [31m500[39m in 8ms[2m (next.js: 4ms, application-code: 3ms)[22m
-[31m[1m⨯[22m[39m ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx:83:1
-Unexpected token. Did you mean `[35m{'}[39m'}` or `&rbrace;`?
-  [90m81 |[0m             </div>
-  [90m82 |[0m             )
-[31m[1m>[0m [90m83 |[0m }
-  [90m   |[0m [31m[1m^[0m
-  [90m84 |[0m
-  [90m85 |[0m             [36mexport[0m [36mdefault[0m [33mGroupDetailsComponent[0m
-
-Parsing ecmascript source code failed
-
-Import trace:
-  Server Component:
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx
-
-
-[36m[browser][39m [31mUncaught Error: ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx:83:1
-Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
-  81 |             </div>
-  82 |             )
-> 83 | }
-     | ^
-  84 |
-  85 |             export default GroupDetailsComponent
-
-Parsing ecmascript source code failed
-
-Import trace:
-  Server Component:
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx
-
-[39m
-[31m    at <unknown> (Error: ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx:83:1)
-    at <unknown> (Error: (./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx:83:1)[39m
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 193ms[2m (next.js: 48ms, application-code: 145ms)[22m
-[31m[1m⨯[22m[39m ReferenceError: Spinner is not defined
-    at GroupDetails (src/app/(pages)/groups/[groupId]/page.tsx:7:30)
-  [90m 5 |[0m     [36mconst[0m groupId = ([36mawait[0m params).groupId;
-  [90m 6 |[0m     [36mreturn[0m (
-[31m[1m>[0m [90m 7 |[0m         <[33mSuspense[0m fallback={<[33mSpinner[0m />}>
-  [90m   |[0m                              [31m[1m^[0m
-  [90m 8 |[0m
-  [90m 9 |[0m             <[33mGroupDetailsComponent[0m groupId={groupId} />)
-  [90m10 |[0m         </[33mSuspense[0m> {
-  digest: [32m'1720596863'[39m
-}
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 21ms[2m (next.js: 4ms, application-code: 17ms)[22m
-[31m[1m⨯[22m[39m ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx:3:1
-[1m[31mModule not found[39m[22m: Can't resolve [32m'@/components/Spinner'[39m
-  [90m1 |[0m [36mimport[0m [33mGroupDetailsComponent[0m [36mfrom[0m [32m"@/components/pageContents/GroupDetailsComponent"[0m;
-  [90m2 |[0m [36mimport[0m { [33mSuspense[0m } [36mfrom[0m [32m"react"[0m;
-[31m[1m>[0m [90m3 |[0m [36mimport[0m [33mSpinner[0m [36mfrom[0m [32m"@/components/Spinner"[0m;
-  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
-  [90m4 |[0m
-  [90m5 |[0m [36mconst[0m [33mGroupDetails[0m = [36masync[0m ({ params }: { params: [33mPromise[0m<{ groupId: string }> }) => {
-  [90m6 |[0m     [36mconst[0m groupId = ([36mawait[0m params).groupId;
-
-Import map: aliased to relative './src/components/Spinner' inside of [project]/apps/frontend
-
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-[31m[1m⨯[22m[39m ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx:3:1
-[1m[31mModule not found[39m[22m: Can't resolve [32m'@/components/Spinner'[39m
-  [90m1 |[0m [36mimport[0m [33mGroupDetailsComponent[0m [36mfrom[0m [32m"@/components/pageContents/GroupDetailsComponent"[0m;
-  [90m2 |[0m [36mimport[0m { [33mSuspense[0m } [36mfrom[0m [32m"react"[0m;
-[31m[1m>[0m [90m3 |[0m [36mimport[0m [33mSpinner[0m [36mfrom[0m [32m"@/components/Spinner"[0m;
-  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
-  [90m4 |[0m
-  [90m5 |[0m [36mconst[0m [33mGroupDetails[0m = [36masync[0m ({ params }: { params: [33mPromise[0m<{ groupId: string }> }) => {
-  [90m6 |[0m     [36mconst[0m groupId = ([36mawait[0m params).groupId;
-
-Import map: aliased to relative './src/components/Spinner' inside of [project]/apps/frontend
-
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-[31m[1m⨯[22m[39m ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx:3:1
-[1m[31mModule not found[39m[22m: Can't resolve [32m'@/components/Spinner'[39m
-  [90m1 |[0m [36mimport[0m [33mGroupDetailsComponent[0m [36mfrom[0m [32m"@/components/pageContents/GroupDetailsComponent"[0m;
-  [90m2 |[0m [36mimport[0m { [33mSuspense[0m } [36mfrom[0m [32m"react"[0m;
-[31m[1m>[0m [90m3 |[0m [36mimport[0m [33mSpinner[0m [36mfrom[0m [32m"@/components/Spinner"[0m;
-  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
-  [90m4 |[0m
-  [90m5 |[0m [36mconst[0m [33mGroupDetails[0m = [36masync[0m ({ params }: { params: [33mPromise[0m<{ groupId: string }> }) => {
-  [90m6 |[0m     [36mconst[0m groupId = ([36mawait[0m params).groupId;
-
-Import map: aliased to relative './src/components/Spinner' inside of [project]/apps/frontend
-
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-[31m[1m⨯[22m[39m ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx:3:1
-[1m[31mModule not found[39m[22m: Can't resolve [32m'@/components/Spinner'[39m
-  [90m1 |[0m [36mimport[0m [33mGroupDetailsComponent[0m [36mfrom[0m [32m"@/components/pageContents/GroupDetailsComponent"[0m;
-  [90m2 |[0m [36mimport[0m { [33mSuspense[0m } [36mfrom[0m [32m"react"[0m;
-[31m[1m>[0m [90m3 |[0m [36mimport[0m [33mSpinner[0m [36mfrom[0m [32m"@/components/Spinner"[0m;
-  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
-  [90m4 |[0m
-  [90m5 |[0m [36mconst[0m [33mGroupDetails[0m = [36masync[0m ({ params }: { params: [33mPromise[0m<{ groupId: string }> }) => {
-  [90m6 |[0m     [36mconst[0m groupId = ([36mawait[0m params).groupId;
-
-Import map: aliased to relative './src/components/Spinner' inside of [project]/apps/frontend
-
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-[32m[1m✓[22m[39m Compiled in 165ms
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 909ms[2m (next.js: 180ms, application-code: 729ms)[22m
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 418ms[2m (next.js: 57ms, application-code: 361ms)[22m
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 107ms[2m (next.js: 4ms, application-code: 103ms)[22m
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 380ms[2m (next.js: 16ms, application-code: 365ms)[22m
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 17ms[2m (next.js: 4ms, application-code: 13ms)[22m
-[32m[1m✓[22m[39m Compiled in 21ms
-[32m[1m✓[22m[39m Compiled in 19ms
-[32m[1m✓[22m[39m Compiled in 165ms
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 78ms[2m (next.js: 34ms, application-code: 45ms)[22m
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 12ms[2m (next.js: 1136µs, application-code: 10ms)[22m
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 19ms[2m (next.js: 4ms, application-code: 14ms)[22m
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 15ms[2m (next.js: 3ms, application-code: 11ms)[22m
-[31m[1m⨯[22m[39m ReferenceError: ErrorBoundary is not defined
-    at GroupDetails (src/app/(pages)/groups/[groupId]/page.tsx:8:10)
-  [90m 6 |[0m     [36mconst[0m groupId = ([36mawait[0m params).groupId;
-  [90m 7 |[0m     [36mreturn[0m (
-[31m[1m>[0m [90m 8 |[0m         <[33mErrorBoundary[0m fallback={<div>[33mSomething[0m went wrong!</div>}>
-  [90m   |[0m          [31m[1m^[0m
-  [90m 9 |[0m
-  [90m10 |[0m             <[33mSuspense[0m fallback={<[33mSpinner[0m />}>
-  [90m11 |[0m                 <[33mGroupDetailsComponent[0m groupId={groupId} /> {
-  digest: [32m'4089161441'[39m
-}
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 22ms[2m (next.js: 5ms, application-code: 17ms)[22m
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 149ms[2m (next.js: 82ms, application-code: 66ms)[22m
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 42ms[2m (next.js: 2ms, application-code: 40ms)[22m
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 35ms[2m (next.js: 2ms, application-code: 33ms)[22m
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 35ms[2m (next.js: 1156µs, application-code: 33ms)[22m
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 22ms[2m (next.js: 1501µs, application-code: 20ms)[22m
-[31m[1m⨯[22m[39m ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx:2:1
-[1m[31mModule not found[39m[22m: Can't resolve [32m'@/components/Spinner'[39m
-  [90m1 |[0m [36mimport[0m [33mGroupDetailsComponent[0m [36mfrom[0m [32m"@/components/pageContents/GroupDetailsComponent"[0m;
-[31m[1m>[0m [90m2 |[0m [36mimport[0m [33mSpinner[0m [36mfrom[0m [32m"@/components/Spinner"[0m;
-  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
-  [90m3 |[0m [36mimport[0m { [33mErrorBoundary[0m } [36mfrom[0m [32m"react-error-boundary"[0m
-  [90m4 |[0m [36mimport[0m { [33mSuspense[0m } [36mfrom[0m [32m"react"[0m;
-  [90m5 |[0m
-
-Import map: aliased to relative './src/components/Spinner' inside of [project]/apps/frontend
-
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-[31m[1m⨯[22m[39m ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx:2:1
-[1m[31mModule not found[39m[22m: Can't resolve [32m'@/components/Spinner'[39m
-  [90m1 |[0m [36mimport[0m [33mGroupDetailsComponent[0m [36mfrom[0m [32m"@/components/pageContents/GroupDetailsComponent"[0m;
-[31m[1m>[0m [90m2 |[0m [36mimport[0m [33mSpinner[0m [36mfrom[0m [32m"@/components/Spinner"[0m;
-  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
-  [90m3 |[0m [36mimport[0m { [33mErrorBoundary[0m } [36mfrom[0m [32m"react-error-boundary"[0m
-  [90m4 |[0m [36mimport[0m { [33mSuspense[0m } [36mfrom[0m [32m"react"[0m;
-  [90m5 |[0m
-
-Import map: aliased to relative './src/components/Spinner' inside of [project]/apps/frontend
-
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-[31m[1m⨯[22m[39m ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx:2:1
-[1m[31mModule not found[39m[22m: Can't resolve [32m'@/components/Spinner'[39m
-  [90m1 |[0m [36mimport[0m [33mGroupDetailsComponent[0m [36mfrom[0m [32m"@/components/pageContents/GroupDetailsComponent"[0m;
-[31m[1m>[0m [90m2 |[0m [36mimport[0m [33mSpinner[0m [36mfrom[0m [32m"@/components/Spinner"[0m;
-  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
-  [90m3 |[0m [36mimport[0m { [33mErrorBoundary[0m } [36mfrom[0m [32m"react-error-boundary"[0m
-  [90m4 |[0m [36mimport[0m { [33mSuspense[0m } [36mfrom[0m [32m"react"[0m;
-  [90m5 |[0m
-
-Import map: aliased to relative './src/components/Spinner' inside of [project]/apps/frontend
-
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-[31m[1m⨯[22m[39m ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx:2:1
-[1m[31mModule not found[39m[22m: Can't resolve [32m'@/components/Spinner'[39m
-  [90m1 |[0m [36mimport[0m [33mGroupDetailsComponent[0m [36mfrom[0m [32m"@/components/pageContents/GroupDetailsComponent"[0m;
-[31m[1m>[0m [90m2 |[0m [36mimport[0m [33mSpinner[0m [36mfrom[0m [32m"@/components/Spinner"[0m;
-  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
-  [90m3 |[0m [36mimport[0m { [33mErrorBoundary[0m } [36mfrom[0m [32m"react-error-boundary"[0m
-  [90m4 |[0m [36mimport[0m { [33mSuspense[0m } [36mfrom[0m [32m"react"[0m;
-  [90m5 |[0m
-
-Import map: aliased to relative './src/components/Spinner' inside of [project]/apps/frontend
-
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-[31m[1m⨯[22m[39m ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx:2:1
-[1m[31mModule not found[39m[22m: Can't resolve [32m'@/components/Spinner'[39m
-  [90m1 |[0m [36mimport[0m [33mGroupDetailsComponent[0m [36mfrom[0m [32m"@/components/pageContents/GroupDetailsComponent"[0m;
-[31m[1m>[0m [90m2 |[0m [36mimport[0m [33mSpinner[0m [36mfrom[0m [32m"@/components/Spinner"[0m;
-  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
-  [90m3 |[0m [36mimport[0m { [33mErrorBoundary[0m } [36mfrom[0m [32m"react-error-boundary"[0m
-  [90m4 |[0m [36mimport[0m { [33mSuspense[0m } [36mfrom[0m [32m"react"[0m;
-  [90m5 |[0m
-
-Import map: aliased to relative './src/components/Spinner' inside of [project]/apps/frontend
-
-
-https://nextjs.org/docs/messages/module-not-found
-
-
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [31m500[39m in 20ms[2m (next.js: 12ms, application-code: 8ms)[22m
-[31m[1m⨯[22m[39m ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx:2:1
-[1m[31mModule not found[39m[22m: Can't resolve [32m'@/components/Spinner'[39m
-  [90m1 |[0m [36mimport[0m [33mGroupDetailsComponent[0m [36mfrom[0m [32m"@/components/pageContents/GroupDetailsComponent"[0m;
-[31m[1m>[0m [90m2 |[0m [36mimport[0m [33mSpinner[0m [36mfrom[0m [32m"@/components/Spinner"[0m;
-  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
-  [90m3 |[0m [36mimport[0m { [33mErrorBoundary[0m } [36mfrom[0m [32m"react-error-boundary"[0m
-  [90m4 |[0m [36mimport[0m { [33mSuspense[0m } [36mfrom[0m [32m"react"[0m;
-  [90m5 |[0m
-
-Import map: aliased to relative './src/components/Spinner' inside of [project]/apps/frontend
-
-
-https://nextjs.org/docs/messages/module-not-found
-
-
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [31m500[39m in 5ms[2m (next.js: 2ms, application-code: 3ms)[22m
-[31m[1m⨯[22m[39m ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx:2:1
-[1m[31mModule not found[39m[22m: Can't resolve [32m'@/components/Spinner'[39m
-  [90m1 |[0m [36mimport[0m [33mGroupDetailsComponent[0m [36mfrom[0m [32m"@/components/pageContents/GroupDetailsComponent"[0m;
-[31m[1m>[0m [90m2 |[0m [36mimport[0m [33mSpinner[0m [36mfrom[0m [32m"@/components/Spinner"[0m;
-  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
-  [90m3 |[0m [36mimport[0m { [33mErrorBoundary[0m } [36mfrom[0m [32m"react-error-boundary"[0m
-  [90m4 |[0m [36mimport[0m { [33mSuspense[0m } [36mfrom[0m [32m"react"[0m;
-  [90m5 |[0m
-
-Import map: aliased to relative './src/components/Spinner' inside of [project]/apps/frontend
-
-
-https://nextjs.org/docs/messages/module-not-found
-
-
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [31m500[39m in 6ms[2m (next.js: 2ms, application-code: 4ms)[22m
-[36m[browser][39m [31mUncaught Error: ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx:2:1
-Module not found: Can't resolve '@/components/Spinner'
-  1 | import GroupDetailsComponent from "@/components/pageContents/GroupDetailsComponent";
-> 2 | import Spinner from "@/components/Spinner";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  3 | import { ErrorBoundary } from "react-error-boundary"
-  4 | import { Suspense } from "react";
-  5 |
-
-Import map: aliased to relative './src/components/Spinner' inside of [project]/apps/frontend
-
-
-https://nextjs.org/docs/messages/module-not-found
-
-[39m
-[31m    at <unknown> (Error: ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx:2:1)
-    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
-    at <unknown> (Error: (./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx:2:1)
-    at <unknown> (https://nextjs.org/docs/messages/module-not-found)[39m
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 1588ms[2m (next.js: 141ms, application-code: 1447ms)[22m
-[32m[1m✓[22m[39m Compiled in 136ms
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 88ms[2m (next.js: 35ms, application-code: 53ms)[22m
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 28ms[2m (next.js: 1248µs, application-code: 27ms)[22m
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 10ms[2m (next.js: 880µs, application-code: 9ms)[22m
- GET /groups [32m200[39m in 37ms[2m (next.js: 21ms, application-code: 16ms)[22m
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 20ms[2m (next.js: 4ms, application-code: 16ms)[22m
- GET /groups/cmnq4oz3e0005xkv21be71kiu [32m200[39m in 29ms[2m (next.js: 6ms, application-code: 23ms)[22m
- GET /groups/cmnq4oz3e0005xkv21be71kiu [32m200[39m in 29ms[2m (next.js: 7ms, application-code: 22ms)[22m
- GET /groups/cmnoh5xzt0003u8v2r1u72s2j [32m200[39m in 29ms[2m (next.js: 8ms, application-code: 21ms)[22m
- GET /groups/cmnoh5xzt0003u8v2r1u72s2j [32m200[39m in 19ms[2m (next.js: 4ms, application-code: 15ms)[22m
- GET /groups/cmnoh5xzt0003u8v2r1u72s2j [32m200[39m in 153ms[2m (next.js: 2ms, application-code: 151ms)[22m
- GET /groups/cmnoh5xzt0003u8v2r1u72s2j [32m200[39m in 60ms[2m (next.js: 6ms, application-code: 54ms)[22m
- GET /groups/cmnoh5xzt0003u8v2r1u72s2j [32m200[39m in 70ms[2m (next.js: 7ms, application-code: 63ms)[22m
- GET /groups/cmnoh5xzt0003u8v2r1u72s2j [32m200[39m in 50ms[2m (next.js: 6ms, application-code: 44ms)[22m
- GET /groups/cmnoh5xzt0003u8v2r1u72s2j [32m200[39m in 63ms[2m (next.js: 6ms, application-code: 56ms)[22m
- GET /groups/cmnoh5xzt0003u8v2r1u72s2j [32m200[39m in 66ms[2m (next.js: 5ms, application-code: 62ms)[22m
- GET /groups/cmnoh5xzt0003u8v2r1u72s2j [32m200[39m in 56ms[2m (next.js: 5ms, application-code: 51ms)[22m
- GET /groups/cmnoh5xzt0003u8v2r1u72s2j [32m200[39m in 58ms[2m (next.js: 6ms, application-code: 51ms)[22m
- GET /groups/cmnoh5xzt0003u8v2r1u72s2j [32m200[39m in 16ms[2m (next.js: 3ms, application-code: 13ms)[22m
- GET /groups/cmnoh5xzt0003u8v2r1u72s2j [32m200[39m in 84ms[2m (next.js: 5ms, application-code: 79ms)[22m
- GET /groups/cmnoh5xzt0003u8v2r1u72s2j [32m200[39m in 52ms[2m (next.js: 6ms, application-code: 46ms)[22m
- GET /groups/cmnoh5xzt0003u8v2r1u72s2j [32m200[39m in 52ms[2m (next.js: 7ms, application-code: 45ms)[22m
- GET /groups/cmnoh5xzt0003u8v2r1u72s2j [32m200[39m in 51ms[2m (next.js: 6ms, application-code: 45ms)[22m
- GET /groups/cmnoh5xzt0003u8v2r1u72s2j [32m200[39m in 35ms[2m (next.js: 3ms, application-code: 33ms)[22m
- GET /groups/cmnoh5xzt0003u8v2r1u72s2j [32m200[39m in 48ms[2m (next.js: 7ms, application-code: 41ms)[22m
- GET /groups/cmnoh5xzt0003u8v2r1u72s2j [32m200[39m in 48ms[2m (next.js: 5ms, application-code: 43ms)[22m
- GET /groups/cmnoh5xzt0003u8v2r1u72s2j [32m200[39m in 50ms[2m (next.js: 6ms, application-code: 44ms)[22m
- GET /groups/cmnoh5xzt0003u8v2r1u72s2j [32m200[39m in 49ms[2m (next.js: 7ms, application-code: 42ms)[22m
- GET /groups [32m200[39m in 27ms[2m (next.js: 6ms, application-code: 20ms)[22m
- GET /groups [32m200[39m in 86ms[2m (next.js: 68ms, application-code: 18ms)[22m
- GET /groups [32m200[39m in 10ms[2m (next.js: 880µs, application-code: 9ms)[22m
- GET /groups [32m200[39m in 51ms[2m (next.js: 3ms, application-code: 48ms)[22m
- GET /groups [32m200[39m in 57ms[2m (next.js: 4ms, application-code: 53ms)[22m
- GET /groups [32m200[39m in 51ms[2m (next.js: 5ms, application-code: 46ms)[22m
- GET /groups [32m200[39m in 30ms[2m (next.js: 1427µs, application-code: 29ms)[22m
- GET /groups [32m200[39m in 61ms[2m (next.js: 10ms, application-code: 51ms)[22m
- GET /home [32m200[39m in 39ms[2m (next.js: 24ms, application-code: 15ms)[22m
- GET /groups [32m200[39m in 23ms[2m (next.js: 3ms, application-code: 20ms)[22m
- GET /home [32m200[39m in 25ms[2m (next.js: 3ms, application-code: 22ms)[22m
- GET /groups [32m200[39m in 22ms[2m (next.js: 3ms, application-code: 19ms)[22m
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 38ms[2m (next.js: 17ms, application-code: 21ms)[22m
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 17ms[2m (next.js: 4ms, application-code: 13ms)[22m
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 16ms[2m (next.js: 4ms, application-code: 12ms)[22m
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 17ms[2m (next.js: 3ms, application-code: 14ms)[22m
-[31m[1m⨯[22m[39m Error [AxiosError]: Request failed with status code 404
-    at async queryFn (src/components/pageContents/GroupDetailsComponent.tsx:40:25)
-  [90m38 |[0m         queryKey: [[32m"students"[0m, groupId],
-  [90m39 |[0m         queryFn: [36masync[0m () => {
-[31m[1m>[0m [90m40 |[0m             [36mconst[0m res = [36mawait[0m axios.get([32m`[0m${[33mAPI[0m[32m}/group/all/students/[0m${groupId[32m}`[0m, { headers: { [33mAuthorization[0m: [32m`Bearer [0m${token[32m}`[0m } });
-  [90m   |[0m                         [31m[1m^[0m
-  [90m41 |[0m             [36mreturn[0m res.data;
-  [90m42 |[0m         },
-  [90m43 |[0m     }) {
-  isAxiosError: [33mtrue[39m,
-  code: [32m'ERR_BAD_REQUEST'[39m,
-  config: {
-    transitional: {
-      silentJSONParsing: [33mtrue[39m,
-      forcedJSONParsing: [33mtrue[39m,
-      clarifyTimeoutError: [33mfalse[39m,
-      legacyInterceptorReqResOrdering: [33mtrue[39m
-    },
-    adapter: [ [32m'xhr'[39m, [32m'http'[39m, [32m'fetch'[39m ],
-    transformRequest: [ [36m[Function: transformRequest][39m ],
-    transformResponse: [ [36m[Function: transformResponse][39m ],
-    timeout: [33m0[39m,
-    xsrfCookieName: [32m'XSRF-TOKEN'[39m,
-    xsrfHeaderName: [32m'X-XSRF-TOKEN'[39m,
-    maxContentLength: [33m-1[39m,
-    maxBodyLength: [33m-1[39m,
-    env: { FormData: [36m[Function][39m, Blob: [36m[class Blob][39m },
-    validateStatus: [36m[Function: validateStatus][39m,
-    headers: Object [AxiosHeaders] {
-      Accept: [32m'application/json, text/plain, */*'[39m,
-      [32m'Content-Type'[39m: [90mundefined[39m,
-      Authorization: [32m'Bearer null'[39m,
-      [32m'User-Agent'[39m: [32m'axios/1.14.0'[39m,
-      [32m'Accept-Encoding'[39m: [32m'gzip, compress, deflate, br'[39m
-    },
-    method: [32m'get'[39m,
-    url: [32m'http://localhost:3002/group/all/students/cmnq4bbkf0000xkv2o72hfh9z'[39m,
-    allowAbsoluteUrls: [33mtrue[39m,
-    data: [90mundefined[39m
+[
+  {
+    studentId: [32m'cmnkaas440001icv2k7mikei8'[39m,
+    username: [32m'Alibek'[39m,
+    homework: [33m50[39m,
+    attendance: [33m0[39m,
+    total: [33m50[39m
   },
-  request: [36m<ref *1>[39m ClientRequest {
-    _events: [Object: null prototype] {
-      abort: [36m[Function (anonymous)][39m,
-      aborted: [36m[Function (anonymous)][39m,
-      connect: [36m[Function (anonymous)][39m,
-      error: [36m[Function (anonymous)][39m,
-      socket: [36m[Function (anonymous)][39m,
-      timeout: [36m[Function (anonymous)][39m,
-      finish: [36m[Function: requestOnFinish][39m
-    },
-    _eventsCount: [33m7[39m,
-    _maxListeners: [90mundefined[39m,
-    outputData: [],
-    outputSize: [33m0[39m,
-    writable: [33mtrue[39m,
-    destroyed: [33mtrue[39m,
-    _last: [33mtrue[39m,
-    chunkedEncoding: [33mfalse[39m,
-    shouldKeepAlive: [33mtrue[39m,
-    maxRequestsOnConnectionReached: [33mfalse[39m,
-    _defaultKeepAlive: [33mtrue[39m,
-    useChunkedEncodingByDefault: [33mfalse[39m,
-    sendDate: [33mfalse[39m,
-    _removedConnection: [33mfalse[39m,
-    _removedContLen: [33mfalse[39m,
-    _removedTE: [33mfalse[39m,
-    strictContentLength: [33mfalse[39m,
-    _contentLength: [33m0[39m,
-    _hasBody: [33mtrue[39m,
-    _trailer: [32m''[39m,
-    finished: [33mtrue[39m,
-    _headerSent: [33mtrue[39m,
-    _closed: [33mtrue[39m,
-    socket: Socket {
-      connecting: [33mfalse[39m,
-      _hadError: [33mfalse[39m,
-      _parent: [1mnull[22m,
-      _host: [32m'localhost'[39m,
-      _closeAfterHandlingError: [33mfalse[39m,
-      _events: [36m[Object][39m,
-      _readableState: [36m[ReadableState][39m,
-      _writableState: [36m[WritableState][39m,
-      allowHalfOpen: [33mfalse[39m,
-      _maxListeners: [90mundefined[39m,
-      _eventsCount: [33m6[39m,
-      _sockname: [1mnull[22m,
-      _pendingData: [1mnull[22m,
-      _pendingEncoding: [32m''[39m,
-      server: [1mnull[22m,
-      _server: [1mnull[22m,
-      timeout: [33m4000[39m,
-      parser: [1mnull[22m,
-      _httpMessage: [1mnull[22m,
-      autoSelectFamilyAttemptedAddresses: [36m[Array][39m,
-      [[32mSymbol(async_id_symbol)[39m]: [33m-1[39m,
-      [[32mSymbol(kHandle)[39m]: [36m[TCP][39m,
-      [[32mSymbol(lastWriteQueueSize)[39m]: [33m0[39m,
-      [[32mSymbol(timeout)[39m]: Timeout {
-        _idleTimeout: [33m4000[39m,
-        _idlePrev: [36m[TimersList][39m,
-        _idleNext: [36m[TimersList][39m,
-        _idleStart: [33m10206021[39m,
-        _onTimeout: [36m[Function: bound ][39m,
-        _timerArgs: [90mundefined[39m,
-        _repeat: [1mnull[22m,
-        _destroyed: [33mfalse[39m,
-        [[32mSymbol(refed)[39m]: [33mfalse[39m,
-        [[32mSymbol(kHasPrimitive)[39m]: [33mfalse[39m,
-        [[32mSymbol(asyncId)[39m]: [33m217557[39m,
-        [[32mSymbol(triggerId)[39m]: [33m217555[39m,
-        [[32mSymbol(kResourceStore)[39m]: [36m[Object][39m,
-        [[32mSymbol(kResourceStore)[39m]: [90mundefined[39m,
-        [[32mSymbol(kResourceStore)[39m]: [90mundefined[39m,
-        [[32mSymbol(kResourceStore)[39m]: [36m[RequestInstance][39m,
-        [[32mSymbol(kResourceStore)[39m]: [90mundefined[39m,
-        [[32mSymbol(kResourceStore)[39m]: [36m[Object][39m
-      },
-      [[32mSymbol(kBuffer)[39m]: [1mnull[22m,
-      [[32mSymbol(kBufferCb)[39m]: [1mnull[22m,
-      [[32mSymbol(kBufferGen)[39m]: [1mnull[22m,
-      [[32mSymbol(shapeMode)[39m]: [33mtrue[39m,
-      [[32mSymbol(kCapture)[39m]: [33mfalse[39m,
-      [[32mSymbol(kSetNoDelay)[39m]: [33mtrue[39m,
-      [[32mSymbol(kSetKeepAlive)[39m]: [33mtrue[39m,
-      [[32mSymbol(kSetKeepAliveInitialDelay)[39m]: [33m1[39m,
-      [[32mSymbol(kBytesRead)[39m]: [33m0[39m,
-      [[32mSymbol(kBytesWritten)[39m]: [33m0[39m
-    },
-    _header: [32m'GET /group/all/students/cmnq4bbkf0000xkv2o72hfh9z HTTP/1.1\r\n'[39m +
-      [32m'Accept: application/json, text/plain, */*\r\n'[39m +
-      [32m'Authorization: Bearer null\r\n'[39m +
-      [32m'User-Agent: axios/1.14.0\r\n'[39m +
-      [32m'Accept-Encoding: gzip, compress, deflate, br\r\n'[39m +
-      [32m'Host: localhost:3002\r\n'[39m +
-      [32m'Connection: keep-alive\r\n'[39m +
-      [32m'\r\n'[39m,
-    _keepAliveTimeout: [33m0[39m,
-    _onPendingData: [36m[Function: nop][39m,
-    agent: Agent {
-      _events: [36m[Object: null prototype][39m,
-      _eventsCount: [33m2[39m,
-      _maxListeners: [90mundefined[39m,
-      defaultPort: [33m80[39m,
-      protocol: [32m'http:'[39m,
-      options: [36m[Object: null prototype][39m,
-      requests: [Object: null prototype] {},
-      sockets: [Object: null prototype] {},
-      freeSockets: [36m[Object: null prototype][39m,
-      keepAliveMsecs: [33m1000[39m,
-      keepAlive: [33mtrue[39m,
-      maxSockets: [33mInfinity[39m,
-      maxFreeSockets: [33m256[39m,
-      scheduling: [32m'lifo'[39m,
-      maxTotalSockets: [33mInfinity[39m,
-      totalSocketCount: [33m1[39m,
-      [[32mSymbol(shapeMode)[39m]: [33mfalse[39m,
-      [[32mSymbol(kCapture)[39m]: [33mfalse[39m
-    },
-    socketPath: [90mundefined[39m,
-    method: [32m'GET'[39m,
-    maxHeaderSize: [90mundefined[39m,
-    insecureHTTPParser: [90mundefined[39m,
-    joinDuplicateHeaders: [90mundefined[39m,
-    path: [32m'/group/all/students/cmnq4bbkf0000xkv2o72hfh9z'[39m,
-    _ended: [33mtrue[39m,
-    res: IncomingMessage {
-      _events: [36m[Object][39m,
-      _readableState: [36m[ReadableState][39m,
-      _maxListeners: [90mundefined[39m,
-      socket: [1mnull[22m,
-      httpVersionMajor: [33m1[39m,
-      httpVersionMinor: [33m1[39m,
-      httpVersion: [32m'1.1'[39m,
-      complete: [33mtrue[39m,
-      rawHeaders: [36m[Array][39m,
-      rawTrailers: [],
-      joinDuplicateHeaders: [90mundefined[39m,
-      aborted: [33mfalse[39m,
-      upgrade: [33mfalse[39m,
-      url: [32m''[39m,
-      method: [1mnull[22m,
-      statusCode: [33m404[39m,
-      statusMessage: [32m'Not Found'[39m,
-      client: [36m[Socket][39m,
-      _consuming: [33mfalse[39m,
-      _dumped: [33mfalse[39m,
-      req: [36m[Circular *1][39m,
-      _eventsCount: [33m4[39m,
-      responseUrl: [32m'http://localhost:3002/group/all/students/cmnq4bbkf0000xkv2o72hfh9z'[39m,
-      redirects: [],
-      [[32mSymbol(shapeMode)[39m]: [33mtrue[39m,
-      [[32mSymbol(kCapture)[39m]: [33mfalse[39m,
-      [[32mSymbol(kHeaders)[39m]: [36m[Object][39m,
-      [[32mSymbol(kHeadersCount)[39m]: [33m16[39m,
-      [[32mSymbol(kTrailers)[39m]: [1mnull[22m,
-      [[32mSymbol(kTrailersCount)[39m]: [33m0[39m
-    },
-    aborted: [33mfalse[39m,
-    timeoutCb: [1mnull[22m,
-    upgradeOrConnect: [33mfalse[39m,
-    parser: [1mnull[22m,
-    maxHeadersCount: [1mnull[22m,
-    reusedSocket: [33mtrue[39m,
-    host: [32m'localhost'[39m,
-    protocol: [32m'http:'[39m,
-    _redirectable: Writable {
-      _events: [36m[Object][39m,
-      _writableState: [36m[WritableState][39m,
-      _maxListeners: [90mundefined[39m,
-      _options: [36m[Object][39m,
-      _ended: [33mtrue[39m,
-      _ending: [33mtrue[39m,
-      _redirectCount: [33m0[39m,
-      _redirects: [],
-      _requestBodyLength: [33m0[39m,
-      _requestBodyBuffers: [],
-      _eventsCount: [33m3[39m,
-      _onNativeResponse: [36m[Function (anonymous)][39m,
-      _currentRequest: [36m[Circular *1][39m,
-      _currentUrl: [32m'http://localhost:3002/group/all/students/cmnq4bbkf0000xkv2o72hfh9z'[39m,
-      _timeout: [1mnull[22m,
-      [[32mSymbol(shapeMode)[39m]: [33mtrue[39m,
-      [[32mSymbol(kCapture)[39m]: [33mfalse[39m
-    },
-    [[32mSymbol(shapeMode)[39m]: [33mfalse[39m,
-    [[32mSymbol(kCapture)[39m]: [33mfalse[39m,
-    [[32mSymbol(kBytesWritten)[39m]: [33m0[39m,
-    [[32mSymbol(kNeedDrain)[39m]: [33mfalse[39m,
-    [[32mSymbol(corked)[39m]: [33m0[39m,
-    [[32mSymbol(kOutHeaders)[39m]: [Object: null prototype] {
-      accept: [36m[Array][39m,
-      authorization: [36m[Array][39m,
-      [32m'user-agent'[39m: [36m[Array][39m,
-      [32m'accept-encoding'[39m: [36m[Array][39m,
-      host: [36m[Array][39m
-    },
-    [[32mSymbol(errored)[39m]: [1mnull[22m,
-    [[32mSymbol(kHighWaterMark)[39m]: [33m16384[39m,
-    [[32mSymbol(kRejectNonStandardBodyWrites)[39m]: [33mfalse[39m,
-    [[32mSymbol(kUniqueHeaders)[39m]: [1mnull[22m
+  {
+    studentId: [32m'cmnpz5idh0000c7v2t1pcqh45'[39m,
+    username: [32m'Jasurbek'[39m,
+    homework: [33m40[39m,
+    attendance: [33m0[39m,
+    total: [33m40[39m
   },
-  response: {
-    status: [33m404[39m,
-    statusText: [32m'Not Found'[39m,
-    headers: Object [AxiosHeaders] {
-      [32m'x-powered-by'[39m: [32m'Express'[39m,
-      [32m'access-control-allow-origin'[39m: [32m'*'[39m,
-      [32m'content-type'[39m: [32m'application/json; charset=utf-8'[39m,
-      [32m'content-length'[39m: [32m'107'[39m,
-      etag: [32m'W/"6b-vmXan7snqrwuOcfFZMrCq3bPSKc"'[39m,
-      date: [32m'Mon, 20 Apr 2026 12:14:45 GMT'[39m,
-      connection: [32m'keep-alive'[39m,
-      [32m'keep-alive'[39m: [32m'timeout=5'[39m
-    },
-    config: {
-      transitional: [36m[Object][39m,
-      adapter: [36m[Array][39m,
-      transformRequest: [36m[Array][39m,
-      transformResponse: [36m[Array][39m,
-      timeout: [33m0[39m,
-      xsrfCookieName: [32m'XSRF-TOKEN'[39m,
-      xsrfHeaderName: [32m'X-XSRF-TOKEN'[39m,
-      maxContentLength: [33m-1[39m,
-      maxBodyLength: [33m-1[39m,
-      env: [36m[Object][39m,
-      validateStatus: [36m[Function: validateStatus][39m,
-      headers: [36m[Object [AxiosHeaders]][39m,
-      method: [32m'get'[39m,
-      url: [32m'http://localhost:3002/group/all/students/cmnq4bbkf0000xkv2o72hfh9z'[39m,
-      allowAbsoluteUrls: [33mtrue[39m,
-      data: [90mundefined[39m
-    },
-    request: [36m<ref *1>[39m ClientRequest {
-      _events: [36m[Object: null prototype][39m,
-      _eventsCount: [33m7[39m,
-      _maxListeners: [90mundefined[39m,
-      outputData: [],
-      outputSize: [33m0[39m,
-      writable: [33mtrue[39m,
-      destroyed: [33mtrue[39m,
-      _last: [33mtrue[39m,
-      chunkedEncoding: [33mfalse[39m,
-      shouldKeepAlive: [33mtrue[39m,
-      maxRequestsOnConnectionReached: [33mfalse[39m,
-      _defaultKeepAlive: [33mtrue[39m,
-      useChunkedEncodingByDefault: [33mfalse[39m,
-      sendDate: [33mfalse[39m,
-      _removedConnection: [33mfalse[39m,
-      _removedContLen: [33mfalse[39m,
-      _removedTE: [33mfalse[39m,
-      strictContentLength: [33mfalse[39m,
-      _contentLength: [33m0[39m,
-      _hasBody: [33mtrue[39m,
-      _trailer: [32m''[39m,
-      finished: [33mtrue[39m,
-      _headerSent: [33mtrue[39m,
-      _closed: [33mtrue[39m,
-      socket: [36m[Socket][39m,
-      _header: [32m'GET /group/all/students/cmnq4bbkf0000xkv2o72hfh9z HTTP/1.1\r\n'[39m +
-        [32m'Accept: application/json, text/plain, */*\r\n'[39m +
-        [32m'Authorization: Bearer null\r\n'[39m +
-        [32m'User-Agent: axios/1.14.0\r\n'[39m +
-        [32m'Accept-Encoding: gzip, compress, deflate, br\r\n'[39m +
-        [32m'Host: localhost:3002\r\n'[39m +
-        [32m'Connection: keep-alive\r\n'[39m +
-        [32m'\r\n'[39m,
-      _keepAliveTimeout: [33m0[39m,
-      _onPendingData: [36m[Function: nop][39m,
-      agent: [36m[Agent][39m,
-      socketPath: [90mundefined[39m,
-      method: [32m'GET'[39m,
-      maxHeaderSize: [90mundefined[39m,
-      insecureHTTPParser: [90mundefined[39m,
-      joinDuplicateHeaders: [90mundefined[39m,
-      path: [32m'/group/all/students/cmnq4bbkf0000xkv2o72hfh9z'[39m,
-      _ended: [33mtrue[39m,
-      res: [36m[IncomingMessage][39m,
-      aborted: [33mfalse[39m,
-      timeoutCb: [1mnull[22m,
-      upgradeOrConnect: [33mfalse[39m,
-      parser: [1mnull[22m,
-      maxHeadersCount: [1mnull[22m,
-      reusedSocket: [33mtrue[39m,
-      host: [32m'localhost'[39m,
-      protocol: [32m'http:'[39m,
-      _redirectable: [36m[Writable][39m,
-      [[32mSymbol(shapeMode)[39m]: [33mfalse[39m,
-      [[32mSymbol(kCapture)[39m]: [33mfalse[39m,
-      [[32mSymbol(kBytesWritten)[39m]: [33m0[39m,
-      [[32mSymbol(kNeedDrain)[39m]: [33mfalse[39m,
-      [[32mSymbol(corked)[39m]: [33m0[39m,
-      [[32mSymbol(kOutHeaders)[39m]: [36m[Object: null prototype][39m,
-      [[32mSymbol(errored)[39m]: [1mnull[22m,
-      [[32mSymbol(kHighWaterMark)[39m]: [33m16384[39m,
-      [[32mSymbol(kRejectNonStandardBodyWrites)[39m]: [33mfalse[39m,
-      [[32mSymbol(kUniqueHeaders)[39m]: [1mnull[22m
-    },
-    data: {
-      message: [32m'Cannot GET /group/all/students/cmnq4bbkf0000xkv2o72hfh9z'[39m,
-      error: [32m'Not Found'[39m,
-      statusCode: [33m404[39m
-    }
+  {
+    studentId: [32m'cmnq74ink0001hrv254s9e0li'[39m,
+    username: [32m'Jamshid'[39m,
+    homework: [33m40[39m,
+    attendance: [33m0[39m,
+    total: [33m40[39m
   },
-  status: [33m404[39m,
-  digest: [32m'908505898'[39m
-}
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 108ms[2m (next.js: 8ms, application-code: 100ms)[22m
-[36m[browser][39m [31mUncaught Error: Switched to client rendering because the server rendering errored:
-
-Request failed with status code 404[39m
-[31m    at async queryFn (src/components/pageContents/GroupDetailsComponent.tsx:40:25)[39m
-  [90m38 |[0m         queryKey: [[32m"students"[0m, groupId],
-  [90m39 |[0m         queryFn: [36masync[0m () => {
-[31m[1m>[0m [90m40 |[0m             [36mconst[0m res = [36mawait[0m axios.get([32m`[0m${[33mAPI[0m[32m}/group/all/students/[0m${groupId[32m}`[0m, { headers: { [33mAuthorization[0m: [32m`Bearer [0m${token[32m}`[0m } });
-  [90m   |[0m                         [31m[1m^[0m
-  [90m41 |[0m             [36mreturn[0m res.data;
-  [90m42 |[0m         },
-  [90m43 |[0m     })
- GET /groups [32m200[39m in 21ms[2m (next.js: 5ms, application-code: 17ms)[22m
- GET /groups [32m200[39m in 52ms[2m (next.js: 3ms, application-code: 49ms)[22m
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 29ms[2m (next.js: 7ms, application-code: 22ms)[22m
-[32m[1m✓[22m[39m Compiled in 21ms
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 82ms[2m (next.js: 9ms, application-code: 72ms)[22m
-[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
-[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
-[32m[1m✓[22m[39m Compiled in 31ms
-[32m[1m✓[22m[39m Compiled in 28ms
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 17ms[2m (next.js: 4ms, application-code: 13ms)[22m
-[32m[1m✓[22m[39m Compiled in 25ms
-[32m[1m✓[22m[39m Compiled in 26ms
-[32m[1m✓[22m[39m Compiled in 25ms
-[32m[1m✓[22m[39m Compiled in 27ms
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 20ms[2m (next.js: 4ms, application-code: 16ms)[22m
-[32m[1m✓[22m[39m Compiled in 19ms
-[32m[1m✓[22m[39m Compiled in 31ms
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 23ms[2m (next.js: 4ms, application-code: 18ms)[22m
-[32m[1m✓[22m[39m Compiled in 22ms
-[32m[1m✓[22m[39m Compiled in 19ms
+  {
+    studentId: [32m'cmnra1k180000bvv2v19pir4r'[39m,
+    username: [32m'Jamol'[39m,
+    homework: [33m30[39m,
+    attendance: [33m0[39m,
+    total: [33m30[39m
+  },
+  {
+    studentId: [32m'cmo05ffeo00008pv28uobawe6'[39m,
+    username: [32m'odil'[39m,
+    homework: [33m60[39m,
+    attendance: [33m0[39m,
+    total: [33m60[39m
+  }
+]
+ GET /groups/cmnoh0p550000u8v2nihbtf1o [32m200[39m in 87ms[2m (next.js: 6ms, application-code: 80ms)[22m
 [32m[1m✓[22m[39m Compiled in 20ms
-[32m[1m✓[22m[39m Compiled in 24ms
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 21ms[2m (next.js: 4ms, application-code: 17ms)[22m
-[32m[1m✓[22m[39m Compiled in 22ms
-[32m[1m✓[22m[39m Compiled in 26ms
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 18ms[2m (next.js: 4ms, application-code: 14ms)[22m
-[32m[1m✓[22m[39m Compiled in 20ms
-[32m[1m✓[22m[39m Compiled in 21ms
-[32m[1m✓[22m[39m Compiled in 30ms
-[32m[1m✓[22m[39m Compiled in 22ms
-[36m[browser][39m ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx:51:5
-Expected ident
-  49 |     const
-  50 |
-> 51 |     return (
-     |     ^^^^^^
-  52 |         <div className='flex flex-col w-full'>
-  53 |             <header className='flex items-center gap-6 justify-center text-center'>
-  54 |                 <Badge className='w-40 h-8 font-semibold text-lg'>{group?.name}</Badge> -
-
-Parsing ecmascript source code failed
-
-Import trace:
-  Server Component:
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx 
-[36m[browser][39m ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx:49:59
-Expression expected
-  47 |     const studentScores: GroupStudentScore[] = studentData;
-  48 |
-> 49 |     const scoresMap = studentScores.reduce((acc, score) =>)
-     |                                                           ^
-  50 |
-  51 |     return (
-  52 |         <div className='flex flex-col w-full'>
-
-Parsing ecmascript source code failed
-
-Import trace:
-  Server Component:
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx 
-[36m[browser][39m ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx:51:5
-Expected ident
-  49 |     const studentScoreMap = new Map < string,
-  50 |
-> 51 |     return (
-     |     ^^^^^^
-  52 |         <div className='flex flex-col w-full'>
-  53 |             <header className='flex items-center gap-6 justify-center text-center'>
-  54 |                 <Badge className='w-40 h-8 font-semibold text-lg'>{group?.name}</Badge> -
-
-Parsing ecmascript source code failed
-
-Import trace:
-  Server Component:
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx 
-[36m[browser][39m ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx:49:47
-'const' declarations must be initialized
-  47 |     const studentScores: GroupStudentScore[] = studentData;
-  48 |
-> 49 |     const studentScoreMap = new Map < string, {
-     |                                               ^
-> 50 |
-     | ^
-> 51 |     }
-     | ^^^^^
-  52 |
-  53 |     return (
-  54 |         <div className='flex flex-col w-full'>
-
-Parsing ecmascript source code failed
-
-Import trace:
-  Server Component:
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx 
-[36m[browser][39m ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx:49:47
-'const' declarations must be initialized
-  47 |     const studentScores: GroupStudentScore[] = studentData;
-  48 |
-> 49 |     const studentScoreMap = new Map < string, {
-     |                                               ^
-> 50 |         studentId: string,
-     | ^^^^^^^^^^^^^^^^^^^^^^^^^^
-> 51 |         username: string
-     | ^^^^^^^^^^^^^^^^^^^^^^^^
-> 52 |     }
-     | ^^^^^
-  53 |
-  54 |     return (
-  55 |         <div className='flex flex-col w-full'>
-
-Parsing ecmascript source code failed
-
-Import trace:
-  Server Component:
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx 
-[36m[browser][39m ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx:49:47
-'const' declarations must be initialized
-  47 |     const studentScores: GroupStudentScore[] = studentData;
-  48 |
-> 49 |     const studentScoreMap = new Map < string, {
-     |                                               ^
-> 50 |         studentId: string,
-     | ^^^^^^^^^^^^^^^^^^^^^^^^^^
-> 51 |         username: string,
-     | ^^^^^^^^^^^^^^^^^^^^^^^^^
-> 52 |         homework: number,
-     | ^^^^^^^^^^^^^^^^^^^^^^^^^
-> 53 |         attendance: number,
-     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> 54 |         total: number,
-     | ^^^^^^^^^^^^^^^^^^^^^^
-> 55 |     }()
-     | ^^^^^
-  56 |
-  57 |     return (
-  58 |         <div className='flex flex-col w-full'>
-
-Parsing ecmascript source code failed
-
-Import trace:
-  Server Component:
-    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx 
+[
+  {
+    studentId: [32m'cmnkaas440001icv2k7mikei8'[39m,
+    username: [32m'Alibek'[39m,
+    homework: [33m50[39m,
+    attendance: [33m0[39m,
+    total: [33m50[39m
+  },
+  {
+    studentId: [32m'cmnpz5idh0000c7v2t1pcqh45'[39m,
+    username: [32m'Jasurbek'[39m,
+    homework: [33m40[39m,
+    attendance: [33m0[39m,
+    total: [33m40[39m
+  },
+  {
+    studentId: [32m'cmnq74ink0001hrv254s9e0li'[39m,
+    username: [32m'Jamshid'[39m,
+    homework: [33m40[39m,
+    attendance: [33m0[39m,
+    total: [33m40[39m
+  },
+  {
+    studentId: [32m'cmnra1k180000bvv2v19pir4r'[39m,
+    username: [32m'Jamol'[39m,
+    homework: [33m30[39m,
+    attendance: [33m0[39m,
+    total: [33m30[39m
+  },
+  {
+    studentId: [32m'cmo05ffeo00008pv28uobawe6'[39m,
+    username: [32m'odil'[39m,
+    homework: [33m60[39m,
+    attendance: [33m0[39m,
+    total: [33m60[39m
+  }
+]
+ GET /groups/cmnoh0p550000u8v2nihbtf1o [32m200[39m in 84ms[2m (next.js: 12ms, application-code: 73ms)[22m

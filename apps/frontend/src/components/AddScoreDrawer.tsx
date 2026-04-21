@@ -28,7 +28,7 @@ import { Toggle } from "@/components/ui/toggle"
 import { ScoreType } from '@/lib/types/score_type';
 
 
-const AddScoreDrawer = ({ openCreate, setOpenCreate, students, groupId }: { openCreate: boolean, setOpenCreate: any, students: TokenPayload[], groupId: string }) => {
+const AddScoreDrawer = ({ openCreate, setOpenCreate, students, groupId, onScoreAdded }: { openCreate: boolean, setOpenCreate: any, students: TokenPayload[], groupId: string, onScoreAdded: () => void }) => {
     const [type, setType] = useState<ScoreType>('HOMEWORK');
     const [globalScore, setGlobalScore] = useState<number>(0);
     const API = process.env.NEXT_PUBLIC_API_URL;
@@ -56,6 +56,7 @@ const AddScoreDrawer = ({ openCreate, setOpenCreate, students, groupId }: { open
                 await axios.post(`${API}/student-score/bulk`, { groupId, scoreType: type, students: value.students }, { headers: { Authorization: `Bearer ${token}` } });
                 form.reset()
                 setGlobalScore(0)
+                onScoreAdded();
                 toast.success('Scores added successfully!')
             } catch (error: any) {
                 toast.error(
