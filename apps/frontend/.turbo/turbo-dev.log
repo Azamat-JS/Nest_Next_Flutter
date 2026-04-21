@@ -1,0 +1,181 @@
+
+> frontend@0.1.0 dev /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend
+> next dev -p 4000
+
+[1m[38;2;173;127;168m▲ Next.js 16.2.1[39m[22m (Turbopack)
+- Local:         http://localhost:4000
+- Network:       http://192.168.13.93:4000
+- Environments: .env.local
+[32m[1m✓[22m[39m Ready in 258ms
+[33m[1m⚠[22m[39m Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /Users/azamatabdullayev/Desktop/full-stack-turbo/pnpm-workspace.yaml as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend/pnpm-workspace.yaml
+
+
+[]
+[]
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 100ms[2m (next.js: 9ms, application-code: 91ms)[22m
+ GET /groups [32m200[39m in 48ms[2m (next.js: 32ms, application-code: 16ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 12ms[2m (next.js: 3ms, application-code: 9ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[32m[1m✓[22m[39m Compiled in 33ms
+[32m[1m✓[22m[39m Compiled in 30ms
+[
+  {
+    studentId: [32m'cmnq74ink0001hrv254s9e0li'[39m,
+    username: [32m'Jamshid'[39m,
+    homework: [33m40[39m,
+    attendance: [33m0[39m,
+    total: [33m40[39m
+  },
+  {
+    studentId: [32m'cmnkampkh0003icv2q37yozix'[39m,
+    username: [32m'bekzod'[39m,
+    homework: [33m30[39m,
+    attendance: [33m30[39m,
+    total: [33m60[39m
+  },
+  {
+    studentId: [32m'cmnq721po0000hrv21wvb6zsf'[39m,
+    username: [32m'Javlon'[39m,
+    homework: [33m20[39m,
+    attendance: [33m30[39m,
+    total: [33m50[39m
+  }
+]
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 86ms[2m (next.js: 6ms, application-code: 79ms)[22m
+[
+  {
+    studentId: [32m'cmnq74ink0001hrv254s9e0li'[39m,
+    username: [32m'Jamshid'[39m,
+    homework: [33m40[39m,
+    attendance: [33m0[39m,
+    total: [33m40[39m
+  },
+  {
+    studentId: [32m'cmnkampkh0003icv2q37yozix'[39m,
+    username: [32m'bekzod'[39m,
+    homework: [33m30[39m,
+    attendance: [33m30[39m,
+    total: [33m60[39m
+  },
+  {
+    studentId: [32m'cmnq721po0000hrv21wvb6zsf'[39m,
+    username: [32m'Javlon'[39m,
+    homework: [33m20[39m,
+    attendance: [33m30[39m,
+    total: [33m50[39m
+  }
+]
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 90ms[2m (next.js: 9ms, application-code: 81ms)[22m
+[
+  {
+    studentId: [32m'cmnq74ink0001hrv254s9e0li'[39m,
+    username: [32m'Jamshid'[39m,
+    homework: [33m40[39m,
+    attendance: [33m0[39m,
+    total: [33m40[39m
+  },
+  {
+    studentId: [32m'cmnkampkh0003icv2q37yozix'[39m,
+    username: [32m'bekzod'[39m,
+    homework: [33m30[39m,
+    attendance: [33m30[39m,
+    total: [33m60[39m
+  },
+  {
+    studentId: [32m'cmnq721po0000hrv21wvb6zsf'[39m,
+    username: [32m'Javlon'[39m,
+    homework: [33m20[39m,
+    attendance: [33m30[39m,
+    total: [33m50[39m
+  }
+]
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 76ms[2m (next.js: 10ms, application-code: 66ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[
+  {
+    studentId: [32m'cmnq721po0000hrv21wvb6zsf'[39m,
+    username: [32m'Javlon'[39m,
+    homework: [33m20[39m,
+    attendance: [33m50[39m,
+    total: [33m70[39m
+  },
+  {
+    studentId: [32m'cmnkampkh0003icv2q37yozix'[39m,
+    username: [32m'bekzod'[39m,
+    homework: [33m30[39m,
+    attendance: [33m50[39m,
+    total: [33m80[39m
+  },
+  {
+    studentId: [32m'cmnq74ink0001hrv254s9e0li'[39m,
+    username: [32m'Jamshid'[39m,
+    homework: [33m40[39m,
+    attendance: [33m50[39m,
+    total: [33m90[39m
+  }
+]
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 131ms[2m (next.js: 7ms, application-code: 124ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[
+  {
+    studentId: [32m'cmnq721po0000hrv21wvb6zsf'[39m,
+    username: [32m'Javlon'[39m,
+    homework: [33m20[39m,
+    attendance: [33m50[39m,
+    total: [33m70[39m
+  },
+  {
+    studentId: [32m'cmnkampkh0003icv2q37yozix'[39m,
+    username: [32m'bekzod'[39m,
+    homework: [33m30[39m,
+    attendance: [33m50[39m,
+    total: [33m80[39m
+  },
+  {
+    studentId: [32m'cmnq74ink0001hrv254s9e0li'[39m,
+    username: [32m'Jamshid'[39m,
+    homework: [33m40[39m,
+    attendance: [33m50[39m,
+    total: [33m90[39m
+  }
+]
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 89ms[2m (next.js: 7ms, application-code: 82ms)[22m
+[
+  {
+    studentId: [32m'cmnq721po0000hrv21wvb6zsf'[39m,
+    username: [32m'Javlon'[39m,
+    homework: [33m20[39m,
+    attendance: [33m50[39m,
+    total: [33m70[39m
+  },
+  {
+    studentId: [32m'cmnkampkh0003icv2q37yozix'[39m,
+    username: [32m'bekzod'[39m,
+    homework: [33m30[39m,
+    attendance: [33m50[39m,
+    total: [33m80[39m
+  },
+  {
+    studentId: [32m'cmnq74ink0001hrv254s9e0li'[39m,
+    username: [32m'Jamshid'[39m,
+    homework: [33m40[39m,
+    attendance: [33m50[39m,
+    total: [33m90[39m
+  }
+]
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 78ms[2m (next.js: 12ms, application-code: 67ms)[22m
+[?25h

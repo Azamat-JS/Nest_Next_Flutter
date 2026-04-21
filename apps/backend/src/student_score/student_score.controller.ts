@@ -49,6 +49,11 @@ export class StudentScoreController {
     );
   }
 
+  @Delete("delete/:studentId/:groupId")
+  async deleteStudent(@Param('studentId') studentId: string, @Param('groupId') groupId: string) {
+    return this.studentScoreRepo.deleteStudent(studentId, groupId);
+  }
+
   @Delete("delete/all")
   async deleteAll() {
     return this.studentScoreRepo.deleteMany();

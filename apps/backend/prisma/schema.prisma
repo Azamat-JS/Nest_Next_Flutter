@@ -86,13 +86,13 @@ model Groups {
 model ScoreEvent {
     id   String @id @default(cuid())
     studentId String
-    student Users @relation(fields: [studentId], references: [id])
+    student Users @relation(fields: [studentId], references: [id], onDelete: Cascade)
 
     type ScoreType
     value Int
 
     groupId String
-    group Groups @relation(fields: [groupId], references: [id])
+    group Groups @relation(fields: [groupId], references: [id], onDelete: Cascade)
     date DateTime
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
@@ -105,9 +105,9 @@ model StudentScore{
   studentId String
   groupId String
 
-  student Users @relation(fields: [studentId], references: [id])
+  student Users @relation(fields: [studentId], references: [id], onDelete: Cascade)
 
-  group Groups @relation(fields: [groupId], references: [id])
+  group Groups @relation(fields: [groupId], references: [id], onDelete: Cascade)
 
   total Int @default(0)
   homework Int @default(0)
