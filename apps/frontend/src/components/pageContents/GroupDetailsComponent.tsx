@@ -45,14 +45,17 @@ import { Button } from '../ui/button';
 type UpdateScorePayload = {
     studentId: string;
     groupId: string;
-    homeworkScore?: string;
-    attendanceScore?: string;
+    type: "HOMEWORK" | "ATTENDANCE";
+    date: string;
+    value: number;
 };
 
 type DeleteStudentPayload = {
     studentId: string;
     groupId: string;
 }
+
+const date = new Date().toISOString().split('T')[0];
 
 
 const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
@@ -79,13 +82,13 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
 
     const updateScoresMutation = useMutation({
         mutationFn: async (payload: UpdateScorePayload) => {
-            const { studentId, groupId, homeworkScore, attendanceScore } = payload;
-            return await axios.put(`${API}/student-score/update${studentId}/${groupId}`, { homeworkScore, attendanceScore }, { headers: { Authorization: `Bearer ${token}` } });
+            const { studentId, groupId, date, type, value } = payload;
+            return await axios.put(`${API}/student-score/update/${studentId}/${groupId}`, { date, type, value, homeworkScore: type === "HOMEWORK" ? value : undefined, attendanceScore: type === "ATTENDANCE" ? value : undefined }, { headers: { Authorization: `Bearer ${token}` } });
         },
         onSuccess: () => {
             toast.success('Scores updated successfully!');
             setOpenUpdate(false);
-            queryClient.invalidateQueries({
+            queryClient.refetchQueries({
                 queryKey: ['students', groupId],
                 exact: false,
             })
@@ -147,6 +150,7 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
                         <TableHead className="w-48 text-center font-bold text-lg">Name</TableHead>
                         <TableHead className="w-48 text-center font-bold text-lg">Homework</TableHead>
                         <TableHead className="w-48 text-center font-bold text-lg">Attendance</TableHead>
+                        <TableHead className="w-48 text-center font-bold text-lg">Date</TableHead>
                         <TableHead className="w-48 text-center font-bold text-lg">Total Score</TableHead>
                         <TableHead className="w-24 text-start font-bold text-lg">Actions</TableHead>
                     </TableRow>
@@ -159,6 +163,7 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
                             <TableCell className="text-center">{s.username}</TableCell>
                             <TableCell className="text-center">{score?.homework ?? 0}</TableCell>
                             <TableCell className="text-center">{score?.attendance ?? 0}</TableCell>
+                            <TableCell className="text-center">{score?.date ?? ""}</TableCell>
                             <TableCell className="text-center">{score?.total ?? 0}</TableCell>
                             <TableCell className="translate-x-5">
                                 <DropdownMenu>

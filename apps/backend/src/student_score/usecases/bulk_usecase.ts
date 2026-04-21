@@ -42,12 +42,14 @@ export class BulkAddScoreUseCase {
                 if (!studentGroup) {
                     throw new BadRequestException(`Student ${studentId} is not part of the group`);
                 }
-
+                const date = new Date();
+                const startOfDay = date.setHours(0, 0, 0, 0);
                 const scoreDto = {
                     studentId,
                     groupId,
                     scoreType,
                     score,
+                    date: new Date(startOfDay).toISOString(),
                 };
 
                 const addedScore = await this.studentScoreRepo.addScore(tx, scoreDto);

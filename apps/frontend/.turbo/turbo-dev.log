@@ -331,3 +331,43 @@ Import trace:
 [32m[1m✓[22m[39m Compiled in 36ms
 [32m[1m✓[22m[39m Compiled in 37ms
  GET /home [32m200[39m in 43ms[2m (next.js: 25ms, application-code: 18ms)[22m
+ GET /groups [32m200[39m in 20ms[2m (next.js: 4ms, application-code: 16ms)[22m
+[32m[1m✓[22m[39m Compiled in 182ms
+ GET /home [32m200[39m in 26ms[2m (next.js: 4ms, application-code: 22ms)[22m
+ GET /groups [32m200[39m in 30ms[2m (next.js: 9ms, application-code: 21ms)[22m
+ GET /profile [32m200[39m in 55ms[2m (next.js: 40ms, application-code: 15ms)[22m
+ GET /groups [32m200[39m in 9ms[2m (next.js: 1123µs, application-code: 8ms)[22m
+ GET /home [32m200[39m in 9ms[2m (next.js: 1697µs, application-code: 7ms)[22m
+ GET /profile [32m200[39m in 25ms[2m (next.js: 4ms, application-code: 20ms)[22m
+ GET /groups [32m200[39m in 27ms[2m (next.js: 4ms, application-code: 22ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+ GET /home [32m200[39m in 24ms[2m (next.js: 4ms, application-code: 20ms)[22m
+ GET /groups [32m200[39m in 25ms[2m (next.js: 3ms, application-code: 22ms)[22m
+ GET /profile [32m200[39m in 24ms[2m (next.js: 3ms, application-code: 21ms)[22m
+ GET /groups [32m200[39m in 26ms[2m (next.js: 4ms, application-code: 22ms)[22m
+ GET /home [32m200[39m in 23ms[2m (next.js: 4ms, application-code: 19ms)[22m
+ GET /groups [32m200[39m in 23ms[2m (next.js: 3ms, application-code: 20ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 16ms[2m (next.js: 5ms, application-code: 11ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+ GET /home [32m200[39m in 22ms[2m (next.js: 3ms, application-code: 19ms)[22m
+ GET /groups [32m200[39m in 24ms[2m (next.js: 3ms, application-code: 21ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 29ms[2m (next.js: 8ms, application-code: 20ms)[22m
+[32m[1m✓[22m[39m Compiled in 61ms
+[32m[1m✓[22m[39m Compiled in 202ms
+[32m[1m✓[22m[39m Compiled in 109ms
+[32m[1m✓[22m[39m Compiled in 19ms
+[32m[1m✓[22m[39m Compiled in 23ms
+[32m[1m✓[22m[39m Compiled in 19ms
+[32m[1m✓[22m[39m Compiled in 28ms
+[]
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 189ms[2m (next.js: 14ms, application-code: 175ms)[22m
+[32m[1m✓[22m[39m Compiled in 23ms
+[32m[1m✓[22m[39m Compiled in 29ms
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 26ms[2m (next.js: 6ms, application-code: 20ms)[22m
+[32m[1m✓[22m[39m Compiled in 27ms
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 26ms[2m (next.js: 10ms, application-code: 16ms)[22m
+[32m[1m✓[22m[39m Compiled in 63ms
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 22ms[2m (next.js: 5ms, application-code: 17ms)[22m
+[?25h

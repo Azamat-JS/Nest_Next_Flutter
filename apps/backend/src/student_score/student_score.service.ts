@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { ScoreDto } from './dto/score.dto';
+import { ScoreDto, UpdateScoreDto } from './dto/score.dto';
 import { Prisma } from '@prisma/client/scripts/default-index.js';
 import { ScoreType } from '@prisma/client';
 
@@ -17,60 +17,104 @@ export class StudentScoreRepository {
         })
     }
 
-    async getEventById(eventId: string) {
-        return this.prisma.scoreEvent.findUnique({
-            where: {
-                id: eventId,
-            }
-        })
-    }
-
     async addScore(tx: Prisma.TransactionClient, dto: ScoreDto) {
-        return tx.scoreEvent.create({
-            data: {
-                studentId: dto.studentId,
-                groupId: dto.groupId,
-                type: dto.scoreType,
-                value: dto.score,
-            }
-        })
+        const normalizedDate = new Date(dto.date);
+        normalizedDate.setHours(0, 0, 0, 0);
+        return tx.$transaction(async (tx) => {
+            await tx.scoreEvent.create({
+                data: {
+                    studentId: dto.studentId,
+                    groupId: dto.groupId,
+                    type: dto.scoreType,
+                    value: dto.score,
+                    date: normalizedDate.toISOString(),
+                },
+            });
+
+            await tx.studentScore.upsert({
+                where: {
+                    studentId_groupId: {
+                        studentId: dto.studentId,
+                        groupId: dto.groupId,
+                    },
+                },
+                update: {
+                    total: { increment: dto.score },
+                    homework:
+                        dto.scoreType === "HOMEWORK"
+                            ? { increment: dto.score }
+                            : undefined,
+                    attendance:
+                        dto.scoreType === "ATTENDANCE"
+                            ? { increment: dto.score }
+                            : undefined,
+                },
+                create: {
+                    studentId: dto.studentId,
+                    groupId: dto.groupId,
+                    total: dto.score,
+                    homework: dto.scoreType === "HOMEWORK" ? dto.score : 0,
+                    attendance: dto.scoreType === "ATTENDANCE" ? dto.score : 0,
+                },
+            });
+        });
     }
 
-    async updateTotalScore(tx: Prisma.TransactionClient, dto: ScoreDto, diff?: number) {
-        return tx.studentScore.upsert({
+    async updateTotalScore(tx: Prisma.TransactionClient, dto: ScoreDto) {
+
+        return tx.studentScore.update({
             where: {
                 studentId_groupId: {
                     studentId: dto.studentId,
                     groupId: dto.groupId,
                 }
             },
-            update: {
-                total: { increment: diff ?? dto.score },
-                homework: dto.scoreType === "HOMEWORK" ? { increment: diff ?? dto.score } : undefined,
-                attendance: dto.scoreType === "ATTENDANCE" ? { increment: diff ?? dto.score } : undefined,
-            },
-            create: {
-                studentId: dto.studentId,
-                groupId: dto.groupId,
-                total: dto.score,
+            data: {
+                total: { increment: dto.score },
+                homework: dto.scoreType === "HOMEWORK" ? {
+                    increment: dto.score
+                } : undefined,
+                attendance: dto.scoreType === "ATTENDANCE" ? {
+                    increment: dto.score
+                } : undefined,
             }
         })
     }
 
-    async updateEvent(tx: Prisma.TransactionClient, dto: ScoreDto, eventId: string) {
-        return tx.scoreEvent.update({
-            where: { id: eventId },
-            data: { value: dto.score },
+    async updateEvent(tx: Prisma.TransactionClient, dto: UpdateScoreDto, studentId: string, groupId: string, newValue: number) {
+        return tx.scoreEvent.upsert({
+            where: {
+                studentId_groupId_date_type: {
+                    studentId,
+                    groupId,
+                    date: dto.date,
+                    type: dto.type,
+                }
+            },
+            create: {
+                studentId,
+                groupId,
+                date: dto.date,
+                value: newValue,
+                type: dto.type,
+            },
+            update: {
+                value: newValue,
+            }
         });
     }
 
-    async findScoreByTypeAndStudentAndGroup(studentId: string, groupId: string, scoreType: ScoreType) {
+    async findScoreEvent(studentId: string, groupId: string, scoreType: ScoreType, date: string) {
         return this.prisma.scoreEvent.findFirst({
             where: {
+
                 studentId,
                 groupId,
                 type: scoreType,
-            }
+                date,
+
+            },
+            select: { value: true },
         })
     }
 
@@ -129,6 +173,7 @@ export class StudentScoreRepository {
                 select: {
                     type: true,
                     value: true,
+                    date: true,
                 }
             }),
         ]);
@@ -184,6 +229,7 @@ export class StudentScoreRepository {
             select: {
                 id: true,
                 username: true,
+                date: true,
             },
         });
 
@@ -201,6 +247,7 @@ export class StudentScoreRepository {
                 homework: number;
                 attendance: number;
                 total: number;
+                date: string;
             }
         >();
 
@@ -215,6 +262,7 @@ export class StudentScoreRepository {
                     homework: 0,
                     attendance: 0,
                     total: 0,
+                    date: "",
                 });
             }
 

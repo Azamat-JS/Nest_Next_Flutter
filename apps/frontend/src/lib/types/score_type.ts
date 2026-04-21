@@ -5,6 +5,7 @@ export type StudentScoreRow = {
     username: string;
     homework: number;
     attendance: number;
+    date: string;
     total: number;
 }
 
