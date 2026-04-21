@@ -225,7 +225,6 @@ export class StudentScoreRepository {
             select: {
                 id: true,
                 username: true,
-                date: true,
             },
         });
 
@@ -243,7 +242,6 @@ export class StudentScoreRepository {
                 homework: number;
                 attendance: number;
                 total: number;
-                date: string;
             }
         >();
 
@@ -258,7 +256,6 @@ export class StudentScoreRepository {
                     homework: 0,
                     attendance: 0,
                     total: 0,
-                    date: "",
                 });
             }
 
