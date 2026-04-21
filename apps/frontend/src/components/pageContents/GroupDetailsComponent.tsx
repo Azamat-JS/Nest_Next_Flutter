@@ -14,13 +14,33 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-import { Menu } from 'lucide-react';
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuGroup,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { Menu, Edit, Trash } from 'lucide-react';
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import { Badge } from '../ui/badge';
 import { TokenPayload } from '@/lib/types/token_payload';
 import AddScoreDrawer from '../AddScoreDrawer';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { StudentScoreRow } from '@/lib/types/score_type';
 import { useQueryClient, useMutation } from "@tanstack/react-query";
+import {
+    Dialog,
+    DialogClose,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+} from "@/components/ui/dialog"
+import { Field, FieldGroup, FieldLabel } from "@/components/ui/field"
+import { Button } from '../ui/button';
 
 type UpdateScorePayload = {
     studentId: string;
@@ -41,6 +61,8 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
     const [openUpdate, setOpenUpdate] = useState(false);
     const [openDelete, setOpenDelete] = useState(false);
     const [selectedStudent, setSelectedStudent] = useState<TokenPayload | null>(null);
+    const [homeworkScore, setHomeworkScore] = useState<string>("");
+    const [attendanceScore, setAttendanceScore] = useState<string>("");
     const API = process.env.NEXT_PUBLIC_API_URL;
     const queryClient = useQueryClient();
 
@@ -138,7 +160,23 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
                             <TableCell className="text-center">{score?.homework ?? 0}</TableCell>
                             <TableCell className="text-center">{score?.attendance ?? 0}</TableCell>
                             <TableCell className="text-center">{score?.total ?? 0}</TableCell>
-                            <TableCell className=''><Menu className='h-5 w-5' /></TableCell>
+                            <TableCell className="translate-x-5">
+                                <DropdownMenu>
+                                    <DropdownMenuTrigger>
+                                        <Menu className="h-5 w-5" />
+                                    </DropdownMenuTrigger>
+                                    <DropdownMenuContent align="start">
+                                        <DropdownMenuGroup>
+                                            <DropdownMenuItem onClick={() => { setOpenUpdate(true); setSelectedStudent(s) }}>
+                                                <Edit /> Update
+                                            </DropdownMenuItem>
+                                            <DropdownMenuItem onClick={() => { setOpenDelete(true); setSelectedStudent(s) }} className="text-red-500">
+                                                <Trash /> Delete
+                                            </DropdownMenuItem>
+                                        </DropdownMenuGroup>
+                                    </DropdownMenuContent>
+                                </DropdownMenu>
+                            </TableCell>
                         </TableRow>)
                     })}
                 </TableBody>
@@ -154,6 +192,55 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
                     exact: false,
                 })} />
             </div>
+
+            {/* update user modal */}
+            <Dialog open={openUpdate} onOpenChange={setOpenUpdate}>
+                <DialogContent className="sm:max-w-sm">
+                    <DialogHeader>
+                        <DialogTitle>Edit Student Scores</DialogTitle>
+                        <DialogDescription>
+                            Make changes to the student's scores here. Click save when you&apos;re
+                            done.
+                        </DialogDescription>
+                    </DialogHeader>
+                    <FieldGroup>
+                        <Field>
+                            <Label htmlFor="homework-1">Homework Score</Label>
+                            <Input id="homework-1" name="homework" onChange={(e) => setHomeworkScore(e.target.value)} value={homeworkScore} />
+                        </Field>
+                        <Field>
+                            <Label htmlFor="attendance-1">Attendance Score</Label>
+                            <Input id="attendance-1" name="attendance" onChange={(e) => setAttendanceScore(e.target.value)} value={attendanceScore} />
+                        </Field>
+                    </FieldGroup>
+                    <DialogFooter>
+                        <DialogClose>
+                            Cancel
+                        </DialogClose>
+                        <Button type="submit" onClick={() => selectedStudent && updateScoresMutation.mutate({ studentId: selectedStudent?.id, groupId, homeworkScore: homeworkScore, attendanceScore: attendanceScore })}>Update</Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
+
+            {/* delete user modal */}
+            <Dialog open={openDelete} onOpenChange={setOpenDelete}>
+                <form>
+                    <DialogContent className="sm:max-w-sm">
+                        <DialogHeader>
+                            <DialogTitle>Delete profile</DialogTitle>
+                            <DialogDescription>
+                                Are you sure to delete this user?
+                            </DialogDescription>
+                        </DialogHeader>
+                        <DialogFooter>
+                            <DialogClose>
+                                Cancel
+                            </DialogClose>
+                            <Button type="submit" onClick={() => selectedStudent && deleteStudentMutation.mutate({ studentId: selectedStudent?.id, groupId })} variant="destructive">Delete</Button>
+                        </DialogFooter>
+                    </DialogContent>
+                </form>
+            </Dialog>
         </div>
     )
 }
