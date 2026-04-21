@@ -64,8 +64,6 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
     const [openUpdate, setOpenUpdate] = useState(false);
     const [openDelete, setOpenDelete] = useState(false);
     const [selectedStudent, setSelectedStudent] = useState<TokenPayload | null>(null);
-    const [homeworkScore, setHomeworkScore] = useState(0);
-    const [attendanceScore, setAttendanceScore] = useState(0);
     const [type, setType] = useState<"HOMEWORK" | "ATTENDANCE">("HOMEWORK");
     const [value, setValue] = useState<number>(0); ("HOMEWORK");
     const API = process.env.NEXT_PUBLIC_API_URL;
@@ -94,6 +92,8 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
                 queryKey: ['students', groupId],
                 exact: false,
             })
+            queryClient.invalidateQueries({ queryKey: ['group', groupId] });
+
         },
         onError: (error: any) => {
             toast.error(error.response?.data?.message ?? 'Something went wrong');
@@ -103,7 +103,7 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
     const deleteStudentMutation = useMutation({
         mutationFn: async (payload: DeleteStudentPayload) => {
             const { studentId, groupId } = payload;
-            return await axios.delete(`${API}/student-score/${studentId}/${groupId}`, { headers: { Authorization: `Bearer ${token}` } });
+            return await axios.delete(`${API}/student-score/delete/${studentId}/${groupId}`, { headers: { Authorization: `Bearer ${token}` } });
         },
         onSuccess: () => {
             toast.success('Student deleted from this group!');
@@ -132,7 +132,6 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
     const students: TokenPayload[] = data?.students?.length > 0 ? data.students : [];
 
     const rows: StudentScoreRow[] = studentScores;
-    console.log(rows)
     const scoreMap = new Map<string, StudentScoreRow>();
     studentScores.forEach((s: StudentScoreRow) => {
         scoreMap.set(s.studentId, s);
@@ -241,9 +240,9 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
                 <form>
                     <DialogContent className="sm:max-w-sm">
                         <DialogHeader>
-                            <DialogTitle>Delete profile</DialogTitle>
+                            <DialogTitle>Delete Student From Group</DialogTitle>
                             <DialogDescription>
-                                Are you sure to delete this user?
+                                Are you sure to delete this student from this group?
                             </DialogDescription>
                         </DialogHeader>
                         <DialogFooter>
