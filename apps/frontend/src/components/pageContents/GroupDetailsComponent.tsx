@@ -190,7 +190,7 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
                             <TableCell className="text-center">{s.username}</TableCell>
                             <TableCell className="text-center">{score?.homework ?? 0}</TableCell>
                             <TableCell className="text-center">{score?.attendance ?? 0}</TableCell>
-                            <TableCell className="text-center">{score?.date ?? ""}</TableCell>
+                            <TableCell className="text-center"> {new Date().toISOString().split("T")[0]}</TableCell>
                             <TableCell className="text-center">{score?.total ?? 0}</TableCell>
                             <TableCell className="translate-x-5">
                                 <DropdownMenu>
