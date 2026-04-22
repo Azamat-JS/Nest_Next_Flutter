@@ -158,7 +158,6 @@ const GroupComponent = () => {
         }
     }
 
-
     useEffect(() => {
         if (selectedGroup && students.length > 0) {
             setSelectedStudentIds(

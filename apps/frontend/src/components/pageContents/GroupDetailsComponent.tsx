@@ -113,7 +113,7 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
             toast.success('Students added successfully!');
             setOpenAddStudents(false);
             queryClient.invalidateQueries({
-                queryKey: ['groups'],
+                queryKey: ['group', groupId],
             })
         },
         onError: (error: any) => {
@@ -131,7 +131,6 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
             setOpenDelete(false);
             queryClient.invalidateQueries({
                 queryKey: ['group', groupId],
-                exact: false,
             })
         },
         onError: (error: any) => {
