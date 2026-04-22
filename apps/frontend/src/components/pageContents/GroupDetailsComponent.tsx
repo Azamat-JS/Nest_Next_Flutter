@@ -219,7 +219,7 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
                     </TableRow>
                 </TableFooter>
             </Table>
-            <div className='flex justify-end mr-5 mt-4'>
+            <div className='flex gap-3 justify-end mr-5 mt-4'>
                 <AddScoreDrawer openCreate={openCreate} setOpenCreate={setOpenCreate} students={groupStudents} groupId={groupId} onScoreAdded={() => queryClient.invalidateQueries({
                     queryKey: ['students', groupId],
                     exact: false,
@@ -229,7 +229,7 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
                     setOpenAddStudents(true); queryClient.invalidateQueries({
                         queryKey: ['students'],
                     })
-                }}>
+                }} className="text-md">
                     Add Students
                 </Button>
             </div>

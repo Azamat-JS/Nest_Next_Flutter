@@ -68,7 +68,7 @@ const AddScoreDrawer = ({ openCreate, setOpenCreate, students, groupId, onScoreA
     return (
         <Drawer direction="right" open={openCreate} onOpenChange={setOpenCreate}>
             <DrawerTrigger asChild>
-                <Button variant="default" className="text-md">Add Score</Button>
+                <Button className="text-md">Add Score</Button>
             </DrawerTrigger>
             <DrawerContent>
                 <DrawerHeader>
