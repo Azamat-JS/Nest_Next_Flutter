@@ -17,9 +17,10 @@ export class StudentScoreController {
   }
 
   @Get("today/students/:groupId")
-  async findTodayScore(@Param('groupId') groupId: string, @Param('studentId') studentId: string) {
-    return this.studentScoreRepo.findTodayScore(studentId, groupId);
+  async getTodayStudentsScore(@Param('groupId') groupId: string) {
+    return this.studentScoreRepo.getTodayStudentsScoreByGroup(groupId);
   }
+
 
   // @Get("group/scores/:groupId")
   // async getTotalScore(@Param('groupId') groupId: string) {

@@ -122,7 +122,7 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
     const { data: studentScores } = useSuspenseQuery({
         queryKey: ["students", groupId],
         queryFn: async () => {
-            const res = await axios.get(`${API}/student-score/all/students/${groupId}`, { headers: { Authorization: `Bearer ${token}` } });
+            const res = await axios.get(`${API}/student-score/today/students/${groupId}`, { headers: { Authorization: `Bearer ${token}` } });
             return res.data;
         },
     })

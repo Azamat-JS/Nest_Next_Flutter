@@ -126,52 +126,76 @@ export class StudentScoreRepository {
     //     });
     // }
 
-    async findTodayScore(studentId: string, groupId: string) {
+    async getTodayStudentsScoreByGroup(groupId: string) {
         const startOfDay = new Date();
         startOfDay.setHours(0, 0, 0, 0);
 
         const endOfDay = new Date();
         endOfDay.setHours(23, 59, 59, 999);
 
-
-        const [total, todayEvents] = await Promise.all([
-            this.prisma.studentScore.findUnique({
-                where: {
-                    studentId_groupId: {
-                        studentId,
-                        groupId,
+        const group = await this.prisma.groups.findUnique({
+            where: { id: groupId },
+            select: {
+                students: {
+                    select: {
+                        student: {
+                            select: {
+                                id: true,
+                                username: true,
+                            },
+                        },
                     },
                 },
-                select: {
-                    total: true,
-                }
-            }),
-
-            this.prisma.scoreEvent.findMany({
-                where: {
-                    studentId,
-                    groupId,
-                    createdAt: {
-                        gte: startOfDay,
-                        lte: endOfDay,
-                    }
-                },
-                select: {
-                    type: true,
-                    value: true,
-                    date: true,
-                }
-            }),
-        ]);
-
-        return {
-            total: total?.total || 0,
-            today: {
-                homework: todayEvents.filter(e => e.type === "HOMEWORK").reduce((acc, curr) => acc + curr.value, 0),
-                attendance: todayEvents.filter(e => e.type === "ATTENDANCE").reduce((acc, curr) => acc + curr.value, 0),
             },
+        });
+
+        if (!group) {
+            throw new Error(`Group not found: ${groupId}`);
         }
+
+        const students = group.students?.map(s => s.student) ?? [];
+
+        const grouped = await this.prisma.scoreEvent.groupBy({
+            by: ['studentId', 'type'],
+            where: {
+                groupId,
+                createdAt: {
+                    gte: startOfDay,
+                    lte: endOfDay,
+                },
+            },
+            _sum: {
+                value: true,
+            },
+        });
+
+        const resultMap = new Map<string, any>();
+
+        for (const s of students) {
+            resultMap.set(s.id, {
+                studentId: s.id,
+                username: s.username,
+                homework: 0,
+                attendance: 0,
+                total: 0,
+            });
+        }
+
+        for (const g of grouped) {
+            const entry = resultMap.get(g.studentId);
+            if (!entry) continue;
+
+            const value = g._sum.value ?? 0;
+
+            if (g.type === 'HOMEWORK') entry.homework = value;
+            if (g.type === 'ATTENDANCE') entry.attendance = value;
+
+            entry.total += value;
+        }
+
+        return Array.from(resultMap.values());
     }
+
     async findTodayScoreWithType(
         studentId: string,
         groupId: string,
