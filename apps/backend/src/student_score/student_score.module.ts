@@ -5,7 +5,7 @@ import { ConfigifyModule } from '@itgorillaz/configify';
 import { JwtModule } from '@nestjs/jwt';
 import { AppConfig } from 'src/lib/config';
 import { AddScoreUseCase, BulkAddScoreUseCase, UpdateScoreUseCase } from './usecases';
-import { RemoveStudentFromGroupUseCase } from './usecases/remove_student_from_group_usecase';
+
 
 @Module({
   imports: [
@@ -19,6 +19,6 @@ import { RemoveStudentFromGroupUseCase } from './usecases/remove_student_from_gr
     }),
   ],
   controllers: [StudentScoreController],
-  providers: [StudentScoreRepository, AddScoreUseCase, UpdateScoreUseCase, BulkAddScoreUseCase, RemoveStudentFromGroupUseCase],
+  providers: [StudentScoreRepository, AddScoreUseCase, UpdateScoreUseCase, BulkAddScoreUseCase],
 })
 export class StudentScoreModule { }

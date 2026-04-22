@@ -4,7 +4,8 @@ import { GroupController } from './group.controller';
 import { ConfigifyModule } from '@itgorillaz/configify';
 import { JwtModule } from '@nestjs/jwt';
 import { AppConfig } from 'src/lib/config';
-import { CreateGroupUseCase, UpdateGroupUseCase } from './usecases';
+import { AddStudentUseCase, CreateGroupUseCase, RemoveStudentFromGroupUseCase, UpdateGroupUseCase } from './usecases';
+import { StudentScoreRepository } from 'src/student_score/student_score.service';
 
 @Module({
   imports: [
@@ -18,6 +19,6 @@ import { CreateGroupUseCase, UpdateGroupUseCase } from './usecases';
     }),
   ],
   controllers: [GroupController],
-  providers: [GroupRepository, CreateGroupUseCase, UpdateGroupUseCase],
+  providers: [GroupRepository, CreateGroupUseCase, UpdateGroupUseCase, RemoveStudentFromGroupUseCase, StudentScoreRepository, AddStudentUseCase],
 })
 export class GroupModule { }
