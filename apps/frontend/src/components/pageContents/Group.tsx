@@ -83,7 +83,7 @@ const GroupComponent = () => {
 
 
     const { data } = useSuspenseQuery({
-        queryKey: ['groups', page, limit, token],
+        queryKey: ['groups', page, limit],
         queryFn: async () => {
             const res = await axios.get(`${API}/group/all?page=${page}&limit=${limit}`, { headers: { Authorization: `Bearer ${token}` } })
             return res.data
