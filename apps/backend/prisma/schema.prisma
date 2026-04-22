@@ -56,7 +56,7 @@ model StudentGroup {
   student   Users  @relation(fields: [studentId], references: [id])
 
   groupId String
-  group   Groups @relation(fields: [groupId], references: [id])
+  group   Groups @relation(fields: [groupId], references: [id], onDelete: Cascade)
 
   joinedAt DateTime @default(now())
 
