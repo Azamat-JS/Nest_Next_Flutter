@@ -1,0 +1,153 @@
+
+> frontend@0.1.0 dev /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend
+> next dev -p 4000
+
+[1m[38;2;173;127;168m▲ Next.js 16.2.1[39m[22m (Turbopack)
+- Local:         http://localhost:4000
+- Network:       http://192.168.13.93:4000
+- Environments: .env.local
+[32m[1m✓[22m[39m Ready in 477ms
+[33m[1m⚠[22m[39m Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /Users/azamatabdullayev/Desktop/full-stack-turbo/pnpm-workspace.yaml as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend/pnpm-workspace.yaml
+
+
+ GET / [32m200[39m in 320ms[2m (next.js: 141ms, application-code: 178ms)[22m
+ GET /groups [32m200[39m in 33ms[2m (next.js: 18ms, application-code: 15ms)[22m
+[32m[1m✓[22m[39m Compiled in 182ms
+[32m[1m✓[22m[39m Compiled in 299ms
+ GET /groups [32m200[39m in 108ms[2m (next.js: 55ms, application-code: 52ms)[22m
+ GET /groups [32m200[39m in 13ms[2m (next.js: 1704µs, application-code: 11ms)[22m
+[32m[1m✓[22m[39m Compiled in 19ms
+[32m[1m✓[22m[39m Compiled in 18ms
+[32m[1m✓[22m[39m Compiled in 21ms
+[32m[1m✓[22m[39m Compiled in 213ms
+ GET /groups [32m200[39m in 279ms[2m (next.js: 107ms, application-code: 171ms)[22m
+ GET /groups [32m200[39m in 137ms[2m (next.js: 3ms, application-code: 134ms)[22m
+ GET /groups [32m200[39m in 108ms[2m (next.js: 12ms, application-code: 95ms)[22m
+[32m[1m✓[22m[39m Compiled in 64ms
+[32m[1m✓[22m[39m Compiled in 62ms
+[32m[1m✓[22m[39m Compiled in 46ms
+[32m[1m✓[22m[39m Compiled in 226ms
+ GET /groups [32m200[39m in 92ms[2m (next.js: 49ms, application-code: 44ms)[22m
+ GET /groups [32m200[39m in 13ms[2m (next.js: 1344µs, application-code: 12ms)[22m
+[32m[1m✓[22m[39m Compiled in 19ms
+[36m[browser][39m ./apps/frontend/src/components/pageContents/Group.tsx:110:5
+Expression expected
+  108 |     const { data: groupData, isLoading: groupLoading } = 
+  109 |
+> 110 |     const students: TokenPayload[] = studentData ?? [];
+      |     ^^^^^
+  111 |     const teachers: TokenPayload[] = teacherData ?? [];
+  112 |
+  113 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./apps/frontend/src/components/pageContents/Group.tsx
+    ./apps/frontend/src/app/(pages)/groups/page.tsx 
+[36m[browser][39m ./apps/frontend/src/components/pageContents/Group.tsx:110:5
+Expression expected
+  108 |     const { data: groupData, isLoading: groupLoading } = 
+  109 |
+> 110 |     const students: TokenPayload[] = studentData ?? [];
+      |     ^^^^^
+  111 |     const teachers: TokenPayload[] = teacherData ?? [];
+  112 |
+  113 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./apps/frontend/src/components/pageContents/Group.tsx
+    ./apps/frontend/src/app/(pages)/groups/page.tsx 
+[32m[1m✓[22m[39m Compiled in 30ms
+[32m[1m✓[22m[39m Compiled in 20ms
+[32m[1m✓[22m[39m Compiled in 18ms
+[32m[1m✓[22m[39m Compiled in 29ms
+ GET /groups [32m200[39m in 19ms[2m (next.js: 4ms, application-code: 14ms)[22m
+[36m[browser][39m ./apps/frontend/src/components/pageContents/Group.tsx:198:5
+Expression expected
+  196 |
+  197 |
+> 198 |     return (
+      |     ^^^^^^
+  199 |         <div className="mt-5">
+  200 |             <Table className="mt-5">
+  201 |                 <TableCaption>A list of all groups.</TableCaption>
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./apps/frontend/src/components/pageContents/Group.tsx
+    ./apps/frontend/src/app/(pages)/groups/page.tsx 
+ GET /groups/cmnq4oz3e0005xkv21be71kiu [32m200[39m in 285ms[2m (next.js: 267ms, application-code: 18ms)[22m
+ GET /groups [32m200[39m in 25ms[2m (next.js: 4ms, application-code: 20ms)[22m
+ GET /groups/cmnrc2lv50001kvv2fshteyu9 [32m200[39m in 29ms[2m (next.js: 6ms, application-code: 22ms)[22m
+ GET /groups [32m200[39m in 26ms[2m (next.js: 4ms, application-code: 21ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 29ms[2m (next.js: 7ms, application-code: 22ms)[22m
+ GET /groups [32m200[39m in 220ms[2m (next.js: 7ms, application-code: 213ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 30ms[2m (next.js: 9ms, application-code: 21ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[32m[1m✓[22m[39m Compiled in 22ms
+[32m[1m✓[22m[39m Compiled in 18ms
+[32m[1m✓[22m[39m Compiled in 19ms
+[32m[1m✓[22m[39m Compiled in 21ms
+[32m[1m✓[22m[39m Compiled in 20ms
+[32m[1m✓[22m[39m Compiled in 20ms
+[32m[1m✓[22m[39m Compiled in 26ms
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 18ms[2m (next.js: 3ms, application-code: 15ms)[22m
+[32m[1m✓[22m[39m Compiled in 22ms
+[32m[1m✓[22m[39m Compiled in 18ms
+[32m[1m✓[22m[39m Compiled in 22ms
+[32m[1m✓[22m[39m Compiled in 19ms
+[32m[1m✓[22m[39m Compiled in 22ms
+[36m[browser][39m ./apps/frontend/src/components/pageContents/Group.tsx:188:13
+Expression expected
+  186 |
+  187 |     useEffect(() => {
+> 188 |         if ()
+      |             ^
+  189 |     })
+  190 |
+  191 |     const groups: GroupType[] = data?.data ?? []
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./apps/frontend/src/components/pageContents/Group.tsx
+    ./apps/frontend/src/app/(pages)/groups/page.tsx 
+ GET /groups [32m200[39m in 32ms[2m (next.js: 11ms, application-code: 21ms)[22m
+ GET /groups [32m200[39m in 89ms[2m (next.js: 3ms, application-code: 86ms)[22m
+ GET /groups [32m200[39m in 65ms[2m (next.js: 1790µs, application-code: 64ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 28ms[2m (next.js: 8ms, application-code: 20ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 104ms[2m (next.js: 7ms, application-code: 96ms)[22m
+ GET /groups [32m200[39m in 18ms[2m (next.js: 3ms, application-code: 16ms)[22m
+ GET /groups [32m200[39m in 62ms[2m (next.js: 1725µs, application-code: 61ms)[22m
+[31m[1m⨯[22m[39m ./apps/frontend/src/app/(pages)/groups/page.tsx:2:1
+[1m[31mModule not found[39m[22m: Can't resolve [32m'@/components/ui/suspence'[39m
+  [90m1 |[0m [36mimport[0m [33mGroupComponent[0m [36mfrom[0m [32m"@/components/pageContents/Group"[0m
+[31m[1m>[0m [90m2 |[0m [36mimport[0m { [33mSuspence[0m } [36mfrom[0m [32m"@/components/ui/suspence"[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m3 |[0m
+  [90m4 |[0m [36mconst[0m [33mGroupsPage[0m = [36masync[0m () => {
+  [90m5 |[0m     [36mreturn[0m (
+
+Import map: aliased to relative './src/components/ui/suspence' inside of [project]/apps/frontend
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[31m[1m⨯[22m[39m ./apps/frontend/src/app/(pages)/groups/page.tsx:2:1
+[1m[31mModule not found[39m[22m: Can't resolve [32m'@/components/ui/suspence'[39m
+  [90m1 |[0m [36mimport[0m [33mGroupComponent[0m [36mfrom[0m [32m"@/components/pageCo

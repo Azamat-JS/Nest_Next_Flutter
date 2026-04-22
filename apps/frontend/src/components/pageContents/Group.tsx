@@ -76,12 +76,13 @@ const GroupComponent = () => {
     const [openAddStudents, setOpenAddStudents] = useState(false);
     const [openDelete, setOpenDelete] = useState(false);
     const [openCreate, setOpenCreate] = useState(false);
+    const [newStudentIds, setNewStudentIds] = useState<string[]>([]);
     const [selectedGroup, setSelectedGroup] = useState<GroupType | null>(null);
     const [selectedStudentIds, setSelectedStudentIds] = useState<string[]>([]);
     const queryClient = useQueryClient();
 
 
-    const { data, isLoading } = useSuspenseQuery({
+    const { data } = useSuspenseQuery({
         queryKey: ['groups', page, limit, token],
         queryFn: async () => {
             const res = await axios.get(`${API}/group/all?page=${page}&limit=${limit}`, { headers: { Authorization: `Bearer ${token}` } })
@@ -90,7 +91,7 @@ const GroupComponent = () => {
         staleTime: 1000 * 60 * 5,
     })
 
-    const { data: teacherData, isLoading: teacherLoading } = useSuspenseQuery({
+    const { data: teacherData } = useSuspenseQuery({
         queryKey: ['teachers'],
         queryFn: async () => {
             const res = await axios.get(`${API}/users/teachers`, { headers: { Authorization: `Bearer ${token}` } });
@@ -99,7 +100,7 @@ const GroupComponent = () => {
         staleTime: 1000 * 60 * 5,
     })
 
-    const { data: studentData, isLoading: studentLoading } = useSuspenseQuery({
+    const { data: studentData } = useSuspenseQuery({
         queryKey: ['students'],
         queryFn: async () => {
             const res = await axios.get(`${API}/users/students`, { headers: { Authorization: `Bearer ${token}` } });
@@ -156,13 +157,6 @@ const GroupComponent = () => {
         }
     };
 
-    const handleAddStudents = async (groupId: string, studentIds: string[]) => {
-        try {
-        } catch (error: any) {
-            toast.error(error.response?.data?.message ?? 'Something went wrong');
-        }
-    }
-
     const handleDeleteGroup = async (groupId: string) => {
         try {
             const res = await axios.delete(`${API}/group/${groupId}`, { headers: { Authorization: `Bearer ${token}` } })
@@ -190,14 +184,24 @@ const GroupComponent = () => {
         }
     }, [selectedGroup, students]);
 
+    useEffect(() => {
+        if (openAddStudents) {
+            setNewStudentIds([]);
+        }
+    }, [openAddStudents])
+
     const groups: GroupType[] = data?.data ?? []
     const meta: PaginationType = data?.meta ?? {}
     const lastPage = meta?.last_page ?? 1;
 
-    if (isLoading || teacherLoading || studentLoading) {
-        return <div>Loading...</div>
-    }
 
+    const existingStudents = new Set(
+        selectedGroup?.students?.map((s) => s.id) ?? []
+    );
+
+    const availableStudents = students.filter(
+        (s) => !existingStudents.has(s.id)
+    )
 
     return (
         <div className="mt-5">
@@ -383,33 +387,32 @@ const GroupComponent = () => {
                         <Field>
                             <Label>Students</Label>
                             <div className="max-h-48 overflow-y-auto border rounded-md p-3 space-y-2">
-                                {students.map((student, idx) => {
-                                    const checked = selectedStudentIds.includes(student.id);
+                                {availableStudents.map((student, idx) => {
+                                    const checked = newStudentIds.includes(student.id);
 
                                     return (
-
                                         <label
                                             key={student.id ?? `student-${idx}`}
                                             className="flex items-center gap-2 cursor-pointer"
                                         >
                                             <input
+                                                disabled={existingStudents.has(student.id)}
                                                 type="checkbox"
                                                 checked={checked}
                                                 onChange={(e) => {
                                                     if (!student.id) return;
                                                     if (e.target.checked) {
-                                                        setSelectedStudentIds((prev) => [
+                                                        setNewStudentIds((prev) => [
                                                             ...prev,
                                                             student.id,
                                                         ]);
                                                     } else {
-                                                        setSelectedStudentIds((prev) =>
+                                                        setNewStudentIds((prev) =>
                                                             prev.filter((id) => id !== student.id)
                                                         );
                                                     }
                                                 }}
                                             />
-
                                             <span>{student.username}</span>
                                         </label>
                                     );
@@ -421,7 +424,7 @@ const GroupComponent = () => {
                         <DialogClose>
                             Cancel
                         </DialogClose>
-                        <Button type="submit" onClick={() => selectedGroup && handleUpdateGroup(selectedGroup)}>Save</Button>
+                        <Button type="submit" onClick={() => selectedGroup && addStudentMutation.mutate({ groupId: selectedGroup.id, studentIds: newStudentIds })}>Save</Button>
                     </DialogFooter>
                 </DialogContent>
             </Dialog>
