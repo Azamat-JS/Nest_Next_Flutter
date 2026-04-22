@@ -16,4 +16,7 @@ export type PaginationType = {
     limit: number;
 }
 
-
+export type AddStudentPayload = {
+    groupId: string;
+    studentIds: string[];
+}

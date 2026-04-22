@@ -825,4 +825,150 @@ Request failed with status code 500[39m
     [[32mSymbol(corked)[39m]: [33m0[39m,
     [[32mSymbol(kOutHeaders)[39m]: [Object: null prototype] {
       accept: [36m[Array][39m,
-      authorization: [36m[Array]
+      authorization: [36m[Array][39m,
+      [32m'user-agent'[39m: [36m[Array][39m,
+      [32m'accept-encoding'[39m: [36m[Array][39m,
+      host: [36m[Array][39m
+    },
+    [[32mSymbol(errored)[39m]: [1mnull[22m,
+    [[32mSymbol(kHighWaterMark)[39m]: [33m16384[39m,
+    [[32mSymbol(kRejectNonStandardBodyWrites)[39m]: [33mfalse[39m,
+    [[32mSymbol(kUniqueHeaders)[39m]: [1mnull[22m
+  },
+  response: {
+    status: [33m500[39m,
+    statusText: [32m'Internal Server Error'[39m,
+    headers: Object [AxiosHeaders] {
+      [32m'x-powered-by'[39m: [32m'Express'[39m,
+      [32m'access-control-allow-origin'[39m: [32m'*'[39m,
+      [32m'content-type'[39m: [32m'application/json; charset=utf-8'[39m,
+      [32m'content-length'[39m: [32m'52'[39m,
+      etag: [32m'W/"34-rlKccw1E+/fV8niQk4oFitDfPro"'[39m,
+      date: [32m'Wed, 22 Apr 2026 11:19:07 GMT'[39m,
+      connection: [32m'keep-alive'[39m,
+      [32m'keep-alive'[39m: [32m'timeout=5'[39m
+    },
+    config: {
+      transitional: [36m[Object][39m,
+      adapter: [36m[Array][39m,
+      transformRequest: [36m[Array][39m,
+      transformResponse: [36m[Array][39m,
+      timeout: [33m0[39m,
+      xsrfCookieName: [32m'XSRF-TOKEN'[39m,
+      xsrfHeaderName: [32m'X-XSRF-TOKEN'[39m,
+      maxContentLength: [33m-1[39m,
+      maxBodyLength: [33m-1[39m,
+      env: [36m[Object][39m,
+      validateStatus: [36m[Function: validateStatus][39m,
+      headers: [36m[Object [AxiosHeaders]][39m,
+      method: [32m'get'[39m,
+      url: [32m'http://localhost:3002/student-score/today/students/cmnq4bbkf0000xkv2o72hfh9z'[39m,
+      allowAbsoluteUrls: [33mtrue[39m,
+      data: [90mundefined[39m
+    },
+    request: [36m<ref *1>[39m ClientRequest {
+      _events: [36m[Object: null prototype][39m,
+      _eventsCount: [33m7[39m,
+      _maxListeners: [90mundefined[39m,
+      outputData: [],
+      outputSize: [33m0[39m,
+      writable: [33mtrue[39m,
+      destroyed: [33mtrue[39m,
+      _last: [33mtrue[39m,
+      chunkedEncoding: [33mfalse[39m,
+      shouldKeepAlive: [33mtrue[39m,
+      maxRequestsOnConnectionReached: [33mfalse[39m,
+      _defaultKeepAlive: [33mtrue[39m,
+      useChunkedEncodingByDefault: [33mfalse[39m,
+      sendDate: [33mfalse[39m,
+      _removedConnection: [33mfalse[39m,
+      _removedContLen: [33mfalse[39m,
+      _removedTE: [33mfalse[39m,
+      strictContentLength: [33mfalse[39m,
+      _contentLength: [33m0[39m,
+      _hasBody: [33mtrue[39m,
+      _trailer: [32m''[39m,
+      finished: [33mtrue[39m,
+      _headerSent: [33mtrue[39m,
+      _closed: [33mtrue[39m,
+      socket: [36m[Socket][39m,
+      _header: [32m'GET /student-score/today/students/cmnq4bbkf0000xkv2o72hfh9z HTTP/1.1\r\n'[39m +
+        [32m'Accept: application/json, text/plain, */*\r\n'[39m +
+        [32m'Authorization: Bearer null\r\n'[39m +
+        [32m'User-Agent: axios/1.14.0\r\n'[39m +
+        [32m'Accept-Encoding: gzip, compress, deflate, br\r\n'[39m +
+        [32m'Host: localhost:3002\r\n'[39m +
+        [32m'Connection: keep-alive\r\n'[39m +
+        [32m'\r\n'[39m,
+      _keepAliveTimeout: [33m0[39m,
+      _onPendingData: [36m[Function: nop][39m,
+      agent: [36m[Agent][39m,
+      socketPath: [90mundefined[39m,
+      method: [32m'GET'[39m,
+      maxHeaderSize: [90mundefined[39m,
+      insecureHTTPParser: [90mundefined[39m,
+      joinDuplicateHeaders: [90mundefined[39m,
+      path: [32m'/student-score/today/students/cmnq4bbkf0000xkv2o72hfh9z'[39m,
+      _ended: [33mtrue[39m,
+      res: [36m[IncomingMessage][39m,
+      aborted: [33mfalse[39m,
+      timeoutCb: [1mnull[22m,
+      upgradeOrConnect: [33mfalse[39m,
+      parser: [1mnull[22m,
+      maxHeadersCount: [1mnull[22m,
+      reusedSocket: [33mtrue[39m,
+      host: [32m'localhost'[39m,
+      protocol: [32m'http:'[39m,
+      _redirectable: [36m[Writable][39m,
+      [[32mSymbol(shapeMode)[39m]: [33mfalse[39m,
+      [[32mSymbol(kCapture)[39m]: [33mfalse[39m,
+      [[32mSymbol(kBytesWritten)[39m]: [33m0[39m,
+      [[32mSymbol(kNeedDrain)[39m]: [33mfalse[39m,
+      [[32mSymbol(corked)[39m]: [33m0[39m,
+      [[32mSymbol(kOutHeaders)[39m]: [36m[Object: null prototype][39m,
+      [[32mSymbol(errored)[39m]: [1mnull[22m,
+      [[32mSymbol(kHighWaterMark)[39m]: [33m16384[39m,
+      [[32mSymbol(kRejectNonStandardBodyWrites)[39m]: [33mfalse[39m,
+      [[32mSymbol(kUniqueHeaders)[39m]: [1mnull[22m
+    },
+    data: { statusCode: [33m500[39m, message: [32m'Internal server error'[39m }
+  },
+  status: [33m500[39m,
+  digest: [32m'2907941702'[39m
+}
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 192ms[2m (next.js: 9ms, application-code: 183ms)[22m
+[36m[browser][39m [31mUncaught Error: Switched to client rendering because the server rendering errored:
+
+Request failed with status code 500[39m
+[31m    at async queryFn (src/components/pageContents/GroupDetailsComponent.tsx:125:25)[39m
+  [90m123 |[0m         queryKey: [[32m"students"[0m, groupId],
+  [90m124 |[0m         queryFn: [36masync[0m () => {
+[31m[1m>[0m [90m125 |[0m             [36mconst[0m res = [36mawait[0m axios.get([32m`[0m${[33mAPI[0m[32m}/student-score/today/students/[0m${groupId[32m}`[0m, { headers: { [33mAuthorization[0m: [32m`Bearer [0m${token[32m}`[0m } });
+  [90m    |[0m                         [31m[1m^[0m
+  [90m126 |[0m             [36mreturn[0m res.data;
+  [90m127 |[0m         },
+  [90m128 |[0m     })
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 120ms[2m (next.js: 3ms, application-code: 117ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 87ms[2m (next.js: 10ms, application-code: 77ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 75ms[2m (next.js: 4ms, application-code: 71ms)[22m
+[32m[1m✓[22m[39m Compiled in 55ms
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 88ms[2m (next.js: 12ms, application-code: 76ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 81ms[2m (next.js: 6ms, application-code: 75ms)[22m
+[32m[1m✓[22m[39m Compiled in 24ms
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 85ms[2m (next.js: 9ms, application-code: 77ms)[22m
+ GET /groups [32m200[39m in 28ms[2m (next.js: 6ms, application-code: 22ms)[22m
+ GET /groups [32m200[39m in 76ms[2m (next.js: 1562µs, application-code: 74ms)[22m
+[32m[1m✓[22m[39m Compiled in 23ms
+ GET /groups [32m200[39m in 102ms[2m (next.js: 8ms, application-code: 94ms)[22m
+ GET /groups [32m200[39m in 84ms[2m (next.js: 3ms, application-code: 81ms)[22m
+ GET /home [32m200[39m in 50ms[2m (next.js: 36ms, application-code: 14ms)[22m
+ GET /groups [32m200[39m in 17ms[2m (next.js: 4ms, application-code: 13ms)[22m
+[32m[1m✓[22m[39m Compiled in 22ms

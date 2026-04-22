@@ -34,7 +34,7 @@ import {
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { GroupType, PaginationType } from "@/lib/types/groups"
+import { AddStudentPayload, GroupType, PaginationType } from "@/lib/types/groups"
 import {
     Select,
     SelectContent,
@@ -55,14 +55,7 @@ import {
 import { TokenPayload } from "@/lib/types/token_payload"
 import { GroupDrawer } from "../Drawer"
 import { useRouter } from 'next/navigation';
-import { useMutation, useQuery, useQueryClient, useSuspenseQuery } from '@tanstack/react-query'
-
-type AddStudentPayload = {
-    groupId: string;
-    studentIds: string[];
-}
-
-
+import { useMutation, useQueryClient, useSuspenseQuery } from '@tanstack/react-query'
 
 const GroupComponent = () => {
     const router = useRouter();

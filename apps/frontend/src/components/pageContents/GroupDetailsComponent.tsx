@@ -1,6 +1,6 @@
 'use client'
 import { useAuthStore } from '@/lib/stores/authStore';
-import { GroupType } from '@/lib/types/groups';
+import { AddStudentPayload, GroupType } from '@/lib/types/groups';
 import axios from 'axios';
 import { useState } from 'react';
 import { toast } from 'sonner';
@@ -38,9 +38,10 @@ import {
     DialogHeader,
     DialogTitle,
 } from "@/components/ui/dialog"
-import { FieldGroup, } from "@/components/ui/field"
+import { Field, FieldGroup, } from "@/components/ui/field"
 import { Button } from '../ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
+import { Label } from '../ui/label';
 
 type UpdateScorePayload = {
     studentId: string;
@@ -63,14 +64,13 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
     const [openCreate, setOpenCreate] = useState(false);
     const [openUpdate, setOpenUpdate] = useState(false);
     const [openDelete, setOpenDelete] = useState(false);
+    const [openAddStudents, setOpenAddStudents] = useState(false);
+    const [newStudentIds, setNewStudentIds] = useState<string[]>([]);
     const [selectedStudent, setSelectedStudent] = useState<TokenPayload | null>(null);
     const [type, setType] = useState<"HOMEWORK" | "ATTENDANCE">("HOMEWORK");
     const [value, setValue] = useState<number>(0); ("HOMEWORK");
     const API = process.env.NEXT_PUBLIC_API_URL;
     const queryClient = useQueryClient();
-
-
-
 
     const { data } = useSuspenseQuery({
         queryKey: ["group", groupId],
@@ -94,6 +94,26 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
             })
             queryClient.invalidateQueries({ queryKey: ['group', groupId] });
 
+        },
+        onError: (error: any) => {
+            toast.error(error.response?.data?.message ?? 'Something went wrong');
+        }
+    })
+
+
+    const addStudentMutation = useMutation({
+        mutationFn: async (payload: AddStudentPayload) => {
+            const { groupId, studentIds } = payload;
+            const res = await axios.post(`${API}/group/${groupId}/add-students`, { studentIds }, { headers: { Authorization: `Bearer ${token}` } });
+            return res.data;
+        },
+        onSuccess: () => {
+            toast.success('Students added successfully!');
+            setOpenAddStudents(false);
+            queryClient.invalidateQueries({
+                queryKey: ['groups'],
+                exact: false,
+            })
         },
         onError: (error: any) => {
             toast.error(error.response?.data?.message ?? 'Something went wrong');
@@ -133,7 +153,15 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
     const scoreMap = new Map<string, StudentScoreRow>();
     studentScores.forEach((s: StudentScoreRow) => {
         scoreMap.set(s.studentId, s);
-    })
+    });
+
+    const existingStudents = new Set(
+        group?.students?.map((s) => s.id) ?? []
+    );
+
+    const availableStudents = students.filter(
+        (s) => !existingStudents.has(s.id)
+    )
 
     return (
         <div className='flex flex-col w-full'>
@@ -195,9 +223,13 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
                     queryKey: ['students', groupId],
                     exact: false,
                 })} />
+
+                <Button variant="default" onClick={() => setOpenAddStudents(true)}>
+                    Add Students
+                </Button>
             </div>
 
-            {/* update user modal */}
+            {/* update student scores modal */}
             <Dialog open={openUpdate} onOpenChange={setOpenUpdate}>
                 <DialogContent className="sm:max-w-sm">
                     <DialogHeader>
@@ -233,7 +265,63 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
                 </DialogContent>
             </Dialog>
 
-            {/* delete user modal */}
+            {/* Add students modal */}
+            <Dialog open={openAddStudents} onOpenChange={setOpenAddStudents}>
+                <DialogContent className="sm:max-w-sm">
+                    <DialogHeader>
+                        <DialogTitle>Add Students</DialogTitle>
+                        <DialogDescription>
+                            Add students to this group. Click save when you&apos;re
+                            done.
+                        </DialogDescription>
+                    </DialogHeader>
+                    <FieldGroup>
+                        <Field>
+                            <Label>Students</Label>
+                            <div className="max-h-48 overflow-y-auto border rounded-md p-3 space-y-2">
+                                {availableStudents.map((student, idx) => {
+                                    const checked = newStudentIds.includes(student.id);
+
+                                    return (
+                                        <label
+                                            key={student.id ?? `student-${idx}`}
+                                            className="flex items-center gap-2 cursor-pointer"
+                                        >
+                                            <input
+                                                disabled={existingStudents.has(student.id)}
+                                                type="checkbox"
+                                                checked={checked}
+                                                onChange={(e) => {
+                                                    if (!student.id) return;
+                                                    if (e.target.checked) {
+                                                        setNewStudentIds((prev) => [
+                                                            ...prev,
+                                                            student.id,
+                                                        ]);
+                                                    } else {
+                                                        setNewStudentIds((prev) =>
+                                                            prev.filter((id) => id !== student.id)
+                                                        );
+                                                    }
+                                                }}
+                                            />
+                                            <span>{student.username}</span>
+                                        </label>
+                                    );
+                                })}
+                            </div>
+                        </Field>
+                    </FieldGroup>
+                    <DialogFooter>
+                        <DialogClose>
+                            Cancel
+                        </DialogClose>
+                        <Button type="submit" onClick={() => group && addStudentMutation.mutate({ groupId: group.id, studentIds: newStudentIds })}>Save</Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
+
+            {/* delete student modal */}
             <Dialog open={openDelete} onOpenChange={setOpenDelete}>
                 <form>
                     <DialogContent className="sm:max-w-sm">
