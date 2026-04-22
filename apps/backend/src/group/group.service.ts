@@ -59,14 +59,17 @@ export class GroupRepository {
     ]);
 
     return {
-      data,
+      data: data.map(group => ({
+        ...group,
+        students: group.students.map(s => s.student)
+      })),
       meta: {
         total,
         page,
         last_page: Math.ceil(total / limit),
         limit,
       }
-    }
+    };
   }
 
   async findOne(id: string) {

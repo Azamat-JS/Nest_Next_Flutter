@@ -431,22 +431,20 @@ const GroupComponent = () => {
 
             {/* delete group modal */}
             <Dialog open={openDelete} onOpenChange={setOpenDelete}>
-                <form>
-                    <DialogContent className="sm:max-w-sm">
-                        <DialogHeader>
-                            <DialogTitle>Delete Group</DialogTitle>
-                            <DialogDescription>
-                                Are you sure to delete this group?
-                            </DialogDescription>
-                        </DialogHeader>
-                        <DialogFooter>
-                            <DialogClose >
-                                Cancel
-                            </DialogClose>
-                            <Button type="submit" onClick={() => selectedGroup && handleDeleteGroup(selectedGroup.id)} variant="destructive">Delete</Button>
-                        </DialogFooter>
-                    </DialogContent>
-                </form>
+                <DialogContent className="sm:max-w-sm">
+                    <DialogHeader>
+                        <DialogTitle>Delete Group</DialogTitle>
+                        <DialogDescription>
+                            Are you sure to delete this group?
+                        </DialogDescription>
+                    </DialogHeader>
+                    <DialogFooter>
+                        <DialogClose >
+                            Cancel
+                        </DialogClose>
+                        <Button type="button" onClick={() => selectedGroup && handleDeleteGroup(selectedGroup.id)} variant="destructive">Delete</Button>
+                    </DialogFooter>
+                </DialogContent>
             </Dialog>
             <div className="w-full flex justify-end p-5">
 
