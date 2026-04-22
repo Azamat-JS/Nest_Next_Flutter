@@ -127,7 +127,6 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
         },
     })
 
-
     const group: GroupType = data;
     const students: TokenPayload[] = data?.students?.length > 0 ? data.students : [];
 

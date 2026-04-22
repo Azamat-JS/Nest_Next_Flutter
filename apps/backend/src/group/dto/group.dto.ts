@@ -25,7 +25,9 @@ export class UpdateGroupDto {
     @IsOptional()
     @IsString()
     teacherId?: string;
+}
 
+export class AddStudentsDto {
     @IsOptional()
     @IsArray()
     @ArrayUnique()

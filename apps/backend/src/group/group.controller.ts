@@ -1,13 +1,15 @@
 import { Controller, Get, Post, Body, Param, Delete, Put, UseGuards, Query } from '@nestjs/common';
 import { GroupRepository } from './group.service';
-import { CreateGroupDto, PaginationDto, UpdateGroupDto } from './dto/group.dto';
+import { AddStudentsDto, CreateGroupDto, PaginationDto, UpdateGroupDto } from './dto/group.dto';
 import { JwtAuthGuard } from 'src/lib/guards/jwt.guard';
 import { CreateGroupUseCase, UpdateGroupUseCase } from './usecases';
+import { AddStudentUseCase } from './usecases/add-student-usecase';
 
 @Controller('group')
 export class GroupController {
   constructor(private readonly groupService: GroupRepository, private readonly createGroupUseCase: CreateGroupUseCase,
     private readonly updateGroupUseCase: UpdateGroupUseCase,
+    private readonly addStudentUseCase: AddStudentUseCase
   ) { }
 
   @UseGuards(JwtAuthGuard)
@@ -24,6 +26,11 @@ export class GroupController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.groupService.findOne(id);
+  }
+
+  @Post("/group/:id/students")
+  addStudents(@Param('id') id: string, @Body() body: AddStudentsDto) {
+    return this.addStudentUseCase.execute(id, body);
   }
 
   @UseGuards(JwtAuthGuard)

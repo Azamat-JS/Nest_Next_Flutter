@@ -9,7 +9,6 @@ export class UpdateGroupUseCase {
     ) { }
 
     async execute(id: string, dto: UpdateGroupDto) {
-        const studentIds = dto.studentIds?.filter(Boolean) ?? [];
 
         const group = await this.groupRepo.findOne(id);
 
@@ -19,9 +18,6 @@ export class UpdateGroupUseCase {
             if (!teacher) {
                 throw new NotFoundException('Teacher not found');
             }
-        }
-        if (dto.studentIds) {
-            await this.groupRepo.findStudentByIds(studentIds);
         }
 
         return await this.prisma.$transaction(async (tx) => {
@@ -40,20 +36,20 @@ export class UpdateGroupUseCase {
 
             });
 
-            if (dto.studentIds) {
-                await tx.studentGroup.deleteMany({
-                    where: {
-                        groupId: id
-                    }
-                })
-                if (studentIds.length > 0) {
-                    await this.groupRepo.createStudents(
-                        tx,
-                        studentIds,
-                        group.id
-                    )
-                }
-            }
+            // if (dto.studentIds) {
+            //     await tx.studentGroup.deleteMany({
+            //         where: {
+            //             groupId: id
+            //         }
+            //     })
+            //     if (studentIds.length > 0) {
+            //         await this.groupRepo.createStudents(
+            //             tx,
+            //             studentIds,
+            //             group.id
+            //         )
+            //     }
+            // }
             return this.groupRepo.findOne(id);
         })
     }
