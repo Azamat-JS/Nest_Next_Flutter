@@ -29,7 +29,7 @@ export class GroupController {
     return this.groupService.findOne(id);
   }
 
-  @Post("/group/:id/students")
+  @Post("/group/:id/add-students")
   addStudents(@Param('id') id: string, @Body() body: AddStudentsDto) {
     return this.addStudentUseCase.execute(id, body);
   }

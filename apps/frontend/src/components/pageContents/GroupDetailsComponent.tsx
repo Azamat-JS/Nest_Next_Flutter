@@ -130,7 +130,6 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
     const group: GroupType = data;
     const students: TokenPayload[] = data?.students?.length > 0 ? data.students : [];
 
-    const rows: StudentScoreRow[] = studentScores;
     const scoreMap = new Map<string, StudentScoreRow>();
     studentScores.forEach((s: StudentScoreRow) => {
         scoreMap.set(s.studentId, s);

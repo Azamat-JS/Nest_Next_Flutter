@@ -21,7 +21,7 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Edit, Menu, Trash } from "lucide-react"
+import { Edit, Menu, Plus, Trash } from "lucide-react"
 import {
     Dialog,
     DialogClose,
@@ -55,7 +55,13 @@ import {
 import { TokenPayload } from "@/lib/types/token_payload"
 import { GroupDrawer } from "../Drawer"
 import { useRouter } from 'next/navigation';
-import { useQuery, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient, useSuspenseQuery } from '@tanstack/react-query'
+
+type AddStudentPayload = {
+    groupId: string;
+    studentIds: string[];
+}
+
 
 
 const GroupComponent = () => {
@@ -67,6 +73,7 @@ const GroupComponent = () => {
     const [selectedTeacher, setSelectedTeacher] = useState<TokenPayload | null>(null);
     const API = process.env.NEXT_PUBLIC_API_URL;
     const [openUpdate, setOpenUpdate] = useState(false);
+    const [openAddStudents, setOpenAddStudents] = useState(false);
     const [openDelete, setOpenDelete] = useState(false);
     const [openCreate, setOpenCreate] = useState(false);
     const [selectedGroup, setSelectedGroup] = useState<GroupType | null>(null);
@@ -74,34 +81,50 @@ const GroupComponent = () => {
     const queryClient = useQueryClient();
 
 
-    const { data, isLoading } = useQuery({
+    const { data, isLoading } = useSuspenseQuery({
         queryKey: ['groups', page, limit, token],
         queryFn: async () => {
             const res = await axios.get(`${API}/group/all?page=${page}&limit=${limit}`, { headers: { Authorization: `Bearer ${token}` } })
             return res.data
         },
-        enabled: !!token,
         staleTime: 1000 * 60 * 5,
     })
 
-    const { data: teacherData, isLoading: teacherLoading } = useQuery({
+    const { data: teacherData, isLoading: teacherLoading } = useSuspenseQuery({
         queryKey: ['teachers'],
         queryFn: async () => {
             const res = await axios.get(`${API}/users/teachers`, { headers: { Authorization: `Bearer ${token}` } });
             return res.data;
         },
-        enabled: !!token,
         staleTime: 1000 * 60 * 5,
     })
 
-    const { data: studentData, isLoading: studentLoading } = useQuery({
+    const { data: studentData, isLoading: studentLoading } = useSuspenseQuery({
         queryKey: ['students'],
         queryFn: async () => {
             const res = await axios.get(`${API}/users/students`, { headers: { Authorization: `Bearer ${token}` } });
             return res.data;
         },
-        enabled: !!token,
         staleTime: 1000 * 60 * 5,
+    })
+
+    const addStudentMutation = useMutation({
+        mutationFn: async (payload: AddStudentPayload) => {
+            const { groupId, studentIds } = payload;
+            const res = await axios.post(`${API}/group/${groupId}/add-students`, { studentIds }, { headers: { Authorization: `Bearer ${token}` } });
+            return res.data;
+        },
+        onSuccess: () => {
+            toast.success('Students added successfully!');
+            setOpenAddStudents(false);
+            queryClient.invalidateQueries({
+                queryKey: ['groups'],
+                exact: false,
+            })
+        },
+        onError: (error: any) => {
+            toast.error(error.response?.data?.message ?? 'Something went wrong');
+        }
     })
 
     const students: TokenPayload[] = studentData ?? [];
@@ -132,6 +155,13 @@ const GroupComponent = () => {
             toast.error(error.response?.data?.message ?? 'Something went wrong');
         }
     };
+
+    const handleAddStudents = async (groupId: string, studentIds: string[]) => {
+        try {
+        } catch (error: any) {
+            toast.error(error.response?.data?.message ?? 'Something went wrong');
+        }
+    }
 
     const handleDeleteGroup = async (groupId: string) => {
         try {
@@ -201,6 +231,15 @@ const GroupComponent = () => {
 
                                     <DropdownMenuContent align="start">
                                         <DropdownMenuGroup>
+                                            <DropdownMenuItem
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    setSelectedGroup(u);
+                                                    setOpenAddStudents(true);
+                                                }}
+                                            >
+                                                <Plus /> Add Students
+                                            </DropdownMenuItem>
                                             <DropdownMenuItem
                                                 onClick={(e) => {
                                                     e.stopPropagation();
@@ -320,9 +359,29 @@ const GroupComponent = () => {
                                 </SelectContent>
                             </Select>
                         </Field>
+                    </FieldGroup>
+                    <DialogFooter>
+                        <DialogClose>
+                            Cancel
+                        </DialogClose>
+                        <Button type="submit" onClick={() => selectedGroup && handleUpdateGroup(selectedGroup)}>Update</Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
+
+            {/* Add students modal */}
+            <Dialog open={openAddStudents} onOpenChange={setOpenAddStudents}>
+                <DialogContent className="sm:max-w-sm">
+                    <DialogHeader>
+                        <DialogTitle>Add Students</DialogTitle>
+                        <DialogDescription>
+                            Add students to this group. Click save when you&apos;re
+                            done.
+                        </DialogDescription>
+                    </DialogHeader>
+                    <FieldGroup>
                         <Field>
                             <Label>Students</Label>
-
                             <div className="max-h-48 overflow-y-auto border rounded-md p-3 space-y-2">
                                 {students.map((student, idx) => {
                                     const checked = selectedStudentIds.includes(student.id);
@@ -362,7 +421,7 @@ const GroupComponent = () => {
                         <DialogClose>
                             Cancel
                         </DialogClose>
-                        <Button type="submit" onClick={() => selectedGroup && handleUpdateGroup(selectedGroup)}>Update</Button>
+                        <Button type="submit" onClick={() => selectedGroup && handleUpdateGroup(selectedGroup)}>Save</Button>
                     </DialogFooter>
                 </DialogContent>
             </Dialog>
