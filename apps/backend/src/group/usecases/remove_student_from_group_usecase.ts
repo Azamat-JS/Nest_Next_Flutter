@@ -20,6 +20,7 @@ export class RemoveStudentFromGroupUseCase {
 
         return this.prisma.$transaction(async (tx) => {
             await this.groupRepo.deleteStudent(tx, { studentId, groupId });
+            return { message: 'Student removed from group' };
         })
 
     }

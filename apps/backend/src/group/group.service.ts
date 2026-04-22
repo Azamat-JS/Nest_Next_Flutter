@@ -134,11 +134,9 @@ export class GroupRepository {
   }
 
   async createStudents(tx: Prisma.TransactionClient, studentIds: string[], groupId: string) {
-    return tx.studentGroup.createMany({
-      data: studentIds.map((studentId) => ({
-        studentId,
-        groupId,
-      }))
+    return await tx.studentGroup.createMany({
+      data: studentIds.map(id => ({ studentId: id, groupId })),
+      skipDuplicates: true,
     })
   }
 
