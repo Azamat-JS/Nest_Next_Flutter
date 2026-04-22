@@ -142,6 +142,18 @@ export class GroupRepository {
     })
   }
 
+  async deleteStudent(tx: Prisma.TransactionClient, body: { studentId: string, groupId: string }) {
+    const { studentId, groupId } = body;
+    await tx.studentGroup.delete({
+      where: {
+        studentId_groupId: {
+          studentId,
+          groupId,
+        }
+      }
+    })
+  }
+
   async remove(id: string) {
     const group = await this.prisma.groups.findUnique({ where: { id } });
     if (!group) throw new NotFoundException(

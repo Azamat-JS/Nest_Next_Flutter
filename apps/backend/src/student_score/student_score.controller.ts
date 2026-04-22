@@ -3,14 +3,12 @@ import { StudentScoreRepository } from './student_score.service';
 import { ScoreDto, UpdateScoreDto } from './dto/score.dto';
 import { AddScoreUseCase, UpdateScoreUseCase, BulkAddScoreUseCase } from './usecases';
 import { BulkScoreDto } from './dto/bulk.dto';
-import { RemoveStudentFromGroupUseCase } from './usecases/remove_student_from_group_usecase';
 
 @Controller('student-score')
 export class StudentScoreController {
   constructor(private readonly studentScoreRepo: StudentScoreRepository, private readonly addScoreUseCase: AddScoreUseCase,
     private readonly updateScoreUseCase: UpdateScoreUseCase,
     private readonly bulkAddScoreUseCase: BulkAddScoreUseCase,
-    private readonly removeStudentFromGroupUseCase: RemoveStudentFromGroupUseCase
   ) { }
 
   @Get("all/students/:groupId")
@@ -49,11 +47,6 @@ export class StudentScoreController {
       studentId,
       groupId
     );
-  }
-
-  @Delete("delete/:studentId/:groupId")
-  async deleteStudent(@Param('studentId') studentId: string, @Param('groupId') groupId: string) {
-    return this.removeStudentFromGroupUseCase.execute(studentId, groupId);
   }
 
   @Delete("delete/all")

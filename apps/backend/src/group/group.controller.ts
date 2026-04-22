@@ -2,14 +2,15 @@ import { Controller, Get, Post, Body, Param, Delete, Put, UseGuards, Query } fro
 import { GroupRepository } from './group.service';
 import { AddStudentsDto, CreateGroupDto, PaginationDto, UpdateGroupDto } from './dto/group.dto';
 import { JwtAuthGuard } from 'src/lib/guards/jwt.guard';
-import { CreateGroupUseCase, UpdateGroupUseCase } from './usecases';
+import { CreateGroupUseCase, UpdateGroupUseCase, RemoveStudentFromGroupUseCase } from './usecases';
 import { AddStudentUseCase } from './usecases/add-student-usecase';
 
 @Controller('group')
 export class GroupController {
   constructor(private readonly groupService: GroupRepository, private readonly createGroupUseCase: CreateGroupUseCase,
     private readonly updateGroupUseCase: UpdateGroupUseCase,
-    private readonly addStudentUseCase: AddStudentUseCase
+    private readonly addStudentUseCase: AddStudentUseCase,
+    private readonly removeStudentFromGroupUseCase: RemoveStudentFromGroupUseCase,
   ) { }
 
   @UseGuards(JwtAuthGuard)
@@ -37,6 +38,11 @@ export class GroupController {
   @Put(':id')
   update(@Param('id') id: string, @Body() updateGroupDto: UpdateGroupDto) {
     return this.updateGroupUseCase.execute(id, updateGroupDto);
+  }
+
+  @Delete("delete/:studentId/:groupId")
+  async deleteStudent(@Param('studentId') studentId: string, @Param('groupId') groupId: string) {
+    return this.removeStudentFromGroupUseCase.execute(studentId, groupId);
   }
 
   @UseGuards(JwtAuthGuard)

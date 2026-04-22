@@ -1,10 +1,12 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { PrismaService } from "src/prisma/prisma.service";
-import { StudentScoreRepository } from "../student_score.service";
+import { GroupRepository } from "../group.service";
+import { StudentScoreRepository } from "src/student_score/student_score.service";
 
 @Injectable()
 export class RemoveStudentFromGroupUseCase {
     constructor(
+        private readonly groupRepo: GroupRepository,
         private readonly studentScoreRepo: StudentScoreRepository,
         private readonly prisma: PrismaService
     ) { }
@@ -17,7 +19,7 @@ export class RemoveStudentFromGroupUseCase {
         }
 
         return this.prisma.$transaction(async (tx) => {
-            await this.studentScoreRepo.deleteStudent(tx, { studentId, groupId });
+            await this.groupRepo.deleteStudent(tx, { studentId, groupId });
         })
 
     }
