@@ -18,4 +18,9 @@ class StudentScoreModel extends StudentScoreEntity {
       total: (json['total'] ?? 0).toInt(),
     );
   }
+  static List<StudentScoreModel> fromJsonList(List<dynamic> data) {
+    return data
+        .map((e) => StudentScoreModel.fromJson(e as Map<String, dynamic>))
+        .toList();
+  }
 }
