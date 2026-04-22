@@ -42,6 +42,7 @@ import { Field, FieldGroup, } from "@/components/ui/field"
 import { Button } from '../ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { Label } from '../ui/label';
+import { useStudents } from '@/lib/hooks/studentsHook';
 
 type UpdateScorePayload = {
     studentId: string;
@@ -71,6 +72,7 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
     const [value, setValue] = useState<number>(0); ("HOMEWORK");
     const API = process.env.NEXT_PUBLIC_API_URL;
     const queryClient = useQueryClient();
+    const { data: students = [] } = useStudents()
 
     const { data } = useSuspenseQuery({
         queryKey: ["group", groupId],
@@ -112,7 +114,6 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
             setOpenAddStudents(false);
             queryClient.invalidateQueries({
                 queryKey: ['groups'],
-                exact: false,
             })
         },
         onError: (error: any) => {
@@ -148,7 +149,7 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
     })
 
     const group: GroupType = data;
-    const students: TokenPayload[] = data?.students?.length > 0 ? data.students : [];
+    const groupStudents: TokenPayload[] = data?.students?.length > 0 ? data.students : [];
 
     const scoreMap = new Map<string, StudentScoreRow>();
     studentScores.forEach((s: StudentScoreRow) => {
@@ -159,8 +160,8 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
         group?.students?.map((s) => s.id) ?? []
     );
 
-    const availableStudents = students.filter(
-        (s) => !existingStudents.has(s.id)
+    const availableStudents: any = students.filter(
+        (s: TokenPayload) => !existingStudents.has(s.id)
     )
 
     return (
@@ -183,7 +184,7 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {students.map((s, idx) => {
+                    {groupStudents.map((s, idx) => {
                         const score = scoreMap.get(s.id);
                         return (<TableRow key={s.id}>
                             <TableCell className="text-center">{idx + 1}</TableCell>
@@ -214,17 +215,21 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
                 </TableBody>
                 <TableFooter>
                     <TableRow>
-                        <TableCell colSpan={3}>Total: {students.length} students</TableCell>
+                        <TableCell colSpan={3}>Total: {groupStudents.length} students</TableCell>
                     </TableRow>
                 </TableFooter>
             </Table>
             <div className='flex justify-end mr-5 mt-4'>
-                <AddScoreDrawer openCreate={openCreate} setOpenCreate={setOpenCreate} students={students} groupId={groupId} onScoreAdded={() => queryClient.invalidateQueries({
+                <AddScoreDrawer openCreate={openCreate} setOpenCreate={setOpenCreate} students={groupStudents} groupId={groupId} onScoreAdded={() => queryClient.invalidateQueries({
                     queryKey: ['students', groupId],
                     exact: false,
                 })} />
 
-                <Button variant="default" onClick={() => setOpenAddStudents(true)}>
+                <Button variant="default" onClick={() => {
+                    setOpenAddStudents(true); queryClient.invalidateQueries({
+                        queryKey: ['students'],
+                    })
+                }}>
                     Add Students
                 </Button>
             </div>
@@ -279,7 +284,7 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
                         <Field>
                             <Label>Students</Label>
                             <div className="max-h-48 overflow-y-auto border rounded-md p-3 space-y-2">
-                                {availableStudents.map((student, idx) => {
+                                {availableStudents.map((student: any, idx: number) => {
                                     const checked = newStudentIds.includes(student.id);
 
                                     return (

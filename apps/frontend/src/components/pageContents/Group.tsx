@@ -56,6 +56,7 @@ import { TokenPayload } from "@/lib/types/token_payload"
 import { GroupDrawer } from "../Drawer"
 import { useRouter } from 'next/navigation';
 import { useMutation, useQueryClient, useSuspenseQuery } from '@tanstack/react-query'
+import { useStudents } from "@/lib/hooks/studentsHook"
 
 const GroupComponent = () => {
     const router = useRouter();
@@ -73,6 +74,7 @@ const GroupComponent = () => {
     const [selectedGroup, setSelectedGroup] = useState<GroupType | null>(null);
     const [selectedStudentIds, setSelectedStudentIds] = useState<string[]>([]);
     const queryClient = useQueryClient();
+    const { data: studentData = [] } = useStudents();
 
 
     const { data } = useSuspenseQuery({
@@ -93,15 +95,6 @@ const GroupComponent = () => {
         staleTime: 1000 * 60 * 5,
     })
 
-    const { data: studentData } = useSuspenseQuery({
-        queryKey: ['students'],
-        queryFn: async () => {
-            const res = await axios.get(`${API}/users/students`, { headers: { Authorization: `Bearer ${token}` } });
-            return res.data;
-        },
-        staleTime: 1000 * 60 * 5,
-    })
-
     const addStudentMutation = useMutation({
         mutationFn: async (payload: AddStudentPayload) => {
             const { groupId, studentIds } = payload;
@@ -113,7 +106,6 @@ const GroupComponent = () => {
             setOpenAddStudents(false);
             queryClient.invalidateQueries({
                 queryKey: ['groups'],
-                exact: false,
             })
         },
         onError: (error: any) => {
