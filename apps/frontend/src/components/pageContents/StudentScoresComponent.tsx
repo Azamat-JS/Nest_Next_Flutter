@@ -94,7 +94,7 @@ const StudentScoresComponent = ({ groupId, studentId }: { groupId: string, stude
     return (
         <div>
             <Table>
-                <TableCaption>Student Scores</TableCaption>
+                <TableCaption className="font-bold text-xl text-black">Total - {grandTotal}</TableCaption>
                 <TableHeader>
                     <TableRow key={groupId}>
                         <TableHead className="w-12 text-center text-lg font-bold">&#8470;</TableHead>
@@ -117,16 +117,6 @@ const StudentScoresComponent = ({ groupId, studentId }: { groupId: string, stude
                         </TableRow>
                     ))}
                 </TableBody>
-                <TableFooter>
-                    <TableRow>
-                        <TableCell className="text-center font-bold" colSpan={4}>
-                            Total
-                        </TableCell>
-                        <TableCell className="text-center font-bold">
-                            {grandTotal}
-                        </TableCell>
-                    </TableRow>
-                </TableFooter>
             </Table>
         </div>
     )

@@ -6,7 +6,7 @@
 - Local:         http://localhost:4000
 - Network:       http://192.168.13.93:4000
 - Environments: .env.local
-[32m[1m✓[22m[39m Ready in 305ms
+[32m[1m✓[22m[39m Ready in 251ms
 [33m[1m⚠[22m[39m Warning: Next.js inferred your workspace root, but it may not be correct.
  We detected multiple lockfiles and selected the directory of /Users/azamatabdullayev/Desktop/full-stack-turbo/pnpm-workspace.yaml as the root directory.
  To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
@@ -15,413 +15,161 @@
    * /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend/pnpm-workspace.yaml
 
 
- GET /groups [32m200[39m in 402ms[2m (next.js: 111ms, application-code: 291ms)[22m
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 214ms[2m (next.js: 197ms, application-code: 17ms)[22m
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkampkh0003icv2q37yozix [32m200[39m in 197ms[2m (next.js: 184ms, application-code: 13ms)[22m
- GET /groups [32m200[39m in 32ms[2m (next.js: 7ms, application-code: 25ms)[22m
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 34ms[2m (next.js: 12ms, application-code: 22ms)[22m
-[32m[1m✓[22m[39m Compiled in 401ms
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [31m500[39m in 140ms[2m (next.js: 71ms, application-code: 70ms)[22m
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [31m500[39m in 5ms[2m (next.js: 2ms, application-code: 3ms)[22m
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [31m500[39m in 5ms[2m (next.js: 1974µs, application-code: 3ms)[22m
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [31m500[39m in 5ms[2m (next.js: 2ms, application-code: 3ms)[22m
-[36m[browser][39m [31mUncaught Error: ./apps/frontend/src/components/pageContents/StudentScoresComponent.tsx:24:9
-'const' declarations must be initialized
-  22 |     const
-  23 |
-> 24 |         console.log(studentScoreReport)
-     |         ^^^^^^^
-  25 |     return (
-  26 |         <div>StudentScoresComponent</div>
-  27 |     )
-
-Parsing ecmascript source code failed
-
-Import trace:
-  Server Component:
-    ./apps/frontend/src/components/pageContents/StudentScoresComponent.tsx
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/[studentId]/page.tsx
-
-[39m
-[31m    at <unknown> (Error: ./apps/frontend/src/components/pageContents/StudentScoresComponent.tsx:24:9)
-    at <unknown> (Error: (./apps/frontend/src/components/pageContents/StudentScoresComponent.tsx:24:9)[39m
-[32m[1m✓[22m[39m Compiled in 76ms
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 305ms[2m (next.js: 49ms, application-code: 256ms)[22m
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 23ms[2m (next.js: 7ms, application-code: 17ms)[22m
-[32m[1m✓[22m[39m Compiled in 27ms
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 20ms[2m (next.js: 3ms, application-code: 16ms)[22m
-[32m[1m✓[22m[39m Compiled in 18ms
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 164ms[2m (next.js: 70ms, application-code: 95ms)[22m
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 40ms[2m (next.js: 3ms, application-code: 36ms)[22m
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 18ms[2m (next.js: 1600µs, application-code: 16ms)[22m
-[36m[browser][39m ./apps/frontend/src/components/pageContents/StudentScoresComponent.tsx:24:5
-Expression expected
-  22 |     const groupedByDate = studentScoreReport.scores.reduce((acc: any, score: any) => {
-  23 |         const date = 
-> 24 |     }, {});
-     |     ^
-  25 |
-  26 |
-  27 |     console.log(studentScoreReport)
-
-Parsing ecmascript source code failed
-
-Import trace:
-  Server Component:
-    ./apps/frontend/src/components/pageContents/StudentScoresComponent.tsx
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/[studentId]/page.tsx 
-[36m[browser][39m ./apps/frontend/src/components/pageContents/StudentScoresComponent.tsx:25:25
-Expression expected
-  23 |         const date = new Date(score.date).toISOString().split('T')[0];
-  24 |         if (!acc[date]) {
-> 25 |             acc[date] = ;
-     |                         ^
-  26 |         }
-  27 |         acc[date].push(score);
-  28 |         return acc;
-
-Parsing ecmascript source code failed
-
-Import trace:
-  Server Component:
-    ./apps/frontend/src/components/pageContents/StudentScoresComponent.tsx
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/[studentId]/page.tsx 
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkampkh0003icv2q37yozix [32m200[39m in 57ms[2m (next.js: 29ms, application-code: 27ms)[22m
-{
-  scores: [
-    { type: [32m'ATTENDANCE'[39m, value: [33m40[39m, date: [32m'2026-04-22T19:00:00.000Z'[39m },
-    { type: [32m'HOMEWORK'[39m, value: [33m10[39m, date: [32m'2026-04-22T19:00:00.000Z'[39m }
-  ],
-  total: { total: [33m120[39m }
-}
-[31m[1m⨯[22m[39m TypeError: Cannot read properties of undefined (reading 'name')
-    at StudentScoresComponent (src/components/pageContents/StudentScoresComponent.tsx:48:26)
-  [90m46 |[0m     [36mreturn[0m (
-  [90m47 |[0m         <div>
-[31m[1m>[0m [90m48 |[0m             <h2>{student.name}</h2>
-  [90m   |[0m                          [31m[1m^[0m
-  [90m49 |[0m         </div>
-  [90m50 |[0m     )
-  [90m51 |[0m } {
-  digest: [32m'1945344682'[39m
-}
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkampkh0003icv2q37yozix [32m200[39m in 158ms[2m (next.js: 9ms, application-code: 149ms)[22m
-[36m[browser][39m [31mUncaught Error: Switched to client rendering because the server rendering errored:
-
-Cannot read properties of undefined (reading 'name')[39m
-[31m    at StudentScoresComponent (src/components/pageContents/StudentScoresComponent.tsx:48:26)[39m
-  [90m46 |[0m     [36mreturn[0m (
-  [90m47 |[0m         <div>
-[31m[1m>[0m [90m48 |[0m             <h2>{student.name}</h2>
-  [90m   |[0m                          [31m[1m^[0m
-  [90m49 |[0m         </div>
-  [90m50 |[0m     )
-  [90m51 |[0m }
-[32m[1m✓[22m[39m Compiled in 30ms
-{
-  scores: [
-    { type: [32m'ATTENDANCE'[39m, value: [33m40[39m, date: [32m'2026-04-22T19:00:00.000Z'[39m },
-    { type: [32m'HOMEWORK'[39m, value: [33m10[39m, date: [32m'2026-04-22T19:00:00.000Z'[39m }
-  ],
-  total: { total: [33m120[39m }
-}
-[31m[1m⨯[22m[39m TypeError: Cannot read properties of undefined (reading 'username')
-    at StudentScoresComponent (src/components/pageContents/StudentScoresComponent.tsx:48:26)
-  [90m46 |[0m     [36mreturn[0m (
-  [90m47 |[0m         <div>
-[31m[1m>[0m [90m48 |[0m             <h2>{student.username}</h2>
-  [90m   |[0m                          [31m[1m^[0m
-  [90m49 |[0m         </div>
-  [90m50 |[0m     )
-  [90m51 |[0m } {
-  digest: [32m'2664702619'[39m
-}
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkampkh0003icv2q37yozix [32m200[39m in 72ms[2m (next.js: 13ms, application-code: 59ms)[22m
-[36m[browser][39m [31mUncaught Error: Switched to client rendering because the server rendering errored:
-
-Cannot read properties of undefined (reading 'username')[39m
-[31m    at StudentScoresComponent (src/components/pageContents/StudentScoresComponent.tsx:48:26)[39m
-  [90m46 |[0m     [36mreturn[0m (
-  [90m47 |[0m         <div>
-[31m[1m>[0m [90m48 |[0m             <h2>{student.username}</h2>
-  [90m   |[0m                          [31m[1m^[0m
-  [90m49 |[0m         </div>
-  [90m50 |[0m     )
-  [90m51 |[0m }
-{
-  scores: [
-    { type: [32m'ATTENDANCE'[39m, value: [33m40[39m, date: [32m'2026-04-22T19:00:00.000Z'[39m },
-    { type: [32m'HOMEWORK'[39m, value: [33m10[39m, date: [32m'2026-04-22T19:00:00.000Z'[39m }
-  ],
-  total: { total: [33m120[39m }
-}
-[31m[1m⨯[22m[39m TypeError: Cannot read properties of undefined (reading 'username')
-    at StudentScoresComponent (src/components/pageContents/StudentScoresComponent.tsx:48:26)
-  [90m46 |[0m     [36mreturn[0m (
-  [90m47 |[0m         <div>
-[31m[1m>[0m [90m48 |[0m             <h2>{student.username}</h2>
-  [90m   |[0m                          [31m[1m^[0m
-  [90m49 |[0m         </div>
-  [90m50 |[0m     )
-  [90m51 |[0m } {
-  digest: [32m'2664702619'[39m
-}
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkampkh0003icv2q37yozix [32m200[39m in 61ms[2m (next.js: 7ms, application-code: 53ms)[22m
-[36m[browser][39m [31mUncaught Error: Switched to client rendering because the server rendering errored:
-
-Cannot read properties of undefined (reading 'username')[39m
-[31m    at StudentScoresComponent (src/components/pageContents/StudentScoresComponent.tsx:48:26)[39m
-  [90m46 |[0m     [36mreturn[0m (
-  [90m47 |[0m         <div>
-[31m[1m>[0m [90m48 |[0m             <h2>{student.username}</h2>
-  [90m   |[0m                          [31m[1m^[0m
-  [90m49 |[0m         </div>
-  [90m50 |[0m     )
-  [90m51 |[0m }
-[32m[1m✓[22m[39m Compiled in 20ms
-[]
-{
-  scores: [
-    { type: [32m'ATTENDANCE'[39m, value: [33m40[39m, date: [32m'2026-04-22T19:00:00.000Z'[39m },
-    { type: [32m'HOMEWORK'[39m, value: [33m10[39m, date: [32m'2026-04-22T19:00:00.000Z'[39m }
-  ],
-  total: { total: [33m120[39m }
-}
-[31m[1m⨯[22m[39m TypeError: Cannot read properties of undefined (reading 'username')
-    at StudentScoresComponent (src/components/pageContents/StudentScoresComponent.tsx:50:26)
-  [90m48 |[0m     [36mreturn[0m (
-  [90m49 |[0m         <div>
-[31m[1m>[0m [90m50 |[0m             <h2>{student.username}</h2>
-  [90m   |[0m                          [31m[1m^[0m
-  [90m51 |[0m         </div>
-  [90m52 |[0m     )
-  [90m53 |[0m } {
-  digest: [32m'2664702619'[39m
-}
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkampkh0003icv2q37yozix [32m200[39m in 99ms[2m (next.js: 12ms, application-code: 87ms)[22m
-[36m[browser][39m [31mUncaught Error: Switched to client rendering because the server rendering errored:
-
-Cannot read properties of undefined (reading 'username')[39m
-[31m    at StudentScoresComponent (src/components/pageContents/StudentScoresComponent.tsx:50:26)[39m
-  [90m48 |[0m     [36mreturn[0m (
-  [90m49 |[0m         <div>
-[31m[1m>[0m [90m50 |[0m             <h2>{student.username}</h2>
-  [90m   |[0m                          [31m[1m^[0m
-  [90m51 |[0m         </div>
-  [90m52 |[0m     )
-  [90m53 |[0m }
- GET /groups [32m200[39m in 47ms[2m (next.js: 23ms, application-code: 24ms)[22m
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 31ms[2m (next.js: 10ms, application-code: 21ms)[22m
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkampkh0003icv2q37yozix [32m200[39m in 29ms[2m (next.js: 8ms, application-code: 21ms)[22m
-[32m[1m✓[22m[39m Compiled in 66ms
-[]
-{
-  scores: [
-    { type: [32m'ATTENDANCE'[39m, value: [33m40[39m, date: [32m'2026-04-22T19:00:00.000Z'[39m },
-    { type: [32m'HOMEWORK'[39m, value: [33m10[39m, date: [32m'2026-04-22T19:00:00.000Z'[39m }
-  ],
-  total: { total: [33m120[39m }
-}
-[31m[1m⨯[22m[39m TypeError: Cannot read properties of undefined (reading 'username')
-    at StudentScoresComponent (src/components/pageContents/StudentScoresComponent.tsx:51:26)
-  [90m49 |[0m     [36mreturn[0m (
-  [90m50 |[0m         <div>
-[31m[1m>[0m [90m51 |[0m             <h2>{student.username}</h2>
-  [90m   |[0m                          [31m[1m^[0m
-  [90m52 |[0m         </div>
-  [90m53 |[0m     )
-  [90m54 |[0m } {
-  digest: [32m'2664702619'[39m
-}
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkampkh0003icv2q37yozix [32m200[39m in 68ms[2m (next.js: 16ms, application-code: 52ms)[22m
-[36m[browser][39m [31mUncaught Error: Switched to client rendering because the server rendering errored:
-
-Cannot read properties of undefined (reading 'username')[39m
-[31m    at StudentScoresComponent (src/components/pageContents/StudentScoresComponent.tsx:50:26)[39m
-  [90m48 |[0m     [36mreturn[0m (
-  [90m49 |[0m         <div>
-[31m[1m>[0m [90m50 |[0m             <h2>{student.username}</h2>
-  [90m   |[0m                          [31m[1m^[0m
-  [90m51 |[0m         </div>
-  [90m52 |[0m     )
-  [90m53 |[0m }
-[32m[1m✓[22m[39m Compiled in 21ms
-[32m[1m✓[22m[39m Compiled in 21ms
-[32m[1m✓[22m[39m Compiled in 20ms
-[32m[1m✓[22m[39m Compiled in 32ms
-[32m[1m✓[22m[39m Compiled in 23ms
-[32m[1m✓[22m[39m Compiled in 227ms
-[]
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkampkh0003icv2q37yozix [32m200[39m in 146ms[2m (next.js: 16ms, application-code: 130ms)[22m
-[36m[browser][39m React has detected a change in the order of Hooks called by StudentScoresComponent. This will lead to bugs and errors if not fixed. For more information, read the Rules of Hooks: https://react.dev/link/rules-of-hooks
-
-   Previous render            Next render
-   ------------------------------------------------------
-1. useCallback                useCallback
-2. useCallback                useCallback
-3. useSyncExternalStore       useSyncExternalStore
-4. useDebugValue              useDebugValue
-5. useContext                 useContext
-6. useCallback                useCallback
-7. useCallback                useCallback
-8. useSyncExternalStore       useSyncExternalStore
-9. useDebugValue              useDebugValue
-10. useContext                useContext
-11. useContext                useContext
-12. useContext                useContext
-13. useEffect                 useEffect
-14. useState                  useState
-15. useCallback               useCallback
-16. useSyncExternalStore      useSyncExternalStore
-17. useEffect                 useEffect
-18. useContext                useContext
-19. useContext                useContext
-20. useContext                useContext
-21. useEffect                 useEffect
-22. useState                  useState
-23. useCallback               useCallback
-24. useSyncExternalStore      useSyncExternalStore
-25. useEffect                 useEffect
-26. useMemo                   useMemo
-27. undefined                 useMemo
-   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
- 
-[31m    at StudentScoresComponent (src/components/pageContents/StudentScoresComponent.tsx:37:34)[39m
-  [90m35 |[0m     }
-  [90m36 |[0m
-[31m[1m>[0m [90m37 |[0m     [36mconst[0m groupedByDate = useMemo(() => {
-  [90m   |[0m                                  [31m[1m^[0m
-  [90m38 |[0m         [36mreturn[0m studentScoreReport.scores.reduce((acc: any, score: any) => {
-  [90m39 |[0m             [36mconst[0m date = [36mnew[0m [33mDate[0m(score.date).toISOString().split([32m'T'[0m)[[35m0[0m];
-  [90m40 |[0m             [36mif[0m (!acc[date]) { [2m(src/components/pageContents/StudentScoresComponent.tsx:37:34)[22m
-[32m[1m✓[22m[39m Compiled in 20ms
-[]
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkampkh0003icv2q37yozix [32m200[39m in 131ms[2m (next.js: 12ms, application-code: 119ms)[22m
-[36m[browser][39m React has detected a change in the order of Hooks called by StudentScoresComponent. This will lead to bugs and errors if not fixed. For more information, read the Rules of Hooks: https://react.dev/link/rules-of-hooks
-
-   Previous render            Next render
-   ------------------------------------------------------
-1. useCallback                useCallback
-2. useCallback                useCallback
-3. useSyncExternalStore       useSyncExternalStore
-4. useDebugValue              useDebugValue
-5. useContext                 useContext
-6. useCallback                useCallback
-7. useCallback                useCallback
-8. useSyncExternalStore       useSyncExternalStore
-9. useDebugValue              useDebugValue
-10. useContext                useContext
-11. useContext                useContext
-12. useContext                useContext
-13. useEffect                 useEffect
-14. useState                  useState
-15. useCallback               useCallback
-16. useSyncExternalStore      useSyncExternalStore
-17. useEffect                 useEffect
-18. useContext                useContext
-19. useContext                useContext
-20. useContext                useContext
-21. useEffect                 useEffect
-22. useState                  useState
-23. useCallback               useCallback
-24. useSyncExternalStore      useSyncExternalStore
-25. useEffect                 useEffect
-26. useMemo                   useMemo
-27. undefined                 useMemo
-   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
- 
-[31m    at StudentScoresComponent (src/components/pageContents/StudentScoresComponent.tsx:37:34)[39m
-  [90m35 |[0m     }
-  [90m36 |[0m
-[31m[1m>[0m [90m37 |[0m     [36mconst[0m groupedByDate = useMemo(() => {
-  [90m   |[0m                                  [31m[1m^[0m
-  [90m38 |[0m         [36mreturn[0m studentScoreReport.scores.reduce((acc: any, score: any) => {
-  [90m39 |[0m             [36mconst[0m date = [36mnew[0m [33mDate[0m(score.date).toISOString().split([32m'T'[0m)[[35m0[0m];
-  [90m40 |[0m             [36mif[0m (!acc[date]) { [2m(src/components/pageContents/StudentScoresComponent.tsx:37:34)[22m
-[32m[1m✓[22m[39m Compiled in 22ms
-[]
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkampkh0003icv2q37yozix [32m200[39m in 114ms[2m (next.js: 14ms, application-code: 99ms)[22m
-[32m[1m✓[22m[39m Compiled in 56ms
-[32m[1m✓[22m[39m Compiled in 233ms
-[32m[1m✓[22m[39m Compiled in 92ms
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkampkh0003icv2q37yozix [32m200[39m in 141ms[2m (next.js: 27ms, application-code: 114ms)[22m
-[32m[1m✓[22m[39m Compiled in 552ms
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkampkh0003icv2q37yozix [32m200[39m in 757ms[2m (next.js: 134ms, application-code: 624ms)[22m
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkampkh0003icv2q37yozix [32m200[39m in 327ms[2m (next.js: 7ms, application-code: 320ms)[22m
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkampkh0003icv2q37yozix [32m200[39m in 163ms[2m (next.js: 12ms, application-code: 151ms)[22m
-[32m[1m✓[22m[39m Compiled in 117ms
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkampkh0003icv2q37yozix [32m200[39m in 424ms[2m (next.js: 86ms, application-code: 338ms)[22m
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkampkh0003icv2q37yozix [32m200[39m in 167ms[2m (next.js: 84ms, application-code: 83ms)[22m
-[32m[1m✓[22m[39m Compiled in 71ms
-[32m[1m✓[22m[39m Compiled in 177ms
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkampkh0003icv2q37yozix [32m200[39m in 220ms[2m (next.js: 104ms, application-code: 116ms)[22m
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkampkh0003icv2q37yozix [32m200[39m in 40ms[2m (next.js: 3ms, application-code: 37ms)[22m
-[32m[1m✓[22m[39m Compiled in 64ms
-[36m[browser][39m ./apps/frontend/src/components/pageContents/StudentScoresComponent.tsx:149:1
-Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
-  147 |             </div>
-  148 |             )
-> 149 | }
-      | ^
-  150 |
-  151 |             export default StudentScoresComponent
-
-Parsing ecmascript source code failed
-
-Import trace:
-  Server Component:
-    ./apps/frontend/src/components/pageContents/StudentScoresComponent.tsx
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/[studentId]/page.tsx 
-[32m[1m✓[22m[39m Compiled in 49ms
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkampkh0003icv2q37yozix [32m200[39m in 115ms[2m (next.js: 63ms, application-code: 52ms)[22m
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkampkh0003icv2q37yozix [32m200[39m in 29ms[2m (next.js: 2ms, application-code: 26ms)[22m
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkampkh0003icv2q37yozix [32m200[39m in 15ms[2m (next.js: 900µs, application-code: 14ms)[22m
-[]
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkampkh0003icv2q37yozix [32m200[39m in 113ms[2m (next.js: 2ms, application-code: 111ms)[22m
-[32m[1m✓[22m[39m Compiled in 21ms
-{
-  scores: [
-    { type: [32m'ATTENDANCE'[39m, value: [33m40[39m, date: [32m'2026-04-22T19:00:00.000Z'[39m },
-    { type: [32m'HOMEWORK'[39m, value: [33m10[39m, date: [32m'2026-04-22T19:00:00.000Z'[39m }
-  ],
-  total: { total: [33m120[39m }
-}
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkampkh0003icv2q37yozix [32m200[39m in 46ms[2m (next.js: 10ms, application-code: 37ms)[22m
-[32m[1m✓[22m[39m Compiled in 33ms
-[36m[browser][39m ./apps/frontend/src/components/pageContents/StudentScoresComponent.tsx:90:51
-Expected '</', got '}'
-  88 |         // <div></div>
-  89 |         <div className="flex flex-col justify-center items-center w-full min-h-screen">
-> 90 |             <Table key={studentScoreReport.scores.} className="table-fixed">
-     |                                                   ^
-  91 |                 <TableCaption>A list of all scores.</TableCaption>
-  92 |                 <TableHeader>
-  93 |                     <TableRow key={user?.id}>
-
-Parsing ecmascript source code failed
-
-Import trace:
-  Server Component:
-    ./apps/frontend/src/components/pageContents/StudentScoresComponent.tsx
-    ./apps/frontend/src/app/(pages)/groups/[groupId]/[studentId]/page.tsx 
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkampkh0003icv2q37yozix [32m200[39m in 120ms[2m (next.js: 22ms, application-code: 98ms)[22m
-[32m[1m✓[22m[39m Compiled in 28ms
-{ [32m'2026-04-22'[39m: { homework: [33m10[39m, attendance: [33m40[39m } }
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkampkh0003icv2q37yozix [32m200[39m in 109ms[2m (next.js: 6ms, application-code: 103ms)[22m
-[32m[1m✓[22m[39m Compiled in 25ms
-{
-  scores: [
-    { type: [32m'ATTENDANCE'[39m, value: [33m40[39m, date: [32m'2026-04-22T19:00:00.000Z'[39m },
-    { type: [32m'HOMEWORK'[39m, value: [33m10[39m, date: [32m'2026-04-22T19:00:00.000Z'[39m }
-  ],
-  total: { total: [33m120[39m }
-}
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkampkh0003icv2q37yozix [32m200[39m in 55ms[2m (next.js: 11ms, application-code: 43ms)[22m
-[32m[1m✓[22m[39m Compiled in 20ms
-{ [32m'2026-04-22'[39m: { homework: [33m10[39m, attendance: [33m40[39m } }
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkampkh0003icv2q37yozix [32m200[39m in 55ms[2m (next.js: 11ms, application-code: 44ms)[22m
-[32m[1m✓[22m[39m Compiled in 194ms
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkampkh0003icv2q37yozix [32m200[39m in 344ms[2m (next.js: 123ms, application-code: 221ms)[22m
- GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkampkh0003icv2q37yozix [32m200[39m in 107ms[2m (next.js: 2ms, application-code: 105ms)[22m
-[32m[1m✓[22m[39m Compiled in 80ms
-[32m[1m✓[22m[39m Compiled in 30ms
+[31m[1m⨯[22m[39m Error [AggregateError]: 
+    at async queryFn (src/components/pageContents/StudentScoresComponent.tsx:60:25)
+  [90m58 |[0m         queryKey: [[32m"studentScores"[0m, studentId, groupId],
+  [90m59 |[0m         queryFn: [36masync[0m () => {
+[31m[1m>[0m [90m60 |[0m             [36mconst[0m res = [36mawait[0m axios.get([32m`[0m${[33mAPI[0m[32m}/student-score/one-student/[0m${studentId[32m}/[0m${groupId[32m}`[0m, { headers: { [33mAuthorization[0m: [32m`Be...[0m
+  [90m   |[0m                         [31m[1m^[0m
+  [90m61 |[0m             [36mreturn[0m res.data;
+  [90m62 |[0m         },
+  [90m63 |[0m     }); {
+  isAxiosError: [33mtrue[39m,
+  code: [32m'ECONNREFUSED'[39m,
+  config: {
+    transitional: {
+      silentJSONParsing: [33mtrue[39m,
+      forcedJSONParsing: [33mtrue[39m,
+      clarifyTimeoutError: [33mfalse[39m,
+      legacyInterceptorReqResOrdering: [33mtrue[39m
+    },
+    adapter: [ [32m'xhr'[39m, [32m'http'[39m, [32m'fetch'[39m ],
+    transformRequest: [ [36m[Function: transformRequest][39m ],
+    transformResponse: [ [36m[Function: transformResponse][39m ],
+    timeout: [33m0[39m,
+    xsrfCookieName: [32m'XSRF-TOKEN'[39m,
+    xsrfHeaderName: [32m'X-XSRF-TOKEN'[39m,
+    maxContentLength: [33m-1[39m,
+    maxBodyLength: [33m-1[39m,
+    env: { FormData: [36m[Function][39m, Blob: [36m[class Blob][39m },
+    validateStatus: [36m[Function: validateStatus][39m,
+    headers: Object [AxiosHeaders] {
+      Accept: [32m'application/json, text/plain, */*'[39m,
+      [32m'Content-Type'[39m: [90mundefined[39m,
+      Authorization: [32m'Bearer null'[39m,
+      [32m'User-Agent'[39m: [32m'axios/1.14.0'[39m,
+      [32m'Accept-Encoding'[39m: [32m'gzip, compress, deflate, br'[39m
+    },
+    method: [32m'get'[39m,
+    url: [32m'http://localhost:3002/student-score/one-student/cmnq74ink0001hrv254s9e0li/cmnq4bbkf0000xkv2o72hfh9z'[39m,
+    allowAbsoluteUrls: [33mtrue[39m,
+    data: [90mundefined[39m
+  },
+  request: [36m<ref *1>[39m Writable {
+    _events: {
+      close: [90mundefined[39m,
+      error: [36m[Function: handleRequestError][39m,
+      prefinish: [90mundefined[39m,
+      finish: [90mundefined[39m,
+      drain: [90mundefined[39m,
+      response: [36m[Function: handleResponse][39m,
+      socket: [36m[Array][39m,
+      abort: [90mundefined[39m
+    },
+    _writableState: WritableState {
+      highWaterMark: [33m16384[39m,
+      length: [33m0[39m,
+      corked: [33m0[39m,
+      onwrite: [36m[Function: bound onwrite][39m,
+      writelen: [33m0[39m,
+      bufferedIndex: [33m0[39m,
+      pendingcb: [33m0[39m,
+      [[32mSymbol(kState)[39m]: [33m17580812[39m,
+      [[32mSymbol(kBufferedValue)[39m]: [1mnull[22m
+    },
+    _maxListeners: [90mundefined[39m,
+    _options: {
+      maxRedirects: [33m21[39m,
+      maxBodyLength: [33mInfinity[39m,
+      protocol: [32m'http:'[39m,
+      path: [32m'/student-score/one-student/cmnq74ink0001hrv254s9e0li/cmnq4bbkf0000xkv2o72hfh9z'[39m,
+      method: [32m'GET'[39m,
+      headers: [36m[Object: null prototype][39m,
+      agents: [36m[Object][39m,
+      auth: [90mundefined[39m,
+      family: [90mundefined[39m,
+      beforeRedirect: [36m[Function: dispatchBeforeRedirect][39m,
+      beforeRedirects: [36m[Object][39m,
+      http2Options: [90mundefined[39m,
+      hostname: [32m'localhost'[39m,
+      port: [32m'3002'[39m,
+      agent: [90mundefined[39m,
+      nativeProtocols: [36m[Object][39m,
+      pathname: [32m'/student-score/one-student/cmnq74ink0001hrv254s9e0li/cmnq4bbkf0000xkv2o72hfh9z'[39m
+    },
+    _ended: [33mtrue[39m,
+    _ending: [33mtrue[39m,
+    _redirectCount: [33m0[39m,
+    _redirects: [],
+    _requestBodyLength: [33m0[39m,
+    _requestBodyBuffers: [],
+    _eventsCount: [33m3[39m,
+    _onNativeResponse: [36m[Function (anonymous)][39m,
+    _currentRequest: ClientRequest {
+      _events: [36m[Object: null prototype][39m,
+      _eventsCount: [33m7[39m,
+      _maxListeners: [90mundefined[39m,
+      outputData: [],
+      outputSize: [33m0[39m,
+      writable: [33mtrue[39m,
+      destroyed: [33mfalse[39m,
+      _last: [33mtrue[39m,
+      chunkedEncoding: [33mfalse[39m,
+      shouldKeepAlive: [33mtrue[39m,
+      maxRequestsOnConnectionReached: [33mfalse[39m,
+      _defaultKeepAlive: [33mtrue[39m,
+      useChunkedEncodingByDefault: [33mfalse[39m,
+      sendDate: [33mfalse[39m,
+      _removedConnection: [33mfalse[39m,
+      _removedContLen: [33mfalse[39m,
+      _removedTE: [33mfalse[39m,
+      strictContentLength: [33mfalse[39m,
+      _contentLength: [33m0[39m,
+      _hasBody: [33mtrue[39m,
+      _trailer: [32m''[39m,
+      finished: [33mtrue[39m,
+      _headerSent: [33mtrue[39m,
+      _closed: [33mfalse[39m,
+      socket: [36m[Socket][39m,
+      _header: [32m'GET /student-score/one-student/cmnq74ink0001hrv254s9e0li/cmnq4bbkf0000xkv2o72hfh9z HTTP/1.1\r\n'[39m +
+        [32m'Accept: application/json, text/plain, */*\r\n'[39m +
+        [32m'Authorization: Bearer null\r\n'[39m +
+        [32m'User-Agent: axios/1.14.0\r\n'[39m +
+        [32m'Accept-Encoding: gzip, compress, deflate, br\r\n'[39m +
+        [32m'Host: localhost:3002\r\n'[39m +
+        [32m'Connection: keep-alive\r\n'[39m +
+        [32m'\r\n'[39m,
+      _keepAliveTimeout: [33m0[39m,
+      _onPendingData: [36m[Function: nop][39m,
+      agent: [36m[Agent][39m,
+      socketPath: [90mundefined[39m,
+      method: [32m'GET'[39m,
+      maxHeaderSize: [90mundefined[39m,
+      insecureHTTPParser: [90mundefined[39m,
+      joinDuplicateHeaders: [90mundefined[39m,
+      path: [32m'/student-score/one-student/cmnq74ink0001hrv254s9e0li/cmnq4bbkf0000xkv2o72hfh9z'[39m,
+      _ended: [33mfalse[39m,
+      res: [1mnull[22m,
+      aborted: [33mfalse[39m,
+      timeoutCb: [36m[Function: emitRequestTimeout][39m,
+      upgradeOrConnect: [33mfalse[39m,
+      parser: [1mnull[22m,
+      maxHeadersCount: [1mnull[22m,
+      reusedSocket: [33mfalse[39m,
+      host: [32m'localhost'[39m,
+      protocol: [32m'http:'[39m,
+      _redirectable: [36m[Circular *1][39m,
+      [[32mSymbol(shapeMode)[39m]: [33mfalse[39m,
+      [[32mSymbol(kCapture)[39m]: [33mfalse[39m,
+      [[32mSymbol(kBytesWritten)[39m]: [33m0[39m,
+      [[32mSymbol(kNeedDrain)[39m]: [33mfalse[39m,
+      [[32mSymbol(corked)[39m]: [33m0[39m,
+      [[32mSymbol(kOutHeaders)[39m]: [36m[Object: null prototype][39m,
+      [[32mSymbol(errored)[39m]: [1mnull[22m,
+      [[32mSymbol(kHighWaterMark)[39m]: [33m16384[39m,
+      [[32mSymbol(kRejectNonStandardBodyWrites)[39m]: [33mfalse[39m,
+      [[32mSymbol(kUniqueHeaders)[39m]: [1mnull[22m
+    },
+    _currentUrl: [32m'http://localhost:3002/student-score/one-student/cmnq74ink0001hrv254s9e0li/cmnq4bbkf0000xkv2o72hfh9z'[39m,
+    _timeout: [1mnull[22m,
+    [[32mSymbol(shapeMode)[39m
