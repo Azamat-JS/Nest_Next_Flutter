@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mobile/core/di/service_locator.dart';
 import 'package:mobile/core/utils/show_snackbar.dart';
 import 'package:mobile/features/groups/presentation/bloc/group_bloc.dart';
 import 'package:mobile/features/groups/presentation/pages/group_details_page.dart';
+import 'package:mobile/features/student_scores/presentation/bloc/student_score_bloc.dart';
 
 class MyGroupsPage extends StatefulWidget {
   const MyGroupsPage({super.key});
@@ -116,10 +118,18 @@ Widget _buildBody(BuildContext context) {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => GroupDetailsPage(
-                        students: state.selectedGroup!.students,
-                        teacher: state.selectedGroup!.teacher,
-                      ),
+                      builder: (context) {
+                        final group = state.selectedGroup!;
+                        return BlocProvider(
+                          create: (_) =>
+                              serviceLocator<StudentScoreBloc>()
+                                ..add(FetchStudentScores(group.id)),
+                          child: GroupDetailsPage(
+                            students: group.students,
+                            teacher: group.teacher,
+                          ),
+                        );
+                      },
                     ),
                   );
                 },
