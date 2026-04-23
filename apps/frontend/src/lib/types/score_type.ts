@@ -9,3 +9,14 @@ export type StudentScoreRow = {
     total: number;
 }
 
+export type ScoreEvent = {
+    type: "HOMEWORK" | "ATTENDANCE";
+    value: number;
+    date: string;
+}
+
+export type StudentScoreResponse = {
+    scores: ScoreEvent[];
+    total: { total: number };
+}
+
