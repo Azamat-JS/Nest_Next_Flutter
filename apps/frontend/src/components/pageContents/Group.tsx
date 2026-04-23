@@ -204,10 +204,10 @@ const GroupComponent = () => {
 
                 <TableBody>
                     {groups.map((u, idx) => (
-                        <TableRow key={u.id} className="cursor-pointer hover:bg-muted/50">
+                        <TableRow key={u.id} className=" hover:bg-muted/50">
                             <TableCell className="text-center">{(page - 1) * limit + idx + 1}</TableCell>
                             <TableCell className="text-center">{u.id}</TableCell>
-                            <TableCell className="text-center" onClick={() => router.push(`/groups/${u.id}`)}>{u.name}</TableCell>
+                            <TableCell className="text-center hover:cursor-pointer" onClick={() => router.push(`/groups/${u.id}`)}>{u.name}</TableCell>
 
                             <TableCell className="text-center">{u.teacher!.username}</TableCell>
 

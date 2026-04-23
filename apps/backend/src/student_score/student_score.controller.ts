@@ -21,6 +21,14 @@ export class StudentScoreController {
     return this.studentScoreRepo.getTodayStudentsScoreByGroup(groupId);
   }
 
+  @Get('one-student/:studentId/:groupId')
+  async getOneStudentScore(
+    @Param('studentId') studentId: string,
+    @Param('groupId') groupId: string,
+  ) {
+    return this.studentScoreRepo.findOneStudentScores(studentId, groupId);
+  }
+
 
   // @Get("group/scores/:groupId")
   // async getTotalScore(@Param('groupId') groupId: string) {

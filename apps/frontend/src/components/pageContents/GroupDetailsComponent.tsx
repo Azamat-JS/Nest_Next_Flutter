@@ -43,6 +43,7 @@ import { Button } from '../ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { Label } from '../ui/label';
 import { useStudents } from '@/lib/hooks/studentsHook';
+import { useRouter } from 'next/navigation';
 
 type UpdateScorePayload = {
     studentId: string;
@@ -61,6 +62,7 @@ const date = new Date().toISOString().split('T')[0];
 
 
 const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
+    const router = useRouter();
     const token = useAuthStore((state) => state.token);
     const [openCreate, setOpenCreate] = useState(false);
     const [openUpdate, setOpenUpdate] = useState(false);
@@ -189,7 +191,7 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
                         const score = scoreMap.get(s.id);
                         return (<TableRow key={s.id}>
                             <TableCell className="text-center">{idx + 1}</TableCell>
-                            <TableCell className="text-center">{s.username}</TableCell>
+                            <TableCell className="text-center hover:cursor-pointer" onClick={() => router.push(`/groups/${groupId}/${s.id}`)}>{s.username}</TableCell>
                             <TableCell className="text-center">{score?.homework ?? 0}</TableCell>
                             <TableCell className="text-center">{score?.attendance ?? 0}</TableCell>
                             <TableCell className="text-center"> {new Date().toISOString().split("T")[0]}</TableCell>

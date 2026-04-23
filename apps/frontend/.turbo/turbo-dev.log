@@ -1,0 +1,142 @@
+
+> frontend@0.1.0 dev /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend
+> next dev -p 4000
+
+[1m[38;2;173;127;168m▲ Next.js 16.2.1[39m[22m (Turbopack)
+- Local:         http://localhost:4000
+- Network:       http://192.168.13.93:4000
+- Environments: .env.local
+[32m[1m✓[22m[39m Ready in 286ms
+[33m[1m⚠[22m[39m Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /Users/azamatabdullayev/Desktop/full-stack-turbo/pnpm-workspace.yaml as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend/pnpm-workspace.yaml
+
+
+ GET / [32m200[39m in 459ms[2m (next.js: 279ms, application-code: 179ms)[22m
+ GET /groups [32m200[39m in 57ms[2m (next.js: 33ms, application-code: 23ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 328ms[2m (next.js: 312ms, application-code: 16ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 22ms[2m (next.js: 5ms, application-code: 17ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+ GET /groups [32m200[39m in 30ms[2m (next.js: 6ms, application-code: 24ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 35ms[2m (next.js: 13ms, application-code: 22ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 1506ms[2m (next.js: 1123ms, application-code: 384ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 535ms[2m (next.js: 17ms, application-code: 518ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 412ms[2m (next.js: 61ms, application-code: 350ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 111ms[2m (next.js: 20ms, application-code: 91ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 55ms[2m (next.js: 2ms, application-code: 52ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 58ms[2m (next.js: 3ms, application-code: 55ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 73ms[2m (next.js: 5ms, application-code: 68ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 76ms[2m (next.js: 3ms, application-code: 73ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 46ms[2m (next.js: 6ms, application-code: 41ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 43ms[2m (next.js: 1948µs, application-code: 41ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 44ms[2m (next.js: 4ms, application-code: 40ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 61ms[2m (next.js: 2ms, application-code: 58ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 63ms[2m (next.js: 4ms, application-code: 59ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 42ms[2m (next.js: 1263µs, application-code: 41ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 24ms[2m (next.js: 2ms, application-code: 22ms)[22m
+[32m[1m✓[22m[39m Compiled in 540ms
+[32m[1m✓[22m[39m Compiled in 325ms
+{
+  id: [32m'cmnq4bbkf0000xkv2o72hfh9z'[39m,
+  name: [32m'Group5'[39m,
+  teacherId: [32m'cmneollky0000hsv2s2gbkt7t'[39m,
+  createdAt: [32m'2026-04-08T14:02:51.087Z'[39m,
+  teacher: {
+    id: [32m'cmneollky0000hsv2s2gbkt7t'[39m,
+    username: [32m'Usmon'[39m,
+    email: [32m'usmon@gmail.com'[39m,
+    role: [32m'TEACHER'[39m
+  },
+  students: [
+    {
+      id: [32m'cmnkampkh0003icv2q37yozix'[39m,
+      username: [32m'bekzod'[39m,
+      email: [32m'bek@gmail.com'[39m,
+      role: [32m'STUDENT'[39m
+    },
+    {
+      id: [32m'cmnq74ink0001hrv254s9e0li'[39m,
+      username: [32m'Jamshid'[39m,
+      email: [32m'jamshid@gmail.com'[39m,
+      role: [32m'STUDENT'[39m
+    },
+    {
+      id: [32m'cmnkaas440001icv2k7mikei8'[39m,
+      username: [32m'Alibek'[39m,
+      email: [32m'alibek@gmail.com'[39m,
+      role: [32m'STUDENT'[39m
+    },
+    {
+      id: [32m'cmo05ffeo00008pv28uobawe6'[39m,
+      username: [32m'odil'[39m,
+      email: [32m'odil@gmail.com'[39m,
+      role: [32m'STUDENT'[39m
+    }
+  ]
+}
+{
+  id: [32m'cmnq4bbkf0000xkv2o72hfh9z'[39m,
+  name: [32m'Group5'[39m,
+  teacherId: [32m'cmneollky0000hsv2s2gbkt7t'[39m,
+  createdAt: [32m'2026-04-08T14:02:51.087Z'[39m,
+  teacher: {
+    id: [32m'cmneollky0000hsv2s2gbkt7t'[39m,
+    username: [32m'Usmon'[39m,
+    email: [32m'usmon@gmail.com'[39m,
+    role: [32m'TEACHER'[39m
+  },
+  students: [
+    {
+      id: [32m'cmnkampkh0003icv2q37yozix'[39m,
+      username: [32m'bekzod'[39m,
+      email: [32m'bek@gmail.com'[39m,
+      role: [32m'STUDENT'[39m
+    },
+    {
+      id: [32m'cmnq74ink0001hrv254s9e0li'[39m,
+      username: [32m'Jamshid'[39m,
+      email: [32m'jamshid@gmail.com'[39m,
+      role: [32m'STUDENT'[39m
+    },
+    {
+      id: [32m'cmnkaas440001icv2k7mikei8'[39m,
+      username: [32m'Alibek'[39m,
+      email: [32m'alibek@gmail.com'[39m,
+      role: [32m'STUDENT'[39m
+    },
+    {
+      id: [32m'cmo05ffeo00008pv28uobawe6'[39m,
+      username: [32m'odil'[39m,
+      email: [32m'odil@gmail.com'[39m,
+      role: [32m'STUDENT'[39m
+    }
+  ]
+}
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 131ms[2m (next.js: 17ms, application-code: 114ms)[22m
+[31m[1m⨯[22m[39m TypeError: useSyncExternalStore only works in Client Components. Add the "use client" directive at the top of the file to use it. Read more: https://nextjs.org/docs/messages/react-client-hook-in-server-component
+    at StudentScoresComponent (src/components/pageContents/StudentScoresComponent.tsx:6:31)
+  [90m4 |[0m
+  [90m5 |[0m [36mconst[0m [33mStudentScoresComponent[0m = ({ groupId, studentId }: { groupId: string, studentId: string }) => {
+[31m[1m>[0m [90m6 |[0m     [36mconst[0m token = useAuthStore((state) => state.token);
+  [90m  |[0m                               [31m[1m^[0m
+  [90m7 |[0m     [36mconst[0m queryClient = useQueryClient();
+  [90m8 |[0m     [36mconst[0m [33mAPI[0m = process.env.[33mNEXT_PUBLIC_API_URL[0m;
+  [90m9 |[0m {
+  digest: [32m'1669449595'[39m
+}
+[31m[1m⨯[22m[39m TypeError: useSyncExternalStore only works in Client Components. Add the "use client" directive at the top of the file to use it. Read more: https://nextjs.org/docs/messages/react-client-hook-in-server-component
+    at StudentScoresComponent (src/components/pageContents/StudentScoresComponent.tsx:6:31)
+  [90m4 |[0m
+  [90m5 |[0m [36mconst[0m [33mStudentScoresComponent[0m = ({ groupId, studentId }: { groupId: string, studentId: string }) => {
+[31m[1m>[0m [90m6 |[0m     [36mconst[0m token = useAuthStore((state) => state.token);
+  [90m  |[0m                               [31m[1m^[0m
+  [90m7 |[0m     [36mconst[0m queryClient = useQueryClient();
+  [90m8 |[0m     [36mconst[0m [33mAPI[0m = process.env.[33mNEXT_PUBLIC_API_URL[0m;
+  [90m9 |[0m {
+  digest: [32m'1843918669'[39m
+}
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkampkh0003icv2q37yozix [32m200[39m in 937ms[2m (next.js: 872ms, application-code: 64ms)[22m

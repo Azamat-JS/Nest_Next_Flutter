@@ -17,6 +17,35 @@ export class StudentScoreRepository {
         })
     }
 
+    async findOneStudentScores(studentId: string, groupId: string) {
+        return this.prisma.$transaction(async (tx) => {
+            const scores = await tx.scoreEvent.findMany({
+                where: {
+                    studentId,
+                    groupId,
+                },
+                select: {
+                    type: true,
+                    value: true,
+                    date: true,
+                }
+            });
+            const total = await tx.studentScore.findUnique({
+                where: {
+                    studentId_groupId: {
+                        studentId,
+                        groupId,
+                    }
+                },
+                select: {
+                    total: true,
+                }
+            })
+            return { scores, total }
+        })
+
+    }
+
     async addScore(tx: Prisma.TransactionClient, dto: ScoreDto) {
         await tx.scoreEvent.create({
             data: {
