@@ -140,3 +140,475 @@
   digest: [32m'1843918669'[39m
 }
  GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkampkh0003icv2q37yozix [32m200[39m in 937ms[2m (next.js: 872ms, application-code: 64ms)[22m
+[31m[1m⨯[22m[39m TypeError: useSyncExternalStore only works in Client Components. Add the "use client" directive at the top of the file to use it. Read more: https://nextjs.org/docs/messages/react-client-hook-in-server-component
+    at StudentScoresComponent (src/components/pageContents/StudentScoresComponent.tsx:6:31)
+  [90m4 |[0m
+  [90m5 |[0m [36mconst[0m [33mStudentScoresComponent[0m = ({ groupId, studentId }: { groupId: string, studentId: string }) => {
+[31m[1m>[0m [90m6 |[0m     [36mconst[0m token = useAuthStore((state) => state.token);
+  [90m  |[0m                               [31m[1m^[0m
+  [90m7 |[0m     [36mconst[0m queryClient = useQueryClient();
+  [90m8 |[0m     [36mconst[0m [33mAPI[0m = process.env.[33mNEXT_PUBLIC_API_URL[0m;
+  [90m9 |[0m {
+  digest: [32m'1843918669'[39m
+}
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkampkh0003icv2q37yozix [32m200[39m in 38ms[2m (next.js: 3ms, application-code: 35ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkampkh0003icv2q37yozix [32m200[39m in 12ms[2m (next.js: 949µs, application-code: 11ms)[22m
+[32m[1m✓[22m[39m Compiled in 160ms
+[31m[1m⨯[22m[39m TypeError: useSyncExternalStore only works in Client Components. Add the "use client" directive at the top of the file to use it. Read more: https://nextjs.org/docs/messages/react-client-hook-in-server-component
+    at StudentScoresComponent (src/components/pageContents/StudentScoresComponent.tsx:6:31)
+  [90m4 |[0m
+  [90m5 |[0m [36mconst[0m [33mStudentScoresComponent[0m = ({ groupId, studentId }: { groupId: string, studentId: string }) => {
+[31m[1m>[0m [90m6 |[0m     [36mconst[0m token = useAuthStore((state) => state.token);
+  [90m  |[0m                               [31m[1m^[0m
+  [90m7 |[0m     [36mconst[0m queryClient = useQueryClient();
+  [90m8 |[0m     [36mconst[0m [33mAPI[0m = process.env.[33mNEXT_PUBLIC_API_URL[0m;
+  [90m9 |[0m {
+  digest: [32m'1843918669'[39m
+}
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkampkh0003icv2q37yozix [32m200[39m in 43ms[2m (next.js: 18ms, application-code: 26ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkampkh0003icv2q37yozix [32m200[39m in 1496ms[2m (next.js: 865ms, application-code: 631ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkampkh0003icv2q37yozix [32m200[39m in 90ms[2m (next.js: 34ms, application-code: 57ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkampkh0003icv2q37yozix [32m200[39m in 38ms[2m (next.js: 1289µs, application-code: 37ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkampkh0003icv2q37yozix [32m200[39m in 25ms[2m (next.js: 2ms, application-code: 23ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkampkh0003icv2q37yozix [32m200[39m in 24ms[2m (next.js: 997µs, application-code: 23ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkampkh0003icv2q37yozix [32m200[39m in 13ms[2m (next.js: 860µs, application-code: 12ms)[22m
+{
+  scores: [
+    { type: [32m'HOMEWORK'[39m, value: [33m40[39m, date: [32m'2026-04-22T19:00:00.000Z'[39m },
+    { type: [32m'ATTENDANCE'[39m, value: [33m30[39m, date: [32m'2026-04-22T19:00:00.000Z'[39m },
+    { type: [32m'ATTENDANCE'[39m, value: [33m50[39m, date: [32m'2026-04-20T19:00:00.000Z'[39m },
+    { type: [32m'HOMEWORK'[39m, value: [33m100[39m, date: [32m'2026-04-20T19:00:00.000Z'[39m },
+    { type: [32m'HOMEWORK'[39m, value: [33m30[39m, date: [32m'2026-04-21T19:00:00.000Z'[39m },
+    { type: [32m'ATTENDANCE'[39m, value: [33m30[39m, date: [32m'2026-04-21T19:00:00.000Z'[39m }
+  ],
+  total: { total: [33m560[39m }
+}
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkampkh0003icv2q37yozix [32m200[39m in 133ms[2m (next.js: 4ms, application-code: 130ms)[22m
+ GET /groups [32m200[39m in 39ms[2m (next.js: 21ms, application-code: 18ms)[22m
+ GET /groups/cmnoh0p550000u8v2nihbtf1o [32m200[39m in 41ms[2m (next.js: 19ms, application-code: 21ms)[22m
+[32m[1m✓[22m[39m Compiled in 196ms
+ GET /groups [32m200[39m in 34ms[2m (next.js: 11ms, application-code: 23ms)[22m
+ GET /groups/cmnoh0p550000u8v2nihbtf1o [32m200[39m in 28ms[2m (next.js: 8ms, application-code: 20ms)[22m
+ GET /groups/cmnoh0p550000u8v2nihbtf1o/cmnq74ink0001hrv254s9e0li [32m200[39m in 30ms[2m (next.js: 7ms, application-code: 23ms)[22m
+{ scores: [], total: [1mnull[22m }
+ GET /groups/cmnoh0p550000u8v2nihbtf1o/cmnq74ink0001hrv254s9e0li [32m200[39m in 65ms[2m (next.js: 10ms, application-code: 54ms)[22m
+ GET /groups [32m200[39m in 25ms[2m (next.js: 4ms, application-code: 20ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 30ms[2m (next.js: 10ms, application-code: 20ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnq74ink0001hrv254s9e0li [32m200[39m in 21ms[2m (next.js: 6ms, application-code: 16ms)[22m
+[32m[1m✓[22m[39m Compiled in 25ms
+{
+  scores: [
+    { type: [32m'ATTENDANCE'[39m, value: [33m30[39m, date: [32m'2026-04-22T19:00:00.000Z'[39m },
+    { type: [32m'HOMEWORK'[39m, value: [33m50[39m, date: [32m'2026-04-22T19:00:00.000Z'[39m },
+    { type: [32m'ATTENDANCE'[39m, value: [33m30[39m, date: [32m'2026-04-21T19:00:00.000Z'[39m },
+    { type: [32m'HOMEWORK'[39m, value: [33m90[39m, date: [32m'2026-04-21T19:00:00.000Z'[39m },
+    { type: [32m'ATTENDANCE'[39m, value: [33m50[39m, date: [32m'2026-04-20T19:00:00.000Z'[39m },
+    { type: [32m'HOMEWORK'[39m, value: [33m40[39m, date: [32m'2026-04-20T19:00:00.000Z'[39m }
+  ],
+  total: { total: [33m580[39m }
+}
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnq74ink0001hrv254s9e0li [32m200[39m in 145ms[2m (next.js: 18ms, application-code: 127ms)[22m
+ GET /groups [32m200[39m in 29ms[2m (next.js: 10ms, application-code: 19ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 31ms[2m (next.js: 9ms, application-code: 21ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkampkh0003icv2q37yozix [32m200[39m in 30ms[2m (next.js: 7ms, application-code: 23ms)[22m
+[32m[1m✓[22m[39m Compiled in 26ms
+{
+  scores: [
+    { type: [32m'ATTENDANCE'[39m, value: [33m30[39m, date: [32m'2026-04-22T19:00:00.000Z'[39m },
+    { type: [32m'HOMEWORK'[39m, value: [33m40[39m, date: [32m'2026-04-22T19:00:00.000Z'[39m },
+    { type: [32m'ATTENDANCE'[39m, value: [33m30[39m, date: [32m'2026-04-21T19:00:00.000Z'[39m },
+    { type: [32m'HOMEWORK'[39m, value: [33m30[39m, date: [32m'2026-04-21T19:00:00.000Z'[39m },
+    { type: [32m'ATTENDANCE'[39m, value: [33m50[39m, date: [32m'2026-04-20T19:00:00.000Z'[39m },
+    { type: [32m'HOMEWORK'[39m, value: [33m100[39m, date: [32m'2026-04-20T19:00:00.000Z'[39m }
+  ],
+  total: { total: [33m560[39m }
+}
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkampkh0003icv2q37yozix [32m200[39m in 37ms[2m (next.js: 3ms, application-code: 34ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 25ms[2m (next.js: 8ms, application-code: 17ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkampkh0003icv2q37yozix [32m200[39m in 34ms[2m (next.js: 10ms, application-code: 25ms)[22m
+[32m[1m✓[22m[39m Compiled in 38ms
+[32m[1m✓[22m[39m Compiled in 77ms
+{
+  scores: [
+    { type: [32m'ATTENDANCE'[39m, value: [33m30[39m, date: [32m'2026-04-22T19:00:00.000Z'[39m },
+    { type: [32m'HOMEWORK'[39m, value: [33m40[39m, date: [32m'2026-04-22T19:00:00.000Z'[39m },
+    { type: [32m'ATTENDANCE'[39m, value: [33m30[39m, date: [32m'2026-04-21T19:00:00.000Z'[39m },
+    { type: [32m'HOMEWORK'[39m, value: [33m30[39m, date: [32m'2026-04-21T19:00:00.000Z'[39m },
+    { type: [32m'ATTENDANCE'[39m, value: [33m50[39m, date: [32m'2026-04-20T19:00:00.000Z'[39m },
+    { type: [32m'HOMEWORK'[39m, value: [33m100[39m, date: [32m'2026-04-20T19:00:00.000Z'[39m }
+  ],
+  total: { total: [33m560[39m }
+}
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkampkh0003icv2q37yozix [32m200[39m in 72ms[2m (next.js: 26ms, application-code: 46ms)[22m
+ GET /groups [32m200[39m in 21ms[2m (next.js: 4ms, application-code: 17ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 34ms[2m (next.js: 12ms, application-code: 23ms)[22m
+[31m[1m⨯[22m[39m Error [AxiosError]: Request failed with status code 500
+    at async queryFn (src/components/pageContents/GroupDetailsComponent.tsx:147:25)
+  [90m145 |[0m         queryKey: [[32m"students"[0m, groupId],
+  [90m146 |[0m         queryFn: [36masync[0m () => {
+[31m[1m>[0m [90m147 |[0m             [36mconst[0m res = [36mawait[0m axios.get([32m`[0m${[33mAPI[0m[32m}/student-score/today/students/[0m${groupId[32m}`[0m, { headers: { [33mAuthorization[0m: [32m`Bearer [0m${token[32m}`[0m } });
+  [90m    |[0m                         [31m[1m^[0m
+  [90m148 |[0m             [36mreturn[0m res.data;
+  [90m149 |[0m         },
+  [90m150 |[0m     }) {
+  isAxiosError: [33mtrue[39m,
+  code: [32m'ERR_BAD_RESPONSE'[39m,
+  config: {
+    transitional: {
+      silentJSONParsing: [33mtrue[39m,
+      forcedJSONParsing: [33mtrue[39m,
+      clarifyTimeoutError: [33mfalse[39m,
+      legacyInterceptorReqResOrdering: [33mtrue[39m
+    },
+    adapter: [ [32m'xhr'[39m, [32m'http'[39m, [32m'fetch'[39m ],
+    transformRequest: [ [36m[Function: transformRequest][39m ],
+    transformResponse: [ [36m[Function: transformResponse][39m ],
+    timeout: [33m0[39m,
+    xsrfCookieName: [32m'XSRF-TOKEN'[39m,
+    xsrfHeaderName: [32m'X-XSRF-TOKEN'[39m,
+    maxContentLength: [33m-1[39m,
+    maxBodyLength: [33m-1[39m,
+    env: { FormData: [36m[Function][39m, Blob: [36m[class Blob][39m },
+    validateStatus: [36m[Function: validateStatus][39m,
+    headers: Object [AxiosHeaders] {
+      Accept: [32m'application/json, text/plain, */*'[39m,
+      [32m'Content-Type'[39m: [90mundefined[39m,
+      Authorization: [32m'Bearer null'[39m,
+      [32m'User-Agent'[39m: [32m'axios/1.14.0'[39m,
+      [32m'Accept-Encoding'[39m: [32m'gzip, compress, deflate, br'[39m
+    },
+    method: [32m'get'[39m,
+    url: [32m'http://localhost:3002/student-score/today/students/cmnq4bbkf0000xkv2o72hfh9z'[39m,
+    allowAbsoluteUrls: [33mtrue[39m,
+    data: [90mundefined[39m
+  },
+  request: [36m<ref *1>[39m ClientRequest {
+    _events: [Object: null prototype] {
+      abort: [36m[Function (anonymous)][39m,
+      aborted: [36m[Function (anonymous)][39m,
+      connect: [36m[Function (anonymous)][39m,
+      error: [36m[Function (anonymous)][39m,
+      socket: [36m[Function (anonymous)][39m,
+      timeout: [36m[Function (anonymous)][39m,
+      finish: [36m[Function: requestOnFinish][39m
+    },
+    _eventsCount: [33m7[39m,
+    _maxListeners: [90mundefined[39m,
+    outputData: [],
+    outputSize: [33m0[39m,
+    writable: [33mtrue[39m,
+    destroyed: [33mtrue[39m,
+    _last: [33mtrue[39m,
+    chunkedEncoding: [33mfalse[39m,
+    shouldKeepAlive: [33mtrue[39m,
+    maxRequestsOnConnectionReached: [33mfalse[39m,
+    _defaultKeepAlive: [33mtrue[39m,
+    useChunkedEncodingByDefault: [33mfalse[39m,
+    sendDate: [33mfalse[39m,
+    _removedConnection: [33mfalse[39m,
+    _removedContLen: [33mfalse[39m,
+    _removedTE: [33mfalse[39m,
+    strictContentLength: [33mfalse[39m,
+    _contentLength: [33m0[39m,
+    _hasBody: [33mtrue[39m,
+    _trailer: [32m''[39m,
+    finished: [33mtrue[39m,
+    _headerSent: [33mtrue[39m,
+    _closed: [33mtrue[39m,
+    socket: Socket {
+      connecting: [33mfalse[39m,
+      _hadError: [33mfalse[39m,
+      _parent: [1mnull[22m,
+      _host: [32m'localhost'[39m,
+      _closeAfterHandlingError: [33mfalse[39m,
+      _events: [36m[Object][39m,
+      _readableState: [36m[ReadableState][39m,
+      _writableState: [36m[WritableState][39m,
+      allowHalfOpen: [33mfalse[39m,
+      _maxListeners: [90mundefined[39m,
+      _eventsCount: [33m6[39m,
+      _sockname: [1mnull[22m,
+      _pendingData: [1mnull[22m,
+      _pendingEncoding: [32m''[39m,
+      server: [1mnull[22m,
+      _server: [1mnull[22m,
+      timeout: [33m4000[39m,
+      parser: [1mnull[22m,
+      _httpMessage: [1mnull[22m,
+      autoSelectFamilyAttemptedAddresses: [36m[Array][39m,
+      [[32mSymbol(async_id_symbol)[39m]: [33m-1[39m,
+      [[32mSymbol(kHandle)[39m]: [36m[TCP][39m,
+      [[32mSymbol(lastWriteQueueSize)[39m]: [33m0[39m,
+      [[32mSymbol(timeout)[39m]: Timeout {
+        _idleTimeout: [33m4000[39m,
+        _idlePrev: [36m[TimersList][39m,
+        _idleNext: [36m[TimersList][39m,
+        _idleStart: [33m7664417[39m,
+        _onTimeout: [36m[Function: bound ][39m,
+        _timerArgs: [90mundefined[39m,
+        _repeat: [1mnull[22m,
+        _destroyed: [33mfalse[39m,
+        [[32mSymbol(refed)[39m]: [33mfalse[39m,
+        [[32mSymbol(kHasPrimitive)[39m]: [33mfalse[39m,
+        [[32mSymbol(asyncId)[39m]: [33m138900[39m,
+        [[32mSymbol(triggerId)[39m]: [33m138898[39m,
+        [[32mSymbol(kResourceStore)[39m]: [36m[Object][39m,
+        [[32mSymbol(kResourceStore)[39m]: [90mundefined[39m,
+        [[32mSymbol(kResourceStore)[39m]: [90mundefined[39m,
+        [[32mSymbol(kResourceStore)[39m]: [36m[RequestInstance][39m,
+        [[32mSymbol(kResourceStore)[39m]: [36m[Object][39m
+      },
+      [[32mSymbol(kBuffer)[39m]: [1mnull[22m,
+      [[32mSymbol(kBufferCb)[39m]: [1mnull[22m,
+      [[32mSymbol(kBufferGen)[39m]: [1mnull[22m,
+      [[32mSymbol(shapeMode)[39m]: [33mtrue[39m,
+      [[32mSymbol(kCapture)[39m]: [33mfalse[39m,
+      [[32mSymbol(kSetNoDelay)[39m]: [33mtrue[39m,
+      [[32mSymbol(kSetKeepAlive)[39m]: [33mtrue[39m,
+      [[32mSymbol(kSetKeepAliveInitialDelay)[39m]: [33m1[39m,
+      [[32mSymbol(kBytesRead)[39m]: [33m0[39m,
+      [[32mSymbol(kBytesWritten)[39m]: [33m0[39m
+    },
+    _header: [32m'GET /student-score/today/students/cmnq4bbkf0000xkv2o72hfh9z HTTP/1.1\r\n'[39m +
+      [32m'Accept: application/json, text/plain, */*\r\n'[39m +
+      [32m'Authorization: Bearer null\r\n'[39m +
+      [32m'User-Agent: axios/1.14.0\r\n'[39m +
+      [32m'Accept-Encoding: gzip, compress, deflate, br\r\n'[39m +
+      [32m'Host: localhost:3002\r\n'[39m +
+      [32m'Connection: keep-alive\r\n'[39m +
+      [32m'\r\n'[39m,
+    _keepAliveTimeout: [33m0[39m,
+    _onPendingData: [36m[Function: nop][39m,
+    agent: Agent {
+      _events: [36m[Object: null prototype][39m,
+      _eventsCount: [33m2[39m,
+      _maxListeners: [90mundefined[39m,
+      defaultPort: [33m80[39m,
+      protocol: [32m'http:'[39m,
+      options: [36m[Object: null prototype][39m,
+      requests: [Object: null prototype] {},
+      sockets: [Object: null prototype] {},
+      freeSockets: [36m[Object: null prototype][39m,
+      keepAliveMsecs: [33m1000[39m,
+      keepAlive: [33mtrue[39m,
+      maxSockets: [33mInfinity[39m,
+      maxFreeSockets: [33m256[39m,
+      scheduling: [32m'lifo'[39m,
+      maxTotalSockets: [33mInfinity[39m,
+      totalSocketCount: [33m1[39m,
+      [[32mSymbol(shapeMode)[39m]: [33mfalse[39m,
+      [[32mSymbol(kCapture)[39m]: [33mfalse[39m
+    },
+    socketPath: [90mundefined[39m,
+    method: [32m'GET'[39m,
+    maxHeaderSize: [90mundefined[39m,
+    insecureHTTPParser: [90mundefined[39m,
+    joinDuplicateHeaders: [90mundefined[39m,
+    path: [32m'/student-score/today/students/cmnq4bbkf0000xkv2o72hfh9z'[39m,
+    _ended: [33mtrue[39m,
+    res: IncomingMessage {
+      _events: [36m[Object][39m,
+      _readableState: [36m[ReadableState][39m,
+      _maxListeners: [90mundefined[39m,
+      socket: [1mnull[22m,
+      httpVersionMajor: [33m1[39m,
+      httpVersionMinor: [33m1[39m,
+      httpVersion: [32m'1.1'[39m,
+      complete: [33mtrue[39m,
+      rawHeaders: [36m[Array][39m,
+      rawTrailers: [],
+      joinDuplicateHeaders: [90mundefined[39m,
+      aborted: [33mfalse[39m,
+      upgrade: [33mfalse[39m,
+      url: [32m''[39m,
+      method: [1mnull[22m,
+      statusCode: [33m500[39m,
+      statusMessage: [32m'Internal Server Error'[39m,
+      client: [36m[Socket][39m,
+      _consuming: [33mfalse[39m,
+      _dumped: [33mfalse[39m,
+      req: [36m[Circular *1][39m,
+      _eventsCount: [33m4[39m,
+      responseUrl: [32m'http://localhost:3002/student-score/today/students/cmnq4bbkf0000xkv2o72hfh9z'[39m,
+      redirects: [],
+      [[32mSymbol(shapeMode)[39m]: [33mtrue[39m,
+      [[32mSymbol(kCapture)[39m]: [33mfalse[39m,
+      [[32mSymbol(kHeaders)[39m]: [36m[Object][39m,
+      [[32mSymbol(kHeadersCount)[39m]: [33m16[39m,
+      [[32mSymbol(kTrailers)[39m]: [1mnull[22m,
+      [[32mSymbol(kTrailersCount)[39m]: [33m0[39m
+    },
+    aborted: [33mfalse[39m,
+    timeoutCb: [1mnull[22m,
+    upgradeOrConnect: [33mfalse[39m,
+    parser: [1mnull[22m,
+    maxHeadersCount: [1mnull[22m,
+    reusedSocket: [33mtrue[39m,
+    host: [32m'localhost'[39m,
+    protocol: [32m'http:'[39m,
+    _redirectable: Writable {
+      _events: [36m[Object][39m,
+      _writableState: [36m[WritableState][39m,
+      _maxListeners: [90mundefined[39m,
+      _options: [36m[Object][39m,
+      _ended: [33mtrue[39m,
+      _ending: [33mtrue[39m,
+      _redirectCount: [33m0[39m,
+      _redirects: [],
+      _requestBodyLength: [33m0[39m,
+      _requestBodyBuffers: [],
+      _eventsCount: [33m3[39m,
+      _onNativeResponse: [36m[Function (anonymous)][39m,
+      _currentRequest: [36m[Circular *1][39m,
+      _currentUrl: [32m'http://localhost:3002/student-score/today/students/cmnq4bbkf0000xkv2o72hfh9z'[39m,
+      _timeout: [1mnull[22m,
+      [[32mSymbol(shapeMode)[39m]: [33mtrue[39m,
+      [[32mSymbol(kCapture)[39m]: [33mfalse[39m
+    },
+    [[32mSymbol(shapeMode)[39m]: [33mfalse[39m,
+    [[32mSymbol(kCapture)[39m]: [33mfalse[39m,
+    [[32mSymbol(kBytesWritten)[39m]: [33m0[39m,
+    [[32mSymbol(kNeedDrain)[39m]: [33mfalse[39m,
+    [[32mSymbol(corked)[39m]: [33m0[39m,
+    [[32mSymbol(kOutHeaders)[39m]: [Object: null prototype] {
+      accept: [36m[Array][39m,
+      authorization: [36m[Array][39m,
+      [32m'user-agent'[39m: [36m[Array][39m,
+      [32m'accept-encoding'[39m: [36m[Array][39m,
+      host: [36m[Array][39m
+    },
+    [[32mSymbol(errored)[39m]: [1mnull[22m,
+    [[32mSymbol(kHighWaterMark)[39m]: [33m16384[39m,
+    [[32mSymbol(kRejectNonStandardBodyWrites)[39m]: [33mfalse[39m,
+    [[32mSymbol(kUniqueHeaders)[39m]: [1mnull[22m
+  },
+  response: {
+    status: [33m500[39m,
+    statusText: [32m'Internal Server Error'[39m,
+    headers: Object [AxiosHeaders] {
+      [32m'x-powered-by'[39m: [32m'Express'[39m,
+      [32m'access-control-allow-origin'[39m: [32m'*'[39m,
+      [32m'content-type'[39m: [32m'application/json; charset=utf-8'[39m,
+      [32m'content-length'[39m: [32m'52'[39m,
+      etag: [32m'W/"34-rlKccw1E+/fV8niQk4oFitDfPro"'[39m,
+      date: [32m'Thu, 23 Apr 2026 12:34:25 GMT'[39m,
+      connection: [32m'keep-alive'[39m,
+      [32m'keep-alive'[39m: [32m'timeout=5'[39m
+    },
+    config: {
+      transitional: [36m[Object][39m,
+      adapter: [36m[Array][39m,
+      transformRequest: [36m[Array][39m,
+      transformResponse: [36m[Array][39m,
+      timeout: [33m0[39m,
+      xsrfCookieName: [32m'XSRF-TOKEN'[39m,
+      xsrfHeaderName: [32m'X-XSRF-TOKEN'[39m,
+      maxContentLength: [33m-1[39m,
+      maxBodyLength: [33m-1[39m,
+      env: [36m[Object][39m,
+      validateStatus: [36m[Function: validateStatus][39m,
+      headers: [36m[Object [AxiosHeaders]][39m,
+      method: [32m'get'[39m,
+      url: [32m'http://localhost:3002/student-score/today/students/cmnq4bbkf0000xkv2o72hfh9z'[39m,
+      allowAbsoluteUrls: [33mtrue[39m,
+      data: [90mundefined[39m
+    },
+    request: [36m<ref *1>[39m ClientRequest {
+      _events: [36m[Object: null prototype][39m,
+      _eventsCount: [33m7[39m,
+      _maxListeners: [90mundefined[39m,
+      outputData: [],
+      outputSize: [33m0[39m,
+      writable: [33mtrue[39m,
+      destroyed: [33mtrue[39m,
+      _last: [33mtrue[39m,
+      chunkedEncoding: [33mfalse[39m,
+      shouldKeepAlive: [33mtrue[39m,
+      maxRequestsOnConnectionReached: [33mfalse[39m,
+      _defaultKeepAlive: [33mtrue[39m,
+      useChunkedEncodingByDefault: [33mfalse[39m,
+      sendDate: [33mfalse[39m,
+      _removedConnection: [33mfalse[39m,
+      _removedContLen: [33mfalse[39m,
+      _removedTE: [33mfalse[39m,
+      strictContentLength: [33mfalse[39m,
+      _contentLength: [33m0[39m,
+      _hasBody: [33mtrue[39m,
+      _trailer: [32m''[39m,
+      finished: [33mtrue[39m,
+      _headerSent: [33mtrue[39m,
+      _closed: [33mtrue[39m,
+      socket: [36m[Socket][39m,
+      _header: [32m'GET /student-score/today/students/cmnq4bbkf0000xkv2o72hfh9z HTTP/1.1\r\n'[39m +
+        [32m'Accept: application/json, text/plain, */*\r\n'[39m +
+        [32m'Authorization: Bearer null\r\n'[39m +
+        [32m'User-Agent: axios/1.14.0\r\n'[39m +
+        [32m'Accept-Encoding: gzip, compress, deflate, br\r\n'[39m +
+        [32m'Host: localhost:3002\r\n'[39m +
+        [32m'Connection: keep-alive\r\n'[39m +
+        [32m'\r\n'[39m,
+      _keepAliveTimeout: [33m0[39m,
+      _onPendingData: [36m[Function: nop][39m,
+      agent: [36m[Agent][39m,
+      socketPath: [90mundefined[39m,
+      method: [32m'GET'[39m,
+      maxHeaderSize: [90mundefined[39m,
+      insecureHTTPParser: [90mundefined[39m,
+      joinDuplicateHeaders: [90mundefined[39m,
+      path: [32m'/student-score/today/students/cmnq4bbkf0000xkv2o72hfh9z'[39m,
+      _ended: [33mtrue[39m,
+      res: [36m[IncomingMessage][39m,
+      aborted: [33mfalse[39m,
+      timeoutCb: [1mnull[22m,
+      upgradeOrConnect: [33mfalse[39m,
+      parser: [1mnull[22m,
+      maxHeadersCount: [1mnull[22m,
+      reusedSocket: [33mtrue[39m,
+      host: [32m'localhost'[39m,
+      protocol: [32m'http:'[39m,
+      _redirectable: [36m[Writable][39m,
+      [[32mSymbol(shapeMode)[39m]: [33mfalse[39m,
+      [[32mSymbol(kCapture)[39m]: [33mfalse[39m,
+      [[32mSymbol(kBytesWritten)[39m]: [33m0[39m,
+      [[32mSymbol(kNeedDrain)[39m]: [33mfalse[39m,
+      [[32mSymbol(corked)[39m]: [33m0[39m,
+      [[32mSymbol(kOutHeaders)[39m]: [36m[Object: null prototype][39m,
+      [[32mSymbol(errored)[39m]: [1mnull[22m,
+      [[32mSymbol(kHighWaterMark)[39m]: [33m16384[39m,
+      [[32mSymbol(kRejectNonStandardBodyWrites)[39m]: [33mfalse[39m,
+      [[32mSymbol(kUniqueHeaders)[39m]: [1mnull[22m
+    },
+    data: { statusCode: [33m500[39m, message: [32m'Internal server error'[39m }
+  },
+  status: [33m500[39m,
+  digest: [32m'419711952'[39m
+}
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 154ms[2m (next.js: 3ms, application-code: 151ms)[22m
+[36m[browser][39m [31mUncaught Error: Switched to client rendering because the server rendering errored:
+
+Request failed with status code 500[39m
+[31m    at async queryFn (src/components/pageContents/GroupDetailsComponent.tsx:147:25)[39m
+  [90m145 |[0m         queryKey: [[32m"students"[0m, groupId],
+  [90m146 |[0m         queryFn: [36masync[0m () => {
+[31m[1m>[0m [90m147 |[0m             [36mconst[0m res = [36mawait[0m axios.get([32m`[0m${[33mAPI[0m[32m}/student-score/today/students/[0m${groupId[32m}`[0m, { headers: { [33mAuthorization[0m: [32m`Bearer [0m${token[32m}`[0m } });
+  [90m    |[0m                         [31m[1m^[0m
+  [90m148 |[0m             [36mreturn[0m res.data;
+  [90m149 |[0m         },
+  [90m150 |[0m     })
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 165ms[2m (next.js: 10ms, application-code: 155ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 77ms[2m (next.js: 15ms, application-code: 62ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[32m[1m✓[22m[39m Compiled in 55ms
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 60ms[2m (next.js: 6ms, application-code: 54ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkampkh0003icv2q37yozix [32m200[39m in 31ms[2m (next.js: 8ms, application-code: 24ms)[22m
+ GET /groups [32m200[39m in 20ms[2m (next.js: 4ms, application-code: 16ms)[22m
+[?25h

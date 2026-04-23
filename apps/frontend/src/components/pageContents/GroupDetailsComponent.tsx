@@ -84,8 +84,6 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
         },
     })
 
-    console.log(data)
-
     const updateScoresMutation = useMutation({
         mutationFn: async (payload: UpdateScorePayload) => {
             const { studentId, groupId, date, type, value } = payload;

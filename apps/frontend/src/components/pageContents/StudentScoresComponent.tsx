@@ -11,7 +11,7 @@ const StudentScoresComponent = ({ groupId, studentId }: { groupId: string, stude
     const API = process.env.NEXT_PUBLIC_API_URL;
 
 
-    const { data: studentScores } = useSuspenseQuery<StudentScoreResponse>({
+    const { data: studentScoreReport } = useSuspenseQuery<StudentScoreResponse>({
         queryKey: ["studentScores", studentId, groupId],
         queryFn: async () => {
             const res = await axios.get(`${API}/student-score/one-student/${studentId}/${groupId}`, { headers: { Authorization: `Bearer ${token}` } });
@@ -19,7 +19,7 @@ const StudentScoresComponent = ({ groupId, studentId }: { groupId: string, stude
         },
     })
 
-    console.log(studentScores)
+    console.log(studentScoreReport)
     return (
         <div>StudentScoresComponent</div>
     )

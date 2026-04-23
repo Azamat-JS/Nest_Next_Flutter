@@ -28,6 +28,9 @@ export class StudentScoreRepository {
                     type: true,
                     value: true,
                     date: true,
+                },
+                orderBy: {
+                    createdAt: 'desc',
                 }
             });
             const total = await tx.studentScore.findUnique({
