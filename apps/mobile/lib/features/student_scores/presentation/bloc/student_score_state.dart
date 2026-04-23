@@ -16,11 +16,15 @@ class StudentScoreState {
     bool? isLoading,
     Failure? failure,
     List<StudentScoreEntity>? studentScores,
+    bool clearFailure = false,
+    bool clearStudentScores = false,
   }) {
     return StudentScoreState(
       isLoading: isLoading ?? this.isLoading,
-      failure: failure,
-      studentScores: this.studentScores,
+      failure: clearFailure ? null : (failure ?? this.failure),
+      studentScores: clearStudentScores
+          ? []
+          : (studentScores ?? this.studentScores),
     );
   }
 }
