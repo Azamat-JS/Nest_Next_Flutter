@@ -18,9 +18,14 @@ class StudentCard extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 12),
       elevation: 3,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: _cardBody(context, student, homework, attendance),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: _cardBody(context, student, homework, attendance),
+          ),
+        ],
       ),
     );
   }
@@ -47,8 +52,6 @@ Widget _cardBody(
         overflow: TextOverflow.ellipsis,
       ),
       const SizedBox(height: 10),
-      Text(student.email, style: const TextStyle(fontSize: 16)),
-      const SizedBox(height: 10),
       Card.outlined(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -67,7 +70,6 @@ Widget _cardBody(
       const SizedBox(height: 10),
       Card.outlined(
         color: Colors.lightBlue,
-
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
           child: IntrinsicHeight(
