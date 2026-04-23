@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { PaginationDto } from './dto/group.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { Prisma, UserRole } from '@prisma/client';
+import { PaginationDto } from 'src/lib/shared/dto/pagination.dto';
 
 @Injectable()
 export class GroupRepository {

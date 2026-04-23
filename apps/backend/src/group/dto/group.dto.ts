@@ -34,16 +34,3 @@ export class AddStudentsDto {
     @IsString({ each: true })
     studentIds?: string[];
 }
-
-
-export class PaginationDto {
-    @IsOptional()
-    @IsInt()
-    @Min(1)
-    limit?: number;
-
-    @IsOptional()
-    @IsInt()
-    @Min(1)
-    page?: number;
-}

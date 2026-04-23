@@ -3,6 +3,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { ScoreDto, UpdateScoreDto } from './dto/score.dto';
 import { Prisma } from '@prisma/client/scripts/default-index.js';
 import { ScoreType } from '@prisma/client';
+import { PaginationDto } from 'src/lib/shared/dto/pagination.dto';
 
 @Injectable()
 export class StudentScoreRepository {
@@ -17,9 +18,13 @@ export class StudentScoreRepository {
         })
     }
 
-    async findOneStudentScores(studentId: string, groupId: string) {
+    async findOneStudentScores(studentId: string, groupId: string, query: PaginationDto) {
+        const { limit = 10, page = 1 } = query;
+        const skip = (page - 1) * limit;
         return this.prisma.$transaction(async (tx) => {
             const scores = await tx.scoreEvent.findMany({
+                skip,
+                take: limit,
                 where: {
                     studentId,
                     groupId,
