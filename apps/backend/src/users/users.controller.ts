@@ -2,7 +2,7 @@ import { Body, Controller, Get, Post, Put, Param, Delete, UseGuards, Req, Query 
 import { UsersService } from './users.service';
 import { CreateUserDto, LoginDto, UpdateUserDto } from './dto/user.dto';
 import { JwtAuthGuard } from 'src/lib/guards/jwt.guard';
-import { PaginationDto } from 'src/group/dto/group.dto';
+import { PaginationDto } from 'src/lib/shared/dto/pagination.dto';
 
 @Controller('users')
 export class UsersController {

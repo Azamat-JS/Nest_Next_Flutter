@@ -48,55 +48,41 @@ import { Menu, Edit, Trash } from 'lucide-react';
 
 const StudentScoresComponent = ({ groupId, studentId }: { groupId: string, studentId: string }) => {
     const token = useAuthStore((state) => state.token);
+    const searchParams = useSearchParams();
     const queryClient = useQueryClient();
+    const page = Number(searchParams.get('page') ?? 1);
+    const limit = Number(searchParams.get('limit') ?? 10)
     const API = process.env.NEXT_PUBLIC_API_URL;
     const { data: students = [] } = useStudents()
     const router = useRouter();
 
 
     const { data: studentScoreReport } = useSuspenseQuery<StudentScoreResponse>({
-        queryKey: ["studentScores", studentId, groupId],
+        queryKey: ["studentScores", studentId, groupId, page, limit],
         queryFn: async () => {
-            const res = await axios.get(`${API}/student-score/one-student/${studentId}/${groupId}`, { headers: { Authorization: `Bearer ${token}` } });
+            const res = await axios.get(`${API}/student-score/one-student/${studentId}/${groupId}`, { headers: { Authorization: `Bearer ${token}` }, params: { page, limit }, });
             return res.data;
         },
     });
+    console.log(studentScoreReport)
 
 
     const student = useMemo(() => {
         return students.find((s: TokenPayload) => s.id === studentId);
     }, [studentId, students])
 
-    const groupedByDate = useMemo(() => {
-        return studentScoreReport.scores.reduce((acc, score) => {
-            const date = new Date(score.date).toISOString().split('T')[0];
+    const rows = studentScoreReport.scores;
 
-            acc[date] ??= { homework: 0, attendance: 0 };
-
-            if (score.type === 'HOMEWORK') acc[date].homework += score.value;
-            if (score.type === 'ATTENDANCE') acc[date].attendance += score.value;
-
-            return acc;
-        }, {} as Record<string, { homework: number; attendance: number }>);
-    }, [studentScoreReport]);
-
-    const grandTotal = useMemo(() => {
-        return Object.values(groupedByDate).reduce((sum, day) => {
-            return sum + day.homework + day.attendance;
-        }, 0)
-    }, [groupedByDate]);
-
-    console.log(groupedByDate)
     if (!student) {
         return <div className="text-gray-500">Loading student...</div>;
     }
 
-    const lastPage = meta?.last_page ?? 1;
+    const lastPage = studentScoreReport.last_page;
 
     return (
         <div>
             <Table>
-                <TableCaption className="font-bold text-xl text-black">Total - {grandTotal}</TableCaption>
+                <TableCaption className="font-bold text-xl text-black">Total (all time): {studentScoreReport.total.total}</TableCaption>
                 <TableHeader>
                     <TableRow key={groupId}>
                         <TableHead className="w-12 text-center text-lg font-bold">&#8470;</TableHead>
@@ -107,14 +93,14 @@ const StudentScoresComponent = ({ groupId, studentId }: { groupId: string, stude
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {Object.entries(groupedByDate).map(([date, value], idx) => (
-                        <TableRow key={date}>
+                    {rows.map((row, idx) => (
+                        <TableRow key={idx}>
                             <TableCell className="text-center">{idx + 1}</TableCell>
-                            <TableCell className="text-center">{value.homework}</TableCell>
-                            <TableCell className="text-center">{value.attendance}</TableCell>
-                            <TableCell className="text-center">{date}</TableCell>
+                            <TableCell className="text-center">{row.homework}</TableCell>
+                            <TableCell className="text-center">{row.attendance}</TableCell>
+                            <TableCell className="text-center">{row.date}</TableCell>
                             <TableCell className="text-center">
-                                {value.homework + value.attendance}
+                                {row.homework + row.attendance}
                             </TableCell>
                         </TableRow>
                     ))}

@@ -172,4 +172,146 @@
     },
     _currentUrl: [32m'http://localhost:3002/student-score/one-student/cmnq74ink0001hrv254s9e0li/cmnq4bbkf0000xkv2o72hfh9z'[39m,
     _timeout: [1mnull[22m,
-    [[32mSymbol(shapeMode)[39m
+    [[32mSymbol(shapeMode)[39m]: [33mtrue[39m,
+    [[32mSymbol(kCapture)[39m]: [33mfalse[39m
+  },
+  digest: [32m'2573234712'[39m,
+  [cause]: AggregateError: 
+      at [3mignore-listed frames[23m {
+    code: [32m'ECONNREFUSED'[39m,
+    [errors]: [ [36m[Error][39m, [36m[Error][39m ]
+  }
+}
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnq74ink0001hrv254s9e0li [32m200[39m in 495ms[2m (next.js: 268ms, application-code: 227ms)[22m
+[36m[browser][39m [31mUncaught Error: Switched to client rendering because the server rendering errored:
+
+[39m
+[31m    at async queryFn (src/components/pageContents/StudentScoresComponent.tsx:60:25)[39m
+  [90m58 |[0m         queryKey: [[32m"studentScores"[0m, studentId, groupId],
+  [90m59 |[0m         queryFn: [36masync[0m () => {
+[31m[1m>[0m [90m60 |[0m             [36mconst[0m res = [36mawait[0m axios.get([32m`[0m${[33mAPI[0m[32m}/student-score/one-student/[0m${studentId[32m}/[0m${groupId[32m}`[0m, { headers: { [33mAuthorization[0m: [32m`Be...[0m
+  [90m   |[0m                         [31m[1m^[0m
+  [90m61 |[0m             [36mreturn[0m res.data;
+  [90m62 |[0m         },
+  [90m63 |[0m     });
+{ [32m'2026-04-22'[39m: { homework: [33m40[39m, attendance: [33m40[39m } }
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnq74ink0001hrv254s9e0li [32m200[39m in 64ms[2m (next.js: 11ms, application-code: 54ms)[22m
+[32m[1m✓[22m[39m Compiled in 312ms
+[32m[1m✓[22m[39m Compiled in 27ms
+[32m[1m✓[22m[39m Compiled in 24ms
+[32m[1m✓[22m[39m Compiled in 19ms
+[32m[1m✓[22m[39m Compiled in 268ms
+[32m[1m✓[22m[39m Compiled in 21ms
+[32m[1m✓[22m[39m Compiled in 509ms
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnq74ink0001hrv254s9e0li [32m200[39m in 284ms[2m (next.js: 100ms, application-code: 183ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnq74ink0001hrv254s9e0li [32m200[39m in 111ms[2m (next.js: 3ms, application-code: 108ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnq74ink0001hrv254s9e0li [32m200[39m in 78ms[2m (next.js: 3ms, application-code: 75ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnq74ink0001hrv254s9e0li [32m200[39m in 44ms[2m (next.js: 4ms, application-code: 39ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnq74ink0001hrv254s9e0li [32m200[39m in 13ms[2m (next.js: 943µs, application-code: 12ms)[22m
+[32m[1m✓[22m[39m Compiled in 23ms
+[32m[1m✓[22m[39m Compiled in 72ms
+[32m[1m✓[22m[39m Compiled in 263ms
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnq74ink0001hrv254s9e0li [32m200[39m in 134ms[2m (next.js: 68ms, application-code: 66ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnq74ink0001hrv254s9e0li [32m200[39m in 28ms[2m (next.js: 1384µs, application-code: 27ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnq74ink0001hrv254s9e0li [32m200[39m in 15ms[2m (next.js: 1192µs, application-code: 14ms)[22m
+{
+  scores: [
+    { type: [32m'ATTENDANCE'[39m, value: [33m40[39m, date: [32m'2026-04-22T19:00:00.000Z'[39m },
+    { type: [32m'HOMEWORK'[39m, value: [33m40[39m, date: [32m'2026-04-22T19:00:00.000Z'[39m }
+  ],
+  total: { total: [33m160[39m }
+}
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnq74ink0001hrv254s9e0li [32m200[39m in 167ms[2m (next.js: 10ms, application-code: 158ms)[22m
+{
+  scores: [
+    { type: [32m'ATTENDANCE'[39m, value: [33m40[39m, date: [32m'2026-04-22T19:00:00.000Z'[39m },
+    { type: [32m'HOMEWORK'[39m, value: [33m40[39m, date: [32m'2026-04-22T19:00:00.000Z'[39m }
+  ],
+  total: { total: [33m160[39m }
+}
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnq74ink0001hrv254s9e0li [32m200[39m in 64ms[2m (next.js: 19ms, application-code: 45ms)[22m
+[32m[1m✓[22m[39m Compiled in 27ms
+{
+  scores: [
+    { type: [32m'ATTENDANCE'[39m, value: [33m40[39m, date: [32m'2026-04-22T19:00:00.000Z'[39m },
+    { type: [32m'HOMEWORK'[39m, value: [33m40[39m, date: [32m'2026-04-22T19:00:00.000Z'[39m }
+  ],
+  total: { total: [33m160[39m }
+}
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnq74ink0001hrv254s9e0li [32m200[39m in 65ms[2m (next.js: 14ms, application-code: 51ms)[22m
+[32m[1m✓[22m[39m Compiled in 23ms
+{
+  scores: [
+    { type: [32m'ATTENDANCE'[39m, value: [33m40[39m, date: [32m'2026-04-22T19:00:00.000Z'[39m },
+    { type: [32m'HOMEWORK'[39m, value: [33m40[39m, date: [32m'2026-04-22T19:00:00.000Z'[39m }
+  ],
+  total: { total: [33m160[39m }
+}
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnq74ink0001hrv254s9e0li [32m200[39m in 41ms[2m (next.js: 8ms, application-code: 33ms)[22m
+{
+  scores: [
+    { type: [32m'ATTENDANCE'[39m, value: [33m40[39m, date: [32m'2026-04-22T19:00:00.000Z'[39m },
+    { type: [32m'HOMEWORK'[39m, value: [33m40[39m, date: [32m'2026-04-22T19:00:00.000Z'[39m }
+  ],
+  total: { total: [33m160[39m }
+}
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnq74ink0001hrv254s9e0li [32m200[39m in 74ms[2m (next.js: 8ms, application-code: 66ms)[22m
+[32m[1m✓[22m[39m Compiled in 94ms
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnq74ink0001hrv254s9e0li [32m200[39m in 122ms[2m (next.js: 59ms, application-code: 63ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnq74ink0001hrv254s9e0li [32m200[39m in 46ms[2m (next.js: 963µs, application-code: 45ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnq74ink0001hrv254s9e0li [32m200[39m in 24ms[2m (next.js: 1500µs, application-code: 22ms)[22m
+{
+  scores: [
+    { type: [32m'ATTENDANCE'[39m, value: [33m40[39m, date: [32m'2026-04-22T19:00:00.000Z'[39m },
+    { type: [32m'HOMEWORK'[39m, value: [33m40[39m, date: [32m'2026-04-22T19:00:00.000Z'[39m }
+  ],
+  total: { total: [33m160[39m }
+}
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnq74ink0001hrv254s9e0li [32m200[39m in 130ms[2m (next.js: 5ms, application-code: 125ms)[22m
+[32m[1m✓[22m[39m Compiled in 21ms
+{
+  scores: [
+    { type: [32m'ATTENDANCE'[39m, value: [33m40[39m, date: [32m'2026-04-22T19:00:00.000Z'[39m },
+    { type: [32m'HOMEWORK'[39m, value: [33m40[39m, date: [32m'2026-04-22T19:00:00.000Z'[39m }
+  ],
+  total: { total: [33m160[39m }
+}
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnq74ink0001hrv254s9e0li [32m200[39m in 42ms[2m (next.js: 8ms, application-code: 34ms)[22m
+[32m[1m✓[22m[39m Compiled in 81ms
+[32m[1m✓[22m[39m Compiled in 21ms
+{
+  scores: [
+    { type: [32m'ATTENDANCE'[39m, value: [33m40[39m, date: [32m'2026-04-22T19:00:00.000Z'[39m },
+    { type: [32m'HOMEWORK'[39m, value: [33m40[39m, date: [32m'2026-04-22T19:00:00.000Z'[39m }
+  ],
+  total: { total: [33m160[39m }
+}
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnq74ink0001hrv254s9e0li [32m200[39m in 61ms[2m (next.js: 16ms, application-code: 46ms)[22m
+{
+  scores: [
+    { type: [32m'ATTENDANCE'[39m, value: [33m40[39m, date: [32m'2026-04-22T19:00:00.000Z'[39m },
+    { type: [32m'HOMEWORK'[39m, value: [33m40[39m, date: [32m'2026-04-22T19:00:00.000Z'[39m }
+  ],
+  total: { total: [33m160[39m }
+}
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnq74ink0001hrv254s9e0li [32m200[39m in 63ms[2m (next.js: 15ms, application-code: 48ms)[22m
+{
+  scores: [ { date: [32m'2026-04-22'[39m, homework: [33m40[39m, attendance: [33m40[39m } ],
+  total: { total: [33m160[39m },
+  page: [33m1[39m,
+  limit: [33m10[39m,
+  total_count: [33m1[39m,
+  last_page: [33m1[39m
+}
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnq74ink0001hrv254s9e0li [32m200[39m in 58ms[2m (next.js: 10ms, application-code: 48ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnq74ink0001hrv254s9e0li?limit=5&page=1 [32m200[39m in 27ms[2m (next.js: 6ms, application-code: 21ms)[22m
+{
+  scores: [ { date: [32m'2026-04-22'[39m, homework: [33m40[39m, attendance: [33m40[39m } ],
+  total: { total: [33m160[39m },
+  page: [33m1[39m,
+  limit: [33m5[39m,
+  total_count: [33m1[39m,
+  last_page: [33m1[39m
+}
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnq74ink0001hrv254s9e0li?limit=5&page=1 [32m200[39m in 35ms[2m (next.js: 2ms, application-code: 32ms)[22m
+[32m[1m✓[22m[39m Compiled in 27ms

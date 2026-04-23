@@ -17,41 +17,72 @@ export class StudentScoreRepository {
             }
         })
     }
-
-    async findOneStudentScores(studentId: string, groupId: string, query: PaginationDto) {
+    async findOneStudentScores(
+        studentId: string,
+        groupId: string,
+        query: PaginationDto
+    ) {
         const { limit = 10, page = 1 } = query;
         const skip = (page - 1) * limit;
+
         return this.prisma.$transaction(async (tx) => {
-            const scores = await tx.scoreEvent.findMany({
-                skip,
-                take: limit,
-                where: {
-                    studentId,
-                    groupId,
-                },
-                select: {
-                    type: true,
-                    value: true,
-                    date: true,
-                },
+            const grouped = await tx.scoreEvent.groupBy({
+                by: ['date', 'type'],
+                where: { studentId, groupId },
+                _sum: { value: true },
                 orderBy: {
-                    createdAt: 'desc',
-                }
+                    date: 'desc', // ✅ IMPORTANT
+                },
             });
+
+            const map = new Map<
+                string,
+                { date: string; homework: number; attendance: number }
+            >();
+
+            for (const g of grouped) {
+                const date = g.date.toISOString().split('T')[0];
+                if (!map.has(date)) {
+                    map.set(date, { date, homework: 0, attendance: 0 });
+                }
+
+                const entry = map.get(date)!;
+
+                if (g.type === 'HOMEWORK') {
+                    entry.homework = g._sum.value ?? 0;
+                }
+
+                if (g.type === 'ATTENDANCE') {
+                    entry.attendance = g._sum.value ?? 0;
+                }
+            }
+
+            const allDays = Array.from(map.values());
+
+            const totalCount = allDays.length;
+            const paginated = allDays.slice(skip, skip + limit);
+
             const total = await tx.studentScore.findUnique({
                 where: {
                     studentId_groupId: {
                         studentId,
                         groupId,
-                    }
+                    },
                 },
                 select: {
                     total: true,
-                }
-            })
-            return { scores, total }
-        })
+                },
+            });
 
+            return {
+                scores: paginated,
+                total,
+                page,
+                limit,
+                total_count: totalCount,
+                last_page: Math.ceil(totalCount / limit),
+            };
+        });
     }
 
     async addScore(tx: Prisma.TransactionClient, dto: ScoreDto) {

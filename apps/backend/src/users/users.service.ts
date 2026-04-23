@@ -3,8 +3,8 @@ import { Prisma, UserRole } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
-import { PaginationDto } from 'src/group/dto/group.dto';
 import { CreateUserDto, UpdateUserDto } from './dto/user.dto';
+import { PaginationDto } from 'src/lib/shared/dto/pagination.dto';
 
 @Injectable()
 export class UsersService {
