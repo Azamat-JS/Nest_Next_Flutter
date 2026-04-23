@@ -3,7 +3,7 @@ import 'package:mobile/core/network/dio_client.dart';
 import 'package:mobile/features/student_scores/data/model/student_score_model.dart';
 
 abstract interface class StudentScoreDataSource {
-  Future<List<StudentScoreModel>> getStudentScore({required String groupId});
+  Future<List<StudentScoreModel>> getStudentScores({required String groupId});
 }
 
 class StudentScoreDateSourceImpl implements StudentScoreDataSource {
@@ -12,7 +12,7 @@ class StudentScoreDateSourceImpl implements StudentScoreDataSource {
   StudentScoreDateSourceImpl(this.dioClient);
 
   @override
-  Future<List<StudentScoreModel>> getStudentScore({
+  Future<List<StudentScoreModel>> getStudentScores({
     required String groupId,
   }) async {
     try {

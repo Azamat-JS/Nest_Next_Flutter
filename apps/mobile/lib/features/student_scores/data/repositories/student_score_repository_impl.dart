@@ -14,7 +14,7 @@ class StudentScoreRepositoryImpl implements StudentScoreRepository {
     required String groupId,
   }) async {
     try {
-      final studentScores = await dataSource.getStudentScore(groupId: groupId);
+      final studentScores = await dataSource.getStudentScores(groupId: groupId);
       return right(studentScores);
     } catch (e) {
       return left(Failure('Failed to fetch student scores: $e'));

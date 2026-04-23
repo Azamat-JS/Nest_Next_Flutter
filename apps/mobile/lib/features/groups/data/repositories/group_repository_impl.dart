@@ -16,7 +16,6 @@ class GroupRepositoryImpl implements GroupRepository {
       final group = await remoteDataSource.getGroupById(id: id);
       return right(group);
     } catch (e) {
-      print(e);
       return left(Failure('Failed to fetch group: $e'));
     }
   }
