@@ -4,15 +4,8 @@ import 'package:mobile/features/student_scores/presentation/bloc/student_score_b
 import 'package:mobile/features/student_scores/presentation/widgets/my_score_card.dart';
 
 class StudentScoresPage extends StatelessWidget {
-  final String groupId;
-  final String studentId;
   final String username;
-  const StudentScoresPage({
-    super.key,
-    required this.groupId,
-    required this.studentId,
-    required this.username,
-  });
+  const StudentScoresPage({super.key, required this.username});
 
   @override
   Widget build(BuildContext context) {

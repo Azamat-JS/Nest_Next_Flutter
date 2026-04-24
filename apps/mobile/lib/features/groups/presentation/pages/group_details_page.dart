@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile/core/common/entities/user_entity.dart';
 import 'package:mobile/features/groups/presentation/widgets/student_card.dart';
 import 'package:mobile/features/student_scores/presentation/bloc/student_score_bloc.dart';
+import 'package:mobile/features/student_scores/presentation/pages/student_scores_page.dart';
 
 class GroupDetailsPage extends StatelessWidget {
   final List<UserEntity> students;
@@ -33,6 +34,15 @@ class GroupDetailsPage extends StatelessWidget {
                   for (final s in scoreState.studentScores) s.studentId: s,
                 };
                 return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            StudentScoresPage(username: students[0].username),
+                      ),
+                    );
+                  },
                   child: SizedBox(
                     height: 400,
                     child: ListView.builder(
