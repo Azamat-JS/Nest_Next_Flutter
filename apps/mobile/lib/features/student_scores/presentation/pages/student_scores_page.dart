@@ -20,14 +20,6 @@ class StudentScoresPage extends StatefulWidget {
 
 class _StudentScoresPageState extends State<StudentScoresPage> {
   @override
-  void initState() {
-    super.initState();
-    context.read<OneStudentScoreBloc>().add(
-      FetchOneStudentScores(widget.studentId, widget.groupId),
-    );
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('${widget.username} Scores')),

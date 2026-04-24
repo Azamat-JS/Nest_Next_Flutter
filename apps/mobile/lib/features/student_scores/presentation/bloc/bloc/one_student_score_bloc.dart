@@ -23,6 +23,7 @@ class OneStudentScoreBloc
     final res = await _oneStudentUseCases(
       OneStudentScoreParams(studentId: event.studentId, groupId: event.groupId),
     );
+    print("bloc scores: $res");
     res.fold(
       (failure) => emit(state.copyWith(isLoading: false, failure: failure)),
       (scores) => emit(
