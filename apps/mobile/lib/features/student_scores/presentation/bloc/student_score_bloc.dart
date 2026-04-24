@@ -1,15 +1,21 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile/core/errors/failures.dart';
+import 'package:mobile/features/student_scores/domain/entity/one_student_score_entity.dart';
 import 'package:mobile/features/student_scores/domain/entity/student_scores_entity.dart';
 import 'package:mobile/features/student_scores/domain/usecases/get_today_student_score_usecase.dart';
+import 'package:mobile/features/student_scores/domain/usecases/one_student_score_usecase.dart';
 part 'student_score_event.dart';
 part 'student_score_state.dart';
 
 class StudentScoreBloc extends Bloc<StudentScoreEvent, StudentScoreState> {
   final GetTodayStudentScoresUsecase _useCases;
-  StudentScoreBloc(this._useCases) : super(StudentScoreState()) {
+  final OneStudentScoreUsecase _oneStudentUseCases;
+
+  StudentScoreBloc(this._useCases, this._oneStudentUseCases)
+    : super(StudentScoreState()) {
     on<FetchStudentScores>(_onFetchStudentScores);
+    on<FetchOneStudentScores>(_oneFetchOneStudentScores);
   }
 
   void _onFetchStudentScores(
@@ -26,6 +32,26 @@ class StudentScoreBloc extends Bloc<StudentScoreEvent, StudentScoreState> {
         state.copyWith(
           isLoading: false,
           studentScores: studentScores,
+          clearFailure: true,
+        ),
+      ),
+    );
+  }
+
+  void _oneFetchOneStudentScores(
+    FetchOneStudentScores event,
+    Emitter<StudentScoreState> emit,
+  ) async {
+    emit(state.copyWith(isLoading: true, clearFailure: true));
+    final res = await _oneStudentUseCases(
+      OneStudentScoreParams(studentId: event.studentId, groupId: event.groupId),
+    );
+    res.fold(
+      (failure) => emit(state.copyWith(isLoading: false, failure: failure)),
+      (scores) => emit(
+        state.copyWith(
+          isLoading: false,
+          oneStudentScores: scores,
           clearFailure: true,
         ),
       ),
