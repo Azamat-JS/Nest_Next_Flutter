@@ -10,3 +10,16 @@ class StudentScoreProvider {
     );
   }
 }
+
+class OneStudentScoreProvider {
+  static BlocProvider<StudentScoreBloc> forOneStudent(
+    String studentId,
+    String groupId,
+  ) {
+    return BlocProvider(
+      create: (_) =>
+          serviceLocator<StudentScoreBloc>()
+            ..add(FetchOneStudentScores(studentId, groupId)),
+    );
+  }
+}
