@@ -26,8 +26,15 @@ class StudentScoreRepositoryImpl implements StudentScoreRepository {
   Future<Either<Failure, List<OneStudentScoreEntity>>> getOneStudentScores({
     required String studentId,
     required String groupId,
-  }) {
-    // TODO: implement getOneStudentScores
-    throw UnimplementedError();
+  }) async {
+    try {
+      final studentScores = await dataSource.getOneStudentScores(
+        studentId: studentId,
+        groupId: groupId,
+      );
+      return right(studentScores);
+    } catch (e) {
+      return left(Failure('Failed to fetch student scores: $e'));
+    }
   }
 }
