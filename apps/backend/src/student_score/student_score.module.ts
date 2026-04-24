@@ -4,7 +4,7 @@ import { StudentScoreController } from './student_score.controller';
 import { ConfigifyModule } from '@itgorillaz/configify';
 import { JwtModule } from '@nestjs/jwt';
 import { AppConfig } from 'src/lib/config';
-import { AddScoreUseCase, BulkAddScoreUseCase, UpdateScoreUseCase } from './usecases';
+import { BulkAddScoreUseCase, UpdateScoreUseCase } from './usecases';
 
 
 @Module({
@@ -19,6 +19,6 @@ import { AddScoreUseCase, BulkAddScoreUseCase, UpdateScoreUseCase } from './usec
     }),
   ],
   controllers: [StudentScoreController],
-  providers: [StudentScoreRepository, AddScoreUseCase, UpdateScoreUseCase, BulkAddScoreUseCase],
+  providers: [StudentScoreRepository, UpdateScoreUseCase, BulkAddScoreUseCase],
 })
 export class StudentScoreModule { }

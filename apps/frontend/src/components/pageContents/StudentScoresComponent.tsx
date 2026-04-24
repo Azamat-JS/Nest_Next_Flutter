@@ -66,7 +66,6 @@ const StudentScoresComponent = ({ groupId, studentId }: { groupId: string, stude
     });
     console.log(studentScoreReport)
 
-
     const student = useMemo(() => {
         return students.find((s: TokenPayload) => s.id === studentId);
     }, [studentId, students])

@@ -1,13 +1,13 @@
 import { Body, Delete, Controller, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { StudentScoreRepository } from './student_score.service';
 import { ScoreDto, UpdateScoreDto } from './dto/score.dto';
-import { AddScoreUseCase, UpdateScoreUseCase, BulkAddScoreUseCase } from './usecases';
+import { UpdateScoreUseCase, BulkAddScoreUseCase } from './usecases';
 import { BulkScoreDto } from './dto/bulk.dto';
 import { PaginationDto } from 'src/lib/shared/dto/pagination.dto';
 
 @Controller('student-score')
 export class StudentScoreController {
-  constructor(private readonly studentScoreRepo: StudentScoreRepository, private readonly addScoreUseCase: AddScoreUseCase,
+  constructor(private readonly studentScoreRepo: StudentScoreRepository,
     private readonly updateScoreUseCase: UpdateScoreUseCase,
     private readonly bulkAddScoreUseCase: BulkAddScoreUseCase,
   ) { }
@@ -36,11 +36,6 @@ export class StudentScoreController {
   // async getTotalScore(@Param('groupId') groupId: string) {
   //   return this.studentScoreRepo.findAllScoresByGroup(groupId);
   // }
-
-  @Post("add")
-  async addScore(@Body() body: ScoreDto) {
-    return this.addScoreUseCase.execute(body);
-  }
 
   @Post("bulk")
   async bulkAddScores(@Body() body: BulkScoreDto) {
