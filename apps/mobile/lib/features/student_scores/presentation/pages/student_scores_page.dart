@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mobile/features/student_scores/presentation/bloc/student_score_bloc.dart';
+import 'package:mobile/features/student_scores/presentation/bloc/bloc/one_student_score_bloc.dart';
 import 'package:mobile/features/student_scores/presentation/widgets/my_score_card.dart';
 
 class StudentScoresPage extends StatefulWidget {
@@ -22,7 +22,7 @@ class _StudentScoresPageState extends State<StudentScoresPage> {
   @override
   void initState() {
     super.initState();
-    context.read<StudentScoreBloc>().add(
+    context.read<OneStudentScoreBloc>().add(
       FetchOneStudentScores(widget.studentId, widget.groupId),
     );
   }
@@ -32,7 +32,7 @@ class _StudentScoresPageState extends State<StudentScoresPage> {
     return Scaffold(
       appBar: AppBar(title: Text('${widget.username} Scores')),
 
-      body: BlocBuilder<StudentScoreBloc, StudentScoreState>(
+      body: BlocBuilder<OneStudentScoreBloc, OneStudentScoreState>(
         builder: (context, state) {
           if (state.isLoading) {
             return const Center(child: CircularProgressIndicator());
