@@ -8,10 +8,12 @@ import 'package:mobile/features/student_scores/presentation/pages/student_scores
 class GroupDetailsPage extends StatelessWidget {
   final List<UserEntity> students;
   final UserEntity teacher;
+  final String groupId;
   const GroupDetailsPage({
     super.key,
     required this.students,
     required this.teacher,
+    required this.groupId,
   });
 
   @override
@@ -33,34 +35,39 @@ class GroupDetailsPage extends StatelessWidget {
                 final scoreMap = {
                   for (final s in scoreState.studentScores) s.studentId: s,
                 };
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            StudentScoresPage(username: students[0].username),
-                      ),
-                    );
-                  },
-                  child: SizedBox(
-                    height: 400,
-                    child: ListView.builder(
-                      itemCount: students.length,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        final student = students[index];
-                        final score = scoreMap[student.id];
-                        return SizedBox(
+                return SizedBox(
+                  height: 400,
+                  child: ListView.builder(
+                    itemCount: students.length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      final student = students[index];
+                      final score = scoreMap[student.id];
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return StudentScoresPage(
+                                  username: student.username,
+                                  groupId: groupId,
+                                  studentId: student.id,
+                                );
+                              },
+                            ),
+                          );
+                        },
+                        child: SizedBox(
                           width: 300,
                           child: StudentCard(
                             student: student,
                             homework: score?.homework ?? 0,
                             attendance: score?.attendance ?? 0,
                           ),
-                        );
-                      },
-                    ),
+                        ),
+                      );
+                    },
                   ),
                 );
               },

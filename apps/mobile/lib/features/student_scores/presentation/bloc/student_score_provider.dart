@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile/core/di/service_locator.dart';
+import 'package:mobile/features/student_scores/presentation/bloc/bloc/one_student_score_bloc.dart';
 import 'package:mobile/features/student_scores/presentation/bloc/student_score_bloc.dart';
 
 class StudentScoreProvider {
@@ -12,13 +13,13 @@ class StudentScoreProvider {
 }
 
 class OneStudentScoreProvider {
-  static BlocProvider<StudentScoreBloc> forOneStudent(
+  static BlocProvider<OneStudentScoreBloc> forOneStudent(
     String studentId,
     String groupId,
   ) {
     return BlocProvider(
       create: (_) =>
-          serviceLocator<StudentScoreBloc>()
+          serviceLocator<OneStudentScoreBloc>()
             ..add(FetchOneStudentScores(studentId, groupId)),
     );
   }

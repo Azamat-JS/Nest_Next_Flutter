@@ -127,6 +127,7 @@ Widget _buildBody(BuildContext context) {
                           child: GroupDetailsPage(
                             students: group.students,
                             teacher: group.teacher,
+                            groupId: group.id,
                           ),
                         );
                       },

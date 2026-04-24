@@ -3,14 +3,34 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile/features/student_scores/presentation/bloc/student_score_bloc.dart';
 import 'package:mobile/features/student_scores/presentation/widgets/my_score_card.dart';
 
-class StudentScoresPage extends StatelessWidget {
+class StudentScoresPage extends StatefulWidget {
   final String username;
-  const StudentScoresPage({super.key, required this.username});
+  final String groupId;
+  final String studentId;
+  const StudentScoresPage({
+    super.key,
+    required this.username,
+    required this.groupId,
+    required this.studentId,
+  });
+
+  @override
+  State<StudentScoresPage> createState() => _StudentScoresPageState();
+}
+
+class _StudentScoresPageState extends State<StudentScoresPage> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<StudentScoreBloc>().add(
+      FetchOneStudentScores(widget.studentId, widget.groupId),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('$username Scores')),
+      appBar: AppBar(title: Text('${widget.username} Scores')),
 
       body: BlocBuilder<StudentScoreBloc, StudentScoreState>(
         builder: (context, state) {
