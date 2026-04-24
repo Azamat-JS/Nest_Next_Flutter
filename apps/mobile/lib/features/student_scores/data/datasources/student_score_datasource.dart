@@ -6,7 +6,7 @@ import 'package:mobile/features/student_scores/data/model/student_score_model.da
 abstract interface class StudentScoreDataSource {
   Future<List<StudentScoreModel>> getStudentScores({required String groupId});
 
-  Future<List<OneStudentScoreModel>> getOneStudentScores({
+  Future<OneStudentScoreModel> getOneStudentScores({
     required String studentId,
     required String groupId,
   });
@@ -35,7 +35,7 @@ class StudentScoreDateSourceImpl implements StudentScoreDataSource {
   }
 
   @override
-  Future<List<OneStudentScoreModel>> getOneStudentScores({
+  Future<OneStudentScoreModel> getOneStudentScores({
     required String studentId,
     required String groupId,
   }) async {
@@ -43,7 +43,9 @@ class StudentScoreDateSourceImpl implements StudentScoreDataSource {
       final response = await dioClient.dio.get(
         '/student-score/one-student/$studentId/$groupId',
       );
-      return OneStudentScoreModel.fromJsonList(response.data as List<dynamic>);
+      return OneStudentScoreModel.fromJson(
+        response.data as Map<String, dynamic>,
+      );
     } on DioException catch (e) {
       throw Exception(
         e.response?.data['message'] ??

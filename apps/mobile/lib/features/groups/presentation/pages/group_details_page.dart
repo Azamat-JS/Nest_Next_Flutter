@@ -32,23 +32,25 @@ class GroupDetailsPage extends StatelessWidget {
                 final scoreMap = {
                   for (final s in scoreState.studentScores) s.studentId: s,
                 };
-                return SizedBox(
-                  height: 400,
-                  child: ListView.builder(
-                    itemCount: students.length,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      final student = students[index];
-                      final score = scoreMap[student.id];
-                      return SizedBox(
-                        width: 300,
-                        child: StudentCard(
-                          student: student,
-                          homework: score?.homework ?? 0,
-                          attendance: score?.attendance ?? 0,
-                        ),
-                      );
-                    },
+                return GestureDetector(
+                  child: SizedBox(
+                    height: 400,
+                    child: ListView.builder(
+                      itemCount: students.length,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        final student = students[index];
+                        final score = scoreMap[student.id];
+                        return SizedBox(
+                          width: 300,
+                          child: StudentCard(
+                            student: student,
+                            homework: score?.homework ?? 0,
+                            attendance: score?.attendance ?? 0,
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 );
               },

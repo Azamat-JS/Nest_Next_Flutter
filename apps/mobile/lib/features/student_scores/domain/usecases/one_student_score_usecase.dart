@@ -5,12 +5,12 @@ import 'package:mobile/features/student_scores/domain/entity/one_student_score_e
 import 'package:mobile/features/student_scores/domain/repositories/student_score_repository.dart';
 
 class OneStudentScoreUsecase
-    implements Usecase<List<OneStudentScoreEntity>, OneStudentScoreParams> {
+    implements Usecase<OneStudentScoreEntity, OneStudentScoreParams> {
   final StudentScoreRepository repo;
   const OneStudentScoreUsecase(this.repo);
 
   @override
-  Future<Either<Failure, List<OneStudentScoreEntity>>> call(
+  Future<Either<Failure, OneStudentScoreEntity>> call(
     OneStudentScoreParams params,
   ) async {
     return repo.getOneStudentScores(

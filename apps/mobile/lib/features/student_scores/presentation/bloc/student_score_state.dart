@@ -5,13 +5,13 @@ class StudentScoreState {
   final bool isLoading;
   final Failure? failure;
   final List<StudentScoreEntity> studentScores;
-  final List<OneStudentScoreEntity> oneStudentScores;
+  final OneStudentScoreEntity? oneStudentScores;
 
   const StudentScoreState({
     this.isLoading = false,
     this.failure,
     this.studentScores = const [],
-    this.oneStudentScores = const [],
+    this.oneStudentScores,
   });
 
   StudentScoreState copyWith({
@@ -20,7 +20,7 @@ class StudentScoreState {
     List<StudentScoreEntity>? studentScores,
     bool clearFailure = false,
     bool clearStudentScores = false,
-    List<OneStudentScoreEntity>? oneStudentScores,
+    OneStudentScoreEntity? oneStudentScores,
     bool clearOneStudentScores = false,
   }) {
     return StudentScoreState(
@@ -30,7 +30,7 @@ class StudentScoreState {
           ? []
           : (studentScores ?? this.studentScores),
       oneStudentScores: clearOneStudentScores
-          ? []
+          ? null
           : (oneStudentScores ?? this.oneStudentScores),
     );
   }

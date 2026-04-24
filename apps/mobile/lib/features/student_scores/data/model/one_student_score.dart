@@ -22,11 +22,6 @@ class OneStudentScoreModel extends OneStudentScoreEntity {
       lastPage: json['last_page'] as int,
     );
   }
-  static List<OneStudentScoreModel> fromJsonList(List<dynamic> data) {
-    return data
-        .map((e) => OneStudentScoreModel.fromJson(e as Map<String, dynamic>))
-        .toList();
-  }
 }
 
 class ScoreEventModel extends ScoreEventEntity {

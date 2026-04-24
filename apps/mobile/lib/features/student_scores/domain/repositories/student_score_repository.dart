@@ -8,7 +8,7 @@ abstract interface class StudentScoreRepository {
     required String groupId,
   });
 
-  Future<Either<Failure, List<OneStudentScoreEntity>>> getOneStudentScores({
+  Future<Either<Failure, OneStudentScoreEntity>> getOneStudentScores({
     required String studentId,
     required String groupId,
   });
