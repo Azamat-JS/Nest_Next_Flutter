@@ -1,6 +1,7 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:mobile/core/errors/failures.dart';
 import 'package:mobile/features/student_scores/data/datasources/student_score_datasource.dart';
+import 'package:mobile/features/student_scores/domain/entity/one_student_score_entity.dart';
 import 'package:mobile/features/student_scores/domain/entity/student_scores_entity.dart';
 import 'package:mobile/features/student_scores/domain/repositories/student_score_repository.dart';
 
@@ -19,5 +20,14 @@ class StudentScoreRepositoryImpl implements StudentScoreRepository {
     } catch (e) {
       return left(Failure('Failed to fetch student scores: $e'));
     }
+  }
+
+  @override
+  Future<Either<Failure, List<OneStudentScoreEntity>>> getOneStudentScores({
+    required String studentId,
+    required String groupId,
+  }) {
+    // TODO: implement getOneStudentScores
+    throw UnimplementedError();
   }
 }

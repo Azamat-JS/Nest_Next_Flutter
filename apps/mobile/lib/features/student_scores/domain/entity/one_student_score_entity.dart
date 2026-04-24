@@ -1,6 +1,6 @@
 class OneStudentScoreEntity {
-  final List<ScoreEvent> scores;
-  final Total total;
+  final List<ScoreEventEntity> scores;
+  final TotalEntity total;
   final int page;
   final int limit;
   final int totalCount;
@@ -16,16 +16,16 @@ class OneStudentScoreEntity {
   });
 }
 
-class ScoreEvent {
+class ScoreEventEntity {
   final String date;
   final int homework;
   final int attendance;
 
-  ScoreEvent(this.date, this.homework, this.attendance);
+  ScoreEventEntity(this.date, this.homework, this.attendance);
 }
 
-class Total {
+class TotalEntity {
   final int total;
 
-  Total(this.total);
+  TotalEntity(this.total);
 }
