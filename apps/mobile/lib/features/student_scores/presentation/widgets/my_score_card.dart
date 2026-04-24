@@ -16,14 +16,21 @@ class MyStudentCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Card.filled(
-        child: Column(
-          children: [
-            Row(children: [Icon(Icons.home_work), Text('Homework: $homework')]),
-            const SizedBox(height: 10),
-            Row(children: [Icon(Icons.list), Text('Attendance: $attendance')]),
-            const SizedBox(height: 10),
-            Row(children: [Icon(Icons.list), Text('Date: $date')]),
-          ],
+        elevation: 3,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Column(
+            children: [
+              Row(children: [Icon(Icons.home), Text('Homework: $homework')]),
+              const SizedBox(height: 10),
+              Row(
+                children: [Icon(Icons.list), Text('Attendance: $attendance')],
+              ),
+              const SizedBox(height: 10),
+              Row(children: [Icon(Icons.calendar_month), Text('Date: $date')]),
+            ],
+          ),
         ),
       ),
     );

@@ -43,7 +43,6 @@ class StudentScoreDateSourceImpl implements StudentScoreDataSource {
       final response = await dioClient.dio.get(
         '/student-score/one-student/$studentId/$groupId',
       );
-      print(response.data);
       return OneStudentScoreModel.fromJson(
         response.data as Map<String, dynamic>,
       );
