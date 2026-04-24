@@ -17,6 +17,7 @@ export class StudentScoreRepository {
             }
         })
     }
+
     async findOneStudentScores(
         studentId: string,
         groupId: string,
