@@ -308,12 +308,10 @@ export class StudentScoreRepository {
             },
         });
 
-        // 3. Create student map (O(1) lookup)
         const studentMap = new Map(
             students.map((s) => [s.id, s.username])
         );
 
-        // 4. Transform grouped data into final shape
         const resultMap = new Map<
             string,
             {

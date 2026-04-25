@@ -81,7 +81,7 @@ const StudentScoresComponent = ({ groupId, studentId }: { groupId: string, stude
     return (
         <div>
             <Table>
-                <TableCaption className="font-bold text-xl text-black">Total (all time): {studentScoreReport.total.total}</TableCaption>
+                <TableCaption className="font-bold text-xl text-black">Total (all time): {studentScoreReport.total?.total}</TableCaption>
                 <TableHeader>
                     <TableRow key={groupId}>
                         <TableHead className="w-12 text-center text-lg font-bold">&#8470;</TableHead>
