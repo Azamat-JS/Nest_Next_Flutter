@@ -1,6 +1,9 @@
 import 'package:mobile/core/di/service_locator.dart';
 import 'package:mobile/core/network/dio_client.dart';
+import 'package:mobile/features/groups/data/datasources/group_local_datasource.dart';
 import 'package:mobile/features/groups/data/datasources/group_remote_data_source.dart';
+import 'package:mobile/features/groups/data/datasources/group_student_local_data_source.dart';
+import 'package:mobile/features/groups/data/datasources/user_local_data_source.dart';
 import 'package:mobile/features/groups/data/repositories/group_repository_impl.dart';
 import 'package:mobile/features/groups/domain/repositories/group_repository.dart';
 import 'package:mobile/features/groups/domain/usecases/group_all.dart';
@@ -15,7 +18,12 @@ Future<void> initGroup() async {
       () => GroupRemoteDataSourceImpl(serviceLocator<DioClient>()),
     )
     ..registerLazySingleton<GroupRepository>(
-      () => GroupRepositoryImpl(serviceLocator<GroupRemoteDataSource>()),
+      () => GroupRepositoryImpl(
+        serviceLocator<GroupRemoteDataSource>(),
+        serviceLocator<GroupLocalDatasource>(),
+        serviceLocator<UserLocalDataSource>(),
+        serviceLocator<GroupStudentLocalDatasource>(),
+      ),
     )
     ..registerLazySingleton<GetGroupsUseCase>(
       () => GetGroupsUseCase(serviceLocator<GroupRepository>()),

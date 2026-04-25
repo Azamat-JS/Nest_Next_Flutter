@@ -23,4 +23,15 @@ class GroupModel extends GroupEntity {
           .toList(),
     );
   }
+
+  GroupEntity toEntity() {
+    return GroupEntity(
+      createdAt: createdAt,
+      id: id,
+      name: name,
+      teacherId: teacherId,
+      teacher: teacher,
+      students: students,
+    );
+  }
 }
