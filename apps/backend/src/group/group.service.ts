@@ -88,19 +88,6 @@ export class GroupRepository {
             role: true,
           }
         },
-        students: {
-          select: {
-            student: {
-              select: {
-                id: true,
-                username: true,
-                email: true,
-                role: true,
-
-              }
-            }
-          }
-        }
       }
     })
     if (!group) {
@@ -108,9 +95,37 @@ export class GroupRepository {
         'Group not found'
       )
     }
+    return group;
+  }
+
+  async findGroupStudents(groupId: string, page: number = 1, limit: number = 10) {
+    const skip = (page - 1) * limit;
+    const [students, total] = await Promise.all([
+      this.prisma.studentGroup.findMany({
+        where: { groupId },
+        skip,
+        take: limit,
+        select: {
+          student: {
+            select: {
+              id: true,
+              username: true,
+              email: true,
+              role: true,
+            }
+          }
+        }
+      }),
+      this.prisma.studentGroup.count({ where: { groupId } })
+    ])
     return {
-      ...group,
-      students: group.students.map(s => s.student)
+      data: students.map(s => s.student),
+      meta: {
+        total,
+        page,
+        last_page: Math.ceil(total / limit),
+        limit,
+      }
     }
   }
   async findStudentByIds(studentIds: string[]) {

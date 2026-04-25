@@ -30,6 +30,11 @@ export class GroupController {
     return this.groupService.findOne(id);
   }
 
+  @Get(':id/students')
+  findGroupStudents(@Param('id') id: string, @Query() query: PaginationDto) {
+    return this.groupService.findGroupStudents(id, query.page, query.limit);
+  }
+
   @Post(":id/add-students")
   addStudents(@Param('id') id: string, @Body() body: AddStudentsDto) {
     return this.addStudentUseCase.execute(id, body);
