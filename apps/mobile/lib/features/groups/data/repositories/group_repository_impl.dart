@@ -1,23 +1,39 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:mobile/core/errors/failures.dart';
+import 'package:mobile/features/groups/data/datasources/group_local_datasource.dart';
 import 'package:mobile/features/groups/data/datasources/group_remote_data_source.dart';
 import 'package:mobile/features/groups/domain/entities/group_entity.dart';
 import 'package:mobile/features/groups/domain/repositories/group_repository.dart';
 
 class GroupRepositoryImpl implements GroupRepository {
   final GroupRemoteDataSource remoteDataSource;
-  GroupRepositoryImpl(this.remoteDataSource);
+  final GroupLocalDatasource localDataSource;
+
+  GroupRepositoryImpl(this.remoteDataSource, this.localDataSource);
 
   @override
   Future<Either<Failure, GroupEntity>> getGroupById({
     required String id,
   }) async {
     try {
-      final group = await remoteDataSource.getGroupById(id: id);
-      return right(group);
+      final cached = await localDataSource.getCachedGroup(id);
+      if (cached != null) {
+        _refreshInBackgroundId(id);
+        return right(cached);
+      }
+      final remoteGroup = await remoteDataSource.getGroupById(id: id);
+      await localDataSource.cacheGroup(remoteGroup);
+      return right(remoteGroup);
     } catch (e) {
       return left(Failure('Failed to fetch group: $e'));
     }
+  }
+
+  Future<void> _refreshInBackgroundId(String id) async {
+    try {
+      final fresh = await remoteDataSource.getGroupById(id: id);
+      await localDataSource.cacheGroup(fresh);
+    } catch (_) {}
   }
 
   @override
