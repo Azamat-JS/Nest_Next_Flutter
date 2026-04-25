@@ -1,6 +1,6 @@
 'use client'
 import { useAuthStore } from '@/lib/stores/authStore';
-import { AddStudentPayload, GroupType } from '@/lib/types/groups';
+import { AddStudentPayload, GroupType, PaginationType } from '@/lib/types/groups';
 import axios from 'axios';
 import { useState } from 'react';
 import { toast } from 'sonner';
@@ -38,12 +38,28 @@ import {
     DialogHeader,
     DialogTitle,
 } from "@/components/ui/dialog"
-import { Field, FieldGroup, } from "@/components/ui/field"
+import { Field, FieldGroup, FieldLabel, } from "@/components/ui/field"
 import { Button } from '../ui/button';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { Label } from '../ui/label';
 import { useStudents } from '@/lib/hooks/studentsHook';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
+import {
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectLabel,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select"
+import {
+    Pagination,
+    PaginationContent,
+    PaginationItem,
+    PaginationLink,
+    PaginationNext,
+    PaginationPrevious,
+} from "@/components/ui/pagination"
 
 type UpdateScorePayload = {
     studentId: string;
@@ -63,6 +79,9 @@ const date = new Date().toISOString().split('T')[0];
 
 const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const page = Number(searchParams.get('page') ?? 1);
+    const limit = Number(searchParams.get('limit') ?? 10);
     const token = useAuthStore((state) => state.token);
     const [openCreate, setOpenCreate] = useState(false);
     const [openUpdate, setOpenUpdate] = useState(false);
@@ -151,6 +170,9 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
 
     const group: GroupType = data;
     const groupStudents: TokenPayload[] = data?.students?.length > 0 ? data.students : [];
+    const meta: PaginationType = data?.meta ?? {}
+    const lastPage = meta?.last_page ?? 1;
+
 
     const scoreMap = new Map<string, StudentScoreRow>();
     studentScores.forEach((s: StudentScoreRow) => {
@@ -172,7 +194,7 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
                 <Badge className='w-40 h-8 text-lg' variant="outline">Teacher: {group?.teacher?.username}</Badge>
             </header>
             <Table>
-                <TableCaption>Students of the group.</TableCaption>
+                <TableCaption className="text-center font-bold text-lg">Total: {groupStudents.length} students</TableCaption>
                 <TableHeader>
                     <TableRow>
                         <TableHead className="w-12 text-center font-bold text-lg">&#8470;</TableHead>
@@ -214,11 +236,6 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
                         </TableRow>)
                     })}
                 </TableBody>
-                <TableFooter>
-                    <TableRow>
-                        <TableCell colSpan={3}>Total: {groupStudents.length} students</TableCell>
-                    </TableRow>
-                </TableFooter>
             </Table>
             <div className='flex gap-3 justify-end mr-5 mt-4'>
                 <AddScoreDrawer openCreate={openCreate} setOpenCreate={setOpenCreate} students={groupStudents} groupId={groupId} onScoreAdded={() => queryClient.invalidateQueries({
@@ -234,6 +251,54 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
                     Add Students
                 </Button>
             </div>
+
+            {/* pagination */}
+            <div className="grid grid-cols-2 items-center mt-4">
+
+                <div className="flex justify-center">
+                    <Field orientation="horizontal" className="w-fit">
+                        <FieldLabel htmlFor="select-rows-per-page">Rows per page</FieldLabel>
+                        <Select value={String(limit)} onValueChange={(val) => {
+                            const params = new URLSearchParams(searchParams.toString());
+                            params.set('limit', val);
+                            params.set('page', '1');
+                            router.push(`?${params.toString()}`);
+                        }}>
+                            <SelectTrigger className="w-20" id="select-rows-per-page">
+                                <SelectValue />
+                            </SelectTrigger>
+                            <SelectContent align="start">
+                                <SelectGroup>
+                                    <SelectItem value="5" >5</SelectItem>
+                                    <SelectItem value="10">10</SelectItem>
+                                    <SelectItem value="15">15</SelectItem>
+                                    <SelectItem value="20">20</SelectItem>
+                                </SelectGroup>
+                            </SelectContent>
+                        </Select>
+                    </Field>
+                </div>
+                <div className="flex justify-end">
+                    <Pagination>
+                        <PaginationContent>
+                            <PaginationItem>
+                                <PaginationPrevious href={`?page=${Math.max(1, page - 1)}&limit=${limit}`} />
+                            </PaginationItem>
+                            {Array.from({ length: lastPage }).map((_, idx) => (
+                                <PaginationItem key={idx}>
+                                    <PaginationLink href={`?page=${idx + 1}&limit=${limit}`} isActive={page === idx + 1}>{idx + 1}</PaginationLink>
+                                </PaginationItem>
+                            )
+                            )}
+
+                            <PaginationItem>
+                                <PaginationNext href={`?page=${Math.min(lastPage, page + 1)}&limit=${limit}`} />
+                            </PaginationItem>
+                        </PaginationContent>
+                    </Pagination>
+                </div>
+            </div>
+
 
             {/* update student scores modal */}
             <Dialog open={openUpdate} onOpenChange={setOpenUpdate}>

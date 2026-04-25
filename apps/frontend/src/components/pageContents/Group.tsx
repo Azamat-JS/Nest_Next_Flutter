@@ -190,7 +190,9 @@ const GroupComponent = () => {
     return (
         <div className="mt-5">
             <Table className="mt-5">
-                <TableCaption>A list of all groups.</TableCaption>
+                <TableCaption className="text-center text-lg font-bold">
+                    Showing {groups.length} of {meta?.total ?? 0} users
+                </TableCaption>
 
                 <TableHeader>
                     <TableRow>

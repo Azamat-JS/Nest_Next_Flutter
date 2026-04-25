@@ -117,7 +117,9 @@ const Home = () => {
     return (
         <div className="mt-5">
             <Table key={user?.id} className="table-fixed">
-                <TableCaption>A list of all users.</TableCaption>
+                <TableCaption className="text-center text-lg font-bold">
+                    Showing {users.length} of {meta?.total ?? 0} users
+                </TableCaption>
                 <TableHeader>
                     <TableRow key={user?.id}>
                         <TableHead className="w-12 text-center text-lg font-bold">&#8470;</TableHead>
