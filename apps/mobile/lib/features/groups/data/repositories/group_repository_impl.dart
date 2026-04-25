@@ -19,7 +19,7 @@ class GroupRepositoryImpl implements GroupRepository {
       final cached = await localDataSource.getCachedGroup(id);
       if (cached != null) {
         _refreshInBackgroundId(id);
-        return right(cached);
+        return right(cached.toEntity());
       }
       final remoteGroup = await remoteDataSource.getGroupById(id: id);
       await localDataSource.cacheGroup(remoteGroup);

@@ -1,9 +1,9 @@
-import 'package:mobile/features/groups/data/models/group_model.dart';
+import 'package:mobile/features/groups/data/models/groupdb_model.dart';
 import 'package:sqflite/sqflite.dart';
 
 abstract interface class GroupLocalDatasource {
-  Future<void> cacheGroup(GroupModel group);
-  Future<GroupModel?> getCachedGroup(String id);
+  Future<void> cacheGroup(GroupdbModel group);
+  Future<GroupdbModel?> getCachedGroup(String id);
   Future<void> clearCache();
 }
 
@@ -13,24 +13,23 @@ class GroupLocalDatasourceImpl implements GroupLocalDatasource {
   GroupLocalDatasourceImpl(this.db);
 
   @override
-  Future<void> cacheGroup(GroupModel group) async {
+  Future<void> cacheGroup(GroupdbModel group) async {
     await db.insert(
-      'group',
+      'groups',
       group.toJson(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }
 
   @override
-  Future<GroupModel?> getCachedGroup(String id) async {
-    final res = await db.query('group', where: 'id = ?', whereArgs: [id]);
+  Future<GroupdbModel?> getCachedGroup(String id) async {
+    final res = await db.query('groups', where: 'id = ?', whereArgs: [id]);
     if (res.isEmpty) return null;
-    return GroupModel.fromJson(res.first);
+    return GroupdbModel.fromJson(res.first);
   }
 
   @override
-  Future<void> clearCache() {
-    // TODO: implement clearCache
-    throw UnimplementedError();
+  Future<void> clearCache() async {
+    await db.delete('groups');
   }
 }

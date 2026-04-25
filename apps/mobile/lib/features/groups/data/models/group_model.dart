@@ -23,13 +23,4 @@ class GroupModel extends GroupEntity {
           .toList(),
     );
   }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'name': name,
-      'teacher_id': teacherId,
-      'created_at': createdAt.toIso8601String(),
-    };
-  }
 }
