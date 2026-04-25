@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:mobile/core/common/cubit/auth_check_cubit.dart';
+import 'package:mobile/core/database/database_helper.dart';
 import 'package:mobile/core/di/service_locator.dart';
 import 'package:mobile/core/theme/app_theme.dart';
 import 'package:mobile/features/auth/presentation/bloc/auth_bloc.dart';
@@ -13,6 +14,7 @@ import 'package:mobile/core/di/init_dependencies.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initDependencies();
+  await DatabaseHelper.database;
   await dotenv.load(fileName: ".env");
   runApp(
     MultiBlocProvider(
