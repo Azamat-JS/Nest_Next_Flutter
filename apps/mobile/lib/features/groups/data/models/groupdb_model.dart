@@ -1,3 +1,5 @@
+import 'package:mobile/features/groups/domain/entities/group_entity.dart';
+
 class GroupdbModel {
   final String id;
   final String name;
@@ -5,10 +7,10 @@ class GroupdbModel {
   final DateTime createdAt;
 
   GroupdbModel.fromJson(Map<String, dynamic> json)
-    : id = json['id'],
-      name = json['name'],
-      teacherId = json['teacher_id'],
-      createdAt = DateTime.parse(json['created_at']);
+    : id = json['id'] as String,
+      name = json['name'] as String,
+      teacherId = json['teacher_id'] as String,
+      createdAt = DateTime.parse(json['created_at'] as String);
 
   Map<String, dynamic> toJson() {
     return {
@@ -18,4 +20,10 @@ class GroupdbModel {
       'created_at': createdAt.toIso8601String(),
     };
   }
+
+  GroupdbModel.fromEntity(GroupEntity entity)
+    : id = entity.id,
+      name = entity.name,
+      teacherId = entity.teacherId,
+      createdAt = entity.createdAt;
 }

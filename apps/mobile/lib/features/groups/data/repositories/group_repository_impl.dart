@@ -1,4 +1,5 @@
 import 'package:fpdart/fpdart.dart';
+import 'package:mobile/core/common/entities/user_entity.dart';
 import 'package:mobile/core/errors/failures.dart';
 import 'package:mobile/features/groups/data/datasources/group_local_datasource.dart';
 import 'package:mobile/features/groups/data/datasources/group_remote_data_source.dart';
@@ -17,13 +18,35 @@ class GroupRepositoryImpl implements GroupRepository {
   }) async {
     try {
       final cached = await localDataSource.getCachedGroup(id);
+
       if (cached != null) {
         _refreshInBackgroundId(id);
-        return right(cached.toEntity());
+
+        final teacher =
+            await localDataSource.getUser(cached.teacherId) ??
+            UserEntity.empty();
+
+        final students = await localDataSource.getStudentsByGroup(id) ?? [];
+
+        return right(
+          GroupEntity(
+            id: cached.id,
+            name: cached.name,
+            teacherId: cached.teacherId,
+            createdAt: cached.createdAt,
+            teacher: teacher,
+            students: students,
+          ),
+        );
       }
-      final remoteGroup = await remoteDataSource.getGroupById(id: id);
-      await localDataSource.cacheGroup(remoteGroup);
-      return right(remoteGroup);
+
+      final remote = await remoteDataSource.getGroupById(id: id);
+
+      final entity = remote.toEntity();
+
+      await localDataSource.cacheGroup(GroupdbModel.fromEntity(entity));
+
+      return right(entity);
     } catch (e) {
       return left(Failure('Failed to fetch group: $e'));
     }
@@ -32,7 +55,10 @@ class GroupRepositoryImpl implements GroupRepository {
   Future<void> _refreshInBackgroundId(String id) async {
     try {
       final fresh = await remoteDataSource.getGroupById(id: id);
-      await localDataSource.cacheGroup(fresh);
+
+      final entity = fresh.toEntity();
+
+      await localDataSource.cacheGroup(GroupdbModel.fromEntity(entity));
     } catch (_) {}
   }
 
