@@ -151,3 +151,126 @@ Import trace:
  GET /home [32m200[39m in 61ms[2m (next.js: 2ms, application-code: 59ms)[22m
  GET /home [32m200[39m in 76ms[2m (next.js: 4ms, application-code: 72ms)[22m
 [32m[1m✓[22m[39m Compiled in 21ms
+ GET /home [32m200[39m in 87ms[2m (next.js: 6ms, application-code: 80ms)[22m
+ GET /home [32m200[39m in 75ms[2m (next.js: 3ms, application-code: 71ms)[22m
+ GET /home [32m200[39m in 85ms[2m (next.js: 5ms, application-code: 80ms)[22m
+ GET /home [32m200[39m in 77ms[2m (next.js: 4ms, application-code: 74ms)[22m
+ GET /groups [32m200[39m in 28ms[2m (next.js: 4ms, application-code: 23ms)[22m
+ GET /profile [32m200[39m in 31ms[2m (next.js: 21ms, application-code: 9ms)[22m
+[36m[browser][39m Error fetching profile: [31mAxiosError: Request failed with status code 401[39m
+[31m    at async Profile.useEffect.fetchProfile (src/components/pageContents/Profile.tsx:20:29)[39m
+  [90m18 |[0m         [36mconst[0m fetchProfile = [36masync[0m () => {
+  [90m19 |[0m             [36mtry[0m {
+[31m[1m>[0m [90m20 |[0m                 [36mconst[0m res = [36mawait[0m axios.get([32m`[0m${[33mAPI[0m[32m}/users/me`[0m, {
+  [90m   |[0m                             [31m[1m^[0m
+  [90m21 |[0m                     headers: {
+  [90m22 |[0m                         [33mAuthorization[0m: [32m`Bearer [0m${token[32m}`[0m
+  [90m23 |[0m                     } [2m(src/components/pageContents/Profile.tsx:27:25)[22m
+[36m[browser][39m Error fetching profile: [31mAxiosError: Request failed with status code 401[39m
+[31m    at async Profile.useEffect.fetchProfile (src/components/pageContents/Profile.tsx:20:29)[39m
+  [90m18 |[0m         [36mconst[0m fetchProfile = [36masync[0m () => {
+  [90m19 |[0m             [36mtry[0m {
+[31m[1m>[0m [90m20 |[0m                 [36mconst[0m res = [36mawait[0m axios.get([32m`[0m${[33mAPI[0m[32m}/users/me`[0m, {
+  [90m   |[0m                             [31m[1m^[0m
+  [90m21 |[0m                     headers: {
+  [90m22 |[0m                         [33mAuthorization[0m: [32m`Bearer [0m${token[32m}`[0m
+  [90m23 |[0m                     } [2m(src/components/pageContents/Profile.tsx:27:25)[22m
+ GET / [32m200[39m in 32ms[2m (next.js: 19ms, application-code: 13ms)[22m
+ GET /home [32m200[39m in 11ms[2m (next.js: 1936µs, application-code: 9ms)[22m
+ GET /home [32m200[39m in 53ms[2m (next.js: 3ms, application-code: 50ms)[22m
+ GET /groups [32m200[39m in 14ms[2m (next.js: 3ms, application-code: 11ms)[22m
+ GET /profile [32m200[39m in 25ms[2m (next.js: 6ms, application-code: 19ms)[22m
+ GET /groups [32m200[39m in 25ms[2m (next.js: 7ms, application-code: 18ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 303ms[2m (next.js: 287ms, application-code: 16ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkampkh0003icv2q37yozix [32m200[39m in 209ms[2m (next.js: 191ms, application-code: 18ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 138ms[2m (next.js: 13ms, application-code: 124ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkampkh0003icv2q37yozix [32m200[39m in 30ms[2m (next.js: 10ms, application-code: 20ms)[22m
+ GET /groups [32m200[39m in 24ms[2m (next.js: 4ms, application-code: 20ms)[22m
+ GET /groups/cmnvnk98400005av2u5s78s0o [32m200[39m in 11ms[2m (next.js: 2ms, application-code: 9ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+ GET /groups/cmnvnk98400005av2u5s78s0o [32m200[39m in 77ms[2m (next.js: 8ms, application-code: 69ms)[22m
+ GET /groups/cmnvnk98400005av2u5s78s0o/cmnkampkh0003icv2q37yozix [32m200[39m in 31ms[2m (next.js: 8ms, application-code: 23ms)[22m
+{
+  scores: [],
+  total: [1mnull[22m,
+  page: [33m1[39m,
+  limit: [33m10[39m,
+  total_count: [33m0[39m,
+  last_page: [33m0[39m
+}
+ GET /groups/cmnvnk98400005av2u5s78s0o/cmnkampkh0003icv2q37yozix [32m200[39m in 76ms[2m (next.js: 12ms, application-code: 64ms)[22m
+[32m[1m✓[22m[39m Compiled in 75ms
+{
+  scores: [],
+  total: [1mnull[22m,
+  page: [33m1[39m,
+  limit: [33m10[39m,
+  total_count: [33m0[39m,
+  last_page: [33m0[39m
+}
+ GET /groups/cmnvnk98400005av2u5s78s0o/cmnkampkh0003icv2q37yozix [32m200[39m in 103ms[2m (next.js: 16ms, application-code: 87ms)[22m
+[32m[1m✓[22m[39m Compiled in 37ms
+{
+  scores: [],
+  total: [1mnull[22m,
+  page: [33m1[39m,
+  limit: [33m10[39m,
+  total_count: [33m0[39m,
+  last_page: [33m0[39m
+}
+ GET /groups/cmnvnk98400005av2u5s78s0o/cmnkampkh0003icv2q37yozix [32m200[39m in 53ms[2m (next.js: 8ms, application-code: 44ms)[22m
+[32m[1m✓[22m[39m Compiled in 30ms
+{
+  scores: [],
+  total: [1mnull[22m,
+  page: [33m1[39m,
+  limit: [33m10[39m,
+  total_count: [33m0[39m,
+  last_page: [33m0[39m
+}
+ GET /groups/cmnvnk98400005av2u5s78s0o/cmnkampkh0003icv2q37yozix [32m200[39m in 55ms[2m (next.js: 10ms, application-code: 44ms)[22m
+{
+  scores: [],
+  total: [1mnull[22m,
+  page: [33m1[39m,
+  limit: [33m10[39m,
+  total_count: [33m0[39m,
+  last_page: [33m0[39m
+}
+ GET /groups/cmnvnk98400005av2u5s78s0o/cmnkampkh0003icv2q37yozix [32m200[39m in 80ms[2m (next.js: 8ms, application-code: 72ms)[22m
+ GET /groups [32m200[39m in 24ms[2m (next.js: 4ms, application-code: 20ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 28ms[2m (next.js: 7ms, application-code: 21ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnq74ink0001hrv254s9e0li [32m200[39m in 22ms[2m (next.js: 6ms, application-code: 16ms)[22m
+ GET /groups [32m200[39m in 19ms[2m (next.js: 3ms, application-code: 16ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 30ms[2m (next.js: 8ms, application-code: 22ms)[22m
+ GET /groups [32m200[39m in 16ms[2m (next.js: 2ms, application-code: 14ms)[22m
+ GET /groups/cmnoh0p550000u8v2nihbtf1o [32m200[39m in 29ms[2m (next.js: 7ms, application-code: 22ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[32m[1m✓[22m[39m Compiled in 89ms
+[32m[1m✓[22m[39m Compiled in 19ms
+[32m[1m✓[22m[39m Compiled in 20ms
+[32m[1m✓[22m[39m Compiled in 28ms
+[32m[1m✓[22m[39m Compiled in 24ms
+[32m[1m✓[22m[39m Compiled in 21ms
+[32m[1m✓[22m[39m Compiled in 202ms
+[32m[1m✓[22m[39m Compiled in 36ms
+[32m[1m✓[22m[39m Compiled in 27ms
+[32m[1m✓[22m[39m Compiled in 20ms
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[32m[1m✓[22m[39m Compiled in 22ms
+[32m[1m✓[22m[39m Compiled in 20ms
+[32m[1m✓[22m[39m Compiled in 26ms
+[32m[1m✓[22m[39m Compiled in 22ms
+[32m[1m✓[22m[39m Compiled in 24ms
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m

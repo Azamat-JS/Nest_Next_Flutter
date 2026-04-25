@@ -121,6 +121,8 @@ const AddScoreDrawer = ({ openCreate, setOpenCreate, students, groupId, onScoreA
                                                     <span className='w-32'>{s.username}</span>
                                                     <Input
                                                         type="number"
+                                                        className="mb-1"
+                                                        min={0}
                                                         value={
                                                             form.state.values.students.find(st => st.studentId === s.id)?.score ?? ''
                                                         }
@@ -153,6 +155,7 @@ const AddScoreDrawer = ({ openCreate, setOpenCreate, students, groupId, onScoreA
                                                 type="number"
                                                 placeholder="Enter Attendance Score"
                                                 value={globalScore}
+                                                min={0}
                                                 onChange={(e) => {
                                                     const value = Number(e.target.value);
                                                     setGlobalScore(value);
@@ -167,7 +170,7 @@ const AddScoreDrawer = ({ openCreate, setOpenCreate, students, groupId, onScoreA
                                                     type="checkbox"
                                                     checked={allSelected}
                                                     disabled={students.length === 0}
-                                                    className="h-3 w-3"
+                                                    className="h-5 w-5"
                                                     onChange={(e) => {
                                                         if (e.target.checked) {
                                                             form.setFieldValue("students", students.map((s) => ({
@@ -179,7 +182,7 @@ const AddScoreDrawer = ({ openCreate, setOpenCreate, students, groupId, onScoreA
                                                         }
                                                     }}
                                                 />
-                                                <span className="font-bold">Select All</span>
+                                                <span className="font-bold text-[16px]">Select All</span>
                                             </div>
 
                                             {students.map((s) => {
@@ -188,7 +191,7 @@ const AddScoreDrawer = ({ openCreate, setOpenCreate, students, groupId, onScoreA
                                                     <div key={s.id} className="flex items-center gap-2">
                                                         <input
                                                             type="checkbox"
-                                                            className="h-3 w-3"
+                                                            className="h-4 w-4"
                                                             disabled={students.length === 0}
                                                             checked={checked}
                                                             onChange={(e) => {
@@ -203,7 +206,7 @@ const AddScoreDrawer = ({ openCreate, setOpenCreate, students, groupId, onScoreA
 
                                                             }}
                                                         />
-                                                        <span className="w-32 ">{s.username}</span>
+                                                        <span className="w-32 text-[15px]">{s.username}</span>
                                                     </div>
                                                 )
                                             })}
