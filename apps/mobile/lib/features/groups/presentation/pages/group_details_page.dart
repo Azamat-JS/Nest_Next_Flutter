@@ -4,7 +4,6 @@ import 'package:mobile/core/common/entities/user_entity.dart';
 import 'package:mobile/features/groups/presentation/widgets/student_card.dart';
 import 'package:mobile/features/student_scores/presentation/bloc/student_score_bloc.dart';
 import 'package:mobile/features/student_scores/presentation/providers/student_score_provider.dart';
-import 'package:mobile/features/student_scores/presentation/pages/student_scores_page.dart';
 
 class GroupDetailsPage extends StatelessWidget {
   final List<UserEntity> students;

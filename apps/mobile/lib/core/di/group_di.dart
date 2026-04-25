@@ -11,11 +11,21 @@ import 'package:mobile/features/groups/domain/usecases/group_by_id.dart';
 import 'package:mobile/features/groups/domain/usecases/group_use_case.dart';
 import 'package:mobile/features/groups/domain/usecases/merge_groups.dart';
 import 'package:mobile/features/groups/presentation/bloc/group_bloc.dart';
+import 'package:sqflite/sqflite.dart';
 
 Future<void> initGroup() async {
   serviceLocator
     ..registerLazySingleton<GroupRemoteDataSource>(
       () => GroupRemoteDataSourceImpl(serviceLocator<DioClient>()),
+    )
+    ..registerLazySingleton<GroupLocalDatasource>(
+      () => GroupLocalDatasourceImpl(serviceLocator<Database>()),
+    )
+    ..registerLazySingleton<UserLocalDataSource>(
+      () => UserLocalDataSourceImpl(serviceLocator<Database>()),
+    )
+    ..registerLazySingleton<GroupStudentLocalDatasource>(
+      () => GroupStudentLocalDatasourceImpl(serviceLocator<Database>()),
     )
     ..registerLazySingleton<GroupRepository>(
       () => GroupRepositoryImpl(

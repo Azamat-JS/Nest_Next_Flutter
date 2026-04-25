@@ -1,5 +1,4 @@
 import 'package:mobile/core/common/entities/user_entity.dart';
-import 'package:mobile/core/common/entities/user_entity.dart';
 import 'package:sqflite/sqflite.dart';
 
 abstract class UserLocalDataSource {
