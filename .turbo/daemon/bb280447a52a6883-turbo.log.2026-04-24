@@ -896,3 +896,10 @@
 2026-04-24T16:04:48.399405Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
 2026-04-24T16:04:48.498792Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/mobile/build/ab98e94b1c7610a77023274e1712ea95/gen_localizations.stamp")}
 2026-04-24T16:04:48.498800Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2026-04-24T16:05:42.999021Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/frontend/.turbo/turbo-dev.log"), AnchoredSystemPathBuf("apps/backend/.turbo/turbo-dev.log")}
+2026-04-24T16:05:42.999030Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("frontend"), path: AnchoredSystemPathBuf("apps/frontend") }, WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-04-24T16:05:43.051169Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2026-04-24T16:05:43.051202Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2026-04-24T16:05:43.099041Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/frontend/.next/dev/lock"), AnchoredSystemPathBuf("apps/frontend/.next/dev/trace")}
+2026-04-24T16:05:43.099047Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("frontend"), path: AnchoredSystemPathBuf("apps/frontend") }}))
+2026-04-24T16:05:43.099082Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun

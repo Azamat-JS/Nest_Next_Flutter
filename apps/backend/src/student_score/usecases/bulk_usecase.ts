@@ -52,11 +52,8 @@ export class BulkAddScoreUseCase {
                     score,
                     date,
                 };
-
                 const addedScore = await this.studentScoreRepo.addScore(tx, scoreDto);
-                await this.studentScoreRepo.updateTotalScore(tx, scoreDto);
                 results.push(addedScore);
-
             }
         })
     }

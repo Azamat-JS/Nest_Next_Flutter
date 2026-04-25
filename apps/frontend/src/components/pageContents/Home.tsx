@@ -53,7 +53,7 @@ import { Field, FieldGroup, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient, useSuspenseQuery } from '@tanstack/react-query'
 import { PaginationType } from "@/lib/types/groups"
 
 const Home = () => {
@@ -69,13 +69,12 @@ const Home = () => {
     const page = Number(searchParams.get('page') ?? 1);
     const limit = Number(searchParams.get('limit') ?? 10);
 
-    const { data, isLoading } = useQuery({
-        queryKey: ['users', page, limit, token],
+    const { data } = useSuspenseQuery({
+        queryKey: ['users', page, limit],
         queryFn: async () => {
             const res = await axios.get(`${API}/users?page=${page}&limit=${limit}`, { headers: { Authorization: `Bearer ${token}` } })
             return res.data
         },
-        enabled: !!token,
         staleTime: 1000 * 60 * 5,
     })
 
@@ -114,10 +113,6 @@ const Home = () => {
     const users: TokenPayload[] = data?.data ?? [];
     const meta: PaginationType = data?.meta ?? {}
     const lastPage = meta?.last_page ?? 1;
-
-    if (isLoading) {
-        return <div>Loading...</div>
-    }
 
     return (
         <div className="mt-5">

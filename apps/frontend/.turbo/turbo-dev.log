@@ -1,0 +1,153 @@
+
+> frontend@0.1.0 dev /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend
+> next dev -p 4000
+
+[1m[38;2;173;127;168m▲ Next.js 16.2.1[39m[22m (Turbopack)
+- Local:         http://localhost:4000
+- Network:       http://192.168.13.93:4000
+- Environments: .env.local
+[32m[1m✓[22m[39m Ready in 441ms
+[33m[1m⚠[22m[39m Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /Users/azamatabdullayev/Desktop/full-stack-turbo/pnpm-workspace.yaml as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend/pnpm-workspace.yaml
+
+
+ GET / [32m200[39m in 643ms[2m (next.js: 399ms, application-code: 244ms)[22m
+ GET / [32m200[39m in 275ms[2m (next.js: 125ms, application-code: 150ms)[22m
+ GET / [32m200[39m in 60ms[2m (next.js: 30ms, application-code: 30ms)[22m
+ GET / [32m200[39m in 8ms[2m (next.js: 909µs, application-code: 7ms)[22m
+ GET / [32m200[39m in 25ms[2m (next.js: 877µs, application-code: 24ms)[22m
+ GET / [32m200[39m in 38ms[2m (next.js: 999µs, application-code: 37ms)[22m
+ GET / [32m200[39m in 35ms[2m (next.js: 929µs, application-code: 34ms)[22m
+ GET / [32m200[39m in 45ms[2m (next.js: 1661µs, application-code: 43ms)[22m
+ GET / [32m200[39m in 44ms[2m (next.js: 1282µs, application-code: 43ms)[22m
+ GET / [32m200[39m in 46ms[2m (next.js: 3ms, application-code: 43ms)[22m
+ GET / [32m200[39m in 29ms[2m (next.js: 2ms, application-code: 26ms)[22m
+ GET / [32m200[39m in 58ms[2m (next.js: 1672µs, application-code: 56ms)[22m
+ GET / [32m200[39m in 50ms[2m (next.js: 1008µs, application-code: 49ms)[22m
+ GET / [32m200[39m in 41ms[2m (next.js: 1337µs, application-code: 40ms)[22m
+ GET / [32m200[39m in 22ms[2m (next.js: 2ms, application-code: 20ms)[22m
+ GET / [32m200[39m in 16ms[2m (next.js: 5ms, application-code: 11ms)[22m
+ GET / [32m200[39m in 167ms[2m (next.js: 4ms, application-code: 164ms)[22m
+ GET / [32m200[39m in 39ms[2m (next.js: 5ms, application-code: 35ms)[22m
+ GET / [32m200[39m in 26ms[2m (next.js: 2ms, application-code: 24ms)[22m
+[32m[1m✓[22m[39m Compiled in 368ms
+[31m[1m⨯[22m[39m ./apps/frontend/src/app/(pages)/home/page.tsx:8:1
+Unexpected token. Did you mean `[35m{'}[39m'}` or `&rbrace;`?
+  [90m 6 |[0m             <[33mSuspense[0m fallback={<[33mSpinner[0m />}></[33mSuspense[0m>
+  [90m 7 |[0m             <[33mHome[0m />)
+[31m[1m>[0m [90m 8 |[0m }
+  [90m   |[0m [31m[1m^[0m
+  [90m 9 |[0m
+  [90m10 |[0m             [36mexport[0m [36mdefault[0m [33mHomePage[0m
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Client Component Browser:
+    ./apps/frontend/src/app/(pages)/home/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/(auth)/AuthWrapper.tsx [Client Component Browser]
+    ./apps/frontend/src/app/(auth)/AuthWrapper.tsx [Server Component]
+    ./apps/frontend/src/app/page.tsx [Server Component]
+
+
+ GET / [31m500[39m in 141ms[2m (next.js: 65ms, application-code: 77ms)[22m
+[31m[1m⨯[22m[39m ./apps/frontend/src/app/(pages)/home/page.tsx:8:1
+Unexpected token. Did you mean `[35m{'}[39m'}` or `&rbrace;`?
+  [90m 6 |[0m             <[33mSuspense[0m fallback={<[33mSpinner[0m />}></[33mSuspense[0m>
+  [90m 7 |[0m             <[33mHome[0m />)
+[31m[1m>[0m [90m 8 |[0m }
+  [90m   |[0m [31m[1m^[0m
+  [90m 9 |[0m
+  [90m10 |[0m             [36mexport[0m [36mdefault[0m [33mHomePage[0m
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Client Component Browser:
+    ./apps/frontend/src/app/(pages)/home/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/(auth)/AuthWrapper.tsx [Client Component Browser]
+    ./apps/frontend/src/app/(auth)/AuthWrapper.tsx [Server Component]
+    ./apps/frontend/src/app/page.tsx [Server Component]
+
+
+ GET / [31m500[39m in 6ms[2m (next.js: 3ms, application-code: 3ms)[22m
+[31m[1m⨯[22m[39m ./apps/frontend/src/app/(pages)/home/page.tsx:8:1
+Unexpected token. Did you mean `[35m{'}[39m'}` or `&rbrace;`?
+  [90m 6 |[0m             <[33mSuspense[0m fallback={<[33mSpinner[0m />}></[33mSuspense[0m>
+  [90m 7 |[0m             <[33mHome[0m />)
+[31m[1m>[0m [90m 8 |[0m }
+  [90m   |[0m [31m[1m^[0m
+  [90m 9 |[0m
+  [90m10 |[0m             [36mexport[0m [36mdefault[0m [33mHomePage[0m
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Client Component Browser:
+    ./apps/frontend/src/app/(pages)/home/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/(auth)/AuthWrapper.tsx [Client Component Browser]
+    ./apps/frontend/src/app/(auth)/AuthWrapper.tsx [Server Component]
+    ./apps/frontend/src/app/page.tsx [Server Component]
+
+
+[31m[1m⨯[22m[39m ./apps/frontend/src/app/(pages)/home/page.tsx:8:1
+Unexpected token. Did you mean `[35m{'}[39m'}` or `&rbrace;`?
+  [90m 6 |[0m             <[33mSuspense[0m fallback={<[33mSpinner[0m />}></[33mSuspense[0m>
+  [90m 7 |[0m             <[33mHome[0m />)
+[31m[1m>[0m [90m 8 |[0m }
+  [90m   |[0m [31m[1m^[0m
+  [90m 9 |[0m
+  [90m10 |[0m             [36mexport[0m [36mdefault[0m [33mHomePage[0m
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Client Component Browser:
+    ./apps/frontend/src/app/(pages)/home/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/(auth)/AuthWrapper.tsx [Client Component Browser]
+    ./apps/frontend/src/app/(auth)/AuthWrapper.tsx [Server Component]
+    ./apps/frontend/src/app/page.tsx [Server Component]
+
+
+ GET / [31m500[39m in 10ms[2m (next.js: 3ms, application-code: 8ms)[22m
+ GET / [31m500[39m in 10ms[2m (next.js: 7ms, application-code: 3ms)[22m
+[36m[browser][39m [31mUncaught Error: ./apps/frontend/src/app/(pages)/home/page.tsx:8:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+   6 |             <Suspense fallback={<Spinner />}></Suspense>
+   7 |             <Home />)
+>  8 | }
+     | ^
+   9 |
+  10 |             export default HomePage
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Client Component Browser:
+    ./apps/frontend/src/app/(pages)/home/page.tsx [Client Component Browser]
+    ./apps/frontend/src/app/(auth)/AuthWrapper.tsx [Client Component Browser]
+    ./apps/frontend/src/app/(auth)/AuthWrapper.tsx [Server Component]
+    ./apps/frontend/src/app/page.tsx [Server Component]
+
+[39m
+[31m    at <unknown> (Error: ./apps/frontend/src/app/(pages)/home/page.tsx:8:1)
+    at <unknown> (Error: (./apps/frontend/src/app/(pages)/home/page.tsx:8:1)[39m
+ GET / [32m200[39m in 322ms[2m (next.js: 116ms, application-code: 206ms)[22m
+ GET / [32m200[39m in 70ms[2m (next.js: 32ms, application-code: 38ms)[22m
+ GET / [32m200[39m in 42ms[2m (next.js: 4ms, application-code: 39ms)[22m
+ GET / [32m200[39m in 47ms[2m (next.js: 5ms, application-code: 42ms)[22m
+ GET /groups [32m200[39m in 61ms[2m (next.js: 35ms, application-code: 26ms)[22m
+[32m[1m✓[22m[39m Compiled in 174ms
+ GET /groups [32m200[39m in 104ms[2m (next.js: 50ms, application-code: 55ms)[22m
+ GET /groups [32m200[39m in 21ms[2m (next.js: 1744µs, application-code: 19ms)[22m
+ GET /groups [32m200[39m in 11ms[2m (next.js: 2ms, application-code: 9ms)[22m
+ GET /home [32m200[39m in 53ms[2m (next.js: 31ms, application-code: 22ms)[22m
+ GET /home [32m200[39m in 167ms[2m (next.js: 4ms, application-code: 163ms)[22m
+ GET /home [32m200[39m in 77ms[2m (next.js: 5ms, application-code: 72ms)[22m
+ GET /home [32m200[39m in 61ms[2m (next.js: 2ms, application-code: 59ms)[22m
+ GET /home [32m200[39m in 76ms[2m (next.js: 4ms, application-code: 72ms)[22m
+[32m[1m✓[22m[39m Compiled in 21ms

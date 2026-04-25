@@ -32,7 +32,7 @@ export class StudentScoreRepository {
                 where: { studentId, groupId },
                 _sum: { value: true },
                 orderBy: {
-                    date: 'desc', // ✅ IMPORTANT
+                    date: 'desc',
                 },
             });
 
@@ -121,24 +121,21 @@ export class StudentScoreRepository {
 
     async updateTotalScore(tx: Prisma.TransactionClient, dto: ScoreDto) {
 
-        return tx.studentScore.upsert({
+        return tx.studentScore.update({
             where: {
                 studentId_groupId: {
                     studentId: dto.studentId,
                     groupId: dto.groupId,
                 }
             },
-            update: {
+            data: {
                 total: { increment: dto.score },
-                homework: dto.scoreType === "HOMEWORK" ? { increment: dto.score } : undefined,
-                attendance: dto.scoreType === "ATTENDANCE" ? { increment: dto.score } : undefined,
-            },
-            create: {
-                studentId: dto.studentId,
-                groupId: dto.groupId,
-                total: dto.score,
-                homework: dto.scoreType === "HOMEWORK" ? dto.score : 0,
-                attendance: dto.scoreType === "ATTENDANCE" ? dto.score : 0,
+                ...(dto.scoreType === "HOMEWORK" && {
+                    homework: { increment: dto.score }
+                }),
+                ...(dto.scoreType === "ATTENDANCE" && {
+                    attendance: { increment: dto.score }
+                })
             }
         })
     }
@@ -160,16 +157,16 @@ export class StudentScoreRepository {
     }
 
     async findScoreEvent(studentId: string, groupId: string, scoreType: ScoreType, date: Date) {
-        return this.prisma.scoreEvent.findFirst({
+        return this.prisma.scoreEvent.findUnique({
             where: {
-
-                studentId,
-                groupId,
-                type: scoreType,
-                date,
-
+                studentId_groupId_type_date: {
+                    studentId,
+                    groupId,
+                    type: scoreType,
+                    date,
+                }
             },
-            select: { value: true },
+            select: { value: true }
         })
     }
 
