@@ -40,22 +40,46 @@ class _StudentScoresPageState extends State<StudentScoresPage> {
           }
 
           final scores = data.scores;
-          final total = data.total;
+          final total = data.total.total;
           final totalCount = data.totalCount;
 
-          return SizedBox(
-            child: ListView.builder(
-              itemCount: scores.length,
-              itemBuilder: (context, index) {
-                final score = scores[index];
+          return Column(
+            children: [
+              Padding(
+                padding: EdgeInsetsGeometry.all(12),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Total score: $total',
+                      style: TextStyle(
+                        color: Colors.blue,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      'All records: $totalCount',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: scores.length,
+                  itemBuilder: (context, index) {
+                    final score = scores[index];
 
-                return MyStudentCard(
-                  homework: score.homework,
-                  attendance: score.attendance,
-                  date: score.date,
-                );
-              },
-            ),
+                    return MyStudentCard(
+                      homework: score.homework,
+                      attendance: score.attendance,
+                      date: score.date,
+                    );
+                  },
+                ),
+              ),
+            ],
           );
         },
       ),

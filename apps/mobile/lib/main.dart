@@ -50,7 +50,7 @@ class _MyAppState extends State<MyApp> {
           if (state is AuthUserLoggedIn) {
             return MyGroupsPage();
           }
-          return LoginPage();
+          return MyGroupsPage();
         },
       ),
     );

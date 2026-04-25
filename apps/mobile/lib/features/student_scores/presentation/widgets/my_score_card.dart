@@ -22,13 +22,32 @@ class MyStudentCard extends StatelessWidget {
           padding: const EdgeInsets.all(12.0),
           child: Column(
             children: [
-              Row(children: [Icon(Icons.home), Text('Homework: $homework')]),
-              const SizedBox(height: 10),
               Row(
-                children: [Icon(Icons.list), Text('Attendance: $attendance')],
+                children: [
+                  Icon(Icons.home),
+                  SizedBox(width: 15),
+                  Text('Homework: $homework', style: TextStyle(fontSize: 16)),
+                ],
               ),
               const SizedBox(height: 10),
-              Row(children: [Icon(Icons.calendar_month), Text('Date: $date')]),
+              Row(
+                children: [
+                  Icon(Icons.person),
+                  SizedBox(width: 15),
+                  Text(
+                    'Attendance: $attendance',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 10),
+              Row(
+                children: [
+                  Icon(Icons.calendar_month),
+                  SizedBox(width: 15),
+                  Text('Date: $date', style: TextStyle(fontSize: 16)),
+                ],
+              ),
             ],
           ),
         ),
