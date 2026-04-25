@@ -103,6 +103,14 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
         },
     })
 
+    const { data: groupStudentsData } = useSuspenseQuery({
+        queryKey: ["group-students", groupId, page, limit],
+        queryFn: async () => {
+            const res = await axios.get(`${API}/group/${groupId}/students`, { headers: { "Authorization": `Bearer ${token}` }, params: { page, limit } });
+            return res.data;
+        }
+    })
+
     const updateScoresMutation = useMutation({
         mutationFn: async (payload: UpdateScorePayload) => {
             const { studentId, groupId, date, type, value } = payload;
@@ -169,8 +177,8 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
     })
 
     const group: GroupType = data;
-    const groupStudents: TokenPayload[] = data?.students?.length > 0 ? data.students : [];
-    const meta: PaginationType = data?.meta ?? {}
+    const groupStudents: TokenPayload[] = groupStudentsData.data.length > 0 ? groupStudentsData.data : [];
+    const meta: PaginationType = groupStudentsData?.meta ?? {}
     const lastPage = meta?.last_page ?? 1;
 
 
@@ -194,7 +202,9 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
                 <Badge className='w-40 h-8 text-lg' variant="outline">Teacher: {group?.teacher?.username}</Badge>
             </header>
             <Table>
-                <TableCaption className="text-center font-bold text-lg">Total: {groupStudents.length} students</TableCaption>
+                <TableCaption className="text-center font-bold text-lg">
+                    Showing {groupStudents.length} of {meta?.total ?? 0} students
+                </TableCaption>
                 <TableHeader>
                     <TableRow>
                         <TableHead className="w-12 text-center font-bold text-lg">&#8470;</TableHead>

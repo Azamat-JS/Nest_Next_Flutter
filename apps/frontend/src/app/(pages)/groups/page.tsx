@@ -3,10 +3,11 @@ import { ErrorBoundary } from "react-error-boundary"
 import { Suspense } from "react";
 import ErrorHandler from "@/components/utils/ErrorHandler";
 import Spinner from "@/components/utils/Spinner";
+import { SkeletonDemo } from "@/components/utils/Skeleton";
 const GroupsPage = async () => {
     return (
         <ErrorBoundary fallback={<ErrorHandler />}>
-            <Suspense fallback={<Spinner />}>
+            <Suspense fallback={<SkeletonDemo />}>
                 <GroupComponent />
             </Suspense>
         </ErrorBoundary>
