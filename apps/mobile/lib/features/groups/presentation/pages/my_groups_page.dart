@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile/core/di/service_locator.dart';
 import 'package:mobile/core/utils/show_snackbar.dart';
 import 'package:mobile/features/groups/presentation/bloc/group/group_bloc.dart';
+import 'package:mobile/features/groups/presentation/bloc/students/group_students_bloc.dart';
 import 'package:mobile/features/groups/presentation/pages/group_details_page.dart';
 import 'package:mobile/features/student_scores/presentation/bloc/student_score_bloc.dart';
 
@@ -116,7 +117,7 @@ Widget _buildBody(BuildContext context) {
               GestureDetector(
                 onTap: () {
                   final group = state.selectedGroup!;
-                  context.read<GroupBloc>().add(
+                  context.read<GroupStudentsBloc>().add(
                     FetchGroupStudents(group.id, 1, 10),
                   );
                   Navigator.push(
@@ -134,10 +135,7 @@ Widget _buildBody(BuildContext context) {
                                     ..add(FetchStudentScores(group.id)),
                             ),
                           ],
-                          child: GroupDetailsPage(
-                            teacher: group.teacher,
-                            groupId: group.id,
-                          ),
+                          child: GroupDetailsPage(groupId: group.id),
                         );
                       },
                     ),
@@ -171,8 +169,6 @@ Widget _buildBody(BuildContext context) {
                           "Teacher: ${state.selectedGroup?.teacher.username}",
                           style: TextStyle(fontSize: 16),
                         ),
-                        SizedBox(height: 10),
-                        Text("Students: ${state.students?.total ?? 0}"),
                       ],
                     ),
                   ),
