@@ -7,6 +7,7 @@ import 'package:mobile/features/groups/data/datasources/group_remote_data_source
 import 'package:mobile/features/groups/data/datasources/group_student_local_data_source.dart';
 import 'package:mobile/features/groups/data/models/groupdb_model.dart';
 import 'package:mobile/features/groups/domain/entities/group_entity.dart';
+import 'package:mobile/features/groups/domain/entities/group_students_entity.dart';
 import 'package:mobile/features/groups/domain/repositories/group_repository.dart';
 
 class GroupRepositoryImpl implements GroupRepository {
@@ -34,10 +35,6 @@ class GroupRepositoryImpl implements GroupRepository {
 
         final teacher = await userLocalDataSource.getCachedUser();
 
-        final students = await groupStudentLocalDatasource.getStudentsByGroup(
-          id,
-        );
-
         return right(
           GroupEntity(
             id: cached.id,
@@ -45,7 +42,6 @@ class GroupRepositoryImpl implements GroupRepository {
             teacherId: cached.teacherId,
             createdAt: cached.createdAt,
             teacher: teacher ?? _emptyUser(),
-            students: students,
           ),
         );
       }
@@ -53,13 +49,6 @@ class GroupRepositoryImpl implements GroupRepository {
       final entity = remote.toEntity();
       await localDataSource.cacheGroup(GroupdbModel.fromEntity(entity));
       await userLocalDataSource.cacheUser(entity.teacher);
-      for (final student in entity.students) {
-        await userLocalDataSource.cacheUser(student);
-        await groupStudentLocalDatasource.cacheStudentGroup(
-          studentId: student.id,
-          groupId: id,
-        );
-      }
       return right(remote.toEntity());
     } catch (e) {
       return left(Failure('Failed to fetch group: $e'));
@@ -90,6 +79,22 @@ class GroupRepositoryImpl implements GroupRepository {
       return right(groups);
     } catch (e) {
       return left(Failure('Failed to fetch groups: $e'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, GroupStudentsEntity>> getGroupStudents({required String groupId, required int page, required int limit}) {
+    try {
+      final students = groupStudentLocalDatasource.getStudentsByGroup(groupId);
+            for (final student in entity.students) {
+        await userLocalDataSource.cacheUser(student);
+        await groupStudentLocalDatasource.cacheStudentGroup(
+          studentId: student.id,
+          groupId: id,
+        );
+      }
+    } catch (e) {
+      
     }
   }
 }
