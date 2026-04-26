@@ -11,3 +11,5 @@ final class AuthUserLoggedIn extends AuthCheckState {
 }
 
 final class AuthChecking extends AuthCheckState {}
+
+final class AuthCheckUnauthenticated extends AuthCheckState {}

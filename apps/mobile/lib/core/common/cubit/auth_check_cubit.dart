@@ -11,14 +11,38 @@ class AuthCheckCubit extends Cubit<AuthCheckState> {
 
   AuthCheckCubit(this.remote, this.local) : super(AuthCheckInitial());
 
-  Future<void> checkAuthStatus(UserEntity? user) async {
+  Future<void> checkAuthStatus() async {
     emit(AuthChecking());
-    final token = remote.getToken();
-    final user = await authRemoteDataSource.getCurrentUser();
-    if (user != null) {
-      emit(AuthUserLoggedIn(user));
-    } else {
-      emit(AuthCheckInitial());
+    final token = await remote.getToken();
+    if (token == null) {
+      emit(AuthCheckUnauthenticated());
+      return;
     }
+    final cachedUser = await local.getCachedUser();
+    if (cachedUser != null) {
+      emit(AuthUserLoggedIn(cachedUser));
+      _refreshUser();
+      return;
+    }
+    try {
+      final remoteUser = await remote.getCurrentUser();
+      if (remoteUser != null) {
+        await local.cacheUser(remoteUser);
+        emit(AuthUserLoggedIn(remoteUser));
+        _refreshUser();
+      } else {
+        emit(AuthCheckUnauthenticated());
+      }
+    } catch (_) {}
+  }
+
+  Future<void> _refreshUser() async {
+    try {
+      final fresh = await remote.getCurrentUser();
+      if (fresh != null) {
+        await local.cacheUser(fresh);
+        emit(AuthUserLoggedIn(fresh));
+      }
+    } catch (_) {}
   }
 }
