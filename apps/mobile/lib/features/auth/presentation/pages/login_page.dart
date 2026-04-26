@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mobile/core/common/cubit/auth_check_cubit.dart';
 import 'package:mobile/core/theme/app_pallete.dart';
 import 'package:mobile/core/utils/show_snackbar.dart';
 import 'package:mobile/features/auth/presentation/bloc/auth_bloc.dart';
@@ -47,6 +48,9 @@ class _LoginPageState extends State<LoginPage> {
                 listener: (context, state) {
                   if (state is AuthFailure) {
                     showSnackbar(context, state.message);
+                  }
+                  if (state is AuthSuccess) {
+                    context.read<AuthCheckCubit>().checkAuthStatus();
                   }
                 },
                 builder: (context, state) {
