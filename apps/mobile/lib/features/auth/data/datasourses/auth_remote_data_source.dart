@@ -20,6 +20,10 @@ abstract interface class AuthRemoteDataSource {
 
   Future<String?> getToken();
 
+  Future<void> saveToken(String token);
+
+  Future<void> clearToken();
+
   Future<void> signOut();
 }
 
@@ -106,5 +110,15 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   Future<String?> getToken() async {
     final token = await secureStorage.read(key: 'access_token');
     return token;
+  }
+
+  @override
+  Future<void> clearToken() async {
+    await secureStorage.delete(key: 'access_token');
+  }
+
+  @override
+  Future<void> saveToken(String token) async {
+    await secureStorage.write(key: 'access_token', value: token);
   }
 }
