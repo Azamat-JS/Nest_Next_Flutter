@@ -4,10 +4,10 @@ import 'package:mobile/core/usecase/usecase.dart';
 import 'package:mobile/features/groups/domain/entities/group_students_entity.dart';
 import 'package:mobile/features/groups/domain/repositories/group_repository.dart';
 
-class GroupStudentsUsecase
+class GetGroupStudentsUsecase
     implements Usecase<GroupStudentsEntity, GroupStudentsParams> {
   final GroupRepository groupRepository;
-  GroupStudentsUsecase(this.groupRepository);
+  GetGroupStudentsUsecase(this.groupRepository);
 
   @override
   Future<Either<Failure, GroupStudentsEntity>> call(

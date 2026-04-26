@@ -14,6 +14,13 @@ final class FetchGroupById extends GroupEvent {
   FetchGroupById(this.id);
 }
 
+final class FetchGroupStudents extends GroupEvent {
+  final String groupId;
+  final int page;
+  final int limit;
+  FetchGroupStudents(this.groupId, this.page, this.limit);
+}
+
 final class LoadMoreGroups extends GroupEvent {
   final int nextPage;
   final int limit;

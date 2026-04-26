@@ -2,8 +2,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile/core/errors/failures.dart';
 import 'package:mobile/features/groups/domain/entities/group_entity.dart';
+import 'package:mobile/features/groups/domain/entities/group_students_entity.dart';
 import 'package:mobile/features/groups/domain/usecases/group_all.dart';
 import 'package:mobile/features/groups/domain/usecases/group_by_id.dart';
+import 'package:mobile/features/groups/domain/usecases/group_students_usecase.dart';
 import 'package:mobile/features/groups/domain/usecases/group_use_case.dart';
 part 'group_event.dart';
 part 'group_state.dart';
@@ -13,6 +15,7 @@ class GroupBloc extends Bloc<GroupEvent, GroupState> {
   GroupBloc(this._useCases) : super(GroupState()) {
     on<FetchGroups>(_onFetchGroups);
     on<FetchGroupById>(_onFetchGroupById);
+    on<FetchGroupStudents>(_onFetchGroupStudents);
     on<LoadMoreGroups>(_onLoadMoreGroups);
   }
 
@@ -38,12 +41,35 @@ class GroupBloc extends Bloc<GroupEvent, GroupState> {
     final res = await _useCases.groupById(GroupByIdParams(id: event.id));
     res.fold(
       (fail) {
-        print("FAILURE: $fail");
         emit(state.copyWith(isLoading: false, failure: fail));
       },
       (group) {
-        print("SUCCESS GROUP: ${group.name}");
         emit(state.copyWith(isLoading: false, selectedGroup: group));
+      },
+    );
+  }
+
+  void _onFetchGroupStudents(
+    FetchGroupStudents event,
+    Emitter<GroupState> emit,
+  ) async {
+    emit(
+      state.copyWith(isLoading: true, clearFailure: true, clearStudents: true),
+    );
+    final res = await _useCases.groupStudents(
+      GroupStudentsParams(
+        groupId: event.groupId,
+        page: event.page,
+        limit: event.limit,
+      ),
+    );
+
+    res.fold(
+      (fail) {
+        emit(state.copyWith(isLoading: false, failure: fail));
+      },
+      (students) {
+        emit(state.copyWith(isLoading: false, students: students));
       },
     );
   }
