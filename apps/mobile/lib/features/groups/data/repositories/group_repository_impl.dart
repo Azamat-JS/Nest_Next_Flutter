@@ -83,18 +83,35 @@ class GroupRepositoryImpl implements GroupRepository {
   }
 
   @override
-  Future<Either<Failure, GroupStudentsEntity>> getGroupStudents({required String groupId, required int page, required int limit}) {
+  Future<Either<Failure, GroupStudentsEntity>> getGroupStudents({
+    required String groupId,
+    required int page,
+    required int limit,
+  }) async {
     try {
-      final students = groupStudentLocalDatasource.getStudentsByGroup(groupId);
-            for (final student in entity.students) {
+      final students = await groupStudentLocalDatasource.getStudentsByGroup(
+        groupId,
+        page,
+        limit,
+      );
+
+      for (final student in students) {
         await userLocalDataSource.cacheUser(student);
         await groupStudentLocalDatasource.cacheStudentGroup(
           studentId: student.id,
-          groupId: id,
+          groupId: groupId,
         );
       }
+      return right(
+        GroupStudentsEntity(
+          data: students,
+          page: page,
+          total: students.length,
+          lastPage: 1,
+        ),
+      );
     } catch (e) {
-      
+      return left(Failure('Failed to fetch group students: $e'));
     }
   }
 }

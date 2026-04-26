@@ -2,7 +2,11 @@ import 'package:mobile/core/common/entities/user_entity.dart';
 import 'package:sqflite/sqflite.dart';
 
 abstract class GroupStudentLocalDatasource {
-  Future<List<UserEntity>> getStudentsByGroup(String groupId);
+  Future<List<UserEntity>> getStudentsByGroup(
+    String groupId,
+    int page,
+    int limit,
+  );
   Future<void> cacheStudentGroup({
     required String studentId,
     required String groupId,
@@ -15,7 +19,12 @@ class GroupStudentLocalDatasourceImpl implements GroupStudentLocalDatasource {
   GroupStudentLocalDatasourceImpl(this.db);
 
   @override
-  Future<List<UserEntity>> getStudentsByGroup(String groupId) async {
+  Future<List<UserEntity>> getStudentsByGroup(
+    String groupId,
+    int page,
+    int limit,
+  ) async {
+    final offset = (page - 1) * limit;
     final res = await db.rawQuery(
       '''
       SELECT u.id, u.username, u.email, u.role
@@ -23,8 +32,10 @@ class GroupStudentLocalDatasourceImpl implements GroupStudentLocalDatasource {
       INNER JOIN student_group sg
       ON u.id = sg.student_id
       WHERE sg.group_id = ?
+      ORDER BY sg.joined_at DESC
+      LIMIT ? OFFSET ?
     ''',
-      [groupId],
+      [groupId, limit, offset],
     );
 
     return res.map((json) {
