@@ -2,10 +2,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile/core/errors/failures.dart';
 import 'package:mobile/features/groups/domain/entities/group_entity.dart';
-import 'package:mobile/features/groups/domain/entities/group_students_entity.dart';
 import 'package:mobile/features/groups/domain/usecases/group_all.dart';
 import 'package:mobile/features/groups/domain/usecases/group_by_id.dart';
-import 'package:mobile/features/groups/domain/usecases/group_students_usecase.dart';
 import 'package:mobile/features/groups/domain/usecases/group_use_case.dart';
 part 'group_event.dart';
 part 'group_state.dart';
@@ -15,9 +13,7 @@ class GroupBloc extends Bloc<GroupEvent, GroupState> {
   GroupBloc(this._useCases) : super(GroupState()) {
     on<FetchGroups>(_onFetchGroups);
     on<FetchGroupById>(_onFetchGroupById);
-    on<FetchGroupStudents>(_onFetchGroupStudents);
     on<LoadMoreGroups>(_onLoadMoreGroups);
-    on<LoadMoreGroupStudents>(_onLoadMoreGroupStudents);
   }
 
   void _onFetchGroups(FetchGroups event, Emitter<GroupState> emit) async {
@@ -50,31 +46,6 @@ class GroupBloc extends Bloc<GroupEvent, GroupState> {
     );
   }
 
-  void _onFetchGroupStudents(
-    FetchGroupStudents event,
-    Emitter<GroupState> emit,
-  ) async {
-    emit(
-      state.copyWith(isLoading: true, clearFailure: true, clearStudents: true),
-    );
-    final res = await _useCases.groupStudents(
-      GroupStudentsParams(
-        groupId: event.groupId,
-        page: event.page,
-        limit: event.limit,
-      ),
-    );
-
-    res.fold(
-      (fail) {
-        emit(state.copyWith(isLoading: false, failure: fail));
-      },
-      (students) {
-        emit(state.copyWith(isLoading: false, students: students));
-      },
-    );
-  }
-
   void _onLoadMoreGroups(LoadMoreGroups event, Emitter<GroupState> emit) async {
     if (state.isLoading) return;
     final groups = state.groups;
@@ -94,41 +65,6 @@ class GroupBloc extends Bloc<GroupEvent, GroupState> {
       }
       final updated = _useCases.merge(old, newGroups);
       emit(state.copyWith(isLoading: false, groups: updated));
-    });
-  }
-
-  void _onLoadMoreGroupStudents(
-    LoadMoreGroupStudents event,
-    Emitter<GroupState> emit,
-  ) async {
-    if (state.isLoading) return;
-
-    final current = state.students;
-    if (current != null && current.page >= current.lastPage) return;
-
-    final res = await _useCases.groupStudents(
-      GroupStudentsParams(
-        groupId: event.groupId,
-        page: event.nextPage,
-        limit: event.limit,
-      ),
-    );
-
-    res.fold((fail) => emit(state.copyWith(failure: fail)), (newStudents) {
-      final old = state.students;
-
-      if (old == null) {
-        emit(state.copyWith(students: newStudents));
-        return;
-      }
-
-      final merged = GroupStudentsEntity(
-        data: [...old.data, ...newStudents.data],
-        page: newStudents.page,
-        total: newStudents.total,
-        lastPage: newStudents.lastPage,
-      );
-      emit(state.copyWith(students: merged));
     });
   }
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile/core/di/service_locator.dart';
 import 'package:mobile/core/utils/show_snackbar.dart';
-import 'package:mobile/features/groups/presentation/bloc/group_bloc.dart';
+import 'package:mobile/features/groups/presentation/bloc/group/group_bloc.dart';
 import 'package:mobile/features/groups/presentation/pages/group_details_page.dart';
 import 'package:mobile/features/student_scores/presentation/bloc/student_score_bloc.dart';
 

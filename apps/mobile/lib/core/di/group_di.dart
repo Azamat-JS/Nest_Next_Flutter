@@ -11,7 +11,7 @@ import 'package:mobile/features/groups/domain/usecases/group_by_id.dart';
 import 'package:mobile/features/groups/domain/usecases/group_students_usecase.dart';
 import 'package:mobile/features/groups/domain/usecases/group_use_case.dart';
 import 'package:mobile/features/groups/domain/usecases/merge_groups.dart';
-import 'package:mobile/features/groups/presentation/bloc/group_bloc.dart';
+import 'package:mobile/features/groups/presentation/bloc/group/group_bloc.dart';
 import 'package:sqflite/sqflite.dart';
 
 Future<void> initGroup() async {

@@ -1,0 +1,37 @@
+
+> frontend@0.1.0 dev /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend
+> next dev -p 4000
+
+[1m[38;2;173;127;168m▲ Next.js 16.2.1[39m[22m (Turbopack)
+- Local:         http://localhost:4000
+- Network:       http://192.168.13.93:4000
+- Environments: .env.local
+[32m[1m✓[22m[39m Ready in 301ms
+[33m[1m⚠[22m[39m Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /Users/azamatabdullayev/Desktop/full-stack-turbo/pnpm-workspace.yaml as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend/pnpm-workspace.yaml
+
+
+ GET / [32m200[39m in 263ms[2m (next.js: 97ms, application-code: 166ms)[22m
+ GET /groups [32m200[39m in 228ms[2m (next.js: 190ms, application-code: 38ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 345ms[2m (next.js: 326ms, application-code: 19ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmo05ffeo00008pv28uobawe6 [32m200[39m in 248ms[2m (next.js: 231ms, application-code: 18ms)[22m
+ GET /groups [32m200[39m in 28ms[2m (next.js: 5ms, application-code: 23ms)[22m
+ GET /groups/cmnq4oz3e0005xkv21be71kiu [32m200[39m in 45ms[2m (next.js: 25ms, application-code: 20ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+ GET /groups [32m200[39m in 30ms[2m (next.js: 6ms, application-code: 25ms)[22m
+ GET /groups/cmnoh0p550000u8v2nihbtf1o [32m200[39m in 20ms[2m (next.js: 5ms, application-code: 15ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+ GET /groups/cmnoh0p550000u8v2nihbtf1o/cmnq74ink0001hrv254s9e0li [32m200[39m in 32ms[2m (next.js: 10ms, application-code: 22ms)[22m
+ GET /groups [32m200[39m in 12ms[2m (next.js: 2ms, application-code: 10ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 30ms[2m (next.js: 9ms, application-code: 21ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnq74ink0001hrv254s9e0li [32m200[39m in 32ms[2m (next.js: 9ms, application-code: 23ms)[22m
+ GET /groups [32m200[39m in 29ms[2m (next.js: 4ms, application-code: 24ms)[22m
+[?25h
