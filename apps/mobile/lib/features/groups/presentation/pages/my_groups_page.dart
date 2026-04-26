@@ -115,17 +115,24 @@ Widget _buildBody(BuildContext context) {
               SizedBox(height: 30),
               GestureDetector(
                 onTap: () {
+                  final group = state.selectedGroup!;
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) {
-                        final group = state.selectedGroup!;
-                        return BlocProvider(
-                          create: (_) =>
-                              serviceLocator<StudentScoreBloc>()
-                                ..add(FetchStudentScores(group.id)),
+                        return MultiBlocProvider(
+                          providers: [
+                            BlocProvider.value(
+                              value: context.read<GroupBloc>()
+                                ..add(FetchGroupStudents(group.id, 1, 10)),
+                            ),
+                            BlocProvider(
+                              create: (_) =>
+                                  serviceLocator<StudentScoreBloc>()
+                                    ..add(FetchStudentScores(group.id)),
+                            ),
+                          ],
                           child: GroupDetailsPage(
-                            students: group.students,
                             teacher: group.teacher,
                             groupId: group.id,
                           ),
@@ -163,9 +170,7 @@ Widget _buildBody(BuildContext context) {
                           style: TextStyle(fontSize: 16),
                         ),
                         SizedBox(height: 10),
-                        Text(
-                          "Students: ${state.selectedGroup?.students.length ?? 0}",
-                        ),
+                        Text("Students: ${state.students?.total ?? 0}"),
                       ],
                     ),
                   ),
