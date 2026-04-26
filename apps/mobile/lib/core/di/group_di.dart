@@ -21,9 +21,6 @@ Future<void> initGroup() async {
     ..registerLazySingleton<GroupLocalDatasource>(
       () => GroupLocalDatasourceImpl(serviceLocator<Database>()),
     )
-    ..registerLazySingleton<UserLocalDataSource>(
-      () => UserLocalDataSourceImpl(serviceLocator<Database>()),
-    )
     ..registerLazySingleton<GroupStudentLocalDatasource>(
       () => GroupStudentLocalDatasourceImpl(serviceLocator<Database>()),
     )

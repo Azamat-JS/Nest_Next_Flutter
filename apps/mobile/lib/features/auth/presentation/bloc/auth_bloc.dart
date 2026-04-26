@@ -42,7 +42,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(AuthLoading());
     final res = await _currentUser(NoParams());
     return res.fold((l) => emit(AuthFailure(l.message)), (user) {
-      _authCheckCubit.checkAuthStatus(user);
+      _authCheckCubit.checkAuthStatus();
       emit(AuthSuccess(user));
     });
   }
@@ -68,7 +68,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     final useRes = await _currentUser(NoParams());
     useRes.fold((l) => emit(AuthFailure(l.message)), (user) {
-      _authCheckCubit.checkAuthStatus(user);
+      _authCheckCubit.checkAuthStatus();
       emit(AuthSuccess(user));
     });
   }
@@ -89,7 +89,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     final useRes = await _currentUser(NoParams());
     useRes.fold((l) => emit(AuthFailure(l.message)), (user) {
-      _authCheckCubit.checkAuthStatus(user);
+      _authCheckCubit.checkAuthStatus();
       emit(AuthSuccess(user));
     });
   }
