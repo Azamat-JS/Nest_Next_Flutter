@@ -17,6 +17,7 @@ class GroupBloc extends Bloc<GroupEvent, GroupState> {
     on<FetchGroupById>(_onFetchGroupById);
     on<FetchGroupStudents>(_onFetchGroupStudents);
     on<LoadMoreGroups>(_onLoadMoreGroups);
+    on<LoadMoreGroupStudents>(_onLoadMoreGroupStudents);
   }
 
   void _onFetchGroups(FetchGroups event, Emitter<GroupState> emit) async {
@@ -93,6 +94,41 @@ class GroupBloc extends Bloc<GroupEvent, GroupState> {
       }
       final updated = _useCases.merge(old, newGroups);
       emit(state.copyWith(isLoading: false, groups: updated));
+    });
+  }
+
+  void _onLoadMoreGroupStudents(
+    LoadMoreGroupStudents event,
+    Emitter<GroupState> emit,
+  ) async {
+    if (state.isLoading) return;
+
+    final current = state.students;
+    if (current != null && current.page >= current.lastPage) return;
+
+    final res = await _useCases.groupStudents(
+      GroupStudentsParams(
+        groupId: event.groupId,
+        page: event.nextPage,
+        limit: event.limit,
+      ),
+    );
+
+    res.fold((fail) => emit(state.copyWith(failure: fail)), (newStudents) {
+      final old = state.students;
+
+      if (old == null) {
+        emit(state.copyWith(students: newStudents));
+        return;
+      }
+
+      final merged = GroupStudentsEntity(
+        data: [...old.data, ...newStudents.data],
+        page: newStudents.page,
+        total: newStudents.total,
+        lastPage: newStudents.lastPage,
+      );
+      emit(state.copyWith(students: merged));
     });
   }
 }

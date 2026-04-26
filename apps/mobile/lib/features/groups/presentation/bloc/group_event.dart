@@ -26,3 +26,10 @@ final class LoadMoreGroups extends GroupEvent {
   final int limit;
   LoadMoreGroups(this.nextPage, this.limit);
 }
+
+final class LoadMoreGroupStudents extends GroupEvent {
+  final String groupId;
+  final int nextPage;
+  final int limit;
+  LoadMoreGroupStudents(this.groupId, this.nextPage, this.limit);
+}
