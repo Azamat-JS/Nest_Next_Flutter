@@ -128,6 +128,7 @@ export class GroupRepository {
       }
     }
   }
+
   async findStudentByIds(studentIds: string[]) {
     const students = await this.prisma.users.findMany({
       where: {

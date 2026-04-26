@@ -6,7 +6,6 @@ class GroupEntity {
   final String teacherId;
   final DateTime createdAt;
   final UserEntity teacher;
-  final List<UserEntity> students;
 
   GroupEntity({
     required this.id,
@@ -14,7 +13,6 @@ class GroupEntity {
     required this.teacherId,
     required this.createdAt,
     required this.teacher,
-    required this.students,
   });
 }
 

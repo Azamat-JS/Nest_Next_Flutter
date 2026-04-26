@@ -8,7 +8,6 @@ class GroupModel extends GroupEntity {
     required super.teacherId,
     required super.createdAt,
     required super.teacher,
-    required super.students,
   });
 
   factory GroupModel.fromJson(Map<String, dynamic> json) {
@@ -18,9 +17,6 @@ class GroupModel extends GroupEntity {
       teacherId: json['teacherId'] as String,
       createdAt: DateTime.parse(json['createdAt'] as String),
       teacher: UserModel.fromJson(json['teacher'] as Map<String, dynamic>),
-      students: (json['students'] as List<dynamic>)
-          .map((s) => UserModel.fromJson(s as Map<String, dynamic>))
-          .toList(),
     );
   }
 
@@ -31,7 +27,6 @@ class GroupModel extends GroupEntity {
       name: name,
       teacherId: teacherId,
       teacher: teacher,
-      students: students,
     );
   }
 }

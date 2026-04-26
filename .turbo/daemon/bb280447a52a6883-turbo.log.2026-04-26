@@ -248,3 +248,38 @@
 2026-04-26T11:08:39.757889Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
 2026-04-26T11:08:39.859063Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/mobile/build/ab98e94b1c7610a77023274e1712ea95/gen_localizations.stamp")}
 2026-04-26T11:08:39.859072Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2026-04-26T11:11:13.958704Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/group/group.service.ts")}
+2026-04-26T11:11:13.958719Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-04-26T11:11:14.357412Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/dist/src/group/group.service.js.map"), AnchoredSystemPathBuf("apps/backend/dist/tsconfig.build.tsbuildinfo"), AnchoredSystemPathBuf("apps/backend/dist/src/main.d.ts"), AnchoredSystemPathBuf("apps/backend/dist/src/group/usecases/index.d.ts"), AnchoredSystemPathBuf("apps/backend/dist/src/group/group.module.d.ts"), AnchoredSystemPathBuf("apps/backend/dist/src/group/group.controller.d.ts"), AnchoredSystemPathBuf("apps/backend/dist/src/group/usecases/update-group.usecase.d.ts"), AnchoredSystemPathBuf("apps/backend/dist/src/group/group.service.js"), AnchoredSystemPathBuf("apps/backend/dist/src/app.module.d.ts"), AnchoredSystemPathBuf("apps/backend/dist/src/group/usecases/remove_student_from_group_usecase.d.ts"), AnchoredSystemPathBuf("apps/backend/dist/src/group/usecases/create-group.usecase.d.ts"), AnchoredSystemPathBuf("apps/backend/dist/src/group/group.service.d.ts"), AnchoredSystemPathBuf("apps/backend/dist/src/group/usecases/add-student-usecase.d.ts")}
+2026-04-26T11:11:14.357420Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-04-26T11:11:14.448392Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2026-04-26T11:16:42.650884Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/mobile/lib/features/groups/domain/entities/group_entity.dart")}
+2026-04-26T11:16:42.650908Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2026-04-26T11:17:06.649105Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/mobile/lib/features/groups/data/models/group_model.dart")}
+2026-04-26T11:17:06.649115Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2026-04-26T11:17:27.649680Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/mobile/lib/features/groups/data/models/group_model.dart")}
+2026-04-26T11:17:27.649691Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2026-04-26T11:18:29.849872Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/mobile/lib/features/groups/data/models/group_model.dart")}
+2026-04-26T11:18:29.849879Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2026-04-26T11:18:53.548192Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/mobile/lib/features/groups/data/models/group_model.dart")}
+2026-04-26T11:18:53.548201Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2026-04-26T11:19:01.751463Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/mobile/lib/features/groups/domain/entities/group_entity.dart")}
+2026-04-26T11:19:01.751474Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2026-04-26T11:19:35.050702Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/mobile/lib/features/groups/data/models/group_model.dart")}
+2026-04-26T11:19:35.050717Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2026-04-26T11:19:35.149722Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/mobile/lib/features/groups/data/models/group_model.dart")}
+2026-04-26T11:19:35.149733Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2026-04-26T11:19:40.747976Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/mobile/lib/features/groups/domain/entities/group_entity.dart")}
+2026-04-26T11:19:40.747985Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2026-04-26T11:23:05.953894Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/mobile/lib/features/groups/domain/entities/group_students_entity.dart")}
+2026-04-26T11:23:05.953905Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2026-04-26T11:23:14.648340Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/mobile/lib/features/groups/domain/entities/group_students_entity.dart")}
+2026-04-26T11:23:14.648350Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2026-04-26T11:23:28.951507Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/mobile/lib/features/groups/domain/entities/group_students_entity.dart")}
+2026-04-26T11:23:28.951518Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2026-04-26T11:23:51.248224Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/mobile/lib/features/groups/domain/entities/group_students_entity.dart")}
+2026-04-26T11:23:51.248234Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2026-04-26T11:24:08.348209Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/mobile/lib/features/groups/domain/entities/group_students_entity.dart")}
+2026-04-26T11:24:08.348232Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2026-04-26T11:24:18.547429Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/mobile/lib/features/groups/domain/entities/group_students_entity.dart")}
+2026-04-26T11:24:18.547437Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
