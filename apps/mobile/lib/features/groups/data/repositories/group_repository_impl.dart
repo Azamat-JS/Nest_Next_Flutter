@@ -32,7 +32,7 @@ class GroupRepositoryImpl implements GroupRepository {
       if (cached != null) {
         _refreshInBackgroundId(id);
 
-        final teacher = await userLocalDataSource.getUser(cached.teacherId);
+        final teacher = await userLocalDataSource.getCachedUser();
 
         final students = await groupStudentLocalDatasource.getStudentsByGroup(
           id,

@@ -18,6 +18,8 @@ abstract interface class AuthRemoteDataSource {
 
   Future<UserModel?> getCurrentUser();
 
+  Future<String?> getToken();
+
   Future<void> signOut();
 }
 
@@ -98,5 +100,11 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<void> signOut() async {
     await secureStorage.delete(key: 'access_token');
+  }
+
+  @override
+  Future<String?> getToken() async {
+    final token = await secureStorage.read(key: 'access_token');
+    return token;
   }
 }

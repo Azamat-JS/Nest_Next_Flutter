@@ -2,8 +2,9 @@ import 'package:mobile/core/common/entities/user_entity.dart';
 import 'package:sqflite/sqflite.dart';
 
 abstract class UserLocalDataSource {
-  Future<UserEntity?> getUser(String id);
+  Future<UserEntity?> getCachedUser();
   Future<void> cacheUser(UserEntity user);
+  Future<void> clearCache();
 }
 
 class UserLocalDataSourceImpl implements UserLocalDataSource {
@@ -12,8 +13,8 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
   UserLocalDataSourceImpl(this.db);
 
   @override
-  Future<UserEntity?> getUser(String id) async {
-    final res = await db.query('users', where: 'id = ?', whereArgs: [id]);
+  Future<UserEntity?> getCachedUser() async {
+    final res = await db.query('users', limit: 1);
 
     if (res.isEmpty) return null;
 
@@ -36,5 +37,10 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
       'role': user.role,
       'created_at': DateTime.now().toIso8601String(),
     }, conflictAlgorithm: ConflictAlgorithm.replace);
+  }
+
+  @override
+  Future<void> clearCache() async {
+    await db.delete('users');
   }
 }
