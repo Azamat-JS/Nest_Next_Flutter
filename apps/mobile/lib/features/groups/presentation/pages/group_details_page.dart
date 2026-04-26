@@ -7,13 +7,8 @@ import 'package:mobile/features/student_scores/presentation/bloc/student_score_b
 import 'package:mobile/features/student_scores/presentation/providers/student_score_provider.dart';
 
 class GroupDetailsPage extends StatelessWidget {
-  final UserEntity teacher;
   final String groupId;
-  const GroupDetailsPage({
-    super.key,
-    required this.teacher,
-    required this.groupId,
-  });
+  const GroupDetailsPage({super.key, required this.groupId});
 
   @override
   Widget build(BuildContext context) {

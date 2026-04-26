@@ -2,7 +2,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mobile/core/common/cubit/auth_check_cubit.dart';
 import 'package:mobile/core/di/service_locator.dart';
+import 'package:mobile/features/groups/presentation/bloc/group/group_bloc.dart';
+import 'package:mobile/features/groups/presentation/bloc/students/group_students_bloc.dart';
+import 'package:mobile/features/groups/presentation/pages/group_details_page.dart';
 import 'package:mobile/features/groups/presentation/pages/my_groups_page.dart';
+import 'package:mobile/features/student_scores/presentation/bloc/student_score_bloc.dart';
 
 final GoRouter appRouter = GoRouter(
   initialLocation: '/groups',
@@ -38,11 +42,27 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: '/groups/:groupId',
       builder: (context, state) {
-        final groupId = state.pathParameters['groupId'];
+        final groupId = state.pathParameters['groupId']!;
 
-        return MultiBlocProvider(providers: [
-          BlocProvider(create: (_) => serviceLocator<GroupStudentsBloc>())
-        ],)
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (_) =>
+                  serviceLocator<GroupStudentsBloc>()
+                    ..add(FetchGroupStudents(groupId, 1, 10)),
+            ),
+            BlocProvider(
+              create: (_) =>
+                  serviceLocator<GroupBloc>()..add(FetchGroupById(groupId)),
+            ),
+            BlocProvider(
+              create: (_) =>
+                  serviceLocator<StudentScoreBloc>()
+                    ..add(FetchStudentScores(groupId)),
+            ),
+          ],
+          child: GroupDetailsPage(groupId: groupId),
+        );
       },
     ),
   ],
