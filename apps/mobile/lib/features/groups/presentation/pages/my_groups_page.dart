@@ -116,6 +116,9 @@ Widget _buildBody(BuildContext context) {
               GestureDetector(
                 onTap: () {
                   final group = state.selectedGroup!;
+                  context.read<GroupBloc>().add(
+                    FetchGroupStudents(group.id, 1, 10),
+                  );
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -123,8 +126,7 @@ Widget _buildBody(BuildContext context) {
                         return MultiBlocProvider(
                           providers: [
                             BlocProvider.value(
-                              value: context.read<GroupBloc>()
-                                ..add(FetchGroupStudents(group.id, 1, 10)),
+                              value: context.read<GroupBloc>(),
                             ),
                             BlocProvider(
                               create: (_) =>

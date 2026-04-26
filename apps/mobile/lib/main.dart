@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:mobile/core/common/cubit/auth_check_cubit.dart';
 import 'package:mobile/core/di/service_locator.dart';
+import 'package:mobile/core/router/app_router.dart';
 import 'package:mobile/core/theme/app_theme.dart';
 import 'package:mobile/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:mobile/features/groups/presentation/bloc/group_bloc.dart';
@@ -35,23 +36,11 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.darkThemeMode,
-      home: BlocBuilder<AuthCheckCubit, AuthCheckState>(
-        builder: (context, state) {
-          if (state is AuthChecking) {
-            return const Scaffold(
-              body: Center(child: CircularProgressIndicator()),
-            );
-          }
-          if (state is AuthUserLoggedIn) {
-            return MyGroupsPage();
-          }
-          return MyGroupsPage();
-        },
-      ),
+      routerConfig: appRouter,
     );
   }
 }

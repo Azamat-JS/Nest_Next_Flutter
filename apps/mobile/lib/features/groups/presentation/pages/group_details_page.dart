@@ -44,8 +44,7 @@ class GroupDetailsPage extends StatelessWidget {
                     final scoreMap = {
                       for (final s in scoreState.studentScores) s.studentId: s,
                     };
-                    return SizedBox(
-                      height: 400,
+                    return Expanded(
                       child: ListView.builder(
                         itemCount: students.length,
                         scrollDirection: Axis.horizontal,
