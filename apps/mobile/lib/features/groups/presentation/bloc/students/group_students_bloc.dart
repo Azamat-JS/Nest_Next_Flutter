@@ -14,15 +14,12 @@ class GroupStudentsBloc extends Bloc<GroupStudentsEvent, GroupStudentsState> {
     : super(const GroupStudentsState()) {
     on<FetchGroupStudents>(_onFetchGroupStudents);
     on<LoadMoreGroupStudents>(_onLoadMoreGroupStudents);
-    print("GroupBloc CREATED: ${identityHashCode(this)}");
   }
 
   void _onFetchGroupStudents(
     FetchGroupStudents event,
     Emitter<GroupStudentsState> emit,
   ) async {
-    print("EVENT RECEIVED 👇");
-    print(event.groupId);
     emit(
       state.copyWith(isLoading: true, clearFailure: true, clearStudents: true),
     );

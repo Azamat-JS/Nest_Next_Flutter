@@ -45,13 +45,9 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
             final students = studentState.data;
             return BlocBuilder<GroupBloc, GroupState>(
               builder: (context, state) {
-                print("GROUP STATE: ${state.selectedGroup}");
                 if (state.selectedGroup == null) {
                   return const Text('No group loaded');
                 }
-                print(
-                  "UI GroupBloc: ${identityHashCode(context.read<GroupBloc>())}",
-                );
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
