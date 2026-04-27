@@ -30,6 +30,8 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
 
   @override
   Future<void> cacheUser(UserEntity user) async {
+    await db.delete('current_user');
+
     await db.insert('current_user', {
       'id': user.id,
       'username': user.username,
