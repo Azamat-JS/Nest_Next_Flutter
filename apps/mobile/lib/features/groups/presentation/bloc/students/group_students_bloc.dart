@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:mobile/core/errors/failures.dart';
 import 'package:mobile/features/groups/domain/entities/group_students_entity.dart';
 import 'package:mobile/features/groups/domain/usecases/group_students_usecase.dart';
-import 'package:mobile/features/groups/domain/usecases/group_use_case.dart';
 part 'group_students_event.dart';
 part 'group_students_state.dart';
 
 class GroupStudentsBloc extends Bloc<GroupStudentsEvent, GroupStudentsState> {
-  final GroupUseCases _useCases;
+  final GetGroupStudentsUsecase _groupStudentsUsecase;
 
-  GroupStudentsBloc(this._useCases) : super(const GroupStudentsState()) {
+  GroupStudentsBloc(this._groupStudentsUsecase)
+    : super(const GroupStudentsState()) {
     on<FetchGroupStudents>(_onFetchGroupStudents);
     on<LoadMoreGroupStudents>(_onLoadMoreGroupStudents);
   }
@@ -24,7 +24,7 @@ class GroupStudentsBloc extends Bloc<GroupStudentsEvent, GroupStudentsState> {
       state.copyWith(isLoading: true, clearFailure: true, clearStudents: true),
     );
 
-    final res = await _useCases.groupStudents(
+    final res = await _groupStudentsUsecase(
       GroupStudentsParams(
         groupId: event.groupId,
         page: event.page,
@@ -51,7 +51,7 @@ class GroupStudentsBloc extends Bloc<GroupStudentsEvent, GroupStudentsState> {
     final current = state.students;
     if (current != null && current.page >= current.lastPage) return;
 
-    final res = await _useCases.groupStudents(
+    final res = await _groupStudentsUsecase(
       GroupStudentsParams(
         groupId: event.groupId,
         page: event.nextPage,

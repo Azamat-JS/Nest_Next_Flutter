@@ -45,8 +45,10 @@ Future<void> initGroup() async {
         serviceLocator<GetGroupsUseCase>(),
         serviceLocator<GetGroupByIdUseCase>(),
         serviceLocator<MergeGroupsUseCase>(),
-        serviceLocator<GetGroupStudentsUsecase>(),
       ),
+    )
+    ..registerLazySingleton<GetGroupStudentsUsecase>(
+      () => GetGroupStudentsUsecase(serviceLocator<GroupRepository>()),
     )
     ..registerFactory<GroupBloc>(
       () => GroupBloc(serviceLocator<GroupUseCases>()),
