@@ -50,6 +50,9 @@ class _AuthFormState extends State<AuthForm> {
             : null,
       ),
       obscureText: _isOscureText,
+      autocorrect: false,
+      enableSuggestions: false,
+      textInputAction: TextInputAction.next,
       controller: widget.controller,
       keyboardType: widget.keyboardType,
       validator:
