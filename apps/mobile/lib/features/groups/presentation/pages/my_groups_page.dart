@@ -123,9 +123,6 @@ Widget _buildBody(BuildContext context) {
                       builder: (context) {
                         return MultiBlocProvider(
                           providers: [
-                            BlocProvider.value(
-                              value: context.read<GroupBloc>(),
-                            ),
                             BlocProvider(
                               create: (_) =>
                                   serviceLocator<GroupStudentsBloc>()

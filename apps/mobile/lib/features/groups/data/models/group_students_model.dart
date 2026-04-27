@@ -15,7 +15,7 @@ class GroupStudentsModel extends GroupStudentsEntity {
       data: (json['data'] as List<dynamic>)
           .map((u) => UserModel.fromJson(u as Map<String, dynamic>))
           .toList(),
-      lastPage: meta['lastPage'] as int,
+      lastPage: meta['last_page'] as int,
       page: meta['page'] as int,
       total: meta['total'] as int,
     );

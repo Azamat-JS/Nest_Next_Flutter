@@ -4,11 +4,25 @@ import 'package:mobile/features/groups/presentation/bloc/group/group_bloc.dart';
 import 'package:mobile/features/groups/presentation/bloc/students/group_students_bloc.dart';
 import 'package:mobile/features/groups/presentation/widgets/student_card.dart';
 import 'package:mobile/features/student_scores/presentation/bloc/student_score_bloc.dart';
-import 'package:mobile/features/student_scores/presentation/providers/student_score_provider.dart';
+import 'package:mobile/features/student_scores/presentation/pages/student_scores_page.dart';
 
-class GroupDetailsPage extends StatelessWidget {
+class GroupDetailsPage extends StatefulWidget {
   final String groupId;
   const GroupDetailsPage({super.key, required this.groupId});
+
+  @override
+  State<GroupDetailsPage> createState() => _GroupDetailsPageState();
+}
+
+class _GroupDetailsPageState extends State<GroupDetailsPage> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<GroupStudentsBloc>().add(
+      FetchGroupStudents(widget.groupId, 1, 10),
+    );
+    context.read<StudentScoreBloc>().add(FetchStudentScores(widget.groupId));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,11 +43,18 @@ class GroupDetailsPage extends StatelessWidget {
             final students = studentState.data;
             return BlocBuilder<GroupBloc, GroupState>(
               builder: (context, state) {
+                print("GROUP STATE: ${state.selectedGroup}");
+                if (state.selectedGroup == null) {
+                  return const Text('No group loaded');
+                }
+                print(
+                  "UI GroupBloc: ${identityHashCode(context.read<GroupBloc>())}",
+                );
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Teacher: ${state.selectedGroup?.teacher.username ?? ''}',
+                      'Teacher: ${state.selectedGroup?.teacher.username ?? "Unknown"}',
                     ),
                     const SizedBox(height: 10),
                     Text('Students: ${students.length}'),
@@ -44,7 +65,8 @@ class GroupDetailsPage extends StatelessWidget {
                           for (final s in scoreState.studentScores)
                             s.studentId: s,
                         };
-                        return Expanded(
+                        return SizedBox(
+                          height: 400,
                           child: ListView.builder(
                             itemCount: students.length,
                             scrollDirection: Axis.horizontal,
@@ -56,12 +78,11 @@ class GroupDetailsPage extends StatelessWidget {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) =>
-                                          OneStudentScoreProvider.forOneStudent(
-                                            student.id,
-                                            groupId,
-                                            student.username,
-                                          ),
+                                      builder: (_) => StudentScoresPage(
+                                        studentId: student.id,
+                                        groupId: widget.groupId,
+                                        username: student.username,
+                                      ),
                                     ),
                                   );
                                 },

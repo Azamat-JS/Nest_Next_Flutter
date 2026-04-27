@@ -38,9 +38,12 @@ class GroupBloc extends Bloc<GroupEvent, GroupState> {
     final res = await _useCases.groupById(GroupByIdParams(id: event.id));
     res.fold(
       (fail) {
+        print("❌ FAILURE: ${fail.message}");
         emit(state.copyWith(isLoading: false, failure: fail));
       },
       (group) {
+        print("group IN BLOC: ${group.name}");
+
         emit(state.copyWith(isLoading: false, selectedGroup: group));
       },
     );
