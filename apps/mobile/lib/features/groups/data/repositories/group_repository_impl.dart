@@ -1,6 +1,7 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:mobile/core/common/entities/user_entity.dart';
 import 'package:mobile/core/errors/failures.dart';
+import 'package:mobile/features/groups/data/datasources/group_students_remote_datasource.dart';
 import 'package:mobile/features/groups/data/datasources/user_local_data_source.dart';
 import 'package:mobile/features/groups/data/datasources/group_local_datasource.dart';
 import 'package:mobile/features/groups/data/datasources/group_remote_data_source.dart';
@@ -15,12 +16,14 @@ class GroupRepositoryImpl implements GroupRepository {
   final GroupLocalDatasource localDataSource;
   final UserLocalDataSource userLocalDataSource;
   final GroupStudentLocalDatasource groupStudentLocalDatasource;
+  final GroupStudentsRemoteDatasource groupStudentsRemoteDatasource;
 
   GroupRepositoryImpl(
     this.remoteDataSource,
     this.localDataSource,
     this.userLocalDataSource,
     this.groupStudentLocalDatasource,
+    this.groupStudentsRemoteDatasource,
   );
 
   @override
@@ -89,13 +92,13 @@ class GroupRepositoryImpl implements GroupRepository {
     required int limit,
   }) async {
     try {
-      final students = await groupStudentLocalDatasource.getStudentsByGroup(
-        groupId,
-        page,
-        limit,
+      final students = await groupStudentsRemoteDatasource.getGroupStudents(
+        groupId: groupId,
+        page: page,
+        limit: limit,
       );
 
-      for (final student in students) {
+      for (final student in students.data) {
         await userLocalDataSource.cacheUser(student);
         await groupStudentLocalDatasource.cacheStudentGroup(
           studentId: student.id,
@@ -104,9 +107,9 @@ class GroupRepositoryImpl implements GroupRepository {
       }
       return right(
         GroupStudentsEntity(
-          data: students,
+          data: students.data,
           page: page,
-          total: students.length,
+          total: students.data.length,
           lastPage: 1,
         ),
       );
