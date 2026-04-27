@@ -10,6 +10,7 @@ import 'package:mobile/features/groups/presentation/bloc/students/group_students
 import 'package:mobile/features/groups/presentation/pages/group_details_page.dart';
 import 'package:mobile/features/groups/presentation/pages/my_groups_page.dart';
 import 'package:mobile/features/student_scores/presentation/bloc/student_score_bloc.dart';
+import 'package:mobile/features/student_scores/presentation/pages/student_scores_page.dart';
 
 final GoRouter appRouter = GoRouter(
   initialLocation: '/groups',
@@ -49,6 +50,22 @@ final GoRouter appRouter = GoRouter(
 
     /// Register page
     GoRoute(path: '/signup', builder: (context, state) => const SignUpPage()),
+
+    /// Student Scores page
+    GoRoute(
+      path: '/student-scores/:studentId',
+      builder: (context, state) {
+        final studentId = state.pathParameters['studentId']!;
+        final groupId = state.uri.queryParameters['groupId']!;
+        final username = state.uri.queryParameters['username']!;
+
+        return StudentScoresPage(
+          studentId: studentId,
+          groupId: groupId,
+          username: username,
+        );
+      },
+    ),
 
     /// GROUP DETAILS
     GoRoute(

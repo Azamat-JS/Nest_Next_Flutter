@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mobile/core/di/service_locator.dart';
 import 'package:mobile/features/groups/presentation/bloc/group/group_bloc.dart';
 import 'package:mobile/features/groups/presentation/bloc/students/group_students_bloc.dart';
 import 'package:mobile/features/groups/presentation/widgets/student_card.dart';
+import 'package:mobile/features/student_scores/presentation/bloc/one_student_score_bloc.dart';
 import 'package:mobile/features/student_scores/presentation/bloc/student_score_bloc.dart';
 import 'package:mobile/features/student_scores/presentation/pages/student_scores_page.dart';
 
@@ -78,10 +80,26 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (_) => StudentScoresPage(
-                                        studentId: student.id,
-                                        groupId: widget.groupId,
-                                        username: student.username,
+                                      builder: (_) => MultiBlocProvider(
+                                        providers: [
+                                          BlocProvider(
+                                            create: (_) =>
+                                                serviceLocator<
+                                                    OneStudentScoreBloc
+                                                  >()
+                                                  ..add(
+                                                    FetchOneStudentScores(
+                                                      student.id,
+                                                      widget.groupId,
+                                                    ),
+                                                  ),
+                                          ),
+                                        ],
+                                        child: StudentScoresPage(
+                                          groupId: widget.groupId,
+                                          studentId: student.id,
+                                          username: student.username,
+                                        ),
                                       ),
                                     ),
                                   );
