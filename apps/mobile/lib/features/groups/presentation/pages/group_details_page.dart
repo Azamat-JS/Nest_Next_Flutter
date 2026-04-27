@@ -52,7 +52,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Teacher: ${state.selectedGroup?.teacher.username ?? "Unknown"}',
+                      'Teacher: ${state.selectedGroup?.teacher?.username ?? "Unknown"}',
                     ),
                     const SizedBox(height: 10),
                     Text('Students: ${students.length}'),

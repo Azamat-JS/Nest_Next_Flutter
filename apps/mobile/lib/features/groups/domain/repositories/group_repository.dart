@@ -15,4 +15,6 @@ abstract interface class GroupRepository {
     required int page,
     required int limit,
   });
+
+  Future<Either<Failure, List<GroupEntity>>> getRecentGroups();
 }

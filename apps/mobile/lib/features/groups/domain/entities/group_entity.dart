@@ -5,7 +5,7 @@ class GroupEntity {
   final String name;
   final String teacherId;
   final DateTime createdAt;
-  final UserEntity teacher;
+  final UserEntity? teacher;
 
   GroupEntity({
     required this.id,

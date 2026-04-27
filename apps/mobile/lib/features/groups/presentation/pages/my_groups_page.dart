@@ -165,7 +165,7 @@ Widget _buildBody(BuildContext context) {
                         ),
                         SizedBox(height: 10),
                         Text(
-                          "Teacher: ${state.selectedGroup?.teacher.username}",
+                          "Teacher: ${state.selectedGroup?.teacher?.username ?? 'Unknown'}",
                           style: TextStyle(fontSize: 16),
                         ),
                       ],

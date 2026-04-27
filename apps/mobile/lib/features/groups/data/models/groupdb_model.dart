@@ -26,4 +26,14 @@ class GroupdbModel {
       name = entity.name,
       teacherId = entity.teacherId,
       createdAt = entity.createdAt;
+
+  GroupEntity toEntity() {
+    return GroupEntity(
+      id: id,
+      name: name,
+      teacherId: teacherId,
+      createdAt: createdAt,
+      teacher: null,
+    );
+  }
 }
