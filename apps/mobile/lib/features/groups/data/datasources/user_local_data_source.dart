@@ -14,7 +14,7 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
 
   @override
   Future<UserEntity?> getCachedUser() async {
-    final res = await db.query('users', limit: 1);
+    final res = await db.query('current_user', limit: 1);
 
     if (res.isEmpty) return null;
 
@@ -30,7 +30,7 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
 
   @override
   Future<void> cacheUser(UserEntity user) async {
-    await db.insert('users', {
+    await db.insert('current_user', {
       'id': user.id,
       'username': user.username,
       'email': user.email,
@@ -41,6 +41,6 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
 
   @override
   Future<void> clearCache() async {
-    await db.delete('users');
+    await db.delete('current_user');
   }
 }

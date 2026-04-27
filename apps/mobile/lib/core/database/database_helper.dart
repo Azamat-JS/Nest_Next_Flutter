@@ -6,9 +6,7 @@ class DatabaseHelper {
   static Database? _db;
 
   static Future<Database> get database async {
-    if (_db != null) return _db!;
-
-    _db = await _initDb();
+    _db ??= await _initDb();
     return _db!;
   }
 
@@ -18,8 +16,16 @@ class DatabaseHelper {
 
     return await openDatabase(
       path,
-      version: 1,
+      version: 2,
       onCreate: _createDb,
+      onUpgrade: (db, oldVersion, newVersion) async {
+        if (oldVersion < 2) {
+          await db.execute('ALTER TABLE groups ADD COLUMN last_opened INTEGER');
+          await db.execute(
+            'ALTER TABLE groups ADD COLUMN is_recent INTEGER DEFAULT 0',
+          );
+        }
+      },
       onConfigure: (db) {
         db.execute('PRAGMA foreign_keys = ON');
       },
@@ -37,13 +43,23 @@ class DatabaseHelper {
   ''');
 
     await db.execute('''
-    CREATE TABLE users (
+    CREATE TABLE current_user (
       id TEXT PRIMARY KEY,
       username TEXT,
       role TEXT,
       email TEXT,
+      token TEXT,
       created_at TEXT
     );
+  ''');
+
+    await db.execute('''
+CREATE TABLE users (
+  id TEXT PRIMARY KEY,
+  username TEXT,
+  email TEXT,
+  role TEXT
+);
   ''');
 
     await db.execute('''
