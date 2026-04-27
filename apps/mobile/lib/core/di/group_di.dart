@@ -12,6 +12,7 @@ import 'package:mobile/features/groups/domain/usecases/group_students_usecase.da
 import 'package:mobile/features/groups/domain/usecases/group_use_case.dart';
 import 'package:mobile/features/groups/domain/usecases/merge_groups.dart';
 import 'package:mobile/features/groups/presentation/bloc/group/group_bloc.dart';
+import 'package:mobile/features/groups/presentation/bloc/students/group_students_bloc.dart';
 import 'package:sqflite/sqflite.dart';
 
 Future<void> initGroup() async {
@@ -49,6 +50,9 @@ Future<void> initGroup() async {
     )
     ..registerLazySingleton<GetGroupStudentsUsecase>(
       () => GetGroupStudentsUsecase(serviceLocator<GroupRepository>()),
+    )
+    ..registerFactory<GroupStudentsBloc>(
+      () => GroupStudentsBloc(serviceLocator<GetGroupStudentsUsecase>()),
     )
     ..registerFactory<GroupBloc>(
       () => GroupBloc(serviceLocator<GroupUseCases>()),
