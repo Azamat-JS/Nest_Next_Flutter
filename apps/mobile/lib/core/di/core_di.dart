@@ -11,14 +11,16 @@ Future<void> initCore() async {
   final db = await DatabaseHelper.database;
   serviceLocator.registerLazySingleton(() => DioClient());
   serviceLocator.registerLazySingleton(() => FlutterSecureStorage());
+  serviceLocator.registerLazySingleton<Database>(() => db);
+
+  serviceLocator.registerLazySingleton<UserLocalDataSource>(
+    () => UserLocalDataSourceImpl(serviceLocator<Database>()),
+  );
   serviceLocator.registerLazySingleton<AuthRemoteDataSource>(
     () => AuthRemoteDataSourceImpl(
       serviceLocator<DioClient>(),
       serviceLocator<FlutterSecureStorage>(),
     ),
-  );
-  serviceLocator.registerLazySingleton<UserLocalDataSource>(
-    () => UserLocalDataSourceImpl(db),
   );
   serviceLocator.registerLazySingleton<AuthCheckCubit>(
     () => AuthCheckCubit(
@@ -27,5 +29,4 @@ Future<void> initCore() async {
       serviceLocator<Database>(),
     ),
   );
-  serviceLocator.registerLazySingleton<Database>(() => db);
 }
