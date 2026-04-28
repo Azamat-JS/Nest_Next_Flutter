@@ -4,9 +4,13 @@ part of 'recent_group_bloc.dart';
 class RecentGroupState {
   final bool isLoading;
   final Failure? failure;
-  final List<GroupEntity>? groups;
+  final List<GroupEntity> groups;
 
-  const RecentGroupState({this.isLoading = false, this.failure, this.groups});
+  const RecentGroupState({
+    this.isLoading = false,
+    this.failure,
+    this.groups = const [],
+  });
 
   RecentGroupState copyWith({
     bool? isLoading,
@@ -18,7 +22,7 @@ class RecentGroupState {
     return RecentGroupState(
       isLoading: isLoading ?? this.isLoading,
       failure: clearFailure ? null : (failure ?? this.failure),
-      groups: clearGroups ? null : (groups ?? this.groups),
+      groups: groups ?? this.groups,
     );
   }
 }

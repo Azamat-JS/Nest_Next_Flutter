@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile/core/di/service_locator.dart';
 import 'package:mobile/core/utils/show_snackbar.dart';
 import 'package:mobile/features/groups/presentation/bloc/group/group_bloc.dart';
+import 'package:mobile/features/groups/presentation/bloc/recent_group/bloc/recent_group_bloc.dart';
 import 'package:mobile/features/groups/presentation/bloc/students/group_students_bloc.dart';
 import 'package:mobile/features/groups/presentation/pages/group_details_page.dart';
 import 'package:mobile/features/student_scores/presentation/bloc/student_score_bloc.dart';
@@ -25,17 +26,26 @@ class _MyGroupsPageState extends State<MyGroupsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Group page')),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            _buildHeader(context, controller),
-            SizedBox(height: 20),
-            _buildBody(context),
-          ],
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => serviceLocator<GroupBloc>()),
+        BlocProvider(
+          create: (_) =>
+              serviceLocator<RecentGroupBloc>()..add(LoadRecentGroups()),
+        ),
+      ],
+      child: Scaffold(
+        appBar: AppBar(title: const Text('Group page')),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              _buildHeader(context, controller),
+              SizedBox(height: 20),
+              _buildBody(context),
+            ],
+          ),
         ),
       ),
     );
@@ -101,87 +111,123 @@ Widget _buildBody(BuildContext context) {
       if (state.failure != null) {
         showSnackbar(context, state.failure!.message);
       }
-    },
-    builder: (context, state) {
-      if (state.isLoading) {
-        return const Center(child: CircularProgressIndicator());
-      }
-      if (state.failure != null) {
-        return Center(child: Text('Error occurred'));
-      }
       if (state.selectedGroup != null) {
-        return Center(
-          child: Column(
-            children: [
-              SizedBox(height: 30),
-              GestureDetector(
-                onTap: () {
-                  final group = state.selectedGroup!;
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return MultiBlocProvider(
-                          providers: [
-                            BlocProvider(
-                              create: (_) =>
-                                  serviceLocator<GroupStudentsBloc>()
-                                    ..add(FetchGroupStudents(group.id, 1, 10)),
-                            ),
-                            BlocProvider(
-                              create: (_) =>
-                                  serviceLocator<StudentScoreBloc>()
-                                    ..add(FetchStudentScores(group.id)),
-                            ),
-                          ],
-                          child: GroupDetailsPage(groupId: group.id),
-                        );
-                      },
-                    ),
-                  );
-                },
-                child: Card.outlined(
-                  margin: const EdgeInsets.symmetric(horizontal: 12),
-                  elevation: 3,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 60,
-                      vertical: 15,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          state.selectedGroup?.name ?? '',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.blue,
-                          ),
-                        ),
-                        SizedBox(height: 10),
-                        Text(
-                          "Teacher: ${state.selectedGroup?.teacher?.username ?? 'Unknown'}",
-                          style: TextStyle(fontSize: 16),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        );
+        context.read<RecentGroupBloc>().add(LoadRecentGroups());
       }
-      return const Center(child: Text('No group found'));
+    },
+
+    builder: (context, state) {
+      return SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            /// 🔍 SEARCH RESULT (optional)
+            if (state.isLoading)
+              const Center(child: CircularProgressIndicator())
+            else if (state.selectedGroup != null)
+              _buildSelectedGroup(context, state),
+
+            const SizedBox(height: 20),
+
+            /// 🕒 RECENT GROUPS (always visible)
+            _buildRecentGroups(),
+          ],
+        ),
+      );
     },
   );
 }
 
-Widget _buildFooter(BuildContext context) {
-  return Container();
+Widget _buildSelectedGroup(BuildContext context, GroupState state) {
+  final group = state.selectedGroup!;
+  return GestureDetector(
+    onTap: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (_) =>
+                    serviceLocator<GroupStudentsBloc>()
+                      ..add(FetchGroupStudents(group.id, 1, 10)),
+              ),
+
+              BlocProvider(
+                create: (_) =>
+                    serviceLocator<StudentScoreBloc>()
+                      ..add(FetchStudentScores(group.id)),
+              ),
+            ],
+            child: GroupDetailsPage(groupId: group.id),
+          ),
+        ),
+      );
+    },
+    child: Card.outlined(
+      margin: const EdgeInsets.symmetric(horizontal: 12),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 15),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              group.name,
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.blue,
+              ),
+            ),
+            SizedBox(height: 10),
+            Text(
+              "Teacher: ${group.teacher?.username ?? 'Unknown'}",
+              style: TextStyle(fontSize: 16),
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
+}
+
+Widget _buildRecentGroups() {
+  return BlocBuilder<RecentGroupBloc, RecentGroupState>(
+    builder: (context, state) {
+      if (state.isLoading) {
+        return const Center(child: CircularProgressIndicator());
+      }
+      if (state.groups.isEmpty) {
+        return const Center(child: Text('No recent groups'));
+      }
+
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Recent Groups',
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 10),
+
+          ...state.groups.map((group) {
+            return ListTile(
+              title: Text(group.name),
+              subtitle: Text(
+                "Teacher: ${group.teacher?.username ?? 'Unknown'}",
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => GroupDetailsPage(groupId: group.id),
+                  ),
+                );
+              },
+            );
+          }),
+        ],
+      );
+    },
+  );
 }

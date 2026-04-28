@@ -52,7 +52,7 @@ class GroupRepositoryImpl implements GroupRepository {
       final entity = remote.toEntity();
       await localDataSource.cacheGroup(GroupdbModel.fromEntity(entity));
       await userLocalDataSource.cacheUser(entity.teacher!);
-      return right(remote.toEntity());
+      return right(entity);
     } catch (e) {
       return left(Failure('Failed to fetch group: $e'));
     }
@@ -120,8 +120,14 @@ class GroupRepositoryImpl implements GroupRepository {
 
   @override
   Future<Either<Failure, List<GroupEntity>>> getRecentGroups() async {
-    final local = await localDataSource.getRecentGroups();
-    final entities = local.map((e) => e.toEntity()).toList();
-    return right(entities);
+    try {
+      final local = await localDataSource.getRecentGroups();
+
+      final entities = local.map((e) => e.toEntity()).toList();
+
+      return right(entities);
+    } catch (e) {
+      return left(Failure('Failed to get recent groups: $e'));
+    }
   }
 }
