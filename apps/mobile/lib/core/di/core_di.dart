@@ -24,6 +24,7 @@ Future<void> initCore() async {
     () => AuthCheckCubit(
       serviceLocator<AuthRemoteDataSource>(),
       serviceLocator<UserLocalDataSource>(),
+      serviceLocator<Database>(),
     ),
   );
   serviceLocator.registerLazySingleton<Database>(() => db);
