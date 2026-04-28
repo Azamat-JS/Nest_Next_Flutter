@@ -7,12 +7,14 @@ import 'package:mobile/features/groups/data/datasources/group_students_remote_da
 import 'package:mobile/features/groups/data/datasources/user_local_data_source.dart';
 import 'package:mobile/features/groups/data/repositories/group_repository_impl.dart';
 import 'package:mobile/features/groups/domain/repositories/group_repository.dart';
+import 'package:mobile/features/groups/domain/usecases/get_recent_group_usecase.dart';
 import 'package:mobile/features/groups/domain/usecases/group_all.dart';
 import 'package:mobile/features/groups/domain/usecases/group_by_id.dart';
 import 'package:mobile/features/groups/domain/usecases/group_students_usecase.dart';
 import 'package:mobile/features/groups/domain/usecases/group_use_case.dart';
 import 'package:mobile/features/groups/domain/usecases/merge_groups.dart';
 import 'package:mobile/features/groups/presentation/bloc/group/group_bloc.dart';
+import 'package:mobile/features/groups/presentation/bloc/recent_group/bloc/recent_group_bloc.dart';
 import 'package:mobile/features/groups/presentation/bloc/students/group_students_bloc.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -56,8 +58,14 @@ Future<void> initGroup() async {
     ..registerLazySingleton<GetGroupStudentsUsecase>(
       () => GetGroupStudentsUsecase(serviceLocator<GroupRepository>()),
     )
+    ..registerLazySingleton<GetRecentGroupsUseCase>(
+      () => GetRecentGroupsUseCase(serviceLocator<GroupRepository>()),
+    )
     ..registerFactory<GroupStudentsBloc>(
       () => GroupStudentsBloc(serviceLocator<GetGroupStudentsUsecase>()),
+    )
+    ..registerFactory<RecentGroupBloc>(
+      () => RecentGroupBloc(serviceLocator<GetRecentGroupsUseCase>()),
     )
     ..registerFactory<GroupBloc>(
       () => GroupBloc(serviceLocator<GroupUseCases>()),

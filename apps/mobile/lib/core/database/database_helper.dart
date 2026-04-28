@@ -14,16 +14,40 @@ class DatabaseHelper {
     final dir = await getApplicationDocumentsDirectory();
     final path = join(dir.path, 'app.db');
 
+    Future<bool> columnExists(Database db, String table, String column) async {
+      final res = await db.rawQuery('PRAGMA table_info($table)');
+      return res.any((c) => c['name'] == column);
+    }
+
     return await openDatabase(
       path,
-      version: 2,
+      version: 3,
       onCreate: _createDb,
       onUpgrade: (db, oldVersion, newVersion) async {
         if (oldVersion < 2) {
-          await db.execute('ALTER TABLE groups ADD COLUMN last_opened INTEGER');
-          await db.execute(
-            'ALTER TABLE groups ADD COLUMN is_recent INTEGER DEFAULT 0',
-          );
+          if (!(await columnExists(db, 'groups', 'last_opened'))) {
+            await db.execute(
+              'ALTER TABLE groups ADD COLUMN last_opened INTEGER',
+            );
+          }
+          if (!(await columnExists(db, 'groups', 'is_recent'))) {
+            await db.execute(
+              'ALTER TABLE groups ADD COLUMN is_recent INTEGER DEFAULT 0',
+            );
+          }
+        }
+
+        if (oldVersion < 3) {
+          await db.execute('''
+      CREATE TABLE IF NOT EXISTS current_user (
+        id TEXT PRIMARY KEY,
+        username TEXT,
+        role TEXT,
+        email TEXT,
+        token TEXT,
+        created_at TEXT
+      );
+    ''');
         }
       },
       onConfigure: (db) {
