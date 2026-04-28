@@ -11,6 +11,8 @@ class RecentGroupBloc extends Bloc<RecentGroupEvent, RecentGroupState> {
 
   RecentGroupBloc(this.useCase) : super(const RecentGroupState()) {
     on<LoadRecentGroups>(_onLoad);
+
+    add(LoadRecentGroups());
   }
 
   Future<void> _onLoad(

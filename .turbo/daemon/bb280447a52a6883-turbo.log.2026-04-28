@@ -341,3 +341,43 @@
 2026-04-28T12:22:21.313843Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
 2026-04-28T12:23:08.513631Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/mobile/build/ab98e94b1c7610a77023274e1712ea95/gen_localizations.stamp")}
 2026-04-28T12:23:08.513658Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2026-04-28T12:24:19.513823Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/mobile/lib/features/groups/presentation/bloc/group/group_bloc.dart")}
+2026-04-28T12:24:19.513835Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2026-04-28T12:24:21.613406Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/frontend/.next/dev/logs/next-development.log")}
+2026-04-28T12:24:21.613415Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("frontend"), path: AnchoredSystemPathBuf("apps/frontend") }}))
+2026-04-28T12:24:21.613457Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2026-04-28T12:24:23.512637Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/frontend/.next/dev/cache/turbopack/600cd2fed/00015434.meta"), AnchoredSystemPathBuf("apps/frontend/.next/dev/cache/turbopack/600cd2fed/00015435.meta"), AnchoredSystemPathBuf("apps/frontend/.next/dev/cache/turbopack/600cd2fed/00015436.meta"), AnchoredSystemPathBuf("apps/frontend/.next/dev/cache/turbopack/600cd2fed/00015433.sst"), AnchoredSystemPathBuf("apps/frontend/.next/dev/cache/turbopack/600cd2fed/00015431.sst"), AnchoredSystemPathBuf("apps/frontend/.next/dev/cache/turbopack/600cd2fed/CURRENT"), AnchoredSystemPathBuf("apps/frontend/.next/dev/cache/turbopack/600cd2fed/00015432.sst"), AnchoredSystemPathBuf("apps/frontend/.next/dev/cache/turbopack/600cd2fed/LOG")}
+2026-04-28T12:24:23.512649Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("frontend"), path: AnchoredSystemPathBuf("apps/frontend") }}))
+2026-04-28T12:24:23.530142Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2026-04-28T12:26:42.117739Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/mobile/lib/main.dart")}
+2026-04-28T12:26:42.117761Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2026-04-28T12:27:24.617663Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/mobile/lib/main.dart")}
+2026-04-28T12:27:24.617677Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2026-04-28T12:27:45.917497Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/mobile/lib/main.dart")}
+2026-04-28T12:27:45.917517Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2026-04-28T12:28:07.416485Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/mobile/lib/main.dart")}
+2026-04-28T12:28:07.416492Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2026-04-28T12:28:31.917510Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/mobile/lib/main.dart")}
+2026-04-28T12:28:31.917545Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2026-04-28T12:28:58.117476Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/mobile/lib/main.dart")}
+2026-04-28T12:28:58.117491Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2026-04-28T12:29:49.917307Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/mobile/lib/features/groups/presentation/bloc/recent_group/bloc/recent_group_bloc.dart")}
+2026-04-28T12:29:49.917316Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2026-04-28T12:31:12.017294Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/mobile/lib/main.dart")}
+2026-04-28T12:31:12.017315Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2026-04-28T12:31:55.016741Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/mobile/lib/core/common/cubit/auth_check_cubit.dart")}
+2026-04-28T12:31:55.016749Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2026-04-28T12:32:12.616387Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/mobile/lib/core/common/cubit/auth_check_cubit.dart")}
+2026-04-28T12:32:12.616397Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2026-04-28T12:32:40.619577Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/mobile/lib/core/common/cubit/auth_check_cubit.dart")}
+2026-04-28T12:32:40.619586Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2026-04-28T12:35:03.517129Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/mobile/lib/core/common/cubit/auth_check_cubit.dart")}
+2026-04-28T12:35:03.517140Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2026-04-28T12:35:03.616944Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/mobile/build/ab98e94b1c7610a77023274e1712ea95/gen_localizations.stamp")}
+2026-04-28T12:35:03.616952Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2026-04-28T12:35:03.717313Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/mobile/build/ab98e94b1c7610a77023274e1712ea95/gen_localizations.stamp")}
+2026-04-28T12:35:03.717321Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2026-04-28T12:35:11.417087Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/mobile/build/ab98e94b1c7610a77023274e1712ea95/gen_localizations.stamp")}
+2026-04-28T12:35:11.417096Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2026-04-28T12:35:28.317368Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/mobile/build/ab98e94b1c7610a77023274e1712ea95/gen_localizations.stamp")}
+2026-04-28T12:35:28.317377Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
