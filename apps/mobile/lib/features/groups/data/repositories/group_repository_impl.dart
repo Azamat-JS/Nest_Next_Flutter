@@ -121,6 +121,7 @@ class GroupRepositoryImpl implements GroupRepository {
   @override
   Future<Either<Failure, List<GroupEntity>>> getRecentGroups() async {
     final local = await localDataSource.getRecentGroups();
-    return local.map((e) => e.toEntity()).toList();
+    final entities = local.map((e) => e.toEntity()).toList();
+    return right(entities);
   }
 }
