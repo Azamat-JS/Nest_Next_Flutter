@@ -4,10 +4,10 @@ import 'package:mobile/core/common/widgets/auth_gate.dart';
 import 'package:mobile/core/di/service_locator.dart';
 import 'package:mobile/features/auth/presentation/pages/login_page.dart';
 import 'package:mobile/features/auth/presentation/pages/sign_up_page.dart';
+import 'package:mobile/features/groups/group_shell.dart';
 import 'package:mobile/features/groups/presentation/bloc/group/group_bloc.dart';
 import 'package:mobile/features/groups/presentation/bloc/students/group_students_bloc.dart';
 import 'package:mobile/features/groups/presentation/pages/group_details_page.dart';
-import 'package:mobile/features/groups/presentation/pages/my_groups_page.dart';
 import 'package:mobile/features/student_scores/presentation/bloc/student_score_bloc.dart';
 import 'package:mobile/features/student_scores/presentation/pages/student_scores_page.dart';
 
@@ -18,7 +18,10 @@ final GoRouter appRouter = GoRouter(
     GoRoute(path: '/', builder: (_, state) => const AuthGate()),
 
     /// Group List
-    GoRoute(path: '/groups', builder: (context, state) => const MyGroupsPage()),
+    GoRoute(
+      path: '/groups',
+      builder: (context, state) => const GroupFeatureShell(),
+    ),
 
     /// Login page
     GoRoute(path: '/login', builder: (context, state) => const LoginPage()),

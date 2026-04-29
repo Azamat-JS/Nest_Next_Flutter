@@ -5,7 +5,6 @@ import 'package:mobile/core/utils/show_snackbar.dart';
 import 'package:mobile/features/groups/presentation/bloc/group/group_bloc.dart';
 import 'package:mobile/features/groups/presentation/bloc/recent_group/bloc/recent_group_bloc.dart';
 import 'package:mobile/features/groups/presentation/bloc/students/group_students_bloc.dart';
-import 'package:mobile/features/groups/presentation/dbg/sqlite_test.dart';
 import 'package:mobile/features/groups/presentation/pages/group_details_page.dart';
 import 'package:mobile/features/student_scores/presentation/bloc/student_score_bloc.dart';
 
