@@ -8,6 +8,7 @@ import 'package:mobile/features/auth/domain/usecases/current_user.dart';
 import 'package:mobile/features/auth/domain/usecases/logout_user.dart';
 import 'package:mobile/features/auth/domain/usecases/user_login.dart';
 import 'package:mobile/features/auth/domain/usecases/user_sign_up.dart';
+import 'package:sqflite/sqflite.dart';
 part 'auth_event.dart';
 part 'auth_state.dart';
 
@@ -17,12 +18,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final CurrentUser _currentUser;
   final LogoutUser _logout;
   final AuthCheckCubit _authCheckCubit;
+  final Database db;
   AuthBloc({
     required UserSignUp signUp,
     required UserLogin login,
     required CurrentUser currentUser,
     required LogoutUser logout,
     required AuthCheckCubit authCheckCubit,
+    required this.db,
   }) : _signUp = signUp,
        _login = login,
        _currentUser = currentUser,
@@ -87,10 +90,23 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       return;
     }
 
-    final useRes = await _currentUser(NoParams());
-    useRes.fold((l) => emit(AuthFailure(l.message)), (user) {
-      _authCheckCubit.checkAuthStatus();
-      emit(AuthSuccess(user));
+    loginRes.fold((l) => emit(AuthFailure(l.message)), (token) async {
+      final useRes = await _currentUser(NoParams());
+      useRes.fold((l) => emit(AuthFailure(l.message)), (user) async {
+        _authCheckCubit.checkAuthStatus();
+        await db.insert('current_user', {
+          'id': user.id,
+          'username': user.username,
+          'email': user.email,
+          'token': token,
+          'created_at': DateTime.now().toIso8601String(),
+          'role': user.role ?? "",
+        }, conflictAlgorithm: ConflictAlgorithm.replace);
+        final res = await db.query('current_user');
+        print('BLOC DB RESULT: $res');
+        emit(AuthSuccess(user));
+        _authCheckCubit.emitLoggedIn(user);
+      });
     });
   }
 
