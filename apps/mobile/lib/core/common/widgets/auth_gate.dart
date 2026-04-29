@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile/core/common/cubit/auth_check_cubit.dart';
 import 'package:mobile/features/auth/presentation/pages/login_page.dart';
 import 'package:mobile/features/home/presentation/pages/main_screen.dart';
+import 'package:mobile/features/groups/presentation/pages/my_groups_page.dart';
 
 class AuthGate extends StatelessWidget {
   const AuthGate({super.key});
@@ -21,7 +22,7 @@ class AuthGate extends StatelessWidget {
         }
 
         if (state is AuthUserLoggedIn) {
-          return const MainScreen();
+          return const MainScreen(child: MyGroupsPage());
         }
         return const LoginPage();
       },

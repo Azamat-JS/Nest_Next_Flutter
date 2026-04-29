@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mobile/core/common/cubit/auth_check_cubit.dart';
 import 'package:mobile/core/theme/app_pallete.dart';
 import 'package:mobile/core/utils/show_snackbar.dart';
 import 'package:mobile/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:mobile/features/auth/presentation/pages/login_page.dart';
 import 'package:mobile/features/auth/presentation/widgets/auth_button.dart';
 import 'package:mobile/features/auth/presentation/widgets/auth_form.dart';
-import 'package:mobile/features/home/presentation/pages/main_screen.dart';
 
 class SignUpPage extends StatefulWidget {
   static MaterialPageRoute<dynamic> route() {
@@ -57,10 +57,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     showSnackbar(context, state.message);
                   }
                   if (state is AuthSuccess) {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (_) => MainScreen()),
-                    );
+                    context.read<AuthCheckCubit>().checkAuthStatus();
                   }
                 },
 

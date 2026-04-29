@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mobile/core/common/widgets/my_list_tile.dart';
 import 'package:mobile/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:mobile/features/home/presentation/pages/profile_page.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
@@ -24,12 +24,10 @@ class AppDrawer extends StatelessWidget {
             ),
             MyListTile(
               icon: Icons.settings_outlined,
-              text: 'Settings',
+              text: 'Profile',
               onTap: () {
                 Navigator.of(context).pop();
-                Navigator.of(
-                  context,
-                ).push(MaterialPageRoute(builder: (_) => const ProfilePage()));
+                context.go('/profile');
               },
             ),
             MyListTile(

@@ -8,6 +8,8 @@ import 'package:mobile/features/groups/group_shell.dart';
 import 'package:mobile/features/groups/presentation/bloc/group/group_bloc.dart';
 import 'package:mobile/features/groups/presentation/bloc/students/group_students_bloc.dart';
 import 'package:mobile/features/groups/presentation/pages/group_details_page.dart';
+import 'package:mobile/features/home/presentation/pages/main_screen.dart';
+import 'package:mobile/features/home/presentation/pages/profile_page.dart';
 import 'package:mobile/features/student_scores/presentation/bloc/student_score_bloc.dart';
 import 'package:mobile/features/student_scores/presentation/pages/student_scores_page.dart';
 
@@ -17,14 +19,28 @@ final GoRouter appRouter = GoRouter(
     // Auth Gate
     GoRoute(path: '/', builder: (_, state) => const AuthGate()),
 
-    /// Group List
-    GoRoute(
-      path: '/groups',
-      builder: (context, state) => const GroupFeatureShell(),
+    ShellRoute(
+      builder: (context, state, child) {
+        return MainScreen(child: child);
+      },
+      routes: [
+        GoRoute(
+          path: '/groups',
+          builder: (context, state) => const GroupFeatureShell(),
+        ),
+        GoRoute(
+          path: '/profile',
+          builder: (context, state) => const ProfilePage(),
+        ),
+      ],
     ),
+
+    /// Group List
 
     /// Login page
     GoRoute(path: '/login', builder: (context, state) => const LoginPage()),
+
+    /// Profile page
 
     /// Register page
     GoRoute(path: '/signup', builder: (context, state) => const SignUpPage()),

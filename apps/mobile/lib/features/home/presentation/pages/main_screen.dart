@@ -7,7 +7,8 @@ import 'package:mobile/features/home/presentation/pages/profile_page.dart';
 import 'package:mobile/features/home/presentation/widgets/curved_nav_bar.dart';
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
+  final Widget child;
+  const MainScreen({super.key, required this.child});
 
   @override
   State<MainScreen> createState() => _MainScreenState();
@@ -20,7 +21,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: pages[currentIndex],
+      body: widget.child,
       drawer: const AppDrawer(),
       bottomNavigationBar: CurvedNavBar(
         currentIndex: currentIndex,
