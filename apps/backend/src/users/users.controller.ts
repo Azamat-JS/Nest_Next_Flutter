@@ -28,7 +28,7 @@ export class UsersController {
 
   @Post('login')
   async loginUser(@Body() loginDto: LoginDto) {
-    return this.usersService.loginUser(loginDto.email, loginDto.password);
+    return this.usersService.loginUser(loginDto);
   }
 
   @Get('teachers')

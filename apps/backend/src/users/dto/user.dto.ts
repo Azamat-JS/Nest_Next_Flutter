@@ -49,4 +49,8 @@ export class LoginDto {
     @IsNotEmpty()
     @IsString()
     password!: string;
+
+    @IsOptional()
+    @IsString()
+    deviceInfo?: string;
 }

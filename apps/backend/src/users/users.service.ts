@@ -3,12 +3,13 @@ import { Prisma, UserRole } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
-import { CreateUserDto, UpdateUserDto } from './dto/user.dto';
+import { CreateUserDto, LoginDto, UpdateUserDto } from './dto/user.dto';
 import { PaginationDto } from 'src/lib/shared/dto/pagination.dto';
+import { AppConfig } from 'src/lib/config';
 
 @Injectable()
 export class UsersService {
-    constructor(private readonly prisma: PrismaService, private readonly jwtService: JwtService) { }
+    constructor(private readonly prisma: PrismaService, private readonly jwtService: JwtService, private readonly config: AppConfig) { }
 
     async getAllUsers(query: PaginationDto) {
         const { limit = 10, page = 1 } = query;
@@ -138,7 +139,8 @@ export class UsersService {
         }
     };
 
-    async loginUser(email: string, password: string) {
+    async loginUser(loginDto: LoginDto) {
+        const { email, password } = loginDto;
         const foundUser = await this.prisma.users.findUnique({
             where: { email }
         });
@@ -155,7 +157,16 @@ export class UsersService {
 
         const accessToken = this.jwtService.sign({ userId: foundUser.id, email: foundUser.email, username: foundUser.username, role: foundUser.role });
 
-        await this.prisma.session
+        const refreshTokenExpireData = this.config.REFRESH_TOKEN_EXPIRES_IN;
+
+        await this.prisma.session.create({
+            data: {
+                refreshToken,
+                userId: foundUser.id,
+                expiresAt: refreshTokenExpireData,
+                deviceInfo: loginDto.deviceInfo ?? '',
+            }
+        })
         return {
             accessToken
         }

@@ -23,6 +23,11 @@ export class AppConfig {
 
     @IsNotEmpty()
     @IsString()
+    @Value("REFRESH_TOKEN_EXPIRES_IN")
+    REFRESH_TOKEN_EXPIRES_IN!: string;
+
+    @IsNotEmpty()
+    @IsString()
     @Value("DATABASE_URL")
     DATABASE_URL!: string;
 }
