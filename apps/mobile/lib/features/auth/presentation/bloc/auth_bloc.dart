@@ -110,8 +110,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       'token': token,
       'created_at': DateTime.now().toIso8601String(),
     }, conflictAlgorithm: ConflictAlgorithm.replace);
-    final res = await db.query('current_user');
-    print('BLOC DB RESULT: $res');
     _authCheckCubit.checkAuthStatus();
     emit(AuthSuccess(user));
   }
@@ -119,6 +117,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   void _onUserLogout(AuthLogout event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
     final res = await _logout(NoParams());
+    await db.delete('current_user');
+    _authCheckCubit.checkAuthStatus();
     res.fold((l) => emit(AuthFailure(l.message)), (_) => emit(AuthLoggedOut()));
   }
 }

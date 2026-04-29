@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/core/common/widgets/app_drawer.dart';
 import 'package:mobile/features/groups/presentation/pages/my_groups_page.dart';
 import 'package:mobile/features/home/presentation/pages/chat_page.dart';
 import 'package:mobile/features/home/presentation/pages/home_page.dart';
@@ -20,7 +21,7 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
       appBar: AppBar(),
       body: pages[currentIndex],
-      drawer: const Drawer(),
+      drawer: const AppDrawer(),
       bottomNavigationBar: CurvedNavBar(
         currentIndex: currentIndex,
         onTap: (index) => {
