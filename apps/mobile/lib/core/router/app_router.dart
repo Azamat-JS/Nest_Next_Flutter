@@ -8,6 +8,8 @@ import 'package:mobile/features/groups/group_shell.dart';
 import 'package:mobile/features/groups/presentation/bloc/group/group_bloc.dart';
 import 'package:mobile/features/groups/presentation/bloc/students/group_students_bloc.dart';
 import 'package:mobile/features/groups/presentation/pages/group_details_page.dart';
+import 'package:mobile/features/home/presentation/pages/chat_page.dart';
+import 'package:mobile/features/home/presentation/pages/home_page.dart';
 import 'package:mobile/features/home/presentation/pages/main_screen.dart';
 import 'package:mobile/features/home/presentation/pages/profile_page.dart';
 import 'package:mobile/features/student_scores/presentation/bloc/student_score_bloc.dart';
@@ -32,6 +34,8 @@ final GoRouter appRouter = GoRouter(
           path: '/profile',
           builder: (context, state) => const ProfilePage(),
         ),
+        GoRoute(path: '/home', builder: (context, state) => const HomePage()),
+        GoRoute(path: '/chat', builder: (context, state) => const ChatPage()),
       ],
     ),
 
