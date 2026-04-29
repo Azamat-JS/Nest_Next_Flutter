@@ -151,24 +151,36 @@ export class UsersService {
         if (!isPasswordValid) {
             throw new UnauthorizedException('Invalid credentials');
         }
-        const refreshToken = this.jwtService.sign({
-            userId: foundUser.id, email: foundUser.email, username: foundUser.username, role: foundUser.role
-        });
 
-        const accessToken = this.jwtService.sign({ userId: foundUser.id, email: foundUser.email, username: foundUser.username, role: foundUser.role });
+        const payload = {
+            userId: foundUser.id,
+            email: foundUser.email,
+            username: foundUser.username,
+            role: foundUser.role
+        };
 
-        const refreshTokenExpireData = this.config.REFRESH_TOKEN_EXPIRES_IN;
+
+        const accessToken = this.jwtService.sign(payload, { expiresIn: this.config.JWT_EXPIRES_IN });
+
+
+        const refreshToken = this.jwtService.sign(payload, { expiresIn: this.config.REFRESH_TOKEN_EXPIRES_IN as any });
+
+        const expiresAt = new Date();
+        expiresAt.setDate(expiresAt.getDate() + 30);
 
         await this.prisma.session.create({
             data: {
                 refreshToken,
                 userId: foundUser.id,
-                expiresAt: refreshTokenExpireData,
+                expiresAt,
                 deviceInfo: loginDto.deviceInfo ?? '',
             }
         })
         return {
-            accessToken
+            accessToken,
+            refreshToken,
+            user: foundUser,
+
         }
     }
 

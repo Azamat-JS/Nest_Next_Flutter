@@ -4,8 +4,6 @@ import { UsersController } from './users.controller';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigifyModule } from '@itgorillaz/configify';
 import { AppConfig } from 'src/lib/config';
-import { config } from 'process';
-console.log(process.env.JWT_SECRET)
 @Module({
   imports: [
     ConfigifyModule.forRootAsync(),
