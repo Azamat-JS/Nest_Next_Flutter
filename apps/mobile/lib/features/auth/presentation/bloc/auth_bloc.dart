@@ -90,24 +90,30 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       return;
     }
 
-    loginRes.fold((l) => emit(AuthFailure(l.message)), (token) async {
-      final useRes = await _currentUser(NoParams());
-      useRes.fold((l) => emit(AuthFailure(l.message)), (user) async {
-        _authCheckCubit.checkAuthStatus();
-        await db.insert('current_user', {
-          'id': user.id,
-          'username': user.username,
-          'email': user.email,
-          'token': token,
-          'created_at': DateTime.now().toIso8601String(),
-          'role': user.role ?? "",
-        }, conflictAlgorithm: ConflictAlgorithm.replace);
-        final res = await db.query('current_user');
-        print('BLOC DB RESULT: $res');
-        emit(AuthSuccess(user));
-        _authCheckCubit.emitLoggedIn(user);
-      });
-    });
+    final token = loginRes.getOrElse((_) => '');
+
+    final userRes = await _currentUser(NoParams());
+
+    if (userRes.isLeft()) {
+      final failure = userRes.swap().getOrElse((_) => Failure('Unknown error'));
+      emit(AuthFailure(failure.message));
+      return;
+    }
+
+    final user = userRes.getOrElse((_) => throw Exception('User not found'));
+
+    await db.insert('current_user', {
+      'id': user.id,
+      'username': user.username,
+      'email': user.email,
+      'role': user.role,
+      'token': token,
+      'created_at': DateTime.now().toIso8601String(),
+    }, conflictAlgorithm: ConflictAlgorithm.replace);
+    final res = await db.query('current_user');
+    print('BLOC DB RESULT: $res');
+    _authCheckCubit.checkAuthStatus();
+    emit(AuthSuccess(user));
   }
 
   void _onUserLogout(AuthLogout event, Emitter<AuthState> emit) async {

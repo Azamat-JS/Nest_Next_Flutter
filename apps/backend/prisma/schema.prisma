@@ -31,9 +31,25 @@ model Users {
   studentGroups StudentGroup[]
   scoreEvents   ScoreEvent[]
   studentScore  StudentScore[]
+  sessions      Session[]
+
 
   @@index([email])
   @@map("Users")
+}
+
+model Session {
+  id String @id @default(cuid())
+  userId String
+  user Users @relation(fields: [userId], references: [id])
+
+  refreshToken String
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+
+  deviceInfo String?
+  isRevoked Boolean @default(false)
+  @@map("Session")
 }
 
 model ParentStudent {

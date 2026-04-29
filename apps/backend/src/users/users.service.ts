@@ -149,7 +149,13 @@ export class UsersService {
         if (!isPasswordValid) {
             throw new UnauthorizedException('Invalid credentials');
         }
+        const refreshToken = this.jwtService.sign({
+            userId: foundUser.id, email: foundUser.email, username: foundUser.username, role: foundUser.role
+        });
+
         const accessToken = this.jwtService.sign({ userId: foundUser.id, email: foundUser.email, username: foundUser.username, role: foundUser.role });
+
+        await this.prisma.session
         return {
             accessToken
         }
