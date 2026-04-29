@@ -31,7 +31,7 @@ export class UsersController {
     return this.usersService.loginUser(loginDto);
   }
 
-  @Post('update-access-token')
+  @Post('refresh-token')
   async updateAccessToken(@Body('refreshToken') oldRefreshToken: string) {
     return this.usersService.updateAccessToken(oldRefreshToken);
   }

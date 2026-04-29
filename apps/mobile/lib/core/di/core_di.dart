@@ -9,24 +9,50 @@ import 'package:sqflite/sqflite.dart';
 
 Future<void> initCore() async {
   final db = await DatabaseHelper.database;
+  final storage = FlutterSecureStorage();
+
   serviceLocator.registerLazySingleton(() => DioClient());
-  serviceLocator.registerLazySingleton(() => FlutterSecureStorage());
+  serviceLocator.registerLazySingleton<FlutterSecureStorage>(() => storage);
   serviceLocator.registerLazySingleton<Database>(() => db);
 
   serviceLocator.registerLazySingleton<UserLocalDataSource>(
     () => UserLocalDataSourceImpl(serviceLocator<Database>()),
   );
+
   serviceLocator.registerLazySingleton<AuthRemoteDataSource>(
     () => AuthRemoteDataSourceImpl(
       serviceLocator<DioClient>(),
       serviceLocator<FlutterSecureStorage>(),
     ),
   );
+
   serviceLocator.registerLazySingleton<AuthCheckCubit>(
     () => AuthCheckCubit(
       serviceLocator<AuthRemoteDataSource>(),
       serviceLocator<UserLocalDataSource>(),
       serviceLocator<Database>(),
     ),
+  );
+
+  final dioClient = serviceLocator<DioClient>();
+
+  dioClient.init(
+    refreshToken: () async {
+      final refresh = await storage.read(key: "refresh_token");
+      if (refresh == null) return null;
+
+      final response = await dioClient.dio.post(
+        '/auth/refresh-token',
+        data: {'refreshToken': refresh},
+      );
+      return response.data['accessToken'];
+    },
+    saveAccessToken: (token) async {
+      await storage.write(key: 'access_token', value: token);
+    },
+    logout: () async {
+      await storage.deleteAll();
+      serviceLocator<AuthCheckCubit>().checkAuthStatus();
+    },
   );
 }
