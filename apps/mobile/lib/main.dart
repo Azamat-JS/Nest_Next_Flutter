@@ -13,11 +13,14 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
   await initDependencies();
+  final authCheck = serviceLocator<AuthCheckCubit>();
+
+  await authCheck.checkAuthStatus();
 
   runApp(
     MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => serviceLocator<AuthCheckCubit>()),
+        BlocProvider.value(value: authCheck),
         BlocProvider(create: (_) => serviceLocator<AuthBloc>()),
         BlocProvider(create: (_) => serviceLocator<GroupBloc>()),
       ],
