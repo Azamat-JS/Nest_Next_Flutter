@@ -25,16 +25,17 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, void>> signInWithEmailAndPassword({
+  Future<Either<Failure, String>> signInWithEmailAndPassword({
     required String email,
     required String password,
   }) async {
     try {
-      await remoteDataSource.signInWithEmailAndPassword(
+      final token = await remoteDataSource.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
-      return right(null);
+      print('TOKEN: $token');
+      return right(token);
     } on ServerException catch (e) {
       return left(Failure(e.message));
     } catch (e) {
