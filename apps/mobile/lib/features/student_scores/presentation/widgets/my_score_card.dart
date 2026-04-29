@@ -38,6 +38,16 @@ class MyStudentCard extends StatelessWidget {
                     'Attendance: $attendance',
                     style: TextStyle(fontSize: 16),
                   ),
+                  SizedBox(width: 65),
+                  Text(
+                    'TOTAL: ${homework + attendance}',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.blueAccent,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.end,
+                  ),
                 ],
               ),
               const SizedBox(height: 10),

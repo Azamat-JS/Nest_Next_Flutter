@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile/core/di/service_locator.dart';
 import 'package:mobile/features/groups/presentation/bloc/group/group_bloc.dart';
 import 'package:mobile/features/groups/presentation/bloc/students/group_students_bloc.dart';
-import 'package:mobile/features/groups/presentation/dbg/sqlite_test.dart';
 import 'package:mobile/features/groups/presentation/widgets/student_card.dart';
 import 'package:mobile/features/student_scores/presentation/bloc/one_student_score_bloc.dart';
 import 'package:mobile/features/student_scores/presentation/bloc/student_score_bloc.dart';
@@ -52,10 +51,6 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ElevatedButton(
-                      onPressed: () => testLocalDB(context),
-                      child: const Text('Test local DB'),
-                    ),
                     Text(
                       'Teacher: ${state.selectedGroup?.teacher?.username ?? "Unknown"}',
                     ),
