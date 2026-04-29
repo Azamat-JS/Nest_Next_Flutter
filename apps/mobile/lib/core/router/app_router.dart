@@ -28,14 +28,24 @@ final GoRouter appRouter = GoRouter(
       routes: [
         GoRoute(
           path: '/groups',
-          builder: (context, state) => const GroupFeatureShell(),
+          pageBuilder: (context, state) =>
+              NoTransitionPage(child: const GroupFeatureShell()),
         ),
         GoRoute(
           path: '/profile',
-          builder: (context, state) => const ProfilePage(),
+          pageBuilder: (context, state) =>
+              NoTransitionPage(child: const ProfilePage()),
         ),
-        GoRoute(path: '/home', builder: (context, state) => const HomePage()),
-        GoRoute(path: '/chat', builder: (context, state) => const ChatPage()),
+        GoRoute(
+          path: '/home',
+          pageBuilder: (context, state) =>
+              NoTransitionPage(child: const HomePage()),
+        ),
+        GoRoute(
+          path: '/chat',
+          pageBuilder: (context, state) =>
+              NoTransitionPage(child: const ChatPage()),
+        ),
       ],
     ),
 
