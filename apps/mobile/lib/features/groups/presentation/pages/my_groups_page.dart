@@ -85,11 +85,14 @@ Widget _buildHeader(BuildContext context, TextEditingController controller) {
                         onPressed: state.isLoading
                             ? null
                             : () {
+                                final bloc = context.read<GroupBloc>();
+
+                                if (bloc.isClosed) return;
+
                                 final id = controller.text.trim();
                                 if (id.isEmpty) return;
-                                context.read<GroupBloc>().add(
-                                  FetchGroupById(id),
-                                );
+
+                                bloc.add(FetchGroupById(id));
                               },
                       );
                     },

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/features/groups/presentation/pages/my_groups_page.dart';
 import 'package:mobile/features/home/presentation/pages/chat_page.dart';
 import 'package:mobile/features/home/presentation/pages/home_page.dart';
 import 'package:mobile/features/home/presentation/pages/profile_page.dart';
@@ -13,7 +14,7 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int currentIndex = 0;
-  List pages = const [HomePage(), ChatPage(), ProfilePage()];
+  List pages = const [MyGroupsPage(), HomePage(), ChatPage(), ProfilePage()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(

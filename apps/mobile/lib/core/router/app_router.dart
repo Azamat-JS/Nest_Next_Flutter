@@ -1,9 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mobile/core/common/cubit/auth_check_cubit.dart';
 import 'package:mobile/core/common/widgets/auth_gate.dart';
 import 'package:mobile/core/di/service_locator.dart';
-import 'package:mobile/core/router/go_refresh_notifier.dart';
 import 'package:mobile/features/auth/presentation/pages/login_page.dart';
 import 'package:mobile/features/auth/presentation/pages/sign_up_page.dart';
 import 'package:mobile/features/groups/presentation/bloc/group/group_bloc.dart';
