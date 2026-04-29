@@ -34,7 +34,6 @@ class AuthRepositoryImpl implements AuthRepository {
         email: email,
         password: password,
       );
-      print('TOKEN: $token');
       return right(token);
     } on ServerException catch (e) {
       return left(Failure(e.message));
