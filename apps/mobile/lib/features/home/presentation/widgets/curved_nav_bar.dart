@@ -18,9 +18,10 @@ class CurvedNavBar extends StatelessWidget {
       buttonBackgroundColor: Colors.lightBlueAccent,
       height: 70,
       items: const [
+        Icon(Icons.group, size: 30, color: Colors.white),
         Icon(Icons.home, size: 30, color: Colors.white),
-        Icon(Icons.person, size: 30, color: Colors.white),
         Icon(Icons.message, size: 30, color: Colors.white),
+        Icon(Icons.person, size: 30, color: Colors.white),
       ],
       index: currentIndex,
       onTap: onTap,

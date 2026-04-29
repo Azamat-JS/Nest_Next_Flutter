@@ -34,18 +34,15 @@ class _MyGroupsPageState extends State<MyGroupsPage> {
               serviceLocator<RecentGroupBloc>()..add(LoadRecentGroups()),
         ),
       ],
-      child: Scaffold(
-        appBar: AppBar(title: const Text('Group page')),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              _buildHeader(context, controller),
-              SizedBox(height: 20),
-              _buildBody(context),
-            ],
-          ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            _buildHeader(context, controller),
+            SizedBox(height: 20),
+            _buildBody(context),
+          ],
         ),
       ),
     );

@@ -14,11 +14,13 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int currentIndex = 0;
-  List pages = const [MyGroupsPage(), HomePage(), ChatPage(), ProfilePage()];
+  List pages = const [MyGroupsPage(), HomePage(), ProfilePage(), ChatPage()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: pages[currentIndex],
+      drawer: const Drawer(),
       bottomNavigationBar: CurvedNavBar(
         currentIndex: currentIndex,
         onTap: (index) => {
