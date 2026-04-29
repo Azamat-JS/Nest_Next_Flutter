@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mobile/core/common/widgets/auth_gate.dart';
@@ -33,8 +34,13 @@ final GoRouter appRouter = GoRouter(
         ),
         GoRoute(
           path: '/profile',
-          pageBuilder: (context, state) =>
-              NoTransitionPage(child: const ProfilePage()),
+          pageBuilder: (context, state) => CustomTransitionPage(
+            child: const ProfilePage(),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+                  return FadeTransition(opacity: animation, child: child);
+                },
+          ),
         ),
         GoRoute(
           path: '/home',
