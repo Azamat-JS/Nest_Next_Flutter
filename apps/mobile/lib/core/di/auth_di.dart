@@ -8,6 +8,7 @@ import 'package:mobile/features/auth/domain/usecases/logout_user.dart';
 import 'package:mobile/features/auth/domain/usecases/user_login.dart';
 import 'package:mobile/features/auth/domain/usecases/user_sign_up.dart';
 import 'package:mobile/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:sqflite/sqflite.dart';
 
 Future<void> initAuth() async {
   serviceLocator
@@ -33,6 +34,7 @@ Future<void> initAuth() async {
         signUp: serviceLocator<UserSignUp>(),
         logout: serviceLocator<LogoutUser>(),
         authCheckCubit: serviceLocator<AuthCheckCubit>(),
+        db: serviceLocator<Database>(),
       ),
     );
 }
