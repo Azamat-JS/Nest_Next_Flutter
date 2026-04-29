@@ -184,6 +184,42 @@ export class UsersService {
         }
     }
 
+    async updateAccessToken(oldRefreshToken: string) {
+        const session = await this.prisma.session.findFirst({
+            where: {
+                refreshToken: oldRefreshToken,
+                isRevoked: false
+            }
+        });
+
+        if (!session) {
+            throw new UnauthorizedException('Invalid refresh token');
+        }
+
+        if (session.expiresAt < new Date()) {
+            throw new UnauthorizedException('Refresh token expired');
+        }
+
+        const user = await this.prisma.users.findUnique({
+            where: { id: session.userId }
+        });
+
+        if (!user) {
+            throw new NotFoundException('User not found');
+        }
+
+        const payload = {
+            userId: user.id,
+            email: user.email,
+            username: user.username,
+            role: user.role
+        };
+
+        const newAccessToken = await this.jwtService.signAsync(payload, { expiresIn: this.config.JWT_EXPIRES_IN });
+
+        return { accessToken: newAccessToken };
+    }
+
     async updateUser(id: string, updateUserInput: UpdateUserDto) {
 
         const foundUser = await this.prisma.users.findUnique({

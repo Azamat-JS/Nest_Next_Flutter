@@ -31,6 +31,11 @@ export class UsersController {
     return this.usersService.loginUser(loginDto);
   }
 
+  @Post('update-access-token')
+  async updateAccessToken(@Body('refreshToken') oldRefreshToken: string) {
+    return this.usersService.updateAccessToken(oldRefreshToken);
+  }
+
   @Get('teachers')
   async getAllTeachers() {
     return this.usersService.getAllTeachers();
