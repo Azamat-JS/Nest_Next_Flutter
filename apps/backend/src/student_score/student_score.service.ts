@@ -290,13 +290,24 @@ export class StudentScoreRepository {
     async leaderboard(dto: PaginationDto) {
         const { limit = 10, page = 1 } = dto;
         const skip = (page - 1) * limit;
-        return this.prisma.studentScore.findMany({
+        const students = await this.prisma.studentScore.findMany({
             take: dto.limit,
             skip,
             orderBy: {
                 total: 'desc',
             },
         })
+
+
+        return {
+            data: students,
+            meta: {
+                total: students.length,
+                page,
+                last_page: Math.ceil(students.length / limit),
+                limit
+            }
+        }
     }
 
     async groupLeadeboard(groupId: string, dto: PaginationDto) {
@@ -308,7 +319,7 @@ export class StudentScoreRepository {
 
         if (!group) throw new NotFoundException(`Group not found: ${groupId}`)
 
-        return await this.prisma.studentScore.findMany({
+        const students = await this.prisma.studentScore.findMany({
             take: dto.limit,
             skip,
             where: {
@@ -317,7 +328,16 @@ export class StudentScoreRepository {
             orderBy: {
                 total: 'desc',
             },
-        })
+        });
+        return {
+            data: students,
+            meta: {
+                total: students.length,
+                page,
+                last_page: Math.ceil(students.length / limit),
+                limit
+            }
+        }
     }
 
     async getAllStudentsScoreByGroup(groupId: string) {

@@ -27,7 +27,7 @@ export class StudentScoreController {
     return this.studentScoreRepo.leaderboard(query);
   }
 
-  @Get('group/leaderboard/:groupId')
+  @Get('leaderboard/:groupId')
   async getGroupLeaderboard(@Query() query: PaginationDto, @Param('groupId') groupId: string) {
     return this.studentScoreRepo.groupLeadeboard(groupId, query);
   }
