@@ -74,10 +74,11 @@ const LeaderBoardContent = () => {
                 <TableHeader>
                     <TableRow>
                         <TableHead className="w-12 text-center font-bold text-lg">&#8470;</TableHead>
+                        <TableHead className="w-48 text-center font-bold text-lg">Group Name</TableHead>
                         <TableHead className="w-48 text-center font-bold text-lg">Name</TableHead>
                         <TableHead className="w-48 text-center font-bold text-lg">Homework</TableHead>
                         <TableHead className="w-48 text-center font-bold text-lg">Attendance</TableHead>
-                        <TableHead className="w-48 text-center font-bold text-lg">Total Score</TableHead>
+                        <TableHead className="w-48 text-center font-bold text-2xl text-blue-800">Total Score</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -85,10 +86,11 @@ const LeaderBoardContent = () => {
                         const rankStyle = getRankStyle(idx);
                         return (<TableRow key={idx} className={rankStyle}>
                             <TableCell className="text-center">{idx + 1}</TableCell>
+                            <TableCell className="text-center">{s.group?.name || ""}</TableCell>
                             <TableCell className="text-center">{s.student.username}</TableCell>
                             <TableCell className="text-center"> {s.homework ?? 0}</TableCell>
                             <TableCell className="text-center">{s.attendance ?? 0}</TableCell>
-                            <TableCell className="text-center">{s.total ?? 0}</TableCell>
+                            <TableCell className="text-center font-bold text-blue-800 text-lg">{s.total ?? 0}</TableCell>
                         </TableRow>)
                     })}
                 </TableBody>
