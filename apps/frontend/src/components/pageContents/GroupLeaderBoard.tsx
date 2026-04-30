@@ -1,7 +1,7 @@
 "use client"
 
 import { useAuthStore } from "@/lib/stores/authStore";
-import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
@@ -23,16 +23,7 @@ const GroupLeaderBoard = ({ groupId }: { groupId: string }) => {
     const page = Number(searchParams.get('page') ?? 1);
     const limit = Number(searchParams.get('limit') ?? 10);
     const token = useAuthStore((state) => state.token);
-    const queryClient = useQueryClient();
     const API = process.env.NEXT_PUBLIC_API_URL;
-
-    const { data: groupData } = useSuspenseQuery({
-        queryKey: ["group", groupId],
-        queryFn: async () => {
-            const res = await axios.get(`${API}/group/${groupId}`, { headers: { Authorization: `Bearer ${token}` } });
-            return res.data;
-        },
-    })
 
     const { data: groupStudentsData } = useSuspenseQuery({
         queryKey: ["group-leaderboard", groupId, page, limit],
@@ -41,6 +32,8 @@ const GroupLeaderBoard = ({ groupId }: { groupId: string }) => {
             return res.data;
         }
     });
+
+    console.log(groupStudentsData)
 
     const groupStudents: TokenPayload[] = groupStudentsData.data.length > 0 ? groupStudentsData.data : [];
     const meta: PaginationType = groupStudentsData?.meta ?? {}
@@ -58,7 +51,6 @@ const GroupLeaderBoard = ({ groupId }: { groupId: string }) => {
                         <TableHead className="w-48 text-center font-bold text-lg">Homework</TableHead>
                         <TableHead className="w-48 text-center font-bold text-lg">Attendance</TableHead>
                         <TableHead className="w-48 text-center font-bold text-lg">Total Score</TableHead>
-                        <TableHead className="w-24 text-start font-bold text-lg">Actions</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -66,8 +58,9 @@ const GroupLeaderBoard = ({ groupId }: { groupId: string }) => {
 
                         return (<TableRow key={idx}>
                             <TableCell className="text-center">{idx + 1}</TableCell>
-                            <TableCell className="text-center hover:cursor-pointer" onClick={() => router.push(`/groups/${groupId}/${s.id}`)}>{s.username}</TableCell>
-                            <TableCell className="text-center"> {new Date().toISOString().split("T")[0]}</TableCell>
+                            <TableCell className="text-center">{s.username}</TableCell>
+                            <TableCell className="text-center"> {s.}</TableCell>
+                            <TableCell className="text-center">{s?.id ?? 0}</TableCell>
                             <TableCell className="text-center">{s?.id ?? 0}</TableCell>
                         </TableRow>)
                     })}

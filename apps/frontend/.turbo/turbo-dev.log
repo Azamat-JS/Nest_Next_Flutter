@@ -1,0 +1,109 @@
+
+> frontend@0.1.0 dev /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend
+> next dev -p 4000
+
+[1m[38;2;173;127;168m▲ Next.js 16.2.1[39m[22m (Turbopack)
+- Local:         http://localhost:4000
+- Network:       http://192.168.13.93:4000
+- Environments: .env.local
+[32m[1m✓[22m[39m Ready in 335ms
+[33m[1m⚠[22m[39m Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /Users/azamatabdullayev/Desktop/full-stack-turbo/pnpm-workspace.yaml as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend/pnpm-workspace.yaml
+
+
+ GET / [32m200[39m in 309ms[2m (next.js: 126ms, application-code: 184ms)[22m
+ GET /groups [32m200[39m in 64ms[2m (next.js: 37ms, application-code: 27ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 280ms[2m (next.js: 264ms, application-code: 17ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+ GET /groups [32m200[39m in 29ms[2m (next.js: 5ms, application-code: 24ms)[22m
+ GET /groups/cmnoh0p550000u8v2nihbtf1o [32m200[39m in 19ms[2m (next.js: 4ms, application-code: 15ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+ GET /groups/cmnoh0p550000u8v2nihbtf1o/cmnq74ink0001hrv254s9e0li [32m200[39m in 249ms[2m (next.js: 232ms, application-code: 17ms)[22m
+[32m[1m✓[22m[39m Compiled in 441ms
+[32m[1m✓[22m[39m Compiled in 90ms
+[32m[1m✓[22m[39m Compiled in 410ms
+ GET /groups/cmnoh0p550000u8v2nihbtf1o [32m200[39m in 138ms[2m (next.js: 65ms, application-code: 72ms)[22m
+ GET /groups/cmnoh0p550000u8v2nihbtf1o [32m200[39m in 17ms[2m (next.js: 1186µs, application-code: 15ms)[22m
+[36m[browser][39m Each child in a list should have a unique "key" prop.
+
+Check the render method of `TableBody`. It was passed a child from GroupLeaderBoard. See https://react.dev/link/warning-keys for more information. 
+[32m[1m✓[22m[39m Compiled in 24ms
+[32m[1m✓[22m[39m Compiled in 22ms
+[32m[1m✓[22m[39m Compiled in 22ms
+[32m[1m✓[22m[39m Compiled in 20ms
+[32m[1m✓[22m[39m Compiled in 50ms
+ GET /groups/cmnoh0p550000u8v2nihbtf1o [32m200[39m in 111ms[2m (next.js: 53ms, application-code: 58ms)[22m
+ GET /groups/cmnoh0p550000u8v2nihbtf1o [32m200[39m in 15ms[2m (next.js: 1078µs, application-code: 14ms)[22m
+[32m[1m✓[22m[39m Compiled in 148ms
+ GET /groups/cmnoh0p550000u8v2nihbtf1o [32m200[39m in 288ms[2m (next.js: 95ms, application-code: 193ms)[22m
+ GET /groups/cmnoh0p550000u8v2nihbtf1o [32m200[39m in 56ms[2m (next.js: 7ms, application-code: 49ms)[22m
+ GET /groups/cmnoh0p550000u8v2nihbtf1o [32m200[39m in 292ms[2m (next.js: 156ms, application-code: 136ms)[22m
+ GET /groups/cmnoh0p550000u8v2nihbtf1o [32m200[39m in 115ms[2m (next.js: 39ms, application-code: 77ms)[22m
+ GET /groups/cmnoh0p550000u8v2nihbtf1o [32m200[39m in 30ms[2m (next.js: 2ms, application-code: 28ms)[22m
+ GET /groups/cmnoh0p550000u8v2nihbtf1o [32m200[39m in 50ms[2m (next.js: 1058µs, application-code: 49ms)[22m
+ GET /groups/cmnoh0p550000u8v2nihbtf1o [32m200[39m in 39ms[2m (next.js: 2ms, application-code: 37ms)[22m
+ GET /groups/cmnoh0p550000u8v2nihbtf1o [32m200[39m in 22ms[2m (next.js: 1485µs, application-code: 21ms)[22m
+ GET /groups/cmnoh0p550000u8v2nihbtf1o [32m200[39m in 209ms[2m (next.js: 5ms, application-code: 203ms)[22m
+[36m[browser][39m Each child in a list should have a unique "key" prop.
+
+Check the render method of `TableBody`. It was passed a child from GroupLeaderBoard. See https://react.dev/link/warning-keys for more information. 
+[32m[1m✓[22m[39m Compiled in 26ms
+[32m[1m✓[22m[39m Compiled in 20ms
+[32m[1m✓[22m[39m Compiled in 21ms
+[32m[1m✓[22m[39m Compiled in 19ms
+[32m[1m✓[22m[39m Compiled in 21ms
+[32m[1m✓[22m[39m Compiled in 625ms
+[36m[browser][39m ./apps/frontend/src/components/pageContents/GroupLeaderBoard.tsx:62:68
+Expected '</', got '}'
+  60 |                             <TableCell className="text-center">{idx + 1}</TableCell>
+  61 |                             <TableCell className="text-center">{s.username}</TableCell>
+> 62 |                             <TableCell className="text-center"> {s.}</TableCell>
+     |                                                                    ^
+  63 |                             <TableCell className="text-center">{s?.id ?? 0}</TableCell>
+  64 |                             <TableCell className="text-center">{s?.id ?? 0}</TableCell>
+  65 |                         </TableRow>)
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./apps/frontend/src/components/pageContents/GroupLeaderBoard.tsx [Client Component Browser]
+    ./apps/frontend/src/components/pageContents/GroupAndLeaderboard.tsx [Client Component Browser]
+    ./apps/frontend/src/components/pageContents/GroupAndLeaderboard.tsx [Server Component]
+    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/frontend/src/components/pageContents/GroupLeaderBoard.tsx [Client Component SSR]
+    ./apps/frontend/src/components/pageContents/GroupAndLeaderboard.tsx [Client Component SSR]
+    ./apps/frontend/src/components/pageContents/GroupAndLeaderboard.tsx [Server Component]
+    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component] 
+[36m[browser][39m ./apps/frontend/src/components/pageContents/GroupLeaderBoard.tsx:62:68
+Expected '</', got '}'
+  60 |                             <TableCell className="text-center">{idx + 1}</TableCell>
+  61 |                             <TableCell className="text-center">{s.username}</TableCell>
+> 62 |                             <TableCell className="text-center"> {s.}</TableCell>
+     |                                                                    ^
+  63 |                             <TableCell className="text-center">{s?.id ?? 0}</TableCell>
+  64 |                             <TableCell className="text-center">{s?.id ?? 0}</TableCell>
+  65 |                         </TableRow>)
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./apps/frontend/src/components/pageContents/GroupLeaderBoard.tsx [Client Component Browser]
+    ./apps/frontend/src/components/pageContents/GroupAndLeaderboard.tsx [Client Component Browser]
+    ./apps/frontend/src/components/pageContents/GroupAndLeaderboard.tsx [Server Component]
+    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/frontend/src/components/pageContents/GroupLeaderBoard.tsx [Client Component SSR]
+    ./apps/frontend/src/components/pageContents/GroupAndLeaderboard.tsx [Client Component SSR]
+    ./apps/frontend/src/components/pageContents/GroupAndLeaderboard.tsx [Server Component]
+    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component] 
