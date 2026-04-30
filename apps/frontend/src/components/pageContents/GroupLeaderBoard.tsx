@@ -64,11 +64,11 @@ const GroupLeaderBoard = ({ groupId }: { groupId: string }) => {
                 <TableBody>
                     {groupStudents.map((s, idx) => {
 
-                        return (<TableRow key={s.id}>
+                        return (<TableRow key={idx}>
                             <TableCell className="text-center">{idx + 1}</TableCell>
                             <TableCell className="text-center hover:cursor-pointer" onClick={() => router.push(`/groups/${groupId}/${s.id}`)}>{s.username}</TableCell>
                             <TableCell className="text-center"> {new Date().toISOString().split("T")[0]}</TableCell>
-                            <TableCell className="text-center">{s?.total ?? 0}</TableCell>
+                            <TableCell className="text-center">{s?.id ?? 0}</TableCell>
                         </TableRow>)
                     })}
                 </TableBody>

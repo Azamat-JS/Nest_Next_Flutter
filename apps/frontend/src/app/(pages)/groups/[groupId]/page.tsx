@@ -4,13 +4,14 @@ import { ErrorBoundary } from "react-error-boundary"
 import { Suspense } from "react";
 import ErrorHandler from "@/components/utils/ErrorHandler";
 import { SkeletonDemo } from "@/components/utils/Skeleton";
+import GroupAndLeaderboard from "@/components/pageContents/GroupAndLeaderboard";
 
 const GroupDetails = async ({ params }: { params: Promise<{ groupId: string }> }) => {
     const groupId = (await params).groupId;
     return (
         <ErrorBoundary fallback={<ErrorHandler />}>
             <Suspense fallback={<SkeletonDemo />}>
-                <GroupDetailsComponent groupId={groupId} />
+                <GroupAndLeaderboard groupId={groupId} />
             </Suspense>
         </ErrorBoundary>
     )

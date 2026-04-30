@@ -58,6 +58,7 @@ import {
     PaginationNext,
     PaginationPrevious,
 } from "@/components/ui/pagination"
+import GroupLeaderBoard from './GroupLeaderBoard';
 
 type UpdateScorePayload = {
     studentId: string;
@@ -84,6 +85,7 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
     const [openCreate, setOpenCreate] = useState(false);
     const [openUpdate, setOpenUpdate] = useState(false);
     const [openDelete, setOpenDelete] = useState(false);
+    const [openLeaderBoard, setOpenLeaderBoard] = useState(false);
     const [openAddStudents, setOpenAddStudents] = useState(false);
     const [newStudentIds, setNewStudentIds] = useState<string[]>([]);
     const [selectedStudent, setSelectedStudent] = useState<TokenPayload | null>(null);
@@ -194,11 +196,7 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
     )
 
     return (
-        <div className='flex flex-col w-full'>
-            <header className='flex items-center gap-6 justify-center text-center'>
-                <Badge className='w-40 h-8 font-semibold text-lg'>{group?.name}</Badge> -
-                <Badge className='w-40 h-8 text-lg' variant="outline">Teacher: {group?.teacher?.username}</Badge>
-            </header>
+        <>
             <Table>
                 <TableCaption className="text-center font-bold text-lg">
                     Showing {groupStudents.length} of {meta?.total ?? 0} students
@@ -306,7 +304,6 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
                     </Pagination>
                 </div>
             </div>
-
 
             {/* update student scores modal */}
             <Dialog open={openUpdate} onOpenChange={setOpenUpdate}>
@@ -419,7 +416,7 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
                     </DialogContent>
                 </form>
             </Dialog>
-        </div>
+        </>
     )
 }
 
