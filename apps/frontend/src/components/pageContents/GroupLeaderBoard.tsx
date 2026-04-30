@@ -40,13 +40,11 @@ const GroupLeaderBoard = ({ groupId }: { groupId: string }) => {
             case 1:
                 return "bg-green-200 text-green-800 font-semibold";
             case 2:
-                return "bg-orange-200 text-orange-800 font-semibold";
+                return "bg-yellow-200 text-yellow-800 font-semibold";
             default:
                 return "";
         }
     };
-
-    console.log(groupStudentsData)
 
     const groupStudents: LeaderBoardType[] = groupStudentsData.data.length > 0 ? groupStudentsData.data : [];
     const meta: PaginationType = groupStudentsData?.meta ?? {}
