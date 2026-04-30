@@ -33,6 +33,19 @@ const GroupLeaderBoard = ({ groupId }: { groupId: string }) => {
         }
     });
 
+    const getRankStyle = (idx: number) => {
+        switch (idx) {
+            case 0:
+                return "bg-blue-200 text-blue-800 font-semibold";
+            case 1:
+                return "bg-green-200 text-green-800 font-semibold";
+            case 2:
+                return "bg-orange-200 text-orange-800 font-semibold";
+            default:
+                return "";
+        }
+    };
+
     console.log(groupStudentsData)
 
     const groupStudents: LeaderBoardType[] = groupStudentsData.data.length > 0 ? groupStudentsData.data : [];
@@ -55,10 +68,10 @@ const GroupLeaderBoard = ({ groupId }: { groupId: string }) => {
                 </TableHeader>
                 <TableBody>
                     {groupStudents.map((s, idx) => {
-
-                        return (<TableRow key={idx}>
+                        const rankStyle = getRankStyle(idx);
+                        return (<TableRow key={idx} className={rankStyle}>
                             <TableCell className="text-center">{idx + 1}</TableCell>
-                            <TableCell className="text-center">{s.username}</TableCell>
+                            <TableCell className="text-center">{s.student.username}</TableCell>
                             <TableCell className="text-center"> {s.homework ?? 0}</TableCell>
                             <TableCell className="text-center">{s.attendance ?? 0}</TableCell>
                             <TableCell className="text-center">{s.total ?? 0}</TableCell>

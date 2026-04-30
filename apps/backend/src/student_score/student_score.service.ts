@@ -339,11 +339,6 @@ export class StudentScoreRepository {
                         username: true,
                     }
                 },
-                group: {
-                    select: {
-                        name: true,
-                    }
-                }
             }
         });
         return {
