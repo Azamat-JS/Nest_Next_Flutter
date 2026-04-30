@@ -32,11 +32,12 @@ class LeaderBoardRemoteDataSourceImpl implements LeaderBoardRemoteDataSource {
       );
 
       final data = res.data['data'] as List;
+      final meta = res.data['meta'];
       return LeaderBoardPage(
-        data: data.map((e) => LeaderboardModel.fromJson(e)).toList(),
-        page: res.data['meta']['page'] as int,
-        lastPage: res.data['meta']['last_page'] as int,
-        limit: res.data['meta']['limit'] as int,
+        data: data.map((e) => LeaderboardModel.fromJson(e).toEntity()).toList(),
+        page: meta['page'] as int,
+        lastPage: meta['last_page'] as int,
+        limit: meta['limit'] as int,
       );
     } on DioException catch (e) {
       throw Exception(
@@ -57,11 +58,12 @@ class LeaderBoardRemoteDataSourceImpl implements LeaderBoardRemoteDataSource {
         queryParameters: {'page': page, 'limit': limit},
       );
       final data = res.data['data'] as List;
+      final meta = res.data['meta'];
       return LeaderBoardPage(
         data: data.map((e) => LeaderboardModel.fromJson(e)).toList(),
-        page: res.data['meta']['page'],
-        lastPage: res.data['meta']['last_page'],
-        limit: res.data['meta']['limit'],
+        page: meta['page'] as int,
+        lastPage: meta['last_page'] as int,
+        limit: meta['limit'] as int,
       );
     } on DioException catch (e) {
       throw Exception(
