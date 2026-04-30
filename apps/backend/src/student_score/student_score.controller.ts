@@ -22,6 +22,8 @@ export class StudentScoreController {
     return this.studentScoreRepo.getTodayStudentsScoreByGroup(groupId);
   }
 
+  @Get('leaderboard')
+
   @Get('one-student/:studentId/:groupId')
   async getOneStudentScore(
     @Param('studentId') studentId: string,

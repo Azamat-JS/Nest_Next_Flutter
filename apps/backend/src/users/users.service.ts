@@ -93,7 +93,7 @@ export class UsersService {
                 email: true,
                 avatarUrl: true,
                 role: true,
-            }
+            },
         });
     }
 

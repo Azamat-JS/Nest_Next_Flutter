@@ -287,6 +287,18 @@ export class StudentScoreRepository {
         });
     }
 
+    async leaderboard(dto: PaginationDto) {
+        const { limit = 10, page = 1 } = dto;
+        const skip = (page - 1) * limit;
+        return this.prisma.studentScore.findMany({
+            take: dto.limit,
+            skip,
+            orderBy: {
+                total: 'desc',
+            },
+        })
+    }
+
     async getAllStudentsScoreByGroup(groupId: string) {
         const grouped = await this.prisma.scoreEvent.groupBy({
             by: ['studentId', 'type'],
