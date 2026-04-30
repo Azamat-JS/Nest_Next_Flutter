@@ -50,34 +50,33 @@ const GroupLeaderBoard = ({ groupId }: { groupId: string }) => {
     const meta: PaginationType = groupStudentsData?.meta ?? {}
     const lastPage = meta?.last_page ?? 1;
     return (
-        <div>
-            <Table>
-                <TableCaption className="text-center font-bold text-lg">
-                    Showing {groupStudentsData.length} of {meta?.total ?? 0} students
-                </TableCaption>
-                <TableHeader>
-                    <TableRow>
-                        <TableHead className="w-12 text-center font-bold text-lg">&#8470;</TableHead>
-                        <TableHead className="w-48 text-center font-bold text-lg">Name</TableHead>
-                        <TableHead className="w-48 text-center font-bold text-lg">Homework</TableHead>
-                        <TableHead className="w-48 text-center font-bold text-lg">Attendance</TableHead>
-                        <TableHead className="w-48 text-center font-bold text-lg">Total Score</TableHead>
-                    </TableRow>
-                </TableHeader>
-                <TableBody>
-                    {groupStudents.map((s, idx) => {
-                        const rankStyle = getRankStyle(idx);
-                        return (<TableRow key={idx} className={rankStyle}>
-                            <TableCell className="text-center">{idx + 1}</TableCell>
-                            <TableCell className="text-center">{s.student.username}</TableCell>
-                            <TableCell className="text-center"> {s.homework ?? 0}</TableCell>
-                            <TableCell className="text-center">{s.attendance ?? 0}</TableCell>
-                            <TableCell className="text-center">{s.total ?? 0}</TableCell>
-                        </TableRow>)
-                    })}
-                </TableBody>
-            </Table>
-        </div>
+
+        <Table>
+            <TableCaption className="text-center font-bold text-lg">
+                Showing {groupStudentsData.length} of {meta?.total ?? 0} students
+            </TableCaption>
+            <TableHeader>
+                <TableRow>
+                    <TableHead className="w-12 text-center font-bold text-lg">&#8470;</TableHead>
+                    <TableHead className="w-48 text-center font-bold text-lg">Name</TableHead>
+                    <TableHead className="w-48 text-center font-bold text-lg">Homework</TableHead>
+                    <TableHead className="w-48 text-center font-bold text-lg">Attendance</TableHead>
+                    <TableHead className="w-48 text-center font-bold text-lg">Total Score</TableHead>
+                </TableRow>
+            </TableHeader>
+            <TableBody>
+                {groupStudents.map((s, idx) => {
+                    const rankStyle = getRankStyle(idx);
+                    return (<TableRow key={idx} className={rankStyle}>
+                        <TableCell className="text-center">{idx + 1}</TableCell>
+                        <TableCell className="text-center">{s.student.username}</TableCell>
+                        <TableCell className="text-center"> {s.homework ?? 0}</TableCell>
+                        <TableCell className="text-center">{s.attendance ?? 0}</TableCell>
+                        <TableCell className="text-center">{s.total ?? 0}</TableCell>
+                    </TableRow>)
+                })}
+            </TableBody>
+        </Table>
     )
 }
 
