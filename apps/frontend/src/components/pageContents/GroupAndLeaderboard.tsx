@@ -27,7 +27,7 @@ const GroupAndLeaderboard = ({ groupId }: { groupId: string }) => {
 
     return (
         <div className='flex flex-col w-full'>
-            <header className='flex items-center gap-6 justify-center text-center'>
+            <header className='flex items-center gap-6 justify-center text-center mb-4'>
                 <Badge onClick={() => setOpenLeaderBoard(false)} className='w-40 h-8 hover:cursor-pointer font-semibold text-lg'>{group?.name}</Badge> -
                 <Badge className='w-40 h-8 text-lg' variant="outline">Teacher: {group?.teacher?.username}</Badge>
                 <Badge onClick={() => setOpenLeaderBoard(true)} className='w-40 h-8 hover:cursor-pointer text-lg'>LeaderBoard</Badge>

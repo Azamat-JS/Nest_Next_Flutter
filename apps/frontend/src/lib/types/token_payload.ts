@@ -6,7 +6,7 @@ export type TokenPayload = {
     role?: string | null;
 }
 
-export type LeaderBoard = {
+export type LeaderBoardType = {
     studentId: string;
     groupId: string;
     username: string;

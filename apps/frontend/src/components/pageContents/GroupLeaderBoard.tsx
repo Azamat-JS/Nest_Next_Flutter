@@ -13,7 +13,7 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-import { TokenPayload } from "@/lib/types/token_payload";
+import { LeaderBoardType } from "@/lib/types/token_payload";
 import { PaginationType } from "@/lib/types/groups";
 
 
@@ -35,7 +35,7 @@ const GroupLeaderBoard = ({ groupId }: { groupId: string }) => {
 
     console.log(groupStudentsData)
 
-    const groupStudents: TokenPayload[] = groupStudentsData.data.length > 0 ? groupStudentsData.data : [];
+    const groupStudents: LeaderBoardType[] = groupStudentsData.data.length > 0 ? groupStudentsData.data : [];
     const meta: PaginationType = groupStudentsData?.meta ?? {}
     const lastPage = meta?.last_page ?? 1;
     return (
@@ -59,9 +59,9 @@ const GroupLeaderBoard = ({ groupId }: { groupId: string }) => {
                         return (<TableRow key={idx}>
                             <TableCell className="text-center">{idx + 1}</TableCell>
                             <TableCell className="text-center">{s.username}</TableCell>
-                            <TableCell className="text-center"> {s.}</TableCell>
-                            <TableCell className="text-center">{s?.id ?? 0}</TableCell>
-                            <TableCell className="text-center">{s?.id ?? 0}</TableCell>
+                            <TableCell className="text-center"> {s.homework ?? 0}</TableCell>
+                            <TableCell className="text-center">{s.attendance ?? 0}</TableCell>
+                            <TableCell className="text-center">{s.total ?? 0}</TableCell>
                         </TableRow>)
                     })}
                 </TableBody>

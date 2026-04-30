@@ -107,3 +107,123 @@ Import traces:
     ./apps/frontend/src/components/pageContents/GroupAndLeaderboard.tsx [Client Component SSR]
     ./apps/frontend/src/components/pageContents/GroupAndLeaderboard.tsx [Server Component]
     ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component] 
+[36m[browser][39m ./apps/frontend/src/components/pageContents/GroupLeaderBoard.tsx:62:68
+Expected '</', got '}'
+  60 |                             <TableCell className="text-center">{idx + 1}</TableCell>
+  61 |                             <TableCell className="text-center">{s.username}</TableCell>
+> 62 |                             <TableCell className="text-center"> {s.}</TableCell>
+     |                                                                    ^
+  63 |                             <TableCell className="text-center">{s?.id ?? 0}</TableCell>
+  64 |                             <TableCell className="text-center">{s?.id ?? 0}</TableCell>
+  65 |                         </TableRow>)
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./apps/frontend/src/components/pageContents/GroupLeaderBoard.tsx [Client Component Browser]
+    ./apps/frontend/src/components/pageContents/GroupAndLeaderboard.tsx [Client Component Browser]
+    ./apps/frontend/src/components/pageContents/GroupAndLeaderboard.tsx [Server Component]
+    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/frontend/src/components/pageContents/GroupLeaderBoard.tsx [Client Component SSR]
+    ./apps/frontend/src/components/pageContents/GroupAndLeaderboard.tsx [Client Component SSR]
+    ./apps/frontend/src/components/pageContents/GroupAndLeaderboard.tsx [Server Component]
+    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component] 
+[36m[browser][39m ./apps/frontend/src/components/pageContents/GroupLeaderBoard.tsx:62:68
+Expected '</', got '}'
+  60 |                             <TableCell className="text-center">{idx + 1}</TableCell>
+  61 |                             <TableCell className="text-center">{s.username}</TableCell>
+> 62 |                             <TableCell className="text-center"> {s.}</TableCell>
+     |                                                                    ^
+  63 |                             <TableCell className="text-center">{s?.id ?? 0}</TableCell>
+  64 |                             <TableCell className="text-center">{s?.id ?? 0}</TableCell>
+  65 |                         </TableRow>)
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./apps/frontend/src/components/pageContents/GroupLeaderBoard.tsx [Client Component Browser]
+    ./apps/frontend/src/components/pageContents/GroupAndLeaderboard.tsx [Client Component Browser]
+    ./apps/frontend/src/components/pageContents/GroupAndLeaderboard.tsx [Server Component]
+    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/frontend/src/components/pageContents/GroupLeaderBoard.tsx [Client Component SSR]
+    ./apps/frontend/src/components/pageContents/GroupAndLeaderboard.tsx [Client Component SSR]
+    ./apps/frontend/src/components/pageContents/GroupAndLeaderboard.tsx [Server Component]
+    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component] 
+[36m[browser][39m ./apps/frontend/src/components/pageContents/GroupLeaderBoard.tsx:62:68
+Expected '</', got '}'
+  60 |                             <TableCell className="text-center">{idx + 1}</TableCell>
+  61 |                             <TableCell className="text-center">{s.username}</TableCell>
+> 62 |                             <TableCell className="text-center"> {s.}</TableCell>
+     |                                                                    ^
+  63 |                             <TableCell className="text-center">{s?.id ?? 0}</TableCell>
+  64 |                             <TableCell className="text-center">{s?.id ?? 0}</TableCell>
+  65 |                         </TableRow>)
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./apps/frontend/src/components/pageContents/GroupLeaderBoard.tsx [Client Component Browser]
+    ./apps/frontend/src/components/pageContents/GroupAndLeaderboard.tsx [Client Component Browser]
+    ./apps/frontend/src/components/pageContents/GroupAndLeaderboard.tsx [Server Component]
+    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/frontend/src/components/pageContents/GroupLeaderBoard.tsx [Client Component SSR]
+    ./apps/frontend/src/components/pageContents/GroupAndLeaderboard.tsx [Client Component SSR]
+    ./apps/frontend/src/components/pageContents/GroupAndLeaderboard.tsx [Server Component]
+    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component] 
+ GET /groups/cmnoh0p550000u8v2nihbtf1o [32m200[39m in 35ms[2m (next.js: 9ms, application-code: 26ms)[22m
+ GET /groups/cmnoh0p550000u8v2nihbtf1o [32m200[39m in 75ms[2m (next.js: 6ms, application-code: 69ms)[22m
+[32m[1m✓[22m[39m Compiled in 25ms
+[32m[1m✓[22m[39m Compiled in 22ms
+[32m[1m✓[22m[39m Compiled in 22ms
+ GET /groups/cmnoh0p550000u8v2nihbtf1o [32m200[39m in 365ms[2m (next.js: 9ms, application-code: 356ms)[22m
+[31m[1m⨯[22m[39m Error [AggregateError]: 
+    at async queryFn (src/components/pageContents/GroupAndLeaderboard.tsx:22:25)
+  [90m20 |[0m         queryKey: [[32m"group"[0m, groupId],
+  [90m21 |[0m         queryFn: [36masync[0m () => {
+[31m[1m>[0m [90m22 |[0m             [36mconst[0m res = [36mawait[0m axios.get([32m`[0m${[33mAPI[0m[32m}/group/[0m${groupId[32m}`[0m, { headers: { [33mAuthorization[0m: [32m`Bearer [0m${token[32m}`[0m } });
+  [90m   |[0m                         [31m[1m^[0m
+  [90m23 |[0m             [36mreturn[0m res.data;
+  [90m24 |[0m         },
+  [90m25 |[0m     }) {
+  isAxiosError: [33mtrue[39m,
+  code: [32m'ECONNREFUSED'[39m,
+  config: {
+    transitional: {
+      silentJSONParsing: [33mtrue[39m,
+      forcedJSONParsing: [33mtrue[39m,
+      clarifyTimeoutError: [33mfalse[39m,
+      legacyInterceptorReqResOrdering: [33mtrue[39m
+    },
+    adapter: [ [32m'xhr'[39m, [32m'http'[39m, [32m'fetch'[39m ],
+    transformRequest: [ [36m[Function: transformRequest][39m ],
+    transformResponse: [ [36m[Function: transformResponse][39m ],
+    timeout: [33m0[39m,
+    xsrfCookieName: [32m'XSRF-TOKEN'[39m,
+    xsrfHeaderName: [32m'X-XSRF-TOKEN'[39m,
+    maxContentLength: [33m-1[39m,
+    maxBodyLength: [33m-1[39m,
+    env: { FormData: [36m[Function][39m, Blob: [36m[class Blob][39m },
+    validateStatus: [36m[Function: validateStatus][39m,
+    headers: Object [AxiosHeaders] {
+      Accept: [32m'application/json, text/plain, */*'[39m,
+      [32m'Content-Type'[39m: [90mundefined[39m,
+      Authorization: [32m'Bearer null'[39m,
+      [32m'User-Agent'[39m: [32m'axios/1.14.0'[39m,
+      [32m'Accept-Encoding'[39m: [32m'gzip, compress, deflate, br'[39m
+    },
+    method: [32m'get'[39m,
+    url: [32m'http://localhost:3002/group/cmnoh0p550000u8v2nihbtf1o'[39m,
+    allowAbsoluteUrls: [33mtrue[39m,
+    data: [90mundefined[39m
+  },
+  request: [36m<ref *1>[39m Writable {
+    _e

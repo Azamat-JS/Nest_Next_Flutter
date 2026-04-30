@@ -328,6 +328,23 @@ export class StudentScoreRepository {
             orderBy: {
                 total: 'desc',
             },
+            select: {
+                studentId: true,
+                total: true,
+                homework: true,
+                attendance: true,
+                groupId: true,
+                student: {
+                    select: {
+                        username: true,
+                    }
+                },
+                group: {
+                    select: {
+                        name: true,
+                    }
+                }
+            }
         });
         return {
             data: students,
