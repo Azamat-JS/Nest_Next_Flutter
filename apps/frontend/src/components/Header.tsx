@@ -8,7 +8,7 @@ const navLinks = [
     { name: 'Users', href: '/home' },
     { name: 'Groups', href: '/groups' },
     { name: 'Profile', href: '/profile' },
-    { name: 'Cart', href: '/#' },
+    { name: 'Leaderboard', href: '/leaderboard' },
 ]
 
 export const Header = () => {

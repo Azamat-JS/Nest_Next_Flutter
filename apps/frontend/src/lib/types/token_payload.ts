@@ -7,12 +7,11 @@ export type TokenPayload = {
 }
 
 export type LeaderBoardType = {
-    studentId: string;
-    groupId: string;
     total: number;
     attendance: number;
     homework: number;
-    student: { username: string }
+    student: { username: string };
+    group?: { name: string };
 }
 
 

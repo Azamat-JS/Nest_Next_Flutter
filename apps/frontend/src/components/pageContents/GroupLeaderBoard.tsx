@@ -3,7 +3,7 @@
 import { useAuthStore } from "@/lib/stores/authStore";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import {
     Table,
     TableBody,
@@ -18,7 +18,6 @@ import { PaginationType } from "@/lib/types/groups";
 
 
 const GroupLeaderBoard = ({ groupId }: { groupId: string }) => {
-    const router = useRouter();
     const searchParams = useSearchParams();
     const page = Number(searchParams.get('page') ?? 1);
     const limit = Number(searchParams.get('limit') ?? 10);

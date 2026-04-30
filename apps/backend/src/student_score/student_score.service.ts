@@ -296,6 +296,21 @@ export class StudentScoreRepository {
             orderBy: {
                 total: 'desc',
             },
+            select: {
+                total: true,
+                homework: true,
+                attendance: true,
+                student: {
+                    select: {
+                        username: true,
+                    }
+                },
+                group: {
+                    select: {
+                        name: true,
+                    }
+                }
+            }
         })
 
 
@@ -329,11 +344,9 @@ export class StudentScoreRepository {
                 total: 'desc',
             },
             select: {
-                studentId: true,
                 total: true,
                 homework: true,
                 attendance: true,
-                groupId: true,
                 student: {
                     select: {
                         username: true,
