@@ -3,7 +3,7 @@ import 'package:mobile/core/errors/failures.dart';
 import 'package:mobile/features/leaderboard/domain/entity/leaderboard_entity.dart';
 
 abstract interface class LeaderboardRepository {
-  Future<Either<Failure, LeaderboardEntity>> getGroupLeaderboard({
+  Future<Either<Failure, LeaderBoardPage>> getGroupLeaderboard({
     required String groupId,
     required int page,
     required int limit,

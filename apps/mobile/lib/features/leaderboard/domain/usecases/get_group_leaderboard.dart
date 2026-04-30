@@ -5,12 +5,12 @@ import 'package:mobile/features/leaderboard/domain/entity/leaderboard_entity.dar
 import 'package:mobile/features/leaderboard/domain/repository/leaderboard_repo.dart';
 
 class GetGroupLeaderBoardUsecase
-    implements Usecase<LeaderboardEntity, GroupLeaderBoardParams> {
+    implements Usecase<LeaderBoardPage, GroupLeaderBoardParams> {
   final LeaderboardRepository leaderboardRepository;
   const GetGroupLeaderBoardUsecase(this.leaderboardRepository);
 
   @override
-  Future<Either<Failure, LeaderboardEntity>> call(
+  Future<Either<Failure, LeaderBoardPage>> call(
     GroupLeaderBoardParams params,
   ) async {
     return leaderboardRepository.getGroupLeaderboard(
