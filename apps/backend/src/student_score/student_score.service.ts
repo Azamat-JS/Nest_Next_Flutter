@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { ScoreDto, UpdateScoreDto } from './dto/score.dto';
 import { Prisma } from '@prisma/client/scripts/default-index.js';
@@ -293,6 +293,27 @@ export class StudentScoreRepository {
         return this.prisma.studentScore.findMany({
             take: dto.limit,
             skip,
+            orderBy: {
+                total: 'desc',
+            },
+        })
+    }
+
+    async groupLeadeboard(groupId: string, dto: PaginationDto) {
+        const { limit = 10, page = 1 } = dto;
+        const skip = (page - 1) * limit;
+        const group = await this.prisma.groups.findUnique({
+            where: { id: groupId },
+        });
+
+        if (!group) throw new NotFoundException(`Group not found: ${groupId}`)
+
+        return await this.prisma.studentScore.findMany({
+            take: dto.limit,
+            skip,
+            where: {
+                groupId,
+            },
             orderBy: {
                 total: 'desc',
             },
