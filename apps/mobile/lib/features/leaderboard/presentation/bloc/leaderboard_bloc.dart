@@ -24,7 +24,6 @@ class LeaderboardBloc extends Bloc<LeaderboardEvent, LeaderboardState> {
     on<LoadMoreGroupLeaderboardEvent>(_onLoadMoreGroup);
   }
 
-  /// 🔹 INITIAL GLOBAL FETCH
   void _onFetchGlobal(
     FetchGlobalLeaderboardEvent event,
     Emitter<LeaderboardState> emit,
@@ -43,7 +42,6 @@ class LeaderboardBloc extends Bloc<LeaderboardEvent, LeaderboardState> {
     );
   }
 
-  /// 🔹 INITIAL GROUP FETCH
   void _onFetchGroup(
     FetchGroupLeaderboardEvent event,
     Emitter<LeaderboardState> emit,
@@ -64,7 +62,6 @@ class LeaderboardBloc extends Bloc<LeaderboardEvent, LeaderboardState> {
     );
   }
 
-  /// 🔹 LOAD MORE GLOBAL
   void _onLoadMoreGlobal(
     LoadMoreGlobalLeaderboardEvent event,
     Emitter<LeaderboardState> emit,
@@ -96,7 +93,6 @@ class LeaderboardBloc extends Bloc<LeaderboardEvent, LeaderboardState> {
     });
   }
 
-  /// 🔹 LOAD MORE GROUP
   void _onLoadMoreGroup(
     LoadMoreGroupLeaderboardEvent event,
     Emitter<LeaderboardState> emit,
@@ -132,7 +128,6 @@ class LeaderboardBloc extends Bloc<LeaderboardEvent, LeaderboardState> {
     });
   }
 
-  /// 🔥 SAME IDEA AS YOUR GROUP MERGE
   LeaderBoardPage _merge(LeaderBoardPage old, LeaderBoardPage next) {
     return LeaderBoardPage(
       data: [...old.data, ...next.data],

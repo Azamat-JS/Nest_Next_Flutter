@@ -4,7 +4,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useAuthStore } from "@/lib/stores/authStore";
 import { GroupType, PaginationType } from "@/lib/types/groups";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 import { LeaderBoardType } from "@/lib/types/token_payload";
 import {
@@ -16,8 +16,27 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
+import {
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select"
+import { Field, FieldLabel, } from "@/components/ui/field"
+
+import {
+    Pagination,
+    PaginationContent,
+    PaginationItem,
+    PaginationLink,
+    PaginationNext,
+    PaginationPrevious,
+} from "@/components/ui/pagination"
 
 const LeaderBoardContent = () => {
+    const router = useRouter();
     const searchParams = useSearchParams();
     const page = Number(searchParams.get('page') ?? 1);
     const limit = Number(searchParams.get('limit') ?? 10);
@@ -95,7 +114,57 @@ const LeaderBoardContent = () => {
                     })}
                 </TableBody>
             </Table>
+
+
+            {/* pagination */}
+            <div className="grid grid-cols-2 items-center mt-4">
+
+                <div className="flex justify-center">
+                    <Field orientation="horizontal" className="w-fit">
+                        <FieldLabel htmlFor="select-rows-per-page">Rows per page</FieldLabel>
+                        <Select value={String(limit)} onValueChange={(val) => {
+                            const params = new URLSearchParams(searchParams.toString());
+                            params.set('limit', val);
+                            params.set('page', '1');
+                            router.push(`?${params.toString()}`);
+                        }}>
+                            <SelectTrigger className="w-20" id="select-rows-per-page">
+                                <SelectValue />
+                            </SelectTrigger>
+                            <SelectContent align="start">
+                                <SelectGroup>
+                                    <SelectItem value="5" >5</SelectItem>
+                                    <SelectItem value="10">10</SelectItem>
+                                    <SelectItem value="15">15</SelectItem>
+                                    <SelectItem value="20">20</SelectItem>
+                                </SelectGroup>
+                            </SelectContent>
+                        </Select>
+                    </Field>
+                </div>
+                <div className="flex justify-end">
+                    <Pagination>
+                        <PaginationContent>
+                            <PaginationItem>
+                                <PaginationPrevious href={`?page=${Math.max(1, page - 1)}&limit=${limit}`} />
+                            </PaginationItem>
+                            {Array.from({ length: lastPage }).map((_, idx) => (
+                                <PaginationItem key={idx}>
+                                    <PaginationLink href={`?page=${idx + 1}&limit=${limit}`} isActive={page === idx + 1}>{idx + 1}</PaginationLink>
+                                </PaginationItem>
+                            )
+                            )}
+
+                            <PaginationItem>
+                                <PaginationNext href={`?page=${Math.min(lastPage, page + 1)}&limit=${limit}`} />
+                            </PaginationItem>
+                        </PaginationContent>
+                    </Pagination>
+                </div>
+            </div>
         </div>
+
+
     )
 }
 

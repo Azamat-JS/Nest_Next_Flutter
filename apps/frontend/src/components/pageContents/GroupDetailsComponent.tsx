@@ -22,7 +22,6 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Menu, Edit, Trash } from 'lucide-react';
 import { Input } from "@/components/ui/input"
-import { Badge } from '../ui/badge';
 import { TokenPayload } from '@/lib/types/token_payload';
 import AddScoreDrawer from '../AddScoreDrawer';
 import { useSuspenseQuery } from '@tanstack/react-query';
@@ -58,7 +57,6 @@ import {
     PaginationNext,
     PaginationPrevious,
 } from "@/components/ui/pagination"
-import GroupLeaderBoard from './GroupLeaderBoard';
 
 type UpdateScorePayload = {
     studentId: string;
@@ -85,7 +83,6 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
     const [openCreate, setOpenCreate] = useState(false);
     const [openUpdate, setOpenUpdate] = useState(false);
     const [openDelete, setOpenDelete] = useState(false);
-    const [openLeaderBoard, setOpenLeaderBoard] = useState(false);
     const [openAddStudents, setOpenAddStudents] = useState(false);
     const [newStudentIds, setNewStudentIds] = useState<string[]>([]);
     const [selectedStudent, setSelectedStudent] = useState<TokenPayload | null>(null);

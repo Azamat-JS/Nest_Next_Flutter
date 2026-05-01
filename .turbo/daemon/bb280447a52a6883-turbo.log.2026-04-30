@@ -1581,3 +1581,14 @@
 2026-04-30T16:00:12.899281Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
 2026-04-30T16:00:23.599870Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/mobile/lib/features/leaderboard/presentation/bloc/leaderboard_bloc.dart")}
 2026-04-30T16:00:23.599881Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2026-04-30T16:00:41.998934Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/frontend/.next/dev/lock"), AnchoredSystemPathBuf("apps/backend/.turbo/turbo-dev.log")}
+2026-04-30T16:00:41.998941Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("frontend"), path: AnchoredSystemPathBuf("apps/frontend") }, WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-04-30T16:00:41.998980Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2026-04-30T16:00:42.046972Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2026-04-30T16:00:42.099515Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/frontend/.turbo/turbo-dev.log"), AnchoredSystemPathBuf("apps/frontend/.next/dev/_events_4073.json"), AnchoredSystemPathBuf("apps/frontend/.next/dev/trace")}
+2026-04-30T16:00:42.099522Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("frontend"), path: AnchoredSystemPathBuf("apps/frontend") }}))
+2026-04-30T16:00:42.798448Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/frontend/.next/dev/_events_4073.json")}
+2026-04-30T16:00:42.798455Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("frontend"), path: AnchoredSystemPathBuf("apps/frontend") }}))
+2026-04-30T16:00:42.798491Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2026-04-30T16:04:37.601654Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/mobile/lib/features/leaderboard/presentation/bloc/leaderboard_bloc.dart")}
+2026-04-30T16:04:37.601667Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
