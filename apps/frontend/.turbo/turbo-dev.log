@@ -121,4 +121,177 @@
       maxRedirects: [33m21[39m,
       maxBodyLength: [33mInfinity[39m,
       protocol: [32m'http:'[39m,
-      path: [32m'/group/all?page=2&limit=5'
+      path: [32m'/group/all?page=2&limit=5'[39m,
+      method: [32m'GET'[39m,
+      headers: [36m[Object: null prototype][39m,
+      agents: [36m[Object][39m,
+      auth: [90mundefined[39m,
+      family: [90mundefined[39m,
+      beforeRedirect: [36m[Function: dispatchBeforeRedirect][39m,
+      beforeRedirects: [36m[Object][39m,
+      http2Options: [90mundefined[39m,
+      hostname: [32m'localhost'[39m,
+      port: [32m'3002'[39m,
+      agent: [90mundefined[39m,
+      nativeProtocols: [36m[Object][39m,
+      pathname: [32m'/group/all'[39m,
+      search: [32m'?page=2&limit=5'[39m
+    },
+    _ended: [33mtrue[39m,
+    _ending: [33mtrue[39m,
+    _redirectCount: [33m0[39m,
+    _redirects: [],
+    _requestBodyLength: [33m0[39m,
+    _requestBodyBuffers: [],
+    _eventsCount: [33m3[39m,
+    _onNativeResponse: [36m[Function (anonymous)][39m,
+    _currentRequest: ClientRequest {
+      _events: [36m[Object: null prototype][39m,
+      _eventsCount: [33m7[39m,
+      _maxListeners: [90mundefined[39m,
+      outputData: [],
+      outputSize: [33m0[39m,
+      writable: [33mtrue[39m,
+      destroyed: [33mfalse[39m,
+      _last: [33mtrue[39m,
+      chunkedEncoding: [33mfalse[39m,
+      shouldKeepAlive: [33mtrue[39m,
+      maxRequestsOnConnectionReached: [33mfalse[39m,
+      _defaultKeepAlive: [33mtrue[39m,
+      useChunkedEncodingByDefault: [33mfalse[39m,
+      sendDate: [33mfalse[39m,
+      _removedConnection: [33mfalse[39m,
+      _removedContLen: [33mfalse[39m,
+      _removedTE: [33mfalse[39m,
+      strictContentLength: [33mfalse[39m,
+      _contentLength: [33m0[39m,
+      _hasBody: [33mtrue[39m,
+      _trailer: [32m''[39m,
+      finished: [33mtrue[39m,
+      _headerSent: [33mtrue[39m,
+      _closed: [33mfalse[39m,
+      socket: [36m[Socket][39m,
+      _header: [32m'GET /group/all?page=2&limit=5 HTTP/1.1\r\n'[39m +
+        [32m'Accept: application/json, text/plain, */*\r\n'[39m +
+        [32m'Authorization: Bearer null\r\n'[39m +
+        [32m'User-Agent: axios/1.14.0\r\n'[39m +
+        [32m'Accept-Encoding: gzip, compress, deflate, br\r\n'[39m +
+        [32m'Host: localhost:3002\r\n'[39m +
+        [32m'Connection: keep-alive\r\n'[39m +
+        [32m'\r\n'[39m,
+      _keepAliveTimeout: [33m0[39m,
+      _onPendingData: [36m[Function: nop][39m,
+      agent: [36m[Agent][39m,
+      socketPath: [90mundefined[39m,
+      method: [32m'GET'[39m,
+      maxHeaderSize: [90mundefined[39m,
+      insecureHTTPParser: [90mundefined[39m,
+      joinDuplicateHeaders: [90mundefined[39m,
+      path: [32m'/group/all?page=2&limit=5'[39m,
+      _ended: [33mfalse[39m,
+      res: [1mnull[22m,
+      aborted: [33mfalse[39m,
+      timeoutCb: [36m[Function: emitRequestTimeout][39m,
+      upgradeOrConnect: [33mfalse[39m,
+      parser: [1mnull[22m,
+      maxHeadersCount: [1mnull[22m,
+      reusedSocket: [33mfalse[39m,
+      host: [32m'localhost'[39m,
+      protocol: [32m'http:'[39m,
+      _redirectable: [36m[Circular *1][39m,
+      [[32mSymbol(shapeMode)[39m]: [33mfalse[39m,
+      [[32mSymbol(kCapture)[39m]: [33mfalse[39m,
+      [[32mSymbol(kBytesWritten)[39m]: [33m0[39m,
+      [[32mSymbol(kNeedDrain)[39m]: [33mfalse[39m,
+      [[32mSymbol(corked)[39m]: [33m0[39m,
+      [[32mSymbol(kOutHeaders)[39m]: [36m[Object: null prototype][39m,
+      [[32mSymbol(errored)[39m]: [1mnull[22m,
+      [[32mSymbol(kHighWaterMark)[39m]: [33m16384[39m,
+      [[32mSymbol(kRejectNonStandardBodyWrites)[39m]: [33mfalse[39m,
+      [[32mSymbol(kUniqueHeaders)[39m]: [1mnull[22m
+    },
+    _currentUrl: [32m'http://localhost:3002/group/all?page=2&limit=5'[39m,
+    _timeout: [1mnull[22m,
+    [[32mSymbol(shapeMode)[39m]: [33mtrue[39m,
+    [[32mSymbol(kCapture)[39m]: [33mfalse[39m
+  },
+  digest: [32m'673705615'[39m,
+  [cause]: AggregateError: 
+      at [3mignore-listed frames[23m {
+    code: [32m'ECONNREFUSED'[39m,
+    [errors]: [ [36m[Error][39m, [36m[Error][39m ]
+  }
+}
+ GET /groups?page=2&limit=5 [32m200[39m in 170ms[2m (next.js: 1607µs, application-code: 169ms)[22m
+[36m[browser][39m [31mUncaught Error: Switched to client rendering because the server rendering errored:
+
+[39m
+[31m    at async queryFn (src/components/pageContents/Group.tsx:83:25)[39m
+  [90m81 |[0m         queryKey: [[32m'groups'[0m, page, limit],
+  [90m82 |[0m         queryFn: [36masync[0m () => {
+[31m[1m>[0m [90m83 |[0m             [36mconst[0m res = [36mawait[0m axios.get([32m`[0m${[33mAPI[0m[32m}/group/all?page=[0m${page[32m}&limit=[0m${limit[32m}`[0m, { headers: { [33mAuthorization[0m: [32m`Bearer [0m${token[32m}`[0m } })
+  [90m   |[0m                         [31m[1m^[0m
+  [90m84 |[0m             [36mreturn[0m res.data
+  [90m85 |[0m         },
+  [90m86 |[0m         staleTime: [35m1000[0m * [35m60[0m * [35m5[0m,
+ GET /groups?page=2&limit=5 [32m200[39m in 101ms[2m (next.js: 6ms, application-code: 95ms)[22m
+ GET /groups?page=1&limit=5 [32m200[39m in 26ms[2m (next.js: 3ms, application-code: 23ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 61ms[2m (next.js: 32ms, application-code: 29ms)[22m
+ GET /leaderboard [32m200[39m in 27ms[2m (next.js: 5ms, application-code: 22ms)[22m
+ GET /leaderboard?page=2&limit=10 [32m200[39m in 26ms[2m (next.js: 6ms, application-code: 19ms)[22m
+ GET /leaderboard?page=1&limit=10 [32m200[39m in 25ms[2m (next.js: 6ms, application-code: 19ms)[22m
+ GET /leaderboard?page=2&limit=10 [32m200[39m in 14ms[2m (next.js: 3ms, application-code: 12ms)[22m
+ GET /leaderboard?page=1&limit=10 [32m200[39m in 25ms[2m (next.js: 4ms, application-code: 21ms)[22m
+ GET /leaderboard?page=1&limit=5 [32m200[39m in 26ms[2m (next.js: 3ms, application-code: 23ms)[22m
+ GET /leaderboard?page=2&limit=5 [32m200[39m in 11ms[2m (next.js: 1279µs, application-code: 9ms)[22m
+ GET /leaderboard?page=3&limit=5 [32m200[39m in 25ms[2m (next.js: 3ms, application-code: 21ms)[22m
+ GET /leaderboard?page=4&limit=5 [32m200[39m in 15ms[2m (next.js: 2ms, application-code: 13ms)[22m
+ GET /leaderboard?page=1&limit=5 [32m200[39m in 24ms[2m (next.js: 4ms, application-code: 20ms)[22m
+ GET /leaderboard?page=2&limit=5 [32m200[39m in 23ms[2m (next.js: 4ms, application-code: 19ms)[22m
+ GET /leaderboard?page=3&limit=5 [32m200[39m in 24ms[2m (next.js: 4ms, application-code: 20ms)[22m
+ GET /leaderboard?page=4&limit=5 [32m200[39m in 23ms[2m (next.js: 4ms, application-code: 20ms)[22m
+ GET /leaderboard?page=1&limit=5 [32m200[39m in 24ms[2m (next.js: 3ms, application-code: 21ms)[22m
+ GET /leaderboard?page=1&limit=20 [32m200[39m in 25ms[2m (next.js: 4ms, application-code: 20ms)[22m
+ GET /leaderboard?page=1&limit=15 [32m200[39m in 24ms[2m (next.js: 3ms, application-code: 20ms)[22m
+ GET /leaderboard?page=1&limit=10 [32m200[39m in 31ms[2m (next.js: 4ms, application-code: 27ms)[22m
+[32m[1m✓[22m[39m Compiled in 21ms
+[
+  {
+    total: [33m560[39m,
+    homework: [33m350[39m,
+    attendance: [33m210[39m,
+    student: { username: [32m'Jamol'[39m },
+    group: { name: [32m'Group5'[39m }
+  },
+  {
+    total: [33m530[39m,
+    homework: [33m320[39m,
+    attendance: [33m210[39m,
+    student: { username: [32m'Javlon'[39m },
+    group: { name: [32m'Group5'[39m }
+  },
+  {
+    total: [33m520[39m,
+    homework: [33m310[39m,
+    attendance: [33m210[39m,
+    student: { username: [32m'Alibek'[39m },
+    group: { name: [32m'Group5'[39m }
+  },
+  {
+    total: [33m510[39m,
+    homework: [33m300[39m,
+    attendance: [33m210[39m,
+    student: { username: [32m'Jasurbek'[39m },
+    group: { name: [32m'Group5'[39m }
+  },
+  {
+    total: [33m510[39m,
+    homework: [33m330[39m,
+    attendance: [33m180[39m,
+    student: { username: [32m'odil'[39m },
+    group: { name: [32m'Group5'[39m }
+  },
+  {
+    total: [33m470[39m,
+    homework: [33m290[39m,
+    attendance:

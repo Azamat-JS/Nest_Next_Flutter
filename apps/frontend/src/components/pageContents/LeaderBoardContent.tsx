@@ -52,7 +52,6 @@ const LeaderBoardContent = () => {
             return res.data;
         },
     })
-    const group: GroupType = data;
 
 
     const { data: studentsScoreData } = useSuspenseQuery({
@@ -79,6 +78,7 @@ const LeaderBoardContent = () => {
     const studentsScores: LeaderBoardType[] = studentsScoreData.data.length > 0 ? studentsScoreData.data : [];
     const meta: PaginationType = studentsScoreData?.meta ?? {}
     const lastPage = meta?.last_page ?? 1;
+    console.log(studentsScores)
 
     console.log(lastPage)
 
@@ -90,7 +90,7 @@ const LeaderBoardContent = () => {
 
             <Table>
                 <TableCaption className="text-center font-bold text-lg">
-                    Showing {studentsScoreData.length} of {meta?.total ?? 0} students
+                    Showing {studentsScores.length} of {meta?.total ?? 0} students
                 </TableCaption>
                 <TableHeader>
                     <TableRow>
