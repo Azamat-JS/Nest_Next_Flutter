@@ -290,36 +290,38 @@ export class StudentScoreRepository {
     async leaderboard(dto: PaginationDto) {
         const { limit = 10, page = 1 } = dto;
         const skip = (page - 1) * limit;
-        const students = await this.prisma.studentScore.findMany({
-            take: dto.limit,
-            skip,
-            orderBy: {
-                total: 'desc',
-            },
-            select: {
-                total: true,
-                homework: true,
-                attendance: true,
-                student: {
-                    select: {
-                        username: true,
-                    }
+        const [data, total] = await Promise.all([
+            this.prisma.studentScore.findMany({
+                take: dto.limit,
+                skip,
+                orderBy: {
+                    total: 'desc',
                 },
-                group: {
-                    select: {
-                        name: true,
+                select: {
+                    total: true,
+                    homework: true,
+                    attendance: true,
+                    student: {
+                        select: {
+                            username: true,
+                        }
+                    },
+                    group: {
+                        select: {
+                            name: true,
+                        }
                     }
                 }
-            }
-        })
-
+            }),
+            this.prisma.studentScore.count(),
+        ])
 
         return {
-            data: students,
+            data,
             meta: {
-                total: students.length,
+                total,
                 page,
-                last_page: Math.ceil(students.length / limit),
+                last_page: Math.ceil(total / limit),
                 limit
             }
         }

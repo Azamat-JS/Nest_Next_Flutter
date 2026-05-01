@@ -80,6 +80,8 @@ const LeaderBoardContent = () => {
     const meta: PaginationType = studentsScoreData?.meta ?? {}
     const lastPage = meta?.last_page ?? 1;
 
+    console.log(lastPage)
+
     return (
         <div className='flex flex-col w-full'>
             <header className='flex items-center gap-6 justify-center text-center mb-4'>
@@ -154,7 +156,6 @@ const LeaderBoardContent = () => {
                                 </PaginationItem>
                             )
                             )}
-
                             <PaginationItem>
                                 <PaginationNext href={`?page=${Math.min(lastPage, page + 1)}&limit=${limit}`} />
                             </PaginationItem>
