@@ -4,6 +4,7 @@ import 'package:mobile/core/di/service_locator.dart';
 import 'package:mobile/features/groups/presentation/bloc/group/group_bloc.dart';
 import 'package:mobile/features/groups/presentation/bloc/students/group_students_bloc.dart';
 import 'package:mobile/features/groups/presentation/widgets/student_card.dart';
+import 'package:mobile/features/leaderboard/presentation/pages/group_leaderboard_page.dart';
 import 'package:mobile/features/student_scores/presentation/bloc/one_student_score_bloc.dart';
 import 'package:mobile/features/student_scores/presentation/bloc/student_score_bloc.dart';
 import 'package:mobile/features/student_scores/presentation/pages/student_scores_page.dart';
@@ -113,6 +114,11 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
                           ),
                         );
                       },
+                    ),
+                    const SizedBox(height: 20),
+                    GroupLeaderboardPage(
+                      groupId: widget.groupId,
+                      groupName: state.selectedGroup!.name,
                     ),
                   ],
                 );

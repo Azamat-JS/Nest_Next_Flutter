@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mobile/features/leaderboard/presentation/bloc/leaderboard_bloc.dart';
+import 'package:mobile/features/leaderboard/domain/entity/leaderboard_entity.dart';
 import 'package:mobile/features/leaderboard/presentation/widgets/leaderboard_row.dart';
 
 class GroupLeaderboardPage extends StatelessWidget {
-  final String groupId;
+  final List<LeaderboardEntity> data;
   final String groupName;
   const GroupLeaderboardPage({
     super.key,
-    required this.groupId,
+    required this.data,
     required this.groupName,
   });
 
@@ -18,28 +17,13 @@ class GroupLeaderboardPage extends StatelessWidget {
       children: [
         Text('$groupName Leaderboard'),
         _buildHeader(),
-        Expanded(
-          child: BlocBuilder<LeaderboardBloc, LeaderboardState>(
-            builder: (context, state) {
-              final leaderboard = state.groupLeaderboard;
-              if (state.isLoading && leaderboard == null) {
-                return const Center(
-                  child: CircularProgressIndicator.adaptive(),
-                );
-              }
-              if (leaderboard == null) {
-                return const Center(child: Text('No leaderboard'));
-              }
-              return ListView.builder(
-                itemCount: leaderboard.data.length,
-                itemBuilder: (context, index) {
-                  final student = leaderboard.data[index];
-                  return LeaderboardRow(student: student, index: index);
-                },
-                cacheExtent: 500,
-              );
-            },
-          ),
+        ListView.builder(
+          itemCount: data.length,
+          itemBuilder: (context, index) {
+            final student = data[index];
+            return LeaderboardRow(student: student, index: index);
+          },
+          cacheExtent: 500,
         ),
       ],
     );
