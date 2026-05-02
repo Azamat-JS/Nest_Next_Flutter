@@ -6,6 +6,7 @@ import 'package:mobile/features/groups/presentation/bloc/students/group_students
 import 'package:mobile/features/groups/presentation/widgets/student_card.dart';
 import 'package:mobile/features/leaderboard/presentation/bloc/leaderboard_bloc.dart';
 import 'package:mobile/features/leaderboard/presentation/pages/group_leaderboard_page.dart';
+import 'package:mobile/features/leaderboard/presentation/widgets/leaderboard_row.dart';
 import 'package:mobile/features/student_scores/presentation/bloc/one_student_score_bloc.dart';
 import 'package:mobile/features/student_scores/presentation/bloc/student_score_bloc.dart';
 import 'package:mobile/features/student_scores/presentation/pages/student_scores_page.dart';
@@ -22,6 +23,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
   @override
   void initState() {
     super.initState();
+    context.read<GroupBloc>().add(FetchGroupById(widget.groupId));
     context.read<GroupStudentsBloc>().add(
       FetchGroupStudents(widget.groupId, 1, 10),
     );
@@ -33,125 +35,145 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Group Details')),
+    final group = context.select((GroupBloc bloc) => bloc.state.selectedGroup);
+    final studentState = context.watch<GroupStudentsBloc>().state;
+    final leaderboardState = context.watch<LeaderboardBloc>().state;
+    final scoreState = context.watch<StudentScoreBloc>().state;
 
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 16.0),
-        child: BlocBuilder<GroupStudentsBloc, GroupStudentsState>(
-          builder: (context, state) {
-            final studentState = state.students;
-            if (state.isLoading && studentState == null) {
-              return const Center(child: CircularProgressIndicator.adaptive());
-            }
-            if (studentState == null) {
-              return const Center(child: Text('No students'));
-            }
-            final students = studentState.data;
-            return BlocBuilder<GroupBloc, GroupState>(
-              builder: (context, state) {
-                if (state.selectedGroup == null) {
-                  return const Text('No group loaded');
-                }
-                return SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Teacher: ${state.selectedGroup?.teacher?.username ?? "Unknown"}',
+    final students = studentState.students?.data ?? [];
+    final leaderboard = leaderboardState.groupLeaderboard?.data ?? [];
+    final scores = {for (final s in scoreState.studentScores) s.studentId: s};
+
+    if (group == null || studentState.students == null) {
+      return const Scaffold(
+        body: Center(child: CircularProgressIndicator.adaptive()),
+      );
+    }
+
+    return Scaffold(
+      appBar: AppBar(title: Text(group.name)),
+
+      body: CustomScrollView(
+        physics: const BouncingScrollPhysics(),
+        slivers: [
+          SliverToBoxAdapter(
+            child: _GroupInfoHeader(
+              teacher: group.teacher?.username ?? 'Unknown',
+              studentCount: students.length,
+            ),
+          ),
+          const SliverToBoxAdapter(child: SizedBox(height: 12)),
+
+          SliverToBoxAdapter(
+            child: SizedBox(
+              height: 260,
+              child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                itemCount: students.length,
+                separatorBuilder: (_, idx) => const SizedBox(width: 10),
+                itemBuilder: (context, index) {
+                  final student = students[index];
+                  final score = scores[student.id];
+
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => StudentScoresPage(
+                            studentId: student.id,
+                            groupId: group.id,
+                            username: student.username,
+                          ),
+                        ),
+                      );
+                    },
+                    child: SizedBox(
+                      width: 300,
+                      child: StudentCard(
+                        student: student,
+                        homework: score?.homework ?? 0,
+                        attendance: score?.attendance ?? 0,
                       ),
-                      const SizedBox(height: 10),
-                      Text('Students: ${students.length}'),
-                      const SizedBox(height: 20),
-                      BlocBuilder<StudentScoreBloc, StudentScoreState>(
-                        builder: (context, scoreState) {
-                          final scoreMap = {
-                            for (final s in scoreState.studentScores)
-                              s.studentId: s,
-                          };
-                          return SizedBox(
-                            height: 400,
-                            child: ListView.builder(
-                              itemCount: students.length,
-                              scrollDirection: Axis.horizontal,
-                              itemBuilder: (context, index) {
-                                final student = students[index];
-                                final score = scoreMap[student.id];
-                                return GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (_) => MultiBlocProvider(
-                                          providers: [
-                                            BlocProvider(
-                                              create: (_) =>
-                                                  serviceLocator<
-                                                      OneStudentScoreBloc
-                                                    >()
-                                                    ..add(
-                                                      FetchOneStudentScores(
-                                                        student.id,
-                                                        widget.groupId,
-                                                      ),
-                                                    ),
-                                            ),
-                                          ],
-                                          child: StudentScoresPage(
-                                            groupId: widget.groupId,
-                                            studentId: student.id,
-                                            username: student.username,
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                  child: SizedBox(
-                                    width: 300,
-                                    child: StudentCard(
-                                      student: student,
-                                      homework: score?.homework ?? 0,
-                                      attendance: score?.attendance ?? 0,
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
-                          );
-                        },
-                      ),
-                      const SizedBox(height: 20),
-                      const _LeaderboardSection(),
-                    ],
-                  ),
-                );
-              },
-            );
-          },
-        ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
+          const SliverToBoxAdapter(child: SizedBox(height: 8)),
+
+          SliverPersistentHeader(
+            pinned: true,
+            delegate: _LeaderboardHeaderDelegate(),
+          ),
+          SliverList(
+            delegate: SliverChildBuilderDelegate((context, index) {
+              final student = leaderboard[index];
+              return LeaderboardRow(student: student, index: index);
+            }, childCount: leaderboard.length),
+          ),
+        ],
       ),
     );
   }
 }
 
-class _LeaderboardSection extends StatelessWidget {
-  const _LeaderboardSection();
+/// Leaderboard header delegate
+
+class _LeaderboardHeaderDelegate extends SliverPersistentHeaderDelegate {
+  @override
+  double get minExtent => 50;
+
+  @override
+  double get maxExtent => 50;
+
+  @override
+  Widget build(
+    BuildContext context,
+    double shrinkOffset,
+    bool overlapsContent,
+  ) {
+    return Container(
+      color: Colors.white,
+      padding: const EdgeInsets.symmetric(horizontal: 12),
+      child: const Row(
+        children: [
+          Expanded(flex: 1, child: Text('#')),
+          Expanded(flex: 3, child: Text('Student')),
+          Expanded(flex: 2, child: Text('HW', textAlign: TextAlign.center)),
+          Expanded(flex: 2, child: Text('Att', textAlign: TextAlign.center)),
+          Expanded(flex: 2, child: Text('Total', textAlign: TextAlign.center)),
+        ],
+      ),
+    );
+  }
+
+  @override
+  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
+    return false;
+  }
+}
+
+/// Group info header
+class _GroupInfoHeader extends StatelessWidget {
+  final String teacher;
+  final int studentCount;
+
+  const _GroupInfoHeader({required this.studentCount, required this.teacher});
 
   @override
   Widget build(BuildContext context) {
-    final group = context.select((GroupBloc bloc) => bloc.state.selectedGroup);
-    final leaderboard = context.select(
-      (LeaderboardBloc bloc) => bloc.state.groupLeaderboard,
-    );
-    if (group == null) {
-      return const Text('No group loaded');
-    }
-    if (leaderboard == null) {
-      return const Text('No leaderboard');
-    }
-    return GroupLeaderboardSection(
-      data: leaderboard.data,
-      groupName: group.name,
+    return Padding(
+      padding: const EdgeInsets.all(12),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text("Teacher: $teacher"),
+          const SizedBox(height: 6),
+          Text("Students: $studentCount"),
+        ],
+      ),
     );
   }
 }
