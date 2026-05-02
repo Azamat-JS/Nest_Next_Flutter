@@ -13,6 +13,7 @@ import 'package:mobile/features/home/presentation/pages/chat_page.dart';
 import 'package:mobile/features/home/presentation/pages/home_page.dart';
 import 'package:mobile/features/home/presentation/pages/main_screen.dart';
 import 'package:mobile/features/home/presentation/pages/profile_page.dart';
+import 'package:mobile/features/leaderboard/presentation/bloc/leaderboard_bloc.dart';
 import 'package:mobile/features/student_scores/presentation/bloc/student_score_bloc.dart';
 import 'package:mobile/features/student_scores/presentation/pages/student_scores_page.dart';
 
@@ -91,18 +92,11 @@ final GoRouter appRouter = GoRouter(
           providers: [
             BlocProvider(
               create: (_) =>
-                  serviceLocator<GroupStudentsBloc>()
-                    ..add(FetchGroupStudents(groupId, 1, 10)),
-            ),
-            BlocProvider(
-              create: (_) =>
                   serviceLocator<GroupBloc>()..add(FetchGroupById(groupId)),
             ),
-            BlocProvider(
-              create: (_) =>
-                  serviceLocator<StudentScoreBloc>()
-                    ..add(FetchStudentScores(groupId)),
-            ),
+            BlocProvider(create: (_) => serviceLocator<GroupStudentsBloc>()),
+            BlocProvider(create: (_) => serviceLocator<StudentScoreBloc>()),
+            BlocProvider(create: (_) => serviceLocator<LeaderboardBloc>()),
           ],
           child: GroupDetailsPage(groupId: groupId),
         );

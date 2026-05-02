@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mobile/core/di/service_locator.dart';
 import 'package:mobile/features/groups/presentation/bloc/group/group_bloc.dart';
 import 'package:mobile/features/groups/presentation/bloc/students/group_students_bloc.dart';
 import 'package:mobile/features/groups/presentation/widgets/student_card.dart';
 import 'package:mobile/features/leaderboard/presentation/bloc/leaderboard_bloc.dart';
-import 'package:mobile/features/leaderboard/presentation/pages/group_leaderboard_page.dart';
 import 'package:mobile/features/leaderboard/presentation/widgets/leaderboard_row.dart';
-import 'package:mobile/features/student_scores/presentation/bloc/one_student_score_bloc.dart';
 import 'package:mobile/features/student_scores/presentation/bloc/student_score_bloc.dart';
 import 'package:mobile/features/student_scores/presentation/pages/student_scores_page.dart';
 
@@ -23,11 +20,13 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
   @override
   void initState() {
     super.initState();
-    context.read<GroupBloc>().add(FetchGroupById(widget.groupId));
+
     context.read<GroupStudentsBloc>().add(
       FetchGroupStudents(widget.groupId, 1, 10),
     );
+
     context.read<StudentScoreBloc>().add(FetchStudentScores(widget.groupId));
+
     context.read<LeaderboardBloc>().add(
       FetchGroupLeaderboardEvent(widget.groupId, 1, 10),
     );
@@ -35,19 +34,25 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
-    final group = context.select((GroupBloc bloc) => bloc.state.selectedGroup);
+    final groupState = context.watch<GroupBloc>().state;
     final studentState = context.watch<GroupStudentsBloc>().state;
     final leaderboardState = context.watch<LeaderboardBloc>().state;
     final scoreState = context.watch<StudentScoreBloc>().state;
 
     final students = studentState.students?.data ?? [];
-    final leaderboard = leaderboardState.groupLeaderboard?.data ?? [];
     final scores = {for (final s in scoreState.studentScores) s.studentId: s};
+    final group = groupState.selectedGroup;
+
+    final leaderboardPage = leaderboardState.groupLeaderboard;
 
     if (group == null || studentState.students == null) {
       return const Scaffold(
         body: Center(child: CircularProgressIndicator.adaptive()),
       );
+    }
+
+    if (leaderboardPage == null) {
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
 
     return Scaffold(
@@ -109,9 +114,9 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
           ),
           SliverList(
             delegate: SliverChildBuilderDelegate((context, index) {
-              final student = leaderboard[index];
+              final student = leaderboardPage.data[index];
               return LeaderboardRow(student: student, index: index);
-            }, childCount: leaderboard.length),
+            }, childCount: leaderboardPage.data.length),
           ),
         ],
       ),
