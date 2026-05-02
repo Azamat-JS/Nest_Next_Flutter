@@ -15,6 +15,32 @@ class LeaderboardRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container()
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 12.0),
+      decoration: BoxDecoration(
+        color: _getRankColor().withAlpha(10),
+        border: const Border(bottom: BorderSide(color: Colors.grey)),
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            flex: 3,
+            child: Text(
+              student.username,
+              style: TextStyle(fontWeight: FontWeight.w500),
+            ),
+          ),
+          Expanded(flex: 2, child: Text('${student.homework}')),
+          Expanded(flex: 2, child: Text('${student.attendance}')),
+          Expanded(
+            flex: 2,
+            child: Text(
+              '${student.total}',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
