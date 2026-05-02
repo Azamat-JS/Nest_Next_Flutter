@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:mobile/features/leaderboard/domain/entity/leaderboard_entity.dart';
 import 'package:mobile/features/leaderboard/presentation/widgets/leaderboard_row.dart';
 
-class GroupLeaderboardPage extends StatelessWidget {
+class GroupLeaderboardSection extends StatelessWidget {
   final List<LeaderboardEntity> data;
   final String groupName;
-  const GroupLeaderboardPage({
+  const GroupLeaderboardSection({
     super.key,
     required this.data,
     required this.groupName,
@@ -17,13 +17,15 @@ class GroupLeaderboardPage extends StatelessWidget {
       children: [
         Text('$groupName Leaderboard'),
         _buildHeader(),
-        ListView.builder(
-          itemCount: data.length,
-          itemBuilder: (context, index) {
-            final student = data[index];
-            return LeaderboardRow(student: student, index: index);
-          },
-          cacheExtent: 500,
+        SizedBox(
+          height: 300,
+          child: ListView.builder(
+            itemCount: data.length,
+            itemBuilder: (context, index) {
+              final student = data[index];
+              return LeaderboardRow(student: student, index: index);
+            },
+          ),
         ),
       ],
     );
