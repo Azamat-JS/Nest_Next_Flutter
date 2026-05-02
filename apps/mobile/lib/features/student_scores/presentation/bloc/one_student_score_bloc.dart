@@ -10,8 +10,9 @@ part 'one_student_score_state.dart';
 class OneStudentScoreBloc
     extends Bloc<OneStudentScoreEvent, OneStudentScoreState> {
   final OneStudentScoreUsecase _oneStudentUseCases;
-  OneStudentScoreBloc(this._oneStudentUseCases)
-    : super(OneStudentScoreState()) {
+  OneStudentScoreBloc({required OneStudentScoreUsecase oneStudentUseCases})
+    : _oneStudentUseCases = oneStudentUseCases,
+      super(OneStudentScoreState()) {
     on<FetchOneStudentScores>(_oneFetchOneStudentScores);
   }
 

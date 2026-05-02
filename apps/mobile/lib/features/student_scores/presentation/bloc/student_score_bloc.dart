@@ -9,7 +9,9 @@ part 'student_score_state.dart';
 class StudentScoreBloc extends Bloc<StudentScoreEvent, StudentScoreState> {
   final GetTodayStudentScoresUsecase _useCases;
 
-  StudentScoreBloc(this._useCases) : super(StudentScoreState()) {
+  StudentScoreBloc({required GetTodayStudentScoresUsecase useCases})
+    : _useCases = useCases,
+      super(StudentScoreState()) {
     on<FetchStudentScores>(_onFetchStudentScores);
   }
 

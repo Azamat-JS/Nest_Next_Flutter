@@ -7,9 +7,11 @@ part 'recent_group_event.dart';
 part 'recent_group_state.dart';
 
 class RecentGroupBloc extends Bloc<RecentGroupEvent, RecentGroupState> {
-  final GetRecentGroupsUseCase useCase;
+  final GetRecentGroupsUseCase _useCase;
 
-  RecentGroupBloc(this.useCase) : super(const RecentGroupState()) {
+  RecentGroupBloc({required GetRecentGroupsUseCase useCase})
+    : _useCase = useCase,
+      super(const RecentGroupState()) {
     on<LoadRecentGroups>(_onLoad);
 
     add(LoadRecentGroups());
@@ -23,7 +25,7 @@ class RecentGroupBloc extends Bloc<RecentGroupEvent, RecentGroupState> {
       state.copyWith(isLoading: true, clearFailure: true, clearGroups: true),
     );
 
-    final res = await useCase(NoParams());
+    final res = await _useCase(NoParams());
 
     res.fold(
       (failure) {

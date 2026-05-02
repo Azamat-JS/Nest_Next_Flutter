@@ -10,8 +10,9 @@ part 'group_students_state.dart';
 class GroupStudentsBloc extends Bloc<GroupStudentsEvent, GroupStudentsState> {
   final GetGroupStudentsUsecase _groupStudentsUsecase;
 
-  GroupStudentsBloc(this._groupStudentsUsecase)
-    : super(const GroupStudentsState()) {
+  GroupStudentsBloc({required GetGroupStudentsUsecase groupStudentsUsecase})
+    : _groupStudentsUsecase = groupStudentsUsecase,
+      super(const GroupStudentsState()) {
     on<FetchGroupStudents>(_onFetchGroupStudents);
     on<LoadMoreGroupStudents>(_onLoadMoreGroupStudents);
   }

@@ -10,7 +10,9 @@ part 'group_state.dart';
 
 class GroupBloc extends Bloc<GroupEvent, GroupState> {
   final GroupUseCases _useCases;
-  GroupBloc(this._useCases) : super(GroupState()) {
+  GroupBloc({required GroupUseCases useCases})
+    : _useCases = useCases,
+      super(GroupState()) {
     on<FetchGroups>(_onFetchGroups);
     on<FetchGroupById>(_onFetchGroupById);
     on<LoadMoreGroups>(_onLoadMoreGroups);

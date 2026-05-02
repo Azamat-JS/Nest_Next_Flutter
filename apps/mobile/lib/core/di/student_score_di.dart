@@ -26,9 +26,13 @@ Future<void> initStudentScores() async {
       () => OneStudentScoreUsecase(serviceLocator<StudentScoreRepository>()),
     )
     ..registerFactory<StudentScoreBloc>(
-      () => StudentScoreBloc(serviceLocator<GetTodayStudentScoresUsecase>()),
+      () => StudentScoreBloc(
+        useCases: serviceLocator<GetTodayStudentScoresUsecase>(),
+      ),
     )
     ..registerFactory<OneStudentScoreBloc>(
-      () => OneStudentScoreBloc(serviceLocator<OneStudentScoreUsecase>()),
+      () => OneStudentScoreBloc(
+        oneStudentUseCases: serviceLocator<OneStudentScoreUsecase>(),
+      ),
     );
 }
