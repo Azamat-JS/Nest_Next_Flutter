@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile/features/leaderboard/presentation/bloc/leaderboard_bloc.dart';
 import 'package:mobile/features/leaderboard/presentation/widgets/leaderboard_row.dart';
 
-class GroupLeaderboardPage extends StatefulWidget {
+class GroupLeaderboardPage extends StatelessWidget {
   final String groupId;
   final String groupName;
   const GroupLeaderboardPage({
@@ -13,15 +13,10 @@ class GroupLeaderboardPage extends StatefulWidget {
   });
 
   @override
-  State<GroupLeaderboardPage> createState() => _GroupLeaderboardPageState();
-}
-
-class _GroupLeaderboardPageState extends State<GroupLeaderboardPage> {
-  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text('${widget.groupName} Leaderboard'),
+        Text('$groupName Leaderboard'),
         _buildHeader(),
         Expanded(
           child: BlocBuilder<LeaderboardBloc, LeaderboardState>(
@@ -41,6 +36,7 @@ class _GroupLeaderboardPageState extends State<GroupLeaderboardPage> {
                   final student = leaderboard.data[index];
                   return LeaderboardRow(student: student, index: index);
                 },
+                cacheExtent: 500,
               );
             },
           ),
