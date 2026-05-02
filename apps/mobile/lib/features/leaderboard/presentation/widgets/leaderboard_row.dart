@@ -9,7 +9,7 @@ class LeaderboardRow extends StatelessWidget {
   Color _getRankColor() {
     if (index == 0) return Colors.blue;
     if (index == 1) return Colors.green;
-    if (index == 2) return Colors.yellow;
+    if (index == 2) return Colors.orange;
     return Colors.transparent;
   }
 
@@ -18,8 +18,12 @@ class LeaderboardRow extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 12.0),
       decoration: BoxDecoration(
-        color: _getRankColor().withAlpha(10),
-        border: const Border(bottom: BorderSide(color: Colors.grey)),
+        color: _getRankColor().withValues(alpha: 20),
+
+        border: Border(
+          left: BorderSide(color: _getRankColor(), width: index < 3 ? 4 : 0),
+          bottom: BorderSide(color: Colors.grey),
+        ),
       ),
       child: Row(
         children: [
