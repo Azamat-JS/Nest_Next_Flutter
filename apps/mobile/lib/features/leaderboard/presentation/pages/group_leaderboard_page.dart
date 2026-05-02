@@ -56,6 +56,7 @@ Widget _buildHeader() {
     color: Colors.grey.shade200,
     child: Row(
       children: const [
+        Expanded(flex: 1, child: Text('#')),
         Expanded(flex: 3, child: Text('Student')),
         Expanded(flex: 2, child: Text('Homework')),
         Expanded(flex: 3, child: Text('Attendance')),

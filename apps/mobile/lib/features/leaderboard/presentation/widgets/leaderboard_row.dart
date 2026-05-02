@@ -27,6 +27,7 @@ class LeaderboardRow extends StatelessWidget {
       ),
       child: Row(
         children: [
+          Expanded(flex: 1, child: Text('${index + 1}')),
           Expanded(
             flex: 3,
             child: Text(
@@ -34,12 +35,19 @@ class LeaderboardRow extends StatelessWidget {
               style: TextStyle(fontWeight: FontWeight.w500),
             ),
           ),
-          Expanded(flex: 2, child: Text('${student.homework}')),
-          Expanded(flex: 2, child: Text('${student.attendance}')),
+          Expanded(
+            flex: 2,
+            child: Text('${student.homework}', textAlign: TextAlign.center),
+          ),
+          Expanded(
+            flex: 2,
+            child: Text('${student.attendance}', textAlign: TextAlign.center),
+          ),
           Expanded(
             flex: 2,
             child: Text(
               '${student.total}',
+              textAlign: TextAlign.center,
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
