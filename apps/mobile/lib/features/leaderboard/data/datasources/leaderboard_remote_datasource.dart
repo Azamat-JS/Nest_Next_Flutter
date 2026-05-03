@@ -41,7 +41,8 @@ class LeaderBoardRemoteDataSourceImpl implements LeaderBoardRemoteDataSource {
       );
     } on DioException catch (e) {
       throw Exception(
-        e.response?.data['message'] ?? 'Failed to get group: ${e.message}',
+        e.response?.data['message'] ??
+            'Failed to get leaderboard: ${e.message}',
       );
     }
   }
@@ -57,17 +58,18 @@ class LeaderBoardRemoteDataSourceImpl implements LeaderBoardRemoteDataSource {
         '/student-score/leaderboard/$groupId',
         queryParameters: {'page': page, 'limit': limit},
       );
-      final data = res.data['data'] as List;
-      final meta = res.data['meta'];
+      final data = (res.data['data'] as List?) ?? [];
+      final meta = res.data['meta'] ?? {};
       return LeaderBoardPage(
-        data: data.map((e) => LeaderboardModel.fromJson(e)).toList(),
+        data: data.map((e) => LeaderboardModel.fromJson(e).toEntity()).toList(),
         page: meta['page'] as int,
         lastPage: meta['last_page'] as int,
         limit: meta['limit'] as int,
       );
     } on DioException catch (e) {
       throw Exception(
-        e.response?.data['message'] ?? 'Failed to get group: ${e.message}',
+        e.response?.data['message'] ??
+            'Failed to get leaderboard: ${e.message}',
       );
     }
   }
