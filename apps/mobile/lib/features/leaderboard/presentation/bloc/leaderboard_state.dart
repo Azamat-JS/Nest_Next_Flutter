@@ -2,21 +2,24 @@ part of 'leaderboard_bloc.dart';
 
 @immutable
 class LeaderboardState {
-  final bool isLoading;
+  final bool isLoadingGlobal;
+  final bool isLoadingGroup;
   final Failure? failure;
 
   final LeaderBoardPage? groupLeaderboard;
   final LeaderBoardPage? globalLeaderboard;
 
   const LeaderboardState({
-    this.isLoading = false,
+    this.isLoadingGlobal = false,
+    this.isLoadingGroup = false,
     this.failure,
     this.groupLeaderboard,
     this.globalLeaderboard,
   });
 
   LeaderboardState copyWith({
-    bool? isLoading,
+    bool? isLoadingGlobal,
+    bool? isLoadingGroup,
     Failure? failure,
     bool clearFailure = false,
     LeaderBoardPage? groupLeaderboard,
@@ -25,14 +28,15 @@ class LeaderboardState {
     bool clearGlobal = false,
   }) {
     return LeaderboardState(
-      isLoading: isLoading ?? this.isLoading,
+      isLoadingGlobal: isLoadingGlobal ?? this.isLoadingGlobal,
+      isLoadingGroup: isLoadingGroup ?? this.isLoadingGroup,
       failure: clearFailure ? null : failure ?? this.failure,
       groupLeaderboard: clearGroup
           ? null
-          : (groupLeaderboard ?? this.groupLeaderboard),
+          : groupLeaderboard ?? this.groupLeaderboard,
       globalLeaderboard: clearGlobal
           ? null
-          : (globalLeaderboard ?? this.globalLeaderboard),
+          : globalLeaderboard ?? this.globalLeaderboard,
     );
   }
 }

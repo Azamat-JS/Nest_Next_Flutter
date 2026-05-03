@@ -48,7 +48,7 @@ final GoRouter appRouter = GoRouter(
                   create: (_) => serviceLocator<GroupStudentsBloc>(),
                 ),
                 BlocProvider(create: (_) => serviceLocator<StudentScoreBloc>()),
-                BlocProvider(create: (_) => serviceLocator<LeaderboardBloc>()),
+                BlocProvider.value(value: serviceLocator<LeaderboardBloc>()),
               ],
               child: GroupDetailsPage(groupId: groupId),
             );
@@ -59,7 +59,7 @@ final GoRouter appRouter = GoRouter(
           path: '/profile',
           pageBuilder: (context, state) => CustomTransitionPage(
             child: const ProfilePage(),
-            transitionsBuilder: (_, animation, __, child) =>
+            transitionsBuilder: (_, animation, idx, child) =>
                 FadeTransition(opacity: animation, child: child),
           ),
         ),
@@ -76,8 +76,8 @@ final GoRouter appRouter = GoRouter(
       ],
     ),
 
-    GoRoute(path: '/login', builder: (_, __) => const LoginPage()),
-    GoRoute(path: '/signup', builder: (_, __) => const SignUpPage()),
+    GoRoute(path: '/login', builder: (_, idx) => const LoginPage()),
+    GoRoute(path: '/signup', builder: (_, idx) => const SignUpPage()),
 
     GoRoute(
       path: '/student-scores/:studentId',

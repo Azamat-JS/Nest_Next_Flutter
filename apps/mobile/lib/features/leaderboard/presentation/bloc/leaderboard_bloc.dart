@@ -29,7 +29,11 @@ class LeaderboardBloc extends Bloc<LeaderboardEvent, LeaderboardState> {
     Emitter<LeaderboardState> emit,
   ) async {
     emit(
-      state.copyWith(isLoading: true, clearFailure: true, clearGlobal: true),
+      state.copyWith(
+        isLoadingGlobal: true,
+        clearFailure: true,
+        clearGlobal: true,
+      ),
     );
 
     final res = await _getGlobal(
@@ -37,8 +41,9 @@ class LeaderboardBloc extends Bloc<LeaderboardEvent, LeaderboardState> {
     );
 
     res.fold(
-      (fail) => emit(state.copyWith(isLoading: false, failure: fail)),
-      (page) => emit(state.copyWith(isLoading: false, globalLeaderboard: page)),
+      (fail) => emit(state.copyWith(isLoadingGlobal: false, failure: fail)),
+      (page) =>
+          emit(state.copyWith(isLoadingGlobal: false, globalLeaderboard: page)),
     );
   }
 
@@ -46,7 +51,13 @@ class LeaderboardBloc extends Bloc<LeaderboardEvent, LeaderboardState> {
     FetchGroupLeaderboardEvent event,
     Emitter<LeaderboardState> emit,
   ) async {
-    emit(state.copyWith(isLoading: true, clearFailure: true, clearGroup: true));
+    emit(
+      state.copyWith(
+        isLoadingGroup: true,
+        clearFailure: true,
+        clearGroup: true,
+      ),
+    );
 
     final res = await _getGroup(
       GroupLeaderBoardParams(
@@ -57,8 +68,9 @@ class LeaderboardBloc extends Bloc<LeaderboardEvent, LeaderboardState> {
     );
 
     res.fold(
-      (fail) => emit(state.copyWith(isLoading: false, failure: fail)),
-      (page) => emit(state.copyWith(isLoading: false, groupLeaderboard: page)),
+      (fail) => emit(state.copyWith(isLoadingGroup: false, failure: fail)),
+      (page) =>
+          emit(state.copyWith(isLoadingGroup: false, groupLeaderboard: page)),
     );
   }
 
@@ -66,43 +78,39 @@ class LeaderboardBloc extends Bloc<LeaderboardEvent, LeaderboardState> {
     LoadMoreGlobalLeaderboardEvent event,
     Emitter<LeaderboardState> emit,
   ) async {
-    if (state.isLoading) return;
+    if (state.isLoadingGlobal) return;
 
     final current = state.globalLeaderboard;
     if (current != null && current.page >= current.lastPage) return;
 
-    emit(state.copyWith(isLoading: true, clearFailure: true));
+    emit(state.copyWith(isLoadingGlobal: true));
 
     final res = await _getGlobal(
       GlobalLeaderBoardParams(page: event.nextPage, limit: event.limit),
     );
 
-    res.fold((fail) => emit(state.copyWith(isLoading: false, failure: fail)), (
-      newPage,
-    ) {
-      final old = state.globalLeaderboard;
+    res.fold(
+      (fail) => emit(state.copyWith(isLoadingGlobal: false, failure: fail)),
+      (newPage) {
+        final old = state.globalLeaderboard;
 
-      if (old == null) {
-        emit(state.copyWith(isLoading: false, globalLeaderboard: newPage));
-        return;
-      }
+        final merged = old == null ? newPage : _merge(old, newPage);
 
-      final merged = _merge(old, newPage);
-
-      emit(state.copyWith(isLoading: false, globalLeaderboard: merged));
-    });
+        emit(state.copyWith(isLoadingGlobal: false, globalLeaderboard: merged));
+      },
+    );
   }
 
   void _onLoadMoreGroup(
     LoadMoreGroupLeaderboardEvent event,
     Emitter<LeaderboardState> emit,
   ) async {
-    if (state.isLoading) return;
+    if (state.isLoadingGroup) return;
 
     final current = state.groupLeaderboard;
     if (current != null && current.page >= current.lastPage) return;
 
-    emit(state.copyWith(isLoading: true, clearFailure: true));
+    emit(state.copyWith(isLoadingGroup: true));
 
     final res = await _getGroup(
       GroupLeaderBoardParams(
@@ -112,20 +120,16 @@ class LeaderboardBloc extends Bloc<LeaderboardEvent, LeaderboardState> {
       ),
     );
 
-    res.fold((fail) => emit(state.copyWith(isLoading: false, failure: fail)), (
-      newPage,
-    ) {
-      final old = state.groupLeaderboard;
+    res.fold(
+      (fail) => emit(state.copyWith(isLoadingGroup: false, failure: fail)),
+      (newPage) {
+        final old = state.groupLeaderboard;
 
-      if (old == null) {
-        emit(state.copyWith(isLoading: false, groupLeaderboard: newPage));
-        return;
-      }
+        final merged = old == null ? newPage : _merge(old, newPage);
 
-      final merged = _merge(old, newPage);
-
-      emit(state.copyWith(isLoading: false, groupLeaderboard: merged));
-    });
+        emit(state.copyWith(isLoadingGroup: false, groupLeaderboard: merged));
+      },
+    );
   }
 
   LeaderBoardPage _merge(LeaderBoardPage old, LeaderBoardPage next) {

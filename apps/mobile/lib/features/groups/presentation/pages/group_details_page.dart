@@ -18,23 +18,7 @@ class GroupDetailsPage extends StatefulWidget {
 
 class _GroupDetailsPageState extends State<GroupDetailsPage> {
   @override
-  void initState() {
-    super.initState();
-
-    final groupId = widget.groupId;
-
-    context.read<GroupStudentsBloc>().add(FetchGroupStudents(groupId, 1, 10));
-
-    context.read<StudentScoreBloc>().add(FetchStudentScores(groupId));
-
-    context.read<LeaderboardBloc>().add(
-      FetchGroupLeaderboardEvent(groupId, 1, 10),
-    );
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final studentState = context.watch<GroupStudentsBloc>().state;
     final group = context.select((GroupBloc b) => b.state.selectedGroup);
     final students = context.select(
       (GroupStudentsBloc b) => b.state.students?.data ?? [],
@@ -42,14 +26,22 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
     final leaderboardPage = context.select(
       (LeaderboardBloc b) => b.state.groupLeaderboard,
     );
+
     final scores = context.select((StudentScoreBloc b) {
       return {for (final s in b.state.studentScores) s.studentId: s};
     });
+    print('scores: $scores');
+    print('group: $group');
+    print('students: $students');
+    print('leaderboard: $leaderboardPage');
 
-    if (group == null || studentState.students == null) {
+    if (group == null) {
       return const Scaffold(
         body: Center(child: CircularProgressIndicator.adaptive()),
       );
+    }
+    if (students.isEmpty) {
+      return const Center(child: Text("No students in this group"));
     }
 
     return Scaffold(
