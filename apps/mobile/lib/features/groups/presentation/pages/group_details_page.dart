@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mobile/features/groups/presentation/bloc/group/group_bloc.dart';
 import 'package:mobile/features/groups/presentation/bloc/students/group_students_bloc.dart';
 import 'package:mobile/features/groups/presentation/widgets/student_card.dart';
 import 'package:mobile/features/leaderboard/presentation/bloc/leaderboard_bloc.dart';
 import 'package:mobile/features/leaderboard/presentation/widgets/leaderboard_row.dart';
 import 'package:mobile/features/student_scores/presentation/bloc/student_score_bloc.dart';
-import 'package:mobile/features/student_scores/presentation/pages/student_scores_page.dart';
 
 class GroupDetailsPage extends StatefulWidget {
   final String groupId;
@@ -21,29 +21,30 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
   void initState() {
     super.initState();
 
-    context.read<GroupStudentsBloc>().add(
-      FetchGroupStudents(widget.groupId, 1, 10),
-    );
+    final groupId = widget.groupId;
 
-    context.read<StudentScoreBloc>().add(FetchStudentScores(widget.groupId));
+    context.read<GroupStudentsBloc>().add(FetchGroupStudents(groupId, 1, 10));
+
+    context.read<StudentScoreBloc>().add(FetchStudentScores(groupId));
 
     context.read<LeaderboardBloc>().add(
-      FetchGroupLeaderboardEvent(widget.groupId, 1, 10),
+      FetchGroupLeaderboardEvent(groupId, 1, 10),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    final groupState = context.watch<GroupBloc>().state;
     final studentState = context.watch<GroupStudentsBloc>().state;
-    final leaderboardState = context.watch<LeaderboardBloc>().state;
-    final scoreState = context.watch<StudentScoreBloc>().state;
-
-    final students = studentState.students?.data ?? [];
-    final scores = {for (final s in scoreState.studentScores) s.studentId: s};
-    final group = groupState.selectedGroup;
-
-    final leaderboardPage = leaderboardState.groupLeaderboard;
+    final group = context.select((GroupBloc b) => b.state.selectedGroup);
+    final students = context.select(
+      (GroupStudentsBloc b) => b.state.students?.data ?? [],
+    );
+    final leaderboardPage = context.select(
+      (LeaderboardBloc b) => b.state.groupLeaderboard,
+    );
+    final scores = context.select((StudentScoreBloc b) {
+      return {for (final s in b.state.studentScores) s.studentId: s};
+    });
 
     if (group == null || studentState.students == null) {
       return const Scaffold(
@@ -51,22 +52,19 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
       );
     }
 
-    if (leaderboardPage == null) {
-      return const Scaffold(body: Center(child: CircularProgressIndicator()));
-    }
-
     return Scaffold(
       appBar: AppBar(title: Text(group.name)),
 
       body: CustomScrollView(
-        physics: const BouncingScrollPhysics(),
         slivers: [
+          /// ALWAYS visible
           SliverToBoxAdapter(
             child: _GroupInfoHeader(
               teacher: group.teacher?.username ?? 'Unknown',
               studentCount: students.length,
             ),
           ),
+
           const SliverToBoxAdapter(child: SizedBox(height: 12)),
 
           SliverToBoxAdapter(
@@ -75,22 +73,16 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
                 itemCount: students.length,
-                separatorBuilder: (_, idx) => const SizedBox(width: 10),
+                separatorBuilder: (_, __) => const SizedBox(width: 10),
                 itemBuilder: (context, index) {
                   final student = students[index];
                   final score = scores[student.id];
 
                   return GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => StudentScoresPage(
-                            studentId: student.id,
-                            groupId: group.id,
-                            username: student.username,
-                          ),
-                        ),
+                      context.push(
+                        '/student-scores/${student.id}'
+                        '?groupId=${group.id}&username=${student.username}',
                       );
                     },
                     child: SizedBox(
@@ -106,18 +98,28 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
               ),
             ),
           ),
-          const SliverToBoxAdapter(child: SizedBox(height: 8)),
 
-          SliverPersistentHeader(
-            pinned: true,
-            delegate: _LeaderboardHeaderDelegate(),
-          ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate((context, index) {
-              final student = leaderboardPage.data[index];
-              return LeaderboardRow(student: student, index: index);
-            }, childCount: leaderboardPage.data.length),
-          ),
+          const SliverToBoxAdapter(child: SizedBox(height: 16)),
+
+          if (leaderboardPage == null)
+            const SliverToBoxAdapter(
+              child: Padding(
+                padding: EdgeInsets.all(16),
+                child: Center(child: CircularProgressIndicator()),
+              ),
+            )
+          else ...[
+            SliverPersistentHeader(
+              pinned: true,
+              delegate: _LeaderboardHeaderDelegate(),
+            ),
+            SliverList(
+              delegate: SliverChildBuilderDelegate((context, index) {
+                final student = leaderboardPage.data[index];
+                return LeaderboardRow(student: student, index: index);
+              }, childCount: leaderboardPage.data.length),
+            ),
+          ],
         ],
       ),
     );

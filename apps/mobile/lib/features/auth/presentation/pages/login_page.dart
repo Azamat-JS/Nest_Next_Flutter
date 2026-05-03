@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mobile/core/common/cubit/auth_check_cubit.dart';
 import 'package:mobile/core/theme/app_pallete.dart';
 import 'package:mobile/core/utils/show_snackbar.dart';
@@ -104,7 +105,7 @@ class _LoginPageState extends State<LoginPage> {
                         const SizedBox(height: 20),
                         GestureDetector(
                           onTap: () {
-                            Navigator.push(context, SignUpPage.route());
+                            context.push('/signup');
                           },
                           child: RichText(
                             text: TextSpan(

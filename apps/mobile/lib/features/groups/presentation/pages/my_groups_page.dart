@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mobile/core/di/service_locator.dart';
 import 'package:mobile/core/utils/show_snackbar.dart';
 import 'package:mobile/features/groups/presentation/bloc/group/group_bloc.dart';
 import 'package:mobile/features/groups/presentation/bloc/recent_group/bloc/recent_group_bloc.dart';
-import 'package:mobile/features/groups/presentation/bloc/students/group_students_bloc.dart';
-import 'package:mobile/features/groups/presentation/pages/group_details_page.dart';
-import 'package:mobile/features/student_scores/presentation/bloc/student_score_bloc.dart';
 
 class MyGroupsPage extends StatefulWidget {
   const MyGroupsPage({super.key});
@@ -142,27 +140,7 @@ Widget _buildSelectedGroup(BuildContext context, GroupState state) {
   final group = state.selectedGroup!;
   return GestureDetector(
     onTap: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (_) => MultiBlocProvider(
-            providers: [
-              BlocProvider(
-                create: (_) =>
-                    serviceLocator<GroupStudentsBloc>()
-                      ..add(FetchGroupStudents(group.id, 1, 10)),
-              ),
-
-              BlocProvider(
-                create: (_) =>
-                    serviceLocator<StudentScoreBloc>()
-                      ..add(FetchStudentScores(group.id)),
-              ),
-            ],
-            child: GroupDetailsPage(groupId: group.id),
-          ),
-        ),
-      );
+      context.push('/groups/${group.id}');
     },
     child: Card.outlined(
       margin: const EdgeInsets.symmetric(horizontal: 12),
@@ -217,12 +195,7 @@ Widget _buildRecentGroups() {
                 "Teacher: ${group.teacher?.username ?? 'Unknown'}",
               ),
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => GroupDetailsPage(groupId: group.id),
-                  ),
-                );
+                context.push('/groups/${group.id}');
               },
             );
           }),

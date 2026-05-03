@@ -30,7 +30,7 @@ class LeaderBoardRemoteDataSourceImpl implements LeaderBoardRemoteDataSource {
         '/student-score/leaderboard',
         queryParameters: {'page': page, 'limit': limit},
       );
-
+      print('global data:${res.data}');
       final data = res.data['data'] as List;
       final meta = res.data['meta'];
       return LeaderBoardPage(
@@ -58,6 +58,7 @@ class LeaderBoardRemoteDataSourceImpl implements LeaderBoardRemoteDataSource {
         '/student-score/leaderboard/$groupId',
         queryParameters: {'page': page, 'limit': limit},
       );
+      print('grouplead: ${res.data}');
       final data = (res.data['data'] as List?) ?? [];
       final meta = res.data['meta'] ?? {};
       return LeaderBoardPage(

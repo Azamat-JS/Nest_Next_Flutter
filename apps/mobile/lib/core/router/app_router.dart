@@ -20,7 +20,6 @@ import 'package:mobile/features/student_scores/presentation/pages/student_scores
 final GoRouter appRouter = GoRouter(
   initialLocation: '/',
   routes: [
-    // Auth Gate
     GoRoute(path: '/', builder: (_, state) => const AuthGate()),
 
     ShellRoute(
@@ -33,14 +32,35 @@ final GoRouter appRouter = GoRouter(
           pageBuilder: (context, state) =>
               NoTransitionPage(child: const GroupFeatureShell()),
         ),
+
+        GoRoute(
+          path: '/groups/:groupId',
+          builder: (context, state) {
+            final groupId = state.pathParameters['groupId']!;
+
+            return MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                  create: (_) =>
+                      serviceLocator<GroupBloc>()..add(FetchGroupById(groupId)),
+                ),
+                BlocProvider(
+                  create: (_) => serviceLocator<GroupStudentsBloc>(),
+                ),
+                BlocProvider(create: (_) => serviceLocator<StudentScoreBloc>()),
+                BlocProvider(create: (_) => serviceLocator<LeaderboardBloc>()),
+              ],
+              child: GroupDetailsPage(groupId: groupId),
+            );
+          },
+        ),
+
         GoRoute(
           path: '/profile',
           pageBuilder: (context, state) => CustomTransitionPage(
             child: const ProfilePage(),
-            transitionsBuilder:
-                (context, animation, secondaryAnimation, child) {
-                  return FadeTransition(opacity: animation, child: child);
-                },
+            transitionsBuilder: (_, animation, __, child) =>
+                FadeTransition(opacity: animation, child: child),
           ),
         ),
         GoRoute(
@@ -56,17 +76,9 @@ final GoRouter appRouter = GoRouter(
       ],
     ),
 
-    /// Group List
+    GoRoute(path: '/login', builder: (_, __) => const LoginPage()),
+    GoRoute(path: '/signup', builder: (_, __) => const SignUpPage()),
 
-    /// Login page
-    GoRoute(path: '/login', builder: (context, state) => const LoginPage()),
-
-    /// Profile page
-
-    /// Register page
-    GoRoute(path: '/signup', builder: (context, state) => const SignUpPage()),
-
-    /// Student Scores page
     GoRoute(
       path: '/student-scores/:studentId',
       builder: (context, state) {
@@ -78,27 +90,6 @@ final GoRouter appRouter = GoRouter(
           studentId: studentId,
           groupId: groupId,
           username: username,
-        );
-      },
-    ),
-
-    /// GROUP DETAILS
-    GoRoute(
-      path: '/groups/:groupId',
-      builder: (context, state) {
-        final groupId = state.pathParameters['groupId']!;
-
-        return MultiBlocProvider(
-          providers: [
-            BlocProvider(
-              create: (_) =>
-                  serviceLocator<GroupBloc>()..add(FetchGroupById(groupId)),
-            ),
-            BlocProvider(create: (_) => serviceLocator<GroupStudentsBloc>()),
-            BlocProvider(create: (_) => serviceLocator<StudentScoreBloc>()),
-            BlocProvider(create: (_) => serviceLocator<LeaderboardBloc>()),
-          ],
-          child: GroupDetailsPage(groupId: groupId),
         );
       },
     ),

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mobile/core/common/cubit/auth_check_cubit.dart';
 import 'package:mobile/core/theme/app_pallete.dart';
 import 'package:mobile/core/utils/show_snackbar.dart';
 import 'package:mobile/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:mobile/features/auth/presentation/pages/login_page.dart';
 import 'package:mobile/features/auth/presentation/widgets/auth_button.dart';
 import 'package:mobile/features/auth/presentation/widgets/auth_form.dart';
 
@@ -137,7 +137,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         const SizedBox(height: 20),
                         GestureDetector(
                           onTap: () {
-                            Navigator.push(context, LoginPage.route());
+                            context.push('/login');
                           },
                           child: RichText(
                             text: TextSpan(
