@@ -47,6 +47,7 @@ class _LoginPageState extends State<LoginPage> {
                   }
                   if (state is AuthSuccess) {
                     context.read<AuthCheckCubit>().checkAuthStatus();
+                    context.go('/home');
                   }
                 },
                 builder: (context, state) {

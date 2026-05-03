@@ -54,6 +54,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   }
                   if (state is AuthSuccess) {
                     context.read<AuthCheckCubit>().checkAuthStatus();
+                    context.go('/home');
                   }
                 },
 
