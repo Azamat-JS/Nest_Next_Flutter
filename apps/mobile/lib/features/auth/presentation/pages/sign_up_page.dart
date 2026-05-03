@@ -9,10 +9,6 @@ import 'package:mobile/features/auth/presentation/widgets/auth_button.dart';
 import 'package:mobile/features/auth/presentation/widgets/auth_form.dart';
 
 class SignUpPage extends StatefulWidget {
-  static MaterialPageRoute<dynamic> route() {
-    return MaterialPageRoute(builder: (context) => SignUpPage());
-  }
-
   const SignUpPage({super.key});
 
   @override

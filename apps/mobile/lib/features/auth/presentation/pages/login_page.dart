@@ -5,15 +5,10 @@ import 'package:mobile/core/common/cubit/auth_check_cubit.dart';
 import 'package:mobile/core/theme/app_pallete.dart';
 import 'package:mobile/core/utils/show_snackbar.dart';
 import 'package:mobile/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:mobile/features/auth/presentation/pages/sign_up_page.dart';
 import 'package:mobile/features/auth/presentation/widgets/auth_button.dart';
 import 'package:mobile/features/auth/presentation/widgets/auth_form.dart';
 
 class LoginPage extends StatefulWidget {
-  static MaterialPageRoute<dynamic> route() {
-    return MaterialPageRoute(builder: (_) => LoginPage());
-  }
-
   const LoginPage({super.key});
 
   @override
