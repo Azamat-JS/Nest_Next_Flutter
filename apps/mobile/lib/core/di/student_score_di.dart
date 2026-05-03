@@ -22,10 +22,10 @@ Future<void> initStudentScores() async {
         serviceLocator<StudentScoreRepository>(),
       ),
     )
-    ..registerCachedFactory<OneStudentScoreUsecase>(
+    ..registerLazySingleton<OneStudentScoreUsecase>(
       () => OneStudentScoreUsecase(serviceLocator<StudentScoreRepository>()),
     )
-    ..registerFactory<StudentScoreBloc>(
+    ..registerLazySingleton<StudentScoreBloc>(
       () => StudentScoreBloc(
         useCases: serviceLocator<GetTodayStudentScoresUsecase>(),
       ),
