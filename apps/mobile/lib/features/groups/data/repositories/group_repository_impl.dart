@@ -8,7 +8,7 @@ import 'package:mobile/features/groups/data/datasources/group_remote_data_source
 import 'package:mobile/features/groups/data/datasources/group_student_local_data_source.dart';
 import 'package:mobile/features/groups/data/models/groupdb_model.dart';
 import 'package:mobile/features/groups/domain/entities/group_entity.dart';
-import 'package:mobile/features/groups/domain/entities/group_students_entity.dart';
+import 'package:mobile/features/groups/domain/entities/group_students_page_entity.dart';
 import 'package:mobile/features/groups/domain/repositories/group_repository.dart';
 
 class GroupRepositoryImpl implements GroupRepository {
@@ -86,33 +86,29 @@ class GroupRepositoryImpl implements GroupRepository {
   }
 
   @override
-  Future<Either<Failure, GroupStudentsEntity>> getGroupStudents({
+  Future<Either<Failure, GroupStudentsPageEntity>> getGroupStudents({
     required String groupId,
     required int page,
     required int limit,
   }) async {
     try {
-      final students = await groupStudentsRemoteDatasource.getGroupStudents(
+      final model = await groupStudentsRemoteDatasource.getGroupStudents(
         groupId: groupId,
         page: page,
         limit: limit,
       );
 
-      for (final student in students.data) {
+      final entity = model.toEntity();
+
+      for (final student in entity.data) {
         await userLocalDataSource.cacheUser(student);
         await groupStudentLocalDatasource.cacheStudentGroup(
           studentId: student.id,
           groupId: groupId,
         );
       }
-      return right(
-        GroupStudentsEntity(
-          data: students.data,
-          page: page,
-          total: students.data.length,
-          lastPage: 1,
-        ),
-      );
+
+      return right(entity);
     } catch (e) {
       return left(Failure('Failed to fetch group students: $e'));
     }

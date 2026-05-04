@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile/core/errors/failures.dart';
-import 'package:mobile/features/groups/domain/entities/group_students_entity.dart';
+import 'package:mobile/features/groups/domain/entities/group_students_page_entity.dart';
 import 'package:mobile/features/groups/domain/usecases/group_students_usecase.dart';
 part 'group_students_event.dart';
 part 'group_students_state.dart';
@@ -67,11 +67,12 @@ class GroupStudentsBloc extends Bloc<GroupStudentsEvent, GroupStudentsState> {
         return;
       }
 
-      final merged = GroupStudentsEntity(
+      final merged = GroupStudentsPageEntity(
         data: [...old.data, ...newStudents.data],
         page: newStudents.page,
         total: newStudents.total,
         lastPage: newStudents.lastPage,
+        limit: newStudents.limit,
       );
 
       emit(state.copyWith(students: merged));

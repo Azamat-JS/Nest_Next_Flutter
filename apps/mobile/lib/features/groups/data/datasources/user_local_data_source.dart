@@ -24,7 +24,7 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
       id: json['id'] as String,
       username: json['username'] as String,
       email: json['email'] as String,
-      role: json['role'] as String?,
+      role: json['role'] as String,
     );
   }
 

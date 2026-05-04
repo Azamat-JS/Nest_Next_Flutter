@@ -1,10 +1,17 @@
 import 'package:dio/dio.dart';
 import 'package:mobile/core/network/dio_client.dart';
 import 'package:mobile/features/groups/data/models/group_model.dart';
+import 'package:mobile/features/groups/data/models/group_students_page_model.dart';
 import 'package:mobile/features/groups/data/models/paginated_groups_model.dart';
 
 abstract interface class GroupRemoteDataSource {
   Future<GroupModel> getGroupById({required String id});
+
+  Future<GroupStudentsPageModel> getGroupStudents({
+    required String groupId,
+    required int page,
+    required int limit,
+  });
 
   Future<PaginatedGroupsModel> getGroups({
     required int page,
@@ -26,6 +33,26 @@ class GroupRemoteDataSourceImpl implements GroupRemoteDataSource {
     } on DioException catch (e) {
       throw Exception(
         e.response?.data['message'] ?? 'Failed to get group: ${e.message}',
+      );
+    }
+  }
+
+  @override
+  Future<GroupStudentsPageModel> getGroupStudents({
+    required String groupId,
+    required int page,
+    required int limit,
+  }) async {
+    try {
+      final response = await dioClient.dio.get(
+        '/group/$groupId/students',
+        queryParameters: {'page': page, 'limit': limit},
+      );
+
+      return GroupStudentsPageModel.fromJson(response.data);
+    } on DioException catch (e) {
+      throw Exception(
+        e.response?.data['message'] ?? 'Failed to get students: ${e.message}',
       );
     }
   }

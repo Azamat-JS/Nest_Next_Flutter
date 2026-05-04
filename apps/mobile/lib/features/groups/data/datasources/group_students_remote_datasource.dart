@@ -1,8 +1,8 @@
 import 'package:mobile/core/network/dio_client.dart';
-import 'package:mobile/features/groups/data/models/group_students_model.dart';
+import 'package:mobile/features/groups/data/models/group_students_page_model.dart';
 
 abstract interface class GroupStudentsRemoteDatasource {
-  Future<GroupStudentsModel> getGroupStudents({
+  Future<GroupStudentsPageModel> getGroupStudents({
     required String groupId,
     required int page,
     required int limit,
@@ -16,7 +16,7 @@ class GroupStudentsRemoteDatasourceImpl
   GroupStudentsRemoteDatasourceImpl(this.dioClient);
 
   @override
-  Future<GroupStudentsModel> getGroupStudents({
+  Future<GroupStudentsPageModel> getGroupStudents({
     required String groupId,
     required int page,
     required int limit,
@@ -25,6 +25,6 @@ class GroupStudentsRemoteDatasourceImpl
       '/group/$groupId/students',
       queryParameters: {'page': page, 'limit': limit},
     );
-    return GroupStudentsModel.fromJson(res.data as Map<String, dynamic>);
+    return GroupStudentsPageModel.fromJson(res.data as Map<String, dynamic>);
   }
 }

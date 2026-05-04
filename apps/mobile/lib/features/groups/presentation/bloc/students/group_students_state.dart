@@ -4,7 +4,7 @@ part of 'group_students_bloc.dart';
 class GroupStudentsState {
   final bool isLoading;
   final Failure? failure;
-  final GroupStudentsEntity? students;
+  final GroupStudentsPageEntity? students;
 
   const GroupStudentsState({
     this.isLoading = false,
@@ -16,7 +16,7 @@ class GroupStudentsState {
     bool? isLoading,
     Failure? failure,
     bool clearFailure = false,
-    GroupStudentsEntity? students,
+    GroupStudentsPageEntity? students,
     bool clearStudents = false,
   }) {
     return GroupStudentsState(
