@@ -21,17 +21,21 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
   void initState() {
     super.initState();
 
-    context.read<GroupStudentsBloc>().add(
-      FetchGroupStudents(widget.groupId, 1, 10),
+    final groupId = widget.groupId;
+
+    context.read<GroupStudentsBloc>().add(FetchGroupStudents(groupId, 1, 10));
+
+    context.read<LeaderboardBloc>().add(
+      FetchGroupLeaderboardEvent(groupId, 1, 10),
     );
+
+    context.read<StudentScoreBloc>().add(FetchStudentScores(groupId));
   }
 
   @override
   Widget build(BuildContext context) {
     final group = context.select((GroupBloc b) => b.state.selectedGroup);
-    final students = context.select(
-      (GroupStudentsBloc b) => b.state.students?.data ?? [],
-    );
+
     final leaderboardPage = context.select(
       (LeaderboardBloc b) => b.state.groupLeaderboard,
     );
@@ -52,6 +56,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
     final studentsPage = context.select(
       (GroupStudentsBloc b) => b.state.students,
     );
+
     print('studentpage: ${studentsPage?.data}');
     return Scaffold(
       appBar: AppBar(title: Text(group.name)),
@@ -61,46 +66,60 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
           SliverToBoxAdapter(
             child: _GroupInfoHeader(
               teacher: group.teacher?.username ?? 'Unknown',
-              studentCount: students.length,
+              studentCount: studentsPage?.data.length ?? 0,
             ),
           ),
 
           const SliverToBoxAdapter(child: SizedBox(height: 12)),
 
           SliverToBoxAdapter(
-            child: isStudentsLoading
-                ? const Center(child: CircularProgressIndicator())
-                : studentsPage == null
-                ? const SizedBox()
-                : SizedBox(
-                    height: 400,
-                    child: ListView.separated(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: studentsPage.data.length,
-                      separatorBuilder: (_, idx) => const SizedBox(width: 10),
-                      itemBuilder: (context, index) {
-                        final student = studentsPage.data[index];
-                        final score = scores[student.id];
+            child: Builder(
+              builder: (_) {
+                if (isStudentsLoading && studentsPage == null) {
+                  return Padding(
+                    padding: EdgeInsets.all(16),
+                    child: Center(child: CircularProgressIndicator.adaptive()),
+                  );
+                }
+                if (studentsPage == null || studentsPage.data.isEmpty) {
+                  return const SizedBox.shrink();
+                }
 
-                        return GestureDetector(
-                          onTap: () {
-                            context.push(
-                              '/student-scores/${student.id}'
-                              '?groupId=${group.id}&username=${student.username}',
-                            );
-                          },
-                          child: SizedBox(
-                            width: 300,
-                            child: StudentCard(
-                              student: student,
-                              homework: score?.homework ?? 0,
-                              attendance: score?.attendance ?? 0,
+                return SliverToBoxAdapter(
+                  child: SizedBox(
+                    height: 260,
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: studentsPage.data.map((student) {
+                          final score = scores[student.id];
+
+                          return Padding(
+                            padding: EdgeInsets.only(right: 10),
+                            child: GestureDetector(
+                              onTap: () {
+                                context.push(
+                                  '/student-scores/${student.id}'
+                                  '?groupId=${group.id}username=${Uri.encodeComponent(student.username)}',
+                                );
+                              },
+                              child: SizedBox(
+                                width: 300,
+                                child: StudentCard(
+                                  student: student,
+                                  homework: score?.homework ?? 0,
+                                  attendance: score?.attendance ?? 0,
+                                ),
+                              ),
                             ),
-                          ),
-                        );
-                      },
+                          );
+                        }).toList(),
+                      ),
                     ),
                   ),
+                );
+              },
+            ),
           ),
 
           const SliverToBoxAdapter(child: SizedBox(height: 16)),
