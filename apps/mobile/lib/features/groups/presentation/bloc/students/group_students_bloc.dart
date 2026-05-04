@@ -49,7 +49,9 @@ class GroupStudentsBloc extends Bloc<GroupStudentsEvent, GroupStudentsState> {
     if (state.isLoading) return;
 
     final current = state.students;
-    if (current != null && current.page >= current.lastPage) return;
+    if (state.isLoading) return;
+    if (current == null) return;
+    if (current.page >= current.lastPage) return;
 
     final res = await _groupStudentsUsecase(
       GroupStudentsParams(
