@@ -25,21 +25,14 @@ class _MainScreenState extends State<MainScreen> {
         currentIndex: currentIndex,
         onTap: (index) {
           final target = routes[index];
-          final current = GoRouterState.of(context).uri.toString();
-
-          if (current == target) {
-            context.go('/');
-            Future.microtask(() => context.go(target));
-          } else {
-            context.go(target);
-          }
+          context.go(target);
         },
       ),
     );
   }
 
   int _calculateIndex(BuildContext context) {
-    final location = GoRouterState.of(context).uri.toString();
+    final location = GoRouterState.of(context).uri.path;
 
     if (location.startsWith('/groups')) return 0;
     if (location.startsWith('/home')) return 1;
