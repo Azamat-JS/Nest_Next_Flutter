@@ -26,7 +26,6 @@ class _MyGroupsPageState extends State<MyGroupsPage> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => serviceLocator<GroupBloc>()),
         BlocProvider(
           create: (_) =>
               serviceLocator<RecentGroupBloc>()..add(LoadRecentGroups()),
@@ -119,7 +118,6 @@ Widget _buildBody(BuildContext context) {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            /// 🔍 SEARCH RESULT (optional)
             if (state.isLoading)
               const Center(child: CircularProgressIndicator())
             else if (state.selectedGroup != null)

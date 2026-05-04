@@ -5,10 +5,11 @@ import 'package:mobile/core/common/widgets/auth_gate.dart';
 import 'package:mobile/core/di/service_locator.dart';
 import 'package:mobile/features/auth/presentation/pages/login_page.dart';
 import 'package:mobile/features/auth/presentation/pages/sign_up_page.dart';
-import 'package:mobile/features/groups/group_shell.dart';
 import 'package:mobile/features/groups/presentation/bloc/group/group_bloc.dart';
+import 'package:mobile/features/groups/presentation/bloc/recent_group/bloc/recent_group_bloc.dart';
 import 'package:mobile/features/groups/presentation/bloc/students/group_students_bloc.dart';
 import 'package:mobile/features/groups/presentation/pages/group_details_page.dart';
+import 'package:mobile/features/groups/presentation/pages/my_groups_page.dart';
 import 'package:mobile/features/home/presentation/pages/chat_page.dart';
 import 'package:mobile/features/home/presentation/pages/home_page.dart';
 import 'package:mobile/features/home/presentation/pages/main_screen.dart';
@@ -30,7 +31,7 @@ final GoRouter appRouter = GoRouter(
         GoRoute(
           path: '/groups',
           pageBuilder: (context, state) =>
-              NoTransitionPage(child: const GroupFeatureShell()),
+              NoTransitionPage(child: const MyGroupsPage()),
         ),
 
         GoRoute(
@@ -49,6 +50,11 @@ final GoRouter appRouter = GoRouter(
                 ),
                 BlocProvider(create: (_) => serviceLocator<StudentScoreBloc>()),
                 BlocProvider.value(value: serviceLocator<LeaderboardBloc>()),
+                BlocProvider(
+                  create: (_) =>
+                      serviceLocator<RecentGroupBloc>()
+                        ..add(LoadRecentGroups()),
+                ),
               ],
               child: GroupDetailsPage(groupId: groupId),
             );
