@@ -18,6 +18,15 @@ class GroupDetailsPage extends StatefulWidget {
 
 class _GroupDetailsPageState extends State<GroupDetailsPage> {
   @override
+  void initState() {
+    super.initState();
+
+    context.read<GroupStudentsBloc>().add(
+      FetchGroupStudents(widget.groupId, 1, 10),
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
     final group = context.select((GroupBloc b) => b.state.selectedGroup);
     final students = context.select(
