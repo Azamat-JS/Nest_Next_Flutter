@@ -52,13 +52,12 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
     final studentsPage = context.select(
       (GroupStudentsBloc b) => b.state.students,
     );
-
+    print('studentpage: ${studentsPage?.data}');
     return Scaffold(
       appBar: AppBar(title: Text(group.name)),
 
       body: CustomScrollView(
         slivers: [
-          /// ALWAYS visible
           SliverToBoxAdapter(
             child: _GroupInfoHeader(
               teacher: group.teacher?.username ?? 'Unknown',
@@ -74,11 +73,11 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
                 : studentsPage == null
                 ? const SizedBox()
                 : SizedBox(
-                    height: 260,
+                    height: 400,
                     child: ListView.separated(
                       scrollDirection: Axis.horizontal,
                       itemCount: studentsPage.data.length,
-                      separatorBuilder: (_, __) => const SizedBox(width: 10),
+                      separatorBuilder: (_, idx) => const SizedBox(width: 10),
                       itemBuilder: (context, index) {
                         final student = studentsPage.data[index];
                         final score = scores[student.id];
