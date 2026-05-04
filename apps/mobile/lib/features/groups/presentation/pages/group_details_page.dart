@@ -21,15 +21,17 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
   void initState() {
     super.initState();
 
-    final groupId = widget.groupId;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final groupId = widget.groupId;
 
-    context.read<GroupStudentsBloc>().add(FetchGroupStudents(groupId, 1, 10));
+      context.read<GroupStudentsBloc>().add(FetchGroupStudents(groupId, 1, 10));
 
-    context.read<LeaderboardBloc>().add(
-      FetchGroupLeaderboardEvent(groupId, 1, 10),
-    );
+      context.read<LeaderboardBloc>().add(
+        FetchGroupLeaderboardEvent(groupId, 1, 10),
+      );
 
-    context.read<StudentScoreBloc>().add(FetchStudentScores(groupId));
+      context.read<StudentScoreBloc>().add(FetchStudentScores(groupId));
+    });
   }
 
   @override
@@ -76,46 +78,43 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
             child: Builder(
               builder: (_) {
                 if (isStudentsLoading && studentsPage == null) {
-                  return Padding(
+                  return const Padding(
                     padding: EdgeInsets.all(16),
-                    child: Center(child: CircularProgressIndicator.adaptive()),
+                    child: Center(child: CircularProgressIndicator()),
                   );
                 }
+
                 if (studentsPage == null || studentsPage.data.isEmpty) {
                   return const SizedBox.shrink();
                 }
 
-                return SliverToBoxAdapter(
-                  child: SizedBox(
-                    height: 260,
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: studentsPage.data.map((student) {
-                          final score = scores[student.id];
+                return SizedBox(
+                  height: 350,
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: studentsPage.data.length,
+                    separatorBuilder: (_, __) => const SizedBox(width: 10),
+                    itemBuilder: (context, index) {
+                      final student = studentsPage.data[index];
+                      final score = scores[student.id];
 
-                          return Padding(
-                            padding: EdgeInsets.only(right: 10),
-                            child: GestureDetector(
-                              onTap: () {
-                                context.push(
-                                  '/student-scores/${student.id}'
-                                  '?groupId=${group.id}username=${Uri.encodeComponent(student.username)}',
-                                );
-                              },
-                              child: SizedBox(
-                                width: 300,
-                                child: StudentCard(
-                                  student: student,
-                                  homework: score?.homework ?? 0,
-                                  attendance: score?.attendance ?? 0,
-                                ),
-                              ),
-                            ),
+                      return GestureDetector(
+                        onTap: () {
+                          context.push(
+                            '/student-scores/${student.id}'
+                            '?groupId=${group.id}&username=${Uri.encodeComponent(student.username)}',
                           );
-                        }).toList(),
-                      ),
-                    ),
+                        },
+                        child: SizedBox(
+                          width: 260,
+                          child: StudentCard(
+                            student: student,
+                            homework: score?.homework ?? 0,
+                            attendance: score?.attendance ?? 0,
+                          ),
+                        ),
+                      );
+                    },
                   ),
                 );
               },
@@ -165,6 +164,7 @@ class _LeaderboardHeaderDelegate extends SliverPersistentHeaderDelegate {
     bool overlapsContent,
   ) {
     return Container(
+      height: 50,
       color: Colors.white,
       padding: const EdgeInsets.symmetric(horizontal: 12),
       child: const Row(

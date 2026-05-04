@@ -23,7 +23,9 @@ class StudentCard extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.all(10),
-            child: _cardBody(context, student, homework, attendance),
+            child: SingleChildScrollView(
+              child: _cardBody(context, student, homework, attendance),
+            ),
           ),
         ],
       ),
