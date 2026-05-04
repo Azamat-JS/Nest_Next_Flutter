@@ -108,7 +108,15 @@ class GroupRepositoryImpl implements GroupRepository {
         );
       }
 
-      return right(entity);
+      return right(
+        GroupStudentsPageEntity(
+          data: entity.data,
+          page: entity.page,
+          total: entity.total,
+          lastPage: entity.lastPage,
+          limit: entity.limit,
+        ),
+      );
     } catch (e) {
       return left(Failure('Failed to fetch group students: $e'));
     }
