@@ -132,8 +132,12 @@ GoRouter createRouter(AuthCheckCubit authCheckCubit) {
             routes: [
               GoRoute(
                 path: '/home',
-                pageBuilder: (context, state) =>
-                    NoTransitionPage(child: const HomePage()),
+                pageBuilder: (context, state) => NoTransitionPage(
+                  child: BlocProvider(
+                    create: (_) => serviceLocator<LeaderboardBloc>(),
+                    child: const HomePage(),
+                  ),
+                ),
               ),
             ],
           ),
