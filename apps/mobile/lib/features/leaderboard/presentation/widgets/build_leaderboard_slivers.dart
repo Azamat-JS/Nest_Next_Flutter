@@ -32,7 +32,7 @@ List<Widget> buildLeaderboardSlivers({
         delegate: SliverChildBuilderDelegate((context, index) {
           final student = leaderboardPage.data[index];
           return LeaderboardRow(student: student, index: index);
-        }),
+        }, childCount: leaderboardPage.data.length),
       ),
     ),
   ];
