@@ -13,13 +13,11 @@ class PopupDropdown extends StatelessWidget {
       onSelected: (value) {
         switch (value) {
           case 'logout':
-            Navigator.of(context).pop();
             context.read<AuthBloc>().add(AuthLogout());
             context.go('/login');
             break;
 
           case 'profile':
-            Navigator.of(context).pop();
             context.go('/profile');
             break;
         }

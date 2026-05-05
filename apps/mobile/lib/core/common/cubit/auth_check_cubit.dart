@@ -6,7 +6,7 @@ import 'package:mobile/features/groups/data/datasources/user_local_data_source.d
 import 'package:sqflite/sqflite.dart';
 part 'auth_check_state.dart';
 
-class AuthCheckCubit extends Cubit<AuthCheckState> {
+class AuthCheckCubit extends Cubit<AuthCheckState> with ChangeNotifier {
   final AuthRemoteDataSource remote;
   final UserLocalDataSource local;
   final Database db;
@@ -23,6 +23,12 @@ class AuthCheckCubit extends Cubit<AuthCheckState> {
     } else {
       emit(AuthUserLoggedIn(user));
     }
+  }
+
+  @override
+  void emit(AuthCheckState state) {
+    super.emit(state);
+    notifyListeners();
   }
 
   void emitLoggedIn(UserEntity user) {

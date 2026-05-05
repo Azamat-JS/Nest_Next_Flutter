@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mobile/core/common/cubit/auth_check_cubit.dart';
 import 'package:mobile/core/di/service_locator.dart';
 import 'package:mobile/core/router/app_router.dart';
@@ -17,6 +18,8 @@ void main() async {
 
   await authCheck.checkAuthStatus();
 
+  final router = createRouter(authCheck);
+
   runApp(
     MultiBlocProvider(
       providers: [
@@ -24,26 +27,22 @@ void main() async {
         BlocProvider(create: (_) => serviceLocator<AuthBloc>()),
         BlocProvider(create: (_) => serviceLocator<GroupBloc>()),
       ],
-      child: const MyApp(),
+      child: MyApp(router: router),
     ),
   );
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+class MyApp extends StatelessWidget {
+  final GoRouter router;
+  const MyApp({super.key, required this.router});
 
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.darkThemeMode,
-      routerConfig: appRouter,
+      routerConfig: router,
     );
   }
 }

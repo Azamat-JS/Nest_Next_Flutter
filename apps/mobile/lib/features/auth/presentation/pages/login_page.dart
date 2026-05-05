@@ -46,8 +46,7 @@ class _LoginPageState extends State<LoginPage> {
                     showSnackbar(context, state.message);
                   }
                   if (state is AuthSuccess) {
-                    context.read<AuthCheckCubit>().checkAuthStatus();
-                    context.go('/home');
+                    context.read<AuthCheckCubit>().emitLoggedIn(state.user);
                   }
                 },
                 builder: (context, state) {

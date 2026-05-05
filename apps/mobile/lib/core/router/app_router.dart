@@ -19,135 +19,139 @@ import 'package:mobile/features/student_scores/presentation/bloc/one_student_sco
 import 'package:mobile/features/student_scores/presentation/bloc/student_score_bloc.dart';
 import 'package:mobile/features/student_scores/presentation/pages/student_scores_page.dart';
 
-final GoRouter appRouter = GoRouter(
-  initialLocation: '/',
-  redirect: (context, state) {
-    final authState = context.read<AuthCheckCubit>().state;
+GoRouter createRouter(AuthCheckCubit authCheckCubit) {
+  return GoRouter(
+    initialLocation: '/',
+    refreshListenable: authCheckCubit,
+    redirect: (context, state) {
+      final authState = context.read<AuthCheckCubit>().state;
 
-    final isLoggedIn = authState is AuthUserLoggedIn;
-    final isLoggingIn = state.matchedLocation == '/login';
+      final isLoggedIn = authState is AuthUserLoggedIn;
+      final isLoggingIn = state.matchedLocation == '/login';
 
-    if (!isLoggedIn) {
-      return isLoggingIn ? null : '/login';
-    }
+      if (!isLoggedIn) {
+        return isLoggingIn ? null : '/login';
+      }
 
-    if (isLoggedIn && isLoggingIn) {
-      return '/groups';
-    }
+      if (isLoggedIn && isLoggingIn) {
+        return '/groups';
+      }
 
-    return null;
-  },
-  routes: [
-    GoRoute(path: '/', redirect: (_, __) => '/groups'),
+      return null;
+    },
+    routes: [
+      GoRoute(path: '/', redirect: (_, __) => '/groups'),
 
-    StatefulShellRoute.indexedStack(
-      builder: (context, state, navigationShell) {
-        return MainScreen(navigationShell: navigationShell);
-      },
-      branches: [
-        StatefulShellBranch(
-          routes: [
-            GoRoute(
-              path: '/groups',
-              pageBuilder: (context, state) =>
-                  NoTransitionPage(child: const MyGroupsPage()),
-              routes: [
-                GoRoute(
-                  path: ':groupId',
-                  builder: (context, state) {
-                    final groupId = state.pathParameters['groupId']!;
+      StatefulShellRoute.indexedStack(
+        builder: (context, state, navigationShell) {
+          return MainScreen(navigationShell: navigationShell);
+        },
+        branches: [
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: '/groups',
+                pageBuilder: (context, state) =>
+                    NoTransitionPage(child: const MyGroupsPage()),
+                routes: [
+                  GoRoute(
+                    path: ':groupId',
+                    builder: (context, state) {
+                      final groupId = state.pathParameters['groupId']!;
 
-                    return MultiBlocProvider(
-                      providers: [
-                        BlocProvider(
-                          create: (_) =>
-                              serviceLocator<GroupBloc>()
-                                ..add(FetchGroupById(groupId)),
-                        ),
-                        BlocProvider(
-                          create: (_) => serviceLocator<GroupStudentsBloc>(),
-                        ),
-                        BlocProvider(
-                          create: (_) => serviceLocator<StudentScoreBloc>(),
-                        ),
-                        BlocProvider(
-                          create: (_) => serviceLocator<LeaderboardBloc>(),
-                        ),
-                        BlocProvider(
-                          create: (_) =>
-                              serviceLocator<RecentGroupBloc>()
-                                ..add(LoadRecentGroups()),
-                        ),
-                      ],
-                      child: GroupDetailsPage(groupId: groupId),
-                    );
-                  },
-                  routes: [
-                    GoRoute(
-                      path: 'student-scores/:studentId',
-                      builder: (context, state) {
-                        final studentId = state.pathParameters['studentId']!;
-                        final groupId = state.uri.queryParameters['groupId']!;
-                        final username = state.uri.queryParameters['username']!;
-                        return BlocProvider(
-                          create: (_) =>
-                              serviceLocator<OneStudentScoreBloc>()..add(
-                                FetchOneStudentScores(
-                                  studentId: studentId,
-                                  groupId: groupId,
-                                ),
-                              ),
-                          child: StudentScoresPage(
-                            studentId: studentId,
-                            groupId: groupId,
-                            username: username,
+                      return MultiBlocProvider(
+                        providers: [
+                          BlocProvider(
+                            create: (_) =>
+                                serviceLocator<GroupBloc>()
+                                  ..add(FetchGroupById(groupId)),
                           ),
-                        );
-                      },
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ],
-        ),
-
-        StatefulShellBranch(
-          routes: [
-            GoRoute(
-              path: '/profile',
-              pageBuilder: (context, state) => CustomTransitionPage(
-                child: const ProfilePage(),
-                transitionsBuilder: (_, animation, idx, child) =>
-                    FadeTransition(opacity: animation, child: child),
+                          BlocProvider(
+                            create: (_) => serviceLocator<GroupStudentsBloc>(),
+                          ),
+                          BlocProvider(
+                            create: (_) => serviceLocator<StudentScoreBloc>(),
+                          ),
+                          BlocProvider(
+                            create: (_) => serviceLocator<LeaderboardBloc>(),
+                          ),
+                          BlocProvider(
+                            create: (_) =>
+                                serviceLocator<RecentGroupBloc>()
+                                  ..add(LoadRecentGroups()),
+                          ),
+                        ],
+                        child: GroupDetailsPage(groupId: groupId),
+                      );
+                    },
+                    routes: [
+                      GoRoute(
+                        path: 'student-scores/:studentId',
+                        builder: (context, state) {
+                          final studentId = state.pathParameters['studentId']!;
+                          final groupId = state.uri.queryParameters['groupId']!;
+                          final username =
+                              state.uri.queryParameters['username']!;
+                          return BlocProvider(
+                            create: (_) =>
+                                serviceLocator<OneStudentScoreBloc>()..add(
+                                  FetchOneStudentScores(
+                                    studentId: studentId,
+                                    groupId: groupId,
+                                  ),
+                                ),
+                            child: StudentScoresPage(
+                              studentId: studentId,
+                              groupId: groupId,
+                              username: username,
+                            ),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                ],
               ),
-            ),
-          ],
-        ),
+            ],
+          ),
 
-        StatefulShellBranch(
-          routes: [
-            GoRoute(
-              path: '/home',
-              pageBuilder: (context, state) =>
-                  NoTransitionPage(child: const HomePage()),
-            ),
-          ],
-        ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: '/profile',
+                pageBuilder: (context, state) => CustomTransitionPage(
+                  child: const ProfilePage(),
+                  transitionsBuilder: (_, animation, idx, child) =>
+                      FadeTransition(opacity: animation, child: child),
+                ),
+              ),
+            ],
+          ),
 
-        StatefulShellBranch(
-          routes: [
-            GoRoute(
-              path: '/chat',
-              pageBuilder: (context, state) =>
-                  NoTransitionPage(child: const ChatPage()),
-            ),
-          ],
-        ),
-      ],
-    ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: '/home',
+                pageBuilder: (context, state) =>
+                    NoTransitionPage(child: const HomePage()),
+              ),
+            ],
+          ),
 
-    GoRoute(path: '/login', builder: (_, idx) => const LoginPage()),
-    GoRoute(path: '/signup', builder: (_, idx) => const SignUpPage()),
-  ],
-);
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: '/chat',
+                pageBuilder: (context, state) =>
+                    NoTransitionPage(child: const ChatPage()),
+              ),
+            ],
+          ),
+        ],
+      ),
+
+      GoRoute(path: '/login', builder: (_, idx) => const LoginPage()),
+      GoRoute(path: '/signup', builder: (_, idx) => const SignUpPage()),
+    ],
+  );
+}
