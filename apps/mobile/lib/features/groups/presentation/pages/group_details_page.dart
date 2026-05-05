@@ -58,7 +58,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
     );
 
     return Scaffold(
-      appBar: AppBar(title: Text(group.name)),
+      appBar: AppBar(toolbarHeight: 48, title: Text(group.name)),
 
       body: CustomScrollView(
         slivers: [
@@ -222,13 +222,18 @@ class _GroupInfoHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(12),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text("Teacher: $teacher"),
-          const SizedBox(height: 6),
-          Text("Students: $studentCount"),
+          Text(
+            "Teacher: $teacher",
+            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+          ),
+          Text(
+            "Students: $studentCount",
+            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+          ),
         ],
       ),
     );

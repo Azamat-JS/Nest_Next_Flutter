@@ -24,22 +24,44 @@ class _MyGroupsPageState extends State<MyGroupsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (_) =>
-              serviceLocator<RecentGroupBloc>()..add(LoadRecentGroups()),
+    return BlocProvider(
+      create: (_) => serviceLocator<RecentGroupBloc>()..add(LoadRecentGroups()),
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Search Groups'),
+          leading: Builder(
+            builder: (context) {
+              final isRootTab = GoRouterState.of(
+                context,
+              ).uri.path.startsWith('/groups');
+
+              if (isRootTab) {
+                return IconButton(
+                  icon: const Icon(Icons.menu),
+                  onPressed: () {
+                    Scaffold.of(context).openDrawer();
+                  },
+                );
+              }
+              return const BackButton();
+            },
+          ),
         ),
-      ],
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            _buildHeader(context, controller),
-            SizedBox(height: 20),
-            _buildBody(context),
-          ],
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              vertical: 8.0,
+              horizontal: 12.0,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                _buildHeader(context, controller),
+                SizedBox(height: 20),
+                _buildBody(context),
+              ],
+            ),
+          ),
         ),
       ),
     );
