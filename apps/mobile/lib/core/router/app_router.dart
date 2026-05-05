@@ -15,6 +15,7 @@ import 'package:mobile/features/home/presentation/pages/home_page.dart';
 import 'package:mobile/features/home/presentation/pages/main_screen.dart';
 import 'package:mobile/features/home/presentation/pages/profile_page.dart';
 import 'package:mobile/features/leaderboard/presentation/bloc/leaderboard_bloc.dart';
+import 'package:mobile/features/student_scores/presentation/bloc/one_student_score_bloc.dart';
 import 'package:mobile/features/student_scores/presentation/bloc/student_score_bloc.dart';
 import 'package:mobile/features/student_scores/presentation/pages/student_scores_page.dart';
 
@@ -83,15 +84,24 @@ final GoRouter appRouter = GoRouter(
                   },
                   routes: [
                     GoRoute(
-                      path: '/student-scores/:studentId',
+                      path: 'student-scores/:studentId',
                       builder: (context, state) {
                         final studentId = state.pathParameters['studentId']!;
                         final groupId = state.uri.queryParameters['groupId']!;
                         final username = state.uri.queryParameters['username']!;
-                        return StudentScoresPage(
-                          studentId: studentId,
-                          groupId: groupId,
-                          username: username,
+                        return BlocProvider(
+                          create: (_) =>
+                              serviceLocator<OneStudentScoreBloc>()..add(
+                                FetchOneStudentScores(
+                                  studentId: studentId,
+                                  groupId: groupId,
+                                ),
+                              ),
+                          child: StudentScoresPage(
+                            studentId: studentId,
+                            groupId: groupId,
+                            username: username,
+                          ),
                         );
                       },
                     ),

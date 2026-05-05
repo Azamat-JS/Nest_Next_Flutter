@@ -97,7 +97,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
 
                       return GestureDetector(
                         onTap: () {
-                          context.go(
+                          context.push(
                             '/groups/${group.id}/student-scores/${student.id}'
                             '?groupId=${group.id}&username=${Uri.encodeComponent(student.username)}',
                           );
