@@ -27,13 +27,13 @@ GoRouter createRouter(AuthCheckCubit authCheckCubit) {
       final authState = context.read<AuthCheckCubit>().state;
 
       final isLoggedIn = authState is AuthUserLoggedIn;
-      final isLoggingIn = state.matchedLocation == '/login';
+      final authPages = ['/login', '/signup'];
 
-      if (!isLoggedIn) {
-        return isLoggingIn ? null : '/login';
+      if (!isLoggedIn && !authPages.contains(state.matchedLocation)) {
+        return '/login';
       }
 
-      if (isLoggedIn && isLoggingIn) {
+      if (isLoggedIn && authPages.contains(state.matchedLocation)) {
         return '/groups';
       }
 
