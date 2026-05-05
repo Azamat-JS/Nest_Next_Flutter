@@ -28,7 +28,6 @@ class GroupRemoteDataSourceImpl implements GroupRemoteDataSource {
   Future<GroupModel> getGroupById({required String id}) async {
     try {
       final response = await dioClient.dio.get('/group/$id');
-      print('response: ${response.data}');
       return GroupModel.fromJson(response.data as Map<String, dynamic>);
     } on DioException catch (e) {
       throw Exception(

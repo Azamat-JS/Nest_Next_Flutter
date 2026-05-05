@@ -91,7 +91,7 @@ final GoRouter appRouter = GoRouter(
         final studentId = state.pathParameters['studentId']!;
         final groupId = state.uri.queryParameters['groupId']!;
         final username = state.uri.queryParameters['username']!;
-
+        print('in gorouter: $username');
         return StudentScoresPage(
           studentId: studentId,
           groupId: groupId,

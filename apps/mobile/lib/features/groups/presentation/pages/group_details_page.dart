@@ -59,7 +59,6 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
       (GroupStudentsBloc b) => b.state.students,
     );
 
-    print('studentpage: ${studentsPage?.data}');
     return Scaffold(
       appBar: AppBar(title: Text(group.name)),
 
@@ -100,7 +99,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
 
                       return GestureDetector(
                         onTap: () {
-                          context.push(
+                          context.go(
                             '/student-scores/${student.id}'
                             '?groupId=${group.id}&username=${Uri.encodeComponent(student.username)}',
                           );
@@ -165,15 +164,45 @@ class _LeaderboardHeaderDelegate extends SliverPersistentHeaderDelegate {
   ) {
     return Container(
       height: 50,
-      color: Colors.white,
+      color: Colors.grey.shade800,
       padding: const EdgeInsets.symmetric(horizontal: 12),
       child: const Row(
         children: [
-          Expanded(flex: 1, child: Text('#')),
-          Expanded(flex: 3, child: Text('Student')),
-          Expanded(flex: 2, child: Text('HW', textAlign: TextAlign.center)),
-          Expanded(flex: 2, child: Text('Att', textAlign: TextAlign.center)),
-          Expanded(flex: 2, child: Text('Total', textAlign: TextAlign.center)),
+          Expanded(
+            flex: 1,
+            child: Text('#', style: TextStyle(fontWeight: FontWeight.bold)),
+          ),
+          Expanded(
+            flex: 3,
+            child: Text(
+              'Student',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
+          Expanded(
+            flex: 2,
+            child: Text(
+              'HW',
+              style: TextStyle(fontWeight: FontWeight.bold),
+              textAlign: TextAlign.center,
+            ),
+          ),
+          Expanded(
+            flex: 2,
+            child: Text(
+              'Att',
+              style: TextStyle(fontWeight: FontWeight.bold),
+              textAlign: TextAlign.center,
+            ),
+          ),
+          Expanded(
+            flex: 2,
+            child: Text(
+              'Total',
+              style: TextStyle(fontWeight: FontWeight.bold),
+              textAlign: TextAlign.center,
+            ),
+          ),
         ],
       ),
     );
