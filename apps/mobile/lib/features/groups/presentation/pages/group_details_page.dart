@@ -21,17 +21,15 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final groupId = widget.groupId;
+    final groupId = widget.groupId;
 
-      context.read<GroupStudentsBloc>().add(FetchGroupStudents(groupId, 1, 10));
+    context.read<GroupStudentsBloc>().add(FetchGroupStudents(groupId, 1, 10));
 
-      context.read<LeaderboardBloc>().add(
-        FetchGroupLeaderboardEvent(groupId, 1, 10),
-      );
+    context.read<LeaderboardBloc>().add(
+      FetchGroupLeaderboardEvent(groupId, 1, 10),
+    );
 
-      context.read<StudentScoreBloc>().add(FetchStudentScores(groupId));
-    });
+    context.read<StudentScoreBloc>().add(FetchStudentScores(groupId));
   }
 
   @override
@@ -100,7 +98,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
                       return GestureDetector(
                         onTap: () {
                           context.go(
-                            '/student-scores/${student.id}'
+                            '/groups/${group.id}/student-scores/${student.id}'
                             '?groupId=${group.id}&username=${Uri.encodeComponent(student.username)}',
                           );
                         },

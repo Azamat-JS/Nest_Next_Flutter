@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mobile/core/common/cubit/auth_check_cubit.dart';
-import 'package:mobile/core/common/widgets/auth_gate.dart';
 import 'package:mobile/core/di/service_locator.dart';
 import 'package:mobile/features/auth/presentation/pages/login_page.dart';
 import 'package:mobile/features/auth/presentation/pages/sign_up_page.dart';
@@ -70,8 +69,8 @@ final GoRouter appRouter = GoRouter(
                         BlocProvider(
                           create: (_) => serviceLocator<StudentScoreBloc>(),
                         ),
-                        BlocProvider.value(
-                          value: serviceLocator<LeaderboardBloc>(),
+                        BlocProvider(
+                          create: (_) => serviceLocator<LeaderboardBloc>(),
                         ),
                         BlocProvider(
                           create: (_) =>

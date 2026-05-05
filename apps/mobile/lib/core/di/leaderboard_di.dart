@@ -22,7 +22,7 @@ Future<void> initLeaderboard() async {
     ..registerLazySingleton<GetGroupLeaderBoardUsecase>(
       () => GetGroupLeaderBoardUsecase(serviceLocator<LeaderboardRepository>()),
     )
-    ..registerLazySingleton<LeaderboardBloc>(
+    ..registerFactory<LeaderboardBloc>(
       () => LeaderboardBloc(
         getGlobal: serviceLocator<GetGlobalLeaderBoardUsecase>(),
         getGroup: serviceLocator<GetGroupLeaderBoardUsecase>(),
