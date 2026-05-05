@@ -132,11 +132,14 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
               pinned: true,
               delegate: _LeaderboardHeaderDelegate(),
             ),
-            SliverList(
-              delegate: SliverChildBuilderDelegate((context, index) {
-                final student = leaderboardPage.data[index];
-                return LeaderboardRow(student: student, index: index);
-              }, childCount: leaderboardPage.data.length),
+            SliverPadding(
+              padding: const EdgeInsets.only(left: 12, right: 12, bottom: 18),
+              sliver: SliverList(
+                delegate: SliverChildBuilderDelegate((context, index) {
+                  final student = leaderboardPage.data[index];
+                  return LeaderboardRow(student: student, index: index);
+                }, childCount: leaderboardPage.data.length),
+              ),
             ),
           ],
         ],
@@ -160,48 +163,51 @@ class _LeaderboardHeaderDelegate extends SliverPersistentHeaderDelegate {
     double shrinkOffset,
     bool overlapsContent,
   ) {
-    return Container(
-      height: 50,
-      color: Colors.grey.shade800,
+    return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),
-      child: const Row(
-        children: [
-          Expanded(
-            flex: 1,
-            child: Text('#', style: TextStyle(fontWeight: FontWeight.bold)),
-          ),
-          Expanded(
-            flex: 3,
-            child: Text(
-              'Student',
-              style: TextStyle(fontWeight: FontWeight.bold),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 12),
+        height: 50,
+        color: Colors.grey.shade800,
+        child: const Row(
+          children: [
+            Expanded(
+              flex: 1,
+              child: Text('#', style: TextStyle(fontWeight: FontWeight.bold)),
             ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Text(
-              'HW',
-              style: TextStyle(fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
+            Expanded(
+              flex: 3,
+              child: Text(
+                'Student',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
             ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Text(
-              'Att',
-              style: TextStyle(fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
+            Expanded(
+              flex: 2,
+              child: Text(
+                'HW',
+                style: TextStyle(fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+              ),
             ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Text(
-              'Total',
-              style: TextStyle(fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
+            Expanded(
+              flex: 2,
+              child: Text(
+                'Att',
+                style: TextStyle(fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+              ),
             ),
-          ),
-        ],
+            Expanded(
+              flex: 2,
+              child: Text(
+                'Total',
+                style: TextStyle(fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

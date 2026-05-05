@@ -7,9 +7,9 @@ class LeaderboardRow extends StatelessWidget {
   const LeaderboardRow({super.key, required this.student, required this.index});
 
   Color _getRankColor() {
-    if (index == 0) return Colors.blue;
-    if (index == 1) return Colors.green;
-    if (index == 2) return Colors.orange;
+    if (index == 0) return const Color.fromARGB(255, 5, 114, 203);
+    if (index == 1) return const Color.fromARGB(255, 52, 132, 54);
+    if (index == 2) return const Color.fromARGB(255, 183, 110, 0);
     return Colors.transparent;
   }
 
