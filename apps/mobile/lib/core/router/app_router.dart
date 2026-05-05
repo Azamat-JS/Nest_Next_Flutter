@@ -15,6 +15,7 @@ import 'package:mobile/features/home/presentation/pages/home_page.dart';
 import 'package:mobile/features/home/presentation/pages/main_screen.dart';
 import 'package:mobile/features/home/presentation/pages/profile_page.dart';
 import 'package:mobile/features/leaderboard/presentation/bloc/leaderboard_bloc.dart';
+import 'package:mobile/features/leaderboard/presentation/pages/leaderboard_page.dart';
 import 'package:mobile/features/student_scores/presentation/bloc/one_student_score_bloc.dart';
 import 'package:mobile/features/student_scores/presentation/bloc/student_score_bloc.dart';
 import 'package:mobile/features/student_scores/presentation/pages/student_scores_page.dart';
@@ -135,7 +136,7 @@ GoRouter createRouter(AuthCheckCubit authCheckCubit) {
                 pageBuilder: (context, state) => NoTransitionPage(
                   child: BlocProvider(
                     create: (_) => serviceLocator<LeaderboardBloc>(),
-                    child: const HomePage(),
+                    child: const TotalLeaderboardPage(),
                   ),
                 ),
               ),
