@@ -12,6 +12,15 @@ class MainScreen extends StatelessWidget {
     return Scaffold(
       body: navigationShell,
       drawer: const AppDrawer(),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        leading: Builder(
+          builder: (context) => IconButton(
+            icon: const Icon(Icons.menu),
+            onPressed: () => Scaffold.of(context).openDrawer(),
+          ),
+        ),
+      ),
       bottomNavigationBar: CurvedNavBar(
         currentIndex: navigationShell.currentIndex,
         onTap: (index) {
