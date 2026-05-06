@@ -3,10 +3,12 @@ import { StudentScoreRepository } from "../student_score.service";
 import { PrismaService } from "src/prisma/prisma.service";
 import { BulkScoreDto } from "../dto/bulk.dto";
 import { ScoreType } from "@prisma/client/edge";
+import { EventEmitter2 } from "@nestjs/event-emitter";
+import { ScoreCreatedEvent } from "src/lib/events/score_create_event"
 
 @Injectable()
 export class BulkAddScoreUseCase {
-    constructor(private readonly studentScoreRepo: StudentScoreRepository, private readonly prisma: PrismaService) { }
+    constructor(private readonly studentScoreRepo: StudentScoreRepository, private readonly prisma: PrismaService, private eventEmitter: EventEmitter2) { }
 
     async execute(dto: BulkScoreDto) {
         const { groupId, scoreType, students } = dto;
@@ -54,6 +56,8 @@ export class BulkAddScoreUseCase {
                 };
                 const addedScore = await this.studentScoreRepo.addScore(tx, scoreDto);
                 results.push(addedScore);
+
+                this.eventEmitter.emit('score.created', new ScoreCreatedEvent(studentId, score, scoreType, date))
             }
         })
     }
