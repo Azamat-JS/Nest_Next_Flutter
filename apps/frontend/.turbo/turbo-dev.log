@@ -1,0 +1,30 @@
+
+> frontend@0.1.0 dev /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend
+> next dev -p 4000
+
+[1m[38;2;173;127;168m▲ Next.js 16.2.1[39m[22m (Turbopack)
+- Local:         http://localhost:4000
+- Network:       http://192.168.13.97:4000
+- Environments: .env.local
+[32m[1m✓[22m[39m Ready in 406ms
+[33m[1m⚠[22m[39m Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /Users/azamatabdullayev/Desktop/full-stack-turbo/pnpm-workspace.yaml as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend/pnpm-workspace.yaml
+
+
+ GET / [32m200[39m in 455ms[2m (next.js: 267ms, application-code: 188ms)[22m
+ GET /groups [32m200[39m in 65ms[2m (next.js: 37ms, application-code: 29ms)[22m
+Error: Turbopack build failed with 1 errors:
+./apps/frontend/src/app
+Error: Next.js inferred your workspace root, but it may not be correct.
+    We couldn't find the Next.js package ([1m[31mnext/package.json[39m[22m) from the project directory: [1m[31m/Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend/src/app[39m[22m
+     To fix this, set [32mturbopack.root[39m in your Next.js config, or ensure the Next.js package is resolvable from this directory.
+    Note: For security and performance reasons, files outside of the project directory will not be compiled.
+    See [1m[31mhttps://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory[39m[22m for more information.
+
+    at [3mignore-listed frames[23m
+[?25h
+[41m[30m ELIFECYCLE [39m[49m [31mCommand failed with exit code 1.[39m

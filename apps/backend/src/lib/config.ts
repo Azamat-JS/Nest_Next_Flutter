@@ -30,4 +30,19 @@ export class AppConfig {
     @IsString()
     @Value("DATABASE_URL")
     DATABASE_URL!: string;
+
+    @IsNotEmpty()
+    @IsString()
+    @Value("FIREBASE_PROJECT_ID")
+    FIREBASE_PROJECT_ID!: string;
+
+    @IsNotEmpty()
+    @IsString()
+    @Value("FIREBASE_CLIENT_EMAIL")
+    FIREBASE_CLIENT_EMAIL!: string;
+
+    @IsNotEmpty()
+    @IsString()
+    @Value("FIREBASE_PRIVATE_KEY")
+    FIREBASE_PRIVATE_KEY!: string;
 }
