@@ -453,3 +453,17 @@
 2026-05-06T12:01:30.535920Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
 2026-05-06T12:01:57.434338Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/lib/shared/services/notification.service.ts")}
 2026-05-06T12:01:57.434350Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T12:06:08.635283Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/lib/firebase/firebase_provider.ts")}
+2026-05-06T12:06:08.635289Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T12:06:19.034434Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/lib/firebase/firebase_provider.ts")}
+2026-05-06T12:06:19.034447Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T12:06:27.435484Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/lib/firebase/firebase_provider.ts")}
+2026-05-06T12:06:27.435496Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T12:06:34.534291Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/lib/firebase/firebase_provider.ts")}
+2026-05-06T12:06:34.534299Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T12:08:02.234654Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/lib/firebase/firebase_provider.ts")}
+2026-05-06T12:08:02.234664Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T12:08:26.232682Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/lib/firebase/firebase_provider.ts")}
+2026-05-06T12:08:26.232693Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T12:08:48.732259Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/lib/firebase/firebase_provider.ts")}
+2026-05-06T12:08:48.732271Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
