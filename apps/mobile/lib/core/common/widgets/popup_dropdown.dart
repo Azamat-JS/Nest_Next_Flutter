@@ -17,13 +17,13 @@ class PopupDropdown extends StatelessWidget {
             context.go('/login');
             break;
 
-          case 'profile':
-            context.go('/profile');
+          case 'leaderboard':
+            context.go('/home');
             break;
         }
       },
       itemBuilder: (context) => const [
-        PopupMenuItem(value: 'profile', child: Text('Profile')),
+        PopupMenuItem(value: 'leaderboard', child: Text('Leaderboard')),
         PopupMenuItem(value: 'logout', child: Text('Logout')),
       ],
     );

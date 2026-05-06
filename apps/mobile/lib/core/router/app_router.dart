@@ -11,7 +11,6 @@ import 'package:mobile/features/groups/presentation/bloc/students/group_students
 import 'package:mobile/features/groups/presentation/pages/group_details_page.dart';
 import 'package:mobile/features/groups/presentation/pages/my_groups_page.dart';
 import 'package:mobile/features/home/presentation/pages/chat_page.dart';
-import 'package:mobile/features/home/presentation/pages/home_page.dart';
 import 'package:mobile/features/home/presentation/pages/main_screen.dart';
 import 'package:mobile/features/home/presentation/pages/profile_page.dart';
 import 'package:mobile/features/leaderboard/presentation/bloc/leaderboard_bloc.dart';
