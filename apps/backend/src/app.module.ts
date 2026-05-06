@@ -6,6 +6,7 @@ import { ConfigifyModule } from '@itgorillaz/configify';
 import { GroupModule } from './group/group.module';
 import { StudentScoreModule } from './student_score/student_score.module';
 import { EventEmitterModule } from '@nestjs/event-emitter';
+import { FirebaseModule } from './lib/firebase/firebase.module';
 
 
 @Module({
@@ -13,6 +14,7 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
     ConfigifyModule.forRootAsync(),
     PrismaModule,
     EventEmitterModule.forRoot(),
+    FirebaseModule,
     ChatModule,
     UsersModule,
     GroupModule,
