@@ -9,6 +9,8 @@ import 'package:mobile/core/theme/app_theme.dart';
 import 'package:mobile/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:mobile/features/groups/presentation/bloc/group/group_bloc.dart';
 import 'package:mobile/core/di/init_dependencies.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:mobile/firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,6 +21,7 @@ void main() async {
   await authCheck.checkAuthStatus();
 
   final router = createRouter(authCheck);
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   runApp(
     MultiBlocProvider(
