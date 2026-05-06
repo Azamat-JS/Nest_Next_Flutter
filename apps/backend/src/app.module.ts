@@ -5,12 +5,14 @@ import { UsersModule } from './users/users.module';
 import { ConfigifyModule } from '@itgorillaz/configify';
 import { GroupModule } from './group/group.module';
 import { StudentScoreModule } from './student_score/student_score.module';
+import { EventEmitterModule } from '@nestjs/event-emitter';
 
 
 @Module({
   imports: [
     ConfigifyModule.forRootAsync(),
     PrismaModule,
+    EventEmitterModule.forRoot(),
     ChatModule,
     UsersModule,
     GroupModule,
