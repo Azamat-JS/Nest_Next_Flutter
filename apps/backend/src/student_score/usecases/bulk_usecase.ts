@@ -11,10 +11,11 @@ export class BulkAddScoreUseCase {
     constructor(private readonly studentScoreRepo: StudentScoreRepository, private readonly prisma: PrismaService, private eventEmitter: EventEmitter2) { }
 
     async execute(dto: BulkScoreDto) {
+        const events: ScoreCreatedEvent[] = [];
         const { groupId, scoreType, students } = dto;
 
-        return this.prisma.$transaction(async (tx) => {
-            const results: any[] = [];
+        const results = await this.prisma.$transaction(async (tx) => {
+            const res: any[] = [];
 
             for (const student of students) {
                 const { studentId, score } = student;
@@ -55,10 +56,16 @@ export class BulkAddScoreUseCase {
                     date,
                 };
                 const addedScore = await this.studentScoreRepo.addScore(tx, scoreDto);
-                results.push(addedScore);
+                res.push(addedScore);
 
-                this.eventEmitter.emit('score.created', new ScoreCreatedEvent(studentId, score, scoreType, date))
+                events.push(new ScoreCreatedEvent(studentId, score, scoreType, date))
             }
-        })
+            return res;
+        });
+
+        for (const event of events) {
+            this.eventEmitter.emit('score.created', event);
+        }
+        return results;
     }
 }

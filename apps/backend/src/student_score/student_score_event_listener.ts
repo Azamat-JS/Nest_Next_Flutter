@@ -9,6 +9,6 @@ export class StudentScoreEventListener {
 
     @OnEvent('score.created')
     async handleScoreCreated(event: ScoreCreatedEvent) {
-        await this.notificationService.sendNotification(event)
+        this.notificationService.sendNotification(event)
     }
 }
