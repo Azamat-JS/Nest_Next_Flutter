@@ -18,6 +18,17 @@ export class StudentScoreRepository {
         })
     }
 
+    async findStudentsInGroup(groupId: string, studentIds: string[]) {
+        return this.prisma.studentGroup.findMany({
+            where: {
+                groupId,
+                studentId: {
+                    in: studentIds
+                }
+            }
+        })
+    }
+
     async findOneStudentScores(
         studentId: string,
         groupId: string,
@@ -263,7 +274,7 @@ export class StudentScoreRepository {
     }
 
     async findTodayScoreWithType(
-        studentId: string,
+        studentIds: string[],
         groupId: string,
         scoreType: ScoreType
     ) {
@@ -273,9 +284,11 @@ export class StudentScoreRepository {
         const endOfDay = new Date();
         endOfDay.setHours(23, 59, 59, 999);
 
-        return this.prisma.scoreEvent.findFirst({
+        return this.prisma.scoreEvent.findMany({
             where: {
-                studentId,
+                studentId: {
+                    in: studentIds
+                },
                 groupId,
                 type: scoreType,
                 createdAt: {

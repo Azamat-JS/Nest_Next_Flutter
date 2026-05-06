@@ -2,7 +2,6 @@ import { BadRequestException, Injectable } from "@nestjs/common";
 import { StudentScoreRepository } from "../student_score.service";
 import { PrismaService } from "src/prisma/prisma.service";
 import { BulkScoreDto } from "../dto/bulk.dto";
-import { ScoreType } from "@prisma/client/edge";
 import { EventEmitter2 } from "@nestjs/event-emitter";
 import { ScoreCreatedEvent } from "src/lib/events/score_create_event"
 
@@ -11,61 +10,58 @@ export class BulkAddScoreUseCase {
     constructor(private readonly studentScoreRepo: StudentScoreRepository, private readonly prisma: PrismaService, private eventEmitter: EventEmitter2) { }
 
     async execute(dto: BulkScoreDto) {
-        const events: ScoreCreatedEvent[] = [];
         const { groupId, scoreType, students } = dto;
 
-        const results = await this.prisma.$transaction(async (tx) => {
-            const res: any[] = [];
+        if (!students.length) {
+            throw new BadRequestException('No students provided');
+        }
 
-            for (const student of students) {
-                const { studentId, score } = student;
+        const studentIds = students.map(s => s.studentId);
 
-                if (score <= 0) {
-                    throw new BadRequestException('Score must be positive')
-                }
+        const studentGroups = await this.studentScoreRepo.findStudentsInGroup(groupId, studentIds);
+        const studentGroupMap = new Map(studentGroups.map(sg => [sg.studentId, sg]));
 
-                const restrictOncePerDayTypes = ["ATTENDANCE", "HOMEWORK"] as ScoreType[];
+        const todayScores = await this.studentScoreRepo.findTodayScoreWithType(studentIds, groupId, scoreType);
+        const existingScoreSet = new Set(todayScores.map(s => s.id));
 
-                if (restrictOncePerDayTypes.includes(scoreType)) {
-                    const alreadyMarked = await this.studentScoreRepo.findTodayScoreWithType(
-                        studentId,
-                        groupId,
-                        scoreType
-                    );
+        const date = new Date();
+        date.setHours(0, 0, 0, 0);
 
-                    if (alreadyMarked) {
-                        throw new BadRequestException(
-                            `The student already has a ${scoreType.toLowerCase()} score for today`
-                        );
-                    }
-                }
-
-                const studentGroup = await this.studentScoreRepo.findStudentWithGroup(studentId, groupId);
-
-                if (!studentGroup) {
-                    throw new BadRequestException(`Student ${studentId} is not part of the group`);
-                }
-                const date = new Date();
-                date.setHours(0, 0, 0, 0);
-
-                const scoreDto = {
-                    studentId,
-                    groupId,
-                    scoreType,
-                    score,
-                    date,
-                };
-                const addedScore = await this.studentScoreRepo.addScore(tx, scoreDto);
-                res.push(addedScore);
-
-                events.push(new ScoreCreatedEvent(studentId, score, scoreType, date))
+        for (const { studentId, score } of students) {
+            if (score <= 0) {
+                throw new BadRequestException('Score must be greater than 0');
             }
-            return res;
+
+            if (!studentGroupMap.has(studentId)) {
+                throw new BadRequestException('Student is not part of the group');
+            }
+
+            if (
+                ['HOMEWORK', 'ATTENDANCE'].includes(scoreType) && existingScoreSet.has(studentId)
+            ) {
+                throw new BadRequestException('Score already exists for today');
+            }
+        }
+        const data = students.map(({ score, studentId }) => ({
+            studentId,
+            groupId,
+            scoreType,
+            score,
+            date
+        }));
+
+        await this.prisma.$transaction(async (tx) => {
+            await tx.studentScore.createMany({ data });
         });
 
-        for (const event of events) {
-            this.eventEmitter.emit('score.created', event);
-        }
-        return results;
+        const events = students.map(({ studentId, score }) => new ScoreCreatedEvent(studentId, score, scoreType, date));
+
+        setImmediate(() => {
+            for (const event of events) {
+                this.eventEmitter.emit('score.created', event);
+            }
+        });
+
+        return { count: data.length };
     }
 }

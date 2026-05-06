@@ -467,3 +467,149 @@
 2026-05-06T12:08:26.232693Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
 2026-05-06T12:08:48.732259Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/lib/firebase/firebase_provider.ts")}
 2026-05-06T12:08:48.732271Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T12:14:18.131451Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T12:14:18.131468Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T12:15:36.330247Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/student_score.service.ts")}
+2026-05-06T12:15:36.330255Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T12:16:47.131188Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/student_score.service.ts")}
+2026-05-06T12:16:47.131198Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T12:17:40.731663Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T12:17:40.731671Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T12:18:36.031299Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T12:18:36.031311Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T12:18:56.730854Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T12:18:56.730862Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T12:19:11.030267Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T12:19:11.030275Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T12:19:11.131097Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T12:19:11.131108Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T12:19:11.131150Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2026-05-06T12:19:35.830548Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T12:19:35.830558Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T12:19:42.630737Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T12:19:42.630748Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T12:19:57.530439Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T12:19:57.530453Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T12:21:08.530620Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/student_score.service.ts")}
+2026-05-06T12:21:08.530631Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T12:21:14.933234Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T12:21:14.933245Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T12:21:15.030493Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T12:21:15.030504Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T12:21:15.030554Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2026-05-06T12:21:33.230731Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/student_score.service.ts")}
+2026-05-06T12:21:33.230742Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T12:22:01.330981Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T12:22:01.330992Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T12:22:08.030073Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T12:22:08.030083Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T12:22:33.831021Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T12:22:33.831033Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T12:22:56.730349Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T12:22:56.730359Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T12:23:29.631434Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T12:23:29.631444Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T12:24:07.433790Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T12:24:07.433802Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T12:24:24.636680Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T12:24:24.636690Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T12:24:40.936734Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T12:24:40.936744Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T12:25:08.738383Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T12:25:08.738395Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T12:25:16.738571Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T12:25:16.738582Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T12:25:44.337738Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T12:25:44.337746Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T12:26:14.236946Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T12:26:14.236959Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T12:27:25.538035Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T12:27:25.538045Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T12:27:37.538340Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T12:27:37.538349Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T12:27:47.938224Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T12:27:47.938233Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T12:27:56.937768Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T12:27:56.937776Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T12:28:26.937994Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T12:28:26.938008Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T12:29:04.138597Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T12:29:04.138607Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T12:29:28.937255Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T12:29:28.937265Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T12:29:36.637656Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T12:29:36.637664Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T12:30:13.638230Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T12:30:13.638238Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T12:30:21.637281Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T12:30:21.637293Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T12:30:28.837675Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T12:30:28.837700Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T12:30:50.538507Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T12:30:50.538518Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T12:31:21.837291Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T12:31:21.837302Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T12:31:28.737779Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T12:31:28.737788Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T12:31:41.236832Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T12:31:41.236839Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T13:59:32.141116Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T13:59:32.141135Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T13:59:49.640926Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T13:59:49.640935Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T14:00:03.640647Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T14:00:03.640655Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T14:00:17.040810Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T14:00:17.040820Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T14:00:35.140076Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T14:00:35.140087Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T14:00:47.040630Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T14:00:47.040639Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T14:01:24.839906Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T14:01:24.839916Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T14:01:46.440616Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T14:01:46.440626Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T14:02:09.740970Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T14:02:09.740979Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T14:02:23.340180Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T14:02:23.340191Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T14:02:33.539474Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T14:02:33.539485Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T14:02:58.840090Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T14:02:58.840100Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T14:03:34.541040Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T14:03:34.541050Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T14:04:55.439253Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T14:04:55.439264Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T14:05:13.940100Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T14:05:13.940108Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T14:05:18.840553Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T14:05:18.840564Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T14:05:42.240923Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T14:05:42.240933Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T14:06:37.140910Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T14:06:37.140928Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T14:07:27.440410Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T14:07:27.440418Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T14:07:48.340633Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T14:07:48.340645Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T14:08:16.440746Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T14:08:16.440760Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T14:08:37.140640Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T14:08:37.140647Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T14:09:00.440378Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T14:09:00.440387Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T14:09:26.540794Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T14:09:26.540807Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T14:09:45.339390Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T14:09:45.339398Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T14:10:04.840296Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T14:10:04.840308Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T14:10:21.540388Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T14:10:21.540400Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T14:10:59.740274Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T14:10:59.740285Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T14:11:20.139967Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T14:11:20.139977Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-06T14:11:36.040713Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/student_score/usecases/bulk_usecase.ts")}
+2026-05-06T14:11:36.040721Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
