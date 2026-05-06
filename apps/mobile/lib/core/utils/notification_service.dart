@@ -14,9 +14,18 @@ class NotificationService {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       print('Notification received: ${message.notification?.title}');
     });
+
+    FirebaseMessaging.onMessageOpenedApp.listen((message) {
+      print('notification opened');
+      handleNavigationMessage(message);
+    });
   }
 
   Future<void> sendTokenToBackend(String? token) async {
     /// API call to send token to backend
+  }
+
+  Future<void> handleNavigationMessage(RemoteMessage message) async {
+    /// Handle navigation message here
   }
 }
