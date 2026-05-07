@@ -22,7 +22,8 @@ export class BulkAddScoreUseCase {
         const studentGroupMap = new Map(studentGroups.map(sg => [sg.studentId, sg]));
 
         const todayScores = await this.studentScoreRepo.findTodayScoreWithType(studentIds, groupId, scoreType);
-        const existingScoreSet = new Set(todayScores.map(s => s.id));
+
+        const existingScoreSet = new Set(todayScores.map(s => s.studentId));
 
         const date = new Date();
         date.setHours(0, 0, 0, 0);
@@ -45,13 +46,21 @@ export class BulkAddScoreUseCase {
         const data = students.map(({ score, studentId }) => ({
             studentId,
             groupId,
-            scoreType,
+            type: scoreType,
             score,
             date
         }));
 
         await this.prisma.$transaction(async (tx) => {
-            await tx.studentScore.createMany({ data });
+            for (const s of students) {
+                await this.studentScoreRepo.addScore(tx, {
+                    studentId: s.studentId,
+                    groupId,
+                    scoreType: scoreType,
+                    score: s.score,
+                    date
+                })
+            }
         });
 
         const events = students.map(({ studentId, score }) => new ScoreCreatedEvent(studentId, score, scoreType, date));

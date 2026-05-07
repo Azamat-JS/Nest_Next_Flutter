@@ -296,7 +296,7 @@ export class StudentScoreRepository {
                     lte: endOfDay,
                 },
             },
-            select: { id: true },
+            select: { studentId: true },
         });
     }
 
