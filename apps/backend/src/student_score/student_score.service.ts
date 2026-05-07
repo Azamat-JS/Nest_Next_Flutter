@@ -389,17 +389,15 @@ export class StudentScoreRepository {
             },
         });
 
+        const studentIds = [...new Set(grouped.map(g => g.studentId))]
+
         const students = await this.prisma.users.findMany({
             where: {
-                scoreEvents: {
-                    some: { groupId },
-                },
-            },
-            select: {
-                id: true,
-                username: true,
-            },
-        });
+                id: {
+                    in: studentIds
+                }
+            }
+        })
 
         const studentMap = new Map(
             students.map((s) => [s.id, s.username])
@@ -436,8 +434,38 @@ export class StudentScoreRepository {
             if (type === 'ATTENDANCE') entry.attendance = value;
 
             entry.total += value;
+        };
+
+        const studentsArray = Array.from(resultMap.values());
+        const numberOfStudents = studentsArray.length;
+
+        if (numberOfStudents === 0) {
+            return {
+                students: [],
+                avgHomework: 0,
+                avgAttendance: 0,
+                avg: 0
+            }
+        };
+
+        let totalHomework: number = 0;
+        let totalAttendance: number = 0;
+
+        for (const student of studentsArray) {
+            totalAttendance += student.attendance;
+            totalHomework += student.homework;
         }
-        return Array.from(resultMap.values());
+
+        const avgHomework = totalHomework / numberOfStudents;
+        const avgAttendance = totalAttendance / numberOfStudents;
+
+        const avg = (avgHomework + avgAttendance) / 2;
+        return {
+            students: studentsArray,
+            avgHomework,
+            avgAttendance,
+            avg
+        }
     }
 
     async deleteMany() {
