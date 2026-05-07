@@ -97,6 +97,14 @@ export class UsersService {
         });
     }
 
+    async indentifyDevice(token: string) {
+        try {
+
+        } catch (error) {
+
+        }
+    }
+
     async createUser(createUserDto: CreateUserDto) {
         try {
             const existingUser = await this.prisma.users.findUnique({

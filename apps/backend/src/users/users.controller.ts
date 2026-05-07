@@ -20,6 +20,11 @@ export class UsersController {
     return this.usersService.getUserById(req.user.userId);
   }
 
+  @Post('device-token')
+  async indentifyDevice(@Body() token: string) {
+    return this.usersService.indentifyDevice(token);
+  }
+
   @Post('register')
   async createUser(@Body() createUserDto: CreateUserDto) {
     return this.usersService.createUser(createUserDto);

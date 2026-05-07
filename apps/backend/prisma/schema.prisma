@@ -32,6 +32,7 @@ model Users {
   scoreEvents   ScoreEvent[]
   studentScore  StudentScore[]
   sessions      Session[]
+  devices       DeviceToken[]
 
 
   @@index([email])
@@ -50,6 +51,27 @@ model Session {
   deviceInfo String?
   isRevoked Boolean @default(false)
   @@map("Session")
+}
+
+model DeviceToken {
+  id String @id @default(cuid())
+  userId String
+  user Users @relation(fields: [userId], references: [id])
+
+  fcmToken String @unique
+
+  deviceType String?
+  deviceName String?
+  appVersion String?
+
+  isActive Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+
+  @@map("DeviceToken")
 }
 
 model ParentStudent {

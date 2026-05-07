@@ -1,4 +1,3 @@
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -50,5 +49,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-/// After logout, login is not working, fix it!
