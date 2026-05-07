@@ -248,6 +248,7 @@ export class StudentScoreRepository {
 
         const resultMap = new Map<string, any>();
 
+
         for (const s of students) {
             resultMap.set(s.id, {
                 studentId: s.id,
@@ -257,6 +258,7 @@ export class StudentScoreRepository {
                 total: 0,
             });
         }
+        const resultsArray = Array.from(resultMap.values());
 
         for (const g of grouped) {
             const entry = resultMap.get(g.studentId);
@@ -269,8 +271,35 @@ export class StudentScoreRepository {
 
             entry.total += value;
         }
+        const numberOfStudents = resultsArray.length;
 
-        return Array.from(resultMap.values());
+        if (numberOfStudents === 0) {
+            return {
+                students: [],
+                avgHomework: 0,
+                avgAttendance: 0,
+                avg: 0
+            }
+        }
+
+        let totalHomework: number = 0;
+        let totalAttendance: number = 0;
+
+        for (const student of resultsArray) {
+            totalAttendance += student.attendance;
+            totalHomework += student.homework;
+        }
+
+        const avgHomework = totalHomework / numberOfStudents;
+        const avgAttendance = totalAttendance / numberOfStudents;
+
+        const avg = (avgHomework + avgAttendance) / 2;
+        return {
+            students: resultsArray,
+            avgHomework,
+            avgAttendance,
+            avg
+        }
     }
 
     async findTodayScoreWithType(

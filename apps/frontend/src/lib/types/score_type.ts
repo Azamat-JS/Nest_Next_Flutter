@@ -24,3 +24,9 @@ export type StudentScoreResponse = {
     last_page: number;
 }
 
+export type GroupScoreResponse = {
+    students: StudentScoreRow[];
+    avgHomework: number;
+    avgAttendance: number;
+    avg: number;
+};

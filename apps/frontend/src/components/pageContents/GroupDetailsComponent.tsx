@@ -25,7 +25,7 @@ import { Input } from "@/components/ui/input"
 import { TokenPayload } from '@/lib/types/token_payload';
 import AddScoreDrawer from '../AddScoreDrawer';
 import { useSuspenseQuery } from '@tanstack/react-query';
-import { StudentScoreRow } from '@/lib/types/score_type';
+import { GroupScoreResponse, StudentScoreRow } from '@/lib/types/score_type';
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import {
     Dialog,
@@ -165,13 +165,16 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
         }
     })
 
-    const { data: studentScores } = useSuspenseQuery({
+    const { data: studentScores } = useSuspenseQuery<GroupScoreResponse>({
         queryKey: ["students", groupId],
         queryFn: async () => {
-            const res = await axios.get(`${API}/student-score/today/students/${groupId}`, { headers: { Authorization: `Bearer ${token}` } });
+            const res = await axios.get(
+                `${API}/student-score/today/students/${groupId}`,
+                { headers: { Authorization: `Bearer ${token}` } }
+            );
             return res.data;
         },
-    })
+    });
 
     const group: GroupType = data;
     const groupStudents: TokenPayload[] = groupStudentsData.data.length > 0 ? groupStudentsData.data : [];
@@ -179,10 +182,9 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
     const lastPage = meta?.last_page ?? 1;
 
 
-    const scoreMap = new Map<string, StudentScoreRow>();
-    studentScores.forEach((s: StudentScoreRow) => {
-        scoreMap.set(s.studentId, s);
-    });
+    const scoreMap = new Map(
+        studentScores.students.map((s) => [s.studentId, s])
+    )
 
     const existingStudents = new Set(
         group?.students?.map((s) => s.id) ?? []
