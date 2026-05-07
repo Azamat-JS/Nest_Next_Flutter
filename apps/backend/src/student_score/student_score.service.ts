@@ -378,7 +378,7 @@ export class StudentScoreRepository {
 
         if (!group) throw new NotFoundException(`Group not found: ${groupId}`)
 
-        const students = await this.prisma.studentScore.findMany({
+        const [data, total] = await Promise.all([this.prisma.studentScore.findMany({
             take: dto.limit,
             skip,
             where: {
@@ -397,13 +397,19 @@ export class StudentScoreRepository {
                     }
                 },
             }
-        });
+        }),
+        this.prisma.studentScore.count({
+            where: {
+                groupId,
+            },
+        })
+        ])
         return {
-            data: students,
+            data,
             meta: {
-                total: students.length,
+                total: total,
                 page,
-                last_page: Math.ceil(students.length / limit),
+                last_page: Math.ceil(total / limit),
                 limit
             }
         }

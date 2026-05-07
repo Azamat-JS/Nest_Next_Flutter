@@ -98,7 +98,6 @@ const GroupLeaderBoard = ({ groupId }: { groupId: string }) => {
                 </TableBody>
             </Table>
 
-
             {/* pagination */}
             <div className="grid grid-cols-2 items-center mt-4">
 
