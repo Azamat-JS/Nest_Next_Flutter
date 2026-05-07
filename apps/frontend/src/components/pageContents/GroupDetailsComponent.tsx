@@ -186,6 +186,10 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
         studentScores.students.map((s) => [s.studentId, s])
     )
 
+    const avgAttendance = studentScores.avgAttendance;
+    const avgHomework = studentScores.avgHomework;
+    const avgTotal = studentScores.avg;
+
     const existingStudents = new Set(
         group?.students?.map((s) => s.id) ?? []
     );
@@ -196,6 +200,11 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
 
     return (
         <>
+            <div className="mb-4 flex gap-6">
+                <div>📘 Avg Homework: {avgHomework}</div>
+                <div>📊 Avg Attendance: {avgAttendance}</div>
+                <div>🏆 Avg Total: {avgTotal}</div>
+            </div>
             <Table>
                 <TableCaption className="text-center font-bold text-lg">
                     Showing {groupStudents.length} of {meta?.total ?? 0} students
