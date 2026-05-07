@@ -14,10 +14,31 @@ import {
     TableRow,
 } from "@/components/ui/table"
 import { LeaderBoardType } from "@/lib/types/token_payload";
-import { PaginationType } from "@/lib/types/groups";
-
+import { Field, FieldGroup, FieldLabel } from "@/components/ui/field"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { AddStudentPayload, GroupType, PaginationType } from "@/lib/types/groups"
+import {
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectLabel,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select"
+import {
+    Pagination,
+    PaginationContent,
+    PaginationItem,
+    PaginationLink,
+    PaginationNext,
+    PaginationPrevious,
+} from "@/components/ui/pagination"
+import { useRouter } from "next/navigation";
 
 const GroupLeaderBoard = ({ groupId }: { groupId: string }) => {
+    const router = useRouter();
     const searchParams = useSearchParams();
     const page = Number(searchParams.get('page') ?? 1);
     const limit = Number(searchParams.get('limit') ?? 10);
@@ -49,33 +70,82 @@ const GroupLeaderBoard = ({ groupId }: { groupId: string }) => {
     const meta: PaginationType = groupStudentsData?.meta ?? {}
     const lastPage = meta?.last_page ?? 1;
     return (
+        <>
+            <Table>
+                <TableCaption className="text-center font-bold text-lg">
+                    Showing {groupStudentsData.length} of {meta?.total ?? 0} students
+                </TableCaption>
+                <TableHeader>
+                    <TableRow>
+                        <TableHead className="w-12 text-center font-bold text-lg">&#8470;</TableHead>
+                        <TableHead className="w-48 text-center font-bold text-lg">Name</TableHead>
+                        <TableHead className="w-48 text-center font-bold text-lg">Homework</TableHead>
+                        <TableHead className="w-48 text-center font-bold text-lg">Attendance</TableHead>
+                        <TableHead className="w-48 text-center font-bold text-lg">Total Score</TableHead>
+                    </TableRow>
+                </TableHeader>
+                <TableBody>
+                    {groupStudents.map((s, idx) => {
+                        const rankStyle = getRankStyle(idx);
+                        return (<TableRow key={idx} className={rankStyle}>
+                            <TableCell className="text-center">{idx + 1}</TableCell>
+                            <TableCell className="text-center">{s.student.username}</TableCell>
+                            <TableCell className="text-center"> {s.homework ?? 0}</TableCell>
+                            <TableCell className="text-center">{s.attendance ?? 0}</TableCell>
+                            <TableCell className="text-center">{s.total ?? 0}</TableCell>
+                        </TableRow>)
+                    })}
+                </TableBody>
+            </Table>
 
-        <Table>
-            <TableCaption className="text-center font-bold text-lg">
-                Showing {groupStudentsData.length} of {meta?.total ?? 0} students
-            </TableCaption>
-            <TableHeader>
-                <TableRow>
-                    <TableHead className="w-12 text-center font-bold text-lg">&#8470;</TableHead>
-                    <TableHead className="w-48 text-center font-bold text-lg">Name</TableHead>
-                    <TableHead className="w-48 text-center font-bold text-lg">Homework</TableHead>
-                    <TableHead className="w-48 text-center font-bold text-lg">Attendance</TableHead>
-                    <TableHead className="w-48 text-center font-bold text-lg">Total Score</TableHead>
-                </TableRow>
-            </TableHeader>
-            <TableBody>
-                {groupStudents.map((s, idx) => {
-                    const rankStyle = getRankStyle(idx);
-                    return (<TableRow key={idx} className={rankStyle}>
-                        <TableCell className="text-center">{idx + 1}</TableCell>
-                        <TableCell className="text-center">{s.student.username}</TableCell>
-                        <TableCell className="text-center"> {s.homework ?? 0}</TableCell>
-                        <TableCell className="text-center">{s.attendance ?? 0}</TableCell>
-                        <TableCell className="text-center">{s.total ?? 0}</TableCell>
-                    </TableRow>)
-                })}
-            </TableBody>
-        </Table>
+
+            {/* pagination */}
+            <div className="grid grid-cols-2 items-center mt-4">
+
+                <div className="flex justify-center">
+                    <Field orientation="horizontal" className="w-fit">
+                        <FieldLabel htmlFor="select-rows-per-page">Rows per page</FieldLabel>
+                        <Select value={String(limit)} onValueChange={(val) => {
+                            const params = new URLSearchParams(searchParams.toString());
+                            params.set('limit', val);
+                            params.set('page', '1');
+                            router.push(`?${params.toString()}`);
+                        }}>
+                            <SelectTrigger className="w-20" id="select-rows-per-page">
+                                <SelectValue />
+                            </SelectTrigger>
+                            <SelectContent align="start">
+                                <SelectGroup>
+                                    <SelectItem value="5" >5</SelectItem>
+                                    <SelectItem value="10">10</SelectItem>
+                                    <SelectItem value="15">15</SelectItem>
+                                    <SelectItem value="20">20</SelectItem>
+                                </SelectGroup>
+                            </SelectContent>
+                        </Select>
+                    </Field>
+                </div>
+                <div className="flex justify-end">
+                    <Pagination>
+                        <PaginationContent>
+                            <PaginationItem>
+                                <PaginationPrevious href={`?page=${Math.max(1, page - 1)}&limit=${limit}`} />
+                            </PaginationItem>
+                            {Array.from({ length: lastPage }).map((_, idx) => (
+                                <PaginationItem key={idx}>
+                                    <PaginationLink href={`?page=${idx + 1}&limit=${limit}`} isActive={page === idx + 1}>{idx + 1}</PaginationLink>
+                                </PaginationItem>
+                            )
+                            )}
+
+                            <PaginationItem>
+                                <PaginationNext href={`?page=${Math.min(lastPage, page + 1)}&limit=${limit}`} />
+                            </PaginationItem>
+                        </PaginationContent>
+                    </Pagination>
+                </div>
+            </div>
+        </>
     )
 }
 
