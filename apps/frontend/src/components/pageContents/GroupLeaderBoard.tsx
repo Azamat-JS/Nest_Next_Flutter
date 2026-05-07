@@ -14,16 +14,13 @@ import {
     TableRow,
 } from "@/components/ui/table"
 import { LeaderBoardType } from "@/lib/types/token_payload";
-import { Field, FieldGroup, FieldLabel } from "@/components/ui/field"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { AddStudentPayload, GroupType, PaginationType } from "@/lib/types/groups"
+import { Field, FieldLabel } from "@/components/ui/field"
+import { PaginationType } from "@/lib/types/groups"
 import {
     Select,
     SelectContent,
     SelectGroup,
     SelectItem,
-    SelectLabel,
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
