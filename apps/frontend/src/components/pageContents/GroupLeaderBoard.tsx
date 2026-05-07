@@ -88,7 +88,7 @@ const GroupLeaderBoard = ({ groupId }: { groupId: string }) => {
                     {groupStudents.map((s, idx) => {
                         const rankStyle = getRankStyle(idx);
                         return (<TableRow key={idx} className={rankStyle}>
-                            <TableCell className="text-center">{idx + 1}</TableCell>
+                            <TableCell className="text-center">{(page - 1) * limit + idx + 1}</TableCell>
                             <TableCell className="text-center">{s.student.username}</TableCell>
                             <TableCell className="text-center"> {s.homework ?? 0}</TableCell>
                             <TableCell className="text-center">{s.attendance ?? 0}</TableCell>
