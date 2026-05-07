@@ -20,7 +20,7 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Menu, Edit, Trash } from 'lucide-react';
+import { Menu, Edit, Trash, Home, ListChecks, Medal } from 'lucide-react';
 import { Input } from "@/components/ui/input"
 import { TokenPayload } from '@/lib/types/token_payload';
 import AddScoreDrawer from '../AddScoreDrawer';
@@ -57,6 +57,8 @@ import {
     PaginationNext,
     PaginationPrevious,
 } from "@/components/ui/pagination"
+import { formatValue } from '@/lib/helper/format_score';
+import { Badge } from '../ui/badge';
 
 type UpdateScorePayload = {
     studentId: string;
@@ -200,10 +202,10 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
 
     return (
         <>
-            <div className="mb-4 flex gap-6">
-                <div>📘 Avg Homework: {avgHomework}</div>
-                <div>📊 Avg Attendance: {avgAttendance}</div>
-                <div>🏆 Avg Total: {avgTotal}</div>
+            <div className="mb-4 flex justify-center items-center gap-6">
+                <Badge className='w-40 h-6 font-bold'><Home /> Avg Homework: {formatValue(avgHomework)}</Badge>
+                <Badge className='w-40 h-6 font-bold'><ListChecks /> Avg Attendance: {formatValue(avgAttendance)}</Badge>
+                <Badge className='w-40 h-6 font-bold'><Medal /> Avg Total: {formatValue(avgTotal)}</Badge>
             </div>
             <Table>
                 <TableCaption className="text-center font-bold text-lg">
