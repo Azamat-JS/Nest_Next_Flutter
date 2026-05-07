@@ -4,6 +4,7 @@ import { ScoreDto, UpdateScoreDto } from './dto/score.dto';
 import { Prisma } from '@prisma/client/scripts/default-index.js';
 import { ScoreType } from '@prisma/client';
 import { PaginationDto } from 'src/lib/shared/dto/pagination.dto';
+import { ChartDateDto } from 'src/lib/shared/dto/chart_date.dto';
 
 @Injectable()
 export class StudentScoreRepository {
@@ -501,6 +502,10 @@ export class StudentScoreRepository {
             avgAttendance,
             avg
         }
+    }
+
+    async getScoreHistoryForChart(studentId: string, groupId: string, query: ChartDateDto) {
+        const { year, month } = query;
     }
 
     async deleteMany() {

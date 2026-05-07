@@ -4,6 +4,7 @@ import { ScoreDto, UpdateScoreDto } from './dto/score.dto';
 import { UpdateScoreUseCase, BulkAddScoreUseCase } from './usecases';
 import { BulkScoreDto } from './dto/bulk.dto';
 import { PaginationDto } from 'src/lib/shared/dto/pagination.dto';
+import { ChartDateDto } from 'src/lib/shared/dto/chart_date.dto';
 
 @Controller('student-score')
 export class StudentScoreController {
@@ -42,11 +43,10 @@ export class StudentScoreController {
     return this.studentScoreRepo.findOneStudentScores(studentId, groupId, query);
   }
 
-
-  // @Get("group/scores/:groupId")
-  // async getTotalScore(@Param('groupId') groupId: string) {
-  //   return this.studentScoreRepo.findAllScoresByGroup(groupId);
-  // }
+  @Get('chart/:studentId/:groupId')
+  async getScoreHistoryForChart(@Param('studentId') studentId: string, @Param("groupId") groupId: string, @Query() query: ChartDateDto) {
+    return this.studentScoreRepo.getScoreHistoryForChart(studentId, groupId, query);
+  }
 
   @Post("bulk")
   async bulkAddScores(@Body() body: BulkScoreDto) {
