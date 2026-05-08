@@ -3,3 +3,7 @@ export type ChartType = {
     homework: number;
     attendance: number;
 }
+
+export type ChartResponse = {
+    scores: ChartType[];
+}

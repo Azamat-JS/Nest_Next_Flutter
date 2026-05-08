@@ -23,6 +23,7 @@ import {
     ResponsiveContainer,
     Legend,
 } from 'recharts';
+import { ChartResponse } from "@/lib/types/chart_type"
 
 const LineGraph = ({ studentId, groupId }: { studentId: string, groupId: string }) => {
     const [date, setDate] = React.useState<Date>(new Date());
@@ -48,14 +49,6 @@ const LineGraph = ({ studentId, groupId }: { studentId: string, groupId: string 
             total: item.homework + item.attendance,
         }))
     }, [chartReport]);
-
-    const primaryAxis = useMemo(() => ({
-        getValue: (datum: any) => datum.primary,
-    }), [])
-
-    const secondaryAxis = useMemo(() => ({
-        getValue: (datum: any) => datum.secondary,
-    }), [])
 
     return (
         <div className="space-y-4">
