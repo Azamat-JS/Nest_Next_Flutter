@@ -34,6 +34,7 @@ import {
 import { Field, FieldLabel } from "@/components/ui/field"
 import { useQueryClient, useSuspenseQuery } from '@tanstack/react-query'
 import { useRouter, useSearchParams } from 'next/navigation';
+import LineGraph from "../LineGraph";
 
 
 
@@ -143,6 +144,8 @@ const StudentScoresComponent = ({ groupId, studentId }: { groupId: string, stude
                     </Pagination>
                 </div>
             </div>
+
+            <LineGraph groupId={groupId} studentId={studentId} />
         </div>
     )
 }

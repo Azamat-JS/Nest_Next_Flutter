@@ -23,14 +23,50 @@ import {
     ResponsiveContainer,
     Legend,
 } from 'recharts';
-import { ChartResponse } from "@/lib/types/chart_type"
+
+import {
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select"
+
+const months = [
+    { label: "January", value: "1" },
+    { label: "February", value: "2" },
+    { label: "March", value: "3" },
+    { label: "April", value: "4" },
+    { label: "May", value: "5" },
+    { label: "June", value: "6" },
+    { label: "July", value: "7" },
+    { label: "August", value: "8" },
+    { label: "September", value: "9" },
+    { label: "October", value: "10" },
+    { label: "November", value: "11" },
+    { label: "December", value: "12" },
+];
+
+const currentYear = new Date().getFullYear();
+
+const years = [
+    String(currentYear),
+    String(currentYear - 1),
+    String(currentYear - 2),
+];
 
 const LineGraph = ({ studentId, groupId }: { studentId: string, groupId: string }) => {
     const [date, setDate] = React.useState<Date>(new Date());
     const API = process.env.NEXT_PUBLIC_API_URL;
     const token = useAuthStore((state) => state.token);
-    const month = String(date.getMonth() + 1);
-    const year = String(date.getFullYear());
+    const [month, setMonth] = useState(
+        String(new Date().getMonth() + 1)
+    );
+
+    const [year, setYear] = useState(
+        String(new Date().getFullYear())
+    );
 
 
     const { data: chartReport } = useSuspenseQuery({
@@ -52,28 +88,56 @@ const LineGraph = ({ studentId, groupId }: { studentId: string, groupId: string 
 
     return (
         <div className="space-y-4">
-            <div className="flex justify-end">
-                <Popover>
-                    <PopoverTrigger asChild>
-                        <Button
-                            variant="outline"
-                            data-empty={!date}
-                            className="w-53 justify-between"
-                        >
-                            {format(date, "MMMM yyyy")}
-                            <ChevronDownIcon />
-                        </Button>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0" align="start">
-                        <Calendar
-                            mode="single"
-                            selected={date}
-                            onSelect={(d) => d && setDate(d)}
-                            defaultMonth={date}
-                        />
-                    </PopoverContent>
-                </Popover>
+            <div className="flex justify-end gap-3">
+
+                {/* Month Select */}
+                <Select
+                    value={month}
+                    onValueChange={setMonth}
+                >
+                    <SelectTrigger className="w-40">
+                        <SelectValue placeholder="Select month" />
+                    </SelectTrigger>
+
+                    <SelectContent>
+                        <SelectGroup>
+                            {months.map((m) => (
+                                <SelectItem
+                                    key={m.value}
+                                    value={m.value}
+                                >
+                                    {m.label}
+                                </SelectItem>
+                            ))}
+                        </SelectGroup>
+                    </SelectContent>
+                </Select>
+
+                {/* Year Select */}
+                <Select
+                    value={year}
+                    onValueChange={setYear}
+                >
+                    <SelectTrigger className="w-32">
+                        <SelectValue placeholder="Select year" />
+                    </SelectTrigger>
+
+                    <SelectContent>
+                        <SelectGroup>
+                            {years.map((y) => (
+                                <SelectItem
+                                    key={y}
+                                    value={y}
+                                >
+                                    {y}
+                                </SelectItem>
+                            ))}
+                        </SelectGroup>
+                    </SelectContent>
+                </Select>
+
             </div>
+
 
             <div className="h-100 w-full">
                 <ResponsiveContainer width="100%" height="100%">
