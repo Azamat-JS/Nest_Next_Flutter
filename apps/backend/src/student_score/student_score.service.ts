@@ -528,7 +528,34 @@ export class StudentScoreRepository {
                 date: 'asc'
             }
         });
-        return grouped;
+
+        const map = new Map<
+            string, {
+                date: string,
+                homework: number,
+                attendance: number
+            }
+        >();
+
+        for (const g of grouped) {
+            const date = g.date.toISOString().split('T')[0];
+
+            if (!map.has(date)) {
+                map.set(date, { date, homework: 0, attendance: 0 });
+            }
+            const entry = map.get(date)!;
+
+            if (g.type === 'HOMEWORK') {
+                entry.homework = g._sum.value ?? 0;
+            }
+
+            if (g.type === 'ATTENDANCE') {
+                entry.attendance = g._sum.value ?? 0;
+            }
+        }
+        return {
+            scores: Array.from(map.values())
+        }
     }
 
     async deleteMany() {
