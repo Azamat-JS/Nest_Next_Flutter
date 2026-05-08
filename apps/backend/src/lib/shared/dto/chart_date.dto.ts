@@ -1,11 +1,11 @@
-import { IsInt, IsOptional } from "class-validator";
+import { IsInt, IsNotEmpty, IsOptional } from "class-validator";
 
 export class ChartDateDto {
-    @IsOptional()
+    @IsNotEmpty()
     @IsInt()
-    year?: number;
+    year!: number;
 
-    @IsOptional()
+    @IsNotEmpty()
     @IsInt()
-    month?: number;
+    month!: number;
 }

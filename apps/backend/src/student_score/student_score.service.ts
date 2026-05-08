@@ -506,6 +506,29 @@ export class StudentScoreRepository {
 
     async getScoreHistoryForChart(studentId: string, groupId: string, query: ChartDateDto) {
         const { year, month } = query;
+
+        const startDate = new Date(year, month - 1, 1);
+        const endDate = new Date(year, month, 0);
+        endDate.setHours(23, 59, 59, 999);
+
+        const grouped = await this.prisma.scoreEvent.groupBy({
+            by: ['date', 'type'],
+            where: {
+                studentId,
+                groupId,
+                date: {
+                    gte: startDate,
+                    lte: endDate,
+                }
+            },
+            _sum: {
+                value: true,
+            },
+            orderBy: {
+                date: 'asc'
+            }
+        });
+        return grouped;
     }
 
     async deleteMany() {
