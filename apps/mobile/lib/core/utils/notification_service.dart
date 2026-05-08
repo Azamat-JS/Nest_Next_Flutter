@@ -9,12 +9,37 @@ class NotificationService {
   NotificationService({required this.dioClient});
 
   Future<void> init() async {
-    await _messaging.requestPermission();
+    NotificationSettings settings = await _messaging.requestPermission(
+      alert: true,
+      sound: true,
+      badge: true,
+    );
 
-    String? token = await _messaging.getToken();
-    print("FCM Token: $token");
+    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+      String? apnsToken;
 
-    await sendTokenToBackend(token);
+      for (int i = 0; i < 10; i++) {
+        try {
+          apnsToken = await _messaging.getAPNSToken();
+          if (apnsToken != null) {
+            break;
+          }
+        } catch (e) {
+          print('waiting for apns token');
+        }
+        await Future.delayed(const Duration(seconds: 1));
+      }
+
+      print('APNS token: $apnsToken');
+
+      if (apnsToken != null) {
+        String? token = await _messaging.getToken();
+        print("FCM Token: $token");
+        await sendTokenToBackend(token);
+      } else {
+        print('apns token not available');
+      }
+    }
 
     FirebaseMessaging.instance.onTokenRefresh.listen((newToken) async {
       print('Token refreshed: $newToken');
