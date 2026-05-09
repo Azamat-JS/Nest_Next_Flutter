@@ -23,6 +23,12 @@ import {
 import axios from "axios"
 import { useAuthStore } from "@/lib/stores/authStore"
 import { useRouter } from "next/navigation"
+import { useState } from "react"
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "./ui/select"
+
+type UserRole = "STUDENT" | "TEACHER" | "ADMIN" | "PARENT"
+
+const roles: UserRole[] = ["STUDENT", "TEACHER", "ADMIN", "PARENT"]
 
 export function CardDemo({ id, isLogin, toggle }: { id?: string, isLogin?: boolean, toggle?: () => void }) {
     const API = process.env.NEXT_PUBLIC_API_URL;
@@ -195,19 +201,24 @@ export function CardDemo({ id, isLogin, toggle }: { id?: string, isLogin?: boole
 
                                     <Field data-invalid={isInvalid}>
                                         <FieldLabel htmlFor={field.name}>Role</FieldLabel>
-                                        <Input
-                                            id={field.name}
-                                            name={field.name}
+                                        <Select
                                             value={field.state.value}
-                                            onBlur={field.handleBlur}
-                                            onChange={(e) => field.handleChange(e.target.value)}
-                                            aria-invalid={isInvalid}
-                                            placeholder="Enter a role"
-                                            autoComplete="on"
-                                        />
-                                        {isInvalid && (
-                                            <FieldError errors={field.state.meta.errors} />
-                                        )}
+                                            onValueChange={(val: string) => field.handleChange(val as UserRole)}
+                                        >
+                                            <SelectTrigger>
+                                                <SelectValue placeholder="Select role" />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                <SelectGroup>
+                                                    <SelectLabel>Select a role</SelectLabel>
+                                                    {roles.map((role) => (
+                                                        <SelectItem key={role} value={role}>
+                                                            {role.toLowerCase()}
+                                                        </SelectItem>
+                                                    ))}
+                                                </SelectGroup>
+                                            </SelectContent>
+                                        </Select>
                                     </Field>
                                 )
                             }}
