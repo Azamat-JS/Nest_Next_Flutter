@@ -148,7 +148,7 @@ const LineGraph = ({ studentId, groupId }: { studentId: string, groupId: string 
                             top: 20,
                             right: 30,
                             left: 10,
-                            bottom: 10,
+                            bottom: 20,
                         }}
                     >
                         <CartesianGrid strokeDasharray="3 3" />

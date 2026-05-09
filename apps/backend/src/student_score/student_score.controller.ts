@@ -39,7 +39,6 @@ export class StudentScoreController {
     @Param('groupId') groupId: string,
     @Query() query: PaginationDto
   ) {
-    console.log(groupId);
     return this.studentScoreRepo.findOneStudentScores(studentId, groupId, query);
   }
 

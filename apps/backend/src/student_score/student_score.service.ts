@@ -303,6 +303,70 @@ export class StudentScoreRepository {
         }
     }
 
+    async getGroupTotalAvgScores(groupId: string, year: number) {
+
+        const group = await this.prisma.groups.findUnique({
+            where: { id: groupId },
+        })
+        if (!group) throw new NotFoundException(`Group not found: ${groupId}`)
+
+        const grouped = await this.prisma.scoreEvent.groupBy({
+            by: ['date', 'type'],
+            where: {
+                groupId,
+                date: {
+                    gte: new Date(year, 0, 1),
+                    lte: new Date(year, 11, 31, 23, 59, 59),
+                },
+            },
+            _sum: {
+                value: true,
+
+            },
+            _count: {
+                studentId: true
+            },
+            orderBy: {
+                date: 'asc'
+            }
+        })
+
+        const map = new Map<string, {
+            date: string,
+            avgHomework: number,
+            avgAttendance: number,
+            avgTotal: number,
+        }
+        >();
+
+
+        for (const g of grouped) {
+            const date = g.date.toISOString().split('T')[0];
+
+            if (!map.has(date)) {
+                map.set(date, { date, avgAttendance: 0, avgHomework: 0, avgTotal: 0 });
+            }
+            const entry = map.get(date)!;
+
+            const avg = (g._sum.value ?? 0) / (g._count.studentId || 1);
+
+            if (g.type === 'HOMEWORK') {
+                entry.avgHomework = Number(avg.toFixed(2))
+            }
+
+            if (g.type === 'ATTENDANCE') {
+                entry.avgAttendance = Number(avg.toFixed(2))
+            }
+
+            entry.avgTotal = Number(
+                (entry.avgHomework + entry.avgAttendance).toFixed(2)
+            )
+        }
+        return {
+            scores: Array.from(map.values())
+        }
+    }
+
     async findTodayScoreWithType(
         studentIds: string[],
         groupId: string,
@@ -506,6 +570,18 @@ export class StudentScoreRepository {
 
     async getScoreHistoryForChart(studentId: string, groupId: string, query: ChartDateDto) {
         const { year, month } = query;
+
+        const student = await this.prisma.users.findUnique({
+            where: { id: studentId },
+        });
+
+        if (!student) throw new NotFoundException(`Student not found: ${studentId}`);
+
+        const group = await this.prisma.groups.findUnique({
+            where: { id: groupId },
+        });
+
+        if (!group) throw new NotFoundException(`Group not found: ${groupId}`);
 
         const startDate = new Date(year, month - 1, 1);
         const endDate = new Date(year, month, 0);
