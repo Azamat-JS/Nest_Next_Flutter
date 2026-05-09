@@ -41,10 +41,10 @@ const GroupLineGraph = ({ groupId }: { groupId: string }) => {
 
     const chartData = useMemo(() => {
         return groupReport.scores.map((item: any) => ({
-            date: item.date,
+            month: item.month,
             homework: item.homework,
             attendance: item.attendance,
-            total: item.homework + item.attendance,
+            total: item.total
         }));
     }, [groupReport]);
 
@@ -97,7 +97,7 @@ const GroupLineGraph = ({ groupId }: { groupId: string }) => {
                         }}
                     >
                         <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="date" />
+                        <XAxis dataKey="month" />
                         <YAxis />
                         <Tooltip />
                         <Legend />
