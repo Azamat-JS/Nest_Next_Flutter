@@ -362,21 +362,21 @@ export class StudentScoreRepository {
                 entry.attendanceCount++;
             }
 
-            const scores = Array.from(monthMap.values()).map((m) => {
-                const homework = m.homeworkCount > 0 ? Number((m.homeworkTotal / m.homeworkCount).toFixed(2)) : 0;
+        }
+        const scores = Array.from(monthMap.values()).map((m) => {
+            const homework = m.homeworkCount > 0 ? Number((m.homeworkTotal / m.homeworkCount).toFixed(2)) : 0;
 
-                const attendance = m.attendanceCount > 0 ? Number((m.attendanceTotal / m.attendanceCount).toFixed(2)) : 0;
+            const attendance = m.attendanceCount > 0 ? Number((m.attendanceTotal / m.attendanceCount).toFixed(2)) : 0;
 
-                return {
-                    month: m.month,
-                    homework,
-                    attendance,
-                    total: Number((homework + attendance).toFixed(2))
-                }
-            })
             return {
-                scores
+                month: m.month,
+                homework,
+                attendance,
+                total: Number((homework + attendance).toFixed(2))
             }
+        })
+        return {
+            scores
         }
     }
 
