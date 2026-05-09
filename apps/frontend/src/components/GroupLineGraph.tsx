@@ -1,15 +1,15 @@
 import { useAuthStore } from '@/lib/stores/authStore';
 import { useState, useMemo } from 'react';
 import {
-    LineChart,
-    Line,
+    ResponsiveContainer,
+    BarChart,
+    Bar,
+    CartesianGrid,
     XAxis,
     YAxis,
-    CartesianGrid,
     Tooltip,
-    ResponsiveContainer,
     Legend,
-} from 'recharts';
+} from "recharts";
 
 import {
     Select,
@@ -34,7 +34,7 @@ const GroupLineGraph = ({ groupId }: { groupId: string }) => {
     const { data: groupReport } = useSuspenseQuery({
         queryKey: ['group-score-chart', year, groupId],
         queryFn: async () => {
-            const res = await axios.get(`${API}/group-chart/${groupId}`, { headers: { "Authorization": `Bearer ${token}` }, params: { year } });
+            const res = await axios.get(`${API}/student-score/group-chart/${groupId}`, { headers: { "Authorization": `Bearer ${token}` }, params: { year } });
             return res.data;
         }
     })
@@ -87,7 +87,7 @@ const GroupLineGraph = ({ groupId }: { groupId: string }) => {
             <div className="h-100 w-full">
                 <ResponsiveContainer width="100%" height="100%">
 
-                    <LineChart
+                    <BarChart
                         data={chartData}
                         margin={{
                             top: 20,
@@ -101,16 +101,20 @@ const GroupLineGraph = ({ groupId }: { groupId: string }) => {
                         <YAxis />
                         <Tooltip />
                         <Legend />
-                        <Line type="monotone" dataKey="homework" stroke="#2563eb"
-                            strokeWidth={2}
-                            name="Homework" />
-                        <Line type="monotone" dataKey="attendance" stroke="#16a34a"
-                            strokeWidth={2}
-                            name="Attendance" />
-                        <Line type="monotone" dataKey="total" stroke="#dc2626"
-                            strokeWidth={2}
-                            name="Total" />
-                    </LineChart>
+                        <Bar dataKey="homework"
+                            fill="#2563eb"
+                            name="Homework"
+                            radius={[4, 4, 0, 0]} />
+                        <Bar dataKey="attendance"
+                            fill="#16a34a"
+                            name="Attendance"
+                            radius={[4, 4, 0, 0]}
+                        />
+                        <Bar dataKey="total"
+                            fill="#dc2626"
+                            name="Total"
+                            radius={[4, 4, 0, 0]} />
+                    </BarChart>
                 </ResponsiveContainer>
             </div>
         </div>

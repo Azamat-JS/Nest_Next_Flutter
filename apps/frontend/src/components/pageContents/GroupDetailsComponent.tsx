@@ -59,6 +59,7 @@ import {
 } from "@/components/ui/pagination"
 import { formatValue } from '@/lib/helper/format_score';
 import { Badge } from '../ui/badge';
+import GroupLineGraph from '../GroupLineGraph';
 
 type UpdateScorePayload = {
     studentId: string;
@@ -426,6 +427,8 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
                     </DialogContent>
                 </form>
             </Dialog>
+
+            <GroupLineGraph groupId={groupId} />
         </>
     )
 }
