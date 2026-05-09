@@ -47,6 +47,11 @@ export class StudentScoreController {
     return this.studentScoreRepo.getScoreHistoryForChart(studentId, groupId, query);
   }
 
+  @Get('group-chart/:groupId')
+  async getGroupTotalAvgScores(@Param('groupId') groupId: string, @Query() query: { year: number }) {
+    return this.studentScoreRepo.getGroupTotalAvgScores(groupId, query.year);
+  }
+
   @Post("bulk")
   async bulkAddScores(@Body() body: BulkScoreDto) {
     return this.bulkAddScoreUseCase.execute(body);
