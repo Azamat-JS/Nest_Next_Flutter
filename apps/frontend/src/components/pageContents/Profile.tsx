@@ -43,6 +43,7 @@ const Profile = () => {
                     <h1 className='text-2xl font-bold mb-4'>Profile</h1>
                     <p><strong>Username:</strong> {user.username}</p>
                     <p><strong>Email:</strong> {user.email}</p>
+                    <p><strong>Role:</strong> {user.role?.toLocaleLowerCase()}</p>
                 </div>
             ) : (
                 <p>User not found.</p>

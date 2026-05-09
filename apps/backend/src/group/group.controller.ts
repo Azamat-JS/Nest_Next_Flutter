@@ -5,6 +5,8 @@ import { JwtAuthGuard } from 'src/lib/guards/jwt.guard';
 import { CreateGroupUseCase, UpdateGroupUseCase, RemoveStudentFromGroupUseCase } from './usecases';
 import { AddStudentUseCase } from './usecases/add-student-usecase';
 import { PaginationDto } from 'src/lib/shared/dto/pagination.dto';
+import { RolesGuard } from 'src/lib/guards/roles.guard';
+import { Roles } from 'src/lib/shared/decorators/roles';
 
 @Controller('group')
 export class GroupController {
@@ -14,7 +16,8 @@ export class GroupController {
     private readonly removeStudentFromGroupUseCase: RemoveStudentFromGroupUseCase,
   ) { }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('ADMIN', 'TEACHER')
   @Post()
   create(@Body() createGroupDto: CreateGroupDto) {
     return this.createGroupUseCase.execute(createGroupDto);
@@ -40,18 +43,24 @@ export class GroupController {
     return this.addStudentUseCase.execute(id, body);
   }
 
-  @UseGuards(JwtAuthGuard)
+
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('ADMIN', 'TEACHER')
   @Put(':id')
   update(@Param('id') id: string, @Body() updateGroupDto: UpdateGroupDto) {
     return this.updateGroupUseCase.execute(id, updateGroupDto);
   }
 
+  @UseGuards(RolesGuard, JwtAuthGuard)
+  @Roles('ADMIN', 'TEACHER')
   @Delete("delete/:studentId/:groupId")
   async deleteStudent(@Param('studentId') studentId: string, @Param('groupId') groupId: string) {
     return this.removeStudentFromGroupUseCase.execute(studentId, groupId);
   }
 
-  @UseGuards(JwtAuthGuard)
+
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('ADMIN', 'TEACHER')
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.groupService.remove(id);

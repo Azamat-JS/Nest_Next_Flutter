@@ -5,11 +5,9 @@ import { ROLES_KEY } from '../shared/decorators/roles';
 
 @Injectable()
 export class RolesGuard implements CanActivate {
-    constructor(
-        private reflector: Reflector,
-    ) { }
+    constructor(private reflector: Reflector) { }
 
-    async canActivate(context: ExecutionContext): Promise<boolean> {
+    canActivate(context: ExecutionContext): boolean {
         const requiredRoles = this.reflector.getAllAndOverride<string[]>(
             ROLES_KEY,
             [context.getHandler(), context.getClass()],
@@ -22,13 +20,8 @@ export class RolesGuard implements CanActivate {
         const request = context.switchToHttp().getRequest();
         const user = request.user;
 
-        if (!user) return false;
+        if (!user?.role) return false;
 
-        if (user.role && requiredRoles.includes(user.role)) {
-            return true;
-        }
-
-        const membershipRoles: string[] = Array.isArray(user.membershipRoles) ? user.membershipRoles : [];
-        return membershipRoles.some((role) => requiredRoles.includes(role));
+        return requiredRoles.includes(user.role);
     }
 }
