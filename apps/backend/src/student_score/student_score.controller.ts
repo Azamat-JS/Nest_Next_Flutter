@@ -1,10 +1,13 @@
-import { Body, Delete, Controller, Get, Param, Post, Put, Query } from '@nestjs/common';
+import { Body, Delete, Controller, Get, Param, Post, Put, Query, UseGuards } from '@nestjs/common';
 import { StudentScoreRepository } from './student_score.service';
 import { ScoreDto, UpdateScoreDto } from './dto/score.dto';
 import { UpdateScoreUseCase, BulkAddScoreUseCase } from './usecases';
 import { BulkScoreDto } from './dto/bulk.dto';
 import { PaginationDto } from 'src/lib/shared/dto/pagination.dto';
 import { ChartDateDto } from 'src/lib/shared/dto/chart_date.dto';
+import { Roles } from 'src/lib/shared/decorators/roles';
+import { JwtAuthGuard } from 'src/lib/guards/jwt.guard';
+import { RolesGuard } from 'src/lib/guards/roles.guard';
 
 @Controller('student-score')
 export class StudentScoreController {
@@ -52,11 +55,15 @@ export class StudentScoreController {
     return this.studentScoreRepo.getGroupTotalAvgScores(groupId, query.year);
   }
 
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('ADMIN', 'TEACHER')
   @Post("bulk")
   async bulkAddScores(@Body() body: BulkScoreDto) {
     return this.bulkAddScoreUseCase.execute(body);
   }
 
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('ADMIN', 'TEACHER')
   @Put("update/:studentId/:groupId")
   async updateScore(
     @Param('studentId') studentId: string,
@@ -69,6 +76,7 @@ export class StudentScoreController {
       groupId
     );
   }
+
 
   @Delete("delete/all")
   async deleteAll() {

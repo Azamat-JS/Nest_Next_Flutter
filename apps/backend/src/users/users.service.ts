@@ -113,7 +113,6 @@ export class UsersService {
             if (existingUser) {
                 throw new BadRequestException('Email already exists');
             }
-            console.log(createUserDto);
 
             const normalizedRole = createUserDto.role.toUpperCase() as UserRole;
             const hashedPassword = await bcrypt.hash(createUserDto.password, 10);
@@ -227,6 +226,7 @@ export class UsersService {
 
         return { accessToken: newAccessToken };
     }
+
 
     async updateUser(id: string, updateUserInput: UpdateUserDto) {
 

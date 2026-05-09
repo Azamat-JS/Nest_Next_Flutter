@@ -257,4 +257,86 @@ The width(-1) and height(-1) of chart should be greater than 0,
       _closed: [33mfalse[39m,
       socket: [36m[Socket][39m,
       _header: [32m'GET /group/all?page=1&limit=10 HTTP/1.1\r\n'[39m +
-      
+        [32m'Accept: application/json, text/plain, */*\r\n'[39m +
+        [32m'Authorization: Bearer null\r\n'[39m +
+        [32m'User-Agent: axios/1.15.0\r\n'[39m +
+        [32m'Accept-Encoding: gzip, compress, deflate, br\r\n'[39m +
+        [32m'Host: localhost:3002\r\n'[39m +
+        [32m'Connection: keep-alive\r\n'[39m +
+        [32m'\r\n'[39m,
+      _keepAliveTimeout: [33m0[39m,
+      _onPendingData: [36m[Function: nop][39m,
+      agent: [36m[Agent][39m,
+      socketPath: [90mundefined[39m,
+      method: [32m'GET'[39m,
+      maxHeaderSize: [90mundefined[39m,
+      insecureHTTPParser: [90mundefined[39m,
+      joinDuplicateHeaders: [90mundefined[39m,
+      path: [32m'/group/all?page=1&limit=10'[39m,
+      _ended: [33mfalse[39m,
+      res: [1mnull[22m,
+      aborted: [33mfalse[39m,
+      timeoutCb: [36m[Function: emitRequestTimeout][39m,
+      upgradeOrConnect: [33mfalse[39m,
+      parser: [1mnull[22m,
+      maxHeadersCount: [1mnull[22m,
+      reusedSocket: [33mfalse[39m,
+      host: [32m'localhost'[39m,
+      protocol: [32m'http:'[39m,
+      _redirectable: [36m[Circular *1][39m,
+      [[32mSymbol(shapeMode)[39m]: [33mfalse[39m,
+      [[32mSymbol(kCapture)[39m]: [33mfalse[39m,
+      [[32mSymbol(kBytesWritten)[39m]: [33m0[39m,
+      [[32mSymbol(kNeedDrain)[39m]: [33mfalse[39m,
+      [[32mSymbol(corked)[39m]: [33m0[39m,
+      [[32mSymbol(kOutHeaders)[39m]: [36m[Object: null prototype][39m,
+      [[32mSymbol(errored)[39m]: [1mnull[22m,
+      [[32mSymbol(kHighWaterMark)[39m]: [33m16384[39m,
+      [[32mSymbol(kRejectNonStandardBodyWrites)[39m]: [33mfalse[39m,
+      [[32mSymbol(kUniqueHeaders)[39m]: [1mnull[22m
+    },
+    _currentUrl: [32m'http://localhost:3002/group/all?page=1&limit=10'[39m,
+    _timeout: [1mnull[22m,
+    [[32mSymbol(shapeMode)[39m]: [33mtrue[39m,
+    [[32mSymbol(kCapture)[39m]: [33mfalse[39m
+  },
+  digest: [32m'153339556'[39m,
+  [cause]: AggregateError: 
+      at [3mignore-listed frames[23m {
+    code: [32m'ECONNREFUSED'[39m,
+    [errors]: [ [36m[Error][39m, [36m[Error][39m ]
+  }
+}
+ GET /groups [32m200[39m in 157ms[2m (next.js: 4ms, application-code: 154ms)[22m
+[36m[browser][39m [31mUncaught Error: Switched to client rendering because the server rendering errored:
+
+[39m
+[31m    at async queryFn (src/components/pageContents/Group.tsx:83:25)[39m
+  [90m81 |[0m         queryKey: [[32m'groups'[0m, page, limit],
+  [90m82 |[0m         queryFn: [36masync[0m () => {
+[31m[1m>[0m [90m83 |[0m             [36mconst[0m res = [36mawait[0m axios.get([32m`[0m${[33mAPI[0m[32m}/group/all?page=[0m${page[32m}&limit=[0m${limit[32m}`[0m, { headers: { [33mAuthorization[0m: [32m`Bearer [0m${token[32m}`[0m } })
+  [90m   |[0m                         [31m[1m^[0m
+  [90m84 |[0m             [36mreturn[0m res.data
+  [90m85 |[0m         },
+  [90m86 |[0m         staleTime: [35m1000[0m * [35m60[0m * [35m5[0m,
+ GET /groups [32m200[39m in 89ms[2m (next.js: 5ms, application-code: 85ms)[22m
+ GET /groups [32m200[39m in 202ms[2m (next.js: 12ms, application-code: 189ms)[22m
+ GET /groups [32m200[39m in 131ms[2m (next.js: 4ms, application-code: 126ms)[22m
+ GET /groups [32m200[39m in 146ms[2m (next.js: 4ms, application-code: 142ms)[22m
+ GET /groups [32m200[39m in 89ms[2m (next.js: 7ms, application-code: 82ms)[22m
+ GET /profile [32m200[39m in 31ms[2m (next.js: 9ms, application-code: 22ms)[22m
+ GET /home [32m200[39m in 29ms[2m (next.js: 5ms, application-code: 23ms)[22m
+ GET / [32m200[39m in 28ms[2m (next.js: 10ms, application-code: 18ms)[22m
+ GET /home [32m200[39m in 10ms[2m (next.js: 1445µs, application-code: 9ms)[22m
+ GET /groups [32m200[39m in 10ms[2m (next.js: 1153µs, application-code: 9ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+ GET /profile [32m200[39m in 26ms[2m (next.js: 5ms, application-code: 21ms)[22m
+ GET / [32m200[39m in 26ms[2m (next.js: 4ms, application-code: 22ms)[22m
+ GET /home [32m200[39m in 17ms[2m (next.js: 2ms, application-code: 15ms)[22m
+ GET / [32m200[39m in 24ms[2m (next.js: 4ms, application-code: 20ms)[22m
+ GET /home [32m200[39m in 11ms[2m (next.js: 1485µs, application-code: 10ms)[22m
+ GET /groups [32m200[39m in 27ms[2m (next.js: 3ms, application-code: 24ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[?25h

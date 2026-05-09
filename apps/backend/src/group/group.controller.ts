@@ -38,6 +38,8 @@ export class GroupController {
     return this.groupService.findGroupStudents(id, query.page, query.limit);
   }
 
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('ADMIN', 'TEACHER')
   @Post(":id/add-students")
   addStudents(@Param('id') id: string, @Body() body: AddStudentsDto) {
     return this.addStudentUseCase.execute(id, body);
