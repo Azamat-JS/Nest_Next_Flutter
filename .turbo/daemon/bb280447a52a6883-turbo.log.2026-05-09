@@ -1088,3 +1088,7 @@
 2026-05-09T15:54:50.667436Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
 2026-05-09T15:55:17.265756Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/users/users.controller.ts")}
 2026-05-09T15:55:17.265764Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-09T16:03:53.565698Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/prisma/schema.prisma")}
+2026-05-09T16:03:53.565707Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-05-09T16:04:23.666772Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/prisma/migrations/migration_lock.toml"), AnchoredSystemPathBuf("apps/backend/prisma/migrations/20260509160423_added_comment_scoreevent"), AnchoredSystemPathBuf("apps/backend/prisma/migrations/20260509160423_added_comment_scoreevent/migration.sql")}
+2026-05-09T16:04:23.666783Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))

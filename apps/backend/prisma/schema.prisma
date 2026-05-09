@@ -128,7 +128,8 @@ model ScoreEvent {
 
     type ScoreType
     value Int
-
+    comment String?
+    
     groupId String
     group Groups @relation(fields: [groupId], references: [id], onDelete: Cascade)
     date DateTime
