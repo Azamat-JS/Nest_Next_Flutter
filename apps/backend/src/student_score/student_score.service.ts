@@ -310,8 +310,7 @@ export class StudentScoreRepository {
         })
         if (!group) throw new NotFoundException(`Group not found: ${groupId}`)
 
-        const grouped = await this.prisma.scoreEvent.groupBy({
-            by: ['date', 'type'],
+        const grouped = await this.prisma.scoreEvent.findMany({
             where: {
                 groupId,
                 date: {
@@ -319,11 +318,10 @@ export class StudentScoreRepository {
                     lte: new Date(year, 11, 31, 23, 59, 59),
                 },
             },
-            _sum: {
+            select: {
+                date: true,
+                type: true,
                 value: true,
-
-            },
-            _count: {
                 studentId: true
             },
             orderBy: {
@@ -331,39 +329,54 @@ export class StudentScoreRepository {
             }
         })
 
-        const map = new Map<string, {
-            date: string,
-            avgHomework: number,
-            avgAttendance: number,
-            avgTotal: number,
+        const monthMap = new Map<string, {
+            month: string;
+            homeworkTotal: number;
+            attendanceTotal: number;
+            homeworkCount: number;
+            attendanceCount: number;
         }
         >();
 
 
-        for (const g of grouped) {
-            const date = g.date.toISOString().split('T')[0];
+        for (const item of grouped) {
+            const month = new Date(item.date).toLocaleString('default', { month: 'short' })
 
-            if (!map.has(date)) {
-                map.set(date, { date, avgAttendance: 0, avgHomework: 0, avgTotal: 0 });
+            if (!monthMap.has(month)) {
+                monthMap.set(month, {
+                    month, homeworkTotal: 0,
+                    attendanceTotal: 0,
+                    homeworkCount: 0,
+                    attendanceCount: 0,
+                });
             }
-            const entry = map.get(date)!;
+            const entry = monthMap.get(month)!;
 
-            const avg = (g._sum.value ?? 0) / (g._count.studentId || 1);
-
-            if (g.type === 'HOMEWORK') {
-                entry.avgHomework = Number(avg.toFixed(2))
+            if (item.type === 'HOMEWORK') {
+                entry.homeworkTotal += item.value;
+                entry.homeworkCount++;
             }
 
-            if (g.type === 'ATTENDANCE') {
-                entry.avgAttendance = Number(avg.toFixed(2))
+            if (item.type === 'ATTENDANCE') {
+                entry.attendanceTotal += item.value;
+                entry.attendanceCount++;
             }
 
-            entry.avgTotal = Number(
-                (entry.avgHomework + entry.avgAttendance).toFixed(2)
-            )
-        }
-        return {
-            scores: Array.from(map.values())
+            const scores = Array.from(monthMap.values()).map((m) => {
+                const homework = m.homeworkCount > 0 ? Number((m.homeworkTotal / m.homeworkCount).toFixed(2)) : 0;
+
+                const attendance = m.attendanceCount > 0 ? Number((m.attendanceTotal / m.attendanceCount).toFixed(2)) : 0;
+
+                return {
+                    month: m.month,
+                    homework,
+                    attendance,
+                    total: Number((homework + attendance).toFixed(2))
+                }
+            })
+            return {
+                scores
+            }
         }
     }
 
