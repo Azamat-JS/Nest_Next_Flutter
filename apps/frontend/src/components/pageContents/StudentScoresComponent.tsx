@@ -56,9 +56,6 @@ import LineGraph from "../LineGraph";
 import { toast } from "sonner";
 import { Input } from "../ui/input";
 
-const date = new Date().toISOString().split('T')[0];
-
-
 const StudentScoresComponent = ({ groupId, studentId }: { groupId: string, studentId: string }) => {
     const token = useAuthStore((state) => state.token);
     const searchParams = useSearchParams();
@@ -68,10 +65,11 @@ const StudentScoresComponent = ({ groupId, studentId }: { groupId: string, stude
     const { data: students = [] } = useStudents()
     const router = useRouter();
     const [openUpdate, setOpenUpdate] = useState(false);
-    const [comment, setComment] = useState<string | null>(null);
-    const [value, setValue] = useState<number>(0); ("HOMEWORK");
+    const [comment, setComment] = useState<string>("");
+    const [value, setValue] = useState<number>(0);
     const [type, setType] = useState<"HOMEWORK" | "ATTENDANCE">("HOMEWORK");
     const queryClient = useQueryClient();
+    const [selectedDate, setSelectedDate] = useState<string>("");
 
 
 
@@ -94,8 +92,8 @@ const StudentScoresComponent = ({ groupId, studentId }: { groupId: string, stude
             toast.success('Scores updated successfully!');
             setOpenUpdate(false);
             setValue(0),
-                setComment(null)
-            setType("HOMEWORK")
+                setComment("");
+            setType("HOMEWORK");
             queryClient.invalidateQueries({
                 queryKey: ['students', groupId],
                 exact: false,
@@ -153,7 +151,7 @@ const StudentScoresComponent = ({ groupId, studentId }: { groupId: string, stude
                                     </DropdownMenuTrigger>
                                     <DropdownMenuContent align="start">
                                         <DropdownMenuGroup>
-                                            <DropdownMenuItem onClick={() => { setOpenUpdate(true); setValue(row?.homework ?? 0); setComment(row.comment ?? "") }}>
+                                            <DropdownMenuItem onClick={() => { setOpenUpdate(true); const currentType = row.homework > 0 ? 'HOMEWORK' : 'ATTENDANCE'; setType(currentType); setValue(currentType === 'HOMEWORK' ? row.homework : row.attendance); setSelectedDate(row.date); setComment(row.comment ?? "") }}>
                                                 <Edit /> Update
                                             </DropdownMenuItem>
                                         </DropdownMenuGroup>
@@ -249,7 +247,7 @@ const StudentScoresComponent = ({ groupId, studentId }: { groupId: string, stude
                         <DialogClose>
                             Cancel
                         </DialogClose>
-                        <Button type="submit" onClick={() => studentId && updateScoresMutation.mutate({ studentId, groupId, date, type, value, comment })}>Update</Button>
+                        <Button type="submit" onClick={() => studentId && updateScoresMutation.mutate({ studentId, groupId, date: selectedDate, type, value, comment: comment.trim() === "" ? undefined : comment })}>Update</Button>
                     </DialogFooter>
                 </DialogContent>
             </Dialog>

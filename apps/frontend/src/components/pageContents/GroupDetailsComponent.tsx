@@ -77,7 +77,7 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
     const [newStudentIds, setNewStudentIds] = useState<string[]>([]);
     const [selectedStudent, setSelectedStudent] = useState<TokenPayload | null>(null);
     const [type, setType] = useState<"HOMEWORK" | "ATTENDANCE">("HOMEWORK");
-    const [value, setValue] = useState<number>(0); ("HOMEWORK");
+    const [value, setValue] = useState<number>(0);
     const [comment, setComment] = useState<string | null>(null);
     const API = process.env.NEXT_PUBLIC_API_URL;
     const queryClient = useQueryClient();
