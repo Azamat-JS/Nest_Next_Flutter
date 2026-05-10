@@ -48,7 +48,8 @@ export class BulkAddScoreUseCase {
             groupId,
             type: scoreType,
             score,
-            date
+            date,
+            comment: null
         }));
 
         await this.prisma.$transaction(async (tx) => {
@@ -58,7 +59,8 @@ export class BulkAddScoreUseCase {
                     groupId,
                     scoreType: scoreType,
                     score: s.score,
-                    date
+                    date,
+                    comment: s.comment
                 })
             }
         });

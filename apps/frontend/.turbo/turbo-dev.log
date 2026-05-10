@@ -355,3 +355,108 @@ See this log for the ancestor stack trace.
        or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
        height and width.[39m
  GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnq721po0000hrv21wvb6zsf [32m200[39m in 30ms[2m (next.js: 7ms, application-code: 22ms)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+{
+  scores: [
+    { date: [32m'2026-05-09'[39m, homework: [33m30[39m, attendance: [33m30[39m, comment: [1mnull[22m },
+    { date: [32m'2026-05-08'[39m, homework: [33m50[39m, attendance: [33m30[39m, comment: [1mnull[22m },
+    { date: [32m'2026-05-07'[39m, homework: [33m60[39m, attendance: [33m30[39m, comment: [1mnull[22m },
+    { date: [32m'2026-05-06'[39m, homework: [33m40[39m, attendance: [33m30[39m, comment: [1mnull[22m },
+    { date: [32m'2026-05-04'[39m, homework: [33m50[39m, attendance: [33m30[39m, comment: [1mnull[22m },
+    { date: [32m'2026-05-03'[39m, homework: [33m40[39m, attendance: [33m30[39m, comment: [1mnull[22m },
+    { date: [32m'2026-05-02'[39m, homework: [33m50[39m, attendance: [33m30[39m, comment: [1mnull[22m },
+    { date: [32m'2026-05-01'[39m, homework: [33m40[39m, attendance: [33m30[39m, comment: [1mnull[22m },
+    { date: [32m'2026-04-30'[39m, homework: [33m50[39m, attendance: [33m30[39m, comment: [1mnull[22m },
+    { date: [32m'2026-04-29'[39m, homework: [33m60[39m, attendance: [33m30[39m, comment: [1mnull[22m }
+  ],
+  total: { total: [33m1130[39m },
+  page: [33m1[39m,
+  limit: [33m10[39m,
+  total_count: [33m15[39m,
+  last_page: [33m2[39m
+}
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnq721po0000hrv21wvb6zsf [32m200[39m in 156ms[2m (next.js: 9ms, application-code: 146ms)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+ GET /groups [32m200[39m in 29ms[2m (next.js: 6ms, application-code: 23ms)[22m
+ GET /groups/cmnoh0p550000u8v2nihbtf1o [32m200[39m in 30ms[2m (next.js: 8ms, application-code: 22ms)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+ GET /groups/cmnoh0p550000u8v2nihbtf1o/cmnq74ink0001hrv254s9e0li [32m200[39m in 30ms[2m (next.js: 7ms, application-code: 23ms)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+ GET /groups [32m200[39m in 29ms[2m (next.js: 6ms, application-code: 23ms)[22m
+ GET /groups/cmnq4oz3e0005xkv21be71kiu [32m200[39m in 31ms[2m (next.js: 9ms, application-code: 22ms)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+ GET /groups/cmnq4oz3e0005xkv21be71kiu/cmnq74ink0001hrv254s9e0li [32m200[39m in 32ms[2m (next.js: 8ms, application-code: 24ms)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+{
+  scores: [
+    { date: [32m'2026-05-09'[39m, homework: [33m20[39m, attendance: [33m30[39m, comment: [1mnull[22m },
+    { date: [32m'2026-05-06'[39m, homework: [33m30[39m, attendance: [33m30[39m, comment: [1mnull[22m },
+    { date: [32m'2026-05-04'[39m, homework: [33m60[39m, attendance: [33m30[39m, comment: [1mnull[22m },
+    { date: [32m'2026-05-03'[39m, homework: [33m50[39m, attendance: [33m30[39m, comment: [1mnull[22m },
+    { date: [32m'2026-05-02'[39m, homework: [33m40[39m, attendance: [33m30[39m, comment: [1mnull[22m },
+    { date: [32m'2026-05-01'[39m, homework: [33m40[39m, attendance: [33m30[39m, comment: [1mnull[22m },
+    { date: [32m'2026-04-30'[39m, homework: [33m50[39m, attendance: [33m30[39m, comment: [1mnull[22m },
+    { date: [32m'2026-04-29'[39m, homework: [33m50[39m, attendance: [33m30[39m, comment: [1mnull[22m },
+    { date: [32m'2026-04-28'[39m, homework: [33m40[39m, attendance: [33m30[39m, comment: [1mnull[22m },
+    { date: [32m'2026-04-25'[39m, homework: [33m30[39m, attendance: [33m30[39m, comment: [1mnull[22m }
+  ],
+  total: { total: [33m710[39m },
+  page: [33m1[39m,
+  limit: [33m10[39m,
+  total_count: [33m10[39m,
+  last_page: [33m1[39m
+}

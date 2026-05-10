@@ -135,7 +135,6 @@ export class StudentScoreRepository {
             },
             update: {
                 total: { increment: dto.score },
-                comment: dto.comment ? dto.comment : null,
                 homework: dto.scoreType === "HOMEWORK" ? { increment: dto.score } : undefined,
                 attendance: dto.scoreType === "ATTENDANCE" ? { increment: dto.score } : undefined,
             },
@@ -143,7 +142,6 @@ export class StudentScoreRepository {
                 studentId: dto.studentId,
                 groupId: dto.groupId,
                 total: dto.score,
-                comment: dto.comment,
                 homework: dto.scoreType === "HOMEWORK" ? dto.score : 0,
                 attendance: dto.scoreType === "ATTENDANCE" ? dto.score : 0,
             },
