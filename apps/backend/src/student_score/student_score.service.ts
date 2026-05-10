@@ -38,8 +38,10 @@ export class StudentScoreRepository {
         const { limit = 10, page = 1 } = query;
         const skip = (page - 1) * limit;
 
-        return this.prisma.$transaction(async (tx) => {
-            const scores = await tx.scoreEvent.findMany({
+        const [scores, totalCount, total] = await this.prisma.$transaction([
+            this.prisma.scoreEvent.findMany({
+                skip,
+                take: limit,
                 where: {
                     studentId,
                     groupId,
@@ -52,66 +54,37 @@ export class StudentScoreRepository {
                     type: true,
                     value: true,
                     comment: true,
-                    student: {
-                        select: {
-                            username: true,
-                        },
-                    },
+                    id: true
                 },
-            })
+            }),
+            this.prisma.scoreEvent.count({
+                where: {
+                    studentId,
+                    groupId,
+                },
+            }),
 
-            const map = new Map<
-                string,
-                { date: string; homework: number; attendance: number, comment: string | null }
-            >();
-
-            for (const s of scores) {
-                const date = s.date.toISOString().split('T')[0];
-                if (!map.has(date)) {
-                    map.set(date, { date, homework: 0, attendance: 0, comment: null });
-                }
-
-                const entry = map.get(date)!;
-
-                if (s.type === 'HOMEWORK') {
-                    entry.homework += s.value;
-                }
-
-                if (s.type === 'ATTENDANCE') {
-                    entry.attendance += s.value;
-                }
-                if (s.comment) {
-                    entry.comment = entry.comment ? `${entry.comment} | ${s.comment}` : s.comment;
-                }
-            }
-
-
-            const grouped = Array.from(map.values());
-            const totalCount = grouped.length;
-
-            const paginated = grouped.slice(skip, skip + limit);
-
-            const total = await tx.studentScore.findUnique({
+            this.prisma.studentScore.findUnique({
                 where: {
                     studentId_groupId: {
                         studentId,
-                        groupId,
-                    },
+                        groupId
+                    }
                 },
                 select: {
-                    total: true,
-                },
-            });
+                    total: true
+                }
+            })
+        ])
 
-            return {
-                scores: paginated,
-                total,
-                page,
-                limit,
-                total_count: totalCount,
-                last_page: Math.ceil(totalCount / limit),
-            };
-        });
+        return {
+            scores,
+            total,
+            page,
+            limit,
+            total_count: totalCount,
+            last_page: Math.ceil(totalCount / limit),
+        };
     }
 
     async addScore(tx: Prisma.TransactionClient, dto: ScoreDto) {
@@ -180,8 +153,10 @@ export class StudentScoreRepository {
                 }
             },
             data: {
-                ...dto,
                 value,
+                ...(dto.comment !== undefined && dto.comment.trim() !== "" && {
+                    comment: dto.comment
+                })
             }
         });
     }
