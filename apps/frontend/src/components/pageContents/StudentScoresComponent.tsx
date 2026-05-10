@@ -125,8 +125,8 @@ const StudentScoresComponent = ({ groupId, studentId }: { groupId: string, stude
                 <TableHeader>
                     <TableRow key={groupId}>
                         <TableHead className="w-12 text-center text-lg font-bold">&#8470;</TableHead>
-                        <TableHead className="w-48 text-center text-lg font-bold">Homework</TableHead>
-                        <TableHead className="w-48 text-center font-bold text-lg">Attendance</TableHead>
+                        <TableHead className="w-48 text-center text-lg font-bold">Type</TableHead>
+                        <TableHead className="w-48 text-center text-lg font-bold">Score</TableHead>
                         <TableHead className="w-48 text-center font-bold text-lg">Date</TableHead>
                         <TableHead className="w-24 text-center text-lg font-bold">Total</TableHead>
                         <TableHead className="w-48 text-center font-bold text-lg">Comment</TableHead>
@@ -137,13 +137,13 @@ const StudentScoresComponent = ({ groupId, studentId }: { groupId: string, stude
                     {rows.map((row, idx) => (
                         <TableRow key={idx}>
                             <TableCell className="text-center">{idx + 1}</TableCell>
-                            <TableCell className="text-center">{row.homework}</TableCell>
-                            <TableCell className="text-center">{row.attendance}</TableCell>
-                            <TableCell className="text-center">{row.date}</TableCell>
+                            <TableCell className="text-center">{row.type}</TableCell>
+                            <TableCell className="text-center">{row.value}</TableCell>
+                            <TableCell className="text-center">{new Date(row.date).toLocaleString()}</TableCell>
                             <TableCell className="text-center">
-                                {row.homework + row.attendance}
+                                {row.total}
                             </TableCell>
-                            <TableCell className="text-center">{row.comment}</TableCell>
+                            <TableCell className="text-center">{row.comment ?? "-"}</TableCell>
                             <TableCell className="translate-x-5">
                                 <DropdownMenu>
                                     <DropdownMenuTrigger>
@@ -151,7 +151,7 @@ const StudentScoresComponent = ({ groupId, studentId }: { groupId: string, stude
                                     </DropdownMenuTrigger>
                                     <DropdownMenuContent align="start">
                                         <DropdownMenuGroup>
-                                            <DropdownMenuItem onClick={() => { setOpenUpdate(true); const currentType = row.homework > 0 ? 'HOMEWORK' : 'ATTENDANCE'; setType(currentType); setValue(currentType === 'HOMEWORK' ? row.homework : row.attendance); setSelectedDate(row.date); setComment(row.comment ?? "") }}>
+                                            <DropdownMenuItem onClick={() => { setOpenUpdate(true); setType(row.type); setValue(row.value); setSelectedDate(row.date); setComment(row.comment ?? "") }}>
                                                 <Edit /> Update
                                             </DropdownMenuItem>
                                         </DropdownMenuGroup>
