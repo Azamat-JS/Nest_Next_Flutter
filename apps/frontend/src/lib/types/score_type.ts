@@ -7,6 +7,7 @@ export type StudentScoreRow = {
     attendance: number;
     date: string;
     total: number;
+    comment: string | null;
 }
 
 export type ScoreEvent = {

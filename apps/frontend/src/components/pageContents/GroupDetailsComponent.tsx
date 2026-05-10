@@ -25,7 +25,7 @@ import { Input } from "@/components/ui/input"
 import { TokenPayload } from '@/lib/types/token_payload';
 import AddScoreDrawer from '../AddScoreDrawer';
 import { useSuspenseQuery } from '@tanstack/react-query';
-import { GroupScoreResponse, StudentScoreRow } from '@/lib/types/score_type';
+import { GroupScoreResponse } from '@/lib/types/score_type';
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import {
     Dialog,
@@ -67,7 +67,7 @@ type UpdateScorePayload = {
     type: "HOMEWORK" | "ATTENDANCE";
     date: string;
     value: number;
-    comment?: string;
+    comment?: string | null;
 };
 
 type DeleteStudentPayload = {
@@ -121,6 +121,10 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
         onSuccess: () => {
             toast.success('Scores updated successfully!');
             setOpenUpdate(false);
+            setValue(0),
+                setComment(null)
+            setType("HOMEWORK")
+            setSelectedStudent(null)
             queryClient.invalidateQueries({
                 queryKey: ['students', groupId],
                 exact: false,
@@ -242,7 +246,7 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
                                     </DropdownMenuTrigger>
                                     <DropdownMenuContent align="start">
                                         <DropdownMenuGroup>
-                                            <DropdownMenuItem onClick={() => { setOpenUpdate(true); setSelectedStudent(s) }}>
+                                            <DropdownMenuItem onClick={() => { setOpenUpdate(true); setSelectedStudent(s); setValue(score?.homework ?? 0); setComment(score?.comment ?? "") }}>
                                                 <Edit /> Update
                                             </DropdownMenuItem>
                                             <DropdownMenuItem onClick={() => { setOpenDelete(true); setSelectedStudent(s) }} className="text-red-500">
@@ -344,12 +348,18 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
                             value={value}
                             onChange={(e) => setValue(Number(e.target.value))}
                         />
+                        <Input
+                            type="text"
+                            placeholder="Comment"
+                            value={comment ?? ""}
+                            onChange={(e) => setComment(e.target.value)}
+                        />
                     </FieldGroup>
                     <DialogFooter>
                         <DialogClose>
                             Cancel
                         </DialogClose>
-                        <Button type="submit" onClick={() => selectedStudent && updateScoresMutation.mutate({ studentId: selectedStudent?.id, groupId, date, type, value })}>Update</Button>
+                        <Button type="submit" onClick={() => selectedStudent && updateScoresMutation.mutate({ studentId: selectedStudent?.id, groupId, date, type, value, comment })}>Update</Button>
                     </DialogFooter>
                 </DialogContent>
             </Dialog>
