@@ -23,6 +23,10 @@ export class ScoreDto {
     @IsOptional()
     @IsDate()
     date!: Date;
+
+    @IsOptional()
+    @IsString()
+    comment?: string;
 }
 
 export class UpdateScoreDto {

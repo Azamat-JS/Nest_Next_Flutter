@@ -237,3 +237,121 @@ Import traces:
 [36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
 [36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
 [36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnq721po0000hrv21wvb6zsf [32m200[39m in 322ms[2m (next.js: 309ms, application-code: 12ms)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[32m[1m✓[22m[39m Compiled in 1184ms
+[32m[1m✓[22m[39m Compiled in 26ms
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m [2m(<anonymous>)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m [2m(<anonymous>)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m [2m(<anonymous>)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m [2m(<anonymous>)[22m
+[32m[1m✓[22m[39m Compiled in 22ms
+[32m[1m✓[22m[39m Compiled in 21ms
+[36m[browser][39m In HTML, <td> cannot be a child of <td>.
+This will cause a hydration error.
+
+  ...
+    <SegmentViewNode type="page" pagePath="(pages)/gr...">
+      <SegmentTrieNode>
+      <StudentScores>
+        <m fallback={<div>}>
+          ...
+            <StudentScoresComponent studentId="cmnq721po0..." groupId="cmnq4bbkf0...">
+              <div>
+                <Table>
+                  <div data-slot="table-cont..." className="relative w...">
+                    <table data-slot="table" className="w-full cap...">
+                      <TableCaption>
+                      <TableHeader>
+                      <TableBody>
+                        <tbody data-slot="table-body" className={"[&_tr:la..."}>
+                          <TableRow>
+                            <tr data-slot="table-row" className="border-b t...">
+                              <TableCell>
+                              <TableCell>
+                              <TableCell>
+                              <TableCell>
+                              <TableCell className="text-center">
+>                               <td
+>                                 data-slot="table-cell"
+>                                 className={"p-3 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 text-c..."}
+>                               >
+                                  <TableCell className="text-center">
+>                                   <td
+>                                     data-slot="table-cell"
+>                                     className={"p-3 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 te..."}
+>                                   >
+                          ...
+                ...
+ 
+[31m    at Set.forEach (<anonymous>)[39m [2m(<anonymous>)[22m
+[36m[browser][39m <td> cannot contain a nested <td>.
+See this log for the ancestor stack trace. 
+[31m    at Set.forEach (<anonymous>)[39m [2m(<anonymous>)[22m
+[32m[1m✓[22m[39m Compiled in 20ms
+ GET /groups [32m200[39m in 34ms[2m (next.js: 6ms, application-code: 28ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 17ms[2m (next.js: 6ms, application-code: 11ms)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnq721po0000hrv21wvb6zsf [32m200[39m in 34ms[2m (next.js: 12ms, application-code: 22ms)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnq74ink0001hrv254s9e0li [32m200[39m in 33ms[2m (next.js: 10ms, application-code: 23ms)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+ GET /groups [32m200[39m in 29ms[2m (next.js: 5ms, application-code: 24ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 19ms[2m (next.js: 6ms, application-code: 14ms)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnq721po0000hrv21wvb6zsf [32m200[39m in 30ms[2m (next.js: 7ms, application-code: 22ms)[22m

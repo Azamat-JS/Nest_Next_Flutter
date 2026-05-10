@@ -39,41 +39,57 @@ export class StudentScoreRepository {
         const skip = (page - 1) * limit;
 
         return this.prisma.$transaction(async (tx) => {
-            const grouped = await tx.scoreEvent.groupBy({
-                by: ['date', 'type'],
-                where: { studentId, groupId },
-                _sum: { value: true },
-                orderBy: {
-                    date: 'desc',
+            const scores = await tx.scoreEvent.findMany({
+                where: {
+                    studentId,
+                    groupId,
                 },
-            });
+                orderBy: {
+                    createdAt: 'desc',
+                },
+                select: {
+                    date: true,
+                    type: true,
+                    value: true,
+                    comment: true,
+                    student: {
+                        select: {
+                            username: true,
+                        },
+                    },
+                },
+            })
 
             const map = new Map<
                 string,
                 { date: string; homework: number; attendance: number, comment: string | null }
             >();
 
-            for (const g of grouped) {
-                const date = g.date.toISOString().split('T')[0];
+            for (const s of scores) {
+                const date = s.date.toISOString().split('T')[0];
                 if (!map.has(date)) {
                     map.set(date, { date, homework: 0, attendance: 0, comment: null });
                 }
 
                 const entry = map.get(date)!;
 
-                if (g.type === 'HOMEWORK') {
-                    entry.homework = g._sum.value ?? 0;
+                if (s.type === 'HOMEWORK') {
+                    entry.homework += s.value;
                 }
 
-                if (g.type === 'ATTENDANCE') {
-                    entry.attendance = g._sum.value ?? 0;
+                if (s.type === 'ATTENDANCE') {
+                    entry.attendance += s.value;
+                }
+                if (s.comment) {
+                    entry.comment = entry.comment ? `${entry.comment} | ${s.comment}` : s.comment;
                 }
             }
 
-            const allDays = Array.from(map.values());
 
-            const totalCount = allDays.length;
-            const paginated = allDays.slice(skip, skip + limit);
+            const grouped = Array.from(map.values());
+            const totalCount = grouped.length;
+
+            const paginated = grouped.slice(skip, skip + limit);
 
             const total = await tx.studentScore.findUnique({
                 where: {
@@ -105,6 +121,7 @@ export class StudentScoreRepository {
                 groupId: dto.groupId,
                 type: dto.scoreType,
                 value: dto.score,
+                comment: dto.comment,
                 date: new Date(dto.date!).toISOString(),
             },
         });
@@ -118,6 +135,7 @@ export class StudentScoreRepository {
             },
             update: {
                 total: { increment: dto.score },
+                comment: dto.comment ? dto.comment : null,
                 homework: dto.scoreType === "HOMEWORK" ? { increment: dto.score } : undefined,
                 attendance: dto.scoreType === "ATTENDANCE" ? { increment: dto.score } : undefined,
             },
@@ -125,6 +143,7 @@ export class StudentScoreRepository {
                 studentId: dto.studentId,
                 groupId: dto.groupId,
                 total: dto.score,
+                comment: dto.comment,
                 homework: dto.scoreType === "HOMEWORK" ? dto.score : 0,
                 attendance: dto.scoreType === "ATTENDANCE" ? dto.score : 0,
             },
