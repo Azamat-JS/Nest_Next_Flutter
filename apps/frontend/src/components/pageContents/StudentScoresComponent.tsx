@@ -139,7 +139,7 @@ const StudentScoresComponent = ({ groupId, studentId }: { groupId: string, stude
                             <TableCell className="text-center">{idx + 1}</TableCell>
                             <TableCell className="text-center">{row.type}</TableCell>
                             <TableCell className="text-center">{row.value}</TableCell>
-                            <TableCell className="text-center">{new Date(row.date).toLocaleString()}</TableCell>
+                            <TableCell className="text-center">{new Date(row.date).toLocaleString('en-US', { month: 'short', day: "numeric", year: 'numeric' })}</TableCell>
                             <TableCell className="text-center">
                                 {row.total}
                             </TableCell>
