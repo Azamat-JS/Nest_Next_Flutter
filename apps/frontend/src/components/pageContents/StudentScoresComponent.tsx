@@ -3,9 +3,9 @@
 import { useStudents } from "@/lib/hooks/studentsHook";
 import { useAuthStore } from "@/lib/stores/authStore";
 import { StudentScoreResponse } from "@/lib/types/score_type";
-import { TokenPayload } from "@/lib/types/token_payload";
+import { TokenPayload, UpdateScorePayload } from "@/lib/types/token_payload";
 import axios from "axios";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import {
     Select,
     SelectContent,
@@ -23,6 +23,16 @@ import {
     PaginationPrevious,
 } from "@/components/ui/pagination"
 import {
+    Dialog,
+    DialogClose,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+} from "@/components/ui/dialog"
+import { Button } from '../ui/button';
+import {
     Table,
     TableBody,
     TableCaption,
@@ -31,11 +41,22 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-import { Field, FieldLabel } from "@/components/ui/field"
-import { useQueryClient, useSuspenseQuery } from '@tanstack/react-query'
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuGroup,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { Menu, Edit } from 'lucide-react';
+import { Field, FieldLabel, FieldGroup, } from "@/components/ui/field"
+import { useMutation, useQueryClient, useSuspenseQuery } from '@tanstack/react-query'
 import { useRouter, useSearchParams } from 'next/navigation';
 import LineGraph from "../LineGraph";
+import { toast } from "sonner";
+import { Input } from "../ui/input";
 
+const date = new Date().toISOString().split('T')[0];
 
 
 const StudentScoresComponent = ({ groupId, studentId }: { groupId: string, studentId: string }) => {
@@ -46,6 +67,13 @@ const StudentScoresComponent = ({ groupId, studentId }: { groupId: string, stude
     const API = process.env.NEXT_PUBLIC_API_URL;
     const { data: students = [] } = useStudents()
     const router = useRouter();
+    const [openUpdate, setOpenUpdate] = useState(false);
+    const [comment, setComment] = useState<string | null>(null);
+    const [value, setValue] = useState<number>(0); ("HOMEWORK");
+    const [type, setType] = useState<"HOMEWORK" | "ATTENDANCE">("HOMEWORK");
+    const queryClient = useQueryClient();
+
+
 
 
     const { data: studentScoreReport } = useSuspenseQuery<StudentScoreResponse>({
@@ -56,6 +84,29 @@ const StudentScoresComponent = ({ groupId, studentId }: { groupId: string, stude
         },
     });
     console.log(studentScoreReport)
+
+    const updateScoresMutation = useMutation({
+        mutationFn: async (payload: UpdateScorePayload) => {
+            const { studentId, groupId, date, type, value, comment } = payload;
+            return await axios.put(`${API}/student-score/update/${studentId}/${groupId}`, { date, comment, type, value, homeworkScore: type === "HOMEWORK" ? value : undefined, attendanceScore: type === "ATTENDANCE" ? value : undefined }, { headers: { Authorization: `Bearer ${token}` } });
+        },
+        onSuccess: () => {
+            toast.success('Scores updated successfully!');
+            setOpenUpdate(false);
+            setValue(0),
+                setComment(null)
+            setType("HOMEWORK")
+            queryClient.invalidateQueries({
+                queryKey: ['students', groupId],
+                exact: false,
+            })
+            queryClient.invalidateQueries({ queryKey: ['group', groupId] });
+
+        },
+        onError: (error: any) => {
+            toast.error(error.response?.data?.message ?? 'Something went wrong');
+        }
+    })
 
     const student = useMemo(() => {
         return students.find((s: TokenPayload) => s.id === studentId);
@@ -77,10 +128,11 @@ const StudentScoresComponent = ({ groupId, studentId }: { groupId: string, stude
                     <TableRow key={groupId}>
                         <TableHead className="w-12 text-center text-lg font-bold">&#8470;</TableHead>
                         <TableHead className="w-48 text-center text-lg font-bold">Homework</TableHead>
-                        <TableHead className="w-72 text-center text-lg font-bold">Attendance</TableHead>
-                        <TableHead className="w-72 text-center text-lg font-bold">Date</TableHead>
+                        <TableHead className="w-48 text-center font-bold text-lg">Attendance</TableHead>
+                        <TableHead className="w-48 text-center font-bold text-lg">Date</TableHead>
                         <TableHead className="w-24 text-center text-lg font-bold">Total</TableHead>
-                        <TableHead className="w-72 text-center text-lg font-bold">Comment</TableHead>
+                        <TableHead className="w-48 text-center font-bold text-lg">Comment</TableHead>
+                        <TableHead className="w-24 text-start text-lg font-bold">Actions</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -94,6 +146,20 @@ const StudentScoresComponent = ({ groupId, studentId }: { groupId: string, stude
                                 {row.homework + row.attendance}
                             </TableCell>
                             <TableCell className="text-center">{row.comment}</TableCell>
+                            <TableCell className="translate-x-5">
+                                <DropdownMenu>
+                                    <DropdownMenuTrigger>
+                                        <Menu className="h-5 w-5" />
+                                    </DropdownMenuTrigger>
+                                    <DropdownMenuContent align="start">
+                                        <DropdownMenuGroup>
+                                            <DropdownMenuItem onClick={() => { setOpenUpdate(true); setValue(row?.homework ?? 0); setComment(row.comment ?? "") }}>
+                                                <Edit /> Update
+                                            </DropdownMenuItem>
+                                        </DropdownMenuGroup>
+                                    </DropdownMenuContent>
+                                </DropdownMenu>
+                            </TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
@@ -145,6 +211,48 @@ const StudentScoresComponent = ({ groupId, studentId }: { groupId: string, stude
                     </Pagination>
                 </div>
             </div>
+
+            {/* update student scores modal */}
+            <Dialog open={openUpdate} onOpenChange={setOpenUpdate}>
+                <DialogContent className="sm:max-w-sm">
+                    <DialogHeader>
+                        <DialogTitle>Edit Student Scores</DialogTitle>
+                        <DialogDescription>
+                            Make changes to the student's scores here. Click save when you&apos;re
+                            done.
+                        </DialogDescription>
+                    </DialogHeader>
+                    <FieldGroup>
+                        <Select onValueChange={(v: "HOMEWORK" | "ATTENDANCE") => setType(v)}>
+                            <SelectTrigger>
+                                <SelectValue placeholder="Select type" />
+                            </SelectTrigger>
+
+                            <SelectContent>
+                                <SelectItem value="HOMEWORK">Homework</SelectItem>
+                                <SelectItem value="ATTENDANCE">Attendance</SelectItem>
+                            </SelectContent>
+                        </Select>
+                        <Input
+                            type="number"
+                            value={value}
+                            onChange={(e) => setValue(Number(e.target.value))}
+                        />
+                        <Input
+                            type="text"
+                            placeholder="Comment"
+                            value={comment ?? ""}
+                            onChange={(e) => setComment(e.target.value)}
+                        />
+                    </FieldGroup>
+                    <DialogFooter>
+                        <DialogClose>
+                            Cancel
+                        </DialogClose>
+                        <Button type="submit" onClick={() => studentId && updateScoresMutation.mutate({ studentId, groupId, date, type, value, comment })}>Update</Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
 
             <LineGraph groupId={groupId} studentId={studentId} />
         </div>

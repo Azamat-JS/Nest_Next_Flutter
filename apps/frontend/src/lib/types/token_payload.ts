@@ -14,4 +14,18 @@ export type LeaderBoardType = {
     group?: { name: string };
 }
 
+export type UpdateScorePayload = {
+    studentId: string;
+    groupId: string;
+    type: "HOMEWORK" | "ATTENDANCE";
+    date: string;
+    value: number;
+    comment?: string | null;
+};
+
+export type DeleteStudentPayload = {
+    studentId: string;
+    groupId: string;
+}
+
 

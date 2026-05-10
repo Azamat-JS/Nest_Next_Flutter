@@ -460,3 +460,212 @@ See this log for the ancestor stack trace.
   total_count: [33m10[39m,
   last_page: [33m1[39m
 }
+ GET /groups/cmnq4oz3e0005xkv21be71kiu/cmnq74ink0001hrv254s9e0li [32m200[39m in 57ms[2m (next.js: 9ms, application-code: 48ms)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+ GET /groups [32m200[39m in 26ms[2m (next.js: 4ms, application-code: 22ms)[22m
+ GET /groups/cmoyfzn4d00028vv2hluiievy [32m200[39m in 30ms[2m (next.js: 8ms, application-code: 22ms)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+ GET /groups/cmoyfzn4d00028vv2hluiievy/cmnq721po0000hrv21wvb6zsf [32m200[39m in 33ms[2m (next.js: 9ms, application-code: 24ms)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+ GET /groups/cmoyfzn4d00028vv2hluiievy/cmnq74ink0001hrv254s9e0li [32m200[39m in 30ms[2m (next.js: 8ms, application-code: 22ms)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+ GET /groups [32m200[39m in 25ms[2m (next.js: 4ms, application-code: 21ms)[22m
+ GET /groups/cmnoh0p550000u8v2nihbtf1o [32m200[39m in 29ms[2m (next.js: 8ms, application-code: 21ms)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+ GET /groups/cmnoh0p550000u8v2nihbtf1o/cmnq74ink0001hrv254s9e0li [32m200[39m in 29ms[2m (next.js: 6ms, application-code: 23ms)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[32m[1m✓[22m[39m Compiled in 226ms
+[32m[1m✓[22m[39m Compiled in 27ms
+[32m[1m✓[22m[39m Compiled in 22ms
+[32m[1m✓[22m[39m Compiled in 20ms
+[32m[1m✓[22m[39m Compiled in 20ms
+[32m[1m✓[22m[39m Compiled in 20ms
+[32m[1m✓[22m[39m Compiled in 22ms
+[32m[1m✓[22m[39m Compiled in 22ms
+[32m[1m✓[22m[39m Compiled in 21ms
+[32m[1m✓[22m[39m Compiled in 24ms
+[32m[1m✓[22m[39m Compiled in 19ms
+ GET /groups [32m200[39m in 29ms[2m (next.js: 6ms, application-code: 23ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 32ms[2m (next.js: 12ms, application-code: 20ms)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkaas440001icv2k7mikei8 [32m200[39m in 16ms[2m (next.js: 5ms, application-code: 11ms)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+ GET /groups [32m200[39m in 29ms[2m (next.js: 5ms, application-code: 24ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 16ms[2m (next.js: 3ms, application-code: 12ms)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnq74ink0001hrv254s9e0li [32m200[39m in 32ms[2m (next.js: 8ms, application-code: 24ms)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[32m[1m✓[22m[39m Compiled in 63ms
+[32m[1m✓[22m[39m Compiled in 504ms
+[32m[1m✓[22m[39m Compiled in 577ms
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnq74ink0001hrv254s9e0li [32m200[39m in 389ms[2m (next.js: 135ms, application-code: 254ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnq74ink0001hrv254s9e0li [32m200[39m in 76ms[2m (next.js: 1243µs, application-code: 75ms)[22m
+[32m[1m✓[22m[39m Compiled in 84ms
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m [2m(<anonymous>)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m [2m(<anonymous>)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m [2m(<anonymous>)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m [2m(<anonymous>)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m [2m(<anonymous>)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m [2m(<anonymous>)[22m
+[32m[1m✓[22m[39m Compiled in 38ms
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m [2m(<anonymous>)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m [2m(<anonymous>)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m [2m(<anonymous>)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m [2m(<anonymous>)[22m
+ GET /groups [32m200[39m in 49ms[2m (next.js: 26ms, application-code: 23ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 45ms[2m (next.js: 27ms, application-code: 18ms)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[32m[1m✓[22m[39m Compiled in 57ms
+[32m[1m✓[22m[39m Compiled in 57ms
+[32m[1m✓[22m[39m Compiled in 73ms
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkampkh0003icv2q37yozix [32m200[39m in 33ms[2m (next.js: 11ms, application-code: 22ms)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[32m[1m✓[22m[39m Compiled in 65ms
+[32m[1m✓[22m[39m Compiled in 23ms
+[32m[1m✓[22m[39m Compiled in 21ms
+[32m[1m✓[22m[39m Compiled in 50ms
+[32m[1m✓[22m[39m Compiled in 63ms
+[32m[1m✓[22m[39m Compiled in 60ms
+[32m[1m✓[22m[39m Compiled in 45ms
+[32m[1m✓[22m[39m Compiled in 303ms
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkampkh0003icv2q37yozix [32m200[39m in 352ms[2m (next.js: 114ms, application-code: 239ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkampkh0003icv2q37yozix [32m200[39m in 248ms[2m (next.js: 3ms, application-code: 245ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnkampkh0003icv2q37yozix [32m200[39m in 154ms[2m (next.js: 5ms, application-code: 149ms)[22m
+[32m[1m✓[22m[39m Compiled in 577ms
+[32m[1m✓[22m[39m Compiled in 71ms
+[32m[1m✓[22m[39m Compiled in 108ms
+[32m[1m✓[22m[39m Compiled in 355ms

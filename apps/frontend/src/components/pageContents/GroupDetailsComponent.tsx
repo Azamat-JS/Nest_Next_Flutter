@@ -22,7 +22,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Menu, Edit, Trash, Home, ListChecks, Medal } from 'lucide-react';
 import { Input } from "@/components/ui/input"
-import { TokenPayload } from '@/lib/types/token_payload';
+import { DeleteStudentPayload, TokenPayload, UpdateScorePayload } from '@/lib/types/token_payload';
 import AddScoreDrawer from '../AddScoreDrawer';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { GroupScoreResponse } from '@/lib/types/score_type';
@@ -60,20 +60,6 @@ import {
 import { formatValue } from '@/lib/helper/format_score';
 import { Badge } from '../ui/badge';
 import GroupLineGraph from '../GroupLineGraph';
-
-type UpdateScorePayload = {
-    studentId: string;
-    groupId: string;
-    type: "HOMEWORK" | "ATTENDANCE";
-    date: string;
-    value: number;
-    comment?: string | null;
-};
-
-type DeleteStudentPayload = {
-    studentId: string;
-    groupId: string;
-}
 
 const date = new Date().toISOString().split('T')[0];
 
@@ -246,7 +232,7 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
                                     </DropdownMenuTrigger>
                                     <DropdownMenuContent align="start">
                                         <DropdownMenuGroup>
-                                            <DropdownMenuItem onClick={() => { setOpenUpdate(true); setSelectedStudent(s); setValue(score?.homework ?? 0); setComment(score?.comment ?? "") }}>
+                                            <DropdownMenuItem onClick={() => { setOpenUpdate(true); setSelectedStudent(s); setValue(score?.homework ?? 0); setComment(score?.comment ?? null) }}>
                                                 <Edit /> Update
                                             </DropdownMenuItem>
                                             <DropdownMenuItem onClick={() => { setOpenDelete(true); setSelectedStudent(s) }} className="text-red-500">
