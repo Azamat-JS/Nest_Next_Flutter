@@ -1,5 +1,5 @@
 import { ScoreType } from "@prisma/client";
-import { IsArray, IsEnum, IsInt, IsString, ValidateNested } from "class-validator";
+import { IsArray, IsEnum, IsInt, IsOptional, IsString, ValidateNested } from "class-validator";
 import { Type } from "class-transformer";
 
 class StudentScoreItem {
@@ -8,6 +8,10 @@ class StudentScoreItem {
 
     @IsInt()
     score!: number;
+
+    @IsOptional()
+    @IsString()
+    comment?: string;
 }
 
 export class BulkScoreDto {

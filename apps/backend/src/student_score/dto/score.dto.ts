@@ -37,4 +37,8 @@ export class UpdateScoreDto {
     @IsNotEmpty()
     @IsInt()
     value!: number;
+
+    @IsOptional()
+    @IsString()
+    comment?: string;
 }

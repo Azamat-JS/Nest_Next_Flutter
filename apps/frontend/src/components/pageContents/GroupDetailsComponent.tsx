@@ -67,6 +67,7 @@ type UpdateScorePayload = {
     type: "HOMEWORK" | "ATTENDANCE";
     date: string;
     value: number;
+    comment?: string;
 };
 
 type DeleteStudentPayload = {
@@ -91,6 +92,7 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
     const [selectedStudent, setSelectedStudent] = useState<TokenPayload | null>(null);
     const [type, setType] = useState<"HOMEWORK" | "ATTENDANCE">("HOMEWORK");
     const [value, setValue] = useState<number>(0); ("HOMEWORK");
+    const [comment, setComment] = useState<string | null>(null);
     const API = process.env.NEXT_PUBLIC_API_URL;
     const queryClient = useQueryClient();
     const { data: students = [] } = useStudents()
@@ -113,8 +115,8 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
 
     const updateScoresMutation = useMutation({
         mutationFn: async (payload: UpdateScorePayload) => {
-            const { studentId, groupId, date, type, value } = payload;
-            return await axios.put(`${API}/student-score/update/${studentId}/${groupId}`, { date, type, value, homeworkScore: type === "HOMEWORK" ? value : undefined, attendanceScore: type === "ATTENDANCE" ? value : undefined }, { headers: { Authorization: `Bearer ${token}` } });
+            const { studentId, groupId, date, type, value, comment } = payload;
+            return await axios.put(`${API}/student-score/update/${studentId}/${groupId}`, { date, comment, type, value, homeworkScore: type === "HOMEWORK" ? value : undefined, attendanceScore: type === "ATTENDANCE" ? value : undefined }, { headers: { Authorization: `Bearer ${token}` } });
         },
         onSuccess: () => {
             toast.success('Scores updated successfully!');

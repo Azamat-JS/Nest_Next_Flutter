@@ -38,6 +38,7 @@ const AddScoreDrawer = ({ openCreate, setOpenCreate, students, groupId, onScoreA
             z.object({
                 studentId: z.string(),
                 score: z.number(),
+                comment: z.string().optional(),
             })
         ),
     });
@@ -116,15 +117,16 @@ const AddScoreDrawer = ({ openCreate, setOpenCreate, students, groupId, onScoreA
                                     return (
                                         type === 'HOMEWORK' ? <Field data-invalid={isInvalid}>
                                             <FieldLabel htmlFor={field.name} className='font-bold flex justify-end'>Homework Score</FieldLabel>
-                                            {students.map((s) => (
-                                                <div key={s.id} className="flex items-center gap-2">
+                                            {students.map((s) => {
+                                                const studentEntry = form.state.values.students.find(st => st.studentId === s.id);
+                                                return (< div key={s.id} className="flex items-center gap-2" >
                                                     <span className='w-32'>{s.username}</span>
                                                     <Input
                                                         type="number"
                                                         className="mb-1"
                                                         min={0}
                                                         value={
-                                                            form.state.values.students.find(st => st.studentId === s.id)?.score ?? ''
+                                                            studentEntry?.score ?? ''
                                                         }
                                                         placeholder="Enter score"
                                                         onChange={(e) => {
@@ -139,12 +141,24 @@ const AddScoreDrawer = ({ openCreate, setOpenCreate, students, groupId, onScoreA
                                                                 if (existingIndex >= 0) {
                                                                     return prev.map((student) => student.studentId === s.id ? { ...student, score } : student);
                                                                 }
-                                                                return [...prev, { studentId: s.id, score }];
+                                                                return [...prev, { studentId: s.id, score, comment: "" }];
                                                             })
                                                         }}
                                                     />
+                                                    <Input
+                                                        type='text'
+                                                        className="mb-1"
+                                                        value={studentEntry?.comment ?? ""}
+                                                        onChange={(e) => {
+                                                            const comment = e.target.value;
+
+                                                            form.setFieldValue("students", (prev) => prev.map((student) => student.studentId === s.id ? { ...student, comment } : student))
+                                                        }}
+                                                        placeholder='Write comment...'
+                                                    />
                                                 </div>
-                                            ))}
+                                                )
+                                            })}
                                             {isInvalid && (
                                                 <FieldError errors={field.state.meta.errors} />
                                             )}
@@ -224,7 +238,7 @@ const AddScoreDrawer = ({ openCreate, setOpenCreate, students, groupId, onScoreA
                     </DrawerClose>
                 </DrawerFooter>
             </DrawerContent>
-        </Drawer>
+        </Drawer >
 
     )
 }
