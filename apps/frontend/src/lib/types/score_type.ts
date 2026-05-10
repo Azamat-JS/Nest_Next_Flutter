@@ -13,6 +13,7 @@ export type ScoreEvent = {
     date: string;
     homework: number;
     attendance: number;
+    comment: string | null;
 }
 
 export type StudentScoreResponse = {

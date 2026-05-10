@@ -50,13 +50,13 @@ export class StudentScoreRepository {
 
             const map = new Map<
                 string,
-                { date: string; homework: number; attendance: number }
+                { date: string; homework: number; attendance: number, comment: string | null }
             >();
 
             for (const g of grouped) {
                 const date = g.date.toISOString().split('T')[0];
                 if (!map.has(date)) {
-                    map.set(date, { date, homework: 0, attendance: 0 });
+                    map.set(date, { date, homework: 0, attendance: 0, comment: null });
                 }
 
                 const entry = map.get(date)!;
@@ -163,6 +163,7 @@ export class StudentScoreRepository {
                 }
             },
             data: {
+                ...dto,
                 value,
             }
         });
@@ -178,7 +179,7 @@ export class StudentScoreRepository {
                     date,
                 }
             },
-            select: { value: true }
+            select: { value: true, comment: true }
         })
     }
 

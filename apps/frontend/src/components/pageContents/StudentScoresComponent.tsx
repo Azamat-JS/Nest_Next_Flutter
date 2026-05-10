@@ -41,7 +41,6 @@ import LineGraph from "../LineGraph";
 const StudentScoresComponent = ({ groupId, studentId }: { groupId: string, studentId: string }) => {
     const token = useAuthStore((state) => state.token);
     const searchParams = useSearchParams();
-    const queryClient = useQueryClient();
     const page = Number(searchParams.get('page') ?? 1);
     const limit = Number(searchParams.get('limit') ?? 10)
     const API = process.env.NEXT_PUBLIC_API_URL;
@@ -81,6 +80,7 @@ const StudentScoresComponent = ({ groupId, studentId }: { groupId: string, stude
                         <TableHead className="w-72 text-center text-lg font-bold">Attendance</TableHead>
                         <TableHead className="w-72 text-center text-lg font-bold">Date</TableHead>
                         <TableHead className="w-24 text-center text-lg font-bold">Total</TableHead>
+                        <TableHead className="w-72 text-center text-lg font-bold">Comment</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -93,6 +93,7 @@ const StudentScoresComponent = ({ groupId, studentId }: { groupId: string, stude
                             <TableCell className="text-center">
                                 {row.homework + row.attendance}
                             </TableCell>
+                            <TableCell className="text-center">{row.comment}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>

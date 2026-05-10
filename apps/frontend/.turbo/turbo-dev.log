@@ -1,0 +1,239 @@
+
+> frontend@0.1.0 dev /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend
+> next dev -p 4000
+
+[1m[38;2;173;127;168m▲ Next.js 16.2.1[39m[22m (Turbopack)
+- Local:         http://localhost:4000
+- Network:       http://10.206.9.224:4000
+- Environments: .env.local
+[32m[1m✓[22m[39m Ready in 365ms
+[33m[1m⚠[22m[39m Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /Users/azamatabdullayev/Desktop/full-stack-turbo/pnpm-workspace.yaml as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend/pnpm-workspace.yaml
+
+
+ GET / [32m200[39m in 274ms[2m (next.js: 106ms, application-code: 168ms)[22m
+ GET /groups [32m200[39m in 58ms[2m (next.js: 33ms, application-code: 24ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 268ms[2m (next.js: 254ms, application-code: 14ms)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[32m[1m✓[22m[39m Compiled in 272ms
+[32m[1m✓[22m[39m Compiled in 24ms
+[32m[1m✓[22m[39m Compiled in 629ms
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 26ms[2m (next.js: 6ms, application-code: 19ms)[22m
+[32m[1m✓[22m[39m Compiled in 21ms
+[32m[1m✓[22m[39m Compiled in 21ms
+[32m[1m✓[22m[39m Compiled in 30ms
+[32m[1m✓[22m[39m Compiled in 24ms
+[32m[1m✓[22m[39m Compiled in 28ms
+[32m[1m✓[22m[39m Compiled in 27ms
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 20ms[2m (next.js: 5ms, application-code: 15ms)[22m
+[32m[1m✓[22m[39m Compiled in 22ms
+[32m[1m✓[22m[39m Compiled in 35ms
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 22ms[2m (next.js: 4ms, application-code: 18ms)[22m
+[32m[1m✓[22m[39m Compiled in 21ms
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m [2m(<anonymous>)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m [2m(<anonymous>)[22m
+[36m[browser][39m ./apps/frontend/src/components/AddScoreDrawer.tsx:121:49
+Expected '</', got 'const'
+  119 |                                             <FieldLabel htmlFor={field.name} className='font-bold flex justify-end'>Homework Score</FieldLabel>
+  120 |                                             {students.map((s) => (
+> 121 |                                                 const studentEntry =
+      |                                                 ^^^^^
+  122 |                                                     <div key={s.id} className="flex items-center gap-2">
+  123 |                                                         <span className='w-32'>{s.username}</span>
+  124 |                                                         <Input
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component Browser]
+    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component Browser]
+    ./apps/frontend/src/components/pageContents/GroupAndLeaderboard.tsx [Client Component Browser]
+    ./apps/frontend/src/components/pageContents/GroupAndLeaderboard.tsx [Server Component]
+    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component SSR]
+    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component SSR]
+    ./apps/frontend/src/components/pageContents/GroupAndLeaderboard.tsx [Client Component SSR]
+    ./apps/frontend/src/components/pageContents/GroupAndLeaderboard.tsx [Server Component]
+    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component] 
+[36m[browser][39m ./apps/frontend/src/components/AddScoreDrawer.tsx:121:49
+Expected '</', got 'const'
+  119 |                                             <FieldLabel htmlFor={field.name} className='font-bold flex justify-end'>Homework Score</FieldLabel>
+  120 |                                             {students.map((s) => (
+> 121 |                                                 const studentEntry = from.state.values.
+      |                                                 ^^^^^
+  122 |                                                     < div key = { s.id } className = "flex items-center gap-2" >
+  123 |                                                         <span className='w-32'>{s.username}</span>
+  124 |                                                         <Input
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component Browser]
+    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component Browser]
+    ./apps/frontend/src/components/pageContents/GroupAndLeaderboard.tsx [Client Component Browser]
+    ./apps/frontend/src/components/pageContents/GroupAndLeaderboard.tsx [Server Component]
+    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component SSR]
+    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component SSR]
+    ./apps/frontend/src/components/pageContents/GroupAndLeaderboard.tsx [Client Component SSR]
+    ./apps/frontend/src/components/pageContents/GroupAndLeaderboard.tsx [Server Component]
+    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component] 
+[36m[browser][39m ./apps/frontend/src/components/AddScoreDrawer.tsx:121:49
+Expected '</', got 'const'
+  119 |                                             <FieldLabel htmlFor={field.name} className='font-bold flex justify-end'>Homework Score</FieldLabel>
+  120 |                                             {students.map((s) => (
+> 121 |                                                 const studentEntry = form.state.values.
+      |                                                 ^^^^^
+  122 |                                                     < div key = { s.id } className = "flex items-center gap-2" >
+  123 |                                                         <span className='w-32'>{s.username}</span>
+  124 |                                                         <Input
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component Browser]
+    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component Browser]
+    ./apps/frontend/src/components/pageContents/GroupAndLeaderboard.tsx [Client Component Browser]
+    ./apps/frontend/src/components/pageContents/GroupAndLeaderboard.tsx [Server Component]
+    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component SSR]
+    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component SSR]
+    ./apps/frontend/src/components/pageContents/GroupAndLeaderboard.tsx [Client Component SSR]
+    ./apps/frontend/src/components/pageContents/GroupAndLeaderboard.tsx [Server Component]
+    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component] 
+[36m[browser][39m ./apps/frontend/src/components/AddScoreDrawer.tsx:121:49
+Expected '</', got 'const'
+  119 |                                             <FieldLabel htmlFor={field.name} className='font-bold flex justify-end'>Homework Score</FieldLabel>
+  120 |                                             {students.map((s) => (
+> 121 |                                                 const studentEntry = form.state.values.students.find(st => st.studentId === s.id);
+      |                                                 ^^^^^
+  122 |                                             < div key={s.id} className="flex items-center gap-2" >
+  123 |                                                 <span className='w-32'>{s.username}</span>
+  124 |                                                 <Input
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component Browser]
+    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component Browser]
+    ./apps/frontend/src/components/pageContents/GroupAndLeaderboard.tsx [Client Component Browser]
+    ./apps/frontend/src/components/pageContents/GroupAndLeaderboard.tsx [Server Component]
+    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component SSR]
+    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component SSR]
+    ./apps/frontend/src/components/pageContents/GroupAndLeaderboard.tsx [Client Component SSR]
+    ./apps/frontend/src/components/pageContents/GroupAndLeaderboard.tsx [Server Component]
+    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component] 
+[36m[browser][39m ./apps/frontend/src/components/AddScoreDrawer.tsx:153:57
+Expected '</', got 'ident'
+  151 |                                                         value={studentEntry?.comment ?? ""}
+  152 |                                                         onChange={ }
+> 153 |                                                         placeholder='Write comment...'
+      |                                                         ^^^^^^^^^^^
+  154 |                                                     />
+  155 |                                                 </div>
+  156 |                                                 )
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component Browser]
+    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component Browser]
+    ./apps/frontend/src/components/pageContents/GroupAndLeaderboard.tsx [Client Component Browser]
+    ./apps/frontend/src/components/pageContents/GroupAndLeaderboard.tsx [Server Component]
+    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component SSR]
+    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component SSR]
+    ./apps/frontend/src/components/pageContents/GroupAndLeaderboard.tsx [Client Component SSR]
+    ./apps/frontend/src/components/pageContents/GroupAndLeaderboard.tsx [Server Component]
+    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component] 
+[36m[browser][39m ./apps/frontend/src/components/AddScoreDrawer.tsx:152:74
+Expected '</', got '}'
+  150 |                                                         className="mb-1"
+  151 |                                                         value={studentEntry?.comment ?? ""}
+> 152 |                                                         onChange={(e) => }
+      |                                                                          ^
+  153 |                                                         placeholder='Write comment...'
+  154 |                                                     />
+  155 |                                                 </div>
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component Browser]
+    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component Browser]
+    ./apps/frontend/src/components/pageContents/GroupAndLeaderboard.tsx [Client Component Browser]
+    ./apps/frontend/src/components/pageContents/GroupAndLeaderboard.tsx [Server Component]
+    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component SSR]
+    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component SSR]
+    ./apps/frontend/src/components/pageContents/GroupAndLeaderboard.tsx [Client Component SSR]
+    ./apps/frontend/src/components/pageContents/GroupAndLeaderboard.tsx [Server Component]
+    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component] 
+[36m[browser][39m ./apps/frontend/src/components/AddScoreDrawer.tsx:155:124
+Expected '</', got ')'
+  153 |                                                             const comment = e.target.value;
+  154 |
+> 155 |                                                             form.setFieldValue("students", (prev) => prev.map((student) => ))
+      |                                                                                                                            ^
+  156 |                                                         }}
+  157 |                                                         placeholder='Write comment...'
+  158 |                                                     />
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component Browser]
+    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component Browser]
+    ./apps/frontend/src/components/pageContents/GroupAndLeaderboard.tsx [Client Component Browser]
+    ./apps/frontend/src/components/pageContents/GroupAndLeaderboard.tsx [Server Component]
+    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/frontend/src/components/AddScoreDrawer.tsx [Client Component SSR]
+    ./apps/frontend/src/components/pageContents/GroupDetailsComponent.tsx [Client Component SSR]
+    ./apps/frontend/src/components/pageContents/GroupAndLeaderboard.tsx [Client Component SSR]
+    ./apps/frontend/src/components/pageContents/GroupAndLeaderboard.tsx [Server Component]
+    ./apps/frontend/src/app/(pages)/groups/[groupId]/page.tsx [Server Component] 
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
