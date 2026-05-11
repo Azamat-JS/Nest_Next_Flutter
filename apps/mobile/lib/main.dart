@@ -6,7 +6,6 @@ import 'package:mobile/core/common/cubit/auth_check_cubit.dart';
 import 'package:mobile/core/di/service_locator.dart';
 import 'package:mobile/core/router/app_router.dart';
 import 'package:mobile/core/theme/app_theme.dart';
-import 'package:mobile/core/utils/app_initializer.dart';
 import 'package:mobile/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:mobile/features/groups/presentation/bloc/group/group_bloc.dart';
 import 'package:mobile/core/di/init_dependencies.dart';
@@ -15,7 +14,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
   await initDependencies();
-  await initializeAppService();
 
   final authCheck = serviceLocator<AuthCheckCubit>();
 

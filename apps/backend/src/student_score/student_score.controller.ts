@@ -77,7 +77,6 @@ export class StudentScoreController {
     );
   }
 
-
   @Delete("delete/all")
   async deleteAll() {
     return this.studentScoreRepo.deleteMany();
