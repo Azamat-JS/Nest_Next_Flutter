@@ -177,3 +177,19 @@
 2026-05-12T16:13:59.509477Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
 2026-05-12T16:14:28.510111Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/mobile/lib/features/student_scores/data/model/student_score_model.dart")}
 2026-05-12T16:14:28.510132Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2026-05-12T16:17:30.515138Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/mobile/lib/features/student_scores/data/model/student_score_model.dart")}
+2026-05-12T16:17:30.515875Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2026-05-12T16:17:38.710522Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/mobile/lib/features/student_scores/domain/entity/student_scores_entity.dart")}
+2026-05-12T16:17:38.710530Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2026-05-12T16:17:59.009370Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/mobile/lib/features/student_scores/domain/entity/one_student_score_entity.dart")}
+2026-05-12T16:17:59.009382Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2026-05-12T16:18:11.510033Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/mobile/lib/features/student_scores/data/model/one_student_score.dart")}
+2026-05-12T16:18:11.510088Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2026-05-12T16:18:11.609217Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/mobile/lib/features/student_scores/data/model/one_student_score.dart")}
+2026-05-12T16:18:11.609232Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2026-05-12T16:18:21.909247Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/mobile/lib/features/student_scores/data/model/one_student_score.dart")}
+2026-05-12T16:18:21.909256Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2026-05-12T16:19:30.509874Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/mobile/lib/features/student_scores/domain/entity/one_student_score_entity.dart")}
+2026-05-12T16:19:30.509885Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2026-05-12T16:20:16.610290Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/mobile/lib/features/student_scores/data/model/one_student_score.dart")}
+2026-05-12T16:20:16.610334Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))

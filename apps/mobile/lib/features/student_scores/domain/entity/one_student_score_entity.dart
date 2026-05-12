@@ -17,11 +17,19 @@ class OneStudentScoreEntity {
 }
 
 class ScoreEventEntity {
+  final String id;
   final String date;
-  final int homework;
-  final int attendance;
+  final ScoreType type;
+  final int value;
+  final String? comment;
 
-  ScoreEventEntity(this.date, this.homework, this.attendance);
+  ScoreEventEntity({
+    required this.id,
+    required this.date,
+    required this.type,
+    required this.value,
+    this.comment,
+  });
 }
 
 class TotalEntity {
@@ -29,3 +37,5 @@ class TotalEntity {
 
   TotalEntity(this.total);
 }
+
+enum ScoreType { homework, attendance }

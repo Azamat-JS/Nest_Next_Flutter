@@ -13,29 +13,35 @@ class OneStudentScoreModel extends OneStudentScoreEntity {
   factory OneStudentScoreModel.fromJson(Map<String, dynamic> json) {
     return OneStudentScoreModel(
       scores: (json['scores'] as List<dynamic>)
-          .map((e) => ScoreEventModel.fromJson(e as Map<String, dynamic>))
+          .map((e) => ScoreEventModel.fromJson(e))
           .toList(),
-      total: TotalModel.fromJson(json['total'] as Map<String, dynamic>),
-      page: json['page'] as int,
-      limit: json['limit'] as int,
-      totalCount: json['total_count'] as int,
-      lastPage: json['last_page'] as int,
+      total: TotalModel.fromJson(json['total']),
+      page: json['page'],
+      limit: json['limit'],
+      totalCount: json['total_count'],
+      lastPage: json['last_page'],
     );
   }
 }
 
 class ScoreEventModel extends ScoreEventEntity {
   ScoreEventModel({
-    required String date,
-    required int homework,
-    required int attendance,
-  }) : super(date, homework, attendance);
+    required super.id,
+    required super.date,
+    required super.type,
+    required super.value,
+    super.comment,
+  });
 
   factory ScoreEventModel.fromJson(Map<String, dynamic> json) {
     return ScoreEventModel(
+      id: json['id'] as String,
       date: json['date'] as String,
-      homework: (json['homework'] as num?)?.toInt() ?? 0,
-      attendance: (json['attendance'] as num?)?.toInt() ?? 0,
+      type: json['type'] == 'HOMEWORK'
+          ? ScoreType.homework
+          : ScoreType.attendance,
+      value: (json['value'] ?? 0).toInt(),
+      comment: json['comment'] as String?,
     );
   }
 }
