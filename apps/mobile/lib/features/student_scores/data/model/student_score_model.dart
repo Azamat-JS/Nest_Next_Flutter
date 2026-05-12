@@ -2,22 +2,23 @@ import 'package:mobile/features/student_scores/domain/entity/student_scores_enti
 
 class StudentScoreModel extends StudentScoreEntity {
   StudentScoreModel({
-    required super.studentId,
-    required super.username,
-    required super.homework,
-    required super.attendance,
-    required super.total,
+    required super.id,
+    required super.date,
+    required super.type,
+    required super.value,
+    super.comment,
   });
 
   factory StudentScoreModel.fromJson(Map<String, dynamic> json) {
     return StudentScoreModel(
-      studentId: json['studentId'] as String,
-      username: json['username'] as String,
-      homework: (json['homework'] ?? 0).toInt(),
-      attendance: (json['attendance'] ?? 0).toInt(),
-      total: (json['total'] ?? 0).toInt(),
+      id: json['id'] as String,
+      date: json['date'] as String,
+      type: json['type'] as String,
+      value: (json['value'] ?? 0).toInt(),
+      comment: json['comment'] as String?,
     );
   }
+
   static List<StudentScoreModel> fromJsonList(List<dynamic> data) {
     return data
         .map((e) => StudentScoreModel.fromJson(e as Map<String, dynamic>))

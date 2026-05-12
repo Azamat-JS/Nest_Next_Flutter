@@ -1,0 +1,155 @@
+
+> frontend@0.1.0 dev /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend
+> next dev -p 4000
+
+[1m[38;2;173;127;168m▲ Next.js 16.2.1[39m[22m (Turbopack)
+- Local:         http://localhost:4000
+- Network:       http://192.168.13.97:4000
+- Environments: .env.local
+[32m[1m✓[22m[39m Ready in 336ms
+[33m[1m⚠[22m[39m Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /Users/azamatabdullayev/Desktop/full-stack-turbo/pnpm-workspace.yaml as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend/pnpm-workspace.yaml
+
+
+ GET / [32m200[39m in 322ms[2m (next.js: 148ms, application-code: 174ms)[22m
+ GET /groups [32m200[39m in 60ms[2m (next.js: 39ms, application-code: 21ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 284ms[2m (next.js: 271ms, application-code: 13ms)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+ GET / [32m200[39m in 28ms[2m (next.js: 6ms, application-code: 22ms)[22m
+ GET /home [32m200[39m in 41ms[2m (next.js: 22ms, application-code: 19ms)[22m
+ GET /groups [32m200[39m in 28ms[2m (next.js: 4ms, application-code: 24ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 33ms[2m (next.js: 10ms, application-code: 23ms)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnq74ink0001hrv254s9e0li [32m200[39m in 217ms[2m (next.js: 205ms, application-code: 12ms)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+{
+  scores: [
+    {
+      date: [32m'2026-05-11T19:00:00.000Z'[39m,
+      type: [32m'ATTENDANCE'[39m,
+      value: [33m30[39m,
+      comment: [1mnull[22m,
+      id: [32m'cmp2t5gim0009lev28io7r2p6'[39m
+    },
+    {
+      date: [32m'2026-05-11T19:00:00.000Z'[39m,
+      type: [32m'HOMEWORK'[39m,
+      value: [33m40[39m,
+      comment: [32m''[39m,
+      id: [32m'cmp2t5cyd0002lev2bkhq8n9e'[39m
+    },
+    {
+      date: [32m'2026-05-09T19:00:00.000Z'[39m,
+      type: [32m'ATTENDANCE'[39m,
+      value: [33m30[39m,
+      comment: [1mnull[22m,
+      id: [32m'cmozmqfbu00087qv2lovd82iw'[39m
+    },
+    {
+      date: [32m'2026-05-09T19:00:00.000Z'[39m,
+      type: [32m'HOMEWORK'[39m,
+      value: [33m40[39m,
+      comment: [1mnull[22m,
+      id: [32m'cmozmq54700017qv206xgfgg2'[39m
+    },
+    {
+      date: [32m'2026-05-08T19:00:00.000Z'[39m,
+      type: [32m'ATTENDANCE'[39m,
+      value: [33m30[39m,
+      comment: [1mnull[22m,
+      id: [32m'cmoyb7zz00008iuv23btaagkm'[39m
+    },
+    {
+      date: [32m'2026-05-08T19:00:00.000Z'[39m,
+      type: [32m'HOMEWORK'[39m,
+      value: [33m50[39m,
+      comment: [1mnull[22m,
+      id: [32m'cmoyb7w650001iuv2zkrwiv66'[39m
+    },
+    {
+      date: [32m'2026-05-07T19:00:00.000Z'[39m,
+      type: [32m'ATTENDANCE'[39m,
+      value: [33m30[39m,
+      comment: [1mnull[22m,
+      id: [32m'cmox3ta1s0008jlv20ced2pf1'[39m
+    },
+    {
+      date: [32m'2026-05-07T19:00:00.000Z'[39m,
+      type: [32m'HOMEWORK'[39m,
+      value: [33m40[39m,
+      comment: [1mnull[22m,
+      id: [32m'cmox3t68s0001jlv2xacs3qc6'[39m
+    },
+    {
+      date: [32m'2026-05-06T19:00:00.000Z'[39m,
+      type: [32m'HOMEWORK'[39m,
+      value: [33m50[39m,
+      comment: [1mnull[22m,
+      id: [32m'cmovfc6gr000851v24806qpll'[39m
+    },
+    {
+      date: [32m'2026-05-06T19:00:00.000Z'[39m,
+      type: [32m'ATTENDANCE'[39m,
+      value: [33m30[39m,
+      comment: [1mnull[22m,
+      id: [32m'cmovfbspo000151v2qlils0rf'[39m
+    }
+  ],
+  total: { total: [33m1150[39m },
+  page: [33m1[39m,
+  limit: [33m10[39m,
+  total_count: [33m31[39m,
+  last_page: [33m4[39m
+}
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z/cmnq74ink0001hrv254s9e0li [32m200[39m in 153ms[2m (next.js: 7ms, application-code: 146ms)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+ GET /groups [32m200[39m in 31ms[2m (next.js: 7ms, application-code: 24ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 30ms[2m (next.js: 10ms, application-code: 20ms)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
