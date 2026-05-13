@@ -22,4 +22,13 @@ class GroupStudentScoresModel extends GroupStudentScoresEntity {
           .toList(),
     );
   }
+
+  GroupStudentScoresEntity toEntity() {
+    return GroupStudentScoresEntity(
+      avg: avg,
+      avgAttendance: avgAttendance,
+      avgHomework: avgHomework,
+      students: students,
+    );
+  }
 }

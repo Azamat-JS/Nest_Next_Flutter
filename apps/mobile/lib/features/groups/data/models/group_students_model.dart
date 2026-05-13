@@ -22,7 +22,6 @@ class GroupStudentsModel {
     );
   }
 
-  /// ✅ FIXED: returns SINGLE entity (not page)
   UserEntity toEntity() {
     return UserEntity(id: id, username: username, email: email, role: role);
   }

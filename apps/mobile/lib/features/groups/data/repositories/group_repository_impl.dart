@@ -9,6 +9,7 @@ import 'package:mobile/features/groups/data/datasources/group_student_local_data
 import 'package:mobile/features/groups/data/models/groupdb_model.dart';
 import 'package:mobile/features/groups/domain/entities/group_entity.dart';
 import 'package:mobile/features/groups/domain/entities/group_students_page_entity.dart';
+import 'package:mobile/features/groups/domain/entities/student_scores_entity.dart';
 import 'package:mobile/features/groups/domain/repositories/group_repository.dart';
 
 class GroupRepositoryImpl implements GroupRepository {
@@ -124,6 +125,20 @@ class GroupRepositoryImpl implements GroupRepository {
       return right(entities);
     } catch (e) {
       return left(Failure('Failed to get recent groups: $e'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, GroupStudentScoresEntity>> getGroupStudentScores({
+    required String groupId,
+  }) async {
+    try {
+      final model = await remoteDataSource.getGroupStudentScores(
+        groupId: groupId,
+      );
+      return right(model.toEntity());
+    } catch (e) {
+      return left(Failure('Failed to get group student scores: $e'));
     }
   }
 }
