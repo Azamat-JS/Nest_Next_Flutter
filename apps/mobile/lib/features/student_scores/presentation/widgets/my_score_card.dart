@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
 
 class MyStudentCard extends StatelessWidget {
-  final String type;
-  final int value;
+  final String? homeworkComment;
+  final String? attendanceComment;
   final String date;
+  final int homework;
+  final int attendance;
   const MyStudentCard({
     super.key,
-    required this.type,
-    required this.value,
     required this.date,
+    required this.homework,
+    required this.attendance,
+    this.homeworkComment,
+    this.attendanceComment,
   });
 
   @override
   Widget build(BuildContext context) {
-    final homework = type == 'homework' ? value : 0;
-    final attendance = type == 'attendance' ? value : 0;
     final total = homework + attendance;
-    final normalizedDate = date.toLocalDate()
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Card.filled(
@@ -33,6 +34,12 @@ class MyStudentCard extends StatelessWidget {
                   Text('Homework: $homework', style: TextStyle(fontSize: 16)),
                 ],
               ),
+
+              if (homeworkComment != null)
+                Padding(
+                  padding: const EdgeInsets.only(top: 6),
+                  child: Text('Comment: $homeworkComment'),
+                ),
               const SizedBox(height: 10),
               Row(
                 children: [
@@ -54,12 +61,18 @@ class MyStudentCard extends StatelessWidget {
                   ),
                 ],
               ),
+
+              if (attendanceComment != null)
+                Padding(
+                  padding: EdgeInsets.only(top: 6),
+                  child: Text('Comment: $attendanceComment'),
+                ),
               const SizedBox(height: 10),
               Row(
                 children: [
                   Icon(Icons.calendar_month),
                   SizedBox(width: 15),
-                  Text('Date: $normalizedDate', style: TextStyle(fontSize: 16)),
+                  Text('Date: $date', style: TextStyle(fontSize: 16)),
                 ],
               ),
             ],
