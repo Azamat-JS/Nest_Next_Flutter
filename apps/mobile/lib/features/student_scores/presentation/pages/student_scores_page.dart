@@ -72,8 +72,8 @@ class _StudentScoresPageState extends State<StudentScoresPage> {
                     final score = scores[index];
 
                     return MyStudentCard(
-                      homework: score.homework,
-                      attendance: score.attendance,
+                      type: score.type.name,
+                      value: score.value,
                       date: score.date,
                     );
                   },

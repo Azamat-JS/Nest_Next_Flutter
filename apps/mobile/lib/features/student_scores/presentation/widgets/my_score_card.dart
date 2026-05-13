@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
 
 class MyStudentCard extends StatelessWidget {
-  final int homework;
-  final int attendance;
+  final String type;
+  final int value;
   final String date;
   const MyStudentCard({
     super.key,
-    required this.homework,
-    required this.attendance,
+    required this.type,
+    required this.value,
     required this.date,
   });
 
   @override
   Widget build(BuildContext context) {
+    final homework = type == 'homework' ? value : 0;
+    final attendance = type == 'attendance' ? value : 0;
+    final total = homework + attendance;
+    final normalizedDate = date.toLocalDate()
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Card.filled(
@@ -40,7 +44,7 @@ class MyStudentCard extends StatelessWidget {
                   ),
                   SizedBox(width: 65),
                   Text(
-                    'TOTAL: ${homework + attendance}',
+                    'TOTAL: ${total.toString()}',
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.blueAccent,
@@ -55,7 +59,7 @@ class MyStudentCard extends StatelessWidget {
                 children: [
                   Icon(Icons.calendar_month),
                   SizedBox(width: 15),
-                  Text('Date: $date', style: TextStyle(fontSize: 16)),
+                  Text('Date: $normalizedDate', style: TextStyle(fontSize: 16)),
                 ],
               ),
             ],
