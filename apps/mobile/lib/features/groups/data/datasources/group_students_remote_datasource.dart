@@ -25,7 +25,6 @@ class GroupStudentsRemoteDatasourceImpl
       '/group/$groupId/students',
       queryParameters: {'page': page, 'limit': limit},
     );
-    print('in students data: ${res.data}');
     return GroupStudentsPageModel.fromJson(res.data as Map<String, dynamic>);
   }
 }

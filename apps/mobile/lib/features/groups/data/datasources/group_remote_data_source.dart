@@ -3,6 +3,7 @@ import 'package:mobile/core/network/dio_client.dart';
 import 'package:mobile/features/groups/data/models/group_model.dart';
 import 'package:mobile/features/groups/data/models/group_students_page_model.dart';
 import 'package:mobile/features/groups/data/models/paginated_groups_model.dart';
+import 'package:mobile/features/groups/data/models/student_scores_model.dart';
 
 abstract interface class GroupRemoteDataSource {
   Future<GroupModel> getGroupById({required String id});
@@ -16,6 +17,10 @@ abstract interface class GroupRemoteDataSource {
   Future<PaginatedGroupsModel> getGroups({
     required int page,
     required int limit,
+  });
+
+  Future<GroupStudentScoresModel> getGroupStudentScores({
+    required String groupId,
   });
 }
 
@@ -72,6 +77,23 @@ class GroupRemoteDataSourceImpl implements GroupRemoteDataSource {
     } on DioException catch (e) {
       throw Exception(
         e.response?.data['message'] ?? 'Failed to fetch groups: ${e.message}',
+      );
+    }
+  }
+
+  @override
+  Future<GroupStudentScoresModel> getGroupStudentScores({
+    required String groupId,
+  }) async {
+    try {
+      final res = await dioClient.dio.get(
+        '/student-score/today/students/$groupId',
+      );
+      return GroupStudentScoresModel.fromJson(res.data as Map<String, dynamic>);
+    } on DioException catch (e) {
+      throw Exception(
+        e.response?.data['message'] ??
+            'Failed to fetch student scores: ${e.message}',
       );
     }
   }
