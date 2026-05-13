@@ -1,0 +1,182 @@
+
+> frontend@0.1.0 dev /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend
+> next dev -p 4000
+
+[1m[38;2;173;127;168m▲ Next.js 16.2.1[39m[22m (Turbopack)
+- Local:         http://localhost:4000
+- Network:       http://192.168.13.97:4000
+- Environments: .env.local
+[32m[1m✓[22m[39m Ready in 431ms
+[33m[1m⚠[22m[39m Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /Users/azamatabdullayev/Desktop/full-stack-turbo/pnpm-workspace.yaml as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend/pnpm-workspace.yaml
+
+
+ GET / [32m200[39m in 331ms[2m (next.js: 141ms, application-code: 191ms)[22m
+ GET /groups [32m200[39m in 250ms[2m (next.js: 224ms, application-code: 26ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 463ms[2m (next.js: 445ms, application-code: 18ms)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+ GET /groups [32m200[39m in 30ms[2m (next.js: 6ms, application-code: 24ms)[22m
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 36ms[2m (next.js: 14ms, application-code: 23ms)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[32m[1m✓[22m[39m Compiled in 438ms
+{
+  id: [32m'cmnq4bbkf0000xkv2o72hfh9z'[39m,
+  name: [32m'Group5'[39m,
+  teacherId: [32m'cmneollky0000hsv2s2gbkt7t'[39m,
+  createdAt: [32m'2026-04-08T14:02:51.087Z'[39m,
+  teacher: {
+    id: [32m'cmneollky0000hsv2s2gbkt7t'[39m,
+    username: [32m'Usmon'[39m,
+    email: [32m'usmon@gmail.com'[39m,
+    role: [32m'TEACHER'[39m
+  }
+}
+{
+  id: [32m'cmnq4bbkf0000xkv2o72hfh9z'[39m,
+  name: [32m'Group5'[39m,
+  teacherId: [32m'cmneollky0000hsv2s2gbkt7t'[39m,
+  createdAt: [32m'2026-04-08T14:02:51.087Z'[39m,
+  teacher: {
+    id: [32m'cmneollky0000hsv2s2gbkt7t'[39m,
+    username: [32m'Usmon'[39m,
+    email: [32m'usmon@gmail.com'[39m,
+    role: [32m'TEACHER'[39m
+  }
+}
+{
+  id: [32m'cmnq4bbkf0000xkv2o72hfh9z'[39m,
+  name: [32m'Group5'[39m,
+  teacherId: [32m'cmneollky0000hsv2s2gbkt7t'[39m,
+  createdAt: [32m'2026-04-08T14:02:51.087Z'[39m,
+  teacher: {
+    id: [32m'cmneollky0000hsv2s2gbkt7t'[39m,
+    username: [32m'Usmon'[39m,
+    email: [32m'usmon@gmail.com'[39m,
+    role: [32m'TEACHER'[39m
+  }
+}
+The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+ GET /groups/cmnq4bbkf0000xkv2o72hfh9z [32m200[39m in 258ms[2m (next.js: 18ms, application-code: 240ms)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[32m[1m✓[22m[39m Compiled in 514ms
+{
+  id: [32m'cmnq4bbkf0000xkv2o72hfh9z'[39m,
+  name: [32m'Group5'[39m,
+  teacherId: [32m'cmneollky0000hsv2s2gbkt7t'[39m,
+  createdAt: [32m'2026-04-08T14:02:51.087Z'[39m,
+  teacher: {
+    id: [32m'cmneollky0000hsv2s2gbkt7t'[39m,
+    username: [32m'Usmon'[39m,
+    email: [32m'usmon@gmail.com'[39m,
+    role: [32m'TEACHER'[39m
+  }
+}
+{
+  id: [32m'cmnq4bbkf0000xkv2o72hfh9z'[39m,
+  name: [32m'Group5'[39m,
+  teacherId: [32m'cmneollky0000hsv2s2gbkt7t'[39m,
+  createdAt: [32m'2026-04-08T14:02:51.087Z'[39m,
+  teacher: {
+    id: [32m'cmneollky0000hsv2s2gbkt7t'[39m,
+    username: [32m'Usmon'[39m,
+    email: [32m'usmon@gmail.com'[39m,
+    role: [32m'TEACHER'[39m
+  }
+}
+{
+  data: [
+    {
+      id: [32m'cmnkampkh0003icv2q37yozix'[39m,
+      username: [32m'bekzod'[39m,
+      email: [32m'bek@gmail.com'[39m,
+      role: [32m'STUDENT'[39m
+    },
+    {
+      id: [32m'cmnq74ink0001hrv254s9e0li'[39m,
+      username: [32m'Jamshid'[39m,
+      email: [32m'jamshid@gmail.com'[39m,
+      role: [32m'STUDENT'[39m
+    },
+    {
+      id: [32m'cmnkaas440001icv2k7mikei8'[39m,
+      username: [32m'Alibek'[39m,
+      email: [32m'alibek@gmail.com'[39m,
+      role: [32m'STUDENT'[39m
+    },
+    {
+      id: [32m'cmo05ffeo00008pv28uobawe6'[39m,
+      username: [32m'odil'[39m,
+      email: [32m'odil@gmail.com'[39m,
+      role: [32m'STUDENT'[39m
+    },
+    {
+      id: [32m'cmnq721po0000hrv21wvb6zsf'[39m,
+      username: [32m'Javlon'[39m,
+      email: [32m'javlon@gmail.com'[39m,
+      role: [32m'STUDENT'[39m
+    },
+    {
+      id: [32m'cmnra1k180000bvv2v19pir4r'[39m,
+      username: [32m'Jamol'[39m,
+      email: [32m'jamol@gmail.com'[39m,
+      role: [32m'STUDENT'[39m
+    },
+    {
+      id: [32m'cmnpz5idh0000c7v2t1pcqh45'[39m,
+      username: [32m'Jasurbek'[39m,
+      email: [32m'jasurbek@gmail.com'[39m,
+      role: [32m'STUDENT'[39m
+    }
+  ],
+  meta: { total: [33m7[39m, page: [33m1[39m, last_page: [33m1[39m, limit: [33m10[39m }
+}
+{
+  id: [32m'cmnq4bbkf0000xkv2o72hfh9z'[39m,
+  name: [32m'Group5'[39m,
+  teacherId: [32m'cmneollky0000hsv2s2gbkt7t'[39m,
+  createdAt: [32m'2026-04-08T14:02:51.087Z'[39m,
+  teacher: {
+    id: [32m'cmneollky0000hsv2s2gbkt7t'[39m,
+    username: [32m'Usmon'[39m,
+    email: [32m'usmon@gmail.com'[39m,
+    role: [32m'TEACHER'[39m
+  }
+}

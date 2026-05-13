@@ -99,6 +99,7 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
         }
     })
 
+
     const updateScoresMutation = useMutation({
         mutationFn: async (payload: UpdateScorePayload) => {
             const { studentId, groupId, date, type, value, comment } = payload;
@@ -170,6 +171,8 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
             return res.data;
         },
     });
+
+    console.log(studentScores)
 
     const group: GroupType = data;
     const groupStudents: TokenPayload[] = groupStudentsData.data.length > 0 ? groupStudentsData.data : [];
