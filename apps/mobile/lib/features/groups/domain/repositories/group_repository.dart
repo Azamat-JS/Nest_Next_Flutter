@@ -2,6 +2,7 @@ import 'package:fpdart/fpdart.dart';
 import 'package:mobile/core/errors/failures.dart';
 import 'package:mobile/features/groups/domain/entities/group_entity.dart';
 import 'package:mobile/features/groups/domain/entities/group_students_page_entity.dart';
+import 'package:mobile/features/groups/domain/entities/student_scores_entity.dart';
 
 abstract interface class GroupRepository {
   Future<Either<Failure, PaginatedGroupsEntity>> getGroups({
@@ -15,6 +16,10 @@ abstract interface class GroupRepository {
     required String groupId,
     required int page,
     required int limit,
+  });
+
+  Future<Either<Failure, GroupStudentScoresEntity>> getGroupStudentScores({
+    required String groupId,
   });
 
   Future<Either<Failure, List<GroupEntity>>> getRecentGroups();

@@ -90,7 +90,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
                     itemCount: studentsPage.data.length,
-                    separatorBuilder: (_, __) => const SizedBox(width: 10),
+                    separatorBuilder: (_, idx) => const SizedBox(width: 10),
                     itemBuilder: (context, index) {
                       final student = studentsPage.data[index];
                       final score = scores[student.id];
