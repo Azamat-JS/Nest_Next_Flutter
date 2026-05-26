@@ -1,16 +1,16 @@
-import GroupComponent from "@/components/pageContents/Group"
 import { ErrorBoundary } from "react-error-boundary"
 import { Suspense } from "react";
 import ErrorHandler from "@/components/utils/ErrorHandler";
 import { SkeletonDemo } from "@/components/utils/Skeleton";
-const GroupsPage = async () => {
+import DashboardComponent from "@/components/pageContents/DashboardComponent";
+const Dashboard = () => {
     return (
         <ErrorBoundary fallback={<ErrorHandler />}>
             <Suspense fallback={<SkeletonDemo />}>
-                <GroupComponent />
+                <DashboardComponent />
             </Suspense>
         </ErrorBoundary>
     )
 }
 
-export default GroupsPage
+export default Dashboard

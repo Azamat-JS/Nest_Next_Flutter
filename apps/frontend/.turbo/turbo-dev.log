@@ -1,0 +1,19 @@
+
+> frontend@0.1.0 dev /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend
+> next dev -p 4000
+
+[1m[38;2;173;127;168m▲ Next.js 16.2.1[39m[22m (Turbopack)
+- Local:         http://localhost:4000
+- Network:       http://192.168.13.103:4000
+- Environments: .env.local
+[32m[1m✓[22m[39m Ready in 175ms
+
+ GET /dashboard [32m200[39m in 504ms[2m (next.js: 147ms, application-code: 357ms)[22m
+ GET /dashboard [32m200[39m in 180ms[2m (next.js: 4ms, application-code: 177ms)[22m
+ GET /home [32m200[39m in 54ms[2m (next.js: 17ms, application-code: 36ms)[22m
+ GET /dashboard [32m200[39m in 124ms[2m (next.js: 5ms, application-code: 119ms)[22m
+ GET /dashboard [32m200[39m in 82ms[2m (next.js: 13ms, application-code: 70ms)[22m
+ GET /dashboard [32m200[39m in 1513ms[2m (next.js: 145ms, application-code: 1368ms)[22m
+ GET /dashboard [32m200[39m in 53ms[2m (next.js: 6ms, application-code: 47ms)[22m
+ GET /dashboard [32m200[39m in 69ms[2m (next.js: 8ms, application-code: 61ms)[22m
+[?25h
