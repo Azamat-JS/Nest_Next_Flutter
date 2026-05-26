@@ -1,7 +1,46 @@
-import { Controller } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { StudentPaymentService } from './student_payment.service';
+import { PaginationDto } from 'src/lib/shared/dto/pagination.dto';
+import { StudentPaymentDto, UpdatePaymentDto } from './dto/student_payment.dto';
 
 @Controller('student-payment')
 export class StudentPaymentController {
-  constructor(private readonly studentPaymentService: StudentPaymentService) {}
+  constructor(private readonly studentPaymentService: StudentPaymentService) { }
+
+  @Get('all')
+  async getAllPayments(@Query() query: PaginationDto) {
+    return this.studentPaymentService.getAllPayments(query);
+  }
+
+  @Get("payment-by-id/:paymentId")
+  async getPaymentById(@Param('paymentId') paymentId: string) {
+    return this.studentPaymentService.getPaymentById(paymentId)
+  }
+
+  @Get("student-payments/:studentId")
+  async getStudentPayments(@Query() query: PaginationDto, @Param("studentId") studentId: string) {
+    return this.studentPaymentService.getStudentPayments(studentId, query);
+  }
+
+  @Get("group-payments/:groupId")
+  async getGroupPayments(@Query() query: PaginationDto, @Param("groupId") groupId: string) {
+    return this.studentPaymentService.getStudentPayments(groupId, query);
+  }
+
+  @Put("update-payment/:paymentId")
+  async updatePayment(@Param("paymentId") paymentId: string, @Body() dto: UpdatePaymentDto) {
+    return this.studentPaymentService.updatePayment(dto, paymentId)
+  }
+
+  @Delete("delete-payment/:paymentId")
+  async deletePaymentById(@Param("paymentId") paymentId: string) {
+    return this.studentPaymentService.deletePaymentById(paymentId)
+  }
+
+  @Post("create-payment/:studentId/:groupId")
+  async createPayment(@Param("studentId") studentId: string, @Param("groupId") groupId: string, @Body() dto: StudentPaymentDto) {
+    return this.studentPaymentService.createPayment(dto, studentId, groupId)
+  }
+
+
 }
