@@ -175,10 +175,6 @@ model StudentPayment {
 
   amount Decimal @db.Decimal(10, 2)
 
-  status PaymentStatus @default(PENDING)
-
-  paidAt DateTime?
-
   comment String?
 
   createdAt DateTime @default(now())
@@ -285,10 +281,4 @@ enum ScoreType {
   ATTENDANCE
   EXAM
   QUIZ
-}
-
-enum PaymentStatus {
-  PENDING
-  PAID
-  PARTIAL
 }

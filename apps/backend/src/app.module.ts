@@ -7,6 +7,7 @@ import { GroupModule } from './group/group.module';
 import { StudentScoreModule } from './student_score/student_score.module';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { FirebaseModule } from './lib/firebase/firebase.module';
+import { StudentPaymentModule } from './student_payment/student_payment.module';
 
 
 @Module({
@@ -19,6 +20,7 @@ import { FirebaseModule } from './lib/firebase/firebase.module';
     UsersModule,
     GroupModule,
     StudentScoreModule,
+    StudentPaymentModule,
   ],
   controllers: [],
   providers: [],
