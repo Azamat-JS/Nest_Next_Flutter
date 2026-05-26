@@ -33,6 +33,7 @@ model Users {
   studentScore  StudentScore[]
   sessions      Session[]
   devices       DeviceToken[]
+  studentPayment StudentPayment[]
 
 
   @@index([email])
@@ -116,6 +117,7 @@ model Groups {
 
   scoreEvents ScoreEvent[]
   studentScores StudentScore[]
+  studentPayments StudentPayment[]
 
   @@index([teacherId])
   @@map("Groups")
@@ -157,6 +159,37 @@ model StudentScore{
   @@index([studentId])
   @@index([groupId])
   @@map("StudentScore")
+}
+
+model StudentPayment {
+  id String @id @default(uuid())
+
+  studentId String
+  groupId String
+
+  student Users @relation(fields: [studentId], references: [id])
+  group   Groups @relation(fields: [groupId], references: [id])
+
+  month Int
+  year  Int
+
+  amount Decimal @db.Decimal(10, 2)
+
+  status PaymentStatus @default(PENDING)
+
+  paidAt DateTime?
+
+  comment String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([studentId, groupId, month, year])
+
+  @@index([studentId])
+  @@index([groupId])
+
+  @@map("StudentPayment")
 }
 
 model Chat {
@@ -252,4 +285,10 @@ enum ScoreType {
   ATTENDANCE
   EXAM
   QUIZ
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  PARTIAL
 }

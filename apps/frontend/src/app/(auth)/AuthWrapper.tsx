@@ -13,7 +13,7 @@ export default function AuthWrapper() {
 
     return (
         <div className="flex flex-col items-center justify-center min-h-screen">
-            <h1 className="text-4xl font-bold text-center mt-10">Welcome to Full Stack Turbo App!</h1>
+            <h1 className="text-4xl font-bold text-center mt-10">Welcome to Student Score App!</h1>
             <p className="text-center mt-4 text-lg">
                 This is the frontend of your full stack application.
             </p>
