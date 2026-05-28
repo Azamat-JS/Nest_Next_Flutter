@@ -2,12 +2,10 @@ import { BadRequestException, Injectable } from "@nestjs/common";
 import { StudentScoreRepository } from "../student_score.service";
 import { PrismaService } from "src/prisma/prisma.service";
 import { BulkScoreDto } from "../dto/bulk.dto";
-import { EventEmitter2 } from "@nestjs/event-emitter";
-import { ScoreCreatedEvent } from "src/lib/events/score_create_event"
 
 @Injectable()
 export class BulkAddScoreUseCase {
-    constructor(private readonly studentScoreRepo: StudentScoreRepository, private readonly prisma: PrismaService, private eventEmitter: EventEmitter2) { }
+    constructor(private readonly studentScoreRepo: StudentScoreRepository, private readonly prisma: PrismaService) { }
 
     async execute(dto: BulkScoreDto) {
         const { groupId, scoreType, students } = dto;
@@ -62,14 +60,6 @@ export class BulkAddScoreUseCase {
                     date,
                     comment: s.comment
                 })
-            }
-        });
-
-        const events = students.map(({ studentId, score }) => new ScoreCreatedEvent(studentId, score, scoreType, date));
-
-        setImmediate(() => {
-            for (const event of events) {
-                this.eventEmitter.emit('score.created', event);
             }
         });
 

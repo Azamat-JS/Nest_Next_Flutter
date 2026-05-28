@@ -1224,3 +1224,6 @@
 2026-05-26T16:25:27.648754Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/frontend/.next/dev/_events_56435.json")}
 2026-05-26T16:25:27.648766Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("frontend"), path: AnchoredSystemPathBuf("apps/frontend") }}))
 2026-05-26T16:25:27.648816Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2026-05-26T16:26:07.648159Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/frontend/src/components/app-sidebar.tsx")}
+2026-05-26T16:26:07.648167Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("frontend"), path: AnchoredSystemPathBuf("apps/frontend") }}))
+2026-05-26T16:26:07.648212Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
