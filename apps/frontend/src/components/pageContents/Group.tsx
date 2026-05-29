@@ -9,9 +9,7 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-import { useAuthStore } from "@/lib/stores/authStore"
-import axios from "axios"
-import { useEffect, useState } from "react"
+import { useState, useEffect } from "react"
 import { toast } from "sonner"
 import { Button } from "@/components/ui/button"
 import {
@@ -21,7 +19,7 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Edit, Menu, Plus, Trash } from "lucide-react"
+import { MoreHorizontal, Edit, UserPlus, Trash } from "lucide-react"
 import {
     Dialog,
     DialogClose,
@@ -54,33 +52,31 @@ import {
 } from "@/components/ui/pagination"
 import { TokenPayload } from "@/lib/types/token_payload"
 import { GroupDrawer } from "../Drawer"
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation'
 import { useMutation, useQueryClient, useSuspenseQuery } from '@tanstack/react-query'
 import { useStudents } from "@/lib/hooks/studentsHook"
+import api from "@/lib/api"
 
 const GroupComponent = () => {
-    const router = useRouter();
-    const searchParams = useSearchParams();
-    const page = Number(searchParams.get('page') ?? 1);
-    const limit = Number(searchParams.get('limit') ?? 10);
-    const token = useAuthStore((state) => state.token);
-    const [selectedTeacher, setSelectedTeacher] = useState<TokenPayload | null>(null);
-    const API = process.env.NEXT_PUBLIC_API_URL;
-    const [openUpdate, setOpenUpdate] = useState(false);
-    const [openAddStudents, setOpenAddStudents] = useState(false);
-    const [openDelete, setOpenDelete] = useState(false);
-    const [openCreate, setOpenCreate] = useState(false);
-    const [newStudentIds, setNewStudentIds] = useState<string[]>([]);
-    const [selectedGroup, setSelectedGroup] = useState<GroupType | null>(null);
-    const [selectedStudentIds, setSelectedStudentIds] = useState<string[]>([]);
-    const queryClient = useQueryClient();
-    const { data: studentData = [] } = useStudents();
-
+    const router = useRouter()
+    const searchParams = useSearchParams()
+    const page = Number(searchParams.get('page') ?? 1)
+    const limit = Number(searchParams.get('limit') ?? 10)
+    const [selectedTeacher, setSelectedTeacher] = useState<TokenPayload | null>(null)
+    const [openUpdate, setOpenUpdate] = useState(false)
+    const [openAddStudents, setOpenAddStudents] = useState(false)
+    const [openDelete, setOpenDelete] = useState(false)
+    const [openCreate, setOpenCreate] = useState(false)
+    const [newStudentIds, setNewStudentIds] = useState<string[]>([])
+    const [selectedGroup, setSelectedGroup] = useState<GroupType | null>(null)
+    const [selectedStudentIds, setSelectedStudentIds] = useState<string[]>([])
+    const queryClient = useQueryClient()
+    const { data: studentData = [] } = useStudents()
 
     const { data } = useSuspenseQuery({
         queryKey: ['groups', page, limit],
         queryFn: async () => {
-            const res = await axios.get(`${API}/group/all?page=${page}&limit=${limit}`, { headers: { Authorization: `Bearer ${token}` } })
+            const res = await api.get('/group/all', { params: { page, limit } })
             return res.data
         },
         staleTime: 1000 * 60 * 5,
@@ -89,167 +85,141 @@ const GroupComponent = () => {
     const { data: teacherData } = useSuspenseQuery({
         queryKey: ['teachers'],
         queryFn: async () => {
-            const res = await axios.get(`${API}/users/teachers`, { headers: { Authorization: `Bearer ${token}` } });
-            return res.data;
+            const res = await api.get('/users/teachers')
+            return res.data
         },
-        staleTime: 1000 * 60 * 5,
+        staleTime: 1000 * 60 * 10,
     })
 
     const addStudentMutation = useMutation({
         mutationFn: async (payload: AddStudentPayload) => {
-            const { groupId, studentIds } = payload;
-            const res = await axios.post(`${API}/group/${groupId}/add-students`, { studentIds }, { headers: { Authorization: `Bearer ${token}` } });
-            return res.data;
+            const res = await api.post(`/group/${payload.groupId}/add-students`, { studentIds: payload.studentIds })
+            return res.data
         },
         onSuccess: () => {
-            toast.success('Students added successfully!');
-            setOpenAddStudents(false);
-            queryClient.invalidateQueries({
-                queryKey: ['groups'],
-            })
+            toast.success('Students added successfully')
+            setOpenAddStudents(false)
+            queryClient.invalidateQueries({ queryKey: ['groups'] })
         },
         onError: (error: any) => {
-            toast.error(error.response?.data?.message ?? 'Something went wrong');
-        }
+            toast.error(error.response?.data?.message ?? 'Something went wrong')
+        },
     })
 
-    const students: TokenPayload[] = studentData ?? [];
-    const teachers: TokenPayload[] = teacherData ?? [];
-
-
-    const handleUpdateGroup = async (group: GroupType) => {
-        try {
-            const res = await axios.put(
-                `${API}/group/${group.id}`,
-                {
-                    name: group.name,
-                    teacherId: selectedTeacher!.id,
-                    studentIds: selectedStudentIds.filter(Boolean),
-                },
-                { headers: { Authorization: `Bearer ${token}` } }
-            );
-
-            if (res.status === 200) {
-                toast.success('Group data updated!');
-                setOpenUpdate(false);
-                await queryClient.invalidateQueries({
-                    queryKey: ['groups'],
-                    exact: false,
-                })
-            }
-        } catch (error: any) {
-            toast.error(error.response?.data?.message ?? 'Something went wrong');
-        }
-    };
-
-    const handleDeleteGroup = async (groupId: string) => {
-        try {
-            const res = await axios.delete(`${API}/group/${groupId}`, { headers: { Authorization: `Bearer ${token}` } })
-            if (res.status === 200) {
-                toast.success('Group deleted successfully!')
-                setOpenDelete(false);
-                await queryClient.invalidateQueries({
-                    queryKey: ['groups'],
-                    exact: false,
-                })
-            }
-        } catch (error: any) {
+    const updateGroupMutation = useMutation({
+        mutationFn: async (group: GroupType) => {
+            return await api.put(`/group/${group.id}`, {
+                name: group.name,
+                teacherId: selectedTeacher!.id,
+                studentIds: selectedStudentIds.filter(Boolean),
+            })
+        },
+        onSuccess: () => {
+            toast.success('Group updated successfully')
+            setOpenUpdate(false)
+            queryClient.invalidateQueries({ queryKey: ['groups'] })
+        },
+        onError: (error: any) => {
             toast.error(error.response?.data?.message ?? 'Something went wrong')
-        }
-    }
+        },
+    })
+
+    const deleteGroupMutation = useMutation({
+        mutationFn: async (groupId: string) => {
+            return await api.delete(`/group/${groupId}`)
+        },
+        onSuccess: () => {
+            toast.success('Group deleted successfully')
+            setOpenDelete(false)
+            queryClient.invalidateQueries({ queryKey: ['groups'] })
+        },
+        onError: (error: any) => {
+            toast.error(error.response?.data?.message ?? 'Something went wrong')
+        },
+    })
+
+    const students: TokenPayload[] = studentData ?? []
+    const teachers: TokenPayload[] = teacherData ?? []
 
     useEffect(() => {
         if (selectedGroup && students.length > 0) {
             setSelectedStudentIds(
-                (selectedGroup.students || [])
-                    .map((s) => s.id)
-                    .filter((id): id is string => Boolean(id))
-            );
+                (selectedGroup.students || []).map((s) => s.id).filter((id): id is string => Boolean(id))
+            )
         }
-    }, [selectedGroup, students]);
+    }, [selectedGroup, students])
 
     useEffect(() => {
-        if (openAddStudents) {
-            setNewStudentIds([]);
-        }
+        if (openAddStudents) setNewStudentIds([])
     }, [openAddStudents])
 
     const groups: GroupType[] = data?.data ?? []
     const meta: PaginationType = data?.meta ?? {}
-    const lastPage = meta?.last_page ?? 1;
+    const lastPage = meta?.last_page ?? 1
 
-
-    const existingStudents = new Set(
-        selectedGroup?.students?.map((s) => s.id) ?? []
-    );
-
-    const availableStudents = students.filter(
-        (s) => !existingStudents.has(s.id)
-    )
+    const existingStudents = new Set(selectedGroup?.students?.map((s) => s.id) ?? [])
+    const availableStudents = students.filter((s) => !existingStudents.has(s.id))
 
     return (
-        <div className="mt-5">
-            <Table className="mt-5">
-                <TableCaption className="text-center text-lg font-bold">
-                    Showing {groups.length} of {meta?.total ?? 0} users
+        <div className="space-y-4">
+            <Table>
+                <TableCaption>
+                    Showing {groups.length} of {meta?.total ?? 0} groups
                 </TableCaption>
-
                 <TableHeader>
                     <TableRow>
-                        <TableHead className="w-12 text-center text-lg font-bold">&#8470;</TableHead>
-                        <TableHead className="w-48 text-center text-lg font-bold">Group ID</TableHead>
-                        <TableHead className="w-48 text-center text-lg font-bold">Group Name</TableHead>
-                        <TableHead className="w-72 text-center text-lg font-bold">Teacher Name</TableHead>
-                        <TableHead className="w-24 text-start font-bold  text-lg">Actions</TableHead>
+                        <TableHead className="w-12 text-center font-semibold">#</TableHead>
+                        <TableHead className="text-center font-semibold">Name</TableHead>
+                        <TableHead className="text-center font-semibold">Teacher</TableHead>
+                        <TableHead className="text-center font-semibold">Students</TableHead>
+                        <TableHead className="w-16 text-center font-semibold">Actions</TableHead>
                     </TableRow>
                 </TableHeader>
-
                 <TableBody>
                     {groups.map((u, idx) => (
-                        <TableRow key={u.id} className=" hover:bg-muted/50">
+                        <TableRow key={u.id} className="hover:bg-muted/50">
                             <TableCell className="text-center">{(page - 1) * limit + idx + 1}</TableCell>
-                            <TableCell className="text-center">{u.id}</TableCell>
-                            <TableCell className="text-center hover:cursor-pointer" onClick={() => router.push(`/groups/${u.id}`)}>{u.name}</TableCell>
-
-                            <TableCell className="text-center">{u.teacher!.username}</TableCell>
-
-                            <TableCell className="translate-x-5">
+                            <TableCell
+                                className="text-center font-medium cursor-pointer hover:text-primary hover:underline"
+                                onClick={() => router.push(`/groups/${u.id}`)}
+                            >
+                                {u.name}
+                            </TableCell>
+                            <TableCell className="text-center text-muted-foreground">{u.teacher?.username}</TableCell>
+                            <TableCell className="text-center text-muted-foreground">{u.students?.length ?? 0}</TableCell>
+                            <TableCell className="text-center">
                                 <DropdownMenu>
                                     <DropdownMenuTrigger asChild>
-                                        <Menu className="w-5 h-5" />
+                                        <Button variant="ghost" size="icon" className="h-8 w-8">
+                                            <MoreHorizontal className="h-4 w-4" />
+                                        </Button>
                                     </DropdownMenuTrigger>
-
-                                    <DropdownMenuContent align="start">
+                                    <DropdownMenuContent align="end">
                                         <DropdownMenuGroup>
-                                            <DropdownMenuItem
-                                                onClick={(e) => {
-                                                    e.stopPropagation();
-                                                    setSelectedGroup(u);
-                                                    setOpenAddStudents(true);
-                                                }}
-                                            >
-                                                <Plus /> Add Students
+                                            <DropdownMenuItem onClick={(e) => {
+                                                e.stopPropagation()
+                                                setSelectedGroup(u)
+                                                setOpenAddStudents(true)
+                                            }}>
+                                                <UserPlus className="h-4 w-4" /> Add Students
+                                            </DropdownMenuItem>
+                                            <DropdownMenuItem onClick={(e) => {
+                                                e.stopPropagation()
+                                                setSelectedGroup(u)
+                                                setSelectedTeacher(u.teacher ?? null)
+                                                setOpenUpdate(true)
+                                            }}>
+                                                <Edit className="h-4 w-4" /> Edit
                                             </DropdownMenuItem>
                                             <DropdownMenuItem
                                                 onClick={(e) => {
-                                                    e.stopPropagation();
-                                                    setSelectedGroup(u);
-                                                    setSelectedTeacher(u.teacher ?? null);
-                                                    setOpenUpdate(true);
+                                                    e.stopPropagation()
+                                                    setOpenDelete(true)
+                                                    setSelectedGroup(u)
                                                 }}
+                                                className="text-destructive focus:text-destructive"
                                             >
-                                                <Edit /> Update
-                                            </DropdownMenuItem>
-
-                                            <DropdownMenuItem
-                                                onClick={(e) => {
-                                                    e.stopPropagation();
-                                                    setOpenDelete(true);
-                                                    setSelectedGroup(u);
-                                                }}
-                                                className="text-red-500"
-                                            >
-                                                <Trash /> Delete
+                                                <Trash className="h-4 w-4" /> Delete
                                             </DropdownMenuItem>
                                         </DropdownMenuGroup>
                                     </DropdownMenuContent>
@@ -258,30 +228,27 @@ const GroupComponent = () => {
                         </TableRow>
                     ))}
                 </TableBody>
-
             </Table>
 
-            {/* pagination */}
-            <div className="grid grid-cols-2 items-center mt-4">
-
+            {/* Pagination */}
+            <div className="grid grid-cols-2 items-center">
                 <div className="flex justify-center">
                     <Field orientation="horizontal" className="w-fit">
-                        <FieldLabel htmlFor="select-rows-per-page">Rows per page</FieldLabel>
+                        <FieldLabel htmlFor="groups-rows-per-page">Rows per page</FieldLabel>
                         <Select value={String(limit)} onValueChange={(val) => {
-                            const params = new URLSearchParams(searchParams.toString());
-                            params.set('limit', val);
-                            params.set('page', '1');
-                            router.push(`?${params.toString()}`);
+                            const params = new URLSearchParams(searchParams.toString())
+                            params.set('limit', val)
+                            params.set('page', '1')
+                            router.push(`?${params.toString()}`)
                         }}>
-                            <SelectTrigger className="w-20" id="select-rows-per-page">
+                            <SelectTrigger className="w-20" id="groups-rows-per-page">
                                 <SelectValue />
                             </SelectTrigger>
                             <SelectContent align="start">
                                 <SelectGroup>
-                                    <SelectItem value="5" >5</SelectItem>
-                                    <SelectItem value="10">10</SelectItem>
-                                    <SelectItem value="15">15</SelectItem>
-                                    <SelectItem value="20">20</SelectItem>
+                                    {['5', '10', '15', '20'].map(v => (
+                                        <SelectItem key={v} value={v}>{v}</SelectItem>
+                                    ))}
                                 </SelectGroup>
                             </SelectContent>
                         </Select>
@@ -295,11 +262,11 @@ const GroupComponent = () => {
                             </PaginationItem>
                             {Array.from({ length: lastPage }).map((_, idx) => (
                                 <PaginationItem key={idx}>
-                                    <PaginationLink href={`?page=${idx + 1}&limit=${limit}`} isActive={page === idx + 1}>{idx + 1}</PaginationLink>
+                                    <PaginationLink href={`?page=${idx + 1}&limit=${limit}`} isActive={page === idx + 1}>
+                                        {idx + 1}
+                                    </PaginationLink>
                                 </PaginationItem>
-                            )
-                            )}
-
+                            ))}
                             <PaginationItem>
                                 <PaginationNext href={`?page=${Math.min(lastPage, page + 1)}&limit=${limit}`} />
                             </PaginationItem>
@@ -308,42 +275,40 @@ const GroupComponent = () => {
                 </div>
             </div>
 
-            {/* update group modal */}
+            {/* Edit group modal */}
             <Dialog open={openUpdate} onOpenChange={setOpenUpdate}>
                 <DialogContent className="sm:max-w-sm">
                     <DialogHeader>
                         <DialogTitle>Edit Group</DialogTitle>
-                        <DialogDescription>
-                            Make changes to the group here. Click save when you&apos;re
-                            done.
-                        </DialogDescription>
+                        <DialogDescription>Update details for <strong>{selectedGroup?.name}</strong></DialogDescription>
                     </DialogHeader>
                     <FieldGroup>
                         <Field>
-                            <Label htmlFor="name-1">Group name</Label>
-                            <Input id="name-1" name="name" onChange={(e) => setSelectedGroup(prev => prev ? { ...prev, name: e.target.value } : prev)} value={selectedGroup?.name || ""} />
+                            <Label htmlFor="group-name">Group name</Label>
+                            <Input
+                                id="group-name"
+                                value={selectedGroup?.name ?? ""}
+                                onChange={(e) => setSelectedGroup(prev => prev ? { ...prev, name: e.target.value } : prev)}
+                            />
                         </Field>
                         <Field>
-                            <Label htmlFor="email-1">Teacher Name</Label>
+                            <Label>Teacher</Label>
                             <Select
-                                value={selectedTeacher?.id || ""}
-                                onValueChange={(val: string) => {
-                                    const teacher = teachers.find(t => t.id === val) || null;
-                                    setSelectedTeacher(teacher);
-                                    setSelectedGroup(prev => prev ? { ...prev, teacher } : prev);
-
+                                value={selectedTeacher?.id ?? ""}
+                                onValueChange={(val) => {
+                                    const teacher = teachers.find(t => t.id === val) || null
+                                    setSelectedTeacher(teacher)
+                                    setSelectedGroup(prev => prev ? { ...prev, teacher } : prev)
                                 }}
                             >
-                                <SelectTrigger className="w-full max-w-48">
+                                <SelectTrigger>
                                     <SelectValue placeholder="Select a teacher" />
                                 </SelectTrigger>
-                                <SelectContent position="popper">
+                                <SelectContent>
                                     <SelectGroup>
-                                        <SelectLabel>Select a new teacher</SelectLabel>
+                                        <SelectLabel>Select teacher</SelectLabel>
                                         {teachers.map(t => (
-                                            <SelectItem key={t.id} value={t.id}>
-                                                {t.username}
-                                            </SelectItem>
+                                            <SelectItem key={t.id} value={t.id}>{t.username}</SelectItem>
                                         ))}
                                     </SelectGroup>
                                 </SelectContent>
@@ -351,10 +316,15 @@ const GroupComponent = () => {
                         </Field>
                     </FieldGroup>
                     <DialogFooter>
-                        <DialogClose>
-                            Cancel
+                        <DialogClose asChild>
+                            <Button variant="outline">Cancel</Button>
                         </DialogClose>
-                        <Button type="submit" onClick={() => selectedGroup && handleUpdateGroup(selectedGroup)}>Update</Button>
+                        <Button
+                            onClick={() => selectedGroup && updateGroupMutation.mutate(selectedGroup)}
+                            disabled={updateGroupMutation.isPending}
+                        >
+                            {updateGroupMutation.isPending ? 'Saving…' : 'Save'}
+                        </Button>
                     </DialogFooter>
                 </DialogContent>
             </Dialog>
@@ -364,84 +334,80 @@ const GroupComponent = () => {
                 <DialogContent className="sm:max-w-sm">
                     <DialogHeader>
                         <DialogTitle>Add Students</DialogTitle>
-                        <DialogDescription>
-                            Add students to this group. Click save when you&apos;re
-                            done.
-                        </DialogDescription>
+                        <DialogDescription>Select students to add to <strong>{selectedGroup?.name}</strong></DialogDescription>
                     </DialogHeader>
-                    <FieldGroup>
-                        <Field>
-                            <Label>Students</Label>
-                            <div className="max-h-48 overflow-y-auto border rounded-md p-3 space-y-2">
-                                {availableStudents.map((student, idx) => {
-                                    const checked = newStudentIds.includes(student.id);
-
-                                    return (
-                                        <label
-                                            key={student.id ?? `student-${idx}`}
-                                            className="flex items-center gap-2 cursor-pointer"
-                                        >
-                                            <input
-                                                disabled={existingStudents.has(student.id)}
-                                                type="checkbox"
-                                                checked={checked}
-                                                onChange={(e) => {
-                                                    if (!student.id) return;
-                                                    if (e.target.checked) {
-                                                        setNewStudentIds((prev) => [
-                                                            ...prev,
-                                                            student.id,
-                                                        ]);
-                                                    } else {
-                                                        setNewStudentIds((prev) =>
-                                                            prev.filter((id) => id !== student.id)
-                                                        );
-                                                    }
-                                                }}
-                                            />
-                                            <span>{student.username}</span>
-                                        </label>
-                                    );
-                                })}
-                            </div>
-                        </Field>
-                    </FieldGroup>
+                    <Field>
+                        <Label>Available students</Label>
+                        <div className="max-h-52 overflow-y-auto rounded-md border p-3 space-y-2">
+                            {availableStudents.length === 0
+                                ? <p className="text-sm text-muted-foreground text-center py-4">No students available</p>
+                                : availableStudents.map((student) => (
+                                    <label key={student.id} className="flex items-center gap-2 cursor-pointer">
+                                        <input
+                                            type="checkbox"
+                                            checked={newStudentIds.includes(student.id)}
+                                            onChange={(e) => {
+                                                if (!student.id) return
+                                                setNewStudentIds(prev =>
+                                                    e.target.checked ? [...prev, student.id] : prev.filter(id => id !== student.id)
+                                                )
+                                            }}
+                                        />
+                                        <span className="text-sm">{student.username}</span>
+                                    </label>
+                                ))
+                            }
+                        </div>
+                    </Field>
                     <DialogFooter>
-                        <DialogClose>
-                            Cancel
+                        <DialogClose asChild>
+                            <Button variant="outline">Cancel</Button>
                         </DialogClose>
-                        <Button type="submit" onClick={() => selectedGroup && addStudentMutation.mutate({ groupId: selectedGroup.id, studentIds: newStudentIds })}>Save</Button>
+                        <Button
+                            onClick={() => selectedGroup && addStudentMutation.mutate({ groupId: selectedGroup.id, studentIds: newStudentIds })}
+                            disabled={newStudentIds.length === 0 || addStudentMutation.isPending}
+                        >
+                            {addStudentMutation.isPending ? 'Adding…' : `Add ${newStudentIds.length > 0 ? `(${newStudentIds.length})` : ''}`}
+                        </Button>
                     </DialogFooter>
                 </DialogContent>
             </Dialog>
 
-            {/* delete group modal */}
+            {/* Delete group confirmation */}
             <Dialog open={openDelete} onOpenChange={setOpenDelete}>
                 <DialogContent className="sm:max-w-sm">
                     <DialogHeader>
                         <DialogTitle>Delete Group</DialogTitle>
                         <DialogDescription>
-                            Are you sure to delete this group?
+                            Are you sure you want to delete <strong>{selectedGroup?.name}</strong>? This action cannot be undone.
                         </DialogDescription>
                     </DialogHeader>
                     <DialogFooter>
-                        <DialogClose >
-                            Cancel
+                        <DialogClose asChild>
+                            <Button variant="outline">Cancel</Button>
                         </DialogClose>
-                        <Button type="button" onClick={() => selectedGroup && handleDeleteGroup(selectedGroup.id)} variant="destructive">Delete</Button>
+                        <Button
+                            variant="destructive"
+                            onClick={() => selectedGroup && deleteGroupMutation.mutate(selectedGroup.id)}
+                            disabled={deleteGroupMutation.isPending}
+                        >
+                            {deleteGroupMutation.isPending ? 'Deleting…' : 'Delete'}
+                        </Button>
                     </DialogFooter>
                 </DialogContent>
             </Dialog>
-            <div className="w-full flex justify-end p-5">
 
-                <GroupDrawer openCreate={openCreate} setOpenCreate={setOpenCreate} teachers={teachers} students={students} onGroupCreated={() => queryClient.invalidateQueries({
-                    queryKey: ['groups'],
-                    exact: false,
-                })} />
+            <div className="flex justify-end pt-2">
+                <GroupDrawer
+                    openCreate={openCreate}
+                    setOpenCreate={setOpenCreate}
+                    teachers={teachers}
+                    students={students}
+                    onGroupCreated={() => queryClient.invalidateQueries({ queryKey: ['groups'] })}
+                />
             </div>
         </div>
-
     )
 }
 
-export default GroupComponent;
+export default GroupComponent

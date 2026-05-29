@@ -3,8 +3,8 @@
 import { Button } from "@/components/ui/button"
 import {
     Card,
-    CardAction,
     CardContent,
+    CardAction,
     CardDescription,
     CardFooter,
     CardHeader,
@@ -20,225 +20,175 @@ import {
     FieldGroup,
     FieldLabel,
 } from "@/components/ui/field"
-import axios from "axios"
+import api from "@/lib/api"
 import { useAuthStore } from "@/lib/stores/authStore"
 import { useRouter } from "next/navigation"
-import { useState } from "react"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "./ui/select"
 
 type UserRole = "STUDENT" | "TEACHER" | "ADMIN" | "PARENT"
-
 const roles: UserRole[] = ["STUDENT", "TEACHER", "ADMIN", "PARENT"]
 
-export function CardDemo({ id, isLogin, toggle }: { id?: string, isLogin?: boolean, toggle?: () => void }) {
-    const API = process.env.NEXT_PUBLIC_API_URL;
-    const setToken = useAuthStore((state) => state.setToken);
-    const router = useRouter();
-    const getSchema = (isLogin: boolean) =>
-        z.object({
-            username: isLogin
-                ? z.string()
-                : z.string().min(3),
-            email: z.string().email(),
-            password: z.string().min(6),
-            role: isLogin ? z.string() : z.string().min(3),
-        })
+export function CardDemo({ id, isLogin, toggle }: { id?: string; isLogin?: boolean; toggle?: () => void }) {
+    const setToken = useAuthStore((state) => state.setToken)
+    const router = useRouter()
+
+    const loginSchema = z.object({
+        email: z.string().email(),
+        password: z.string().min(6),
+        role: z.string().optional(),
+    })
+
+    const registerSchema = z.object({
+        username: z.string().min(3),
+        email: z.string().email(),
+        password: z.string().min(6),
+        role: z.string().min(1, "Select a role"),
+    })
+
     const form = useForm({
-        defaultValues: {
-            username: "",
-            email: "",
-            password: "",
-            role: "",
-        },
-        validators: {
-            onSubmit: getSchema(!!isLogin)
-        },
+        defaultValues: { username: "", email: "", password: "", role: "" },
+        validators: { onSubmit: isLogin ? loginSchema : registerSchema },
         onSubmit: async ({ value }) => {
             try {
-                if (isLogin) {
-                    const response = await axios.post(`${API}/users/login`, { email: value.email, password: value.password, role: value.role }, {
-                        headers: {
-                            'Content-Type': 'application/json'
-                        }
-                    })
+                const endpoint = isLogin ? '/users/login' : '/users/register'
+                const payload = isLogin
+                    ? { email: value.email, password: value.password }
+                    : value
 
-                    if (response.status != 201) {
-                        toast.error('Login failed!')
-                        return;
-                    }
-                    localStorage.setItem('token', response.data.accessToken);
-                    setToken(response.data.accessToken);
+                const response = await api.post(endpoint, payload)
 
-                    toast.success('Login successful!')
-                    router.push('/home')
-                } else {
-                    const response = await axios.post(`${API}/users/register`, value, {
-                        headers: {
-                            'Content-Type': 'application/json'
-                        }
-                    })
-                    if (response.status != 201) {
-                        toast.error('Registration failed!')
-                        return;
-                    }
-                    localStorage.setItem('token', response.data.accessToken);
-                    setToken(response.data.accessToken);
-                    toast.success('Registration successful!')
-                    router.push('/home')
-                }
+                localStorage.setItem('token', response.data.accessToken)
+                setToken(response.data.accessToken)
+                toast.success(isLogin ? 'Logged in successfully' : 'Account created successfully')
+                router.push('/home')
             } catch (error: any) {
-                toast.error(
-                    error.response?.data?.message ?? 'Something went wrong'
-                );
+                toast.error(error.response?.data?.message ?? 'Something went wrong')
             }
         },
     })
 
     return (
-        <Card className="w-full max-w-sm mt-5">
+        <Card className="w-full max-w-sm">
             <CardHeader>
-                <CardTitle>{isLogin ? 'Login' : 'Register'}</CardTitle>
+                <CardTitle className="text-2xl">{isLogin ? 'Welcome back' : 'Create account'}</CardTitle>
                 <CardDescription>
                     {isLogin
-                        ? 'Enter your username and email below to login to your account'
-                        : 'Enter your details below to create an account'}
+                        ? 'Enter your credentials to sign in'
+                        : 'Fill in the details below to get started'}
                 </CardDescription>
             </CardHeader>
             <CardContent>
                 <form
                     id={id}
-                    onSubmit={(e) => {
-                        e.preventDefault()
-                        form.handleSubmit()
-                    }}
-                    className="flex flex-col gap-6"
+                    onSubmit={(e) => { e.preventDefault(); form.handleSubmit() }}
+                    className="flex flex-col gap-5"
                 >
                     <FieldGroup>
+                        {!isLogin && (
+                            <form.Field name="username">
+                                {(field) => {
+                                    const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
+                                    return (
+                                        <Field data-invalid={isInvalid}>
+                                            <FieldLabel htmlFor={field.name}>Username</FieldLabel>
+                                            <Input
+                                                id={field.name}
+                                                value={field.state.value}
+                                                onBlur={field.handleBlur}
+                                                onChange={(e) => field.handleChange(e.target.value)}
+                                                placeholder="Your username"
+                                                autoComplete="username"
+                                            />
+                                            {isInvalid && <FieldError errors={field.state.meta.errors} />}
+                                        </Field>
+                                    )
+                                }}
+                            </form.Field>
+                        )}
 
-                        {!isLogin && (<form.Field
-                            name="username"
-                            children={(field) => {
-                                const isInvalid =
-                                    field.state.meta.isTouched && !field.state.meta.isValid
-                                return (
-
-                                    <Field data-invalid={isInvalid}>
-                                        <FieldLabel htmlFor={field.name}>Username</FieldLabel>
-                                        <Input
-                                            id={field.name}
-                                            name={field.name}
-                                            value={field.state.value}
-                                            onBlur={field.handleBlur}
-                                            onChange={(e) => field.handleChange(e.target.value)}
-                                            aria-invalid={isInvalid}
-                                            placeholder="Enter your username"
-                                            autoComplete="on"
-                                        />
-                                        {isInvalid && (
-                                            <FieldError errors={field.state.meta.errors} />
-                                        )}
-                                    </Field>
-
-                                )
-                            }}
-                        />)}
-                        <form.Field
-                            name="email"
-                            children={(field) => {
-                                const isInvalid =
-                                    field.state.meta.isTouched && !field.state.meta.isValid
+                        <form.Field name="email">
+                            {(field) => {
+                                const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
                                 return (
                                     <Field data-invalid={isInvalid}>
                                         <FieldLabel htmlFor={field.name}>Email</FieldLabel>
                                         <Input
                                             id={field.name}
-                                            name={field.name}
+                                            type="email"
                                             value={field.state.value}
                                             onBlur={field.handleBlur}
                                             onChange={(e) => field.handleChange(e.target.value)}
-                                            aria-invalid={isInvalid}
-                                            placeholder="Enter your email"
-                                            autoComplete="off"
+                                            placeholder="you@example.com"
+                                            autoComplete="email"
                                         />
-                                        {isInvalid && (
-                                            <FieldError errors={field.state.meta.errors} />
-                                        )}
+                                        {isInvalid && <FieldError errors={field.state.meta.errors} />}
                                     </Field>
                                 )
                             }}
-                        />
-                        <form.Field
-                            name="password"
-                            children={(field) => {
-                                const isInvalid =
-                                    field.state.meta.isTouched && !field.state.meta.isValid
+                        </form.Field>
+
+                        <form.Field name="password">
+                            {(field) => {
+                                const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
                                 return (
                                     <Field data-invalid={isInvalid}>
                                         <FieldLabel htmlFor={field.name}>Password</FieldLabel>
                                         <Input
                                             id={field.name}
-                                            name={field.name}
+                                            type="password"
                                             value={field.state.value}
                                             onBlur={field.handleBlur}
                                             onChange={(e) => field.handleChange(e.target.value)}
-                                            aria-invalid={isInvalid}
-                                            placeholder="Enter your password"
-                                            autoComplete="off"
+                                            placeholder="Min. 6 characters"
+                                            autoComplete={isLogin ? "current-password" : "new-password"}
                                         />
-                                        {isInvalid && field.state.meta.errors?.map((error, i) => (
-                                            <FieldError key={i}>{'message' in error! ? error.message : String(error)}</FieldError>
-                                        ))}
+                                        {isInvalid && <FieldError errors={field.state.meta.errors} />}
                                     </Field>
                                 )
                             }}
-                        />
-                        {!isLogin && (<form.Field
-                            name="role"
-                            children={(field) => {
-                                const isInvalid =
-                                    field.state.meta.isTouched && !field.state.meta.isValid
-                                return (
+                        </form.Field>
 
-                                    <Field data-invalid={isInvalid}>
-                                        <FieldLabel htmlFor={field.name}>Role</FieldLabel>
-                                        <Select
-                                            value={field.state.value}
-                                            onValueChange={(val: string) => field.handleChange(val as UserRole)}
-                                        >
-                                            <SelectTrigger>
-                                                <SelectValue placeholder="Select role" />
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                                <SelectGroup>
-                                                    <SelectLabel>Select a role</SelectLabel>
-                                                    {roles.map((role) => (
-                                                        <SelectItem key={role} value={role}>
-                                                            {role.toLowerCase()}
-                                                        </SelectItem>
-                                                    ))}
-                                                </SelectGroup>
-                                            </SelectContent>
-                                        </Select>
-                                    </Field>
-                                )
-                            }}
-                        />)}
+                        {!isLogin && (
+                            <form.Field name="role">
+                                {(field) => {
+                                    const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
+                                    return (
+                                        <Field data-invalid={isInvalid}>
+                                            <FieldLabel htmlFor={field.name}>Role</FieldLabel>
+                                            <Select value={field.state.value} onValueChange={(val) => field.handleChange(val as UserRole)}>
+                                                <SelectTrigger id={field.name}>
+                                                    <SelectValue placeholder="Select your role" />
+                                                </SelectTrigger>
+                                                <SelectContent>
+                                                    <SelectGroup>
+                                                        <SelectLabel>Roles</SelectLabel>
+                                                        {roles.map((role) => (
+                                                            <SelectItem key={role} value={role} className="capitalize">
+                                                                {role.toLowerCase()}
+                                                            </SelectItem>
+                                                        ))}
+                                                    </SelectGroup>
+                                                </SelectContent>
+                                            </Select>
+                                            {isInvalid && <FieldError errors={field.state.meta.errors} />}
+                                        </Field>
+                                    )
+                                }}
+                            </form.Field>
+                        )}
                     </FieldGroup>
+
                     <Button type="submit" className="w-full">
-                        {isLogin ? 'Login' : 'Sign Up'}
-                    </Button>
-                    <Button variant="outline" className="w-full">
-                        {isLogin ? 'Login' : 'Sign Up'} with Google
+                        {isLogin ? 'Sign In' : 'Create Account'}
                     </Button>
                 </form>
             </CardContent>
-            <CardFooter className="flex justify-between w-full">
+            <CardFooter className="flex justify-between">
                 <CardAction>
-                    <Button variant="link" onClick={toggle}>
-                        {isLogin ? 'Don\'t have an account? Sign Up' : `Already have an account? Login`}
+                    <Button variant="link" onClick={toggle} className="px-0">
+                        {isLogin ? "Don't have an account? Sign up" : "Already have an account? Sign in"}
                     </Button>
                 </CardAction>
-                <Button variant="link" className="text-blue-400">Forgot password?</Button>
             </CardFooter>
         </Card>
     )

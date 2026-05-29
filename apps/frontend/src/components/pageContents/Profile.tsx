@@ -1,53 +1,66 @@
 'use client'
 
+import { useSuspenseQuery } from '@tanstack/react-query'
 import { TokenPayload } from '@/lib/types/token_payload'
 import { useAuthStore } from '@/lib/stores/authStore'
-import axios from 'axios'
-import { useState, useEffect } from 'react'
-import { toast } from 'sonner'
+import api from '@/lib/api'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { User, Mail, Shield } from 'lucide-react'
 
 const Profile = () => {
-    const API = process.env.NEXT_PUBLIC_API_URL;
-    const token = useAuthStore((state) => state.token);
-    const [user, setUser] = useState<TokenPayload | null>(null);
+    const isAuthenticated = useAuthStore((state) => state.isAuthenticated)
 
-    useEffect(() => {
-        if (!token) {
-            return
-        }
-        const fetchProfile = async () => {
-            try {
-                const res = await axios.get(`${API}/users/me`, {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                })
-                setUser(res.data)
-            } catch (error: any) {
-                console.error('Error fetching profile:', error)
-                toast.error(
-                    error.response?.data?.message ?? 'Something went wrong'
-                );
-            }
-        }
-        fetchProfile();
-    }, [token, API]);
+    const { data: user } = useSuspenseQuery<TokenPayload>({
+        queryKey: ['me'],
+        queryFn: async () => {
+            const res = await api.get('/users/me')
+            return res.data
+        },
+        staleTime: 1000 * 60 * 10,
+        enabled: isAuthenticated,
+    })
 
-    if (!token) {
-        return <div>Please log in to view your profile.</div>
+    if (!isAuthenticated) {
+        return <p className="text-center text-muted-foreground">Please log in to view your profile.</p>
     }
+
     return (
-        <div className='flex min-h-screen justify-center text-center'>
-            {user ? (
-                <div>
-                    <h1 className='text-2xl font-bold mb-4'>Profile</h1>
-                    <p><strong>Username:</strong> {user.username}</p>
-                    <p><strong>Email:</strong> {user.email}</p>
-                    <p><strong>Role:</strong> {user.role?.toLocaleLowerCase()}</p>
-                </div>
-            ) : (
-                <p>User not found.</p>
-            )}
+        <div className="flex justify-center">
+            <Card className="w-full max-w-md">
+                <CardHeader className="text-center pb-2">
+                    <div className="mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
+                        <User className="h-8 w-8 text-primary" />
+                    </div>
+                    <CardTitle className="text-2xl">{user?.username}</CardTitle>
+                    <Badge variant="secondary" className="mx-auto w-fit capitalize">
+                        {user?.role?.toLowerCase()}
+                    </Badge>
+                </CardHeader>
+                <CardContent className="space-y-3 pt-4">
+                    <div className="flex items-center gap-3 rounded-lg border p-3">
+                        <User className="h-4 w-4 text-muted-foreground shrink-0" />
+                        <div>
+                            <p className="text-xs text-muted-foreground">Username</p>
+                            <p className="font-medium">{user?.username}</p>
+                        </div>
+                    </div>
+                    <div className="flex items-center gap-3 rounded-lg border p-3">
+                        <Mail className="h-4 w-4 text-muted-foreground shrink-0" />
+                        <div>
+                            <p className="text-xs text-muted-foreground">Email</p>
+                            <p className="font-medium">{user?.email}</p>
+                        </div>
+                    </div>
+                    <div className="flex items-center gap-3 rounded-lg border p-3">
+                        <Shield className="h-4 w-4 text-muted-foreground shrink-0" />
+                        <div>
+                            <p className="text-xs text-muted-foreground">Role</p>
+                            <p className="font-medium capitalize">{user?.role?.toLowerCase()}</p>
+                        </div>
+                    </div>
+                </CardContent>
+            </Card>
         </div>
     )
 }

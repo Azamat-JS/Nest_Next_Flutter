@@ -1,9 +1,12 @@
 "use client"
 
-import { useAuthStore } from "@/lib/stores/authStore";
-import { useSuspenseQuery } from "@tanstack/react-query";
-import axios from "axios";
-import { useSearchParams } from "next/navigation";
+import { useSuspenseQuery } from "@tanstack/react-query"
+import { useSearchParams, useRouter } from "next/navigation"
+import { LeaderBoardType } from "@/lib/types/token_payload"
+import { PaginationType } from "@/lib/types/groups"
+import api from "@/lib/api"
+import { Trophy, Medal, Award } from "lucide-react"
+import { cn } from "@/lib/utils"
 import {
     Table,
     TableBody,
@@ -13,9 +16,7 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-import { LeaderBoardType } from "@/lib/types/token_payload";
 import { Field, FieldLabel } from "@/components/ui/field"
-import { PaginationType } from "@/lib/types/groups"
 import {
     Select,
     SelectContent,
@@ -32,90 +33,94 @@ import {
     PaginationNext,
     PaginationPrevious,
 } from "@/components/ui/pagination"
-import { useRouter } from "next/navigation";
+
+const getRankIcon = (idx: number) => {
+    if (idx === 0) return <Trophy className="h-4 w-4 text-yellow-500" />
+    if (idx === 1) return <Medal className="h-4 w-4 text-gray-400" />
+    if (idx === 2) return <Award className="h-4 w-4 text-amber-600" />
+    return null
+}
+
+const getRankStyle = (idx: number) => {
+    if (idx === 0) return "bg-yellow-50 dark:bg-yellow-950/20 font-semibold"
+    if (idx === 1) return "bg-slate-50 dark:bg-slate-900/30 font-semibold"
+    if (idx === 2) return "bg-amber-50 dark:bg-amber-950/20 font-semibold"
+    return ""
+}
 
 const GroupLeaderBoard = ({ groupId }: { groupId: string }) => {
-    const router = useRouter();
-    const searchParams = useSearchParams();
-    const page = Number(searchParams.get('page') ?? 1);
-    const limit = Number(searchParams.get('limit') ?? 10);
-    const token = useAuthStore((state) => state.token);
-    const API = process.env.NEXT_PUBLIC_API_URL;
+    const router = useRouter()
+    const searchParams = useSearchParams()
+    const page = Number(searchParams.get('page') ?? 1)
+    const limit = Number(searchParams.get('limit') ?? 10)
 
     const { data: groupStudentsData } = useSuspenseQuery({
         queryKey: ["group-leaderboard", groupId, page, limit],
         queryFn: async () => {
-            const res = await axios.get(`${API}/student-score/leaderboard/${groupId}`, { headers: { Authorization: `Bearer ${token}` }, params: { page, limit } })
-            return res.data;
-        }
-    });
+            const res = await api.get(`/student-score/leaderboard/${groupId}`, { params: { page, limit } })
+            return res.data
+        },
+        staleTime: 1000 * 60 * 5,
+    })
 
-    const getRankStyle = (idx: number) => {
-        switch (idx) {
-            case 0:
-                return "bg-blue-200 text-blue-800 font-semibold";
-            case 1:
-                return "bg-green-200 text-green-800 font-semibold";
-            case 2:
-                return "bg-yellow-200 text-yellow-800 font-semibold";
-            default:
-                return "";
-        }
-    };
-
-    const groupStudents: LeaderBoardType[] = groupStudentsData.data.length > 0 ? groupStudentsData.data : [];
+    const groupStudents: LeaderBoardType[] = groupStudentsData?.data ?? []
     const meta: PaginationType = groupStudentsData?.meta ?? {}
-    const lastPage = meta?.last_page ?? 1;
+    const lastPage = meta?.last_page ?? 1
+
     return (
         <>
             <Table>
-                <TableCaption className="text-center font-bold text-lg">
-                    Showing {groupStudentsData.length} of {meta?.total ?? 0} students
+                <TableCaption>
+                    Showing {groupStudents.length} of {meta?.total ?? 0} students
                 </TableCaption>
                 <TableHeader>
                     <TableRow>
-                        <TableHead className="w-12 text-center font-bold text-lg">&#8470;</TableHead>
-                        <TableHead className="w-48 text-center font-bold text-lg">Name</TableHead>
-                        <TableHead className="w-48 text-center font-bold text-lg">Homework</TableHead>
-                        <TableHead className="w-48 text-center font-bold text-lg">Attendance</TableHead>
-                        <TableHead className="w-48 text-center font-bold text-lg">Total Score</TableHead>
+                        <TableHead className="w-12 text-center font-semibold">#</TableHead>
+                        <TableHead className="text-center font-semibold">Student</TableHead>
+                        <TableHead className="text-center font-semibold">Homework</TableHead>
+                        <TableHead className="text-center font-semibold">Attendance</TableHead>
+                        <TableHead className="text-center font-semibold text-primary">Total</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
                     {groupStudents.map((s, idx) => {
-                        const rankStyle = getRankStyle(idx);
-                        return (<TableRow key={idx} className={rankStyle}>
-                            <TableCell className="text-center">{(page - 1) * limit + idx + 1}</TableCell>
-                            <TableCell className="text-center">{s.student.username}</TableCell>
-                            <TableCell className="text-center"> {s.homework ?? 0}</TableCell>
-                            <TableCell className="text-center">{s.attendance ?? 0}</TableCell>
-                            <TableCell className="text-center">{s.total ?? 0}</TableCell>
-                        </TableRow>)
+                        const absoluteIdx = (page - 1) * limit + idx
+                        return (
+                            <TableRow key={idx} className={cn(getRankStyle(absoluteIdx))}>
+                                <TableCell className="text-center">
+                                    <div className="flex items-center justify-center gap-1">
+                                        {getRankIcon(absoluteIdx)}
+                                        <span>{absoluteIdx + 1}</span>
+                                    </div>
+                                </TableCell>
+                                <TableCell className="text-center font-medium">{s.student.username}</TableCell>
+                                <TableCell className="text-center">{s.homework ?? 0}</TableCell>
+                                <TableCell className="text-center">{s.attendance ?? 0}</TableCell>
+                                <TableCell className="text-center font-bold text-primary">{s.total ?? 0}</TableCell>
+                            </TableRow>
+                        )
                     })}
                 </TableBody>
             </Table>
 
-            {/* pagination */}
             <div className="grid grid-cols-2 items-center mt-4">
-
                 <div className="flex justify-center">
                     <Field orientation="horizontal" className="w-fit">
-                        <FieldLabel htmlFor="select-rows-per-page">Rows per page</FieldLabel>
+                        <FieldLabel htmlFor="gl-rows-per-page">Rows per page</FieldLabel>
                         <Select value={String(limit)} onValueChange={(val) => {
-                            const params = new URLSearchParams(searchParams.toString());
-                            params.set('limit', val);
-                            params.set('page', '1');
-                            router.push(`?${params.toString()}`);
+                            const params = new URLSearchParams(searchParams.toString())
+                            params.set('limit', val)
+                            params.set('page', '1')
+                            router.push(`?${params.toString()}`)
                         }}>
-                            <SelectTrigger className="w-20" id="select-rows-per-page">
+                            <SelectTrigger className="w-20" id="gl-rows-per-page">
                                 <SelectValue />
                             </SelectTrigger>
                             <SelectContent align="start">
                                 <SelectGroup>
-                                    <SelectItem value="5" >5</SelectItem>
-                                    <SelectItem value="10">10</SelectItem>
-                                    <SelectItem value="15">15</SelectItem>
-                                    <SelectItem value="20">20</SelectItem>
+                                    {['5', '10', '15', '20'].map(v => (
+                                        <SelectItem key={v} value={v}>{v}</SelectItem>
+                                    ))}
                                 </SelectGroup>
                             </SelectContent>
                         </Select>
@@ -129,11 +134,11 @@ const GroupLeaderBoard = ({ groupId }: { groupId: string }) => {
                             </PaginationItem>
                             {Array.from({ length: lastPage }).map((_, idx) => (
                                 <PaginationItem key={idx}>
-                                    <PaginationLink href={`?page=${idx + 1}&limit=${limit}`} isActive={page === idx + 1}>{idx + 1}</PaginationLink>
+                                    <PaginationLink href={`?page=${idx + 1}&limit=${limit}`} isActive={page === idx + 1}>
+                                        {idx + 1}
+                                    </PaginationLink>
                                 </PaginationItem>
-                            )
-                            )}
-
+                            ))}
                             <PaginationItem>
                                 <PaginationNext href={`?page=${Math.min(lastPage, page + 1)}&limit=${limit}`} />
                             </PaginationItem>

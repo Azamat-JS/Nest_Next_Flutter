@@ -1,7 +1,5 @@
 'use client'
-import { useAuthStore } from '@/lib/stores/authStore';
-import { AddStudentPayload, GroupType, PaginationType } from '@/lib/types/groups';
-import axios from 'axios';
+import { AddStudentPayload, PaginationType } from '@/lib/types/groups';
 import { useState } from 'react';
 import { toast } from 'sonner';
 import {
@@ -20,7 +18,7 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Menu, Edit, Trash, Home, ListChecks, Medal } from 'lucide-react';
+import { MoreHorizontal, Edit, Trash, UserPlus } from 'lucide-react';
 import { Input } from "@/components/ui/input"
 import { DeleteStudentPayload, TokenPayload, UpdateScorePayload } from '@/lib/types/token_payload';
 import AddScoreDrawer from '../AddScoreDrawer';
@@ -36,7 +34,7 @@ import {
     DialogHeader,
     DialogTitle,
 } from "@/components/ui/dialog"
-import { Field, FieldGroup, FieldLabel, } from "@/components/ui/field"
+import { Field, FieldGroup, FieldLabel } from "@/components/ui/field"
 import { Button } from '../ui/button';
 import { Label } from '../ui/label';
 import { useStudents } from '@/lib/hooks/studentsHook';
@@ -60,16 +58,16 @@ import {
 import { formatValue } from '@/lib/helper/format_score';
 import { Badge } from '../ui/badge';
 import GroupLineGraph from '../GroupLineGraph';
+import api from '@/lib/api';
+import { Home, ListChecks, Medal } from 'lucide-react';
 
 const date = new Date().toISOString().split('T')[0];
-
 
 const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
     const router = useRouter();
     const searchParams = useSearchParams();
     const page = Number(searchParams.get('page') ?? 1);
     const limit = Number(searchParams.get('limit') ?? 10);
-    const token = useAuthStore((state) => state.token);
     const [openCreate, setOpenCreate] = useState(false);
     const [openUpdate, setOpenUpdate] = useState(false);
     const [openDelete, setOpenDelete] = useState(false);
@@ -79,212 +77,204 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
     const [type, setType] = useState<"HOMEWORK" | "ATTENDANCE">("HOMEWORK");
     const [value, setValue] = useState<number>(0);
     const [comment, setComment] = useState<string | null>(null);
-    const API = process.env.NEXT_PUBLIC_API_URL;
     const queryClient = useQueryClient();
-    const { data: students = [] } = useStudents()
-
-    const { data } = useSuspenseQuery({
-        queryKey: ["group", groupId],
-        queryFn: async () => {
-            const res = await axios.get(`${API}/group/${groupId}`, { headers: { Authorization: `Bearer ${token}` } });
-            return res.data;
-        },
-    })
+    const { data: students = [] } = useStudents();
 
     const { data: groupStudentsData } = useSuspenseQuery({
         queryKey: ["group-students", groupId, page, limit],
         queryFn: async () => {
-            const res = await axios.get(`${API}/group/${groupId}/students`, { headers: { "Authorization": `Bearer ${token}` }, params: { page, limit } });
+            const res = await api.get(`/group/${groupId}/students`, { params: { page, limit } });
             return res.data;
-        }
-    })
+        },
+        staleTime: 1000 * 60 * 5,
+    });
 
+    const { data: studentScores } = useSuspenseQuery<GroupScoreResponse>({
+        queryKey: ["today-scores", groupId],
+        queryFn: async () => {
+            const res = await api.get(`/student-score/today/students/${groupId}`);
+            return res.data;
+        },
+        staleTime: 1000 * 60 * 2,
+    });
 
     const updateScoresMutation = useMutation({
         mutationFn: async (payload: UpdateScorePayload) => {
             const { studentId, groupId, date, type, value, comment } = payload;
-            return await axios.put(`${API}/student-score/update/${studentId}/${groupId}`, { date, comment, type, value, homeworkScore: type === "HOMEWORK" ? value : undefined, attendanceScore: type === "ATTENDANCE" ? value : undefined }, { headers: { Authorization: `Bearer ${token}` } });
+            return await api.put(`/student-score/update/${studentId}/${groupId}`, {
+                date, comment, type, value,
+                homeworkScore: type === "HOMEWORK" ? value : undefined,
+                attendanceScore: type === "ATTENDANCE" ? value : undefined,
+            });
         },
         onSuccess: () => {
-            toast.success('Scores updated successfully!');
+            toast.success('Score updated successfully');
             setOpenUpdate(false);
-            setValue(0),
-                setComment(null)
-            setType("HOMEWORK")
-            setSelectedStudent(null)
-            queryClient.invalidateQueries({
-                queryKey: ['students', groupId],
-                exact: false,
-            })
+            setValue(0);
+            setComment(null);
+            setType("HOMEWORK");
+            setSelectedStudent(null);
+            queryClient.invalidateQueries({ queryKey: ['today-scores', groupId] });
             queryClient.invalidateQueries({ queryKey: ['group', groupId] });
-
         },
         onError: (error: any) => {
             toast.error(error.response?.data?.message ?? 'Something went wrong');
-        }
-    })
-
-
-    const addStudentMutation = useMutation({
-        mutationFn: async (payload: AddStudentPayload) => {
-            const { groupId, studentIds } = payload;
-            const res = await axios.post(`${API}/group/${groupId}/add-students`, { studentIds }, { headers: { Authorization: `Bearer ${token}` } });
-            return res.data;
-        },
-        onSuccess: () => {
-            toast.success('Students added successfully!');
-            setOpenAddStudents(false);
-            queryClient.invalidateQueries({
-                queryKey: ['group', groupId],
-            })
-        },
-        onError: (error: any) => {
-            toast.error(error.response?.data?.message ?? 'Something went wrong');
-        }
-    })
-
-    const deleteStudentMutation = useMutation({
-        mutationFn: async (payload: DeleteStudentPayload) => {
-            const { studentId, groupId } = payload;
-            return await axios.delete(`${API}/group/delete/${studentId}/${groupId}`, { headers: { Authorization: `Bearer ${token}` } });
-        },
-        onSuccess: () => {
-            toast.success('Student deleted from this group!');
-            setOpenDelete(false);
-            queryClient.invalidateQueries({
-                queryKey: ['group', groupId],
-            })
-        },
-        onError: (error: any) => {
-            toast.error(error.response?.data?.message ?? 'Something went wrong');
-
-        }
-    })
-
-    const { data: studentScores } = useSuspenseQuery<GroupScoreResponse>({
-        queryKey: ["students", groupId],
-        queryFn: async () => {
-            const res = await axios.get(
-                `${API}/student-score/today/students/${groupId}`,
-                { headers: { Authorization: `Bearer ${token}` } }
-            );
-            return res.data;
         },
     });
 
-    console.log(studentScores)
+    const addStudentMutation = useMutation({
+        mutationFn: async (payload: AddStudentPayload) => {
+            const res = await api.post(`/group/${payload.groupId}/add-students`, { studentIds: payload.studentIds });
+            return res.data;
+        },
+        onSuccess: () => {
+            toast.success('Students added successfully');
+            setOpenAddStudents(false);
+            queryClient.invalidateQueries({ queryKey: ['group', groupId] });
+            queryClient.invalidateQueries({ queryKey: ['group-students', groupId] });
+        },
+        onError: (error: any) => {
+            toast.error(error.response?.data?.message ?? 'Something went wrong');
+        },
+    });
 
-    const group: GroupType = data;
-    const groupStudents: TokenPayload[] = groupStudentsData.data.length > 0 ? groupStudentsData.data : [];
-    const meta: PaginationType = groupStudentsData?.meta ?? {}
+    const deleteStudentMutation = useMutation({
+        mutationFn: async (payload: DeleteStudentPayload) => {
+            return await api.delete(`/group/delete/${payload.studentId}/${payload.groupId}`);
+        },
+        onSuccess: () => {
+            toast.success('Student removed from group');
+            setOpenDelete(false);
+            queryClient.invalidateQueries({ queryKey: ['group', groupId] });
+            queryClient.invalidateQueries({ queryKey: ['group-students', groupId] });
+        },
+        onError: (error: any) => {
+            toast.error(error.response?.data?.message ?? 'Something went wrong');
+        },
+    });
+
+    const groupStudents: TokenPayload[] = groupStudentsData?.data ?? [];
+    const meta: PaginationType = groupStudentsData?.meta ?? {};
     const lastPage = meta?.last_page ?? 1;
 
-
-    const scoreMap = new Map(
-        studentScores.students.map((s) => [s.studentId, s])
-    )
-
+    const scoreMap = new Map(studentScores.students.map((s) => [s.studentId, s]));
     const avgAttendance = studentScores.avgAttendance;
     const avgHomework = studentScores.avgHomework;
     const avgTotal = studentScores.avg;
 
-    const existingStudents = new Set(
-        group?.students?.map((s) => s.id) ?? []
-    );
-
-    const availableStudents: any = students.filter(
-        (s: TokenPayload) => !existingStudents.has(s.id)
-    )
+    const existingStudentIds = new Set(groupStudents.map((s) => s.id));
+    const availableStudents = (students as TokenPayload[]).filter((s) => !existingStudentIds.has(s.id));
 
     return (
         <>
-            <div className="mb-4 flex justify-center items-center gap-6">
-                <Badge className='w-40 h-6 font-bold'><Home /> Avg Homework: {formatValue(avgHomework)}</Badge>
-                <Badge className='w-40 h-6 font-bold'><ListChecks /> Avg Attendance: {formatValue(avgAttendance)}</Badge>
-                <Badge className='w-40 h-6 font-bold'><Medal /> Avg Total: {formatValue(avgTotal)}</Badge>
+            <div className="flex flex-wrap justify-center gap-3 mb-4">
+                <Badge variant="secondary" className="gap-1.5 px-3 py-1.5">
+                    <Home className="h-3.5 w-3.5" /> Avg Homework: {formatValue(avgHomework)}
+                </Badge>
+                <Badge variant="secondary" className="gap-1.5 px-3 py-1.5">
+                    <ListChecks className="h-3.5 w-3.5" /> Avg Attendance: {formatValue(avgAttendance)}
+                </Badge>
+                <Badge variant="secondary" className="gap-1.5 px-3 py-1.5">
+                    <Medal className="h-3.5 w-3.5" /> Avg Total: {formatValue(avgTotal)}
+                </Badge>
             </div>
+
             <Table>
-                <TableCaption className="text-center font-bold text-lg">
+                <TableCaption>
                     Showing {groupStudents.length} of {meta?.total ?? 0} students
                 </TableCaption>
                 <TableHeader>
                     <TableRow>
-                        <TableHead className="w-12 text-center font-bold text-lg">&#8470;</TableHead>
-                        <TableHead className="w-48 text-center font-bold text-lg">Name</TableHead>
-                        <TableHead className="w-48 text-center font-bold text-lg">Homework</TableHead>
-                        <TableHead className="w-48 text-center font-bold text-lg">Attendance</TableHead>
-                        <TableHead className="w-48 text-center font-bold text-lg">Date</TableHead>
-                        <TableHead className="w-48 text-center font-bold text-lg">Total Score</TableHead>
-                        <TableHead className="w-24 text-start font-bold text-lg">Actions</TableHead>
+                        <TableHead className="w-12 text-center font-semibold">#</TableHead>
+                        <TableHead className="text-center font-semibold">Name</TableHead>
+                        <TableHead className="text-center font-semibold">Homework</TableHead>
+                        <TableHead className="text-center font-semibold">Attendance</TableHead>
+                        <TableHead className="text-center font-semibold">Date</TableHead>
+                        <TableHead className="text-center font-semibold">Total</TableHead>
+                        <TableHead className="w-16 text-center font-semibold">Actions</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
                     {groupStudents.map((s, idx) => {
                         const score = scoreMap.get(s.id);
-                        return (<TableRow key={s.id}>
-                            <TableCell className="text-center">{idx + 1}</TableCell>
-                            <TableCell className="text-center hover:cursor-pointer" onClick={() => router.push(`/groups/${groupId}/${s.id}`)}>{s.username}</TableCell>
-                            <TableCell className="text-center">{score?.homework ?? 0}</TableCell>
-                            <TableCell className="text-center">{score?.attendance ?? 0}</TableCell>
-                            <TableCell className="text-center"> {new Date().toISOString().split("T")[0]}</TableCell>
-                            <TableCell className="text-center">{score?.total ?? 0}</TableCell>
-                            <TableCell className="translate-x-5">
-                                <DropdownMenu>
-                                    <DropdownMenuTrigger>
-                                        <Menu className="h-5 w-5" />
-                                    </DropdownMenuTrigger>
-                                    <DropdownMenuContent align="start">
-                                        <DropdownMenuGroup>
-                                            <DropdownMenuItem onClick={() => { setOpenUpdate(true); setSelectedStudent(s); setValue(score?.homework ?? 0); setComment(score?.comment ?? null) }}>
-                                                <Edit /> Update
-                                            </DropdownMenuItem>
-                                            <DropdownMenuItem onClick={() => { setOpenDelete(true); setSelectedStudent(s) }} className="text-red-500">
-                                                <Trash /> Delete
-                                            </DropdownMenuItem>
-                                        </DropdownMenuGroup>
-                                    </DropdownMenuContent>
-                                </DropdownMenu>
-                            </TableCell>
-                        </TableRow>)
+                        return (
+                            <TableRow key={s.id}>
+                                <TableCell className="text-center">{(page - 1) * limit + idx + 1}</TableCell>
+                                <TableCell
+                                    className="text-center font-medium cursor-pointer hover:text-primary hover:underline"
+                                    onClick={() => router.push(`/groups/${groupId}/${s.id}`)}
+                                >
+                                    {s.username}
+                                </TableCell>
+                                <TableCell className="text-center">{score?.homework ?? 0}</TableCell>
+                                <TableCell className="text-center">{score?.attendance ?? 0}</TableCell>
+                                <TableCell className="text-center">{date}</TableCell>
+                                <TableCell className="text-center font-semibold">{score?.total ?? 0}</TableCell>
+                                <TableCell className="text-center">
+                                    <DropdownMenu>
+                                        <DropdownMenuTrigger asChild>
+                                            <Button variant="ghost" size="icon" className="h-8 w-8">
+                                                <MoreHorizontal className="h-4 w-4" />
+                                            </Button>
+                                        </DropdownMenuTrigger>
+                                        <DropdownMenuContent align="end">
+                                            <DropdownMenuGroup>
+                                                <DropdownMenuItem onClick={() => {
+                                                    setOpenUpdate(true);
+                                                    setSelectedStudent(s);
+                                                    setValue(score?.homework ?? 0);
+                                                    setComment(score?.comment ?? null);
+                                                }}>
+                                                    <Edit className="h-4 w-4" /> Update Score
+                                                </DropdownMenuItem>
+                                                <DropdownMenuItem
+                                                    onClick={() => { setOpenDelete(true); setSelectedStudent(s); }}
+                                                    className="text-destructive focus:text-destructive"
+                                                >
+                                                    <Trash className="h-4 w-4" /> Remove
+                                                </DropdownMenuItem>
+                                            </DropdownMenuGroup>
+                                        </DropdownMenuContent>
+                                    </DropdownMenu>
+                                </TableCell>
+                            </TableRow>
+                        );
                     })}
                 </TableBody>
             </Table>
-            <div className='flex gap-3 justify-end mr-5 mt-4'>
-                <AddScoreDrawer openCreate={openCreate} setOpenCreate={setOpenCreate} students={groupStudents} groupId={groupId} onScoreAdded={() => queryClient.invalidateQueries({
-                    queryKey: ['students', groupId],
-                    exact: false,
-                })} />
 
-                <Button variant="default" onClick={() => {
-                    setOpenAddStudents(true); queryClient.invalidateQueries({
-                        queryKey: ['students'],
-                    })
-                }} className="text-md">
-                    Add Students
+            <div className="flex gap-2 justify-end mt-4">
+                <AddScoreDrawer
+                    openCreate={openCreate}
+                    setOpenCreate={setOpenCreate}
+                    students={groupStudents}
+                    groupId={groupId}
+                    onScoreAdded={() => queryClient.invalidateQueries({ queryKey: ['today-scores', groupId] })}
+                />
+                <Button variant="outline" onClick={() => setOpenAddStudents(true)} className="gap-1">
+                    <UserPlus className="h-4 w-4" /> Add Students
                 </Button>
             </div>
 
-            {/* pagination */}
+            {/* Pagination */}
             <div className="grid grid-cols-2 items-center mt-4">
-
                 <div className="flex justify-center">
                     <Field orientation="horizontal" className="w-fit">
-                        <FieldLabel htmlFor="select-rows-per-page">Rows per page</FieldLabel>
+                        <FieldLabel htmlFor="gd-rows-per-page">Rows per page</FieldLabel>
                         <Select value={String(limit)} onValueChange={(val) => {
                             const params = new URLSearchParams(searchParams.toString());
                             params.set('limit', val);
                             params.set('page', '1');
                             router.push(`?${params.toString()}`);
                         }}>
-                            <SelectTrigger className="w-20" id="select-rows-per-page">
+                            <SelectTrigger className="w-20" id="gd-rows-per-page">
                                 <SelectValue />
                             </SelectTrigger>
                             <SelectContent align="start">
                                 <SelectGroup>
-                                    <SelectItem value="5" >5</SelectItem>
-                                    <SelectItem value="10">10</SelectItem>
-                                    <SelectItem value="15">15</SelectItem>
-                                    <SelectItem value="20">20</SelectItem>
+                                    {['5', '10', '15', '20'].map(v => (
+                                        <SelectItem key={v} value={v}>{v}</SelectItem>
+                                    ))}
                                 </SelectGroup>
                             </SelectContent>
                         </Select>
@@ -298,11 +288,11 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
                             </PaginationItem>
                             {Array.from({ length: lastPage }).map((_, idx) => (
                                 <PaginationItem key={idx}>
-                                    <PaginationLink href={`?page=${idx + 1}&limit=${limit}`} isActive={page === idx + 1}>{idx + 1}</PaginationLink>
+                                    <PaginationLink href={`?page=${idx + 1}&limit=${limit}`} isActive={page === idx + 1}>
+                                        {idx + 1}
+                                    </PaginationLink>
                                 </PaginationItem>
-                            )
-                            )}
-
+                            ))}
                             <PaginationItem>
                                 <PaginationNext href={`?page=${Math.min(lastPage, page + 1)}&limit=${limit}`} />
                             </PaginationItem>
@@ -311,22 +301,20 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
                 </div>
             </div>
 
-            {/* update student scores modal */}
+            {/* Update score modal */}
             <Dialog open={openUpdate} onOpenChange={setOpenUpdate}>
                 <DialogContent className="sm:max-w-sm">
                     <DialogHeader>
-                        <DialogTitle>Edit Student Scores</DialogTitle>
+                        <DialogTitle>Update Score</DialogTitle>
                         <DialogDescription>
-                            Make changes to the student's scores here. Click save when you&apos;re
-                            done.
+                            Edit score for <strong>{selectedStudent?.username}</strong>
                         </DialogDescription>
                     </DialogHeader>
                     <FieldGroup>
-                        <Select onValueChange={(v: "HOMEWORK" | "ATTENDANCE") => setType(v)}>
+                        <Select value={type} onValueChange={(v: "HOMEWORK" | "ATTENDANCE") => setType(v)}>
                             <SelectTrigger>
                                 <SelectValue placeholder="Select type" />
                             </SelectTrigger>
-
                             <SelectContent>
                                 <SelectItem value="HOMEWORK">Homework</SelectItem>
                                 <SelectItem value="ATTENDANCE">Attendance</SelectItem>
@@ -334,104 +322,104 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
                         </Select>
                         <Input
                             type="number"
+                            placeholder="Score value"
                             value={value}
                             onChange={(e) => setValue(Number(e.target.value))}
                         />
                         <Input
                             type="text"
-                            placeholder="Comment"
+                            placeholder="Comment (optional)"
                             value={comment ?? ""}
                             onChange={(e) => setComment(e.target.value)}
                         />
                     </FieldGroup>
                     <DialogFooter>
-                        <DialogClose>
-                            Cancel
+                        <DialogClose asChild>
+                            <Button variant="outline">Cancel</Button>
                         </DialogClose>
-                        <Button type="submit" onClick={() => selectedStudent && updateScoresMutation.mutate({ studentId: selectedStudent?.id, groupId, date, type, value, comment })}>Update</Button>
+                        <Button
+                            onClick={() => selectedStudent && updateScoresMutation.mutate({ studentId: selectedStudent.id, groupId, date, type, value, comment })}
+                            disabled={updateScoresMutation.isPending}
+                        >
+                            {updateScoresMutation.isPending ? 'Saving…' : 'Save'}
+                        </Button>
                     </DialogFooter>
                 </DialogContent>
             </Dialog>
 
             {/* Add students modal */}
-            <Dialog open={openAddStudents} onOpenChange={setOpenAddStudents}>
+            <Dialog open={openAddStudents} onOpenChange={(open) => { setOpenAddStudents(open); if (!open) setNewStudentIds([]); }}>
                 <DialogContent className="sm:max-w-sm">
                     <DialogHeader>
                         <DialogTitle>Add Students</DialogTitle>
-                        <DialogDescription>
-                            Add students to this group. Click save when you&apos;re
-                            done.
-                        </DialogDescription>
+                        <DialogDescription>Select students to add to this group.</DialogDescription>
                     </DialogHeader>
-                    <FieldGroup>
-                        <Field>
-                            <Label>Students</Label>
-                            <div className="max-h-48 overflow-y-auto border rounded-md p-3 space-y-2">
-                                {availableStudents.map((student: any, idx: number) => {
-                                    const checked = newStudentIds.includes(student.id);
-
-                                    return (
-                                        <label
-                                            key={student.id ?? `student-${idx}`}
-                                            className="flex items-center gap-2 cursor-pointer"
-                                        >
-                                            <input
-                                                disabled={existingStudents.has(student.id)}
-                                                type="checkbox"
-                                                checked={checked}
-                                                onChange={(e) => {
-                                                    if (!student.id) return;
-                                                    if (e.target.checked) {
-                                                        setNewStudentIds((prev) => [
-                                                            ...prev,
-                                                            student.id,
-                                                        ]);
-                                                    } else {
-                                                        setNewStudentIds((prev) =>
-                                                            prev.filter((id) => id !== student.id)
-                                                        );
-                                                    }
-                                                }}
-                                            />
-                                            <span>{student.username}</span>
-                                        </label>
-                                    );
-                                })}
-                            </div>
-                        </Field>
-                    </FieldGroup>
+                    <Field>
+                        <Label>Available students</Label>
+                        <div className="max-h-52 overflow-y-auto rounded-md border p-3 space-y-2">
+                            {availableStudents.length === 0
+                                ? <p className="text-sm text-muted-foreground text-center py-4">No students available</p>
+                                : availableStudents.map((student) => (
+                                    <label key={student.id} className="flex items-center gap-2 cursor-pointer">
+                                        <input
+                                            type="checkbox"
+                                            checked={newStudentIds.includes(student.id)}
+                                            onChange={(e) => {
+                                                if (!student.id) return;
+                                                setNewStudentIds((prev) =>
+                                                    e.target.checked ? [...prev, student.id] : prev.filter((id) => id !== student.id)
+                                                );
+                                            }}
+                                        />
+                                        <span className="text-sm">{student.username}</span>
+                                    </label>
+                                ))
+                            }
+                        </div>
+                    </Field>
                     <DialogFooter>
-                        <DialogClose>
-                            Cancel
+                        <DialogClose asChild>
+                            <Button variant="outline">Cancel</Button>
                         </DialogClose>
-                        <Button type="submit" onClick={() => group && addStudentMutation.mutate({ groupId: group.id, studentIds: newStudentIds })}>Save</Button>
+                        <Button
+                            onClick={() => addStudentMutation.mutate({ groupId, studentIds: newStudentIds })}
+                            disabled={newStudentIds.length === 0 || addStudentMutation.isPending}
+                        >
+                            {addStudentMutation.isPending ? 'Adding…' : `Add ${newStudentIds.length > 0 ? `(${newStudentIds.length})` : ''}`}
+                        </Button>
                     </DialogFooter>
                 </DialogContent>
             </Dialog>
 
-            {/* delete student modal */}
+            {/* Delete student confirmation modal */}
             <Dialog open={openDelete} onOpenChange={setOpenDelete}>
-                <form>
-                    <DialogContent className="sm:max-w-sm">
-                        <DialogHeader>
-                            <DialogTitle>Delete Student From Group</DialogTitle>
-                            <DialogDescription>
-                                Are you sure to delete this student from this group?
-                            </DialogDescription>
-                        </DialogHeader>
-                        <DialogFooter>
-                            <DialogClose>
-                                Cancel
-                            </DialogClose>
-                            <Button type="submit" onClick={() => selectedStudent && deleteStudentMutation.mutate({ studentId: selectedStudent?.id, groupId })} variant="destructive">Delete</Button>
-                        </DialogFooter>
-                    </DialogContent>
-                </form>
+                <DialogContent className="sm:max-w-sm">
+                    <DialogHeader>
+                        <DialogTitle>Remove Student</DialogTitle>
+                        <DialogDescription>
+                            Remove <strong>{selectedStudent?.username}</strong> from this group? This action cannot be undone.
+                        </DialogDescription>
+                    </DialogHeader>
+                    <DialogFooter>
+                        <DialogClose asChild>
+                            <Button variant="outline">Cancel</Button>
+                        </DialogClose>
+                        <Button
+                            variant="destructive"
+                            onClick={() => selectedStudent && deleteStudentMutation.mutate({ studentId: selectedStudent.id, groupId })}
+                            disabled={deleteStudentMutation.isPending}
+                        >
+                            {deleteStudentMutation.isPending ? 'Removing…' : 'Remove'}
+                        </Button>
+                    </DialogFooter>
+                </DialogContent>
             </Dialog>
 
-            <GroupLineGraph groupId={groupId} />
+            <div className="mt-8">
+                <GroupLineGraph groupId={groupId} />
+            </div>
         </>
-    )
-}
+    );
+};
 
-export default GroupDetailsComponent
+export default GroupDetailsComponent;
