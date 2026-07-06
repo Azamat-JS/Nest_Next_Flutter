@@ -397,7 +397,6 @@ const StudentPaymentHistory = ({ studentId }: { studentId: string }) => {
                     <AddPaymentDrawer
                         openCreate={openCreate}
                         setOpenCreate={setOpenCreate}
-                        students={students}
                         groups={groups}
                         preselectedStudentId={studentId}
                         onPaymentAdded={() => {

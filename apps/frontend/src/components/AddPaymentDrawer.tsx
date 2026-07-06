@@ -1,6 +1,7 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect } from 'react'
+import { useQuery } from '@tanstack/react-query'
 import { Button } from "@/components/ui/button"
 import {
     Drawer,
@@ -14,7 +15,7 @@ import {
 import { Input } from "@/components/ui/input"
 import * as z from "zod"
 import { toast } from "sonner"
-import { useForm } from "@tanstack/react-form"
+import { useForm, useStore } from "@tanstack/react-form"
 import {
     Field,
     FieldError,
@@ -31,9 +32,8 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 import { Label } from "./ui/label"
-import { TokenPayload } from "@/lib/types/token_payload"
 import { GroupType } from "@/lib/types/groups"
-import { MONTH_NAMES } from "@/lib/types/payment_type"
+import { MONTH_NAMES, StudentPaymentsResponse } from "@/lib/types/payment_type"
 import api from "@/lib/api"
 import { Plus } from "lucide-react"
 import { Textarea } from "./ui/textarea"
@@ -47,10 +47,9 @@ const schema = z.object({
     comment: z.string().optional(),
 })
 
-export function AddPaymentDrawer({ openCreate, setOpenCreate, students, groups, onPaymentAdded, preselectedStudentId }: {
+export function AddPaymentDrawer({ openCreate, setOpenCreate, groups, onPaymentAdded, preselectedStudentId }: {
     openCreate: boolean
     setOpenCreate: (open: boolean) => void
-    students: TokenPayload[]
     groups: GroupType[]
     onPaymentAdded: () => void
     preselectedStudentId?: string
@@ -69,6 +68,10 @@ export function AddPaymentDrawer({ openCreate, setOpenCreate, students, groups, 
         },
         validators: { onSubmit: schema },
         onSubmit: async ({ value }) => {
+            if (hasExistingPayment) {
+                toast.warning('This student already has a payment on record. Add it from their payment history page instead.')
+                return
+            }
             try {
                 const { studentId, groupId, month, year, amount, comment } = value
                 await api.post(`/student-payment/create-payment/${studentId}/${groupId}`, {
@@ -89,6 +92,32 @@ export function AddPaymentDrawer({ openCreate, setOpenCreate, students, groups, 
 
     const years = Array.from({ length: 10 }, (_, i) => currentYear - 2 + i)
 
+    const selectedGroupId = useStore(form.store, (state) => state.values.groupId)
+    const groupStudents = groups.find((g) => g.id === selectedGroupId)?.students ?? []
+
+    const selectedStudentId = useStore(form.store, (state) => state.values.studentId)
+    const selectedStudent = groupStudents.find((s) => s.id === selectedStudentId)
+
+    const { data: existingPaymentsData, isFetching: isCheckingExistingPayments } = useQuery<StudentPaymentsResponse>({
+        queryKey: ['student-payments', selectedStudentId, 'exists-check'],
+        queryFn: async () => {
+            const res = await api.get(`/student-payment/student-payments/${selectedStudentId}`, { params: { limit: 1 } })
+            return res.data
+        },
+        enabled: !preselectedStudentId && !!selectedStudentId,
+        staleTime: 1000 * 30,
+    })
+
+    const hasExistingPayment = !preselectedStudentId && !!selectedStudentId && (existingPaymentsData?.meta?.total ?? 0) > 0
+
+    useEffect(() => {
+        if (hasExistingPayment && selectedStudent) {
+            toast.warning(
+                `A payment was already added to ${selectedStudent.username} before. Search for them in the table and open their payment history to add a new payment there.`
+            )
+        }
+    }, [hasExistingPayment, selectedStudentId])
+
     return (
         <Drawer direction="right" open={openCreate} onOpenChange={setOpenCreate}>
             <DrawerTrigger asChild>
@@ -107,39 +136,12 @@ export function AddPaymentDrawer({ openCreate, setOpenCreate, students, groups, 
                         className="flex flex-col gap-6"
                     >
                         <FieldGroup>
-                            {!preselectedStudentId && (
-                                <form.Field name="studentId">
-                                    {(field) => {
-                                        const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
-                                        return (
-                                            <Field data-invalid={isInvalid}>
-                                                <FieldLabel>Student</FieldLabel>
-                                                <Select
-                                                    value={field.state.value}
-                                                    onValueChange={field.handleChange}
-                                                >
-                                                    <SelectTrigger>
-                                                        <SelectValue placeholder="Select a student" />
-                                                    </SelectTrigger>
-                                                    <SelectContent>
-                                                        <SelectGroup>
-                                                            <SelectLabel>Students</SelectLabel>
-                                                            {students.map((s) => (
-                                                                <SelectItem key={s.id} value={s.id}>
-                                                                    {s.username}
-                                                                </SelectItem>
-                                                            ))}
-                                                        </SelectGroup>
-                                                    </SelectContent>
-                                                </Select>
-                                                {isInvalid && <FieldError errors={field.state.meta.errors} />}
-                                            </Field>
-                                        )
-                                    }}
-                                </form.Field>
-                            )}
-
-                            <form.Field name="groupId">
+                            <form.Field
+                                name="groupId"
+                                listeners={{
+                                    onChange: () => form.setFieldValue('studentId', preselectedStudentId ?? ''),
+                                }}
+                            >
                                 {(field) => {
                                     const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
                                     return (
@@ -168,6 +170,44 @@ export function AddPaymentDrawer({ openCreate, setOpenCreate, students, groups, 
                                     )
                                 }}
                             </form.Field>
+
+                            {!preselectedStudentId && (
+                                <form.Field name="studentId">
+                                    {(field) => {
+                                        const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
+                                        return (
+                                            <Field data-invalid={isInvalid}>
+                                                <FieldLabel>Student</FieldLabel>
+                                                <Select
+                                                    value={field.state.value}
+                                                    onValueChange={field.handleChange}
+                                                    disabled={!selectedGroupId}
+                                                >
+                                                    <SelectTrigger>
+                                                        <SelectValue placeholder={selectedGroupId ? "Select a student" : "Select a group first"} />
+                                                    </SelectTrigger>
+                                                    <SelectContent>
+                                                        <SelectGroup>
+                                                            <SelectLabel>Students</SelectLabel>
+                                                            {groupStudents.map((s) => (
+                                                                <SelectItem key={s.id} value={s.id}>
+                                                                    {s.username}
+                                                                </SelectItem>
+                                                            ))}
+                                                        </SelectGroup>
+                                                    </SelectContent>
+                                                </Select>
+                                                {isInvalid && <FieldError errors={field.state.meta.errors} />}
+                                                {hasExistingPayment && (
+                                                    <p className="text-sm text-destructive">
+                                                        A payment was already added to this student before. Search for them in the table and open their payment history to add a new payment there.
+                                                    </p>
+                                                )}
+                                            </Field>
+                                        )
+                                    }}
+                                </form.Field>
+                            )}
 
                             <div className="grid grid-cols-2 gap-3">
                                 <form.Field name="month">
@@ -262,7 +302,13 @@ export function AddPaymentDrawer({ openCreate, setOpenCreate, students, groups, 
                     </form>
                 </div>
                 <DrawerFooter>
-                    <Button type="submit" form="add-payment-form">Add Payment</Button>
+                    <Button
+                        type="submit"
+                        form="add-payment-form"
+                        disabled={hasExistingPayment || isCheckingExistingPayments}
+                    >
+                        Add Payment
+                    </Button>
                     <DrawerClose asChild>
                         <Button variant="outline">Cancel</Button>
                     </DrawerClose>

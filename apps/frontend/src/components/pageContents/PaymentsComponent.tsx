@@ -54,8 +54,6 @@ import {
 import { GroupType, PaginationType } from "@/lib/types/groups"
 import { LatestPaymentsResponse, MONTH_NAMES, StudentPaymentType } from "@/lib/types/payment_type"
 import { AddPaymentDrawer } from "@/components/AddPaymentDrawer"
-import { useStudents } from "@/lib/hooks/studentsHook"
-import { TokenPayload } from "@/lib/types/token_payload"
 import { useAuthStore } from "@/lib/stores/authStore"
 import { jwtDecode } from "jwt-decode"
 import api from "@/lib/api"
@@ -79,9 +77,6 @@ const PaymentsComponent = () => {
     const token = useAuthStore((s) => s.token)
     const decoded = token ? jwtDecode<{ role: string }>(token) : null
     const canEdit = decoded?.role === 'ADMIN' || decoded?.role === 'TEACHER'
-
-    const { data: studentsData = [] } = useStudents()
-    const students: TokenPayload[] = studentsData ?? []
 
     const { data: groupsData } = useSuspenseQuery({
         queryKey: ['groups-all'],
@@ -450,7 +445,6 @@ const PaymentsComponent = () => {
                     <AddPaymentDrawer
                         openCreate={openCreate}
                         setOpenCreate={setOpenCreate}
-                        students={students}
                         groups={groups}
                         onPaymentAdded={() => queryClient.invalidateQueries({ queryKey: ['payments-latest'] })}
                     />
