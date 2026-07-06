@@ -3,10 +3,14 @@ import { CreateGroupDto } from "../dto/group.dto";
 import { GroupRepository } from "../group.service";
 import { PRISMA_CLIENT } from "src/prisma/prisma.module";
 import type { TenantScopedPrismaClient } from "src/prisma/tenant-scoping.extension";
+import { TenantContextService } from "src/lib/tenant/tenant-context.service";
 
 @Injectable()
 export class CreateGroupUseCase {
-    constructor(private readonly groupRepo: GroupRepository, @Inject(PRISMA_CLIENT) private readonly prisma: TenantScopedPrismaClient,
+    constructor(
+        private readonly groupRepo: GroupRepository,
+        @Inject(PRISMA_CLIENT) private readonly prisma: TenantScopedPrismaClient,
+        private readonly tenantContext: TenantContextService,
     ) { }
 
     async execute(dto: CreateGroupDto) {
@@ -18,11 +22,16 @@ export class CreateGroupUseCase {
 
         const studentIds = dto.studentIds?.filter(Boolean) ?? [];
 
+        const tenantId = this.tenantContext.getTenantId()!;
+
         return await this.prisma.$transaction(async (tx) => {
             const group = await this.groupRepo.createGroup(tx, {
                 name: dto.name,
                 teacher: {
                     connect: { id: dto.teacherId }
+                },
+                tenant: {
+                    connect: { id: tenantId }
                 },
             });
 
@@ -31,6 +40,7 @@ export class CreateGroupUseCase {
                     studentIds.map((studentId) => ({
                         studentId,
                         groupId: group.id,
+                        tenantId,
                     }))
                 )
             }

@@ -3,10 +3,14 @@ import { PRISMA_CLIENT } from 'src/prisma/prisma.module';
 import type { TenantScopedPrismaClient } from 'src/prisma/tenant-scoping.extension';
 import { LatestPaymentsQueryDto, StudentPaymentDto, UpdatePaymentDto } from './dto/student_payment.dto';
 import { PaginationDto } from 'src/lib/shared/dto/pagination.dto';
+import { TenantContextService } from 'src/lib/tenant/tenant-context.service';
 
 @Injectable()
 export class StudentPaymentService {
-    constructor(@Inject(PRISMA_CLIENT) private readonly prisma: TenantScopedPrismaClient) { }
+    constructor(
+        @Inject(PRISMA_CLIENT) private readonly prisma: TenantScopedPrismaClient,
+        private readonly tenantContext: TenantContextService,
+    ) { }
 
     async createPayment(dto: StudentPaymentDto, studentId: string, groupId: string) {
         const student = await this.prisma.users.findUnique({ where: { id: studentId } })
@@ -21,7 +25,8 @@ export class StudentPaymentService {
             data: {
                 ...dto,
                 groupId: group.id,
-                studentId: student.id
+                studentId: student.id,
+                tenantId: this.tenantContext.getTenantId()!,
             },
             include: {
                 student: { select: { id: true, firstName: true, lastName: true, phone: true } },

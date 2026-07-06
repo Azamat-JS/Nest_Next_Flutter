@@ -60,7 +60,7 @@ export function buildTenantScopedClient(prisma: PrismaService, cls: ClsService) 
                     const writeArgs = args as { data?: any; where?: any; create?: any };
 
                     if (operation === 'create') {
-                        if (!writeArgs.data?.tenantId) {
+                        if (!writeArgs.data?.tenantId && !writeArgs.data?.tenant) {
                             writeArgs.data = { ...writeArgs.data, tenantId: requireTenantId(cls, model, operation) };
                         }
                         return query(args);
@@ -78,7 +78,7 @@ export function buildTenantScopedClient(prisma: PrismaService, cls: ClsService) 
                     if (operation === 'upsert') {
                         const tenantId = writeArgs.where?.tenantId ?? requireTenantId(cls, model, operation);
                         writeArgs.where = { ...writeArgs.where, tenantId };
-                        if (!writeArgs.create?.tenantId) {
+                        if (!writeArgs.create?.tenantId && !writeArgs.create?.tenant) {
                             writeArgs.create = { ...writeArgs.create, tenantId };
                         }
                         return query(args);
@@ -98,3 +98,11 @@ export function buildTenantScopedClient(prisma: PrismaService, cls: ClsService) 
 }
 
 export type TenantScopedPrismaClient = ReturnType<typeof buildTenantScopedClient>;
+
+// The type Prisma actually hands to an interactive `$transaction(async (tx) => ...)`
+// callback on the extended client - same shape as the client minus the
+// connection/extension-management methods that aren't valid mid-transaction.
+export type TenantScopedTransactionClient = Omit<
+    TenantScopedPrismaClient,
+    '$connect' | '$disconnect' | '$on' | '$transaction' | '$use' | '$extends'
+>;

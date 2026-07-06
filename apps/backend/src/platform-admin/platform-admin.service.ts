@@ -1,6 +1,6 @@
 import { BadRequestException, Inject, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { UserRole } from '@prisma/client';
+import { Prisma, UserRole } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 import { AppConfig } from 'src/lib/config';
 import { PRISMA_CLIENT } from 'src/prisma/prisma.module';
@@ -89,5 +89,25 @@ export class PlatformAdminService {
             throw new NotFoundException('Tenant not found');
         }
         return this.prisma.tenant.update({ where: { id }, data: { status: dto.status } });
+    }
+
+    async deleteTenant(id: string) {
+        const tenant = await this.prisma.tenant.findUnique({ where: { id } });
+        if (!tenant) {
+            throw new NotFoundException('Tenant not found');
+        }
+
+        try {
+            await this.prisma.tenant.delete({ where: { id } });
+        } catch (error) {
+            if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2003') {
+                throw new BadRequestException(
+                    'This center still has students, teachers, groups or other data and cannot be deleted while that data exists',
+                );
+            }
+            throw error;
+        }
+
+        return { message: 'Tenant deleted successfully' };
     }
 }

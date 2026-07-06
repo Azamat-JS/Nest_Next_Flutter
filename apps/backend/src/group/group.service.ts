@@ -1,17 +1,21 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { PRISMA_CLIENT } from 'src/prisma/prisma.module';
-import type { TenantScopedPrismaClient } from 'src/prisma/tenant-scoping.extension';
+import type { TenantScopedPrismaClient, TenantScopedTransactionClient } from 'src/prisma/tenant-scoping.extension';
 import { Prisma, UserRole } from '@prisma/client';
 import { PaginationDto } from 'src/lib/shared/dto/pagination.dto';
+import { TenantContextService } from 'src/lib/tenant/tenant-context.service';
 
 @Injectable()
 export class GroupRepository {
-  constructor(@Inject(PRISMA_CLIENT) private readonly prisma: TenantScopedPrismaClient) { }
-  async createGroup(tx: Prisma.TransactionClient, data: Prisma.GroupsCreateInput) {
+  constructor(
+    @Inject(PRISMA_CLIENT) private readonly prisma: TenantScopedPrismaClient,
+    private readonly tenantContext: TenantContextService,
+  ) { }
+  async createGroup(tx: TenantScopedTransactionClient, data: Prisma.GroupsCreateInput) {
     return tx.groups.create({ data });
   }
 
-  async createStudentGroup(tx: Prisma.TransactionClient, data: Prisma.StudentGroupCreateManyInput[]) {
+  async createStudentGroup(tx: TenantScopedTransactionClient, data: Prisma.StudentGroupCreateManyInput[]) {
     return tx.studentGroup.createMany({ data })
   }
 
@@ -149,7 +153,7 @@ export class GroupRepository {
     return students;
   }
 
-  async update(tx: Prisma.TransactionClient, id: string, data: Prisma.GroupsUpdateInput) {
+  async update(tx: TenantScopedTransactionClient, id: string, data: Prisma.GroupsUpdateInput) {
     await tx.groups.update({
       where: { id },
       data,
@@ -157,14 +161,15 @@ export class GroupRepository {
 
   }
 
-  async createStudents(tx: Prisma.TransactionClient, studentIds: string[], groupId: string) {
+  async createStudents(tx: TenantScopedTransactionClient, studentIds: string[], groupId: string) {
+    const tenantId = this.tenantContext.getTenantId()!;
     return await tx.studentGroup.createMany({
-      data: studentIds.map(id => ({ studentId: id, groupId })),
+      data: studentIds.map(id => ({ studentId: id, groupId, tenantId })),
       skipDuplicates: true,
     })
   }
 
-  async deleteStudent(tx: Prisma.TransactionClient, body: { studentId: string, groupId: string }) {
+  async deleteStudent(tx: TenantScopedTransactionClient, body: { studentId: string, groupId: string }) {
     const { studentId, groupId } = body;
     await tx.studentGroup.delete({
       where: {

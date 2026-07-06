@@ -4,6 +4,7 @@ import * as bcrypt from "bcrypt";
 import { PRISMA_CLIENT } from "src/prisma/prisma.module";
 import { PrismaService } from "src/prisma/prisma.service";
 import type { TenantScopedPrismaClient } from "src/prisma/tenant-scoping.extension";
+import { TenantContextService } from "src/lib/tenant/tenant-context.service";
 import { CreateUserDto } from "../dto/user.dto";
 
 const ALLOWED_CREATIONS: Record<UserRole, UserRole[]> = {
@@ -18,6 +19,7 @@ export class CreateUserUseCase {
     constructor(
         private readonly rawPrisma: PrismaService,
         @Inject(PRISMA_CLIENT) private readonly prisma: TenantScopedPrismaClient,
+        private readonly tenantContext: TenantContextService,
     ) { }
 
     async execute(dto: CreateUserDto, creatorRole: UserRole) {
@@ -43,6 +45,7 @@ export class CreateUserUseCase {
                     role: normalizedRole,
                     password: hashedPassword,
                     mustChangePassword: true,
+                    tenantId: this.tenantContext.getTenantId()!,
                 },
             });
 

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { PlatformRoute } from 'src/lib/shared/decorators/platform-route';
 import { PlatformAdminGuard } from 'src/lib/guards/platform-admin.guard';
 import { PlatformAdminService } from './platform-admin.service';
@@ -30,5 +30,11 @@ export class PlatformAdminController {
     @Patch('tenants/:id/status')
     async updateTenantStatus(@Param('id') id: string, @Body() dto: UpdateTenantStatusDto) {
         return this.platformAdminService.updateTenantStatus(id, dto);
+    }
+
+    @UseGuards(PlatformAdminGuard)
+    @Delete('tenants/:id')
+    async deleteTenant(@Param('id') id: string) {
+        return this.platformAdminService.deleteTenant(id);
     }
 }
