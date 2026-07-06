@@ -19,6 +19,9 @@ api.interceptors.response.use(
         if (error.response?.status === 401) {
             useAuthStore.getState().logout()
         }
+        if (error.response?.status === 403 && error.response?.data?.code === 'PASSWORD_CHANGE_REQUIRED') {
+            useAuthStore.getState().setMustChangePassword(true)
+        }
         return Promise.reject(error)
     }
 )

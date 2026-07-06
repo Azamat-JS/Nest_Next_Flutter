@@ -110,4 +110,37 @@ export class PlatformAdminService {
 
         return { message: 'Tenant deleted successfully' };
     }
+
+    // Irreversibly deletes a tenant and every row that belongs to it. Deletion
+    // order matters: children must go before the parents they reference, since
+    // most tenant-scoped relations have no cascading delete configured.
+    async purgeTenant(id: string) {
+        const tenant = await this.prisma.tenant.findUnique({ where: { id } });
+        if (!tenant) {
+            throw new NotFoundException('Tenant not found');
+        }
+
+        await this.prisma.$transaction(async (tx) => {
+            await tx.attachment.deleteMany({ where: { tenantId: id } });
+            await tx.messageStatus.deleteMany({ where: { tenantId: id } });
+            await tx.chatMember.deleteMany({ where: { tenantId: id } });
+            await tx.message.deleteMany({ where: { tenantId: id } });
+            await tx.chat.deleteMany({ where: { tenantId: id } });
+
+            await tx.scoreEvent.deleteMany({ where: { tenantId: id } });
+            await tx.studentScore.deleteMany({ where: { tenantId: id } });
+            await tx.studentPayment.deleteMany({ where: { tenantId: id } });
+            await tx.studentGroup.deleteMany({ where: { tenantId: id } });
+            await tx.groups.deleteMany({ where: { tenantId: id } });
+
+            await tx.parentStudent.deleteMany({ where: { tenantId: id } });
+            await tx.deviceToken.deleteMany({ where: { tenantId: id } });
+            await tx.session.deleteMany({ where: { tenantId: id } });
+            await tx.users.deleteMany({ where: { tenantId: id } });
+
+            await tx.tenant.delete({ where: { id } });
+        });
+
+        return { message: 'Tenant and all associated data permanently deleted' };
+    }
 }

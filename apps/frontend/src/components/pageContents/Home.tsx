@@ -48,15 +48,19 @@ import {
     PaginationNext,
     PaginationPrevious,
 } from "@/components/ui/pagination"
-import { Field, FieldGroup, FieldLabel } from "@/components/ui/field"
+import { Field, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Badge } from "@/components/ui/badge"
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useMutation, useQueryClient, useSuspenseQuery } from '@tanstack/react-query'
 import { PaginationType } from "@/lib/types/groups"
+import { CreateUserPayload } from "@/lib/types/token_payload"
 import api from "@/lib/api"
 import { cn } from "@/lib/utils"
+import { useForm } from "@tanstack/react-form"
+import * as z from "zod"
+import { UserPlus } from "lucide-react"
 
 const roleVariant: Record<string, "default" | "secondary" | "outline" | "destructive"> = {
     ADMIN: "default",
@@ -65,12 +69,27 @@ const roleVariant: Record<string, "default" | "secondary" | "outline" | "destruc
     PARENT: "outline",
 }
 
+const CREATABLE_ROLES: Record<string, string[]> = {
+    ADMIN: ["ADMIN", "TEACHER", "STUDENT", "PARENT"],
+    TEACHER: ["STUDENT", "PARENT"],
+}
+
+const createUserSchema = z.object({
+    firstName: z.string().min(2),
+    lastName: z.string(),
+    phone: z.string().regex(/^\d{9}$/, "Enter a valid 9-digit phone number"),
+    password: z.string().min(6),
+    role: z.string().min(1, "Select a role"),
+})
+
 const Home = () => {
     const token = useAuthStore((state) => state.token)
     const me = token ? jwtDecode<TokenPayload>(token) : null
+    const [openCreate, setOpenCreate] = useState(false)
     const [openUpdate, setOpenUpdate] = useState(false)
     const [openDelete, setOpenDelete] = useState(false)
     const [selectedUser, setSelectedUser] = useState<TokenPayload | null>(null)
+    const creatableRoles = CREATABLE_ROLES[me?.role ?? ""] ?? []
     const router = useRouter()
     const searchParams = useSearchParams()
     const queryClient = useQueryClient()
@@ -114,12 +133,43 @@ const Home = () => {
         },
     })
 
+    const createUserMutation = useMutation({
+        mutationFn: async (payload: CreateUserPayload) => {
+            return await api.post('/users', payload)
+        },
+        onSuccess: () => {
+            toast.success('User created successfully')
+            setOpenCreate(false)
+            createForm.reset()
+            queryClient.invalidateQueries({ queryKey: ['users'] })
+        },
+        onError: (error: any) => {
+            toast.error(error.response?.data?.message ?? 'Something went wrong')
+        },
+    })
+
+    const createForm = useForm({
+        defaultValues: { firstName: "", lastName: "", phone: "", password: "", role: "" },
+        validators: { onSubmit: createUserSchema },
+        onSubmit: async ({ value }) => {
+            createUserMutation.mutate({ ...value, phone: `+998${value.phone}` })
+        },
+    })
+
     const users: TokenPayload[] = data?.data ?? []
     const meta: PaginationType = data?.meta ?? {}
     const lastPage = meta?.last_page ?? 1
 
     return (
         <div className="space-y-4">
+            {creatableRoles.length > 0 && (
+                <div className="flex justify-end">
+                    <Button onClick={() => setOpenCreate(true)} className="gap-1">
+                        <UserPlus className="h-4 w-4" /> Create user
+                    </Button>
+                </div>
+            )}
+
             <Table>
                 <TableCaption>
                     Showing {users.length} of {meta?.total ?? 0} users
@@ -221,6 +271,135 @@ const Home = () => {
                     </Pagination>
                 </div>
             </div>
+
+            {/* Create user modal */}
+            <Dialog open={openCreate} onOpenChange={setOpenCreate}>
+                <DialogContent className="sm:max-w-sm">
+                    <DialogHeader>
+                        <DialogTitle>Create User</DialogTitle>
+                        <DialogDescription>Add a new teacher, student, or parent to your center.</DialogDescription>
+                    </DialogHeader>
+                    <form
+                        onSubmit={(e) => { e.preventDefault(); createForm.handleSubmit() }}
+                        className="flex flex-col gap-5"
+                    >
+                        <FieldGroup>
+                            <createForm.Field name="firstName">
+                                {(field) => {
+                                    const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
+                                    return (
+                                        <Field data-invalid={isInvalid}>
+                                            <FieldLabel htmlFor={field.name}>First name</FieldLabel>
+                                            <Input
+                                                id={field.name}
+                                                value={field.state.value}
+                                                onBlur={field.handleBlur}
+                                                onChange={(e) => field.handleChange(e.target.value)}
+                                            />
+                                            {isInvalid && <FieldError errors={field.state.meta.errors} />}
+                                        </Field>
+                                    )
+                                }}
+                            </createForm.Field>
+
+                            <createForm.Field name="lastName">
+                                {(field) => (
+                                    <Field>
+                                        <FieldLabel htmlFor={field.name}>Last name (optional)</FieldLabel>
+                                        <Input
+                                            id={field.name}
+                                            value={field.state.value}
+                                            onBlur={field.handleBlur}
+                                            onChange={(e) => field.handleChange(e.target.value)}
+                                        />
+                                    </Field>
+                                )}
+                            </createForm.Field>
+
+                            <createForm.Field name="phone">
+                                {(field) => {
+                                    const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
+                                    return (
+                                        <Field data-invalid={isInvalid}>
+                                            <FieldLabel htmlFor={field.name}>Phone number</FieldLabel>
+                                            <div className="flex items-center gap-2">
+                                                <span className="flex h-9 items-center rounded-md border bg-muted px-3 text-sm text-muted-foreground">
+                                                    +998
+                                                </span>
+                                                <Input
+                                                    id={field.name}
+                                                    type="tel"
+                                                    inputMode="numeric"
+                                                    value={field.state.value}
+                                                    onBlur={field.handleBlur}
+                                                    onChange={(e) => field.handleChange(e.target.value.replace(/\D/g, "").slice(0, 9))}
+                                                    placeholder="997771122"
+                                                />
+                                            </div>
+                                            {isInvalid && <FieldError errors={field.state.meta.errors} />}
+                                        </Field>
+                                    )
+                                }}
+                            </createForm.Field>
+
+                            <createForm.Field name="password">
+                                {(field) => {
+                                    const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
+                                    return (
+                                        <Field data-invalid={isInvalid}>
+                                            <FieldLabel htmlFor={field.name}>Temporary password</FieldLabel>
+                                            <Input
+                                                id={field.name}
+                                                type="password"
+                                                value={field.state.value}
+                                                onBlur={field.handleBlur}
+                                                onChange={(e) => field.handleChange(e.target.value)}
+                                                placeholder="Min. 6 characters"
+                                            />
+                                            {isInvalid && <FieldError errors={field.state.meta.errors} />}
+                                        </Field>
+                                    )
+                                }}
+                            </createForm.Field>
+
+                            <createForm.Field name="role">
+                                {(field) => {
+                                    const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
+                                    return (
+                                        <Field data-invalid={isInvalid}>
+                                            <FieldLabel htmlFor={field.name}>Role</FieldLabel>
+                                            <Select value={field.state.value} onValueChange={(val) => field.handleChange(val)}>
+                                                <SelectTrigger id={field.name}>
+                                                    <SelectValue placeholder="Select a role" />
+                                                </SelectTrigger>
+                                                <SelectContent>
+                                                    <SelectGroup>
+                                                        {creatableRoles.map((role) => (
+                                                            <SelectItem key={role} value={role} className="capitalize">
+                                                                {role.toLowerCase()}
+                                                            </SelectItem>
+                                                        ))}
+                                                    </SelectGroup>
+                                                </SelectContent>
+                                            </Select>
+                                            {isInvalid && <FieldError errors={field.state.meta.errors} />}
+                                        </Field>
+                                    )
+                                }}
+                            </createForm.Field>
+                        </FieldGroup>
+
+                        <DialogFooter>
+                            <DialogClose asChild>
+                                <Button variant="outline" type="button">Cancel</Button>
+                            </DialogClose>
+                            <Button type="submit" disabled={createUserMutation.isPending}>
+                                {createUserMutation.isPending ? 'Creating…' : 'Create'}
+                            </Button>
+                        </DialogFooter>
+                    </form>
+                </DialogContent>
+            </Dialog>
 
             {/* Edit user modal */}
             <Dialog open={openUpdate} onOpenChange={setOpenUpdate}>

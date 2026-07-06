@@ -37,4 +37,10 @@ export class PlatformAdminController {
     async deleteTenant(@Param('id') id: string) {
         return this.platformAdminService.deleteTenant(id);
     }
+
+    @UseGuards(PlatformAdminGuard)
+    @Delete('tenants/:id/purge')
+    async purgeTenant(@Param('id') id: string) {
+        return this.platformAdminService.purgeTenant(id);
+    }
 }

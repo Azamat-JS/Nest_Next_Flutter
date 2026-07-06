@@ -1,0 +1,10 @@
+
+> frontend@0.1.0 dev /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend
+> next dev --turbopack -p 4000
+
+[1m[38;2;173;127;168m▲ Next.js 16.2.10[39m[22m (Turbopack)
+- Local:         http://localhost:4000
+- Network:       http://192.168.13.116:4000
+- Environments: .env.local
+[32m[1m✓[22m[39m Ready in 320ms
+

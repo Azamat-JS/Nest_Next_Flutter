@@ -5,6 +5,17 @@ export type TokenPayload = {
     lastName?: string | null;
     password?: string | null;
     role?: string | null;
+    tenantId?: string;
+    mustChangePassword?: boolean;
+    type?: 'tenant';
+}
+
+export type CreateUserPayload = {
+    firstName: string;
+    lastName?: string;
+    phone: string;
+    password: string;
+    role: string;
 }
 
 export type LeaderBoardType = {

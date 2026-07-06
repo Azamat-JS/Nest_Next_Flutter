@@ -1,8 +1,8 @@
 'use client'
 
 import { useAuthStore } from '@/lib/stores/authStore'
-import { useState } from 'react'
-import { CardDemo } from '@/components/AuthForm'
+import { LoginForm } from '@/components/LoginForm'
+import ChangePasswordScreen from '@/components/pageContents/ChangePasswordScreen'
 import { GraduationCap } from 'lucide-react'
 import dynamic from 'next/dynamic'
 
@@ -10,7 +10,9 @@ const HomePage = dynamic(() => import('../(pages)/home/page'), { ssr: false })
 
 export default function AuthWrapper() {
     const isAuthenticated = useAuthStore((state) => state.isAuthenticated)
-    const [isLogin, setIsLogin] = useState(true)
+    const mustChangePassword = useAuthStore((state) => state.mustChangePassword)
+
+    if (isAuthenticated && mustChangePassword) return <ChangePasswordScreen />
 
     if (isAuthenticated) return <HomePage />
 
@@ -26,11 +28,7 @@ export default function AuthWrapper() {
                         Student score tracking and management platform
                     </p>
                 </div>
-                <CardDemo
-                    isLogin={isLogin}
-                    id="auth-form"
-                    toggle={() => setIsLogin(prev => !prev)}
-                />
+                <LoginForm id="auth-form" />
             </div>
         </div>
     )
