@@ -32,29 +32,32 @@ export function CardDemo({ id, isLogin, toggle }: { id?: string; isLogin?: boole
     const setToken = useAuthStore((state) => state.setToken)
     const router = useRouter()
 
+    const phoneSchema = z.string().regex(/^\d{9}$/, "Enter a valid 9-digit phone number")
+
     const loginSchema = z.object({
-        username: z.string(),
-        email: z.string().email(),
+        phone: phoneSchema,
         password: z.string().min(6),
         role: z.string(),
     })
 
     const registerSchema = z.object({
-        username: z.string().min(3),
-        email: z.string().email(),
+        firstName: z.string().min(2),
+        lastName: z.string().optional(),
+        phone: phoneSchema,
         password: z.string().min(6),
         role: z.string().min(1, "Select a role"),
     })
 
     const form = useForm({
-        defaultValues: { username: "", email: "", password: "", role: "" },
+        defaultValues: { firstName: "", lastName: "", phone: "", password: "", role: "" },
         validators: { onSubmit: isLogin ? loginSchema : registerSchema },
         onSubmit: async ({ value }) => {
             try {
                 const endpoint = isLogin ? '/users/login' : '/users/register'
+                const phone = `+998${value.phone}`
                 const payload = isLogin
-                    ? { email: value.email, password: value.password }
-                    : value
+                    ? { phone, password: value.password }
+                    : { ...value, phone }
 
                 const response = await api.post(endpoint, payload)
 
@@ -86,19 +89,19 @@ export function CardDemo({ id, isLogin, toggle }: { id?: string; isLogin?: boole
                 >
                     <FieldGroup>
                         {!isLogin && (
-                            <form.Field name="username">
+                            <form.Field name="firstName">
                                 {(field) => {
                                     const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
                                     return (
                                         <Field data-invalid={isInvalid}>
-                                            <FieldLabel htmlFor={field.name}>Username</FieldLabel>
+                                            <FieldLabel htmlFor={field.name}>First name</FieldLabel>
                                             <Input
                                                 id={field.name}
                                                 value={field.state.value}
                                                 onBlur={field.handleBlur}
                                                 onChange={(e) => field.handleChange(e.target.value)}
-                                                placeholder="Your username"
-                                                autoComplete="username"
+                                                placeholder="Your first name"
+                                                autoComplete="given-name"
                                             />
                                             {isInvalid && <FieldError errors={field.state.meta.errors} />}
                                         </Field>
@@ -107,21 +110,49 @@ export function CardDemo({ id, isLogin, toggle }: { id?: string; isLogin?: boole
                             </form.Field>
                         )}
 
-                        <form.Field name="email">
+                        {!isLogin && (
+                            <form.Field name="lastName">
+                                {(field) => {
+                                    const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
+                                    return (
+                                        <Field data-invalid={isInvalid}>
+                                            <FieldLabel htmlFor={field.name}>Last name (optional)</FieldLabel>
+                                            <Input
+                                                id={field.name}
+                                                value={field.state.value}
+                                                onBlur={field.handleBlur}
+                                                onChange={(e) => field.handleChange(e.target.value)}
+                                                placeholder="Your last name"
+                                                autoComplete="family-name"
+                                            />
+                                            {isInvalid && <FieldError errors={field.state.meta.errors} />}
+                                        </Field>
+                                    )
+                                }}
+                            </form.Field>
+                        )}
+
+                        <form.Field name="phone">
                             {(field) => {
                                 const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
                                 return (
                                     <Field data-invalid={isInvalid}>
-                                        <FieldLabel htmlFor={field.name}>Email</FieldLabel>
-                                        <Input
-                                            id={field.name}
-                                            type="email"
-                                            value={field.state.value}
-                                            onBlur={field.handleBlur}
-                                            onChange={(e) => field.handleChange(e.target.value)}
-                                            placeholder="you@example.com"
-                                            autoComplete="email"
-                                        />
+                                        <FieldLabel htmlFor={field.name}>Phone number</FieldLabel>
+                                        <div className="flex items-center gap-2">
+                                            <span className="flex h-9 items-center rounded-md border bg-muted px-3 text-sm text-muted-foreground">
+                                                +998
+                                            </span>
+                                            <Input
+                                                id={field.name}
+                                                type="tel"
+                                                inputMode="numeric"
+                                                value={field.state.value}
+                                                onBlur={field.handleBlur}
+                                                onChange={(e) => field.handleChange(e.target.value.replace(/\D/g, "").slice(0, 9))}
+                                                placeholder="997771122"
+                                                autoComplete="tel-national"
+                                            />
+                                        </div>
                                         {isInvalid && <FieldError errors={field.state.meta.errors} />}
                                     </Field>
                                 )

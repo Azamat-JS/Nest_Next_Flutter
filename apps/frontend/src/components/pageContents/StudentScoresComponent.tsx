@@ -114,7 +114,7 @@ const StudentScoresComponent = ({ groupId, studentId }: { groupId: string; stude
     return (
         <div className="flex flex-col gap-4">
             <div className="text-center">
-                <h2 className="text-xl font-bold">{student.username}</h2>
+                <h2 className="text-xl font-bold">{[student.firstName, student.lastName].filter(Boolean).join(' ')}</h2>
                 <p className="text-sm text-muted-foreground">All-time total: <span className="font-semibold text-foreground">{studentScoreReport.total?.total ?? 0}</span></p>
             </div>
 

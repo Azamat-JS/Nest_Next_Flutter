@@ -1,11 +1,12 @@
-import { BadRequestException, Injectable } from "@nestjs/common";
-import { PrismaService } from "src/prisma/prisma.service";
+import { BadRequestException, Inject, Injectable } from "@nestjs/common";
+import { PRISMA_CLIENT } from "src/prisma/prisma.module";
+import type { TenantScopedPrismaClient } from "src/prisma/tenant-scoping.extension";
 import { StudentScoreRepository } from "../student_score.service";
 import { UpdateScoreDto } from "../dto/score.dto";
 
 @Injectable()
 export class UpdateScoreUseCase {
-    constructor(private readonly studentScoreRepo: StudentScoreRepository, private readonly prisma: PrismaService) { }
+    constructor(private readonly studentScoreRepo: StudentScoreRepository, @Inject(PRISMA_CLIENT) private readonly prisma: TenantScopedPrismaClient) { }
     async execute(dto: UpdateScoreDto, studentId: string, groupId: string) {
         const { type, value, date } = dto;
 

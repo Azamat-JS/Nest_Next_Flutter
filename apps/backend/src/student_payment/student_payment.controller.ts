@@ -2,20 +2,22 @@ import { Body, Controller, Delete, Get, Param, Post, Put, Query, UseGuards } fro
 import { StudentPaymentService } from './student_payment.service';
 import { PaginationDto } from 'src/lib/shared/dto/pagination.dto';
 import { LatestPaymentsQueryDto, StudentPaymentDto, UpdatePaymentDto } from './dto/student_payment.dto';
-import { JwtAuthGuard } from 'src/lib/guards/jwt.guard';
 import { RolesGuard } from 'src/lib/guards/roles.guard';
 import { Roles } from 'src/lib/shared/decorators/roles';
 
-@UseGuards(JwtAuthGuard)
 @Controller('student-payment')
 export class StudentPaymentController {
   constructor(private readonly studentPaymentService: StudentPaymentService) { }
 
+  @UseGuards(RolesGuard)
+  @Roles('ADMIN', 'TEACHER')
   @Get('all')
   async getAllPayments(@Query() query: PaginationDto) {
     return this.studentPaymentService.getAllPayments(query);
   }
 
+  @UseGuards(RolesGuard)
+  @Roles('ADMIN', 'TEACHER')
   @Get('latest-per-student')
   async getLatestPaymentsPerStudent(@Query() query: LatestPaymentsQueryDto) {
     return this.studentPaymentService.getLatestPaymentsPerStudent(query);

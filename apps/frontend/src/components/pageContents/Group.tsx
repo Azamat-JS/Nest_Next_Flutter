@@ -185,7 +185,7 @@ const GroupComponent = () => {
                             >
                                 {u.name}
                             </TableCell>
-                            <TableCell className="text-center text-muted-foreground">{u.teacher?.username}</TableCell>
+                            <TableCell className="text-center text-muted-foreground">{[u.teacher?.firstName, u.teacher?.lastName].filter(Boolean).join(' ')}</TableCell>
                             <TableCell className="text-center text-muted-foreground">{u.students?.length ?? 0}</TableCell>
                             <TableCell className="text-center">
                                 <DropdownMenu>
@@ -308,7 +308,7 @@ const GroupComponent = () => {
                                     <SelectGroup>
                                         <SelectLabel>Select teacher</SelectLabel>
                                         {teachers.map(t => (
-                                            <SelectItem key={t.id} value={t.id}>{t.username}</SelectItem>
+                                            <SelectItem key={t.id} value={t.id}>{[t.firstName, t.lastName].filter(Boolean).join(' ')}</SelectItem>
                                         ))}
                                     </SelectGroup>
                                 </SelectContent>
@@ -353,7 +353,7 @@ const GroupComponent = () => {
                                                 )
                                             }}
                                         />
-                                        <span className="text-sm">{student.username}</span>
+                                        <span className="text-sm">{[student.firstName, student.lastName].filter(Boolean).join(' ')}</span>
                                     </label>
                                 ))
                             }

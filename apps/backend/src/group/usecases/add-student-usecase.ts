@@ -1,13 +1,14 @@
-import { Injectable } from "@nestjs/common";
+import { Inject, Injectable } from "@nestjs/common";
 import { GroupRepository } from "../group.service";
-import { PrismaService } from "src/prisma/prisma.service";
+import { PRISMA_CLIENT } from "src/prisma/prisma.module";
+import type { TenantScopedPrismaClient } from "src/prisma/tenant-scoping.extension";
 import { AddStudentsDto } from "../dto/group.dto";
 
 @Injectable()
 export class AddStudentUseCase {
     constructor(
         private readonly groupRepo: GroupRepository,
-        private readonly prisma: PrismaService,
+        @Inject(PRISMA_CLIENT) private readonly prisma: TenantScopedPrismaClient,
     ) { }
 
     async execute(groupId: string, dto: AddStudentsDto) {

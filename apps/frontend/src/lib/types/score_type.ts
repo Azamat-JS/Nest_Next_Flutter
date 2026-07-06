@@ -2,7 +2,8 @@ export type ScoreType = 'HOMEWORK' | 'ATTENDANCE';
 
 export type StudentScoreRow = {
     studentId: string;
-    username: string;
+    firstName: string;
+    lastName?: string | null;
     homework: number;
     attendance: number;
     date: string;

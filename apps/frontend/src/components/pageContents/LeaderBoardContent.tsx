@@ -101,7 +101,7 @@ const LeaderBoardContent = () => {
                                     </div>
                                 </TableCell>
                                 <TableCell className="text-center">{s.group?.name ?? "—"}</TableCell>
-                                <TableCell className="text-center font-medium">{s.student.username}</TableCell>
+                                <TableCell className="text-center font-medium">{[s.student.firstName, s.student.lastName].filter(Boolean).join(' ')}</TableCell>
                                 <TableCell className="text-center">{s.homework ?? 0}</TableCell>
                                 <TableCell className="text-center">{s.attendance ?? 0}</TableCell>
                                 <TableCell className="text-center font-bold text-primary">{s.total ?? 0}</TableCell>

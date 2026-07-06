@@ -204,7 +204,7 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
                                     className="text-center font-medium cursor-pointer hover:text-primary hover:underline"
                                     onClick={() => router.push(`/groups/${groupId}/${s.id}`)}
                                 >
-                                    {s.username}
+                                    {[s.firstName, s.lastName].filter(Boolean).join(' ')}
                                 </TableCell>
                                 <TableCell className="text-center">{score?.homework ?? 0}</TableCell>
                                 <TableCell className="text-center">{score?.attendance ?? 0}</TableCell>
@@ -307,7 +307,7 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
                     <DialogHeader>
                         <DialogTitle>Update Score</DialogTitle>
                         <DialogDescription>
-                            Edit score for <strong>{selectedStudent?.username}</strong>
+                            Edit score for <strong>{[selectedStudent?.firstName, selectedStudent?.lastName].filter(Boolean).join(' ')}</strong>
                         </DialogDescription>
                     </DialogHeader>
                     <FieldGroup>
@@ -371,7 +371,7 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
                                                 );
                                             }}
                                         />
-                                        <span className="text-sm">{student.username}</span>
+                                        <span className="text-sm">{[student.firstName, student.lastName].filter(Boolean).join(' ')}</span>
                                     </label>
                                 ))
                             }
@@ -397,7 +397,7 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
                     <DialogHeader>
                         <DialogTitle>Remove Student</DialogTitle>
                         <DialogDescription>
-                            Remove <strong>{selectedStudent?.username}</strong> from this group? This action cannot be undone.
+                            Remove <strong>{[selectedStudent?.firstName, selectedStudent?.lastName].filter(Boolean).join(' ')}</strong> from this group? This action cannot be undone.
                         </DialogDescription>
                     </DialogHeader>
                     <DialogFooter>

@@ -30,7 +30,7 @@ const GroupAndLeaderboard = ({ groupId }: { groupId: string }) => {
                     {group?.name}
                 </Badge>
                 <Badge variant="outline" className="px-4 py-1.5 text-sm">
-                    Teacher: {group?.teacher?.username}
+                    Teacher: {[group?.teacher?.firstName, group?.teacher?.lastName].filter(Boolean).join(' ')}
                 </Badge>
                 <div className="flex gap-2">
                     <Button

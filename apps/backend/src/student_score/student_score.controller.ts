@@ -6,7 +6,6 @@ import { BulkScoreDto } from './dto/bulk.dto';
 import { PaginationDto } from 'src/lib/shared/dto/pagination.dto';
 import { ChartDateDto } from 'src/lib/shared/dto/chart_date.dto';
 import { Roles } from 'src/lib/shared/decorators/roles';
-import { JwtAuthGuard } from 'src/lib/guards/jwt.guard';
 import { RolesGuard } from 'src/lib/guards/roles.guard';
 
 @Controller('student-score')
@@ -55,14 +54,14 @@ export class StudentScoreController {
     return this.studentScoreRepo.getGroupTotalAvgScores(groupId, query.year);
   }
 
-  @UseGuards(JwtAuthGuard, RolesGuard)
+  @UseGuards(RolesGuard)
   @Roles('ADMIN', 'TEACHER')
   @Post("bulk")
   async bulkAddScores(@Body() body: BulkScoreDto) {
     return this.bulkAddScoreUseCase.execute(body);
   }
 
-  @UseGuards(JwtAuthGuard, RolesGuard)
+  @UseGuards(RolesGuard)
   @Roles('ADMIN', 'TEACHER')
   @Put("update/:studentId/:groupId")
   async updateScore(
@@ -77,6 +76,8 @@ export class StudentScoreController {
     );
   }
 
+  @UseGuards(RolesGuard)
+  @Roles('ADMIN')
   @Delete("delete/all")
   async deleteAll() {
     return this.studentScoreRepo.deleteMany();

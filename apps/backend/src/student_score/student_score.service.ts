@@ -1,5 +1,6 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { PRISMA_CLIENT } from 'src/prisma/prisma.module';
+import type { TenantScopedPrismaClient } from 'src/prisma/tenant-scoping.extension';
 import { ScoreDto, UpdateScoreDto } from './dto/score.dto';
 import { Prisma } from '@prisma/client/scripts/default-index.js';
 import { ScoreType } from '@prisma/client';
@@ -8,7 +9,7 @@ import { ChartDateDto } from 'src/lib/shared/dto/chart_date.dto';
 
 @Injectable()
 export class StudentScoreRepository {
-    constructor(private readonly prisma: PrismaService) { }
+    constructor(@Inject(PRISMA_CLIENT) private readonly prisma: TenantScopedPrismaClient) { }
 
     async findStudentWithGroup(studentId: string, groupId: string) {
         return this.prisma.studentGroup.findFirst({
@@ -212,7 +213,8 @@ export class StudentScoreRepository {
                         student: {
                             select: {
                                 id: true,
-                                username: true,
+                                firstName: true,
+                                lastName: true,
                             },
                         },
                     },
@@ -246,7 +248,8 @@ export class StudentScoreRepository {
         for (const s of students) {
             resultMap.set(s.id, {
                 studentId: s.id,
-                username: s.username,
+                firstName: s.firstName,
+                lastName: s.lastName,
                 homework: 0,
                 attendance: 0,
                 total: 0,
@@ -416,7 +419,8 @@ export class StudentScoreRepository {
                     attendance: true,
                     student: {
                         select: {
-                            username: true,
+                            firstName: true,
+                            lastName: true,
                         }
                     },
                     group: {
@@ -464,7 +468,8 @@ export class StudentScoreRepository {
                 attendance: true,
                 student: {
                     select: {
-                        username: true,
+                        firstName: true,
+                        lastName: true,
                     }
                 },
             }
@@ -506,14 +511,15 @@ export class StudentScoreRepository {
         })
 
         const studentMap = new Map(
-            students.map((s) => [s.id, s.username])
+            students.map((s) => [s.id, { firstName: s.firstName, lastName: s.lastName }])
         );
 
         const resultMap = new Map<
             string,
             {
                 studentId: string;
-                username: string;
+                firstName: string;
+                lastName: string | null;
                 homework: number;
                 attendance: number;
                 total: number;
@@ -527,7 +533,8 @@ export class StudentScoreRepository {
             if (!resultMap.has(studentId)) {
                 resultMap.set(studentId, {
                     studentId,
-                    username: studentMap.get(studentId) || '',
+                    firstName: studentMap.get(studentId)?.firstName || '',
+                    lastName: studentMap.get(studentId)?.lastName ?? null,
                     homework: 0,
                     attendance: 0,
                     total: 0,

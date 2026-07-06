@@ -128,7 +128,7 @@ export function GroupDrawer({ openCreate, setOpenCreate, teachers, students, onG
                                                 <SelectGroup>
                                                     <SelectLabel>Teachers</SelectLabel>
                                                     {teachers.map((t) => (
-                                                        <SelectItem key={t.id} value={t.id}>{t.username}</SelectItem>
+                                                        <SelectItem key={t.id} value={t.id}>{[t.firstName, t.lastName].filter(Boolean).join(' ')}</SelectItem>
                                                     ))}
                                                 </SelectGroup>
                                             </SelectContent>
@@ -157,7 +157,7 @@ export function GroupDrawer({ openCreate, setOpenCreate, teachers, students, onG
                                                                 )
                                                             }}
                                                         />
-                                                        <span className="text-sm">{student.username}</span>
+                                                        <span className="text-sm">{[student.firstName, student.lastName].filter(Boolean).join(' ')}</span>
                                                     </label>
                                                 )
                                             })}

@@ -155,8 +155,8 @@ const StudentPaymentHistory = ({ studentId }: { studentId: string }) => {
                         <ArrowLeft className="h-4 w-4" />
                     </Button>
                     <div>
-                        <h2 className="text-xl font-bold">{student?.username ?? 'Student'}</h2>
-                        <p className="text-sm text-muted-foreground">{student?.email ?? ''}</p>
+                        <h2 className="text-xl font-bold">{[student?.firstName, student?.lastName].filter(Boolean).join(' ') || 'Student'}</h2>
+                        <p className="text-sm text-muted-foreground">{student?.phone ?? ''}</p>
                     </div>
                 </div>
                 <div className="text-sm text-muted-foreground">

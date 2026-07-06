@@ -228,10 +228,10 @@ const PaymentsComponent = () => {
                         >
                             <TableCell className="text-center">{(page - 1) * limit + idx + 1}</TableCell>
                             <TableCell className="text-center font-medium hover:text-primary hover:underline">
-                                {p.student?.username ?? '—'}
+                                {[p.student?.firstName, p.student?.lastName].filter(Boolean).join(' ') || '—'}
                             </TableCell>
                             <TableCell className="text-center text-muted-foreground">
-                                {p.student?.email ?? '—'}
+                                {p.student?.phone ?? '—'}
                             </TableCell>
                             <TableCell className="text-center text-muted-foreground">
                                 {p.group?.name ?? '—'}
@@ -340,7 +340,7 @@ const PaymentsComponent = () => {
                     <DialogHeader>
                         <DialogTitle>Edit Payment</DialogTitle>
                         <DialogDescription>
-                            Update payment for <strong>{selectedPayment?.student?.username}</strong>
+                            Update payment for <strong>{[selectedPayment?.student?.firstName, selectedPayment?.student?.lastName].filter(Boolean).join(' ')}</strong>
                         </DialogDescription>
                     </DialogHeader>
                     <FieldGroup>
@@ -422,7 +422,7 @@ const PaymentsComponent = () => {
                     <DialogHeader>
                         <DialogTitle>Delete Payment</DialogTitle>
                         <DialogDescription>
-                            Are you sure you want to delete the payment for <strong>{selectedPayment?.student?.username}</strong> ({MONTH_NAMES[(selectedPayment?.month ?? 1) - 1]} {selectedPayment?.year})? This action cannot be undone.
+                            Are you sure you want to delete the payment for <strong>{[selectedPayment?.student?.firstName, selectedPayment?.student?.lastName].filter(Boolean).join(' ')}</strong> ({MONTH_NAMES[(selectedPayment?.month ?? 1) - 1]} {selectedPayment?.year})? This action cannot be undone.
                         </DialogDescription>
                     </DialogHeader>
                     <DialogFooter>

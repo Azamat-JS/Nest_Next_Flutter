@@ -113,7 +113,7 @@ export function AddPaymentDrawer({ openCreate, setOpenCreate, groups, onPaymentA
     useEffect(() => {
         if (hasExistingPayment && selectedStudent) {
             toast.warning(
-                `A payment was already added to ${selectedStudent.username} before. Search for them in the table and open their payment history to add a new payment there.`
+                `A payment was already added to ${[selectedStudent.firstName, selectedStudent.lastName].filter(Boolean).join(' ')} before. Search for them in the table and open their payment history to add a new payment there.`
             )
         }
     }, [hasExistingPayment, selectedStudentId])
@@ -191,7 +191,7 @@ export function AddPaymentDrawer({ openCreate, setOpenCreate, groups, onPaymentA
                                                             <SelectLabel>Students</SelectLabel>
                                                             {groupStudents.map((s) => (
                                                                 <SelectItem key={s.id} value={s.id}>
-                                                                    {s.username}
+                                                                    {[s.firstName, s.lastName].filter(Boolean).join(' ')}
                                                                 </SelectItem>
                                                             ))}
                                                         </SelectGroup>

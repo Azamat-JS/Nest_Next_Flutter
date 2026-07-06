@@ -1,7 +1,6 @@
 import { Controller, Get, Post, Body, Param, Delete, Put, UseGuards, Query } from '@nestjs/common';
 import { GroupRepository } from './group.service';
 import { AddStudentsDto, CreateGroupDto, UpdateGroupDto } from './dto/group.dto';
-import { JwtAuthGuard } from 'src/lib/guards/jwt.guard';
 import { CreateGroupUseCase, UpdateGroupUseCase, RemoveStudentFromGroupUseCase } from './usecases';
 import { AddStudentUseCase } from './usecases/add-student-usecase';
 import { PaginationDto } from 'src/lib/shared/dto/pagination.dto';
@@ -16,7 +15,7 @@ export class GroupController {
     private readonly removeStudentFromGroupUseCase: RemoveStudentFromGroupUseCase,
   ) { }
 
-  @UseGuards(JwtAuthGuard, RolesGuard)
+  @UseGuards(RolesGuard)
   @Roles('ADMIN', 'TEACHER')
   @Post()
   create(@Body() createGroupDto: CreateGroupDto) {
@@ -38,7 +37,7 @@ export class GroupController {
     return this.groupService.findGroupStudents(id, query.page, query.limit);
   }
 
-  @UseGuards(JwtAuthGuard, RolesGuard)
+  @UseGuards(RolesGuard)
   @Roles('ADMIN', 'TEACHER')
   @Post(":id/add-students")
   addStudents(@Param('id') id: string, @Body() body: AddStudentsDto) {
@@ -46,14 +45,14 @@ export class GroupController {
   }
 
 
-  @UseGuards(JwtAuthGuard, RolesGuard)
+  @UseGuards(RolesGuard)
   @Roles('ADMIN', 'TEACHER')
   @Put(':id')
   update(@Param('id') id: string, @Body() updateGroupDto: UpdateGroupDto) {
     return this.updateGroupUseCase.execute(id, updateGroupDto);
   }
 
-  @UseGuards(RolesGuard, JwtAuthGuard)
+  @UseGuards(RolesGuard)
   @Roles('ADMIN', 'TEACHER')
   @Delete("delete/:studentId/:groupId")
   async deleteStudent(@Param('studentId') studentId: string, @Param('groupId') groupId: string) {
@@ -61,7 +60,7 @@ export class GroupController {
   }
 
 
-  @UseGuards(JwtAuthGuard, RolesGuard)
+  @UseGuards(RolesGuard)
   @Roles('ADMIN', 'TEACHER')
   @Delete(':id')
   remove(@Param('id') id: string) {

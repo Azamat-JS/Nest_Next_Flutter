@@ -10,7 +10,7 @@ export type StudentPaymentType = {
     comment?: string | null;
     createdAt: string;
     updatedAt: string;
-    student?: { id: string; username: string; email: string };
+    student?: { id: string; firstName: string; lastName?: string | null; phone: string };
     group?: { id: string; name: string };
 }
 

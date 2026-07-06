@@ -115,7 +115,7 @@ const AddScoreDrawer = ({ openCreate, setOpenCreate, students, groupId, onScoreA
                                                         const entry = form.state.values.students.find(st => st.studentId === s.id)
                                                         return (
                                                             <div key={s.id} className="flex items-center gap-2">
-                                                                <span className="w-32 text-sm truncate">{s.username}</span>
+                                                                <span className="w-32 text-sm truncate">{[s.firstName, s.lastName].filter(Boolean).join(' ')}</span>
                                                                 <Input
                                                                     type="number"
                                                                     className="flex-1"
@@ -204,7 +204,7 @@ const AddScoreDrawer = ({ openCreate, setOpenCreate, students, groupId, onScoreA
                                                                     )
                                                                 }}
                                                             />
-                                                            <span className="text-sm">{s.username}</span>
+                                                            <span className="text-sm">{[s.firstName, s.lastName].filter(Boolean).join(' ')}</span>
                                                         </div>
                                                     )
                                                 })}

@@ -11,53 +11,103 @@ datasource db {
   provider = "postgresql"
 }
 
-model Users {
+model Tenant {
+  id          String       @id @default(cuid())
+  name        String
+  status      TenantStatus @default(ACTIVE)
+  botToken    String?
+  botUsername String?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  users           Users[]
+  sessions        Session[]
+  deviceTokens    DeviceToken[]
+  parentStudents  ParentStudent[]
+  studentGroups   StudentGroup[]
+  groups          Groups[]
+  scoreEvents     ScoreEvent[]
+  studentScores   StudentScore[]
+  studentPayments StudentPayment[]
+  chats           Chat[]
+  chatMembers     ChatMember[]
+  messages        Message[]
+  messageStatuses MessageStatus[]
+  attachments     Attachment[]
+
+  @@map("Tenant")
+}
+
+model PlatformAdmin {
   id        String   @id @default(cuid())
-  username  String   @unique
-  email     String   @unique
+  phone     String   @unique
   password  String
-  role      UserRole @default(STUDENT)
-  avatarUrl String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  @@map("PlatformAdmin")
+}
+
+model Users {
+  id                 String   @id @default(cuid())
+  firstName          String
+  lastName           String?
+  phone              String   @unique
+  password           String
+  role               UserRole @default(STUDENT)
+  avatarUrl          String?
+  mustChangePassword Boolean  @default(true)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  tenantId String
+  tenant   Tenant @relation(fields: [tenantId], references: [id])
+
   teachingGroups Groups[] @relation("TeacherGroups")
 
-  chats         ChatMember[]
-  messages      Message[]
-  messageStatus MessageStatus[]
-  parents       ParentStudent[] @relation("StudentRelations")
-  children      ParentStudent[] @relation("ParentRelations")
-  studentGroups StudentGroup[]
-  scoreEvents   ScoreEvent[]
-  studentScore  StudentScore[]
-  sessions      Session[]
-  devices       DeviceToken[]
+  chats          ChatMember[]
+  messages       Message[]
+  messageStatus  MessageStatus[]
+  parents        ParentStudent[]  @relation("StudentRelations")
+  children       ParentStudent[]  @relation("ParentRelations")
+  studentGroups  StudentGroup[]
+  scoreEvents    ScoreEvent[]
+  studentScore   StudentScore[]
+  sessions       Session[]
+  devices        DeviceToken[]
   studentPayment StudentPayment[]
 
-
-  @@index([email])
+  @@index([phone])
+  @@index([tenantId])
   @@map("Users")
 }
 
 model Session {
-  id String @id @default(cuid())
+  id     String @id @default(cuid())
   userId String
-  user Users @relation(fields: [userId], references: [id])
+  user   Users  @relation(fields: [userId], references: [id])
+
+  tenantId String
+  tenant   Tenant @relation(fields: [tenantId], references: [id])
 
   refreshToken String
-  createdAt DateTime @default(now())
-  expiresAt DateTime
+  createdAt    DateTime @default(now())
+  expiresAt    DateTime
 
   deviceInfo String?
-  isRevoked Boolean @default(false)
+  isRevoked  Boolean @default(false)
+
+  @@index([tenantId])
   @@map("Session")
 }
 
 model DeviceToken {
-  id String @id @default(cuid())
+  id     String @id @default(cuid())
   userId String
-  user Users @relation(fields: [userId], references: [id])
+  user   Users  @relation(fields: [userId], references: [id])
+
+  tenantId String
+  tenant   Tenant @relation(fields: [tenantId], references: [id])
 
   fcmToken String @unique
 
@@ -71,7 +121,7 @@ model DeviceToken {
   updatedAt DateTime @updatedAt
 
   @@index([userId])
-
+  @@index([tenantId])
   @@map("DeviceToken")
 }
 
@@ -83,9 +133,13 @@ model ParentStudent {
   studentId String
   student   Users  @relation("StudentRelations", fields: [studentId], references: [id])
 
+  tenantId String
+  tenant   Tenant @relation(fields: [tenantId], references: [id])
+
   @@unique([parentId, studentId])
   @@index([parentId])
   @@index([studentId])
+  @@index([tenantId])
   @@map("ParentStudent")
 }
 
@@ -97,17 +151,24 @@ model StudentGroup {
   groupId String
   group   Groups @relation(fields: [groupId], references: [id], onDelete: Cascade)
 
+  tenantId String
+  tenant   Tenant @relation(fields: [tenantId], references: [id])
+
   joinedAt DateTime @default(now())
 
   @@unique([studentId, groupId])
   @@index([studentId])
   @@index([groupId])
+  @@index([tenantId])
   @@map("StudentGroup")
 }
 
 model Groups {
   id   String @id @default(cuid())
-  name String @unique
+  name String
+
+  tenantId String
+  tenant   Tenant @relation(fields: [tenantId], references: [id])
 
   teacherId String
   teacher   Users          @relation("TeacherGroups", fields: [teacherId], references: [id])
@@ -115,49 +176,59 @@ model Groups {
   createdAt DateTime       @default(now())
   updatedAt DateTime       @updatedAt
 
-  scoreEvents ScoreEvent[]
-  studentScores StudentScore[]
+  scoreEvents     ScoreEvent[]
+  studentScores   StudentScore[]
   studentPayments StudentPayment[]
 
+  @@unique([tenantId, name])
   @@index([teacherId])
+  @@index([tenantId])
   @@map("Groups")
 }
 
 model ScoreEvent {
-    id   String @id @default(cuid())
-    studentId String
-    student Users @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  id        String @id @default(cuid())
+  studentId String
+  student   Users  @relation(fields: [studentId], references: [id], onDelete: Cascade)
 
-    type ScoreType
-    value Int
-    comment String?
-    
-    groupId String
-    group Groups @relation(fields: [groupId], references: [id], onDelete: Cascade)
-    date DateTime
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-    @@unique([studentId, groupId, type, date])
-    @@index([studentId, groupId, type, date])
-    @@map("ScoreEvent")
+  tenantId String
+  tenant   Tenant @relation(fields: [tenantId], references: [id])
+
+  type    ScoreType
+  value   Int
+  comment String?
+
+  groupId   String
+  group     Groups   @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  date      DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([studentId, groupId, type, date])
+  @@index([tenantId, studentId, groupId, type, date])
+  @@map("ScoreEvent")
 }
 
-model StudentScore{
+model StudentScore {
   studentId String
-  groupId String
+  groupId   String
 
   student Users @relation(fields: [studentId], references: [id], onDelete: Cascade)
 
   group Groups @relation(fields: [groupId], references: [id], onDelete: Cascade)
 
-  total Int @default(0)
-  homework Int @default(0)
-  attendance Int @default(0)
-  updatedAt DateTime @updatedAt
+  tenantId String
+  tenant   Tenant @relation(fields: [tenantId], references: [id])
+
+  total      Int      @default(0)
+  homework   Int      @default(0)
+  attendance Int      @default(0)
+  updatedAt  DateTime @updatedAt
 
   @@id([studentId, groupId])
   @@index([studentId])
   @@index([groupId])
+  @@index([tenantId])
   @@map("StudentScore")
 }
 
@@ -165,10 +236,13 @@ model StudentPayment {
   id String @id @default(uuid())
 
   studentId String
-  groupId String
+  groupId   String
 
-  student Users @relation(fields: [studentId], references: [id])
+  student Users  @relation(fields: [studentId], references: [id])
   group   Groups @relation(fields: [groupId], references: [id])
+
+  tenantId String
+  tenant   Tenant @relation(fields: [tenantId], references: [id])
 
   month Int
   year  Int
@@ -181,10 +255,9 @@ model StudentPayment {
   updatedAt DateTime @updatedAt
 
   @@unique([studentId, groupId, month, year])
-
   @@index([studentId])
   @@index([groupId])
-
+  @@index([tenantId])
   @@map("StudentPayment")
 }
 
@@ -195,9 +268,13 @@ model Chat {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  tenantId String
+  tenant   Tenant @relation(fields: [tenantId], references: [id])
+
   members  ChatMember[]
   messages Message[]
 
+  @@index([tenantId])
   @@map("Chat")
 }
 
@@ -211,7 +288,11 @@ model ChatMember {
   isAdmin  Boolean  @default(false)
   isMuted  Boolean  @default(false)
 
+  tenantId String
+  tenant   Tenant @relation(fields: [tenantId], references: [id])
+
   @@unique([userId, chatId])
+  @@index([tenantId])
   @@map("ChatMember")
 }
 
@@ -227,11 +308,15 @@ model Message {
   updatedAt   DateTime    @updatedAt
   deliveredAt DateTime?
 
+  tenantId String
+  tenant   Tenant @relation(fields: [tenantId], references: [id])
+
   messageStatus MessageStatus[]
   attachments   Attachment[]
 
   @@index([chatId])
   @@index([senderId])
+  @@index([tenantId])
   @@map("Message")
 }
 
@@ -243,6 +328,10 @@ model MessageStatus {
   userId    String
   readAt    DateTime?
 
+  tenantId String
+  tenant   Tenant @relation(fields: [tenantId], references: [id])
+
+  @@index([tenantId])
   @@map("MessageStatus")
 }
 
@@ -254,7 +343,16 @@ model Attachment {
   type      String
   createdAt DateTime @default(now())
 
+  tenantId String
+  tenant   Tenant @relation(fields: [tenantId], references: [id])
+
+  @@index([tenantId])
   @@map("Attachments")
+}
+
+enum TenantStatus {
+  ACTIVE
+  SUSPENDED
 }
 
 enum MessageType {

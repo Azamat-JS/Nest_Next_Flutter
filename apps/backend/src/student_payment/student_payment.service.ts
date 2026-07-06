@@ -1,11 +1,12 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { PRISMA_CLIENT } from 'src/prisma/prisma.module';
+import type { TenantScopedPrismaClient } from 'src/prisma/tenant-scoping.extension';
 import { LatestPaymentsQueryDto, StudentPaymentDto, UpdatePaymentDto } from './dto/student_payment.dto';
 import { PaginationDto } from 'src/lib/shared/dto/pagination.dto';
 
 @Injectable()
 export class StudentPaymentService {
-    constructor(private readonly prisma: PrismaService) { }
+    constructor(@Inject(PRISMA_CLIENT) private readonly prisma: TenantScopedPrismaClient) { }
 
     async createPayment(dto: StudentPaymentDto, studentId: string, groupId: string) {
         const student = await this.prisma.users.findUnique({ where: { id: studentId } })
@@ -23,7 +24,7 @@ export class StudentPaymentService {
                 studentId: student.id
             },
             include: {
-                student: { select: { id: true, username: true, email: true } },
+                student: { select: { id: true, firstName: true, lastName: true, phone: true } },
                 group: { select: { id: true, name: true } },
             }
         })
@@ -38,7 +39,7 @@ export class StudentPaymentService {
                 take: limit,
                 orderBy: { createdAt: "desc" },
                 include: {
-                    student: { select: { id: true, username: true, email: true } },
+                    student: { select: { id: true, firstName: true, lastName: true, phone: true } },
                     group: { select: { id: true, name: true } },
                 }
             }),
@@ -64,8 +65,9 @@ export class StudentPaymentService {
         if (search) {
             whereClause.student = {
                 OR: [
-                    { username: { contains: search, mode: 'insensitive' } },
-                    { email: { contains: search, mode: 'insensitive' } },
+                    { firstName: { contains: search, mode: 'insensitive' } },
+                    { lastName: { contains: search, mode: 'insensitive' } },
+                    { phone: { contains: search, mode: 'insensitive' } },
                 ]
             };
         }
@@ -93,7 +95,7 @@ export class StudentPaymentService {
                     where: { studentId, ...(groupId ? { groupId } : {}) },
                     orderBy: [{ year: 'desc' }, { month: 'desc' }],
                     include: {
-                        student: { select: { id: true, username: true, email: true } },
+                        student: { select: { id: true, firstName: true, lastName: true, phone: true } },
                         group: { select: { id: true, name: true } },
                     }
                 })
@@ -115,7 +117,7 @@ export class StudentPaymentService {
         const payment = await this.prisma.studentPayment.findUnique({
             where: { id: paymentId },
             include: {
-                student: { select: { id: true, username: true, email: true } },
+                student: { select: { id: true, firstName: true, lastName: true, phone: true } },
                 group: { select: { id: true, name: true } },
             }
         });
@@ -134,7 +136,7 @@ export class StudentPaymentService {
             where: { id: paymentId },
             data: dto,
             include: {
-                student: { select: { id: true, username: true, email: true } },
+                student: { select: { id: true, firstName: true, lastName: true, phone: true } },
                 group: { select: { id: true, name: true } },
             }
         });
@@ -175,7 +177,7 @@ export class StudentPaymentService {
                 take: limit,
                 where: { groupId },
                 include: {
-                    student: { select: { id: true, username: true, email: true } },
+                    student: { select: { id: true, firstName: true, lastName: true, phone: true } },
                     group: { select: { id: true, name: true } },
                 }
             }),

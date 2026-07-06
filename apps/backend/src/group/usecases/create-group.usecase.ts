@@ -1,11 +1,12 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
+import { Inject, Injectable, NotFoundException } from "@nestjs/common";
 import { CreateGroupDto } from "../dto/group.dto";
 import { GroupRepository } from "../group.service";
-import { PrismaService } from "src/prisma/prisma.service";
+import { PRISMA_CLIENT } from "src/prisma/prisma.module";
+import type { TenantScopedPrismaClient } from "src/prisma/tenant-scoping.extension";
 
 @Injectable()
 export class CreateGroupUseCase {
-    constructor(private readonly groupRepo: GroupRepository, private readonly prisma: PrismaService,
+    constructor(private readonly groupRepo: GroupRepository, @Inject(PRISMA_CLIENT) private readonly prisma: TenantScopedPrismaClient,
     ) { }
 
     async execute(dto: CreateGroupDto) {

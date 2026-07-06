@@ -4,6 +4,7 @@ import { UsersController } from './users.controller';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigifyModule } from '@itgorillaz/configify';
 import { AppConfig } from 'src/lib/config';
+import { CreateUserUseCase } from './usecases/create-user.usecase';
 @Module({
   imports: [
     ConfigifyModule.forRootAsync(),
@@ -16,6 +17,6 @@ import { AppConfig } from 'src/lib/config';
     }),
   ],
   controllers: [UsersController],
-  providers: [UsersService],
+  providers: [UsersService, CreateUserUseCase],
 })
 export class UsersModule { }

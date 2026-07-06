@@ -6,7 +6,7 @@ import { useAuthStore } from '@/lib/stores/authStore'
 import api from '@/lib/api'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { User, Mail, Shield } from 'lucide-react'
+import { User, Phone, Shield } from 'lucide-react'
 
 const Profile = () => {
     const isAuthenticated = useAuthStore((state) => state.isAuthenticated)
@@ -32,7 +32,7 @@ const Profile = () => {
                     <div className="mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
                         <User className="h-8 w-8 text-primary" />
                     </div>
-                    <CardTitle className="text-2xl">{user?.username}</CardTitle>
+                    <CardTitle className="text-2xl">{[user?.firstName, user?.lastName].filter(Boolean).join(' ')}</CardTitle>
                     <Badge variant="secondary" className="mx-auto w-fit capitalize">
                         {user?.role?.toLowerCase()}
                     </Badge>
@@ -41,15 +41,15 @@ const Profile = () => {
                     <div className="flex items-center gap-3 rounded-lg border p-3">
                         <User className="h-4 w-4 text-muted-foreground shrink-0" />
                         <div>
-                            <p className="text-xs text-muted-foreground">Username</p>
-                            <p className="font-medium">{user?.username}</p>
+                            <p className="text-xs text-muted-foreground">Name</p>
+                            <p className="font-medium">{[user?.firstName, user?.lastName].filter(Boolean).join(' ')}</p>
                         </div>
                     </div>
                     <div className="flex items-center gap-3 rounded-lg border p-3">
-                        <Mail className="h-4 w-4 text-muted-foreground shrink-0" />
+                        <Phone className="h-4 w-4 text-muted-foreground shrink-0" />
                         <div>
-                            <p className="text-xs text-muted-foreground">Email</p>
-                            <p className="font-medium">{user?.email}</p>
+                            <p className="text-xs text-muted-foreground">Phone</p>
+                            <p className="font-medium">{user?.phone}</p>
                         </div>
                     </div>
                     <div className="flex items-center gap-3 rounded-lg border p-3">

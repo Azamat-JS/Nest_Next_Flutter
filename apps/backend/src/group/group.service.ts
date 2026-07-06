@@ -1,11 +1,12 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { PRISMA_CLIENT } from 'src/prisma/prisma.module';
+import type { TenantScopedPrismaClient } from 'src/prisma/tenant-scoping.extension';
 import { Prisma, UserRole } from '@prisma/client';
 import { PaginationDto } from 'src/lib/shared/dto/pagination.dto';
 
 @Injectable()
 export class GroupRepository {
-  constructor(private readonly prisma: PrismaService) { }
+  constructor(@Inject(PRISMA_CLIENT) private readonly prisma: TenantScopedPrismaClient) { }
   async createGroup(tx: Prisma.TransactionClient, data: Prisma.GroupsCreateInput) {
     return tx.groups.create({ data });
   }
@@ -36,8 +37,9 @@ export class GroupRepository {
           teacher: {
             select: {
               id: true,
-              username: true,
-              email: true,
+              firstName: true,
+              lastName: true,
+              phone: true,
               role: true,
             }
           },
@@ -46,8 +48,9 @@ export class GroupRepository {
               student: {
                 select: {
                   id: true,
-                  username: true,
-                  email: true,
+                  firstName: true,
+                  lastName: true,
+                  phone: true,
                   role: true,
                 }
               }
@@ -83,8 +86,9 @@ export class GroupRepository {
         teacher: {
           select: {
             id: true,
-            username: true,
-            email: true,
+            firstName: true,
+            lastName: true,
+            phone: true,
             role: true,
           }
         },
@@ -109,8 +113,9 @@ export class GroupRepository {
           student: {
             select: {
               id: true,
-              username: true,
-              email: true,
+              firstName: true,
+              lastName: true,
+              phone: true,
               role: true,
             }
           }

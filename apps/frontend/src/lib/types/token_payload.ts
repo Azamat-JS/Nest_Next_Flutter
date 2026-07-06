@@ -1,7 +1,8 @@
 export type TokenPayload = {
     id: string;
-    email: string;
-    username: string;
+    phone: string;
+    firstName: string;
+    lastName?: string | null;
     password?: string | null;
     role?: string | null;
 }
@@ -10,7 +11,7 @@ export type LeaderBoardType = {
     total: number;
     attendance: number;
     homework: number;
-    student: { username: string };
+    student: { firstName: string; lastName?: string | null };
     group?: { name: string };
 }
 

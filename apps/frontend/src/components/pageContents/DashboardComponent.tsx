@@ -42,7 +42,7 @@ const DashboardComponent = () => {
     const stats = [
         { title: "Total Users", value: totalUsers, icon: Users, description: "Registered accounts" },
         { title: "Total Groups", value: totalGroups, icon: BookOpen, description: "Active study groups" },
-        { title: "Top Score", value: topScore, icon: Trophy, description: topStudents[0]?.student?.username ?? "No data" },
+        { title: "Top Score", value: topScore, icon: Trophy, description: [topStudents[0]?.student?.firstName, topStudents[0]?.student?.lastName].filter(Boolean).join(' ') || "No data" },
         { title: "Students on board", value: leaderboardData?.meta?.total ?? 0, icon: TrendingUp, description: "With recorded scores" },
     ]
 
@@ -79,7 +79,7 @@ const DashboardComponent = () => {
                                         {idx + 1}
                                     </span>
                                     <div>
-                                        <p className="font-medium">{s.student.username}</p>
+                                        <p className="font-medium">{[s.student.firstName, s.student.lastName].filter(Boolean).join(' ')}</p>
                                         {s.group && <p className="text-xs text-muted-foreground">{s.group.name}</p>}
                                     </div>
                                 </div>

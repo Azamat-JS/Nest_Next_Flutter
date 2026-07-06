@@ -127,23 +127,23 @@ const Home = () => {
                 <TableHeader>
                     <TableRow>
                         <TableHead className="w-12 text-center font-semibold">#</TableHead>
-                        <TableHead className="text-center font-semibold">Username</TableHead>
-                        <TableHead className="text-center font-semibold">Email</TableHead>
+                        <TableHead className="text-center font-semibold">Name</TableHead>
+                        <TableHead className="text-center font-semibold">Phone</TableHead>
                         <TableHead className="text-center font-semibold">Role</TableHead>
                         <TableHead className="w-16 text-center font-semibold">Actions</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
                     {users.map((u, idx) => {
-                        const isMe = me?.username === u.username
+                        const isMe = me?.phone === u.phone
                         return (
                             <TableRow key={u.id} className={cn(isMe && "bg-primary/5")}>
                                 <TableCell className="text-center">{(page - 1) * limit + idx + 1}</TableCell>
                                 <TableCell className="text-center font-medium">
-                                    {u.username}
+                                    {[u.firstName, u.lastName].filter(Boolean).join(' ')}
                                     {isMe && <span className="ml-2 text-xs text-primary">(you)</span>}
                                 </TableCell>
-                                <TableCell className="text-center text-muted-foreground">{u.email}</TableCell>
+                                <TableCell className="text-center text-muted-foreground">{u.phone}</TableCell>
                                 <TableCell className="text-center">
                                     <Badge variant={roleVariant[u.role ?? ''] ?? 'outline'} className="capitalize text-xs">
                                         {u.role?.toLowerCase()}
@@ -227,23 +227,31 @@ const Home = () => {
                 <DialogContent className="sm:max-w-sm">
                     <DialogHeader>
                         <DialogTitle>Edit User</DialogTitle>
-                        <DialogDescription>Update details for <strong>{selectedUser?.username}</strong></DialogDescription>
+                        <DialogDescription>Update details for <strong>{[selectedUser?.firstName, selectedUser?.lastName].filter(Boolean).join(' ')}</strong></DialogDescription>
                     </DialogHeader>
                     <FieldGroup>
                         <Field>
-                            <Label htmlFor="edit-username">Username</Label>
+                            <Label htmlFor="edit-firstName">First name</Label>
                             <Input
-                                id="edit-username"
-                                value={selectedUser?.username ?? ""}
-                                onChange={(e) => setSelectedUser(prev => prev ? { ...prev, username: e.target.value } : prev)}
+                                id="edit-firstName"
+                                value={selectedUser?.firstName ?? ""}
+                                onChange={(e) => setSelectedUser(prev => prev ? { ...prev, firstName: e.target.value } : prev)}
                             />
                         </Field>
                         <Field>
-                            <Label htmlFor="edit-email">Email</Label>
+                            <Label htmlFor="edit-lastName">Last name</Label>
                             <Input
-                                id="edit-email"
-                                value={selectedUser?.email ?? ""}
-                                onChange={(e) => setSelectedUser(prev => prev ? { ...prev, email: e.target.value } : prev)}
+                                id="edit-lastName"
+                                value={selectedUser?.lastName ?? ""}
+                                onChange={(e) => setSelectedUser(prev => prev ? { ...prev, lastName: e.target.value } : prev)}
+                            />
+                        </Field>
+                        <Field>
+                            <Label htmlFor="edit-phone">Phone</Label>
+                            <Input
+                                id="edit-phone"
+                                value={selectedUser?.phone ?? ""}
+                                onChange={(e) => setSelectedUser(prev => prev ? { ...prev, phone: e.target.value } : prev)}
                             />
                         </Field>
                         <Field>
@@ -275,7 +283,7 @@ const Home = () => {
                     <DialogHeader>
                         <DialogTitle>Delete User</DialogTitle>
                         <DialogDescription>
-                            Are you sure you want to delete <strong>{selectedUser?.username}</strong>? This action cannot be undone.
+                            Are you sure you want to delete <strong>{[selectedUser?.firstName, selectedUser?.lastName].filter(Boolean).join(' ')}</strong>? This action cannot be undone.
                         </DialogDescription>
                     </DialogHeader>
                     <DialogFooter>

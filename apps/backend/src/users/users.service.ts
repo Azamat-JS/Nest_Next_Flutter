@@ -1,15 +1,22 @@
-import { BadRequestException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
-import { Prisma, UserRole } from '@prisma/client';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { BadRequestException, ForbiddenException, Inject, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
-import { CreateUserDto, LoginDto, UpdateUserDto } from './dto/user.dto';
+import { ChangePasswordDto, LoginDto, UpdateUserDto } from './dto/user.dto';
 import { PaginationDto } from 'src/lib/shared/dto/pagination.dto';
 import { AppConfig } from 'src/lib/config';
+import { PrismaService } from 'src/prisma/prisma.service';
+import { PRISMA_CLIENT } from 'src/prisma/prisma.module';
+import type { TenantScopedPrismaClient } from 'src/prisma/tenant-scoping.extension';
+import { UserRole } from '@prisma/client';
 
 @Injectable()
 export class UsersService {
-    constructor(private readonly prisma: PrismaService, private readonly jwtService: JwtService, private readonly config: AppConfig) { }
+    constructor(
+        private readonly rawPrisma: PrismaService,
+        @Inject(PRISMA_CLIENT) private readonly prisma: TenantScopedPrismaClient,
+        private readonly jwtService: JwtService,
+        private readonly config: AppConfig,
+    ) { }
 
     async getAllUsers(query: PaginationDto) {
         const { limit = 10, page = 1 } = query;
@@ -21,8 +28,9 @@ export class UsersService {
                 take: limit,
                 select: {
                     id: true,
-                    email: true,
-                    username: true,
+                    phone: true,
+                    firstName: true,
+                    lastName: true,
                     avatarUrl: true,
                     role: true,
                 }
@@ -45,8 +53,9 @@ export class UsersService {
         const foundUser = await this.prisma.users.findUnique({
             where: { id: userId }, select: {
                 id: true,
-                email: true,
-                username: true,
+                phone: true,
+                firstName: true,
+                lastName: true,
                 avatarUrl: true,
                 role: true,
             }
@@ -61,8 +70,9 @@ export class UsersService {
         const foundUser = await this.prisma.users.findUnique({
             where: { id }, select: {
                 id: true,
-                email: true,
-                username: true,
+                phone: true,
+                firstName: true,
+                lastName: true,
                 avatarUrl: true,
                 role: true
             }
@@ -77,8 +87,9 @@ export class UsersService {
         return await this.prisma.users.findMany({
             where: { role: UserRole.TEACHER }, select: {
                 id: true,
-                username: true,
-                email: true,
+                firstName: true,
+                lastName: true,
+                phone: true,
                 avatarUrl: true,
                 role: true,
             }
@@ -89,8 +100,9 @@ export class UsersService {
         return await this.prisma.users.findMany({
             where: { role: UserRole.STUDENT }, select: {
                 id: true,
-                username: true,
-                email: true,
+                firstName: true,
+                lastName: true,
+                phone: true,
                 avatarUrl: true,
                 role: true,
             },
@@ -105,51 +117,24 @@ export class UsersService {
         }
     }
 
-    async createUser(createUserDto: CreateUserDto) {
-        try {
-            const existingUser = await this.prisma.users.findUnique({
-                where: { email: createUserDto.email },
-            });
-            if (existingUser) {
-                throw new BadRequestException('Email already exists');
-            }
-
-            const normalizedRole = createUserDto.role.toUpperCase() as UserRole;
-            const hashedPassword = await bcrypt.hash(createUserDto.password, 10);
-            const user = await this.prisma.users.create({
-                data: {
-                    ...createUserDto,
-                    role: normalizedRole,
-                    password: hashedPassword,
-                }
-            });
-
-            const accessToken = this.jwtService.sign({
-                userId: user.id,
-                email: user.email,
-                username: user.username,
-                role: normalizedRole,
-            });
-
-            return {
-                accessToken
-            }
-        } catch (error) {
-            if (
-                error instanceof Prisma.PrismaClientKnownRequestError &&
-                error.code === 'P2002'
-            ) {
-                throw new BadRequestException('Username already exists');
-            }
-
-            throw error;
-        }
-    };
+    private buildTenantJwtPayload(user: { id: string; phone: string; firstName: string; role: UserRole; tenantId: string; mustChangePassword: boolean }) {
+        return {
+            userId: user.id,
+            phone: user.phone,
+            firstName: user.firstName,
+            role: user.role,
+            tenantId: user.tenantId,
+            mustChangePassword: user.mustChangePassword,
+            type: 'tenant' as const,
+        };
+    }
 
     async loginUser(loginDto: LoginDto) {
-        const { email, password } = loginDto;
-        const foundUser = await this.prisma.users.findUnique({
-            where: { email }
+        const { phone, password } = loginDto;
+        // Tenant is unknown at this point - phone is globally unique across the
+        // platform, so this lookup must bypass tenant scoping deliberately.
+        const foundUser = await this.rawPrisma.users.findUnique({
+            where: { phone }
         });
         if (!foundUser) {
             throw new NotFoundException('User not found');
@@ -159,26 +144,24 @@ export class UsersService {
             throw new UnauthorizedException('Invalid credentials');
         }
 
-        const payload = {
-            userId: foundUser.id,
-            email: foundUser.email,
-            username: foundUser.username,
-            role: foundUser.role
-        };
+        const tenant = await this.rawPrisma.tenant.findUnique({ where: { id: foundUser.tenantId } });
+        if (!tenant || tenant.status !== 'ACTIVE') {
+            throw new UnauthorizedException('This center is not currently active');
+        }
 
+        const payload = this.buildTenantJwtPayload(foundUser);
 
         const accessToken = this.jwtService.sign(payload, { expiresIn: this.config.JWT_EXPIRES_IN });
-
-
         const refreshToken = this.jwtService.sign(payload, { expiresIn: this.config.REFRESH_TOKEN_EXPIRES_IN as any });
 
         const expiresAt = new Date();
         expiresAt.setDate(expiresAt.getDate() + 30);
 
-        await this.prisma.session.create({
+        await this.rawPrisma.session.create({
             data: {
                 refreshToken,
                 userId: foundUser.id,
+                tenantId: foundUser.tenantId,
                 expiresAt,
                 deviceInfo: loginDto.deviceInfo ?? '',
             }
@@ -187,12 +170,11 @@ export class UsersService {
             accessToken,
             refreshToken,
             user: foundUser,
-
         }
     }
 
     async updateAccessToken(oldRefreshToken: string) {
-        const session = await this.prisma.session.findFirst({
+        const session = await this.rawPrisma.session.findFirst({
             where: {
                 refreshToken: oldRefreshToken,
                 isRevoked: false
@@ -207,7 +189,7 @@ export class UsersService {
             throw new UnauthorizedException('Refresh token expired');
         }
 
-        const user = await this.prisma.users.findUnique({
+        const user = await this.rawPrisma.users.findUnique({
             where: { id: session.userId }
         });
 
@@ -215,18 +197,35 @@ export class UsersService {
             throw new NotFoundException('User not found');
         }
 
-        const payload = {
-            userId: user.id,
-            email: user.email,
-            username: user.username,
-            role: user.role
-        };
+        const payload = this.buildTenantJwtPayload(user);
 
         const newAccessToken = await this.jwtService.signAsync(payload, { expiresIn: this.config.JWT_EXPIRES_IN });
 
         return { accessToken: newAccessToken };
     }
 
+    async changePassword(userId: string, dto: ChangePasswordDto) {
+        const user = await this.prisma.users.findUnique({ where: { id: userId } });
+        if (!user) {
+            throw new NotFoundException('User not found');
+        }
+
+        const isCurrentValid = await bcrypt.compare(dto.currentPassword, user.password);
+        if (!isCurrentValid) {
+            throw new UnauthorizedException('Current password is incorrect');
+        }
+
+        const hashedPassword = await bcrypt.hash(dto.newPassword, 10);
+        await this.prisma.users.update({
+            where: { id: userId },
+            data: {
+                password: hashedPassword,
+                mustChangePassword: false,
+            },
+        });
+
+        return { message: 'Password changed successfully' };
+    }
 
     async updateUser(id: string, updateUserInput: UpdateUserDto) {
 
@@ -245,7 +244,7 @@ export class UsersService {
             );
         }
         if (updateUserInput.role) {
-            const normalizedRole = updateUserInput.role.toUpperCase() as UserRole;
+            const normalizedRole = updateUserInput.role.toString().toUpperCase() as UserRole;
             updateUserInput.role = normalizedRole;
         }
 
@@ -257,8 +256,9 @@ export class UsersService {
         return {
             user: {
                 id: updatedUser.id,
-                email: updatedUser.email,
-                username: updatedUser.username,
+                phone: updatedUser.phone,
+                firstName: updatedUser.firstName,
+                lastName: updatedUser.lastName,
                 role: updateUserInput.role,
                 avatarUrl: updatedUser.avatarUrl,
                 createdAt: updatedUser.createdAt,
