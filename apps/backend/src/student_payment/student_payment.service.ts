@@ -1,7 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { StudentPaymentDto, UpdatePaymentDto } from './dto/student_payment.dto';
-import { Prisma } from '@prisma/client';
+import { LatestPaymentsQueryDto, StudentPaymentDto, UpdatePaymentDto } from './dto/student_payment.dto';
 import { PaginationDto } from 'src/lib/shared/dto/pagination.dto';
 
 @Injectable()
@@ -9,13 +8,11 @@ export class StudentPaymentService {
     constructor(private readonly prisma: PrismaService) { }
 
     async createPayment(dto: StudentPaymentDto, studentId: string, groupId: string) {
-
         const student = await this.prisma.users.findUnique({ where: { id: studentId } })
         if (!student) {
             throw new NotFoundException("Student not found")
         }
         const group = await this.prisma.groups.findUnique({ where: { id: groupId } })
-
         if (!group) {
             throw new NotFoundException("Group not found")
         }
@@ -24,6 +21,10 @@ export class StudentPaymentService {
                 ...dto,
                 groupId: group.id,
                 studentId: student.id
+            },
+            include: {
+                student: { select: { id: true, username: true, email: true } },
+                group: { select: { id: true, name: true } },
             }
         })
     }
@@ -35,13 +36,14 @@ export class StudentPaymentService {
             this.prisma.studentPayment.findMany({
                 skip,
                 take: limit,
-                orderBy: {
-                    createdAt: "desc"
+                orderBy: { createdAt: "desc" },
+                include: {
+                    student: { select: { id: true, username: true, email: true } },
+                    group: { select: { id: true, name: true } },
                 }
             }),
             this.prisma.studentPayment.count()
         ]);
-
         return {
             data,
             meta: {
@@ -53,9 +55,70 @@ export class StudentPaymentService {
         }
     }
 
-    async getPaymentById(paymentId: string) {
-        const payment = await this.prisma.studentPayment.findUnique({ where: { id: paymentId } });
+    async getLatestPaymentsPerStudent(query: LatestPaymentsQueryDto) {
+        const { limit = 10, page = 1, search, groupId } = query;
+        const skip = (page - 1) * limit;
 
+        const whereClause: any = {};
+        if (groupId) whereClause.groupId = groupId;
+        if (search) {
+            whereClause.student = {
+                OR: [
+                    { username: { contains: search, mode: 'insensitive' } },
+                    { email: { contains: search, mode: 'insensitive' } },
+                ]
+            };
+        }
+
+        const [allDistinct, distinctPage] = await Promise.all([
+            this.prisma.studentPayment.findMany({
+                where: whereClause,
+                select: { studentId: true },
+                distinct: ['studentId'],
+            }),
+            this.prisma.studentPayment.findMany({
+                where: whereClause,
+                select: { studentId: true },
+                distinct: ['studentId'],
+                skip,
+                take: limit,
+            }),
+        ]);
+
+        const total = allDistinct.length;
+
+        const payments = await Promise.all(
+            distinctPage.map(({ studentId }) =>
+                this.prisma.studentPayment.findFirst({
+                    where: { studentId, ...(groupId ? { groupId } : {}) },
+                    orderBy: [{ year: 'desc' }, { month: 'desc' }],
+                    include: {
+                        student: { select: { id: true, username: true, email: true } },
+                        group: { select: { id: true, name: true } },
+                    }
+                })
+            )
+        );
+
+        return {
+            data: payments.filter(Boolean),
+            meta: {
+                total,
+                page,
+                last_page: Math.ceil(total / limit),
+                limit,
+            }
+        };
+    }
+
+    async getPaymentById(paymentId: string) {
+        const payment = await this.prisma.studentPayment.findUnique({
+            where: { id: paymentId },
+            include: {
+                student: { select: { id: true, username: true, email: true } },
+                group: { select: { id: true, name: true } },
+            }
+        });
         if (!payment) {
             throw new NotFoundException("Payment not found")
         }
@@ -63,17 +126,17 @@ export class StudentPaymentService {
     }
 
     async updatePayment(dto: UpdatePaymentDto, paymentId: string) {
-        const existing = await this.prisma.studentPayment.findUnique({
-            where: { id: paymentId }
-        });
-
+        const existing = await this.prisma.studentPayment.findUnique({ where: { id: paymentId } });
         if (!existing) {
             throw new NotFoundException("Payment not found");
         }
-
         return await this.prisma.studentPayment.update({
             where: { id: paymentId },
-            data: dto
+            data: dto,
+            include: {
+                student: { select: { id: true, username: true, email: true } },
+                group: { select: { id: true, name: true } },
+            }
         });
     }
 
@@ -84,13 +147,14 @@ export class StudentPaymentService {
             this.prisma.studentPayment.findMany({
                 skip,
                 take: limit,
-                where: {
-                    studentId
+                where: { studentId },
+                orderBy: [{ year: 'desc' }, { month: 'desc' }],
+                include: {
+                    group: { select: { id: true, name: true } },
                 }
             }),
             this.prisma.studentPayment.count({ where: { studentId } })
         ]);
-
         return {
             data,
             meta: {
@@ -100,7 +164,6 @@ export class StudentPaymentService {
                 limit,
             }
         }
-
     }
 
     async getGroupPayments(groupId: string, query: PaginationDto) {
@@ -110,13 +173,14 @@ export class StudentPaymentService {
             this.prisma.studentPayment.findMany({
                 skip,
                 take: limit,
-                where: {
-                    groupId
+                where: { groupId },
+                include: {
+                    student: { select: { id: true, username: true, email: true } },
+                    group: { select: { id: true, name: true } },
                 }
             }),
             this.prisma.studentPayment.count({ where: { groupId } })
         ]);
-
         return {
             data,
             meta: {

@@ -1,5 +1,16 @@
 import { Type } from "class-transformer";
-import { IsEnum, IsInt, IsNotEmpty, IsNumber, IsOptional, IsPositive, IsString, Max, Min } from "class-validator";
+import { IsInt, IsNotEmpty, IsNumber, IsOptional, IsPositive, IsString, Max, Min } from "class-validator";
+import { PaginationDto } from "src/lib/shared/dto/pagination.dto";
+
+export class LatestPaymentsQueryDto extends PaginationDto {
+    @IsOptional()
+    @IsString()
+    search?: string;
+
+    @IsOptional()
+    @IsString()
+    groupId?: string;
+}
 
 export class StudentPaymentDto {
     @IsInt()

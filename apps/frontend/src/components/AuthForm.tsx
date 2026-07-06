@@ -33,9 +33,10 @@ export function CardDemo({ id, isLogin, toggle }: { id?: string; isLogin?: boole
     const router = useRouter()
 
     const loginSchema = z.object({
+        username: z.string(),
         email: z.string().email(),
         password: z.string().min(6),
-        role: z.string().optional(),
+        role: z.string(),
     })
 
     const registerSchema = z.object({

@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Query, UseGuards } from '@nestjs/common';
 import { StudentPaymentService } from './student_payment.service';
 import { PaginationDto } from 'src/lib/shared/dto/pagination.dto';
-import { StudentPaymentDto, UpdatePaymentDto } from './dto/student_payment.dto';
+import { LatestPaymentsQueryDto, StudentPaymentDto, UpdatePaymentDto } from './dto/student_payment.dto';
 import { JwtAuthGuard } from 'src/lib/guards/jwt.guard';
 import { RolesGuard } from 'src/lib/guards/roles.guard';
 import { Roles } from 'src/lib/shared/decorators/roles';
@@ -14,6 +14,11 @@ export class StudentPaymentController {
   @Get('all')
   async getAllPayments(@Query() query: PaginationDto) {
     return this.studentPaymentService.getAllPayments(query);
+  }
+
+  @Get('latest-per-student')
+  async getLatestPaymentsPerStudent(@Query() query: LatestPaymentsQueryDto) {
+    return this.studentPaymentService.getLatestPaymentsPerStudent(query);
   }
 
   @UseGuards(RolesGuard)
@@ -32,7 +37,7 @@ export class StudentPaymentController {
   @Roles('ADMIN', 'TEACHER')
   @Get("group-payments/:groupId")
   async getGroupPayments(@Query() query: PaginationDto, @Param("groupId") groupId: string) {
-    return this.studentPaymentService.getStudentPayments(groupId, query);
+    return this.studentPaymentService.getGroupPayments(groupId, query);
   }
 
   @UseGuards(RolesGuard)
@@ -55,6 +60,4 @@ export class StudentPaymentController {
   async createPayment(@Param("studentId") studentId: string, @Param("groupId") groupId: string, @Body() dto: StudentPaymentDto) {
     return this.studentPaymentService.createPayment(dto, studentId, groupId)
   }
-
-
 }

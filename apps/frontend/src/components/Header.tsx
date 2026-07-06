@@ -10,6 +10,7 @@ import { useAuthStore } from "@/lib/stores/authStore"
 const navLinks = [
     { name: 'Users', href: '/home' },
     { name: 'Groups', href: '/groups' },
+    { name: 'Payments', href: '/payments' },
     { name: 'Leaderboard', href: '/leaderboard' },
     { name: 'Profile', href: '/profile' },
 ]
