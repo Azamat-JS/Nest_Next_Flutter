@@ -1,6 +1,7 @@
 import { UserRole } from '@prisma/client';
 import { Transform } from 'class-transformer';
 import { IsEnum, IsNotEmpty, IsOptional, IsString, Matches, MinLength } from 'class-validator';
+import { PaginationDto } from 'src/lib/shared/dto/pagination.dto';
 
 export class CreateUserDto {
     @IsNotEmpty()
@@ -70,6 +71,17 @@ export class LoginDto {
     @IsOptional()
     @IsString()
     deviceInfo?: string;
+}
+
+export class GetUsersQueryDto extends PaginationDto {
+    @IsOptional()
+    @IsEnum(UserRole)
+    @Transform(({ value }) => value?.toUpperCase())
+    role?: UserRole;
+
+    @IsOptional()
+    @IsString()
+    search?: string;
 }
 
 export class ChangePasswordDto {

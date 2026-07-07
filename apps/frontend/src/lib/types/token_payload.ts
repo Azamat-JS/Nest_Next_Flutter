@@ -40,4 +40,20 @@ export type DeleteStudentPayload = {
     groupId: string;
 }
 
+export type WaitingListUser = {
+    id: string;
+    firstName: string;
+    lastName?: string | null;
+    phone: string;
+    reason?: string | null;
+    createdAt?: string;
+}
+
+export type CreateWaitingListPayload = {
+    firstName: string;
+    lastName?: string;
+    phone: string;
+    reason?: string;
+}
+
 

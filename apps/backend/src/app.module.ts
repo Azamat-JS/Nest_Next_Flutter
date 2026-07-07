@@ -9,6 +9,7 @@ import { GroupModule } from './group/group.module';
 import { StudentScoreModule } from './student_score/student_score.module';
 import { StudentPaymentModule } from './student_payment/student_payment.module';
 import { PlatformAdminModule } from './platform-admin/platform-admin.module';
+import { WaitingListModule } from './waiting-list/waiting-list.module';
 import { TenantModule } from './lib/tenant/tenant.module';
 import { JwtAuthGuard } from './lib/guards/jwt.guard';
 import { AppConfig } from './lib/config';
@@ -32,6 +33,7 @@ import { AppConfig } from './lib/config';
     StudentScoreModule,
     StudentPaymentModule,
     PlatformAdminModule,
+    WaitingListModule,
   ],
   controllers: [],
   providers: [

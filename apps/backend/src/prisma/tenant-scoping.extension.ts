@@ -20,6 +20,7 @@ const TENANT_SCOPED_MODELS = new Set([
     'Message',
     'MessageStatus',
     'Attachment',
+    'WaitingList',
 ]);
 
 const WHERE_FILTERED_OPERATIONS = new Set([

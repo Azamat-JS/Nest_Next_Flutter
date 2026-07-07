@@ -1,8 +1,8 @@
 import { BadRequestException, ForbiddenException, Inject, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
-import { ChangePasswordDto, LoginDto, UpdateUserDto } from './dto/user.dto';
-import { PaginationDto } from 'src/lib/shared/dto/pagination.dto';
+import { ChangePasswordDto, GetUsersQueryDto, LoginDto, UpdateUserDto } from './dto/user.dto';
+import { Prisma } from '@prisma/client';
 import { AppConfig } from 'src/lib/config';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { PRISMA_CLIENT } from 'src/prisma/prisma.module';
@@ -18,12 +18,24 @@ export class UsersService {
         private readonly config: AppConfig,
     ) { }
 
-    async getAllUsers(query: PaginationDto) {
-        const { limit = 10, page = 1 } = query;
+    async getAllUsers(query: GetUsersQueryDto) {
+        const { limit = 10, page = 1, role, search } = query;
         const skip = (page - 1) * limit;
+
+        const where: Prisma.UsersWhereInput = {
+            ...(role && { role }),
+            ...(search && {
+                OR: [
+                    { firstName: { contains: search, mode: 'insensitive' } },
+                    { lastName: { contains: search, mode: 'insensitive' } },
+                    { phone: { contains: search, mode: 'insensitive' } },
+                ],
+            }),
+        };
 
         const [data, total] = await Promise.all([
             this.prisma.users.findMany({
+                where,
                 skip,
                 take: limit,
                 select: {
@@ -35,7 +47,7 @@ export class UsersService {
                     role: true,
                 }
             }),
-            this.prisma.users.count(),
+            this.prisma.users.count({ where }),
         ]);
 
         return {

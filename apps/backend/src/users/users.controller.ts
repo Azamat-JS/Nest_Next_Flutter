@@ -1,7 +1,6 @@
 import { Body, Controller, Get, Post, Put, Param, Delete, UseGuards, Req, Query } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { ChangePasswordDto, CreateUserDto, LoginDto, UpdateUserDto } from './dto/user.dto';
-import { PaginationDto } from 'src/lib/shared/dto/pagination.dto';
+import { ChangePasswordDto, CreateUserDto, GetUsersQueryDto, LoginDto, UpdateUserDto } from './dto/user.dto';
 import { Roles } from 'src/lib/shared/decorators/roles';
 import { RolesGuard } from 'src/lib/guards/roles.guard';
 import { Public } from 'src/lib/shared/decorators/public';
@@ -16,7 +15,7 @@ export class UsersController {
   ) { }
 
   @Get()
-  async getAllUsers(@Query() query: PaginationDto) {
+  async getAllUsers(@Query() query: GetUsersQueryDto) {
     return this.usersService.getAllUsers(query)
   }
 
