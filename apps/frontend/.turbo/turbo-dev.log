@@ -413,4 +413,144 @@
       transformResponse: [36m[Array][39m,
       timeout: [33m0[39m,
       xsrfCookieName: [32m'XSRF-TOKEN'[39m,
-      xsrfHeaderName: [32m
+      xsrfHeaderName: [32m'X-XSRF-TOKEN'[39m,
+      maxContentLength: [33m-1[39m,
+      maxBodyLength: [33m-1[39m,
+      env: [36m[Object][39m,
+      validateStatus: [36m[Function: validateStatus][39m,
+      headers: [36m[Object [AxiosHeaders]][39m,
+      baseURL: [32m'http://localhost:3002'[39m,
+      method: [32m'get'[39m,
+      url: [32m'/group/cmrc0mhi60001o1v2e7m07hsm'[39m,
+      allowAbsoluteUrls: [33mtrue[39m,
+      data: [90mundefined[39m
+    },
+    request: [36m<ref *1>[39m ClientRequest {
+      _events: [36m[Object: null prototype][39m,
+      _eventsCount: [33m7[39m,
+      _maxListeners: [90mundefined[39m,
+      outputData: [],
+      outputSize: [33m0[39m,
+      writable: [33mtrue[39m,
+      destroyed: [33mtrue[39m,
+      _last: [33mtrue[39m,
+      chunkedEncoding: [33mfalse[39m,
+      shouldKeepAlive: [33mtrue[39m,
+      maxRequestsOnConnectionReached: [33mfalse[39m,
+      _defaultKeepAlive: [33mtrue[39m,
+      useChunkedEncodingByDefault: [33mfalse[39m,
+      sendDate: [33mfalse[39m,
+      _removedConnection: [33mfalse[39m,
+      _removedContLen: [33mfalse[39m,
+      _removedTE: [33mfalse[39m,
+      strictContentLength: [33mfalse[39m,
+      _contentLength: [33m0[39m,
+      _hasBody: [33mtrue[39m,
+      _trailer: [32m''[39m,
+      finished: [33mtrue[39m,
+      _headerSent: [33mtrue[39m,
+      _closed: [33mtrue[39m,
+      socket: [36m[Socket][39m,
+      _header: [32m'GET /group/cmrc0mhi60001o1v2e7m07hsm HTTP/1.1\r\n'[39m +
+        [32m'Accept: application/json, text/plain, */*\r\n'[39m +
+        [32m'User-Agent: axios/1.15.0\r\n'[39m +
+        [32m'Accept-Encoding: gzip, compress, deflate, br\r\n'[39m +
+        [32m'Host: localhost:3002\r\n'[39m +
+        [32m'Connection: keep-alive\r\n'[39m +
+        [32m'\r\n'[39m,
+      _keepAliveTimeout: [33m0[39m,
+      _onPendingData: [36m[Function: nop][39m,
+      agent: [36m[Agent][39m,
+      socketPath: [90mundefined[39m,
+      method: [32m'GET'[39m,
+      maxHeaderSize: [90mundefined[39m,
+      insecureHTTPParser: [90mundefined[39m,
+      joinDuplicateHeaders: [90mundefined[39m,
+      path: [32m'/group/cmrc0mhi60001o1v2e7m07hsm'[39m,
+      _ended: [33mtrue[39m,
+      res: [36m[IncomingMessage][39m,
+      aborted: [33mfalse[39m,
+      timeoutCb: [1mnull[22m,
+      upgradeOrConnect: [33mfalse[39m,
+      parser: [1mnull[22m,
+      maxHeadersCount: [1mnull[22m,
+      reusedSocket: [33mtrue[39m,
+      host: [32m'localhost'[39m,
+      protocol: [32m'http:'[39m,
+      _redirectable: [36m[Writable][39m,
+      [[32mSymbol(shapeMode)[39m]: [33mfalse[39m,
+      [[32mSymbol(kCapture)[39m]: [33mfalse[39m,
+      [[32mSymbol(kBytesWritten)[39m]: [33m0[39m,
+      [[32mSymbol(kNeedDrain)[39m]: [33mfalse[39m,
+      [[32mSymbol(corked)[39m]: [33m0[39m,
+      [[32mSymbol(kOutHeaders)[39m]: [36m[Object: null prototype][39m,
+      [[32mSymbol(errored)[39m]: [1mnull[22m,
+      [[32mSymbol(kHighWaterMark)[39m]: [33m16384[39m,
+      [[32mSymbol(kRejectNonStandardBodyWrites)[39m]: [33mfalse[39m,
+      [[32mSymbol(kUniqueHeaders)[39m]: [1mnull[22m
+    },
+    data: {
+      message: [32m'No token provided'[39m,
+      error: [32m'Unauthorized'[39m,
+      statusCode: [33m401[39m
+    }
+  },
+  status: [33m401[39m,
+  digest: [32m'2749699036'[39m
+}
+ GET /groups/cmrc0mhi60001o1v2e7m07hsm [32m200[39m in 1219ms[2m (next.js: 6ms, application-code: 1213ms)[22m
+[36m[browser][39m [31mUncaught Error: Switched to client rendering because the server rendering errored:
+
+Request failed with status code 401[39m
+[31m    at async queryFn (src/components/pageContents/GroupAndLeaderboard.tsx:22:25)[39m
+  [90m20 |[0m         queryKey: [[32m"group"[0m, groupId],
+  [90m21 |[0m         queryFn: [36masync[0m () => {
+[31m[1m>[0m [90m22 |[0m             [36mconst[0m res = [36mawait[0m api.get([32m`/group/[0m${groupId[32m}`[0m)
+  [90m   |[0m                         [31m[1m^[0m
+  [90m23 |[0m             [36mreturn[0m res.data
+  [90m24 |[0m         },
+  [90m25 |[0m         staleTime: [35m1000[0m * [35m60[0m * [35m5[0m,
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+ GET /groups/cmrc0mhi60001o1v2e7m07hsm?search=Chapter+5&page=1 [32m200[39m in 24ms[2m (next.js: 9ms, application-code: 15ms)[22m
+ GET /groups/cmrc0mhi60001o1v2e7m07hsm?search=zzz-no-match&page=1 [32m200[39m in 18ms[2m (next.js: 4ms, application-code: 15ms)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m [2m(<anonymous>)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m [2m(<anonymous>)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m [2m(<anonymous>)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m [2m(<anonymous>)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m

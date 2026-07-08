@@ -1,12 +1,13 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { useSuspenseQuery } from "@tanstack/react-query"
+import { useSuspenseQuery, useQueryClient } from "@tanstack/react-query"
 import { useRouter, useSearchParams } from "next/navigation"
 import { Search } from "lucide-react"
 import api from "@/lib/api"
 import { HomeworkType } from "@/lib/types/homework"
 import { PaginationType } from "@/lib/types/groups"
+import AddHomeworkDrawer from "../AddHomeworkDrawer"
 import {
     Table,
     TableBody,
@@ -43,10 +44,12 @@ const formatDueDate = (value: string) => {
 const GroupHomeworks = ({ groupId }: { groupId: string }) => {
     const router = useRouter()
     const searchParams = useSearchParams()
+    const queryClient = useQueryClient()
     const page = Number(searchParams.get('page') ?? 1)
     const limit = Number(searchParams.get('limit') ?? 10)
     const search = searchParams.get('search') ?? ''
     const [searchInput, setSearchInput] = useState(search)
+    const [openAddHomework, setOpenAddHomework] = useState(false)
 
     useEffect(() => {
         const handler = setTimeout(() => {
@@ -111,6 +114,15 @@ const GroupHomeworks = ({ groupId }: { groupId: string }) => {
                     ))}
                 </TableBody>
             </Table>
+
+            <div className="flex gap-2 justify-end">
+                <AddHomeworkDrawer
+                    openCreate={openAddHomework}
+                    setOpenCreate={setOpenAddHomework}
+                    groupId={groupId}
+                    onHomeworkAdded={() => queryClient.invalidateQueries({ queryKey: ['group-homeworks', groupId] })}
+                />
+            </div>
 
             <div className="grid grid-cols-2 items-center">
                 <div className="flex justify-center">
