@@ -6,12 +6,15 @@ import { GroupType } from "@/lib/types/groups"
 import { useState } from "react"
 import GroupDetailsComponent from "./GroupDetailsComponent"
 import GroupLeaderBoard from "./GroupLeaderBoard"
+import GroupHomeworks from "./GroupHomeworks"
 import api from "@/lib/api"
-import { Users, Trophy } from "lucide-react"
+import { Users, Trophy, NotebookPen } from "lucide-react"
 import { Button } from "../ui/button"
 
+type GroupTab = "students" | "leaderboard" | "homeworks"
+
 const GroupAndLeaderboard = ({ groupId }: { groupId: string }) => {
-    const [openLeaderBoard, setOpenLeaderBoard] = useState(false)
+    const [activeTab, setActiveTab] = useState<GroupTab>("students")
 
     const { data } = useSuspenseQuery({
         queryKey: ["group", groupId],
@@ -34,28 +37,35 @@ const GroupAndLeaderboard = ({ groupId }: { groupId: string }) => {
                 </Badge>
                 <div className="flex gap-2">
                     <Button
-                        variant={!openLeaderBoard ? "default" : "outline"}
+                        variant={activeTab === "students" ? "default" : "outline"}
                         size="sm"
-                        onClick={() => setOpenLeaderBoard(false)}
+                        onClick={() => setActiveTab("students")}
                         className="gap-1"
                     >
                         <Users className="h-4 w-4" /> Students
                     </Button>
                     <Button
-                        variant={openLeaderBoard ? "default" : "outline"}
+                        variant={activeTab === "leaderboard" ? "default" : "outline"}
                         size="sm"
-                        onClick={() => setOpenLeaderBoard(true)}
+                        onClick={() => setActiveTab("leaderboard")}
                         className="gap-1"
                     >
                         <Trophy className="h-4 w-4" /> Leaderboard
                     </Button>
+                    <Button
+                        variant={activeTab === "homeworks" ? "default" : "outline"}
+                        size="sm"
+                        onClick={() => setActiveTab("homeworks")}
+                        className="gap-1"
+                    >
+                        <NotebookPen className="h-4 w-4" /> Homeworks
+                    </Button>
                 </div>
             </div>
 
-            {!openLeaderBoard
-                ? <GroupDetailsComponent groupId={groupId} />
-                : <GroupLeaderBoard groupId={groupId} />
-            }
+            {activeTab === "students" && <GroupDetailsComponent groupId={groupId} />}
+            {activeTab === "leaderboard" && <GroupLeaderBoard groupId={groupId} />}
+            {activeTab === "homeworks" && <GroupHomeworks groupId={groupId} />}
         </div>
     )
 }

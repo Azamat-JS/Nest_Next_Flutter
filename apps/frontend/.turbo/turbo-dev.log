@@ -1,0 +1,416 @@
+
+> frontend@0.1.0 dev /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend
+> next dev --turbopack -p 4000
+
+[1m[38;2;173;127;168m▲ Next.js 16.2.10[39m[22m (Turbopack)
+- Local:         http://localhost:4000
+- Network:       http://192.168.13.116:4000
+- Environments: .env.local
+[32m[1m✓[22m[39m Ready in 329ms
+
+ GET / [32m200[39m in 296ms[2m (next.js: 119ms, application-code: 177ms)[22m
+ GET /?tab=waiting-list [32m200[39m in 41ms[2m (next.js: 6ms, application-code: 35ms)[22m
+ GET /?tab=waiting-list [32m200[39m in 12ms[2m (next.js: 1864µs, application-code: 11ms)[22m
+ GET /?tab=users [32m200[39m in 23ms[2m (next.js: 4ms, application-code: 20ms)[22m
+ GET /?tab=users [32m200[39m in 9ms[2m (next.js: 1250µs, application-code: 8ms)[22m
+ GET /?tab=waiting-list [32m200[39m in 39ms[2m (next.js: 4ms, application-code: 35ms)[22m
+ GET /?tab=waiting-list [32m200[39m in 15ms[2m (next.js: 3ms, application-code: 12ms)[22m
+ GET /?tab=users [32m200[39m in 38ms[2m (next.js: 3ms, application-code: 34ms)[22m
+ GET /?tab=users [32m200[39m in 15ms[2m (next.js: 2ms, application-code: 13ms)[22m
+ GET /?tab=waiting-list [32m200[39m in 47ms[2m (next.js: 4ms, application-code: 43ms)[22m
+ GET /?tab=waiting-list [32m200[39m in 22ms[2m (next.js: 3ms, application-code: 19ms)[22m
+ GET /home [32m200[39m in 66ms[2m (next.js: 36ms, application-code: 29ms)[22m
+ GET /leaderboard [32m200[39m in 58ms[2m (next.js: 35ms, application-code: 23ms)[22m
+ GET /profile [32m200[39m in 55ms[2m (next.js: 34ms, application-code: 22ms)[22m
+ GET /home [32m200[39m in 33ms[2m (next.js: 4ms, application-code: 29ms)[22m
+ GET /groups [32m200[39m in 49ms[2m (next.js: 32ms, application-code: 18ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+ GET /home [32m200[39m in 34ms[2m (next.js: 4ms, application-code: 30ms)[22m
+ GET /groups [32m200[39m in 35ms[2m (next.js: 5ms, application-code: 30ms)[22m
+ GET /home [32m200[39m in 34ms[2m (next.js: 5ms, application-code: 30ms)[22m
+ GET /groups [32m200[39m in 32ms[2m (next.js: 3ms, application-code: 29ms)[22m
+ GET /payments [32m200[39m in 73ms[2m (next.js: 35ms, application-code: 38ms)[22m
+ GET /home [32m200[39m in 29ms[2m (next.js: 4ms, application-code: 25ms)[22m
+ GET /groups [32m200[39m in 30ms[2m (next.js: 4ms, application-code: 25ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+ GET /home [32m200[39m in 35ms[2m (next.js: 4ms, application-code: 31ms)[22m
+[32m[1m✓[22m[39m Compiled in 357ms
+ GET /home?tab=waiting-list [32m200[39m in 43ms[2m (next.js: 9ms, application-code: 34ms)[22m
+ GET /home?tab=waiting-list [32m200[39m in 14ms[2m (next.js: 1987µs, application-code: 12ms)[22m
+ GET /home?tab=waiting-list [32m200[39m in 83ms[2m (next.js: 4ms, application-code: 79ms)[22m
+ GET /home?tab=waiting-list [32m200[39m in 55ms[2m (next.js: 4ms, application-code: 51ms)[22m
+ GET /home [32m200[39m in 23ms[2m (next.js: 3ms, application-code: 20ms)[22m
+ GET /home [32m200[39m in 50ms[2m (next.js: 3ms, application-code: 48ms)[22m
+ GET / [32m200[39m in 45ms[2m (next.js: 6ms, application-code: 39ms)[22m
+ GET /groups [32m200[39m in 19ms[2m (next.js: 3ms, application-code: 16ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+ GET /groups/cmrbzd48c00011pv2aufbsk9j [32m200[39m in 353ms[2m (next.js: 333ms, application-code: 20ms)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+ GET /home [32m200[39m in 35ms[2m (next.js: 4ms, application-code: 31ms)[22m
+ GET /groups [32m200[39m in 32ms[2m (next.js: 5ms, application-code: 28ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+ GET /groups/cmrbzd48c00011pv2aufbsk9j [32m200[39m in 39ms[2m (next.js: 8ms, application-code: 31ms)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+ GET /groups/cmrbzd48c00011pv2aufbsk9j/cmrajq5cd0000eiv272zorsym [32m200[39m in 225ms[2m (next.js: 205ms, application-code: 19ms)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+ GET /groups [32m200[39m in 24ms[2m (next.js: 3ms, application-code: 21ms)[22m
+ GET /groups/cmrbzd48c00011pv2aufbsk9j [32m200[39m in 37ms[2m (next.js: 9ms, application-code: 29ms)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+ GET /home [32m200[39m in 34ms[2m (next.js: 4ms, application-code: 30ms)[22m
+ GET /groups [32m200[39m in 39ms[2m (next.js: 6ms, application-code: 33ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+ GET /groups/cmrbzkvkm000n1pv2qczr9g3y [32m200[39m in 41ms[2m (next.js: 10ms, application-code: 31ms)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[32m[1m✓[22m[39m Compiled in 106ms
+[32m[1m✓[22m[39m Compiled in 356ms
+ GET /groups/cmrbzkvkm000n1pv2qczr9g3y [32m200[39m in 182ms[2m (next.js: 70ms, application-code: 112ms)[22m
+ GET /groups/cmrbzkvkm000n1pv2qczr9g3y [32m200[39m in 55ms[2m (next.js: 1080µs, application-code: 54ms)[22m
+ GET /groups/cmrbzkvkm000n1pv2qczr9g3y [32m200[39m in 29ms[2m (next.js: 1154µs, application-code: 28ms)[22m
+[32m[1m✓[22m[39m Compiled in 27ms
+[32m[1m✓[22m[39m Compiled in 29ms
+[32m[1m✓[22m[39m Compiled in 98ms
+ GET /groups/cmrbzkvkm000n1pv2qczr9g3y [32m200[39m in 140ms[2m (next.js: 40ms, application-code: 99ms)[22m
+ GET /groups/cmrbzkvkm000n1pv2qczr9g3y [32m200[39m in 49ms[2m (next.js: 973µs, application-code: 48ms)[22m
+ GET /groups/cmrbzkvkm000n1pv2qczr9g3y [32m200[39m in 28ms[2m (next.js: 1189µs, application-code: 27ms)[22m
+ GET / [32m200[39m in 158ms[2m (next.js: 10ms, application-code: 148ms)[22m
+ GET / [32m200[39m in 24ms[2m (next.js: 2ms, application-code: 21ms)[22m
+[zustand persist middleware] Unable to update item 'auth-storage', the given storage is currently unavailable.
+[zustand persist middleware] Unable to update item 'auth-storage', the given storage is currently unavailable.
+[31m[1m⨯[22m[39m Error [AxiosError]: Request failed with status code 401
+    at async queryFn (src/components/pageContents/GroupAndLeaderboard.tsx:22:25)
+  [90m20 |[0m         queryKey: [[32m"group"[0m, groupId],
+  [90m21 |[0m         queryFn: [36masync[0m () => {
+[31m[1m>[0m [90m22 |[0m             [36mconst[0m res = [36mawait[0m api.get([32m`/group/[0m${groupId[32m}`[0m)
+  [90m   |[0m                         [31m[1m^[0m
+  [90m23 |[0m             [36mreturn[0m res.data
+  [90m24 |[0m         },
+  [90m25 |[0m         staleTime: [35m1000[0m * [35m60[0m * [35m5[0m, {
+  isAxiosError: [33mtrue[39m,
+  code: [32m'ERR_BAD_REQUEST'[39m,
+  config: {
+    transitional: {
+      silentJSONParsing: [33mtrue[39m,
+      forcedJSONParsing: [33mtrue[39m,
+      clarifyTimeoutError: [33mfalse[39m,
+      legacyInterceptorReqResOrdering: [33mtrue[39m
+    },
+    adapter: [ [32m'xhr'[39m, [32m'http'[39m, [32m'fetch'[39m ],
+    transformRequest: [ [36m[Function: transformRequest][39m ],
+    transformResponse: [ [36m[Function: transformResponse][39m ],
+    timeout: [33m0[39m,
+    xsrfCookieName: [32m'XSRF-TOKEN'[39m,
+    xsrfHeaderName: [32m'X-XSRF-TOKEN'[39m,
+    maxContentLength: [33m-1[39m,
+    maxBodyLength: [33m-1[39m,
+    env: { FormData: [36m[Function][39m, Blob: [36m[class Blob][39m },
+    validateStatus: [36m[Function: validateStatus][39m,
+    headers: Object [AxiosHeaders] {
+      Accept: [32m'application/json, text/plain, */*'[39m,
+      [32m'Content-Type'[39m: [90mundefined[39m,
+      [32m'User-Agent'[39m: [32m'axios/1.15.0'[39m,
+      [32m'Accept-Encoding'[39m: [32m'gzip, compress, deflate, br'[39m
+    },
+    baseURL: [32m'http://localhost:3002'[39m,
+    method: [32m'get'[39m,
+    url: [32m'/group/cmrc0mhi60001o1v2e7m07hsm'[39m,
+    allowAbsoluteUrls: [33mtrue[39m,
+    data: [90mundefined[39m
+  },
+  request: [36m<ref *1>[39m ClientRequest {
+    _events: [Object: null prototype] {
+      abort: [36m[Function (anonymous)][39m,
+      aborted: [36m[Function (anonymous)][39m,
+      connect: [36m[Function (anonymous)][39m,
+      error: [36m[Function (anonymous)][39m,
+      socket: [36m[Function (anonymous)][39m,
+      timeout: [36m[Function (anonymous)][39m,
+      finish: [36m[Function: requestOnFinish][39m
+    },
+    _eventsCount: [33m7[39m,
+    _maxListeners: [90mundefined[39m,
+    outputData: [],
+    outputSize: [33m0[39m,
+    writable: [33mtrue[39m,
+    destroyed: [33mtrue[39m,
+    _last: [33mtrue[39m,
+    chunkedEncoding: [33mfalse[39m,
+    shouldKeepAlive: [33mtrue[39m,
+    maxRequestsOnConnectionReached: [33mfalse[39m,
+    _defaultKeepAlive: [33mtrue[39m,
+    useChunkedEncodingByDefault: [33mfalse[39m,
+    sendDate: [33mfalse[39m,
+    _removedConnection: [33mfalse[39m,
+    _removedContLen: [33mfalse[39m,
+    _removedTE: [33mfalse[39m,
+    strictContentLength: [33mfalse[39m,
+    _contentLength: [33m0[39m,
+    _hasBody: [33mtrue[39m,
+    _trailer: [32m''[39m,
+    finished: [33mtrue[39m,
+    _headerSent: [33mtrue[39m,
+    _closed: [33mtrue[39m,
+    socket: Socket {
+      connecting: [33mfalse[39m,
+      _hadError: [33mfalse[39m,
+      _parent: [1mnull[22m,
+      _host: [32m'localhost'[39m,
+      _closeAfterHandlingError: [33mfalse[39m,
+      _events: [36m[Object][39m,
+      _readableState: [36m[ReadableState][39m,
+      _writableState: [36m[WritableState][39m,
+      allowHalfOpen: [33mfalse[39m,
+      _maxListeners: [90mundefined[39m,
+      _eventsCount: [33m6[39m,
+      _sockname: [1mnull[22m,
+      _pendingData: [1mnull[22m,
+      _pendingEncoding: [32m''[39m,
+      server: [1mnull[22m,
+      _server: [1mnull[22m,
+      timeout: [33m4000[39m,
+      parser: [1mnull[22m,
+      _httpMessage: [1mnull[22m,
+      autoSelectFamilyAttemptedAddresses: [36m[Array][39m,
+      [[32mSymbol(async_id_symbol)[39m]: [33m-1[39m,
+      [[32mSymbol(kHandle)[39m]: [36m[TCP][39m,
+      [[32mSymbol(lastWriteQueueSize)[39m]: [33m0[39m,
+      [[32mSymbol(timeout)[39m]: Timeout {
+        _idleTimeout: [33m4000[39m,
+        _idlePrev: [36m[TimersList][39m,
+        _idleNext: [36m[TimersList][39m,
+        _idleStart: [33m5515949[39m,
+        _onTimeout: [36m[Function: bound ][39m,
+        _timerArgs: [90mundefined[39m,
+        _repeat: [1mnull[22m,
+        _destroyed: [33mfalse[39m,
+        [[32mSymbol(refed)[39m]: [33mfalse[39m,
+        [[32mSymbol(kHasPrimitive)[39m]: [33mfalse[39m,
+        [[32mSymbol(asyncId)[39m]: [33m128553[39m,
+        [[32mSymbol(triggerId)[39m]: [33m128551[39m,
+        [[32mSymbol(kResourceStore)[39m]: [36m[Object][39m,
+        [[32mSymbol(kResourceStore)[39m]: [90mundefined[39m,
+        [[32mSymbol(kResourceStore)[39m]: [90mundefined[39m,
+        [[32mSymbol(kResourceStore)[39m]: [36m[RequestInstance][39m,
+        [[32mSymbol(kResourceStore)[39m]: [36m[Object][39m
+      },
+      [[32mSymbol(kBuffer)[39m]: [1mnull[22m,
+      [[32mSymbol(kBufferCb)[39m]: [1mnull[22m,
+      [[32mSymbol(kBufferGen)[39m]: [1mnull[22m,
+      [[32mSymbol(shapeMode)[39m]: [33mtrue[39m,
+      [[32mSymbol(kCapture)[39m]: [33mfalse[39m,
+      [[32mSymbol(kSetNoDelay)[39m]: [33mtrue[39m,
+      [[32mSymbol(kSetKeepAlive)[39m]: [33mtrue[39m,
+      [[32mSymbol(kSetKeepAliveInitialDelay)[39m]: [33m1[39m,
+      [[32mSymbol(kBytesRead)[39m]: [33m0[39m,
+      [[32mSymbol(kBytesWritten)[39m]: [33m0[39m
+    },
+    _header: [32m'GET /group/cmrc0mhi60001o1v2e7m07hsm HTTP/1.1\r\n'[39m +
+      [32m'Accept: application/json, text/plain, */*\r\n'[39m +
+      [32m'User-Agent: axios/1.15.0\r\n'[39m +
+      [32m'Accept-Encoding: gzip, compress, deflate, br\r\n'[39m +
+      [32m'Host: localhost:3002\r\n'[39m +
+      [32m'Connection: keep-alive\r\n'[39m +
+      [32m'\r\n'[39m,
+    _keepAliveTimeout: [33m0[39m,
+    _onPendingData: [36m[Function: nop][39m,
+    agent: Agent {
+      _events: [36m[Object: null prototype][39m,
+      _eventsCount: [33m2[39m,
+      _maxListeners: [90mundefined[39m,
+      defaultPort: [33m80[39m,
+      protocol: [32m'http:'[39m,
+      options: [36m[Object: null prototype][39m,
+      requests: [Object: null prototype] {},
+      sockets: [Object: null prototype] {},
+      freeSockets: [36m[Object: null prototype][39m,
+      keepAliveMsecs: [33m1000[39m,
+      keepAlive: [33mtrue[39m,
+      maxSockets: [33mInfinity[39m,
+      maxFreeSockets: [33m256[39m,
+      scheduling: [32m'lifo'[39m,
+      maxTotalSockets: [33mInfinity[39m,
+      totalSocketCount: [33m1[39m,
+      [[32mSymbol(shapeMode)[39m]: [33mfalse[39m,
+      [[32mSymbol(kCapture)[39m]: [33mfalse[39m
+    },
+    socketPath: [90mundefined[39m,
+    method: [32m'GET'[39m,
+    maxHeaderSize: [90mundefined[39m,
+    insecureHTTPParser: [90mundefined[39m,
+    joinDuplicateHeaders: [90mundefined[39m,
+    path: [32m'/group/cmrc0mhi60001o1v2e7m07hsm'[39m,
+    _ended: [33mtrue[39m,
+    res: IncomingMessage {
+      _events: [36m[Object][39m,
+      _readableState: [36m[ReadableState][39m,
+      _maxListeners: [90mundefined[39m,
+      socket: [1mnull[22m,
+      httpVersionMajor: [33m1[39m,
+      httpVersionMinor: [33m1[39m,
+      httpVersion: [32m'1.1'[39m,
+      complete: [33mtrue[39m,
+      rawHeaders: [36m[Array][39m,
+      rawTrailers: [],
+      joinDuplicateHeaders: [90mundefined[39m,
+      aborted: [33mfalse[39m,
+      upgrade: [33mfalse[39m,
+      url: [32m''[39m,
+      method: [1mnull[22m,
+      statusCode: [33m401[39m,
+      statusMessage: [32m'Unauthorized'[39m,
+      client: [36m[Socket][39m,
+      _consuming: [33mfalse[39m,
+      _dumped: [33mfalse[39m,
+      req: [36m[Circular *1][39m,
+      _eventsCount: [33m4[39m,
+      responseUrl: [32m'http://localhost:3002/group/cmrc0mhi60001o1v2e7m07hsm'[39m,
+      redirects: [],
+      [[32mSymbol(shapeMode)[39m]: [33mtrue[39m,
+      [[32mSymbol(kCapture)[39m]: [33mfalse[39m,
+      [[32mSymbol(kHeaders)[39m]: [36m[Object][39m,
+      [[32mSymbol(kHeadersCount)[39m]: [33m16[39m,
+      [[32mSymbol(kTrailers)[39m]: [1mnull[22m,
+      [[32mSymbol(kTrailersCount)[39m]: [33m0[39m
+    },
+    aborted: [33mfalse[39m,
+    timeoutCb: [1mnull[22m,
+    upgradeOrConnect: [33mfalse[39m,
+    parser: [1mnull[22m,
+    maxHeadersCount: [1mnull[22m,
+    reusedSocket: [33mtrue[39m,
+    host: [32m'localhost'[39m,
+    protocol: [32m'http:'[39m,
+    _redirectable: Writable {
+      _events: [36m[Object][39m,
+      _writableState: [36m[WritableState][39m,
+      _maxListeners: [90mundefined[39m,
+      _options: [36m[Object][39m,
+      _ended: [33mtrue[39m,
+      _ending: [33mtrue[39m,
+      _redirectCount: [33m0[39m,
+      _redirects: [],
+      _requestBodyLength: [33m0[39m,
+      _requestBodyBuffers: [],
+      _eventsCount: [33m3[39m,
+      _onNativeResponse: [36m[Function (anonymous)][39m,
+      _headerFilter: [31m/^(?:Authorization|Proxy-Authorization|Cookie)$/i[39m,
+      _currentRequest: [36m[Circular *1][39m,
+      _currentUrl: [32m'http://localhost:3002/group/cmrc0mhi60001o1v2e7m07hsm'[39m,
+      _timeout: [1mnull[22m,
+      [[32mSymbol(shapeMode)[39m]: [33mtrue[39m,
+      [[32mSymbol(kCapture)[39m]: [33mfalse[39m
+    },
+    [[32mSymbol(shapeMode)[39m]: [33mfalse[39m,
+    [[32mSymbol(kCapture)[39m]: [33mfalse[39m,
+    [[32mSymbol(kBytesWritten)[39m]: [33m0[39m,
+    [[32mSymbol(kNeedDrain)[39m]: [33mfalse[39m,
+    [[32mSymbol(corked)[39m]: [33m0[39m,
+    [[32mSymbol(kOutHeaders)[39m]: [Object: null prototype] {
+      accept: [36m[Array][39m,
+      [32m'user-agent'[39m: [36m[Array][39m,
+      [32m'accept-encoding'[39m: [36m[Array][39m,
+      host: [36m[Array][39m
+    },
+    [[32mSymbol(errored)[39m]: [1mnull[22m,
+    [[32mSymbol(kHighWaterMark)[39m]: [33m16384[39m,
+    [[32mSymbol(kRejectNonStandardBodyWrites)[39m]: [33mfalse[39m,
+    [[32mSymbol(kUniqueHeaders)[39m]: [1mnull[22m
+  },
+  response: {
+    status: [33m401[39m,
+    statusText: [32m'Unauthorized'[39m,
+    headers: Object [AxiosHeaders] {
+      [32m'x-powered-by'[39m: [32m'Express'[39m,
+      [32m'access-control-allow-origin'[39m: [32m'*'[39m,
+      [32m'content-type'[39m: [32m'application/json; charset=utf-8'[39m,
+      [32m'content-length'[39m: [32m'71'[39m,
+      etag: [32m'W/"47-hTNE3HHRqMMGfZK+e0PiAwBsSDQ"'[39m,
+      date: [32m'Wed, 08 Jul 2026 11:51:21 GMT'[39m,
+      connection: [32m'keep-alive'[39m,
+      [32m'keep-alive'[39m: [32m'timeout=5'[39m
+    },
+    config: {
+      transitional: [36m[Object][39m,
+      adapter: [36m[Array][39m,
+      transformRequest: [36m[Array][39m,
+      transformResponse: [36m[Array][39m,
+      timeout: [33m0[39m,
+      xsrfCookieName: [32m'XSRF-TOKEN'[39m,
+      xsrfHeaderName: [32m

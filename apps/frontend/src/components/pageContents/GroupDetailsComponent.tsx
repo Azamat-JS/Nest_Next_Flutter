@@ -22,6 +22,7 @@ import { MoreHorizontal, Edit, Trash, UserPlus } from 'lucide-react';
 import { Input } from "@/components/ui/input"
 import { DeleteStudentPayload, TokenPayload, UpdateScorePayload } from '@/lib/types/token_payload';
 import AddScoreDrawer from '../AddScoreDrawer';
+import AddHomeworkDrawer from '../AddHomeworkDrawer';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { GroupScoreResponse } from '@/lib/types/score_type';
 import { useQueryClient, useMutation } from "@tanstack/react-query";
@@ -72,6 +73,7 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
     const [openUpdate, setOpenUpdate] = useState(false);
     const [openDelete, setOpenDelete] = useState(false);
     const [openAddStudents, setOpenAddStudents] = useState(false);
+    const [openAddHomework, setOpenAddHomework] = useState(false);
     const [newStudentIds, setNewStudentIds] = useState<string[]>([]);
     const [selectedStudent, setSelectedStudent] = useState<TokenPayload | null>(null);
     const [type, setType] = useState<"HOMEWORK" | "ATTENDANCE">("HOMEWORK");
@@ -254,6 +256,12 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
                 <Button variant="outline" onClick={() => setOpenAddStudents(true)} className="gap-1">
                     <UserPlus className="h-4 w-4" /> Add Students
                 </Button>
+                <AddHomeworkDrawer
+                    openCreate={openAddHomework}
+                    setOpenCreate={setOpenAddHomework}
+                    groupId={groupId}
+                    onHomeworkAdded={() => queryClient.invalidateQueries({ queryKey: ['group-homeworks', groupId] })}
+                />
             </div>
 
             {/* Pagination */}

@@ -35,6 +35,7 @@ model Tenant {
   messageStatuses MessageStatus[]
   attachments     Attachment[]
   waitingList     WaitingList[]
+  homeworks       Homework[]
 
   @@map("Tenant")
 }
@@ -197,6 +198,7 @@ model Groups {
   scoreEvents     ScoreEvent[]
   studentScores   StudentScore[]
   studentPayments StudentPayment[]
+  homeworks       Homework[]
 
   @@unique([tenantId, name])
   @@index([teacherId])
@@ -277,6 +279,25 @@ model StudentPayment {
   @@index([groupId])
   @@index([tenantId])
   @@map("StudentPayment")
+}
+
+model Homework {
+  id      String   @id @default(cuid())
+  topic   String
+  dueDate DateTime
+
+  groupId String
+  group   Groups @relation(fields: [groupId], references: [id], onDelete: Cascade)
+
+  tenantId String
+  tenant   Tenant @relation(fields: [tenantId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([groupId])
+  @@index([tenantId])
+  @@map("Homework")
 }
 
 model Chat {
