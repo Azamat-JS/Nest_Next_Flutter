@@ -129,6 +129,8 @@ const UsersTab = () => {
             toast.success('User updated successfully')
             setOpenUpdate(false)
             queryClient.invalidateQueries({ queryKey: ['users'] })
+            queryClient.invalidateQueries({ queryKey: ['teachers'] })
+            queryClient.invalidateQueries({ queryKey: ['students'] })
         },
         onError: (error: any) => {
             toast.error(error.response?.data?.message ?? 'Something went wrong')
@@ -143,6 +145,8 @@ const UsersTab = () => {
             toast.success('User deleted successfully')
             setOpenDelete(false)
             queryClient.invalidateQueries({ queryKey: ['users'] })
+            queryClient.invalidateQueries({ queryKey: ['teachers'] })
+            queryClient.invalidateQueries({ queryKey: ['students'] })
         },
         onError: (error: any) => {
             toast.error(error.response?.data?.message ?? 'Something went wrong')
@@ -158,6 +162,8 @@ const UsersTab = () => {
             setOpenCreate(false)
             createForm.reset()
             queryClient.invalidateQueries({ queryKey: ['users'] })
+            queryClient.invalidateQueries({ queryKey: ['teachers'] })
+            queryClient.invalidateQueries({ queryKey: ['students'] })
         },
         onError: (error: any) => {
             toast.error(error.response?.data?.message ?? 'Something went wrong')

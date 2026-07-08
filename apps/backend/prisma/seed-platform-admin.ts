@@ -22,7 +22,6 @@ async function main() {
         update: { password: hashed },
         create: { phone: SUPERADMIN_PHONE, password: hashed },
     });
-    console.log(`Seeded PlatformAdmin (${admin.phone})`);
 
     await prisma.$disconnect();
 }
