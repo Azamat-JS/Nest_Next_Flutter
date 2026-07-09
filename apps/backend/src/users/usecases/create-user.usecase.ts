@@ -23,10 +23,26 @@ export class CreateUserUseCase {
     ) { }
 
     async execute(dto: CreateUserDto, creatorRole: UserRole) {
+        const { studentIds, ...userData } = dto;
         const normalizedRole = dto.role.toString().toUpperCase() as UserRole;
 
         if (!ALLOWED_CREATIONS[creatorRole]?.includes(normalizedRole)) {
             throw new ForbiddenException(`${creatorRole} cannot create a ${normalizedRole} account`);
+        }
+
+        const uniqueStudentIds = [...new Set(studentIds ?? [])];
+        if (uniqueStudentIds.length > 0 && normalizedRole !== UserRole.PARENT) {
+            throw new BadRequestException('studentIds can only be provided when creating a PARENT account');
+        }
+
+        if (uniqueStudentIds.length > 0) {
+            const students = await this.prisma.users.findMany({
+                where: { id: { in: uniqueStudentIds }, role: UserRole.STUDENT },
+                select: { id: true },
+            });
+            if (students.length !== uniqueStudentIds.length) {
+                throw new BadRequestException('One or more selected students were not found');
+            }
         }
 
         const existingUser = await this.rawPrisma.users.findUnique({
@@ -39,14 +55,28 @@ export class CreateUserUseCase {
         const hashedPassword = await bcrypt.hash(dto.password, 10);
 
         try {
-            const user = await this.prisma.users.create({
-                data: {
-                    ...dto,
-                    role: normalizedRole,
-                    password: hashedPassword,
-                    mustChangePassword: true,
-                    tenantId: this.tenantContext.getTenantId()!,
-                },
+            const user = await this.prisma.$transaction(async (tx) => {
+                const created = await tx.users.create({
+                    data: {
+                        ...userData,
+                        role: normalizedRole,
+                        password: hashedPassword,
+                        mustChangePassword: true,
+                        tenantId: this.tenantContext.getTenantId()!,
+                    },
+                });
+
+                if (uniqueStudentIds.length > 0) {
+                    await tx.parentStudent.createMany({
+                        data: uniqueStudentIds.map((studentId) => ({
+                            parentId: created.id,
+                            studentId,
+                            tenantId: created.tenantId,
+                        })),
+                    });
+                }
+
+                return created;
             });
 
             return {

@@ -53,7 +53,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Badge } from "@/components/ui/badge"
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useMutation, useQueryClient, useSuspenseQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient, useSuspenseQuery } from '@tanstack/react-query'
 import { PaginationType } from "@/lib/types/groups"
 import { CreateUserPayload } from "@/lib/types/token_payload"
 import api from "@/lib/api"
@@ -80,6 +80,10 @@ const createUserSchema = z.object({
     phone: z.string().regex(/^\d{9}$/, "Enter a valid 9-digit phone number"),
     password: z.string().min(6),
     role: z.string().min(1, "Select a role"),
+    studentIds: z.array(z.string()),
+}).refine((data) => data.role !== 'PARENT' || data.studentIds.length > 0, {
+    message: "Select at least one student",
+    path: ["studentIds"],
 })
 
 const UsersTab = () => {
@@ -171,12 +175,27 @@ const UsersTab = () => {
     })
 
     const createForm = useForm({
-        defaultValues: { firstName: "", lastName: "", phone: "", password: "", role: "" },
+        defaultValues: { firstName: "", lastName: "", phone: "", password: "", role: "", studentIds: [] as string[] },
         validators: { onSubmit: createUserSchema },
         onSubmit: async ({ value }) => {
-            createUserMutation.mutate({ ...value, phone: `+998${value.phone}` })
+            createUserMutation.mutate({
+                ...value,
+                phone: `+998${value.phone}`,
+                studentIds: value.role === 'PARENT' ? value.studentIds : undefined,
+            })
         },
     })
+
+    const { data: studentsData } = useQuery({
+        queryKey: ['students'],
+        queryFn: async () => {
+            const res = await api.get('/users/students')
+            return res.data
+        },
+        enabled: openCreate,
+        staleTime: 1000 * 60 * 5,
+    })
+    const students: TokenPayload[] = studentsData ?? []
 
     const users: TokenPayload[] = data?.data ?? []
     const meta: PaginationType = data?.meta ?? {}
@@ -421,7 +440,10 @@ const UsersTab = () => {
                                     return (
                                         <Field data-invalid={isInvalid}>
                                             <FieldLabel htmlFor={field.name}>Role</FieldLabel>
-                                            <Select value={field.state.value} onValueChange={(val) => field.handleChange(val)}>
+                                            <Select value={field.state.value} onValueChange={(val) => {
+                                                field.handleChange(val)
+                                                if (val !== 'PARENT') createForm.setFieldValue('studentIds', [])
+                                            }}>
                                                 <SelectTrigger id={field.name}>
                                                     <SelectValue placeholder="Select a role" />
                                                 </SelectTrigger>
@@ -440,6 +462,46 @@ const UsersTab = () => {
                                     )
                                 }}
                             </createForm.Field>
+
+                            <createForm.Subscribe selector={(state) => state.values.role}>
+                                {(selectedRole) => selectedRole === 'PARENT' && (
+                                    <createForm.Field name="studentIds">
+                                        {(field) => {
+                                            const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
+                                            return (
+                                                <Field data-invalid={isInvalid}>
+                                                    <FieldLabel>Children (students)</FieldLabel>
+                                                    <div className="max-h-44 overflow-y-auto rounded-md border p-3 space-y-2">
+                                                        {students.length === 0 && (
+                                                            <p className="text-sm text-muted-foreground">No students found</p>
+                                                        )}
+                                                        {students.map((student) => {
+                                                            const checked = field.state.value.includes(student.id)
+                                                            return (
+                                                                <label key={student.id} className="flex items-center gap-2 cursor-pointer">
+                                                                    <input
+                                                                        type="checkbox"
+                                                                        checked={checked}
+                                                                        onChange={(e) => {
+                                                                            field.handleChange(
+                                                                                e.target.checked
+                                                                                    ? [...field.state.value, student.id]
+                                                                                    : field.state.value.filter(id => id !== student.id)
+                                                                            )
+                                                                        }}
+                                                                    />
+                                                                    <span className="text-sm">{[student.firstName, student.lastName].filter(Boolean).join(' ')}</span>
+                                                                </label>
+                                                            )
+                                                        })}
+                                                    </div>
+                                                    {isInvalid && <FieldError errors={field.state.meta.errors} />}
+                                                </Field>
+                                            )
+                                        }}
+                                    </createForm.Field>
+                                )}
+                            </createForm.Subscribe>
                         </FieldGroup>
 
                         <DialogFooter>

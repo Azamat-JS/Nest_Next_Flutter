@@ -16,6 +16,7 @@ export type CreateUserPayload = {
     phone: string;
     password: string;
     role: string;
+    studentIds?: string[];
 }
 
 export type LeaderBoardType = {

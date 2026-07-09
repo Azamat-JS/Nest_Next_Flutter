@@ -1,6 +1,6 @@
 import { UserRole } from '@prisma/client';
 import { Transform } from 'class-transformer';
-import { IsEnum, IsNotEmpty, IsOptional, IsString, Matches, MinLength } from 'class-validator';
+import { IsArray, IsEnum, IsNotEmpty, IsOptional, IsString, Matches, MinLength } from 'class-validator';
 import { PaginationDto } from 'src/lib/shared/dto/pagination.dto';
 
 export class CreateUserDto {
@@ -27,6 +27,11 @@ export class CreateUserDto {
     @IsEnum(UserRole)
     @Transform(({ value }) => value?.toUpperCase())
     role!: UserRole;
+
+    @IsOptional()
+    @IsArray()
+    @IsString({ each: true })
+    studentIds?: string[];
 }
 
 export class UpdateUserDto {
