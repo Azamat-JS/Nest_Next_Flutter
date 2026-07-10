@@ -30,6 +30,8 @@ export class StudentPaymentController {
     return this.studentPaymentService.getPaymentById(paymentId)
   }
 
+  @UseGuards(RolesGuard)
+  @Roles('ADMIN', 'TEACHER')
   @Get("student-payments/:studentId")
   async getStudentPayments(@Query() query: PaginationDto, @Param("studentId") studentId: string) {
     return this.studentPaymentService.getStudentPayments(studentId, query);

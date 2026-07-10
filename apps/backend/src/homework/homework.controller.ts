@@ -12,6 +12,8 @@ export class HomeworkController {
         private readonly tenantContext: TenantContextService,
     ) { }
 
+    @UseGuards(RolesGuard)
+    @Roles('ADMIN', 'TEACHER')
     @Get('group/:groupId')
     findByGroup(@Param('groupId') groupId: string, @Query() query: HomeworkQueryDto) {
         return this.homeworkRepo.findByGroup(groupId, query);

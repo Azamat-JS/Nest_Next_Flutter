@@ -14,6 +14,8 @@ export class UsersController {
     private readonly createUserUseCase: CreateUserUseCase,
   ) { }
 
+  @UseGuards(RolesGuard)
+  @Roles('ADMIN', 'TEACHER')
   @Get()
   async getAllUsers(@Query() query: GetUsersQueryDto) {
     return this.usersService.getAllUsers(query)
@@ -54,16 +56,22 @@ export class UsersController {
     return this.usersService.updateAccessToken(oldRefreshToken);
   }
 
+  @UseGuards(RolesGuard)
+  @Roles('ADMIN', 'TEACHER')
   @Get('teachers')
   async getAllTeachers() {
     return this.usersService.getAllTeachers();
   }
 
+  @UseGuards(RolesGuard)
+  @Roles('ADMIN', 'TEACHER')
   @Get('students')
   async getAllStudents() {
     return this.usersService.getAllStudents();
   }
 
+  @UseGuards(RolesGuard)
+  @Roles('ADMIN', 'TEACHER')
   @Get(':id')
   async getUserById(@Param('id') id: string) {
     return this.usersService.getUserById(id);

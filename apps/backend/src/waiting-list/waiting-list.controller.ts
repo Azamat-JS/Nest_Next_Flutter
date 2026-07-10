@@ -8,6 +8,8 @@ import { RolesGuard } from 'src/lib/guards/roles.guard';
 export class WaitingListController {
     constructor(private readonly waitingListService: WaitingListService) { }
 
+    @UseGuards(RolesGuard)
+    @Roles('ADMIN', 'TEACHER')
     @Get()
     async getAll(@Query() query: GetWaitingListQueryDto) {
         return this.waitingListService.getAll(query);
