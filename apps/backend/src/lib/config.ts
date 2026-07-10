@@ -1,6 +1,6 @@
 import { Configuration, Value } from "@itgorillaz/configify";
 import { Transform } from "class-transformer";
-import { IsNotEmpty, IsString } from "class-validator";
+import { IsNotEmpty, IsOptional, IsString } from "class-validator";
 
 
 
@@ -30,4 +30,17 @@ export class AppConfig {
     @IsString()
     @Value("DATABASE_URL")
     DATABASE_URL!: string;
+
+    // Public HTTPS base URL of this backend - Telegram delivers webhook
+    // updates here, so it must be reachable from the internet.
+    @IsOptional()
+    @IsString()
+    @Value("API_PUBLIC_URL")
+    API_PUBLIC_URL?: string;
+
+    // HTTPS URL of the Telegram mini app (the frontend /tg entry page).
+    @IsOptional()
+    @IsString()
+    @Value("MINI_APP_URL")
+    MINI_APP_URL?: string;
 }

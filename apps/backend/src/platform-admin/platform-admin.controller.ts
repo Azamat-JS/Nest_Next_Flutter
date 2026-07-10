@@ -2,7 +2,7 @@ import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@n
 import { PlatformRoute } from 'src/lib/shared/decorators/platform-route';
 import { PlatformAdminGuard } from 'src/lib/guards/platform-admin.guard';
 import { PlatformAdminService } from './platform-admin.service';
-import { CreateTenantDto, PlatformAdminLoginDto, UpdateTenantStatusDto } from './dto/platform-admin.dto';
+import { CreateTenantDto, PlatformAdminLoginDto, SetTenantBotDto, UpdateTenantStatusDto } from './dto/platform-admin.dto';
 
 @PlatformRoute()
 @Controller('platform-admin')
@@ -30,6 +30,12 @@ export class PlatformAdminController {
     @Patch('tenants/:id/status')
     async updateTenantStatus(@Param('id') id: string, @Body() dto: UpdateTenantStatusDto) {
         return this.platformAdminService.updateTenantStatus(id, dto);
+    }
+
+    @UseGuards(PlatformAdminGuard)
+    @Patch('tenants/:id/bot')
+    async setTenantBot(@Param('id') id: string, @Body() dto: SetTenantBotDto) {
+        return this.platformAdminService.setTenantBot(id, dto);
     }
 
     @UseGuards(PlatformAdminGuard)

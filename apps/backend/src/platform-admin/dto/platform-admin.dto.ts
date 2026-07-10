@@ -41,6 +41,12 @@ export class CreateTenantDto {
     botToken?: string;
 }
 
+export class SetTenantBotDto {
+    @IsNotEmpty()
+    @IsString()
+    botToken!: string;
+}
+
 export class UpdateTenantStatusDto {
     @IsNotEmpty()
     @IsEnum(TenantStatus)

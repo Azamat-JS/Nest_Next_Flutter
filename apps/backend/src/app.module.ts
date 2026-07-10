@@ -11,6 +11,7 @@ import { StudentPaymentModule } from './student_payment/student_payment.module';
 import { PlatformAdminModule } from './platform-admin/platform-admin.module';
 import { WaitingListModule } from './waiting-list/waiting-list.module';
 import { HomeworkModule } from './homework/homework.module';
+import { TelegramModule } from './telegram/telegram.module';
 import { TenantModule } from './lib/tenant/tenant.module';
 import { JwtAuthGuard } from './lib/guards/jwt.guard';
 import { AppConfig } from './lib/config';
@@ -36,6 +37,7 @@ import { AppConfig } from './lib/config';
     PlatformAdminModule,
     WaitingListModule,
     HomeworkModule,
+    TelegramModule,
   ],
   controllers: [],
   providers: [

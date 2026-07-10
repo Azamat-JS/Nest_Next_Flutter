@@ -12,13 +12,14 @@ datasource db {
 }
 
 model Tenant {
-  id          String       @id @default(cuid())
-  name        String
-  status      TenantStatus @default(ACTIVE)
-  botToken    String?
-  botUsername String?
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
+  id            String       @id @default(cuid())
+  name          String
+  status        TenantStatus @default(ACTIVE)
+  botToken      String?
+  botUsername   String?
+  webhookSecret String?
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
 
   users           Users[]
   sessions        Session[]
@@ -36,6 +37,7 @@ model Tenant {
   attachments     Attachment[]
   waitingList     WaitingList[]
   homeworks       Homework[]
+  telegramLinks   TelegramLink[]
 
   @@map("Tenant")
 }
@@ -78,10 +80,37 @@ model Users {
   sessions       Session[]
   devices        DeviceToken[]
   studentPayment StudentPayment[]
+  telegramLinks  TelegramLink[]
 
   @@index([phone])
   @@index([tenantId])
   @@map("Users")
+}
+
+// Links a Telegram account to a PARENT or STUDENT user of one tenant's bot.
+// `verified` is true only when the phone came from Telegram's contact-share
+// (attested to belong to the sender); manually typed phones stay unverified.
+model TelegramLink {
+  id String @id @default(cuid())
+
+  userId String
+  user   Users  @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  tenantId String
+  tenant   Tenant @relation(fields: [tenantId], references: [id])
+
+  telegramUserId String
+  chatId         String
+  phone          String
+  verified       Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([tenantId, telegramUserId])
+  @@index([userId])
+  @@index([tenantId])
+  @@map("TelegramLink")
 }
 
 model WaitingList {
