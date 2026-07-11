@@ -5,8 +5,10 @@ import api from "@/lib/api"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Users, BookOpen, Trophy, TrendingUp } from "lucide-react"
 import { LeaderBoardType } from "@/lib/types/token_payload"
+import { useTranslations } from "next-intl"
 
 const DashboardComponent = () => {
+    const t = useTranslations('DashboardComponent')
     const { data: usersData } = useSuspenseQuery({
         queryKey: ['dashboard-users'],
         queryFn: async () => {
@@ -40,17 +42,17 @@ const DashboardComponent = () => {
     const topScore = topStudents[0]?.total ?? 0
 
     const stats = [
-        { title: "Total Users", value: totalUsers, icon: Users, description: "Registered accounts" },
-        { title: "Total Groups", value: totalGroups, icon: BookOpen, description: "Active study groups" },
-        { title: "Top Score", value: topScore, icon: Trophy, description: [topStudents[0]?.student?.firstName, topStudents[0]?.student?.lastName].filter(Boolean).join(' ') || "No data" },
-        { title: "Students on board", value: leaderboardData?.meta?.total ?? 0, icon: TrendingUp, description: "With recorded scores" },
+        { title: t('totalUsers'), value: totalUsers, icon: Users, description: t('registeredAccounts') },
+        { title: t('totalGroups'), value: totalGroups, icon: BookOpen, description: t('activeStudyGroups') },
+        { title: t('topScore'), value: topScore, icon: Trophy, description: [topStudents[0]?.student?.firstName, topStudents[0]?.student?.lastName].filter(Boolean).join(' ') || t('noData') },
+        { title: t('studentsOnBoard'), value: leaderboardData?.meta?.total ?? 0, icon: TrendingUp, description: t('withRecordedScores') },
     ]
 
     return (
         <div className="space-y-8">
             <div>
-                <h2 className="text-2xl font-bold tracking-tight">Dashboard</h2>
-                <p className="text-muted-foreground">Overview of your educational center</p>
+                <h2 className="text-2xl font-bold tracking-tight">{t('dashboard')}</h2>
+                <p className="text-muted-foreground">{t('overview')}</p>
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -70,7 +72,7 @@ const DashboardComponent = () => {
 
             {topStudents.length > 0 && (
                 <div>
-                    <h3 className="text-lg font-semibold mb-3">Top 5 Students</h3>
+                    <h3 className="text-lg font-semibold mb-3">{t('top5Students')}</h3>
                     <div className="space-y-2">
                         {topStudents.map((s, idx) => (
                             <div key={idx} className="flex items-center justify-between rounded-lg border p-3">

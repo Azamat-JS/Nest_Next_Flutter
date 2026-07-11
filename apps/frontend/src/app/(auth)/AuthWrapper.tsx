@@ -5,12 +5,14 @@ import { LoginForm } from '@/components/LoginForm'
 import ChangePasswordScreen from '@/components/pageContents/ChangePasswordScreen'
 import { GraduationCap } from 'lucide-react'
 import dynamic from 'next/dynamic'
+import { useTranslations } from 'next-intl'
 
 const HomePage = dynamic(() => import('../(pages)/home/page'), { ssr: false })
 
 export default function AuthWrapper() {
     const isAuthenticated = useAuthStore((state) => state.isAuthenticated)
     const mustChangePassword = useAuthStore((state) => state.mustChangePassword)
+    const t = useTranslations('LoginForm')
 
     if (isAuthenticated && mustChangePassword) return <ChangePasswordScreen />
 
@@ -25,7 +27,7 @@ export default function AuthWrapper() {
                     </div>
                     <h1 className="text-3xl font-bold tracking-tight">EduCenter</h1>
                     <p className="text-muted-foreground text-sm">
-                        Student score tracking and management platform
+                        {t('tagline')}
                     </p>
                 </div>
                 <LoginForm id="auth-form" />

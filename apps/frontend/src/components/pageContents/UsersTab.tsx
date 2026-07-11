@@ -12,7 +12,7 @@ import {
 import { TokenPayload } from "@/lib/types/token_payload"
 import { useAuthStore } from "@/lib/stores/authStore"
 import { jwtDecode } from "jwt-decode"
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { toast } from "sonner"
 import { Button } from "@/components/ui/button"
 import {
@@ -61,6 +61,7 @@ import { cn } from "@/lib/utils"
 import { useForm } from "@tanstack/react-form"
 import * as z from "zod"
 import { UserPlus } from "lucide-react"
+import { useTranslations } from "next-intl"
 
 const roleVariant: Record<string, "default" | "secondary" | "outline" | "destructive"> = {
     ADMIN: "default",
@@ -74,19 +75,9 @@ const CREATABLE_ROLES: Record<string, string[]> = {
     TEACHER: ["STUDENT", "PARENT"],
 }
 
-const createUserSchema = z.object({
-    firstName: z.string().min(2),
-    lastName: z.string(),
-    phone: z.string().regex(/^\d{9}$/, "Enter a valid 9-digit phone number"),
-    password: z.string().min(6),
-    role: z.string().min(1, "Select a role"),
-    studentIds: z.array(z.string()),
-}).refine((data) => data.role !== 'PARENT' || data.studentIds.length > 0, {
-    message: "Select at least one student",
-    path: ["studentIds"],
-})
-
 const UsersTab = () => {
+    const t = useTranslations("UsersTab")
+    const tCommon = useTranslations("Common")
     const token = useAuthStore((state) => state.token)
     const me = token ? jwtDecode<TokenPayload>(token) : null
     const [openCreate, setOpenCreate] = useState(false)
@@ -102,6 +93,18 @@ const UsersTab = () => {
     const role = searchParams.get('role') ?? ''
     const search = searchParams.get('search') ?? ''
     const [searchInput, setSearchInput] = useState(search)
+
+    const createUserSchema = useMemo(() => z.object({
+        firstName: z.string().min(2),
+        lastName: z.string(),
+        phone: z.string().regex(/^\d{9}$/, t('phoneInvalid')),
+        password: z.string().min(6),
+        role: z.string().min(1, t('selectRole')),
+        studentIds: z.array(z.string()),
+    }).refine((data) => data.role !== 'PARENT' || data.studentIds.length > 0, {
+        message: t('selectAtLeastOneStudent'),
+        path: ["studentIds"],
+    }), [t])
 
     useEffect(() => {
         const handler = setTimeout(() => {
@@ -130,14 +133,14 @@ const UsersTab = () => {
             return await api.put(`/users/${user.id}`, user)
         },
         onSuccess: () => {
-            toast.success('User updated successfully')
+            toast.success(t('userUpdated'))
             setOpenUpdate(false)
             queryClient.invalidateQueries({ queryKey: ['users'] })
             queryClient.invalidateQueries({ queryKey: ['teachers'] })
             queryClient.invalidateQueries({ queryKey: ['students'] })
         },
         onError: (error: any) => {
-            toast.error(error.response?.data?.message ?? 'Something went wrong')
+            toast.error(error.response?.data?.message ?? tCommon('errorGeneric'))
         },
     })
 
@@ -146,14 +149,14 @@ const UsersTab = () => {
             return await api.delete(`/users/${userId}`)
         },
         onSuccess: () => {
-            toast.success('User deleted successfully')
+            toast.success(t('userDeleted'))
             setOpenDelete(false)
             queryClient.invalidateQueries({ queryKey: ['users'] })
             queryClient.invalidateQueries({ queryKey: ['teachers'] })
             queryClient.invalidateQueries({ queryKey: ['students'] })
         },
         onError: (error: any) => {
-            toast.error(error.response?.data?.message ?? 'Something went wrong')
+            toast.error(error.response?.data?.message ?? tCommon('errorGeneric'))
         },
     })
 
@@ -162,7 +165,7 @@ const UsersTab = () => {
             return await api.post('/users', payload)
         },
         onSuccess: () => {
-            toast.success('User created successfully')
+            toast.success(t('userCreated'))
             setOpenCreate(false)
             createForm.reset()
             queryClient.invalidateQueries({ queryKey: ['users'] })
@@ -170,7 +173,7 @@ const UsersTab = () => {
             queryClient.invalidateQueries({ queryKey: ['students'] })
         },
         onError: (error: any) => {
-            toast.error(error.response?.data?.message ?? 'Something went wrong')
+            toast.error(error.response?.data?.message ?? tCommon('errorGeneric'))
         },
     })
 
@@ -210,7 +213,7 @@ const UsersTab = () => {
                         <Input
                             value={searchInput}
                             onChange={(e) => setSearchInput(e.target.value)}
-                            placeholder="Search by name or phone"
+                            placeholder={t('searchPlaceholder')}
                             className="pl-8"
                         />
                     </div>
@@ -221,11 +224,11 @@ const UsersTab = () => {
                         router.push(`?${params.toString()}`)
                     }}>
                         <SelectTrigger className="w-40">
-                            <SelectValue placeholder="All roles" />
+                            <SelectValue placeholder={t('allRoles')} />
                         </SelectTrigger>
                         <SelectContent>
                             <SelectGroup>
-                                <SelectItem value="ALL">All roles</SelectItem>
+                                <SelectItem value="ALL">{t('allRoles')}</SelectItem>
                                 {Object.keys(roleVariant).map((r) => (
                                     <SelectItem key={r} value={r} className="capitalize">
                                         {r.toLowerCase()}
@@ -237,22 +240,22 @@ const UsersTab = () => {
                 </div>
                 {creatableRoles.length > 0 && (
                     <Button onClick={() => setOpenCreate(true)} className="gap-1">
-                        <UserPlus className="h-4 w-4" /> Create user
+                        <UserPlus className="h-4 w-4" /> {t('createUser')}
                     </Button>
                 )}
             </div>
 
             <Table>
                 <TableCaption>
-                    Showing {users.length} of {meta?.total ?? 0} users
+                    {t('showingCount', { count: users.length, total: meta?.total ?? 0 })}
                 </TableCaption>
                 <TableHeader>
                     <TableRow>
                         <TableHead className="w-12 text-center font-semibold">#</TableHead>
-                        <TableHead className="text-center font-semibold">Name</TableHead>
-                        <TableHead className="text-center font-semibold">Phone</TableHead>
-                        <TableHead className="text-center font-semibold">Role</TableHead>
-                        <TableHead className="w-16 text-center font-semibold">Actions</TableHead>
+                        <TableHead className="text-center font-semibold">{tCommon('name')}</TableHead>
+                        <TableHead className="text-center font-semibold">{tCommon('phone')}</TableHead>
+                        <TableHead className="text-center font-semibold">{tCommon('role')}</TableHead>
+                        <TableHead className="w-16 text-center font-semibold">{tCommon('actions')}</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -263,7 +266,7 @@ const UsersTab = () => {
                                 <TableCell className="text-center">{(page - 1) * limit + idx + 1}</TableCell>
                                 <TableCell className="text-center font-medium">
                                     {[u.firstName, u.lastName].filter(Boolean).join(' ')}
-                                    {isMe && <span className="ml-2 text-xs text-primary">(you)</span>}
+                                    {isMe && <span className="ml-2 text-xs text-primary">{t('youSuffix')}</span>}
                                 </TableCell>
                                 <TableCell className="text-center text-muted-foreground">{u.phone}</TableCell>
                                 <TableCell className="text-center">
@@ -281,13 +284,13 @@ const UsersTab = () => {
                                         <DropdownMenuContent align="end">
                                             <DropdownMenuGroup>
                                                 <DropdownMenuItem onClick={() => { setOpenUpdate(true); setSelectedUser(u) }}>
-                                                    <Edit className="h-4 w-4" /> Edit
+                                                    <Edit className="h-4 w-4" /> {t('edit')}
                                                 </DropdownMenuItem>
                                                 <DropdownMenuItem
                                                     onClick={() => { setOpenDelete(true); setSelectedUser(u) }}
                                                     className="text-destructive focus:text-destructive"
                                                 >
-                                                    <Trash className="h-4 w-4" /> Delete
+                                                    <Trash className="h-4 w-4" /> {t('delete')}
                                                 </DropdownMenuItem>
                                             </DropdownMenuGroup>
                                         </DropdownMenuContent>
@@ -303,7 +306,7 @@ const UsersTab = () => {
             <div className="grid grid-cols-2 items-center">
                 <div className="flex justify-center">
                     <Field orientation="horizontal" className="w-fit">
-                        <FieldLabel htmlFor="users-rows-per-page">Rows per page</FieldLabel>
+                        <FieldLabel htmlFor="users-rows-per-page">{t('rowsPerPage')}</FieldLabel>
                         <Select value={String(limit)} onValueChange={(val) => {
                             const params = new URLSearchParams(searchParams.toString())
                             params.set('limit', val)
@@ -327,7 +330,7 @@ const UsersTab = () => {
                     <Pagination>
                         <PaginationContent>
                             <PaginationItem>
-                                <PaginationPrevious href={`?page=${Math.max(1, page - 1)}&limit=${limit}`} />
+                                <PaginationPrevious href={`?page=${Math.max(1, page - 1)}&limit=${limit}`} text={tCommon('previous')} />
                             </PaginationItem>
                             {Array.from({ length: lastPage }).map((_, idx) => (
                                 <PaginationItem key={idx}>
@@ -337,7 +340,7 @@ const UsersTab = () => {
                                 </PaginationItem>
                             ))}
                             <PaginationItem>
-                                <PaginationNext href={`?page=${Math.min(lastPage, page + 1)}&limit=${limit}`} />
+                                <PaginationNext href={`?page=${Math.min(lastPage, page + 1)}&limit=${limit}`} text={tCommon('next')} />
                             </PaginationItem>
                         </PaginationContent>
                     </Pagination>
@@ -348,8 +351,8 @@ const UsersTab = () => {
             <Dialog open={openCreate} onOpenChange={setOpenCreate}>
                 <DialogContent className="sm:max-w-sm">
                     <DialogHeader>
-                        <DialogTitle>Create User</DialogTitle>
-                        <DialogDescription>Add a new teacher, student, or parent to your center.</DialogDescription>
+                        <DialogTitle>{t('createUserTitle')}</DialogTitle>
+                        <DialogDescription>{t('createUserDescription')}</DialogDescription>
                     </DialogHeader>
                     <form
                         onSubmit={(e) => { e.preventDefault(); createForm.handleSubmit() }}
@@ -361,7 +364,7 @@ const UsersTab = () => {
                                     const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
                                     return (
                                         <Field data-invalid={isInvalid}>
-                                            <FieldLabel htmlFor={field.name}>First name</FieldLabel>
+                                            <FieldLabel htmlFor={field.name}>{t('firstNameLabel')}</FieldLabel>
                                             <Input
                                                 id={field.name}
                                                 value={field.state.value}
@@ -377,7 +380,7 @@ const UsersTab = () => {
                             <createForm.Field name="lastName">
                                 {(field) => (
                                     <Field>
-                                        <FieldLabel htmlFor={field.name}>Last name (optional)</FieldLabel>
+                                        <FieldLabel htmlFor={field.name}>{t('lastNameOptionalLabel')}</FieldLabel>
                                         <Input
                                             id={field.name}
                                             value={field.state.value}
@@ -393,7 +396,7 @@ const UsersTab = () => {
                                     const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
                                     return (
                                         <Field data-invalid={isInvalid}>
-                                            <FieldLabel htmlFor={field.name}>Phone number</FieldLabel>
+                                            <FieldLabel htmlFor={field.name}>{t('phoneNumberLabel')}</FieldLabel>
                                             <div className="flex items-center gap-2">
                                                 <span className="flex h-9 items-center rounded-md border bg-muted px-3 text-sm text-muted-foreground">
                                                     +998
@@ -419,14 +422,14 @@ const UsersTab = () => {
                                     const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
                                     return (
                                         <Field data-invalid={isInvalid}>
-                                            <FieldLabel htmlFor={field.name}>Temporary password</FieldLabel>
+                                            <FieldLabel htmlFor={field.name}>{t('temporaryPasswordLabel')}</FieldLabel>
                                             <Input
                                                 id={field.name}
                                                 type="password"
                                                 value={field.state.value}
                                                 onBlur={field.handleBlur}
                                                 onChange={(e) => field.handleChange(e.target.value)}
-                                                placeholder="Min. 6 characters"
+                                                placeholder={t('minCharsPlaceholder')}
                                             />
                                             {isInvalid && <FieldError errors={field.state.meta.errors} />}
                                         </Field>
@@ -439,13 +442,13 @@ const UsersTab = () => {
                                     const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
                                     return (
                                         <Field data-invalid={isInvalid}>
-                                            <FieldLabel htmlFor={field.name}>Role</FieldLabel>
+                                            <FieldLabel htmlFor={field.name}>{tCommon('role')}</FieldLabel>
                                             <Select value={field.state.value} onValueChange={(val) => {
                                                 field.handleChange(val)
                                                 if (val !== 'PARENT') createForm.setFieldValue('studentIds', [])
                                             }}>
                                                 <SelectTrigger id={field.name}>
-                                                    <SelectValue placeholder="Select a role" />
+                                                    <SelectValue placeholder={t('selectRole')} />
                                                 </SelectTrigger>
                                                 <SelectContent>
                                                     <SelectGroup>
@@ -470,10 +473,10 @@ const UsersTab = () => {
                                             const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
                                             return (
                                                 <Field data-invalid={isInvalid}>
-                                                    <FieldLabel>Children (students)</FieldLabel>
+                                                    <FieldLabel>{t('childrenLabel')}</FieldLabel>
                                                     <div className="max-h-44 overflow-y-auto rounded-md border p-3 space-y-2">
                                                         {students.length === 0 && (
-                                                            <p className="text-sm text-muted-foreground">No students found</p>
+                                                            <p className="text-sm text-muted-foreground">{t('noStudentsFound')}</p>
                                                         )}
                                                         {students.map((student) => {
                                                             const checked = field.state.value.includes(student.id)
@@ -506,10 +509,10 @@ const UsersTab = () => {
 
                         <DialogFooter>
                             <DialogClose asChild>
-                                <Button variant="outline" type="button">Cancel</Button>
+                                <Button variant="outline" type="button">{tCommon('cancel')}</Button>
                             </DialogClose>
                             <Button type="submit" disabled={createUserMutation.isPending}>
-                                {createUserMutation.isPending ? 'Creating…' : 'Create'}
+                                {createUserMutation.isPending ? t('creating') : t('create')}
                             </Button>
                         </DialogFooter>
                     </form>
@@ -520,12 +523,17 @@ const UsersTab = () => {
             <Dialog open={openUpdate} onOpenChange={setOpenUpdate}>
                 <DialogContent className="sm:max-w-sm">
                     <DialogHeader>
-                        <DialogTitle>Edit User</DialogTitle>
-                        <DialogDescription>Update details for <strong>{[selectedUser?.firstName, selectedUser?.lastName].filter(Boolean).join(' ')}</strong></DialogDescription>
+                        <DialogTitle>{t('editUserTitle')}</DialogTitle>
+                        <DialogDescription>
+                            {t.rich('editUserDescription', {
+                                name: [selectedUser?.firstName, selectedUser?.lastName].filter(Boolean).join(' '),
+                                strong: (chunks) => <strong>{chunks}</strong>,
+                            })}
+                        </DialogDescription>
                     </DialogHeader>
                     <FieldGroup>
                         <Field>
-                            <Label htmlFor="edit-firstName">First name</Label>
+                            <Label htmlFor="edit-firstName">{t('firstNameLabel')}</Label>
                             <Input
                                 id="edit-firstName"
                                 value={selectedUser?.firstName ?? ""}
@@ -533,7 +541,7 @@ const UsersTab = () => {
                             />
                         </Field>
                         <Field>
-                            <Label htmlFor="edit-lastName">Last name</Label>
+                            <Label htmlFor="edit-lastName">{t('lastNameLabel')}</Label>
                             <Input
                                 id="edit-lastName"
                                 value={selectedUser?.lastName ?? ""}
@@ -541,7 +549,7 @@ const UsersTab = () => {
                             />
                         </Field>
                         <Field>
-                            <Label htmlFor="edit-phone">Phone</Label>
+                            <Label htmlFor="edit-phone">{tCommon('phone')}</Label>
                             <Input
                                 id="edit-phone"
                                 value={selectedUser?.phone ?? ""}
@@ -549,7 +557,7 @@ const UsersTab = () => {
                             />
                         </Field>
                         <Field>
-                            <Label htmlFor="edit-role">Role</Label>
+                            <Label htmlFor="edit-role">{tCommon('role')}</Label>
                             <Input
                                 id="edit-role"
                                 value={selectedUser?.role?.toLowerCase() ?? ""}
@@ -559,13 +567,13 @@ const UsersTab = () => {
                     </FieldGroup>
                     <DialogFooter>
                         <DialogClose asChild>
-                            <Button variant="outline">Cancel</Button>
+                            <Button variant="outline">{tCommon('cancel')}</Button>
                         </DialogClose>
                         <Button
                             onClick={() => selectedUser && updateUserMutation.mutate(selectedUser)}
                             disabled={updateUserMutation.isPending}
                         >
-                            {updateUserMutation.isPending ? 'Saving…' : 'Save'}
+                            {updateUserMutation.isPending ? t('saving') : t('save')}
                         </Button>
                     </DialogFooter>
                 </DialogContent>
@@ -575,21 +583,24 @@ const UsersTab = () => {
             <Dialog open={openDelete} onOpenChange={setOpenDelete}>
                 <DialogContent className="sm:max-w-sm">
                     <DialogHeader>
-                        <DialogTitle>Delete User</DialogTitle>
+                        <DialogTitle>{t('deleteUserTitle')}</DialogTitle>
                         <DialogDescription>
-                            Are you sure you want to delete <strong>{[selectedUser?.firstName, selectedUser?.lastName].filter(Boolean).join(' ')}</strong>? This action cannot be undone.
+                            {t.rich('deleteUserDescription', {
+                                name: [selectedUser?.firstName, selectedUser?.lastName].filter(Boolean).join(' '),
+                                strong: (chunks) => <strong>{chunks}</strong>,
+                            })}
                         </DialogDescription>
                     </DialogHeader>
                     <DialogFooter>
                         <DialogClose asChild>
-                            <Button variant="outline">Cancel</Button>
+                            <Button variant="outline">{tCommon('cancel')}</Button>
                         </DialogClose>
                         <Button
                             variant="destructive"
                             onClick={() => selectedUser && deleteUserMutation.mutate(selectedUser.id)}
                             disabled={deleteUserMutation.isPending}
                         >
-                            {deleteUserMutation.isPending ? 'Deleting…' : 'Delete'}
+                            {deleteUserMutation.isPending ? t('deleting') : t('delete')}
                         </Button>
                     </DialogFooter>
                 </DialogContent>

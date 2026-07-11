@@ -2,6 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query"
 import { Loader2, Trophy, Medal, Award } from "lucide-react"
+import { useTranslations } from "next-intl"
 import api from "@/lib/api"
 import { cn } from "@/lib/utils"
 import { LeaderBoardType } from "@/lib/types/token_payload"
@@ -22,6 +23,7 @@ const rankIcon = (idx: number) => {
 }
 
 export default function TgLeaderboardPage() {
+    const t = useTranslations('TgLeaderboard')
     const { data, isPending, isError } = useQuery({
         queryKey: ['tg-global-leaderboard'],
         queryFn: async () => (await api.get('/portal/leaderboard', { params: { limit: 50 } })).data,
@@ -36,7 +38,7 @@ export default function TgLeaderboardPage() {
     }
 
     if (isError) {
-        return <p className="py-16 text-center text-sm text-muted-foreground">Could not load the leaderboard.</p>
+        return <p className="py-16 text-center text-sm text-muted-foreground">{t('loadError')}</p>
     }
 
     const rows: LeaderBoardType[] = data?.data ?? []
@@ -45,15 +47,15 @@ export default function TgLeaderboardPage() {
         <div className="space-y-4 py-4">
             <h1 className="flex items-center gap-2 text-xl font-bold">
                 <Trophy className="h-5 w-5 text-primary" />
-                Global leaderboard
+                {t('title')}
             </h1>
             <Table>
                 <TableHeader>
                     <TableRow>
                         <TableHead className="w-10 text-center">#</TableHead>
-                        <TableHead>Student</TableHead>
-                        <TableHead>Group</TableHead>
-                        <TableHead className="text-center">Total</TableHead>
+                        <TableHead>{t('student')}</TableHead>
+                        <TableHead>{t('group')}</TableHead>
+                        <TableHead className="text-center">{t('total')}</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -66,7 +68,7 @@ export default function TgLeaderboardPage() {
                         </TableRow>
                     ))}
                     {rows.length === 0 && (
-                        <TableRow><TableCell colSpan={4} className="py-8 text-center text-muted-foreground">No scores yet</TableCell></TableRow>
+                        <TableRow><TableCell colSpan={4} className="py-8 text-center text-muted-foreground">{t('noScores')}</TableCell></TableRow>
                     )}
                 </TableBody>
             </Table>

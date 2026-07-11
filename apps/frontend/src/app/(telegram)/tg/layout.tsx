@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation"
 import { useTheme } from "next-themes"
 import { Users, Wallet, Trophy, Loader2 } from "lucide-react"
 import axios from "axios"
+import { useTranslations } from "next-intl"
 import { cn } from "@/lib/utils"
 import { useAuthStore } from "@/lib/stores/authStore"
 import { useTgStore } from "@/lib/stores/tgStore"
@@ -17,6 +18,7 @@ export default function TelegramLayout({ children }: { children: React.ReactNode
     const setToken = useAuthStore((s) => s.setToken)
     const { setTheme } = useTheme()
     const pathname = usePathname()
+    const t = useTranslations('TgLayout')
 
     const authenticate = useCallback(async () => {
         const webApp = getTelegramWebApp()
@@ -39,11 +41,11 @@ export default function TelegramLayout({ children }: { children: React.ReactNode
             setStatus('ready')
         } catch (err) {
             const message = axios.isAxiosError(err)
-                ? err.response?.data?.message ?? 'Could not connect to the server'
-                : 'Could not connect to the server'
+                ? err.response?.data?.message ?? t('connectionError')
+                : t('connectionError')
             setStatus('error', message)
         }
-    }, [setStatus, setTheme, setToken])
+    }, [setStatus, setTheme, setToken, t])
 
     // The SDK script may finish loading before or after this effect runs, so
     // authenticate is triggered from both places.
@@ -58,13 +60,13 @@ export default function TelegramLayout({ children }: { children: React.ReactNode
                 {status === 'loading' && <Loader2 className="h-8 w-8 animate-spin text-primary" />}
                 {status === 'outside-telegram' && (
                     <>
-                        <p className="text-lg font-semibold">This page only works inside Telegram</p>
-                        <p className="text-sm text-muted-foreground">Open your learning centre&apos;s bot and tap the app button.</p>
+                        <p className="text-lg font-semibold">{t('outsideTitle')}</p>
+                        <p className="text-sm text-muted-foreground">{t('outsideDescription')}</p>
                     </>
                 )}
                 {status === 'error' && (
                     <>
-                        <p className="text-lg font-semibold">Could not sign you in</p>
+                        <p className="text-lg font-semibold">{t('errorTitle')}</p>
                         <p className="text-sm text-muted-foreground">{error}</p>
                     </>
                 )}
@@ -76,9 +78,9 @@ export default function TelegramLayout({ children }: { children: React.ReactNode
         ? `/tg/groups/${selectedGroupId}${selectedStudentId ? `?student=${selectedStudentId}` : ''}`
         : '/tg'
     const tabs = [
-        { name: 'Group', href: groupHref, icon: Users, active: pathname === '/tg' || pathname.startsWith('/tg/groups') },
-        { name: 'Payments', href: '/tg/payments', icon: Wallet, active: pathname === '/tg/payments' },
-        { name: 'Leaderboard', href: '/tg/leaderboard', icon: Trophy, active: pathname === '/tg/leaderboard' },
+        { name: t('tabGroup'), href: groupHref, icon: Users, active: pathname === '/tg' || pathname.startsWith('/tg/groups') },
+        { name: t('tabPayments'), href: '/tg/payments', icon: Wallet, active: pathname === '/tg/payments' },
+        { name: t('tabLeaderboard'), href: '/tg/leaderboard', icon: Trophy, active: pathname === '/tg/leaderboard' },
     ]
 
     return (

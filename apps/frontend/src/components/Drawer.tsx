@@ -14,6 +14,7 @@ import { Input } from "@/components/ui/input"
 import * as z from "zod"
 import { toast } from "sonner"
 import { useForm } from "@tanstack/react-form"
+import { useTranslations } from "next-intl"
 import {
     Field,
     FieldError,
@@ -43,6 +44,7 @@ export function GroupDrawer({ openCreate, setOpenCreate, teachers, students, onG
     onGroupCreated: () => void
 }) {
     const [selectedTeacher, setSelectedTeacher] = useState<TokenPayload | null>(null)
+    const t = useTranslations('GroupDrawer')
 
     const form = useForm({
         defaultValues: {
@@ -63,10 +65,10 @@ export function GroupDrawer({ openCreate, setOpenCreate, teachers, students, onG
                 form.reset()
                 setSelectedTeacher(null)
                 setOpenCreate(false)
-                toast.success('Group created successfully')
+                toast.success(t('success'))
                 onGroupCreated()
             } catch (error: any) {
-                toast.error(error.response?.data?.message ?? 'Something went wrong')
+                toast.error(error.response?.data?.message ?? t('error'))
             }
         },
     })
@@ -75,12 +77,12 @@ export function GroupDrawer({ openCreate, setOpenCreate, teachers, students, onG
         <Drawer direction="right" open={openCreate} onOpenChange={setOpenCreate}>
             <DrawerTrigger asChild>
                 <Button variant="default" className="gap-1">
-                    <Plus className="h-4 w-4" /> Add Group
+                    <Plus className="h-4 w-4" /> {t('trigger')}
                 </Button>
             </DrawerTrigger>
             <DrawerContent>
                 <DrawerHeader>
-                    <DrawerTitle className="text-xl font-bold">Create New Group</DrawerTitle>
+                    <DrawerTitle className="text-xl font-bold">{t('title')}</DrawerTitle>
                 </DrawerHeader>
                 <div className="no-scrollbar overflow-y-auto px-4">
                     <form
@@ -94,13 +96,13 @@ export function GroupDrawer({ openCreate, setOpenCreate, teachers, students, onG
                                     const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
                                     return (
                                         <Field data-invalid={isInvalid}>
-                                            <FieldLabel htmlFor={field.name}>Name</FieldLabel>
+                                            <FieldLabel htmlFor={field.name}>{t('nameLabel')}</FieldLabel>
                                             <Input
                                                 id={field.name}
                                                 value={field.state.value}
                                                 onBlur={field.handleBlur}
                                                 onChange={(e) => field.handleChange(e.target.value)}
-                                                placeholder="Group name"
+                                                placeholder={t('namePlaceholder')}
                                                 autoComplete="off"
                                             />
                                             {isInvalid && <FieldError errors={field.state.meta.errors} />}
@@ -112,23 +114,23 @@ export function GroupDrawer({ openCreate, setOpenCreate, teachers, students, onG
                             <form.Field name="teacherId">
                                 {(field) => (
                                     <Field>
-                                        <Label>Teacher</Label>
+                                        <Label>{t('teacherLabel')}</Label>
                                         <Select
                                             value={selectedTeacher?.id ?? ""}
                                             onValueChange={(val) => {
-                                                const teacher = teachers.find(t => t.id === val) ?? null
+                                                const teacher = teachers.find(candidate => candidate.id === val) ?? null
                                                 setSelectedTeacher(teacher)
                                                 field.handleChange(val)
                                             }}
                                         >
                                             <SelectTrigger>
-                                                <SelectValue placeholder="Select a teacher" />
+                                                <SelectValue placeholder={t('selectTeacher')} />
                                             </SelectTrigger>
                                             <SelectContent>
                                                 <SelectGroup>
-                                                    <SelectLabel>Teachers</SelectLabel>
-                                                    {teachers.map((t) => (
-                                                        <SelectItem key={t.id} value={t.id}>{[t.firstName, t.lastName].filter(Boolean).join(' ')}</SelectItem>
+                                                    <SelectLabel>{t('teachersLabel')}</SelectLabel>
+                                                    {teachers.map((teacher) => (
+                                                        <SelectItem key={teacher.id} value={teacher.id}>{[teacher.firstName, teacher.lastName].filter(Boolean).join(' ')}</SelectItem>
                                                     ))}
                                                 </SelectGroup>
                                             </SelectContent>
@@ -140,7 +142,7 @@ export function GroupDrawer({ openCreate, setOpenCreate, teachers, students, onG
                             <form.Field name="studentIds">
                                 {(field) => (
                                     <Field>
-                                        <Label>Students (optional)</Label>
+                                        <Label>{t('studentsLabel')}</Label>
                                         <div className="max-h-52 overflow-y-auto rounded-md border p-3 space-y-2">
                                             {students.map((student) => {
                                                 const checked = field.state.value.includes(student.id)
@@ -169,9 +171,9 @@ export function GroupDrawer({ openCreate, setOpenCreate, teachers, students, onG
                     </form>
                 </div>
                 <DrawerFooter>
-                    <Button type="submit" form="create-group-form">Create Group</Button>
+                    <Button type="submit" form="create-group-form">{t('submit')}</Button>
                     <DrawerClose asChild>
-                        <Button variant="outline">Cancel</Button>
+                        <Button variant="outline">{t('cancel')}</Button>
                     </DrawerClose>
                 </DrawerFooter>
             </DrawerContent>

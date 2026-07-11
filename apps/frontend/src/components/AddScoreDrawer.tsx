@@ -16,6 +16,7 @@ import { Input } from "@/components/ui/input"
 import * as z from "zod"
 import { toast } from "sonner"
 import { useForm } from "@tanstack/react-form"
+import { useTranslations } from "next-intl"
 import {
     Field,
     FieldError,
@@ -37,6 +38,7 @@ const AddScoreDrawer = ({ openCreate, setOpenCreate, students, groupId, onScoreA
 }) => {
     const [type, setType] = useState<ScoreType>('HOMEWORK')
     const [globalScore, setGlobalScore] = useState<number>(0)
+    const t = useTranslations('AddScoreDrawer')
 
     const schema = z.object({
         students: z.array(z.object({
@@ -55,9 +57,9 @@ const AddScoreDrawer = ({ openCreate, setOpenCreate, students, groupId, onScoreA
                 form.reset()
                 setGlobalScore(0)
                 onScoreAdded()
-                toast.success('Scores added successfully')
+                toast.success(t('success'))
             } catch (error: any) {
-                toast.error(error.response?.data?.message ?? 'Something went wrong')
+                toast.error(error.response?.data?.message ?? t('error'))
             }
         },
     })
@@ -66,12 +68,12 @@ const AddScoreDrawer = ({ openCreate, setOpenCreate, students, groupId, onScoreA
         <Drawer direction="right" open={openCreate} onOpenChange={setOpenCreate}>
             <DrawerTrigger asChild>
                 <Button className="gap-1">
-                    <PlusCircle className="h-4 w-4" /> Add Score
+                    <PlusCircle className="h-4 w-4" /> {t('trigger')}
                 </Button>
             </DrawerTrigger>
             <DrawerContent>
                 <DrawerHeader>
-                    <DrawerTitle className="text-xl font-bold">Add Scores</DrawerTitle>
+                    <DrawerTitle className="text-xl font-bold">{t('title')}</DrawerTitle>
                 </DrawerHeader>
                 <div className="no-scrollbar overflow-y-auto px-4">
                     <div className="flex gap-2 mb-4">
@@ -82,7 +84,7 @@ const AddScoreDrawer = ({ openCreate, setOpenCreate, students, groupId, onScoreA
                                 if (pressed) { setType('HOMEWORK'); form.setFieldValue("students", []); setGlobalScore(0) }
                             }}
                         >
-                            Homework
+                            {t('homeworkToggle')}
                         </Toggle>
                         <Toggle
                             variant="outline"
@@ -91,7 +93,7 @@ const AddScoreDrawer = ({ openCreate, setOpenCreate, students, groupId, onScoreA
                                 if (pressed) { setType('ATTENDANCE'); form.setFieldValue("students", []); setGlobalScore(0) }
                             }}
                         >
-                            Attendance
+                            {t('attendanceToggle')}
                         </Toggle>
                     </div>
                     <form
@@ -109,7 +111,7 @@ const AddScoreDrawer = ({ openCreate, setOpenCreate, students, groupId, onScoreA
                                     if (type === 'HOMEWORK') {
                                         return (
                                             <Field data-invalid={isInvalid}>
-                                                <FieldLabel className="font-semibold">Homework Scores</FieldLabel>
+                                                <FieldLabel className="font-semibold">{t('homeworkScoresLabel')}</FieldLabel>
                                                 <div className="space-y-2">
                                                     {students.map((s) => {
                                                         const entry = form.state.values.students.find(st => st.studentId === s.id)
@@ -121,7 +123,7 @@ const AddScoreDrawer = ({ openCreate, setOpenCreate, students, groupId, onScoreA
                                                                     className="flex-1"
                                                                     min={0}
                                                                     value={entry?.score ?? ''}
-                                                                    placeholder="Score"
+                                                                    placeholder={t('scorePlaceholder')}
                                                                     onChange={(e) => {
                                                                         const val = e.target.value
                                                                         form.setFieldValue("students", (prev) => {
@@ -143,7 +145,7 @@ const AddScoreDrawer = ({ openCreate, setOpenCreate, students, groupId, onScoreA
                                                                             prev.map(st => st.studentId === s.id ? { ...st, comment } : st)
                                                                         )
                                                                     }}
-                                                                    placeholder="Comment"
+                                                                    placeholder={t('commentPlaceholder')}
                                                                 />
                                                             </div>
                                                         )
@@ -156,10 +158,10 @@ const AddScoreDrawer = ({ openCreate, setOpenCreate, students, groupId, onScoreA
 
                                     return (
                                         <Field>
-                                            <FieldLabel className="font-semibold">Attendance Score</FieldLabel>
+                                            <FieldLabel className="font-semibold">{t('attendanceScoreLabel')}</FieldLabel>
                                             <Input
                                                 type="number"
-                                                placeholder="Global attendance score"
+                                                placeholder={t('globalScorePlaceholder')}
                                                 value={globalScore}
                                                 min={0}
                                                 onChange={(e) => {
@@ -184,7 +186,7 @@ const AddScoreDrawer = ({ openCreate, setOpenCreate, students, groupId, onScoreA
                                                         )
                                                     }}
                                                 />
-                                                <span className="text-sm font-medium">Select All</span>
+                                                <span className="text-sm font-medium">{t('selectAll')}</span>
                                             </div>
                                             <div className="space-y-1.5">
                                                 {students.map((s) => {
@@ -217,9 +219,9 @@ const AddScoreDrawer = ({ openCreate, setOpenCreate, students, groupId, onScoreA
                     </form>
                 </div>
                 <DrawerFooter>
-                    <Button type="submit" form="add-score-form">Submit</Button>
+                    <Button type="submit" form="add-score-form">{t('submit')}</Button>
                     <DrawerClose asChild>
-                        <Button variant="outline">Cancel</Button>
+                        <Button variant="outline">{t('cancel')}</Button>
                     </DrawerClose>
                 </DrawerFooter>
             </DrawerContent>

@@ -20,6 +20,7 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 import { useSuspenseQuery } from '@tanstack/react-query'
+import { useTranslations } from 'next-intl'
 import api from '@/lib/api'
 
 const currentYear = new Date().getFullYear()
@@ -27,6 +28,7 @@ const years = [String(currentYear), String(currentYear - 1), String(currentYear 
 
 const GroupLineGraph = ({ groupId }: { groupId: string }) => {
     const [year, setYear] = useState(String(currentYear))
+    const t = useTranslations('GroupLineGraph')
 
     const { data: groupReport } = useSuspenseQuery({
         queryKey: ['group-score-chart', year, groupId],
@@ -49,10 +51,10 @@ const GroupLineGraph = ({ groupId }: { groupId: string }) => {
     return (
         <div className="space-y-4">
             <div className="flex items-center justify-between">
-                <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Group Average Chart</h3>
+                <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">{t('title')}</h3>
                 <Select value={year} onValueChange={setYear}>
                     <SelectTrigger className="w-28">
-                        <SelectValue placeholder="Year" />
+                        <SelectValue placeholder={t('yearPlaceholder')} />
                     </SelectTrigger>
                     <SelectContent>
                         <SelectGroup>
@@ -72,9 +74,9 @@ const GroupLineGraph = ({ groupId }: { groupId: string }) => {
                         <YAxis tick={{ fontSize: 11 }} />
                         <Tooltip />
                         <Legend />
-                        <Bar dataKey="homework" fill="#2563eb" name="Homework" radius={[4, 4, 0, 0]} />
-                        <Bar dataKey="attendance" fill="#16a34a" name="Attendance" radius={[4, 4, 0, 0]} />
-                        <Bar dataKey="total" fill="#dc2626" name="Total" radius={[4, 4, 0, 0]} />
+                        <Bar dataKey="homework" fill="#2563eb" name={t('homework')} radius={[4, 4, 0, 0]} />
+                        <Bar dataKey="attendance" fill="#16a34a" name={t('attendance')} radius={[4, 4, 0, 0]} />
+                        <Bar dataKey="total" fill="#dc2626" name={t('total')} radius={[4, 4, 0, 0]} />
                     </BarChart>
                 </ResponsiveContainer>
             </div>

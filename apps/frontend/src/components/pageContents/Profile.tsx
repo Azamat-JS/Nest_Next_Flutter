@@ -7,8 +7,11 @@ import api from '@/lib/api'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { User, Phone, Shield } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 const Profile = () => {
+    const t = useTranslations('Profile')
+    const tCommon = useTranslations('Common')
     const isAuthenticated = useAuthStore((state) => state.isAuthenticated)
 
     const { data: user } = useSuspenseQuery<TokenPayload>({
@@ -22,7 +25,7 @@ const Profile = () => {
     })
 
     if (!isAuthenticated) {
-        return <p className="text-center text-muted-foreground">Please log in to view your profile.</p>
+        return <p className="text-center text-muted-foreground">{t('loginRequired')}</p>
     }
 
     return (
@@ -41,21 +44,21 @@ const Profile = () => {
                     <div className="flex items-center gap-3 rounded-lg border p-3">
                         <User className="h-4 w-4 text-muted-foreground shrink-0" />
                         <div>
-                            <p className="text-xs text-muted-foreground">Name</p>
+                            <p className="text-xs text-muted-foreground">{tCommon('name')}</p>
                             <p className="font-medium">{[user?.firstName, user?.lastName].filter(Boolean).join(' ')}</p>
                         </div>
                     </div>
                     <div className="flex items-center gap-3 rounded-lg border p-3">
                         <Phone className="h-4 w-4 text-muted-foreground shrink-0" />
                         <div>
-                            <p className="text-xs text-muted-foreground">Phone</p>
+                            <p className="text-xs text-muted-foreground">{tCommon('phone')}</p>
                             <p className="font-medium">{user?.phone}</p>
                         </div>
                     </div>
                     <div className="flex items-center gap-3 rounded-lg border p-3">
                         <Shield className="h-4 w-4 text-muted-foreground shrink-0" />
                         <div>
-                            <p className="text-xs text-muted-foreground">Role</p>
+                            <p className="text-xs text-muted-foreground">{tCommon('role')}</p>
                             <p className="font-medium capitalize">{user?.role?.toLowerCase()}</p>
                         </div>
                     </div>

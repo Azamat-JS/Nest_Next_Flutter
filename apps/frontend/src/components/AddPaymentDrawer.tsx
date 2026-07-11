@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { Button } from "@/components/ui/button"
 import {
@@ -16,6 +16,7 @@ import { Input } from "@/components/ui/input"
 import * as z from "zod"
 import { toast } from "sonner"
 import { useForm, useStore } from "@tanstack/react-form"
+import { useTranslations } from "next-intl"
 import {
     Field,
     FieldError,
@@ -33,19 +34,12 @@ import {
 } from "@/components/ui/select"
 import { Label } from "./ui/label"
 import { GroupType } from "@/lib/types/groups"
-import { MONTH_NAMES, StudentPaymentsResponse } from "@/lib/types/payment_type"
+import { StudentPaymentsResponse } from "@/lib/types/payment_type"
 import api from "@/lib/api"
 import { Plus } from "lucide-react"
 import { Textarea } from "./ui/textarea"
 
-const schema = z.object({
-    studentId: z.string().min(1, 'Student is required'),
-    groupId: z.string().min(1, 'Group is required'),
-    month: z.number().min(1).max(12),
-    year: z.number().min(2000),
-    amount: z.number().positive('Amount must be positive'),
-    comment: z.string().optional(),
-})
+const monthValues = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"] as const
 
 export function AddPaymentDrawer({ openCreate, setOpenCreate, groups, onPaymentAdded, preselectedStudentId }: {
     openCreate: boolean
@@ -56,6 +50,17 @@ export function AddPaymentDrawer({ openCreate, setOpenCreate, groups, onPaymentA
 }) {
     const currentYear = new Date().getFullYear()
     const currentMonth = new Date().getMonth() + 1
+    const t = useTranslations('AddPaymentDrawer')
+    const tMonths = useTranslations('Common.months')
+
+    const schema = useMemo(() => z.object({
+        studentId: z.string().min(1, t('studentRequired')),
+        groupId: z.string().min(1, t('groupRequired')),
+        month: z.number().min(1).max(12),
+        year: z.number().min(2000),
+        amount: z.number().positive(t('amountPositive')),
+        comment: z.string().optional(),
+    }), [t])
 
     const form = useForm({
         defaultValues: {
@@ -69,7 +74,7 @@ export function AddPaymentDrawer({ openCreate, setOpenCreate, groups, onPaymentA
         validators: { onSubmit: schema },
         onSubmit: async ({ value }) => {
             if (hasExistingPayment) {
-                toast.warning('This student already has a payment on record. Add it from their payment history page instead.')
+                toast.warning(t('existingPaymentWarning'))
                 return
             }
             try {
@@ -82,10 +87,10 @@ export function AddPaymentDrawer({ openCreate, setOpenCreate, groups, onPaymentA
                 })
                 form.reset()
                 setOpenCreate(false)
-                toast.success('Payment added successfully')
+                toast.success(t('success'))
                 onPaymentAdded()
             } catch (error: any) {
-                toast.error(error.response?.data?.message ?? 'Something went wrong')
+                toast.error(error.response?.data?.message ?? t('error'))
             }
         },
     })
@@ -113,7 +118,7 @@ export function AddPaymentDrawer({ openCreate, setOpenCreate, groups, onPaymentA
     useEffect(() => {
         if (hasExistingPayment && selectedStudent) {
             toast.warning(
-                `A payment was already added to ${[selectedStudent.firstName, selectedStudent.lastName].filter(Boolean).join(' ')} before. Search for them in the table and open their payment history to add a new payment there.`
+                t('existingPaymentWarningNamed', { name: [selectedStudent.firstName, selectedStudent.lastName].filter(Boolean).join(' ') })
             )
         }
     }, [hasExistingPayment, selectedStudentId])
@@ -122,12 +127,12 @@ export function AddPaymentDrawer({ openCreate, setOpenCreate, groups, onPaymentA
         <Drawer direction="right" open={openCreate} onOpenChange={setOpenCreate}>
             <DrawerTrigger asChild>
                 <Button variant="default" className="gap-1">
-                    <Plus className="h-4 w-4" /> Add Payment
+                    <Plus className="h-4 w-4" /> {t('trigger')}
                 </Button>
             </DrawerTrigger>
             <DrawerContent>
                 <DrawerHeader>
-                    <DrawerTitle className="text-xl font-bold">Add Payment</DrawerTitle>
+                    <DrawerTitle className="text-xl font-bold">{t('title')}</DrawerTitle>
                 </DrawerHeader>
                 <div className="no-scrollbar overflow-y-auto px-4">
                     <form
@@ -146,17 +151,17 @@ export function AddPaymentDrawer({ openCreate, setOpenCreate, groups, onPaymentA
                                     const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
                                     return (
                                         <Field data-invalid={isInvalid}>
-                                            <FieldLabel>Group</FieldLabel>
+                                            <FieldLabel>{t('groupLabel')}</FieldLabel>
                                             <Select
                                                 value={field.state.value}
                                                 onValueChange={field.handleChange}
                                             >
                                                 <SelectTrigger>
-                                                    <SelectValue placeholder="Select a group" />
+                                                    <SelectValue placeholder={t('selectGroup')} />
                                                 </SelectTrigger>
                                                 <SelectContent>
                                                     <SelectGroup>
-                                                        <SelectLabel>Groups</SelectLabel>
+                                                        <SelectLabel>{t('groupsLabel')}</SelectLabel>
                                                         {groups.map((g) => (
                                                             <SelectItem key={g.id} value={g.id}>
                                                                 {g.name}
@@ -177,18 +182,18 @@ export function AddPaymentDrawer({ openCreate, setOpenCreate, groups, onPaymentA
                                         const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
                                         return (
                                             <Field data-invalid={isInvalid}>
-                                                <FieldLabel>Student</FieldLabel>
+                                                <FieldLabel>{t('studentLabel')}</FieldLabel>
                                                 <Select
                                                     value={field.state.value}
                                                     onValueChange={field.handleChange}
                                                     disabled={!selectedGroupId}
                                                 >
                                                     <SelectTrigger>
-                                                        <SelectValue placeholder={selectedGroupId ? "Select a student" : "Select a group first"} />
+                                                        <SelectValue placeholder={selectedGroupId ? t('selectStudent') : t('selectGroupFirst')} />
                                                     </SelectTrigger>
                                                     <SelectContent>
                                                         <SelectGroup>
-                                                            <SelectLabel>Students</SelectLabel>
+                                                            <SelectLabel>{t('studentsLabel')}</SelectLabel>
                                                             {groupStudents.map((s) => (
                                                                 <SelectItem key={s.id} value={s.id}>
                                                                     {[s.firstName, s.lastName].filter(Boolean).join(' ')}
@@ -200,7 +205,7 @@ export function AddPaymentDrawer({ openCreate, setOpenCreate, groups, onPaymentA
                                                 {isInvalid && <FieldError errors={field.state.meta.errors} />}
                                                 {hasExistingPayment && (
                                                     <p className="text-sm text-destructive">
-                                                        A payment was already added to this student before. Search for them in the table and open their payment history to add a new payment there.
+                                                        {t('existingPaymentFieldError')}
                                                     </p>
                                                 )}
                                             </Field>
@@ -213,7 +218,7 @@ export function AddPaymentDrawer({ openCreate, setOpenCreate, groups, onPaymentA
                                 <form.Field name="month">
                                     {(field) => (
                                         <Field>
-                                            <FieldLabel>Month</FieldLabel>
+                                            <FieldLabel>{t('monthLabel')}</FieldLabel>
                                             <Select
                                                 value={String(field.state.value)}
                                                 onValueChange={(v) => field.handleChange(Number(v))}
@@ -223,9 +228,9 @@ export function AddPaymentDrawer({ openCreate, setOpenCreate, groups, onPaymentA
                                                 </SelectTrigger>
                                                 <SelectContent>
                                                     <SelectGroup>
-                                                        {MONTH_NAMES.map((name, i) => (
-                                                            <SelectItem key={i + 1} value={String(i + 1)}>
-                                                                {name}
+                                                        {monthValues.map((m) => (
+                                                            <SelectItem key={m} value={m}>
+                                                                {tMonths(m)}
                                                             </SelectItem>
                                                         ))}
                                                     </SelectGroup>
@@ -238,7 +243,7 @@ export function AddPaymentDrawer({ openCreate, setOpenCreate, groups, onPaymentA
                                 <form.Field name="year">
                                     {(field) => (
                                         <Field>
-                                            <FieldLabel>Year</FieldLabel>
+                                            <FieldLabel>{t('yearLabel')}</FieldLabel>
                                             <Select
                                                 value={String(field.state.value)}
                                                 onValueChange={(v) => field.handleChange(Number(v))}
@@ -266,7 +271,7 @@ export function AddPaymentDrawer({ openCreate, setOpenCreate, groups, onPaymentA
                                     const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
                                     return (
                                         <Field data-invalid={isInvalid}>
-                                            <FieldLabel>Amount</FieldLabel>
+                                            <FieldLabel>{t('amountLabel')}</FieldLabel>
                                             <Input
                                                 id={field.name}
                                                 type="number"
@@ -286,13 +291,13 @@ export function AddPaymentDrawer({ openCreate, setOpenCreate, groups, onPaymentA
                             <form.Field name="comment">
                                 {(field) => (
                                     <Field>
-                                        <Label htmlFor={field.name}>Comment (optional)</Label>
+                                        <Label htmlFor={field.name}>{t('commentLabel')}</Label>
                                         <Textarea
                                             id={field.name}
                                             value={field.state.value}
                                             onBlur={field.handleBlur}
                                             onChange={(e) => field.handleChange(e.target.value)}
-                                            placeholder="Add a note..."
+                                            placeholder={t('commentPlaceholder')}
                                             rows={3}
                                         />
                                     </Field>
@@ -307,10 +312,10 @@ export function AddPaymentDrawer({ openCreate, setOpenCreate, groups, onPaymentA
                         form="add-payment-form"
                         disabled={hasExistingPayment || isCheckingExistingPayments}
                     >
-                        Add Payment
+                        {t('trigger')}
                     </Button>
                     <DrawerClose asChild>
-                        <Button variant="outline">Cancel</Button>
+                        <Button variant="outline">{t('cancel')}</Button>
                     </DrawerClose>
                 </DrawerFooter>
             </DrawerContent>

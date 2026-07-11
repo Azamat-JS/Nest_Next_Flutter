@@ -1,6 +1,7 @@
 "use client"
 
 import { useSuspenseQuery } from "@tanstack/react-query"
+import { useTranslations } from "next-intl"
 import { useSearchParams, useRouter } from "next/navigation"
 import { LeaderBoardType } from "@/lib/types/token_payload"
 import { PaginationType } from "@/lib/types/groups"
@@ -49,6 +50,8 @@ const getRankStyle = (idx: number) => {
 }
 
 const GroupLeaderBoard = ({ groupId }: { groupId: string }) => {
+    const t = useTranslations('GroupLeaderBoard')
+    const tCommon = useTranslations('Common')
     const router = useRouter()
     const searchParams = useSearchParams()
     const page = Number(searchParams.get('page') ?? 1)
@@ -71,15 +74,15 @@ const GroupLeaderBoard = ({ groupId }: { groupId: string }) => {
         <>
             <Table>
                 <TableCaption>
-                    Showing {groupStudents.length} of {meta?.total ?? 0} students
+                    {t('showingCount', { count: groupStudents.length, total: meta?.total ?? 0 })}
                 </TableCaption>
                 <TableHeader>
                     <TableRow>
                         <TableHead className="w-12 text-center font-semibold">#</TableHead>
-                        <TableHead className="text-center font-semibold">Student</TableHead>
-                        <TableHead className="text-center font-semibold">Homework</TableHead>
-                        <TableHead className="text-center font-semibold">Attendance</TableHead>
-                        <TableHead className="text-center font-semibold text-primary">Total</TableHead>
+                        <TableHead className="text-center font-semibold">{t('student')}</TableHead>
+                        <TableHead className="text-center font-semibold">{t('homework')}</TableHead>
+                        <TableHead className="text-center font-semibold">{t('attendance')}</TableHead>
+                        <TableHead className="text-center font-semibold text-primary">{t('total')}</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -106,7 +109,7 @@ const GroupLeaderBoard = ({ groupId }: { groupId: string }) => {
             <div className="grid grid-cols-2 items-center mt-4">
                 <div className="flex justify-center">
                     <Field orientation="horizontal" className="w-fit">
-                        <FieldLabel htmlFor="gl-rows-per-page">Rows per page</FieldLabel>
+                        <FieldLabel htmlFor="gl-rows-per-page">{t('rowsPerPage')}</FieldLabel>
                         <Select value={String(limit)} onValueChange={(val) => {
                             const params = new URLSearchParams(searchParams.toString())
                             params.set('limit', val)
@@ -130,7 +133,7 @@ const GroupLeaderBoard = ({ groupId }: { groupId: string }) => {
                     <Pagination>
                         <PaginationContent>
                             <PaginationItem>
-                                <PaginationPrevious href={`?page=${Math.max(1, page - 1)}&limit=${limit}`} />
+                                <PaginationPrevious href={`?page=${Math.max(1, page - 1)}&limit=${limit}`} text={tCommon('previous')} />
                             </PaginationItem>
                             {Array.from({ length: lastPage }).map((_, idx) => (
                                 <PaginationItem key={idx}>
@@ -140,7 +143,7 @@ const GroupLeaderBoard = ({ groupId }: { groupId: string }) => {
                                 </PaginationItem>
                             ))}
                             <PaginationItem>
-                                <PaginationNext href={`?page=${Math.min(lastPage, page + 1)}&limit=${limit}`} />
+                                <PaginationNext href={`?page=${Math.min(lastPage, page + 1)}&limit=${limit}`} text={tCommon('next')} />
                             </PaginationItem>
                         </PaginationContent>
                     </Pagination>

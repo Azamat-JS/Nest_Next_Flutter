@@ -12,8 +12,9 @@ import {
 import { TokenPayload, WaitingListUser, CreateWaitingListPayload } from "@/lib/types/token_payload"
 import { useAuthStore } from "@/lib/stores/authStore"
 import { jwtDecode } from "jwt-decode"
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { toast } from "sonner"
+import { useTranslations } from "next-intl"
 import { Button } from "@/components/ui/button"
 import {
     DropdownMenu,
@@ -59,14 +60,17 @@ import api from "@/lib/api"
 import { useForm } from "@tanstack/react-form"
 import * as z from "zod"
 
-const createWaitingListSchema = z.object({
-    firstName: z.string().min(2),
-    lastName: z.string(),
-    phone: z.string().regex(/^\d{9}$/, "Enter a valid 9-digit phone number"),
-    reason: z.string(),
-})
-
 const WaitingListTab = () => {
+    const t = useTranslations('WaitingListTab')
+    const tCommon = useTranslations('Common')
+
+    const createWaitingListSchema = useMemo(() => z.object({
+        firstName: z.string().min(2),
+        lastName: z.string(),
+        phone: z.string().regex(/^\d{9}$/, t('phoneInvalid')),
+        reason: z.string(),
+    }), [t])
+
     const token = useAuthStore((state) => state.token)
     const me = token ? jwtDecode<TokenPayload>(token) : null
     const canCreate = me?.role === 'ADMIN' || me?.role === 'TEACHER'
@@ -109,12 +113,12 @@ const WaitingListTab = () => {
             return await api.put(`/waiting-list/${entry.id}`, entry)
         },
         onSuccess: () => {
-            toast.success('Waiting list entry updated successfully')
+            toast.success(t('updateSuccess'))
             setOpenUpdate(false)
             queryClient.invalidateQueries({ queryKey: ['waiting-list'] })
         },
         onError: (error: any) => {
-            toast.error(error.response?.data?.message ?? 'Something went wrong')
+            toast.error(error.response?.data?.message ?? tCommon('errorGeneric'))
         },
     })
 
@@ -123,12 +127,12 @@ const WaitingListTab = () => {
             return await api.delete(`/waiting-list/${id}`)
         },
         onSuccess: () => {
-            toast.success('Waiting list entry deleted successfully')
+            toast.success(t('deleteSuccess'))
             setOpenDelete(false)
             queryClient.invalidateQueries({ queryKey: ['waiting-list'] })
         },
         onError: (error: any) => {
-            toast.error(error.response?.data?.message ?? 'Something went wrong')
+            toast.error(error.response?.data?.message ?? tCommon('errorGeneric'))
         },
     })
 
@@ -137,13 +141,13 @@ const WaitingListTab = () => {
             return await api.post('/waiting-list', payload)
         },
         onSuccess: () => {
-            toast.success('Waiting list entry created successfully')
+            toast.success(t('createSuccess'))
             setOpenCreate(false)
             createForm.reset()
             queryClient.invalidateQueries({ queryKey: ['waiting-list'] })
         },
         onError: (error: any) => {
-            toast.error(error.response?.data?.message ?? 'Something went wrong')
+            toast.error(error.response?.data?.message ?? tCommon('errorGeneric'))
         },
     })
 
@@ -167,28 +171,28 @@ const WaitingListTab = () => {
                     <Input
                         value={searchInput}
                         onChange={(e) => setSearchInput(e.target.value)}
-                        placeholder="Search by name or phone"
+                        placeholder={t('searchPlaceholder')}
                         className="pl-8"
                     />
                 </div>
                 {canCreate && (
                     <Button onClick={() => setOpenCreate(true)} className="gap-1">
-                        <UserPlus className="h-4 w-4" /> Add to waiting list
+                        <UserPlus className="h-4 w-4" /> {t('addButton')}
                     </Button>
                 )}
             </div>
 
             <Table>
                 <TableCaption>
-                    Showing {entries.length} of {meta?.total ?? 0} waiting list entries
+                    {t('caption', { count: entries.length, total: meta?.total ?? 0 })}
                 </TableCaption>
                 <TableHeader>
                     <TableRow>
                         <TableHead className="w-12 text-center font-semibold">#</TableHead>
-                        <TableHead className="text-center font-semibold">Name</TableHead>
-                        <TableHead className="text-center font-semibold">Phone</TableHead>
-                        <TableHead className="text-center font-semibold">Reason</TableHead>
-                        <TableHead className="w-16 text-center font-semibold">Actions</TableHead>
+                        <TableHead className="text-center font-semibold">{tCommon('name')}</TableHead>
+                        <TableHead className="text-center font-semibold">{tCommon('phone')}</TableHead>
+                        <TableHead className="text-center font-semibold">{t('headerReason')}</TableHead>
+                        <TableHead className="w-16 text-center font-semibold">{tCommon('actions')}</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -212,13 +216,13 @@ const WaitingListTab = () => {
                                     <DropdownMenuContent align="end">
                                         <DropdownMenuGroup>
                                             <DropdownMenuItem onClick={() => { setOpenUpdate(true); setSelectedEntry(u) }}>
-                                                <Edit className="h-4 w-4" /> Edit
+                                                <Edit className="h-4 w-4" /> {t('edit')}
                                             </DropdownMenuItem>
                                             <DropdownMenuItem
                                                 onClick={() => { setOpenDelete(true); setSelectedEntry(u) }}
                                                 className="text-destructive focus:text-destructive"
                                             >
-                                                <Trash className="h-4 w-4" /> Delete
+                                                <Trash className="h-4 w-4" /> {t('delete')}
                                             </DropdownMenuItem>
                                         </DropdownMenuGroup>
                                     </DropdownMenuContent>
@@ -233,7 +237,7 @@ const WaitingListTab = () => {
             <div className="grid grid-cols-2 items-center">
                 <div className="flex justify-center">
                     <Field orientation="horizontal" className="w-fit">
-                        <FieldLabel htmlFor="waiting-list-rows-per-page">Rows per page</FieldLabel>
+                        <FieldLabel htmlFor="waiting-list-rows-per-page">{t('rowsPerPage')}</FieldLabel>
                         <Select value={String(limit)} onValueChange={(val) => {
                             const params = new URLSearchParams(searchParams.toString())
                             params.set('wlLimit', val)
@@ -257,7 +261,7 @@ const WaitingListTab = () => {
                     <Pagination>
                         <PaginationContent>
                             <PaginationItem>
-                                <PaginationPrevious href={`?wlPage=${Math.max(1, page - 1)}&wlLimit=${limit}`} />
+                                <PaginationPrevious href={`?wlPage=${Math.max(1, page - 1)}&wlLimit=${limit}`} text={tCommon('previous')} />
                             </PaginationItem>
                             {Array.from({ length: lastPage }).map((_, idx) => (
                                 <PaginationItem key={idx}>
@@ -267,7 +271,7 @@ const WaitingListTab = () => {
                                 </PaginationItem>
                             ))}
                             <PaginationItem>
-                                <PaginationNext href={`?wlPage=${Math.min(lastPage, page + 1)}&wlLimit=${limit}`} />
+                                <PaginationNext href={`?wlPage=${Math.min(lastPage, page + 1)}&wlLimit=${limit}`} text={tCommon('next')} />
                             </PaginationItem>
                         </PaginationContent>
                     </Pagination>
@@ -278,8 +282,8 @@ const WaitingListTab = () => {
             <Dialog open={openCreate} onOpenChange={setOpenCreate}>
                 <DialogContent className="sm:max-w-sm">
                     <DialogHeader>
-                        <DialogTitle>Add to Waiting List</DialogTitle>
-                        <DialogDescription>Save contact details for someone who isn&apos;t registered yet.</DialogDescription>
+                        <DialogTitle>{t('createTitle')}</DialogTitle>
+                        <DialogDescription>{t('createDescription')}</DialogDescription>
                     </DialogHeader>
                     <form
                         onSubmit={(e) => { e.preventDefault(); createForm.handleSubmit() }}
@@ -291,7 +295,7 @@ const WaitingListTab = () => {
                                     const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
                                     return (
                                         <Field data-invalid={isInvalid}>
-                                            <FieldLabel htmlFor={field.name}>First name</FieldLabel>
+                                            <FieldLabel htmlFor={field.name}>{t('firstNameLabel')}</FieldLabel>
                                             <Input
                                                 id={field.name}
                                                 value={field.state.value}
@@ -307,7 +311,7 @@ const WaitingListTab = () => {
                             <createForm.Field name="lastName">
                                 {(field) => (
                                     <Field>
-                                        <FieldLabel htmlFor={field.name}>Last name (optional)</FieldLabel>
+                                        <FieldLabel htmlFor={field.name}>{t('lastNameLabel')}</FieldLabel>
                                         <Input
                                             id={field.name}
                                             value={field.state.value}
@@ -323,7 +327,7 @@ const WaitingListTab = () => {
                                     const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
                                     return (
                                         <Field data-invalid={isInvalid}>
-                                            <FieldLabel htmlFor={field.name}>Phone number</FieldLabel>
+                                            <FieldLabel htmlFor={field.name}>{t('phoneNumberLabel')}</FieldLabel>
                                             <div className="flex items-center gap-2">
                                                 <span className="flex h-9 items-center rounded-md border bg-muted px-3 text-sm text-muted-foreground">
                                                     +998
@@ -349,13 +353,13 @@ const WaitingListTab = () => {
                                     const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
                                     return (
                                         <Field data-invalid={isInvalid}>
-                                            <FieldLabel htmlFor={field.name}>Reason (optional)</FieldLabel>
+                                            <FieldLabel htmlFor={field.name}>{t('reasonOptionalLabel')}</FieldLabel>
                                             <Textarea
                                                 id={field.name}
                                                 value={field.state.value}
                                                 onBlur={field.handleBlur}
                                                 onChange={(e) => field.handleChange(e.target.value)}
-                                                placeholder="e.g. Asked to be notified when the next course starts"
+                                                placeholder={t('reasonPlaceholder')}
                                             />
                                             {isInvalid && <FieldError errors={field.state.meta.errors} />}
                                         </Field>
@@ -366,10 +370,10 @@ const WaitingListTab = () => {
 
                         <DialogFooter>
                             <DialogClose asChild>
-                                <Button variant="outline" type="button">Cancel</Button>
+                                <Button variant="outline" type="button">{tCommon('cancel')}</Button>
                             </DialogClose>
                             <Button type="submit" disabled={createEntryMutation.isPending}>
-                                {createEntryMutation.isPending ? 'Adding…' : 'Add'}
+                                {createEntryMutation.isPending ? t('adding') : t('add')}
                             </Button>
                         </DialogFooter>
                     </form>
@@ -380,12 +384,17 @@ const WaitingListTab = () => {
             <Dialog open={openUpdate} onOpenChange={setOpenUpdate}>
                 <DialogContent className="sm:max-w-sm">
                     <DialogHeader>
-                        <DialogTitle>Edit Waiting List Entry</DialogTitle>
-                        <DialogDescription>Update details for <strong>{[selectedEntry?.firstName, selectedEntry?.lastName].filter(Boolean).join(' ')}</strong></DialogDescription>
+                        <DialogTitle>{t('editTitle')}</DialogTitle>
+                        <DialogDescription>
+                            {t.rich('editDescription', {
+                                name: [selectedEntry?.firstName, selectedEntry?.lastName].filter(Boolean).join(' '),
+                                strong: (chunks) => <strong>{chunks}</strong>,
+                            })}
+                        </DialogDescription>
                     </DialogHeader>
                     <FieldGroup>
                         <Field>
-                            <Label htmlFor="edit-wl-firstName">First name</Label>
+                            <Label htmlFor="edit-wl-firstName">{t('firstNameLabel')}</Label>
                             <Input
                                 id="edit-wl-firstName"
                                 value={selectedEntry?.firstName ?? ""}
@@ -393,7 +402,7 @@ const WaitingListTab = () => {
                             />
                         </Field>
                         <Field>
-                            <Label htmlFor="edit-wl-lastName">Last name</Label>
+                            <Label htmlFor="edit-wl-lastName">{t('editLastNameLabel')}</Label>
                             <Input
                                 id="edit-wl-lastName"
                                 value={selectedEntry?.lastName ?? ""}
@@ -401,7 +410,7 @@ const WaitingListTab = () => {
                             />
                         </Field>
                         <Field>
-                            <Label htmlFor="edit-wl-phone">Phone</Label>
+                            <Label htmlFor="edit-wl-phone">{tCommon('phone')}</Label>
                             <Input
                                 id="edit-wl-phone"
                                 value={selectedEntry?.phone ?? ""}
@@ -409,7 +418,7 @@ const WaitingListTab = () => {
                             />
                         </Field>
                         <Field>
-                            <Label htmlFor="edit-wl-reason">Reason</Label>
+                            <Label htmlFor="edit-wl-reason">{t('headerReason')}</Label>
                             <Textarea
                                 id="edit-wl-reason"
                                 value={selectedEntry?.reason ?? ""}
@@ -419,13 +428,13 @@ const WaitingListTab = () => {
                     </FieldGroup>
                     <DialogFooter>
                         <DialogClose asChild>
-                            <Button variant="outline">Cancel</Button>
+                            <Button variant="outline">{tCommon('cancel')}</Button>
                         </DialogClose>
                         <Button
                             onClick={() => selectedEntry && updateEntryMutation.mutate(selectedEntry)}
                             disabled={updateEntryMutation.isPending}
                         >
-                            {updateEntryMutation.isPending ? 'Saving…' : 'Save'}
+                            {updateEntryMutation.isPending ? t('saving') : t('save')}
                         </Button>
                     </DialogFooter>
                 </DialogContent>
@@ -435,21 +444,24 @@ const WaitingListTab = () => {
             <Dialog open={openDelete} onOpenChange={setOpenDelete}>
                 <DialogContent className="sm:max-w-sm">
                     <DialogHeader>
-                        <DialogTitle>Remove from Waiting List</DialogTitle>
+                        <DialogTitle>{t('deleteTitle')}</DialogTitle>
                         <DialogDescription>
-                            Are you sure you want to remove <strong>{[selectedEntry?.firstName, selectedEntry?.lastName].filter(Boolean).join(' ')}</strong> from the waiting list? This action cannot be undone.
+                            {t.rich('deleteDescription', {
+                                name: [selectedEntry?.firstName, selectedEntry?.lastName].filter(Boolean).join(' '),
+                                strong: (chunks) => <strong>{chunks}</strong>,
+                            })}
                         </DialogDescription>
                     </DialogHeader>
                     <DialogFooter>
                         <DialogClose asChild>
-                            <Button variant="outline">Cancel</Button>
+                            <Button variant="outline">{tCommon('cancel')}</Button>
                         </DialogClose>
                         <Button
                             variant="destructive"
                             onClick={() => selectedEntry && deleteEntryMutation.mutate(selectedEntry.id)}
                             disabled={deleteEntryMutation.isPending}
                         >
-                            {deleteEntryMutation.isPending ? 'Removing…' : 'Remove'}
+                            {deleteEntryMutation.isPending ? t('removing') : t('remove')}
                         </Button>
                     </DialogFooter>
                 </DialogContent>

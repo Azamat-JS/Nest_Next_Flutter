@@ -2,17 +2,19 @@
 
 import { useQuery } from "@tanstack/react-query"
 import { Loader2, Wallet } from "lucide-react"
+import { useTranslations } from "next-intl"
 import api from "@/lib/api"
 import { PortalBootstrap, PortalPayment } from "@/lib/types/portal"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 
-const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-
 const formatAmount = (amount: string) =>
     `${Number(amount).toLocaleString()} so'm`
 
 export default function TgPaymentsPage() {
+    const t = useTranslations('TgPayments')
+    const tMonths = useTranslations('Common.months')
+    const monthKey = (m: number) => String(m) as Parameters<typeof tMonths>[0]
     const { data: bootstrap } = useQuery({
         queryKey: ['tg-bootstrap'],
         queryFn: async () => (await api.get<PortalBootstrap>('/portal/bootstrap')).data,
@@ -32,7 +34,7 @@ export default function TgPaymentsPage() {
     }
 
     if (isError) {
-        return <p className="py-16 text-center text-sm text-muted-foreground">Could not load payments.</p>
+        return <p className="py-16 text-center text-sm text-muted-foreground">{t('loadError')}</p>
     }
 
     const payments: PortalPayment[] = data?.data ?? []
@@ -42,13 +44,13 @@ export default function TgPaymentsPage() {
         <div className="space-y-3 py-4">
             <h1 className="flex items-center gap-2 text-xl font-bold">
                 <Wallet className="h-5 w-5 text-primary" />
-                Payment history
+                {t('title')}
             </h1>
             {payments.map((payment) => (
                 <Card key={payment.id}>
                     <CardContent className="flex items-center justify-between py-4">
                         <div>
-                            <p className="font-medium">{MONTHS[payment.month - 1]} {payment.year}</p>
+                            <p className="font-medium">{tMonths(monthKey(payment.month))} {payment.year}</p>
                             <p className="text-sm text-muted-foreground">
                                 {isParent && <>{payment.student.firstName} {payment.student.lastName ?? ''} · </>}
                                 {payment.group.name}
@@ -60,7 +62,7 @@ export default function TgPaymentsPage() {
                 </Card>
             ))}
             {payments.length === 0 && (
-                <p className="py-8 text-center text-sm text-muted-foreground">No payments recorded yet</p>
+                <p className="py-8 text-center text-sm text-muted-foreground">{t('noPayments')}</p>
             )}
         </div>
     )

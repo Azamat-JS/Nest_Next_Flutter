@@ -52,14 +52,19 @@ import {
     PaginationPrevious,
 } from "@/components/ui/pagination"
 import { GroupType, PaginationType } from "@/lib/types/groups"
-import { LatestPaymentsResponse, MONTH_NAMES, StudentPaymentType } from "@/lib/types/payment_type"
+import { LatestPaymentsResponse, StudentPaymentType } from "@/lib/types/payment_type"
 import { AddPaymentDrawer } from "@/components/AddPaymentDrawer"
 import { useAuthStore } from "@/lib/stores/authStore"
 import { jwtDecode } from "jwt-decode"
 import api from "@/lib/api"
+import { useTranslations } from "next-intl"
 
 const PaymentsComponent = () => {
     const router = useRouter()
+    const t = useTranslations('PaymentsComponent')
+    const tCommon = useTranslations('Common')
+    const tMonths = useTranslations('Common.months')
+    const monthKey = (m: number) => String(m) as Parameters<typeof tMonths>[0]
     const searchParams = useSearchParams()
     const page = Number(searchParams.get('page') ?? 1)
     const limit = Number(searchParams.get('limit') ?? 10)
@@ -103,7 +108,7 @@ const PaymentsComponent = () => {
     useEffect(() => {
         const currentSearch = searchParams.get('search') ?? ''
         if (searchInput === currentSearch) return
-        const t = setTimeout(() => {
+        const debounceTimer = setTimeout(() => {
             const params = new URLSearchParams(searchParams.toString())
             if (searchInput) {
                 params.set('search', searchInput)
@@ -113,7 +118,7 @@ const PaymentsComponent = () => {
             params.set('page', '1')
             router.push(`?${params.toString()}`)
         }, 400)
-        return () => clearTimeout(t)
+        return () => clearTimeout(debounceTimer)
     }, [searchInput])
 
     const updatePaymentMutation = useMutation({
@@ -126,12 +131,12 @@ const PaymentsComponent = () => {
             })
         },
         onSuccess: () => {
-            toast.success('Payment updated successfully')
+            toast.success(t('paymentUpdated'))
             setOpenUpdate(false)
             queryClient.invalidateQueries({ queryKey: ['payments-latest'] })
         },
         onError: (error: any) => {
-            toast.error(error.response?.data?.message ?? 'Something went wrong')
+            toast.error(error.response?.data?.message ?? tCommon('errorGeneric'))
         },
     })
 
@@ -140,12 +145,12 @@ const PaymentsComponent = () => {
             return await api.delete(`/student-payment/delete-payment/${paymentId}`)
         },
         onSuccess: () => {
-            toast.success('Payment deleted successfully')
+            toast.success(t('paymentDeleted'))
             setOpenDelete(false)
             queryClient.invalidateQueries({ queryKey: ['payments-latest'] })
         },
         onError: (error: any) => {
-            toast.error(error.response?.data?.message ?? 'Something went wrong')
+            toast.error(error.response?.data?.message ?? tCommon('errorGeneric'))
         },
     })
 
@@ -165,7 +170,7 @@ const PaymentsComponent = () => {
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                     <Input
                         className="pl-9"
-                        placeholder="Search by name or email..."
+                        placeholder={t('searchPlaceholder')}
                         value={searchInput}
                         onChange={(e) => setSearchInput(e.target.value)}
                     />
@@ -184,11 +189,11 @@ const PaymentsComponent = () => {
                     }}
                 >
                     <SelectTrigger className="w-48">
-                        <SelectValue placeholder="Filter by group" />
+                        <SelectValue placeholder={t('filterByGroupPlaceholder')} />
                     </SelectTrigger>
                     <SelectContent>
                         <SelectGroup>
-                            <SelectItem value="__all__">All groups</SelectItem>
+                            <SelectItem value="__all__">{t('allGroups')}</SelectItem>
                             {groups.map((g) => (
                                 <SelectItem key={g.id} value={g.id}>{g.name}</SelectItem>
                             ))}
@@ -199,25 +204,25 @@ const PaymentsComponent = () => {
 
             <Table>
                 <TableCaption>
-                    Showing {payments.length} of {meta?.total ?? 0} students with payments
+                    {t('showingCount', { count: payments.length, total: meta?.total ?? 0 })}
                 </TableCaption>
                 <TableHeader>
                     <TableRow>
                         <TableHead className="w-12 text-center font-semibold">#</TableHead>
-                        <TableHead className="text-center font-semibold">Student</TableHead>
-                        <TableHead className="text-center font-semibold">Email</TableHead>
-                        <TableHead className="text-center font-semibold">Group</TableHead>
-                        <TableHead className="text-center font-semibold">Last Payment</TableHead>
-                        <TableHead className="text-center font-semibold">Amount</TableHead>
-                        <TableHead className="text-center font-semibold">Comment</TableHead>
-                        {canEdit && <TableHead className="w-16 text-center font-semibold">Actions</TableHead>}
+                        <TableHead className="text-center font-semibold">{t('studentHeader')}</TableHead>
+                        <TableHead className="text-center font-semibold">{t('emailHeader')}</TableHead>
+                        <TableHead className="text-center font-semibold">{t('groupHeader')}</TableHead>
+                        <TableHead className="text-center font-semibold">{t('lastPaymentHeader')}</TableHead>
+                        <TableHead className="text-center font-semibold">{t('amountHeader')}</TableHead>
+                        <TableHead className="text-center font-semibold">{t('commentHeader')}</TableHead>
+                        {canEdit && <TableHead className="w-16 text-center font-semibold">{tCommon('actions')}</TableHead>}
                     </TableRow>
                 </TableHeader>
                 <TableBody>
                     {payments.length === 0 ? (
                         <TableRow>
                             <TableCell colSpan={canEdit ? 8 : 7} className="text-center text-muted-foreground py-8">
-                                No payments found
+                                {t('noPaymentsFound')}
                             </TableCell>
                         </TableRow>
                     ) : payments.map((p, idx) => (
@@ -237,7 +242,7 @@ const PaymentsComponent = () => {
                                 {p.group?.name ?? '—'}
                             </TableCell>
                             <TableCell className="text-center text-muted-foreground">
-                                {MONTH_NAMES[p.month - 1]} {p.year}
+                                {tMonths(monthKey(p.month))} {p.year}
                             </TableCell>
                             <TableCell className="text-center font-semibold">
                                 {Number(p.amount).toLocaleString()}
@@ -265,7 +270,7 @@ const PaymentsComponent = () => {
                                                     })
                                                     setOpenUpdate(true)
                                                 }}>
-                                                    <Edit className="h-4 w-4" /> Edit
+                                                    <Edit className="h-4 w-4" /> {t('edit')}
                                                 </DropdownMenuItem>
                                                 <DropdownMenuItem
                                                     className="text-destructive focus:text-destructive"
@@ -274,7 +279,7 @@ const PaymentsComponent = () => {
                                                         setOpenDelete(true)
                                                     }}
                                                 >
-                                                    <Trash className="h-4 w-4" /> Delete
+                                                    <Trash className="h-4 w-4" /> {t('delete')}
                                                 </DropdownMenuItem>
                                             </DropdownMenuGroup>
                                         </DropdownMenuContent>
@@ -290,7 +295,7 @@ const PaymentsComponent = () => {
             <div className="grid grid-cols-2 items-center">
                 <div className="flex justify-center">
                     <Field orientation="horizontal" className="w-fit">
-                        <FieldLabel htmlFor="payments-rows-per-page">Rows per page</FieldLabel>
+                        <FieldLabel htmlFor="payments-rows-per-page">{t('rowsPerPage')}</FieldLabel>
                         <Select value={String(limit)} onValueChange={(val) => {
                             const params = new URLSearchParams(searchParams.toString())
                             params.set('limit', val)
@@ -314,7 +319,7 @@ const PaymentsComponent = () => {
                     <Pagination>
                         <PaginationContent>
                             <PaginationItem>
-                                <PaginationPrevious href={`?page=${Math.max(1, page - 1)}&limit=${limit}${searchParam ? `&search=${searchParam}` : ''}${groupIdParam ? `&groupId=${groupIdParam}` : ''}`} />
+                                <PaginationPrevious href={`?page=${Math.max(1, page - 1)}&limit=${limit}${searchParam ? `&search=${searchParam}` : ''}${groupIdParam ? `&groupId=${groupIdParam}` : ''}`} text={tCommon('previous')} />
                             </PaginationItem>
                             {Array.from({ length: lastPage }).map((_, idx) => (
                                 <PaginationItem key={idx}>
@@ -327,7 +332,7 @@ const PaymentsComponent = () => {
                                 </PaginationItem>
                             ))}
                             <PaginationItem>
-                                <PaginationNext href={`?page=${Math.min(lastPage, page + 1)}&limit=${limit}${searchParam ? `&search=${searchParam}` : ''}${groupIdParam ? `&groupId=${groupIdParam}` : ''}`} />
+                                <PaginationNext href={`?page=${Math.min(lastPage, page + 1)}&limit=${limit}${searchParam ? `&search=${searchParam}` : ''}${groupIdParam ? `&groupId=${groupIdParam}` : ''}`} text={tCommon('next')} />
                             </PaginationItem>
                         </PaginationContent>
                     </Pagination>
@@ -338,15 +343,15 @@ const PaymentsComponent = () => {
             <Dialog open={openUpdate} onOpenChange={setOpenUpdate}>
                 <DialogContent className="sm:max-w-sm">
                     <DialogHeader>
-                        <DialogTitle>Edit Payment</DialogTitle>
+                        <DialogTitle>{t('editPaymentTitle')}</DialogTitle>
                         <DialogDescription>
-                            Update payment for <strong>{[selectedPayment?.student?.firstName, selectedPayment?.student?.lastName].filter(Boolean).join(' ')}</strong>
+                            {t('updatePaymentFor', { name: [selectedPayment?.student?.firstName, selectedPayment?.student?.lastName].filter(Boolean).join(' ') })}
                         </DialogDescription>
                     </DialogHeader>
                     <FieldGroup>
                         <div className="grid grid-cols-2 gap-3">
                             <Field>
-                                <Label>Month</Label>
+                                <Label>{t('monthLabel')}</Label>
                                 <Select
                                     value={String(editForm.month)}
                                     onValueChange={(v) => setEditForm(prev => ({ ...prev, month: Number(v) }))}
@@ -356,15 +361,15 @@ const PaymentsComponent = () => {
                                     </SelectTrigger>
                                     <SelectContent>
                                         <SelectGroup>
-                                            {MONTH_NAMES.map((name, i) => (
-                                                <SelectItem key={i + 1} value={String(i + 1)}>{name}</SelectItem>
+                                            {Array.from({ length: 12 }, (_, i) => i + 1).map((m) => (
+                                                <SelectItem key={m} value={String(m)}>{tMonths(monthKey(m))}</SelectItem>
                                             ))}
                                         </SelectGroup>
                                     </SelectContent>
                                 </Select>
                             </Field>
                             <Field>
-                                <Label>Year</Label>
+                                <Label>{t('yearLabel')}</Label>
                                 <Select
                                     value={String(editForm.year)}
                                     onValueChange={(v) => setEditForm(prev => ({ ...prev, year: Number(v) }))}
@@ -383,7 +388,7 @@ const PaymentsComponent = () => {
                             </Field>
                         </div>
                         <Field>
-                            <Label>Amount</Label>
+                            <Label>{t('amountLabel')}</Label>
                             <Input
                                 type="number"
                                 min={0}
@@ -393,24 +398,24 @@ const PaymentsComponent = () => {
                             />
                         </Field>
                         <Field>
-                            <Label>Comment (optional)</Label>
+                            <Label>{t('commentOptionalLabel')}</Label>
                             <Input
                                 type="text"
                                 value={editForm.comment}
                                 onChange={(e) => setEditForm(prev => ({ ...prev, comment: e.target.value }))}
-                                placeholder="Add a note..."
+                                placeholder={t('commentPlaceholder')}
                             />
                         </Field>
                     </FieldGroup>
                     <DialogFooter>
                         <DialogClose asChild>
-                            <Button variant="outline">Cancel</Button>
+                            <Button variant="outline">{tCommon('cancel')}</Button>
                         </DialogClose>
                         <Button
                             onClick={() => selectedPayment && updatePaymentMutation.mutate({ id: selectedPayment.id, data: editForm })}
                             disabled={updatePaymentMutation.isPending}
                         >
-                            {updatePaymentMutation.isPending ? 'Saving…' : 'Save'}
+                            {updatePaymentMutation.isPending ? t('saving') : t('save')}
                         </Button>
                     </DialogFooter>
                 </DialogContent>
@@ -420,21 +425,25 @@ const PaymentsComponent = () => {
             <Dialog open={openDelete} onOpenChange={setOpenDelete}>
                 <DialogContent className="sm:max-w-sm">
                     <DialogHeader>
-                        <DialogTitle>Delete Payment</DialogTitle>
+                        <DialogTitle>{t('deletePaymentTitle')}</DialogTitle>
                         <DialogDescription>
-                            Are you sure you want to delete the payment for <strong>{[selectedPayment?.student?.firstName, selectedPayment?.student?.lastName].filter(Boolean).join(' ')}</strong> ({MONTH_NAMES[(selectedPayment?.month ?? 1) - 1]} {selectedPayment?.year})? This action cannot be undone.
+                            {t('deleteConfirm', {
+                                name: [selectedPayment?.student?.firstName, selectedPayment?.student?.lastName].filter(Boolean).join(' '),
+                                month: tMonths(monthKey(selectedPayment?.month ?? 1)),
+                                year: selectedPayment?.year ?? '',
+                            })}
                         </DialogDescription>
                     </DialogHeader>
                     <DialogFooter>
                         <DialogClose asChild>
-                            <Button variant="outline">Cancel</Button>
+                            <Button variant="outline">{tCommon('cancel')}</Button>
                         </DialogClose>
                         <Button
                             variant="destructive"
                             onClick={() => selectedPayment && deletePaymentMutation.mutate(selectedPayment.id)}
                             disabled={deletePaymentMutation.isPending}
                         >
-                            {deletePaymentMutation.isPending ? 'Deleting…' : 'Delete'}
+                            {deletePaymentMutation.isPending ? t('deleting') : t('delete')}
                         </Button>
                     </DialogFooter>
                 </DialogContent>

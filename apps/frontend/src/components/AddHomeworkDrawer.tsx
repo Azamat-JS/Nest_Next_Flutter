@@ -1,5 +1,6 @@
 "use client"
 
+import { useMemo } from "react"
 import { Button } from "@/components/ui/button"
 import {
     Drawer,
@@ -14,6 +15,7 @@ import { Input } from "@/components/ui/input"
 import * as z from "zod"
 import { toast } from "sonner"
 import { useForm } from "@tanstack/react-form"
+import { useTranslations } from "next-intl"
 import {
     Field,
     FieldError,
@@ -33,18 +35,20 @@ import { NotebookPen } from "lucide-react"
 
 const hourOptions = Array.from({ length: 24 }, (_, i) => String(i).padStart(2, "0"))
 
-const schema = z.object({
-    topic: z.string().min(1, "Topic is required"),
-    dueDate: z.string().min(1, "Due date is required"),
-    dueHour: z.string().min(1, "Select an hour"),
-})
-
 const AddHomeworkDrawer = ({ openCreate, setOpenCreate, groupId, onHomeworkAdded }: {
     openCreate: boolean
     setOpenCreate: (open: boolean) => void
     groupId: string
     onHomeworkAdded: () => void
 }) => {
+    const t = useTranslations('AddHomeworkDrawer')
+
+    const schema = useMemo(() => z.object({
+        topic: z.string().min(1, t('topicRequired')),
+        dueDate: z.string().min(1, t('dueDateRequired')),
+        dueHour: z.string().min(1, t('hourRequired')),
+    }), [t])
+
     const form = useForm({
         defaultValues: { topic: "", dueDate: "", dueHour: "09" },
         validators: { onSubmit: schema },
@@ -55,9 +59,9 @@ const AddHomeworkDrawer = ({ openCreate, setOpenCreate, groupId, onHomeworkAdded
                 form.reset()
                 onHomeworkAdded()
                 setOpenCreate(false)
-                toast.success('Homework added successfully')
+                toast.success(t('success'))
             } catch (error: any) {
-                toast.error(error.response?.data?.message ?? 'Something went wrong')
+                toast.error(error.response?.data?.message ?? t('error'))
             }
         },
     })
@@ -66,12 +70,12 @@ const AddHomeworkDrawer = ({ openCreate, setOpenCreate, groupId, onHomeworkAdded
         <Drawer direction="right" open={openCreate} onOpenChange={setOpenCreate}>
             <DrawerTrigger asChild>
                 <Button className="gap-1">
-                    <NotebookPen className="h-4 w-4" /> Add Homework
+                    <NotebookPen className="h-4 w-4" /> {t('trigger')}
                 </Button>
             </DrawerTrigger>
             <DrawerContent>
                 <DrawerHeader>
-                    <DrawerTitle className="text-xl font-bold">Add Homework</DrawerTitle>
+                    <DrawerTitle className="text-xl font-bold">{t('title')}</DrawerTitle>
                 </DrawerHeader>
                 <div className="no-scrollbar overflow-y-auto px-4">
                     <form
@@ -85,13 +89,13 @@ const AddHomeworkDrawer = ({ openCreate, setOpenCreate, groupId, onHomeworkAdded
                                     const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
                                     return (
                                         <Field data-invalid={isInvalid}>
-                                            <FieldLabel htmlFor={field.name}>Topic</FieldLabel>
+                                            <FieldLabel htmlFor={field.name}>{t('topicLabel')}</FieldLabel>
                                             <Input
                                                 id={field.name}
                                                 value={field.state.value}
                                                 onBlur={field.handleBlur}
                                                 onChange={(e) => field.handleChange(e.target.value)}
-                                                placeholder="e.g. Chapter 5 exercises"
+                                                placeholder={t('topicPlaceholder')}
                                             />
                                             {isInvalid && <FieldError errors={field.state.meta.errors} />}
                                         </Field>
@@ -105,7 +109,7 @@ const AddHomeworkDrawer = ({ openCreate, setOpenCreate, groupId, onHomeworkAdded
                                         const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
                                         return (
                                             <Field data-invalid={isInvalid} className="flex-1">
-                                                <FieldLabel htmlFor={field.name}>Due date</FieldLabel>
+                                                <FieldLabel htmlFor={field.name}>{t('dueDateLabel')}</FieldLabel>
                                                 <Input
                                                     id={field.name}
                                                     type="date"
@@ -122,7 +126,7 @@ const AddHomeworkDrawer = ({ openCreate, setOpenCreate, groupId, onHomeworkAdded
                                 <form.Field name="dueHour">
                                     {(field) => (
                                         <Field className="w-28">
-                                            <FieldLabel htmlFor={field.name}>Hour</FieldLabel>
+                                            <FieldLabel htmlFor={field.name}>{t('hourLabel')}</FieldLabel>
                                             <Select value={field.state.value} onValueChange={(val) => field.handleChange(val)}>
                                                 <SelectTrigger id={field.name} className="w-full">
                                                     <SelectValue />
@@ -143,9 +147,9 @@ const AddHomeworkDrawer = ({ openCreate, setOpenCreate, groupId, onHomeworkAdded
                     </form>
                 </div>
                 <DrawerFooter>
-                    <Button type="submit" form="add-homework-form">Submit</Button>
+                    <Button type="submit" form="add-homework-form">{t('submit')}</Button>
                     <DrawerClose asChild>
-                        <Button variant="outline">Cancel</Button>
+                        <Button variant="outline">{t('cancel')}</Button>
                     </DrawerClose>
                 </DrawerFooter>
             </DrawerContent>

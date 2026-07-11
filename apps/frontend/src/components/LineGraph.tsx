@@ -2,6 +2,7 @@
 
 import React, { useMemo, useState } from "react"
 import { useSuspenseQuery } from "@tanstack/react-query"
+import { useTranslations } from "next-intl"
 import api from "@/lib/api"
 import {
     LineChart,
@@ -22,20 +23,7 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 
-const months = [
-    { label: "January", value: "1" },
-    { label: "February", value: "2" },
-    { label: "March", value: "3" },
-    { label: "April", value: "4" },
-    { label: "May", value: "5" },
-    { label: "June", value: "6" },
-    { label: "July", value: "7" },
-    { label: "August", value: "8" },
-    { label: "September", value: "9" },
-    { label: "October", value: "10" },
-    { label: "November", value: "11" },
-    { label: "December", value: "12" },
-]
+const monthValues = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"] as const
 
 const currentYear = new Date().getFullYear()
 const years = [String(currentYear), String(currentYear - 1), String(currentYear - 2)]
@@ -43,6 +31,8 @@ const years = [String(currentYear), String(currentYear - 1), String(currentYear 
 const LineGraph = ({ studentId, groupId }: { studentId: string; groupId: string }) => {
     const [month, setMonth] = useState(String(new Date().getMonth() + 1))
     const [year, setYear] = useState(String(currentYear))
+    const t = useTranslations('LineGraph')
+    const tMonths = useTranslations('Common.months')
 
     const { data: chartReport } = useSuspenseQuery({
         queryKey: ['student-score-chart', studentId, groupId, month, year],
@@ -65,23 +55,23 @@ const LineGraph = ({ studentId, groupId }: { studentId: string; groupId: string 
     return (
         <div className="space-y-4">
             <div className="flex items-center justify-between">
-                <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Score Chart</h3>
+                <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">{t('title')}</h3>
                 <div className="flex gap-2">
                     <Select value={month} onValueChange={setMonth}>
                         <SelectTrigger className="w-36">
-                            <SelectValue placeholder="Month" />
+                            <SelectValue placeholder={t('monthPlaceholder')} />
                         </SelectTrigger>
                         <SelectContent>
                             <SelectGroup>
-                                {months.map((m) => (
-                                    <SelectItem key={m.value} value={m.value}>{m.label}</SelectItem>
+                                {monthValues.map((m) => (
+                                    <SelectItem key={m} value={m}>{tMonths(m)}</SelectItem>
                                 ))}
                             </SelectGroup>
                         </SelectContent>
                     </Select>
                     <Select value={year} onValueChange={setYear}>
                         <SelectTrigger className="w-28">
-                            <SelectValue placeholder="Year" />
+                            <SelectValue placeholder={t('yearPlaceholder')} />
                         </SelectTrigger>
                         <SelectContent>
                             <SelectGroup>
@@ -102,9 +92,9 @@ const LineGraph = ({ studentId, groupId }: { studentId: string; groupId: string 
                         <YAxis tick={{ fontSize: 11 }} />
                         <Tooltip />
                         <Legend />
-                        <Line type="monotone" dataKey="homework" stroke="#2563eb" strokeWidth={2} name="Homework" dot={false} />
-                        <Line type="monotone" dataKey="attendance" stroke="#16a34a" strokeWidth={2} name="Attendance" dot={false} />
-                        <Line type="monotone" dataKey="total" stroke="#dc2626" strokeWidth={2} name="Total" dot={false} />
+                        <Line type="monotone" dataKey="homework" stroke="#2563eb" strokeWidth={2} name={t('homework')} dot={false} />
+                        <Line type="monotone" dataKey="attendance" stroke="#16a34a" strokeWidth={2} name={t('attendance')} dot={false} />
+                        <Line type="monotone" dataKey="total" stroke="#dc2626" strokeWidth={2} name={t('total')} dot={false} />
                     </LineChart>
                 </ResponsiveContainer>
             </div>

@@ -12,10 +12,12 @@ import {
 import { useAuthStore } from "@/lib/stores/authStore"
 import { Menu, LogOut, User, Settings } from "lucide-react"
 import { useRouter } from "next/navigation"
+import { useTranslations } from "next-intl"
 
 export function DropdownMenuDemo() {
     const setToken = useAuthStore((state) => state.setToken);
     const router = useRouter();
+    const t = useTranslations("AccountMenu");
 
     const handleLogout = () => {
         setToken(null);
@@ -31,18 +33,18 @@ export function DropdownMenuDemo() {
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-40" align="start">
                 <DropdownMenuGroup>
-                    <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                    <DropdownMenuLabel>{t("myAccount")}</DropdownMenuLabel>
                     <DropdownMenuItem onClick={handleLogout}>
                         <LogOut className="h-4 w-4" />
-                        Logout
+                        {t("logout")}
                     </DropdownMenuItem>
                     <DropdownMenuItem onClick={() => router.push('/profile')}>
                         <User className="w-4 h-4" />
-                        Profile
+                        {t("profile")}
                     </DropdownMenuItem>
                     <DropdownMenuItem>
                         <Settings className="h-4 w-4" />
-                        Settings
+                        {t("settings")}
                     </DropdownMenuItem>
                 </DropdownMenuGroup>
             </DropdownMenuContent>

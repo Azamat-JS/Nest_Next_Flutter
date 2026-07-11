@@ -54,8 +54,11 @@ import LineGraph from "../LineGraph";
 import { toast } from "sonner";
 import { Input } from "../ui/input";
 import api from "@/lib/api";
+import { useTranslations } from "next-intl";
 
 const StudentScoresComponent = ({ groupId, studentId }: { groupId: string; studentId: string }) => {
+    const t = useTranslations('StudentScoresComponent');
+    const tCommon = useTranslations('Common');
     const searchParams = useSearchParams();
     const page = Number(searchParams.get('page') ?? 1);
     const limit = Number(searchParams.get('limit') ?? 10);
@@ -87,7 +90,7 @@ const StudentScoresComponent = ({ groupId, studentId }: { groupId: string; stude
             });
         },
         onSuccess: () => {
-            toast.success('Score updated successfully');
+            toast.success(t('updateSuccess'));
             setOpenUpdate(false);
             setValue(0);
             setComment("");
@@ -96,7 +99,7 @@ const StudentScoresComponent = ({ groupId, studentId }: { groupId: string; stude
             queryClient.invalidateQueries({ queryKey: ['studentScores', studentId, groupId] });
         },
         onError: (error: any) => {
-            toast.error(error.response?.data?.message ?? 'Something went wrong');
+            toast.error(error.response?.data?.message ?? tCommon('errorGeneric'));
         },
     });
 
@@ -108,27 +111,27 @@ const StudentScoresComponent = ({ groupId, studentId }: { groupId: string; stude
     const lastPage = studentScoreReport.last_page;
 
     if (!student) {
-        return <p className="text-center text-muted-foreground py-8">Loading student info…</p>;
+        return <p className="text-center text-muted-foreground py-8">{t('loadingStudent')}</p>;
     }
 
     return (
         <div className="flex flex-col gap-4">
             <div className="text-center">
                 <h2 className="text-xl font-bold">{[student.firstName, student.lastName].filter(Boolean).join(' ')}</h2>
-                <p className="text-sm text-muted-foreground">All-time total: <span className="font-semibold text-foreground">{studentScoreReport.total?.total ?? 0}</span></p>
+                <p className="text-sm text-muted-foreground">{t('allTimeTotal')} <span className="font-semibold text-foreground">{studentScoreReport.total?.total ?? 0}</span></p>
             </div>
 
             <Table>
-                <TableCaption>Score history — page {page} of {lastPage}</TableCaption>
+                <TableCaption>{t('scoreHistoryCaption', { page, lastPage })}</TableCaption>
                 <TableHeader>
                     <TableRow>
                         <TableHead className="w-12 text-center font-semibold">#</TableHead>
-                        <TableHead className="text-center font-semibold">Type</TableHead>
-                        <TableHead className="text-center font-semibold">Score</TableHead>
-                        <TableHead className="text-center font-semibold">Date</TableHead>
-                        <TableHead className="text-center font-semibold">Total</TableHead>
-                        <TableHead className="text-center font-semibold">Comment</TableHead>
-                        <TableHead className="w-16 text-center font-semibold">Actions</TableHead>
+                        <TableHead className="text-center font-semibold">{t('type')}</TableHead>
+                        <TableHead className="text-center font-semibold">{t('score')}</TableHead>
+                        <TableHead className="text-center font-semibold">{t('date')}</TableHead>
+                        <TableHead className="text-center font-semibold">{t('total')}</TableHead>
+                        <TableHead className="text-center font-semibold">{t('comment')}</TableHead>
+                        <TableHead className="w-16 text-center font-semibold">{tCommon('actions')}</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -162,7 +165,7 @@ const StudentScoresComponent = ({ groupId, studentId }: { groupId: string; stude
                                                 setSelectedDate(row.date);
                                                 setComment(row.comment ?? "");
                                             }}>
-                                                <Edit className="h-4 w-4" /> Edit
+                                                <Edit className="h-4 w-4" /> {t('edit')}
                                             </DropdownMenuItem>
                                         </DropdownMenuGroup>
                                     </DropdownMenuContent>
@@ -177,7 +180,7 @@ const StudentScoresComponent = ({ groupId, studentId }: { groupId: string; stude
             <div className="grid grid-cols-2 items-center mt-2">
                 <div className="flex justify-center">
                     <Field orientation="horizontal" className="w-fit">
-                        <FieldLabel htmlFor="ss-rows-per-page">Rows per page</FieldLabel>
+                        <FieldLabel htmlFor="ss-rows-per-page">{t('rowsPerPage')}</FieldLabel>
                         <Select value={String(limit)} onValueChange={(val) => {
                             const params = new URLSearchParams(searchParams.toString());
                             params.set('limit', val);
@@ -201,7 +204,7 @@ const StudentScoresComponent = ({ groupId, studentId }: { groupId: string; stude
                     <Pagination>
                         <PaginationContent>
                             <PaginationItem>
-                                <PaginationPrevious href={`?page=${Math.max(1, page - 1)}&limit=${limit}`} />
+                                <PaginationPrevious href={`?page=${Math.max(1, page - 1)}&limit=${limit}`} text={tCommon('previous')} />
                             </PaginationItem>
                             {Array.from({ length: lastPage }).map((_, idx) => (
                                 <PaginationItem key={idx}>
@@ -211,7 +214,7 @@ const StudentScoresComponent = ({ groupId, studentId }: { groupId: string; stude
                                 </PaginationItem>
                             ))}
                             <PaginationItem>
-                                <PaginationNext href={`?page=${Math.min(lastPage, page + 1)}&limit=${limit}`} />
+                                <PaginationNext href={`?page=${Math.min(lastPage, page + 1)}&limit=${limit}`} text={tCommon('next')} />
                             </PaginationItem>
                         </PaginationContent>
                     </Pagination>
@@ -222,35 +225,35 @@ const StudentScoresComponent = ({ groupId, studentId }: { groupId: string; stude
             <Dialog open={openUpdate} onOpenChange={setOpenUpdate}>
                 <DialogContent className="sm:max-w-sm">
                     <DialogHeader>
-                        <DialogTitle>Update Score</DialogTitle>
-                        <DialogDescription>Edit this score entry.</DialogDescription>
+                        <DialogTitle>{t('updateScoreTitle')}</DialogTitle>
+                        <DialogDescription>{t('updateScoreDescription')}</DialogDescription>
                     </DialogHeader>
                     <FieldGroup>
                         <Select value={type} onValueChange={(v: "HOMEWORK" | "ATTENDANCE") => setType(v)}>
                             <SelectTrigger>
-                                <SelectValue placeholder="Select type" />
+                                <SelectValue placeholder={t('selectType')} />
                             </SelectTrigger>
                             <SelectContent>
-                                <SelectItem value="HOMEWORK">Homework</SelectItem>
-                                <SelectItem value="ATTENDANCE">Attendance</SelectItem>
+                                <SelectItem value="HOMEWORK">{t('homework')}</SelectItem>
+                                <SelectItem value="ATTENDANCE">{t('attendance')}</SelectItem>
                             </SelectContent>
                         </Select>
                         <Input
                             type="number"
-                            placeholder="Score value"
+                            placeholder={t('scoreValuePlaceholder')}
                             value={value}
                             onChange={(e) => setValue(Number(e.target.value))}
                         />
                         <Input
                             type="text"
-                            placeholder="Comment (optional)"
+                            placeholder={t('commentPlaceholder')}
                             value={comment}
                             onChange={(e) => setComment(e.target.value)}
                         />
                     </FieldGroup>
                     <DialogFooter>
                         <DialogClose asChild>
-                            <Button variant="outline">Cancel</Button>
+                            <Button variant="outline">{tCommon('cancel')}</Button>
                         </DialogClose>
                         <Button
                             onClick={() => updateScoresMutation.mutate({
@@ -263,7 +266,7 @@ const StudentScoresComponent = ({ groupId, studentId }: { groupId: string; stude
                             })}
                             disabled={updateScoresMutation.isPending}
                         >
-                            {updateScoresMutation.isPending ? 'Saving…' : 'Save'}
+                            {updateScoresMutation.isPending ? t('saving') : t('save')}
                         </Button>
                     </DialogFooter>
                 </DialogContent>

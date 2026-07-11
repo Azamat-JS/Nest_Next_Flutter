@@ -2,10 +2,12 @@
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { useRouter, useSearchParams } from 'next/navigation'
+import { useTranslations } from "next-intl"
 import UsersTab from "./UsersTab"
 import WaitingListTab from "./WaitingListTab"
 
 const Home = () => {
+    const t = useTranslations('Home')
     const router = useRouter()
     const searchParams = useSearchParams()
     const tab = searchParams.get('tab') ?? 'users'
@@ -21,8 +23,8 @@ const Home = () => {
             className="space-y-4"
         >
             <TabsList>
-                <TabsTrigger value="users">Users</TabsTrigger>
-                <TabsTrigger value="waiting-list">Waiting List</TabsTrigger>
+                <TabsTrigger value="users">{t('users')}</TabsTrigger>
+                <TabsTrigger value="waiting-list">{t('waitingList')}</TabsTrigger>
             </TabsList>
             <TabsContent value="users">
                 <UsersTab />

@@ -1,5 +1,6 @@
 'use client'
 
+import { useMemo } from "react"
 import { Button } from "@/components/ui/button"
 import {
     Card,
@@ -12,6 +13,7 @@ import { Input } from "@/components/ui/input"
 import * as z from "zod"
 import { toast } from "sonner"
 import { useForm } from "@tanstack/react-form"
+import { useTranslations } from "next-intl"
 import {
     Field,
     FieldError,
@@ -21,13 +23,14 @@ import {
 import api from "@/lib/api"
 import { useAuthStore } from "@/lib/stores/authStore"
 
-const loginSchema = z.object({
-    phone: z.string().regex(/^\d{9}$/, "Enter a valid 9-digit phone number"),
-    password: z.string().min(6),
-})
-
 export function LoginForm({ id }: { id?: string }) {
     const setToken = useAuthStore((state) => state.setToken)
+    const t = useTranslations("LoginForm")
+
+    const loginSchema = useMemo(() => z.object({
+        phone: z.string().regex(/^\d{9}$/, t("phoneInvalid")),
+        password: z.string().min(6),
+    }), [t])
 
     const form = useForm({
         defaultValues: { phone: "", password: "" },
@@ -38,9 +41,9 @@ export function LoginForm({ id }: { id?: string }) {
                 const response = await api.post('/users/login', { phone, password: value.password })
 
                 setToken(response.data.accessToken, response.data.refreshToken)
-                toast.success('Logged in successfully')
+                toast.success(t("success"))
             } catch (error: any) {
-                toast.error(error.response?.data?.message ?? 'Something went wrong')
+                toast.error(error.response?.data?.message ?? t("error"))
             }
         },
     })
@@ -48,8 +51,8 @@ export function LoginForm({ id }: { id?: string }) {
     return (
         <Card className="w-full max-w-sm">
             <CardHeader>
-                <CardTitle className="text-2xl">Welcome back</CardTitle>
-                <CardDescription>Enter your credentials to sign in</CardDescription>
+                <CardTitle className="text-2xl">{t("title")}</CardTitle>
+                <CardDescription>{t("description")}</CardDescription>
             </CardHeader>
             <CardContent>
                 <form
@@ -63,7 +66,7 @@ export function LoginForm({ id }: { id?: string }) {
                                 const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
                                 return (
                                     <Field data-invalid={isInvalid}>
-                                        <FieldLabel htmlFor={field.name}>Phone number</FieldLabel>
+                                        <FieldLabel htmlFor={field.name}>{t("phoneLabel")}</FieldLabel>
                                         <div className="flex items-center gap-2">
                                             <span className="flex h-9 items-center rounded-md border bg-muted px-3 text-sm text-muted-foreground">
                                                 +998
@@ -90,14 +93,14 @@ export function LoginForm({ id }: { id?: string }) {
                                 const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
                                 return (
                                     <Field data-invalid={isInvalid}>
-                                        <FieldLabel htmlFor={field.name}>Password</FieldLabel>
+                                        <FieldLabel htmlFor={field.name}>{t("passwordLabel")}</FieldLabel>
                                         <Input
                                             id={field.name}
                                             type="password"
                                             value={field.state.value}
                                             onBlur={field.handleBlur}
                                             onChange={(e) => field.handleChange(e.target.value)}
-                                            placeholder="Min. 6 characters"
+                                            placeholder={t("passwordPlaceholder")}
                                             autoComplete="current-password"
                                         />
                                         {isInvalid && <FieldError errors={field.state.meta.errors} />}
@@ -108,7 +111,7 @@ export function LoginForm({ id }: { id?: string }) {
                     </FieldGroup>
 
                     <Button type="submit" className="w-full">
-                        Sign In
+                        {t("submit")}
                     </Button>
                 </form>
             </CardContent>

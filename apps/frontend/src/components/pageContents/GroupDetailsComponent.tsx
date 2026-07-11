@@ -2,6 +2,7 @@
 import { AddStudentPayload, PaginationType } from '@/lib/types/groups';
 import { useState } from 'react';
 import { toast } from 'sonner';
+import { useTranslations } from 'next-intl';
 import {
     Table,
     TableBody,
@@ -64,6 +65,8 @@ import { Home, ListChecks, Medal } from 'lucide-react';
 const date = new Date().toISOString().split('T')[0];
 
 const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
+    const t = useTranslations('GroupDetailsComponent');
+    const tc = useTranslations('Common');
     const router = useRouter();
     const searchParams = useSearchParams();
     const page = Number(searchParams.get('page') ?? 1);
@@ -108,7 +111,7 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
             });
         },
         onSuccess: () => {
-            toast.success('Score updated successfully');
+            toast.success(t('scoreUpdateSuccess'));
             setOpenUpdate(false);
             setValue(0);
             setComment(null);
@@ -118,7 +121,7 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
             queryClient.invalidateQueries({ queryKey: ['group', groupId] });
         },
         onError: (error: any) => {
-            toast.error(error.response?.data?.message ?? 'Something went wrong');
+            toast.error(error.response?.data?.message ?? tc('errorGeneric'));
         },
     });
 
@@ -128,13 +131,13 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
             return res.data;
         },
         onSuccess: () => {
-            toast.success('Students added successfully');
+            toast.success(t('studentsAddedSuccess'));
             setOpenAddStudents(false);
             queryClient.invalidateQueries({ queryKey: ['group', groupId] });
             queryClient.invalidateQueries({ queryKey: ['group-students', groupId] });
         },
         onError: (error: any) => {
-            toast.error(error.response?.data?.message ?? 'Something went wrong');
+            toast.error(error.response?.data?.message ?? tc('errorGeneric'));
         },
     });
 
@@ -143,13 +146,13 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
             return await api.delete(`/group/delete/${payload.studentId}/${payload.groupId}`);
         },
         onSuccess: () => {
-            toast.success('Student removed from group');
+            toast.success(t('studentRemovedSuccess'));
             setOpenDelete(false);
             queryClient.invalidateQueries({ queryKey: ['group', groupId] });
             queryClient.invalidateQueries({ queryKey: ['group-students', groupId] });
         },
         onError: (error: any) => {
-            toast.error(error.response?.data?.message ?? 'Something went wrong');
+            toast.error(error.response?.data?.message ?? tc('errorGeneric'));
         },
     });
 
@@ -169,29 +172,29 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
         <>
             <div className="flex flex-wrap justify-center gap-3 mb-4">
                 <Badge variant="secondary" className="gap-1.5 px-3 py-1.5">
-                    <Home className="h-3.5 w-3.5" /> Avg Homework: {formatValue(avgHomework)}
+                    <Home className="h-3.5 w-3.5" /> {t('avgHomework', { value: formatValue(avgHomework) })}
                 </Badge>
                 <Badge variant="secondary" className="gap-1.5 px-3 py-1.5">
-                    <ListChecks className="h-3.5 w-3.5" /> Avg Attendance: {formatValue(avgAttendance)}
+                    <ListChecks className="h-3.5 w-3.5" /> {t('avgAttendance', { value: formatValue(avgAttendance) })}
                 </Badge>
                 <Badge variant="secondary" className="gap-1.5 px-3 py-1.5">
-                    <Medal className="h-3.5 w-3.5" /> Avg Total: {formatValue(avgTotal)}
+                    <Medal className="h-3.5 w-3.5" /> {t('avgTotal', { value: formatValue(avgTotal) })}
                 </Badge>
             </div>
 
             <Table>
                 <TableCaption>
-                    Showing {groupStudents.length} of {meta?.total ?? 0} students
+                    {t('showingStudents', { count: groupStudents.length, total: meta?.total ?? 0 })}
                 </TableCaption>
                 <TableHeader>
                     <TableRow>
                         <TableHead className="w-12 text-center font-semibold">#</TableHead>
-                        <TableHead className="text-center font-semibold">Name</TableHead>
-                        <TableHead className="text-center font-semibold">Homework</TableHead>
-                        <TableHead className="text-center font-semibold">Attendance</TableHead>
-                        <TableHead className="text-center font-semibold">Date</TableHead>
-                        <TableHead className="text-center font-semibold">Total</TableHead>
-                        <TableHead className="w-16 text-center font-semibold">Actions</TableHead>
+                        <TableHead className="text-center font-semibold">{tc('name')}</TableHead>
+                        <TableHead className="text-center font-semibold">{t('homework')}</TableHead>
+                        <TableHead className="text-center font-semibold">{t('attendance')}</TableHead>
+                        <TableHead className="text-center font-semibold">{t('date')}</TableHead>
+                        <TableHead className="text-center font-semibold">{t('total')}</TableHead>
+                        <TableHead className="w-16 text-center font-semibold">{tc('actions')}</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -225,13 +228,13 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
                                                     setValue(score?.homework ?? 0);
                                                     setComment(score?.comment ?? null);
                                                 }}>
-                                                    <Edit className="h-4 w-4" /> Update Score
+                                                    <Edit className="h-4 w-4" /> {t('updateScoreAction')}
                                                 </DropdownMenuItem>
                                                 <DropdownMenuItem
                                                     onClick={() => { setOpenDelete(true); setSelectedStudent(s); }}
                                                     className="text-destructive focus:text-destructive"
                                                 >
-                                                    <Trash className="h-4 w-4" /> Remove
+                                                    <Trash className="h-4 w-4" /> {t('removeAction')}
                                                 </DropdownMenuItem>
                                             </DropdownMenuGroup>
                                         </DropdownMenuContent>
@@ -252,7 +255,7 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
                     onScoreAdded={() => queryClient.invalidateQueries({ queryKey: ['today-scores', groupId] })}
                 />
                 <Button variant="outline" onClick={() => setOpenAddStudents(true)} className="gap-1">
-                    <UserPlus className="h-4 w-4" /> Add Students
+                    <UserPlus className="h-4 w-4" /> {t('addStudents')}
                 </Button>
             </div>
 
@@ -260,7 +263,7 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
             <div className="grid grid-cols-2 items-center mt-4">
                 <div className="flex justify-center">
                     <Field orientation="horizontal" className="w-fit">
-                        <FieldLabel htmlFor="gd-rows-per-page">Rows per page</FieldLabel>
+                        <FieldLabel htmlFor="gd-rows-per-page">{t('rowsPerPage')}</FieldLabel>
                         <Select value={String(limit)} onValueChange={(val) => {
                             const params = new URLSearchParams(searchParams.toString());
                             params.set('limit', val);
@@ -284,7 +287,7 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
                     <Pagination>
                         <PaginationContent>
                             <PaginationItem>
-                                <PaginationPrevious href={`?page=${Math.max(1, page - 1)}&limit=${limit}`} />
+                                <PaginationPrevious href={`?page=${Math.max(1, page - 1)}&limit=${limit}`} text={tc('previous')} />
                             </PaginationItem>
                             {Array.from({ length: lastPage }).map((_, idx) => (
                                 <PaginationItem key={idx}>
@@ -294,7 +297,7 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
                                 </PaginationItem>
                             ))}
                             <PaginationItem>
-                                <PaginationNext href={`?page=${Math.min(lastPage, page + 1)}&limit=${limit}`} />
+                                <PaginationNext href={`?page=${Math.min(lastPage, page + 1)}&limit=${limit}`} text={tc('next')} />
                             </PaginationItem>
                         </PaginationContent>
                     </Pagination>
@@ -305,43 +308,46 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
             <Dialog open={openUpdate} onOpenChange={setOpenUpdate}>
                 <DialogContent className="sm:max-w-sm">
                     <DialogHeader>
-                        <DialogTitle>Update Score</DialogTitle>
+                        <DialogTitle>{t('updateScoreAction')}</DialogTitle>
                         <DialogDescription>
-                            Edit score for <strong>{[selectedStudent?.firstName, selectedStudent?.lastName].filter(Boolean).join(' ')}</strong>
+                            {t.rich('updateScoreDescription', {
+                                name: [selectedStudent?.firstName, selectedStudent?.lastName].filter(Boolean).join(' '),
+                                b: (chunks) => <strong>{chunks}</strong>,
+                            })}
                         </DialogDescription>
                     </DialogHeader>
                     <FieldGroup>
                         <Select value={type} onValueChange={(v: "HOMEWORK" | "ATTENDANCE") => setType(v)}>
                             <SelectTrigger>
-                                <SelectValue placeholder="Select type" />
+                                <SelectValue placeholder={t('selectTypePlaceholder')} />
                             </SelectTrigger>
                             <SelectContent>
-                                <SelectItem value="HOMEWORK">Homework</SelectItem>
-                                <SelectItem value="ATTENDANCE">Attendance</SelectItem>
+                                <SelectItem value="HOMEWORK">{t('homework')}</SelectItem>
+                                <SelectItem value="ATTENDANCE">{t('attendance')}</SelectItem>
                             </SelectContent>
                         </Select>
                         <Input
                             type="number"
-                            placeholder="Score value"
+                            placeholder={t('scoreValuePlaceholder')}
                             value={value}
                             onChange={(e) => setValue(Number(e.target.value))}
                         />
                         <Input
                             type="text"
-                            placeholder="Comment (optional)"
+                            placeholder={t('commentPlaceholder')}
                             value={comment ?? ""}
                             onChange={(e) => setComment(e.target.value)}
                         />
                     </FieldGroup>
                     <DialogFooter>
                         <DialogClose asChild>
-                            <Button variant="outline">Cancel</Button>
+                            <Button variant="outline">{tc('cancel')}</Button>
                         </DialogClose>
                         <Button
                             onClick={() => selectedStudent && updateScoresMutation.mutate({ studentId: selectedStudent.id, groupId, date, type, value, comment })}
                             disabled={updateScoresMutation.isPending}
                         >
-                            {updateScoresMutation.isPending ? 'Saving…' : 'Save'}
+                            {updateScoresMutation.isPending ? t('saving') : t('save')}
                         </Button>
                     </DialogFooter>
                 </DialogContent>
@@ -351,14 +357,14 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
             <Dialog open={openAddStudents} onOpenChange={(open) => { setOpenAddStudents(open); if (!open) setNewStudentIds([]); }}>
                 <DialogContent className="sm:max-w-sm">
                     <DialogHeader>
-                        <DialogTitle>Add Students</DialogTitle>
-                        <DialogDescription>Select students to add to this group.</DialogDescription>
+                        <DialogTitle>{t('addStudents')}</DialogTitle>
+                        <DialogDescription>{t('addStudentsDescription')}</DialogDescription>
                     </DialogHeader>
                     <Field>
-                        <Label>Available students</Label>
+                        <Label>{t('availableStudentsLabel')}</Label>
                         <div className="max-h-52 overflow-y-auto rounded-md border p-3 space-y-2">
                             {availableStudents.length === 0
-                                ? <p className="text-sm text-muted-foreground text-center py-4">No students available</p>
+                                ? <p className="text-sm text-muted-foreground text-center py-4">{t('noStudentsAvailable')}</p>
                                 : availableStudents.map((student) => (
                                     <label key={student.id} className="flex items-center gap-2 cursor-pointer">
                                         <input
@@ -379,13 +385,13 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
                     </Field>
                     <DialogFooter>
                         <DialogClose asChild>
-                            <Button variant="outline">Cancel</Button>
+                            <Button variant="outline">{tc('cancel')}</Button>
                         </DialogClose>
                         <Button
                             onClick={() => addStudentMutation.mutate({ groupId, studentIds: newStudentIds })}
                             disabled={newStudentIds.length === 0 || addStudentMutation.isPending}
                         >
-                            {addStudentMutation.isPending ? 'Adding…' : `Add ${newStudentIds.length > 0 ? `(${newStudentIds.length})` : ''}`}
+                            {addStudentMutation.isPending ? t('adding') : `${t('addLabel')} ${newStudentIds.length > 0 ? `(${newStudentIds.length})` : ''}`}
                         </Button>
                     </DialogFooter>
                 </DialogContent>
@@ -395,21 +401,24 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
             <Dialog open={openDelete} onOpenChange={setOpenDelete}>
                 <DialogContent className="sm:max-w-sm">
                     <DialogHeader>
-                        <DialogTitle>Remove Student</DialogTitle>
+                        <DialogTitle>{t('removeStudentTitle')}</DialogTitle>
                         <DialogDescription>
-                            Remove <strong>{[selectedStudent?.firstName, selectedStudent?.lastName].filter(Boolean).join(' ')}</strong> from this group? This action cannot be undone.
+                            {t.rich('removeStudentDescription', {
+                                name: [selectedStudent?.firstName, selectedStudent?.lastName].filter(Boolean).join(' '),
+                                b: (chunks) => <strong>{chunks}</strong>,
+                            })}
                         </DialogDescription>
                     </DialogHeader>
                     <DialogFooter>
                         <DialogClose asChild>
-                            <Button variant="outline">Cancel</Button>
+                            <Button variant="outline">{tc('cancel')}</Button>
                         </DialogClose>
                         <Button
                             variant="destructive"
                             onClick={() => selectedStudent && deleteStudentMutation.mutate({ studentId: selectedStudent.id, groupId })}
                             disabled={deleteStudentMutation.isPending}
                         >
-                            {deleteStudentMutation.isPending ? 'Removing…' : 'Remove'}
+                            {deleteStudentMutation.isPending ? t('removing') : t('removeAction')}
                         </Button>
                     </DialogFooter>
                 </DialogContent>

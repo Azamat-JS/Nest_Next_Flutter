@@ -34,6 +34,7 @@ import {
     PaginationPrevious,
 } from "@/components/ui/pagination"
 import { cn } from "@/lib/utils"
+import { useTranslations } from "next-intl"
 
 const getRankIcon = (idx: number) => {
     if (idx === 0) return <Trophy className="h-4 w-4 text-yellow-500" />
@@ -50,6 +51,8 @@ const getRankStyle = (idx: number) => {
 }
 
 const LeaderBoardContent = () => {
+    const t = useTranslations('LeaderBoardContent')
+    const tCommon = useTranslations('Common')
     const router = useRouter()
     const searchParams = useSearchParams()
     const page = Number(searchParams.get('page') ?? 1)
@@ -72,21 +75,21 @@ const LeaderBoardContent = () => {
         <div className="flex flex-col w-full gap-4">
             <div className="flex items-center justify-center gap-2">
                 <Trophy className="h-5 w-5 text-yellow-500" />
-                <h2 className="text-xl font-bold">Global Leaderboard</h2>
+                <h2 className="text-xl font-bold">{t('title')}</h2>
             </div>
 
             <Table>
                 <TableCaption>
-                    Showing {studentsScores.length} of {meta?.total ?? 0} students
+                    {t('showingCaption', { count: studentsScores.length, total: meta?.total ?? 0 })}
                 </TableCaption>
                 <TableHeader>
                     <TableRow>
                         <TableHead className="w-16 text-center font-semibold">#</TableHead>
-                        <TableHead className="text-center font-semibold">Group</TableHead>
-                        <TableHead className="text-center font-semibold">Student</TableHead>
-                        <TableHead className="text-center font-semibold">Homework</TableHead>
-                        <TableHead className="text-center font-semibold">Attendance</TableHead>
-                        <TableHead className="text-center font-semibold text-primary">Total</TableHead>
+                        <TableHead className="text-center font-semibold">{t('group')}</TableHead>
+                        <TableHead className="text-center font-semibold">{t('student')}</TableHead>
+                        <TableHead className="text-center font-semibold">{t('homework')}</TableHead>
+                        <TableHead className="text-center font-semibold">{t('attendance')}</TableHead>
+                        <TableHead className="text-center font-semibold text-primary">{t('total')}</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -114,7 +117,7 @@ const LeaderBoardContent = () => {
             <div className="grid grid-cols-2 items-center mt-2">
                 <div className="flex justify-center">
                     <Field orientation="horizontal" className="w-fit">
-                        <FieldLabel htmlFor="lb-rows-per-page">Rows per page</FieldLabel>
+                        <FieldLabel htmlFor="lb-rows-per-page">{t('rowsPerPage')}</FieldLabel>
                         <Select value={String(limit)} onValueChange={(val) => {
                             const params = new URLSearchParams(searchParams.toString())
                             params.set('limit', val)
@@ -138,7 +141,7 @@ const LeaderBoardContent = () => {
                     <Pagination>
                         <PaginationContent>
                             <PaginationItem>
-                                <PaginationPrevious href={`?page=${Math.max(1, page - 1)}&limit=${limit}`} />
+                                <PaginationPrevious href={`?page=${Math.max(1, page - 1)}&limit=${limit}`} text={tCommon('previous')} />
                             </PaginationItem>
                             {Array.from({ length: lastPage }).map((_, idx) => (
                                 <PaginationItem key={idx}>
@@ -148,7 +151,7 @@ const LeaderBoardContent = () => {
                                 </PaginationItem>
                             ))}
                             <PaginationItem>
-                                <PaginationNext href={`?page=${Math.min(lastPage, page + 1)}&limit=${limit}`} />
+                                <PaginationNext href={`?page=${Math.min(lastPage, page + 1)}&limit=${limit}`} text={tCommon('next')} />
                             </PaginationItem>
                         </PaginationContent>
                     </Pagination>

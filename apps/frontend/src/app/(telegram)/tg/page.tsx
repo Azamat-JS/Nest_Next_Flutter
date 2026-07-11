@@ -4,6 +4,7 @@ import { useEffect, useMemo } from "react"
 import { useRouter } from "next/navigation"
 import { useQuery } from "@tanstack/react-query"
 import { Loader2, ChevronRight, Users } from "lucide-react"
+import { useTranslations } from "next-intl"
 import api from "@/lib/api"
 import { useTgStore } from "@/lib/stores/tgStore"
 import { PortalBootstrap } from "@/lib/types/portal"
@@ -22,6 +23,7 @@ type GroupChoice = {
 export default function TgEntryPage() {
     const router = useRouter()
     const setSelection = useTgStore((s) => s.setSelection)
+    const t = useTranslations('TgHome')
 
     const { data, isPending, isError } = useQuery({
         queryKey: ['tg-bootstrap'],
@@ -68,15 +70,15 @@ export default function TgEntryPage() {
     }
 
     if (isError) {
-        return <p className="py-16 text-center text-sm text-muted-foreground">Something went wrong. Please reopen the app.</p>
+        return <p className="py-16 text-center text-sm text-muted-foreground">{t('loadError')}</p>
     }
 
     if (choices.length === 0) {
         return (
             <div className="flex min-h-[60vh] flex-col items-center justify-center gap-2 text-center">
                 <Users className="h-10 w-10 text-muted-foreground" />
-                <p className="font-semibold">{data?.role === 'PARENT' ? 'No groups found for your children yet' : 'You are not in a group yet'}</p>
-                <p className="text-sm text-muted-foreground">Please contact your learning centre.</p>
+                <p className="font-semibold">{data?.role === 'PARENT' ? t('noGroupsParent') : t('noGroupsStudent')}</p>
+                <p className="text-sm text-muted-foreground">{t('contactCenter')}</p>
             </div>
         )
     }
@@ -84,7 +86,7 @@ export default function TgEntryPage() {
     return (
         <div className="space-y-3 py-4">
             <h1 className="text-lg font-bold">
-                {data?.role === 'PARENT' ? 'Choose a child’s group' : 'Choose your group'}
+                {data?.role === 'PARENT' ? t('chooseGroupParent') : t('chooseGroupStudent')}
             </h1>
             {choices.map((choice) => (
                 <Card
@@ -99,7 +101,9 @@ export default function TgEntryPage() {
                         <div>
                             <p className="font-semibold">{choice.groupName}</p>
                             <p className="text-sm text-muted-foreground">
-                                {choice.studentName ? `${choice.studentName} · ` : ''}Teacher: {choice.teacherName}
+                                {choice.studentName
+                                    ? t('studentTeacher', { studentName: choice.studentName, teacherName: choice.teacherName })
+                                    : t('teacherOnly', { teacherName: choice.teacherName })}
                             </p>
                         </div>
                         <ChevronRight className="h-5 w-5 text-muted-foreground" />

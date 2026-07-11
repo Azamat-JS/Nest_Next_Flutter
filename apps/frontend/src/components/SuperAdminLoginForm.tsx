@@ -1,5 +1,6 @@
 'use client'
 
+import { useMemo } from "react"
 import { Button } from "@/components/ui/button"
 import {
     Card,
@@ -12,6 +13,7 @@ import { Input } from "@/components/ui/input"
 import * as z from "zod"
 import { toast } from "sonner"
 import { useForm } from "@tanstack/react-form"
+import { useTranslations } from "next-intl"
 import {
     Field,
     FieldError,
@@ -21,13 +23,14 @@ import {
 import platformApi from "@/lib/platformApi"
 import { usePlatformAuthStore } from "@/lib/stores/platformAuthStore"
 
-const loginSchema = z.object({
-    phone: z.string().min(1, "Required"),
-    password: z.string().min(1, "Required"),
-})
-
 export function SuperAdminLoginForm() {
     const setPlatformToken = usePlatformAuthStore((state) => state.setPlatformToken)
+    const t = useTranslations("SuperAdminLoginForm")
+
+    const loginSchema = useMemo(() => z.object({
+        phone: z.string().min(1, t("required")),
+        password: z.string().min(1, t("required")),
+    }), [t])
 
     const form = useForm({
         defaultValues: { phone: "", password: "" },
@@ -36,9 +39,9 @@ export function SuperAdminLoginForm() {
             try {
                 const response = await platformApi.post('/platform-admin/login', value)
                 setPlatformToken(response.data.accessToken)
-                toast.success('Logged in successfully')
+                toast.success(t("success"))
             } catch (error: any) {
-                toast.error(error.response?.data?.message ?? 'Something went wrong')
+                toast.error(error.response?.data?.message ?? t("error"))
             }
         },
     })
@@ -46,8 +49,8 @@ export function SuperAdminLoginForm() {
     return (
         <Card className="w-full max-w-sm">
             <CardHeader>
-                <CardTitle className="text-2xl">SuperAdmin</CardTitle>
-                <CardDescription>Sign in to manage education centers</CardDescription>
+                <CardTitle className="text-2xl">{t("title")}</CardTitle>
+                <CardDescription>{t("description")}</CardDescription>
             </CardHeader>
             <CardContent>
                 <form
@@ -60,7 +63,7 @@ export function SuperAdminLoginForm() {
                                 const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
                                 return (
                                     <Field data-invalid={isInvalid}>
-                                        <FieldLabel htmlFor={field.name}>Phone number</FieldLabel>
+                                        <FieldLabel htmlFor={field.name}>{t("phoneLabel")}</FieldLabel>
                                         <Input
                                             id={field.name}
                                             value={field.state.value}
@@ -79,7 +82,7 @@ export function SuperAdminLoginForm() {
                                 const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
                                 return (
                                     <Field data-invalid={isInvalid}>
-                                        <FieldLabel htmlFor={field.name}>Password</FieldLabel>
+                                        <FieldLabel htmlFor={field.name}>{t("passwordLabel")}</FieldLabel>
                                         <Input
                                             id={field.name}
                                             type="password"
@@ -96,7 +99,7 @@ export function SuperAdminLoginForm() {
                     </FieldGroup>
 
                     <Button type="submit" className="w-full">
-                        Sign In
+                        {t("submit")}
                     </Button>
                 </form>
             </CardContent>

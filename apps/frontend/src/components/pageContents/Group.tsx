@@ -56,8 +56,11 @@ import { useRouter } from 'next/navigation'
 import { useMutation, useQueryClient, useSuspenseQuery } from '@tanstack/react-query'
 import { useStudents } from "@/lib/hooks/studentsHook"
 import api from "@/lib/api"
+import { useTranslations } from "next-intl"
 
 const GroupComponent = () => {
+    const t = useTranslations('Group')
+    const tCommon = useTranslations('Common')
     const router = useRouter()
     const searchParams = useSearchParams()
     const page = Number(searchParams.get('page') ?? 1)
@@ -97,12 +100,12 @@ const GroupComponent = () => {
             return res.data
         },
         onSuccess: () => {
-            toast.success('Students added successfully')
+            toast.success(t('studentsAdded'))
             setOpenAddStudents(false)
             queryClient.invalidateQueries({ queryKey: ['groups'] })
         },
         onError: (error: any) => {
-            toast.error(error.response?.data?.message ?? 'Something went wrong')
+            toast.error(error.response?.data?.message ?? tCommon('errorGeneric'))
         },
     })
 
@@ -115,12 +118,12 @@ const GroupComponent = () => {
             })
         },
         onSuccess: () => {
-            toast.success('Group updated successfully')
+            toast.success(t('groupUpdated'))
             setOpenUpdate(false)
             queryClient.invalidateQueries({ queryKey: ['groups'] })
         },
         onError: (error: any) => {
-            toast.error(error.response?.data?.message ?? 'Something went wrong')
+            toast.error(error.response?.data?.message ?? tCommon('errorGeneric'))
         },
     })
 
@@ -129,12 +132,12 @@ const GroupComponent = () => {
             return await api.delete(`/group/${groupId}`)
         },
         onSuccess: () => {
-            toast.success('Group deleted successfully')
+            toast.success(t('groupDeleted'))
             setOpenDelete(false)
             queryClient.invalidateQueries({ queryKey: ['groups'] })
         },
         onError: (error: any) => {
-            toast.error(error.response?.data?.message ?? 'Something went wrong')
+            toast.error(error.response?.data?.message ?? tCommon('errorGeneric'))
         },
     })
 
@@ -164,15 +167,15 @@ const GroupComponent = () => {
         <div className="space-y-4">
             <Table>
                 <TableCaption>
-                    Showing {groups.length} of {meta?.total ?? 0} groups
+                    {t('showingCount', { count: groups.length, total: meta?.total ?? 0 })}
                 </TableCaption>
                 <TableHeader>
                     <TableRow>
                         <TableHead className="w-12 text-center font-semibold">#</TableHead>
-                        <TableHead className="text-center font-semibold">Name</TableHead>
-                        <TableHead className="text-center font-semibold">Teacher</TableHead>
-                        <TableHead className="text-center font-semibold">Students</TableHead>
-                        <TableHead className="w-16 text-center font-semibold">Actions</TableHead>
+                        <TableHead className="text-center font-semibold">{tCommon('name')}</TableHead>
+                        <TableHead className="text-center font-semibold">{t('teacher')}</TableHead>
+                        <TableHead className="text-center font-semibold">{t('students')}</TableHead>
+                        <TableHead className="w-16 text-center font-semibold">{tCommon('actions')}</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -201,7 +204,7 @@ const GroupComponent = () => {
                                                 setSelectedGroup(u)
                                                 setOpenAddStudents(true)
                                             }}>
-                                                <UserPlus className="h-4 w-4" /> Add Students
+                                                <UserPlus className="h-4 w-4" /> {t('addStudents')}
                                             </DropdownMenuItem>
                                             <DropdownMenuItem onClick={(e) => {
                                                 e.stopPropagation()
@@ -209,7 +212,7 @@ const GroupComponent = () => {
                                                 setSelectedTeacher(u.teacher ?? null)
                                                 setOpenUpdate(true)
                                             }}>
-                                                <Edit className="h-4 w-4" /> Edit
+                                                <Edit className="h-4 w-4" /> {t('edit')}
                                             </DropdownMenuItem>
                                             <DropdownMenuItem
                                                 onClick={(e) => {
@@ -219,7 +222,7 @@ const GroupComponent = () => {
                                                 }}
                                                 className="text-destructive focus:text-destructive"
                                             >
-                                                <Trash className="h-4 w-4" /> Delete
+                                                <Trash className="h-4 w-4" /> {t('delete')}
                                             </DropdownMenuItem>
                                         </DropdownMenuGroup>
                                     </DropdownMenuContent>
@@ -234,7 +237,7 @@ const GroupComponent = () => {
             <div className="grid grid-cols-2 items-center">
                 <div className="flex justify-center">
                     <Field orientation="horizontal" className="w-fit">
-                        <FieldLabel htmlFor="groups-rows-per-page">Rows per page</FieldLabel>
+                        <FieldLabel htmlFor="groups-rows-per-page">{t('rowsPerPage')}</FieldLabel>
                         <Select value={String(limit)} onValueChange={(val) => {
                             const params = new URLSearchParams(searchParams.toString())
                             params.set('limit', val)
@@ -258,7 +261,7 @@ const GroupComponent = () => {
                     <Pagination>
                         <PaginationContent>
                             <PaginationItem>
-                                <PaginationPrevious href={`?page=${Math.max(1, page - 1)}&limit=${limit}`} />
+                                <PaginationPrevious href={`?page=${Math.max(1, page - 1)}&limit=${limit}`} text={tCommon('previous')} />
                             </PaginationItem>
                             {Array.from({ length: lastPage }).map((_, idx) => (
                                 <PaginationItem key={idx}>
@@ -268,7 +271,7 @@ const GroupComponent = () => {
                                 </PaginationItem>
                             ))}
                             <PaginationItem>
-                                <PaginationNext href={`?page=${Math.min(lastPage, page + 1)}&limit=${limit}`} />
+                                <PaginationNext href={`?page=${Math.min(lastPage, page + 1)}&limit=${limit}`} text={tCommon('next')} />
                             </PaginationItem>
                         </PaginationContent>
                     </Pagination>
@@ -279,12 +282,12 @@ const GroupComponent = () => {
             <Dialog open={openUpdate} onOpenChange={setOpenUpdate}>
                 <DialogContent className="sm:max-w-sm">
                     <DialogHeader>
-                        <DialogTitle>Edit Group</DialogTitle>
-                        <DialogDescription>Update details for <strong>{selectedGroup?.name}</strong></DialogDescription>
+                        <DialogTitle>{t('editGroupTitle')}</DialogTitle>
+                        <DialogDescription>{t.rich('updateDetailsFor', { name: selectedGroup?.name ?? '', strong: (chunks) => <strong>{chunks}</strong> })}</DialogDescription>
                     </DialogHeader>
                     <FieldGroup>
                         <Field>
-                            <Label htmlFor="group-name">Group name</Label>
+                            <Label htmlFor="group-name">{t('groupNameLabel')}</Label>
                             <Input
                                 id="group-name"
                                 value={selectedGroup?.name ?? ""}
@@ -292,7 +295,7 @@ const GroupComponent = () => {
                             />
                         </Field>
                         <Field>
-                            <Label>Teacher</Label>
+                            <Label>{t('teacher')}</Label>
                             <Select
                                 value={selectedTeacher?.id ?? ""}
                                 onValueChange={(val) => {
@@ -302,11 +305,11 @@ const GroupComponent = () => {
                                 }}
                             >
                                 <SelectTrigger>
-                                    <SelectValue placeholder="Select a teacher" />
+                                    <SelectValue placeholder={t('selectATeacherPlaceholder')} />
                                 </SelectTrigger>
                                 <SelectContent>
                                     <SelectGroup>
-                                        <SelectLabel>Select teacher</SelectLabel>
+                                        <SelectLabel>{t('selectTeacherLabel')}</SelectLabel>
                                         {teachers.map(t => (
                                             <SelectItem key={t.id} value={t.id}>{[t.firstName, t.lastName].filter(Boolean).join(' ')}</SelectItem>
                                         ))}
@@ -317,13 +320,13 @@ const GroupComponent = () => {
                     </FieldGroup>
                     <DialogFooter>
                         <DialogClose asChild>
-                            <Button variant="outline">Cancel</Button>
+                            <Button variant="outline">{tCommon('cancel')}</Button>
                         </DialogClose>
                         <Button
                             onClick={() => selectedGroup && updateGroupMutation.mutate(selectedGroup)}
                             disabled={updateGroupMutation.isPending}
                         >
-                            {updateGroupMutation.isPending ? 'Saving…' : 'Save'}
+                            {updateGroupMutation.isPending ? t('saving') : t('save')}
                         </Button>
                     </DialogFooter>
                 </DialogContent>
@@ -333,14 +336,14 @@ const GroupComponent = () => {
             <Dialog open={openAddStudents} onOpenChange={setOpenAddStudents}>
                 <DialogContent className="sm:max-w-sm">
                     <DialogHeader>
-                        <DialogTitle>Add Students</DialogTitle>
-                        <DialogDescription>Select students to add to <strong>{selectedGroup?.name}</strong></DialogDescription>
+                        <DialogTitle>{t('addStudents')}</DialogTitle>
+                        <DialogDescription>{t.rich('selectStudentsToAddFor', { name: selectedGroup?.name ?? '', strong: (chunks) => <strong>{chunks}</strong> })}</DialogDescription>
                     </DialogHeader>
                     <Field>
-                        <Label>Available students</Label>
+                        <Label>{t('availableStudents')}</Label>
                         <div className="max-h-52 overflow-y-auto rounded-md border p-3 space-y-2">
                             {availableStudents.length === 0
-                                ? <p className="text-sm text-muted-foreground text-center py-4">No students available</p>
+                                ? <p className="text-sm text-muted-foreground text-center py-4">{t('noStudentsAvailable')}</p>
                                 : availableStudents.map((student) => (
                                     <label key={student.id} className="flex items-center gap-2 cursor-pointer">
                                         <input
@@ -361,13 +364,17 @@ const GroupComponent = () => {
                     </Field>
                     <DialogFooter>
                         <DialogClose asChild>
-                            <Button variant="outline">Cancel</Button>
+                            <Button variant="outline">{tCommon('cancel')}</Button>
                         </DialogClose>
                         <Button
                             onClick={() => selectedGroup && addStudentMutation.mutate({ groupId: selectedGroup.id, studentIds: newStudentIds })}
                             disabled={newStudentIds.length === 0 || addStudentMutation.isPending}
                         >
-                            {addStudentMutation.isPending ? 'Adding…' : `Add ${newStudentIds.length > 0 ? `(${newStudentIds.length})` : ''}`}
+                            {addStudentMutation.isPending
+                                ? t('adding')
+                                : newStudentIds.length > 0
+                                    ? t('addWithCount', { count: newStudentIds.length })
+                                    : t('add')}
                         </Button>
                     </DialogFooter>
                 </DialogContent>
@@ -377,21 +384,21 @@ const GroupComponent = () => {
             <Dialog open={openDelete} onOpenChange={setOpenDelete}>
                 <DialogContent className="sm:max-w-sm">
                     <DialogHeader>
-                        <DialogTitle>Delete Group</DialogTitle>
+                        <DialogTitle>{t('deleteGroupTitle')}</DialogTitle>
                         <DialogDescription>
-                            Are you sure you want to delete <strong>{selectedGroup?.name}</strong>? This action cannot be undone.
+                            {t.rich('deleteConfirm', { name: selectedGroup?.name ?? '', strong: (chunks) => <strong>{chunks}</strong> })}
                         </DialogDescription>
                     </DialogHeader>
                     <DialogFooter>
                         <DialogClose asChild>
-                            <Button variant="outline">Cancel</Button>
+                            <Button variant="outline">{tCommon('cancel')}</Button>
                         </DialogClose>
                         <Button
                             variant="destructive"
                             onClick={() => selectedGroup && deleteGroupMutation.mutate(selectedGroup.id)}
                             disabled={deleteGroupMutation.isPending}
                         >
-                            {deleteGroupMutation.isPending ? 'Deleting…' : 'Delete'}
+                            {deleteGroupMutation.isPending ? t('deleting') : t('delete')}
                         </Button>
                     </DialogFooter>
                 </DialogContent>

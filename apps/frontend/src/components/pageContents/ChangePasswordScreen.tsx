@@ -12,6 +12,8 @@ import { Input } from "@/components/ui/input"
 import * as z from "zod"
 import { toast } from "sonner"
 import { useForm } from "@tanstack/react-form"
+import { useMemo } from "react"
+import { useTranslations } from "next-intl"
 import {
     Field,
     FieldError,
@@ -21,15 +23,17 @@ import {
 import api from "@/lib/api"
 import { useAuthStore } from "@/lib/stores/authStore"
 
-const changePasswordSchema = z.object({
-    currentPassword: z.string().min(1, "Required"),
-    newPassword: z.string().min(6, "Must be at least 6 characters"),
-})
-
 const ChangePasswordScreen = () => {
+    const t = useTranslations('ChangePasswordScreen')
+    const tCommon = useTranslations('Common')
     const setToken = useAuthStore((state) => state.setToken)
     const refreshToken = useAuthStore((state) => state.refreshToken)
     const logout = useAuthStore((state) => state.logout)
+
+    const changePasswordSchema = useMemo(() => z.object({
+        currentPassword: z.string().min(1, t('currentPasswordRequired')),
+        newPassword: z.string().min(6, t('newPasswordMinLength')),
+    }), [t])
 
     const form = useForm({
         defaultValues: { currentPassword: "", newPassword: "" },
@@ -44,9 +48,9 @@ const ChangePasswordScreen = () => {
                 } else {
                     logout()
                 }
-                toast.success('Password changed successfully')
+                toast.success(t('success'))
             } catch (error: any) {
-                toast.error(error.response?.data?.message ?? 'Something went wrong')
+                toast.error(error.response?.data?.message ?? tCommon('errorGeneric'))
             }
         },
     })
@@ -55,9 +59,9 @@ const ChangePasswordScreen = () => {
         <div className="flex min-h-[calc(100vh-4rem)] items-center justify-center">
             <Card className="w-full max-w-sm">
                 <CardHeader>
-                    <CardTitle className="text-2xl">Set a new password</CardTitle>
+                    <CardTitle className="text-2xl">{t('title')}</CardTitle>
                     <CardDescription>
-                        You must change your password before continuing.
+                        {t('description')}
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -71,7 +75,7 @@ const ChangePasswordScreen = () => {
                                     const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
                                     return (
                                         <Field data-invalid={isInvalid}>
-                                            <FieldLabel htmlFor={field.name}>Current password</FieldLabel>
+                                            <FieldLabel htmlFor={field.name}>{t('currentPasswordLabel')}</FieldLabel>
                                             <Input
                                                 id={field.name}
                                                 type="password"
@@ -91,14 +95,14 @@ const ChangePasswordScreen = () => {
                                     const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
                                     return (
                                         <Field data-invalid={isInvalid}>
-                                            <FieldLabel htmlFor={field.name}>New password</FieldLabel>
+                                            <FieldLabel htmlFor={field.name}>{t('newPasswordLabel')}</FieldLabel>
                                             <Input
                                                 id={field.name}
                                                 type="password"
                                                 value={field.state.value}
                                                 onBlur={field.handleBlur}
                                                 onChange={(e) => field.handleChange(e.target.value)}
-                                                placeholder="Min. 6 characters"
+                                                placeholder={t('newPasswordPlaceholder')}
                                                 autoComplete="new-password"
                                             />
                                             {isInvalid && <FieldError errors={field.state.meta.errors} />}
@@ -109,7 +113,7 @@ const ChangePasswordScreen = () => {
                         </FieldGroup>
 
                         <Button type="submit" className="w-full">
-                            Change password
+                            {t('submit')}
                         </Button>
                     </form>
                 </CardContent>

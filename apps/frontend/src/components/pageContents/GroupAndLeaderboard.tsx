@@ -10,11 +10,13 @@ import GroupHomeworks from "./GroupHomeworks"
 import api from "@/lib/api"
 import { Users, Trophy, NotebookPen } from "lucide-react"
 import { Button } from "../ui/button"
+import { useTranslations } from "next-intl"
 
 type GroupTab = "students" | "leaderboard" | "homeworks"
 
 const GroupAndLeaderboard = ({ groupId }: { groupId: string }) => {
     const [activeTab, setActiveTab] = useState<GroupTab>("students")
+    const t = useTranslations('GroupAndLeaderboard')
 
     const { data } = useSuspenseQuery({
         queryKey: ["group", groupId],
@@ -33,7 +35,7 @@ const GroupAndLeaderboard = ({ groupId }: { groupId: string }) => {
                     {group?.name}
                 </Badge>
                 <Badge variant="outline" className="px-4 py-1.5 text-sm">
-                    Teacher: {[group?.teacher?.firstName, group?.teacher?.lastName].filter(Boolean).join(' ')}
+                    {t('teacherLabel', { name: [group?.teacher?.firstName, group?.teacher?.lastName].filter(Boolean).join(' ') })}
                 </Badge>
                 <div className="flex gap-2">
                     <Button
@@ -42,7 +44,7 @@ const GroupAndLeaderboard = ({ groupId }: { groupId: string }) => {
                         onClick={() => setActiveTab("students")}
                         className="gap-1"
                     >
-                        <Users className="h-4 w-4" /> Students
+                        <Users className="h-4 w-4" /> {t('students')}
                     </Button>
                     <Button
                         variant={activeTab === "leaderboard" ? "default" : "outline"}
@@ -50,7 +52,7 @@ const GroupAndLeaderboard = ({ groupId }: { groupId: string }) => {
                         onClick={() => setActiveTab("leaderboard")}
                         className="gap-1"
                     >
-                        <Trophy className="h-4 w-4" /> Leaderboard
+                        <Trophy className="h-4 w-4" /> {t('leaderboard')}
                     </Button>
                     <Button
                         variant={activeTab === "homeworks" ? "default" : "outline"}
@@ -58,7 +60,7 @@ const GroupAndLeaderboard = ({ groupId }: { groupId: string }) => {
                         onClick={() => setActiveTab("homeworks")}
                         className="gap-1"
                     >
-                        <NotebookPen className="h-4 w-4" /> Homeworks
+                        <NotebookPen className="h-4 w-4" /> {t('homeworks')}
                     </Button>
                 </div>
             </div>

@@ -4,6 +4,7 @@ import { use, useEffect } from "react"
 import { useSearchParams } from "next/navigation"
 import { useQuery } from "@tanstack/react-query"
 import { Loader2, Trophy, Medal, Award, BookOpen, GraduationCap } from "lucide-react"
+import { useTranslations } from "next-intl"
 import api from "@/lib/api"
 import { cn } from "@/lib/utils"
 import { useTgStore } from "@/lib/stores/tgStore"
@@ -33,6 +34,7 @@ export default function TgGroupPage({ params }: { params: Promise<{ groupId: str
     const { groupId } = use(params)
     const searchParams = useSearchParams()
     const setSelection = useTgStore((s) => s.setSelection)
+    const t = useTranslations('TgGroupDetail')
 
     const { data: bootstrap } = useQuery({
         queryKey: ['tg-bootstrap'],
@@ -80,7 +82,7 @@ export default function TgGroupPage({ params }: { params: Promise<{ groupId: str
         const status = (error as { response?: { status?: number } })?.response?.status
         return (
             <p className="py-16 text-center text-sm text-muted-foreground">
-                {status === 403 ? 'You do not have access to this group.' : 'Could not load this group.'}
+                {status === 403 ? t('accessDenied') : t('loadError')}
             </p>
         )
     }
@@ -102,16 +104,16 @@ export default function TgGroupPage({ params }: { params: Promise<{ groupId: str
                     {group?.name}
                 </h1>
                 <p className="text-sm text-muted-foreground">
-                    Teacher: {group?.teacher.firstName} {group?.teacher.lastName ?? ''}
+                    {t('teacherLine', { teacherName: `${group?.teacher.firstName ?? ''} ${group?.teacher.lastName ?? ''}`.trim() })}
                     {childName && <> · {childName.firstName} {childName.lastName ?? ''}</>}
                 </p>
             </div>
 
             <Tabs defaultValue="leaderboard">
                 <TabsList className="w-full">
-                    <TabsTrigger value="leaderboard" className="flex-1">Leaderboard</TabsTrigger>
-                    <TabsTrigger value="homework" className="flex-1">Homework</TabsTrigger>
-                    <TabsTrigger value="scores" className="flex-1">Scores</TabsTrigger>
+                    <TabsTrigger value="leaderboard" className="flex-1">{t('tabLeaderboard')}</TabsTrigger>
+                    <TabsTrigger value="homework" className="flex-1">{t('tabHomework')}</TabsTrigger>
+                    <TabsTrigger value="scores" className="flex-1">{t('tabScores')}</TabsTrigger>
                 </TabsList>
 
                 <TabsContent value="leaderboard">
@@ -119,10 +121,10 @@ export default function TgGroupPage({ params }: { params: Promise<{ groupId: str
                         <TableHeader>
                             <TableRow>
                                 <TableHead className="w-10 text-center">#</TableHead>
-                                <TableHead>Student</TableHead>
-                                <TableHead className="text-center">HW</TableHead>
-                                <TableHead className="text-center">Att</TableHead>
-                                <TableHead className="text-center">Total</TableHead>
+                                <TableHead>{t('student')}</TableHead>
+                                <TableHead className="text-center">{t('hw')}</TableHead>
+                                <TableHead className="text-center">{t('att')}</TableHead>
+                                <TableHead className="text-center">{t('total')}</TableHead>
                             </TableRow>
                         </TableHeader>
                         <TableBody>
@@ -136,7 +138,7 @@ export default function TgGroupPage({ params }: { params: Promise<{ groupId: str
                                 </TableRow>
                             ))}
                             {rows.length === 0 && (
-                                <TableRow><TableCell colSpan={5} className="py-8 text-center text-muted-foreground">No scores yet</TableCell></TableRow>
+                                <TableRow><TableCell colSpan={5} className="py-8 text-center text-muted-foreground">{t('noScores')}</TableCell></TableRow>
                             )}
                         </TableBody>
                     </Table>
@@ -149,26 +151,26 @@ export default function TgGroupPage({ params }: { params: Promise<{ groupId: str
                                 <BookOpen className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
                                 <div className="min-w-0">
                                     <p className="font-medium break-words">{hw.topic}</p>
-                                    <p className="text-sm text-muted-foreground">Due {new Date(hw.dueDate).toLocaleDateString()}</p>
+                                    <p className="text-sm text-muted-foreground">{t('due', { date: new Date(hw.dueDate).toLocaleDateString() })}</p>
                                 </div>
                             </CardContent>
                         </Card>
                     ))}
                     {homeworks.length === 0 && (
-                        <p className="py-8 text-center text-sm text-muted-foreground">No homework assigned yet</p>
+                        <p className="py-8 text-center text-sm text-muted-foreground">{t('noHomework')}</p>
                     )}
                 </TabsContent>
 
                 <TabsContent value="scores">
                     {scores?.total?.total !== undefined && (
-                        <p className="mb-2 text-sm text-muted-foreground">Total score: <span className="font-semibold text-primary">{scores.total.total}</span></p>
+                        <p className="mb-2 text-sm text-muted-foreground">{t('totalScoreLabel')} <span className="font-semibold text-primary">{scores.total.total}</span></p>
                     )}
                     <Table>
                         <TableHeader>
                             <TableRow>
-                                <TableHead>Date</TableHead>
-                                <TableHead>Type</TableHead>
-                                <TableHead className="text-center">Score</TableHead>
+                                <TableHead>{t('date')}</TableHead>
+                                <TableHead>{t('type')}</TableHead>
+                                <TableHead className="text-center">{t('score')}</TableHead>
                             </TableRow>
                         </TableHeader>
                         <TableBody>
@@ -180,7 +182,7 @@ export default function TgGroupPage({ params }: { params: Promise<{ groupId: str
                                 </TableRow>
                             ))}
                             {scoreEvents.length === 0 && (
-                                <TableRow><TableCell colSpan={3} className="py-8 text-center text-muted-foreground">No scores yet</TableCell></TableRow>
+                                <TableRow><TableCell colSpan={3} className="py-8 text-center text-muted-foreground">{t('noScores')}</TableCell></TableRow>
                             )}
                         </TableBody>
                     </Table>

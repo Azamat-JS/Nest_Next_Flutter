@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { useSuspenseQuery, useQueryClient } from "@tanstack/react-query"
 import { useRouter, useSearchParams } from "next/navigation"
 import { Search } from "lucide-react"
+import { useTranslations } from "next-intl"
 import api from "@/lib/api"
 import { HomeworkType } from "@/lib/types/homework"
 import { PaginationType } from "@/lib/types/groups"
@@ -42,6 +43,8 @@ const formatDueDate = (value: string) => {
 }
 
 const GroupHomeworks = ({ groupId }: { groupId: string }) => {
+    const t = useTranslations('GroupHomeworks')
+    const tCommon = useTranslations('Common')
     const router = useRouter()
     const searchParams = useSearchParams()
     const queryClient = useQueryClient()
@@ -85,7 +88,7 @@ const GroupHomeworks = ({ groupId }: { groupId: string }) => {
                     <Input
                         value={searchInput}
                         onChange={(e) => setSearchInput(e.target.value)}
-                        placeholder="Search by topic"
+                        placeholder={t('searchPlaceholder')}
                         className="pl-8"
                     />
                 </div>
@@ -93,14 +96,14 @@ const GroupHomeworks = ({ groupId }: { groupId: string }) => {
 
             <Table>
                 <TableCaption>
-                    Showing {homeworks.length} of {meta?.total ?? 0} homeworks
+                    {t('showingHomeworks', { count: homeworks.length, total: meta?.total ?? 0 })}
                 </TableCaption>
                 <TableHeader>
                     <TableRow>
                         <TableHead className="w-12 text-center font-semibold">#</TableHead>
-                        <TableHead className="text-center font-semibold">Topic</TableHead>
-                        <TableHead className="text-center font-semibold">Due Date</TableHead>
-                        <TableHead className="text-center font-semibold">Created At</TableHead>
+                        <TableHead className="text-center font-semibold">{t('topicHeader')}</TableHead>
+                        <TableHead className="text-center font-semibold">{t('dueDateHeader')}</TableHead>
+                        <TableHead className="text-center font-semibold">{t('createdAtHeader')}</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -127,7 +130,7 @@ const GroupHomeworks = ({ groupId }: { groupId: string }) => {
             <div className="grid grid-cols-2 items-center">
                 <div className="flex justify-center">
                     <Field orientation="horizontal" className="w-fit">
-                        <FieldLabel htmlFor="hw-rows-per-page">Rows per page</FieldLabel>
+                        <FieldLabel htmlFor="hw-rows-per-page">{t('rowsPerPage')}</FieldLabel>
                         <Select value={String(limit)} onValueChange={(val) => {
                             const params = new URLSearchParams(searchParams.toString())
                             params.set('limit', val)
@@ -151,7 +154,7 @@ const GroupHomeworks = ({ groupId }: { groupId: string }) => {
                     <Pagination>
                         <PaginationContent>
                             <PaginationItem>
-                                <PaginationPrevious href={`?page=${Math.max(1, page - 1)}&limit=${limit}`} />
+                                <PaginationPrevious href={`?page=${Math.max(1, page - 1)}&limit=${limit}`} text={tCommon('previous')} />
                             </PaginationItem>
                             {Array.from({ length: lastPage }).map((_, idx) => (
                                 <PaginationItem key={idx}>
@@ -161,7 +164,7 @@ const GroupHomeworks = ({ groupId }: { groupId: string }) => {
                                 </PaginationItem>
                             ))}
                             <PaginationItem>
-                                <PaginationNext href={`?page=${Math.min(lastPage, page + 1)}&limit=${limit}`} />
+                                <PaginationNext href={`?page=${Math.min(lastPage, page + 1)}&limit=${limit}`} text={tCommon('next')} />
                             </PaginationItem>
                         </PaginationContent>
                     </Pagination>

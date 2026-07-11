@@ -1,9 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { toast } from 'sonner'
 import { useForm } from '@tanstack/react-form'
 import * as z from 'zod'
+import { useTranslations } from 'next-intl'
 import { useMutation, useQueryClient, useSuspenseQuery } from '@tanstack/react-query'
 import {
     Table,
@@ -43,18 +44,20 @@ import {
     TenantType,
 } from '@/lib/types/tenant'
 
-const createTenantSchema = z.object({
-    name: z.string().min(2),
-    ownerFirstName: z.string().min(2),
-    ownerLastName: z.string(),
-    ownerPhone: z.string().regex(/^\d{9}$/, 'Enter a valid 9-digit phone number'),
-    ownerPassword: z.string().min(6),
-    botToken: z.string(),
-})
-
 const TenantDashboard = () => {
     const logout = usePlatformAuthStore((state) => state.logout)
     const queryClient = useQueryClient()
+    const t = useTranslations('TenantDashboard')
+    const tCommon = useTranslations('Common')
+
+    const createTenantSchema = useMemo(() => z.object({
+        name: z.string().min(2),
+        ownerFirstName: z.string().min(2),
+        ownerLastName: z.string(),
+        ownerPhone: z.string().regex(/^\d{9}$/, t('ownerPhoneInvalid')),
+        ownerPassword: z.string().min(6),
+        botToken: z.string(),
+    }), [t])
 
     const [openCreate, setOpenCreate] = useState(false)
     const [createdOwner, setCreatedOwner] = useState<CreateTenantResponse | null>(null)
@@ -84,7 +87,7 @@ const TenantDashboard = () => {
             queryClient.invalidateQueries({ queryKey: ['platform-tenants'] })
         },
         onError: (error: any) => {
-            toast.error(error.response?.data?.message ?? 'Something went wrong')
+            toast.error(error.response?.data?.message ?? tCommon('errorGeneric'))
         },
     })
 
@@ -105,11 +108,11 @@ const TenantDashboard = () => {
             return await platformApi.patch(`/platform-admin/tenants/${id}/status`, { status })
         },
         onSuccess: () => {
-            toast.success('Tenant status updated')
+            toast.success(t('statusUpdated'))
             queryClient.invalidateQueries({ queryKey: ['platform-tenants'] })
         },
         onError: (error: any) => {
-            toast.error(error.response?.data?.message ?? 'Something went wrong')
+            toast.error(error.response?.data?.message ?? tCommon('errorGeneric'))
         },
     })
 
@@ -118,7 +121,7 @@ const TenantDashboard = () => {
             return await platformApi.delete(`/platform-admin/tenants/${id}`)
         },
         onSuccess: () => {
-            toast.success('Tenant deleted')
+            toast.success(t('tenantDeleted'))
             setOpenDeleteConfirm(false)
             setDeleteTarget(null)
             queryClient.invalidateQueries({ queryKey: ['platform-tenants'] })
@@ -129,7 +132,7 @@ const TenantDashboard = () => {
                 setOpenPurgeConfirm(true)
                 return
             }
-            toast.error(error.response?.data?.message ?? 'Something went wrong')
+            toast.error(error.response?.data?.message ?? tCommon('errorGeneric'))
         },
     })
 
@@ -138,39 +141,39 @@ const TenantDashboard = () => {
             return await platformApi.delete(`/platform-admin/tenants/${id}/purge`)
         },
         onSuccess: () => {
-            toast.success('Tenant and all its data permanently deleted')
+            toast.success(t('tenantPurged'))
             setOpenPurgeConfirm(false)
             setDeleteTarget(null)
             setPurgeConfirmText('')
             queryClient.invalidateQueries({ queryKey: ['platform-tenants'] })
         },
         onError: (error: any) => {
-            toast.error(error.response?.data?.message ?? 'Something went wrong')
+            toast.error(error.response?.data?.message ?? tCommon('errorGeneric'))
         },
     })
 
     return (
         <div className="mx-auto max-w-4xl px-4 py-8 space-y-6">
             <div className="flex items-center justify-between">
-                <h1 className="text-2xl font-bold tracking-tight">Education Centers</h1>
+                <h1 className="text-2xl font-bold tracking-tight">{t('title')}</h1>
                 <div className="flex gap-2">
                     <Button onClick={() => setOpenCreate(true)} className="gap-1">
-                        <Plus className="h-4 w-4" /> Add center
+                        <Plus className="h-4 w-4" /> {t('addCenter')}
                     </Button>
                     <Button variant="outline" onClick={logout} className="gap-1">
-                        <LogOut className="h-4 w-4" /> Log out
+                        <LogOut className="h-4 w-4" /> {t('logout')}
                     </Button>
                 </div>
             </div>
 
             <Table>
-                <TableCaption>{tenants.length} education center{tenants.length === 1 ? '' : 's'}</TableCaption>
+                <TableCaption>{t('tenantCount', { count: tenants.length })}</TableCaption>
                 <TableHeader>
                     <TableRow>
-                        <TableHead className="text-center font-semibold">Name</TableHead>
-                        <TableHead className="text-center font-semibold">Status</TableHead>
-                        <TableHead className="text-center font-semibold">Created</TableHead>
-                        <TableHead className="w-16 text-center font-semibold">Actions</TableHead>
+                        <TableHead className="text-center font-semibold">{tCommon('name')}</TableHead>
+                        <TableHead className="text-center font-semibold">{t('statusHeader')}</TableHead>
+                        <TableHead className="text-center font-semibold">{t('createdHeader')}</TableHead>
+                        <TableHead className="w-16 text-center font-semibold">{tCommon('actions')}</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -198,20 +201,20 @@ const TenantDashboard = () => {
                                                 <DropdownMenuItem
                                                     onClick={() => statusMutation.mutate({ id: tenant.id, status: 'SUSPENDED' })}
                                                 >
-                                                    <ShieldOff className="h-4 w-4" /> Suspend
+                                                    <ShieldOff className="h-4 w-4" /> {t('suspend')}
                                                 </DropdownMenuItem>
                                             ) : (
                                                 <DropdownMenuItem
                                                     onClick={() => statusMutation.mutate({ id: tenant.id, status: 'ACTIVE' })}
                                                 >
-                                                    <ShieldCheck className="h-4 w-4" /> Reactivate
+                                                    <ShieldCheck className="h-4 w-4" /> {t('reactivate')}
                                                 </DropdownMenuItem>
                                             )}
                                             <DropdownMenuItem
                                                 onClick={() => { setDeleteTarget(tenant); setOpenDeleteConfirm(true) }}
                                                 className="text-destructive focus:text-destructive"
                                             >
-                                                <Trash className="h-4 w-4" /> Delete
+                                                <Trash className="h-4 w-4" /> {t('delete')}
                                             </DropdownMenuItem>
                                         </DropdownMenuGroup>
                                     </DropdownMenuContent>
@@ -226,8 +229,8 @@ const TenantDashboard = () => {
             <Dialog open={openCreate} onOpenChange={setOpenCreate}>
                 <DialogContent className="sm:max-w-sm">
                     <DialogHeader>
-                        <DialogTitle>Add Education Center</DialogTitle>
-                        <DialogDescription>Create a new center and its owner account.</DialogDescription>
+                        <DialogTitle>{t('createDialogTitle')}</DialogTitle>
+                        <DialogDescription>{t('createDialogDescription')}</DialogDescription>
                     </DialogHeader>
                     <form
                         onSubmit={(e) => { e.preventDefault(); createForm.handleSubmit() }}
@@ -239,7 +242,7 @@ const TenantDashboard = () => {
                                     const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
                                     return (
                                         <Field data-invalid={isInvalid}>
-                                            <FieldLabel htmlFor={field.name}>Center name</FieldLabel>
+                                            <FieldLabel htmlFor={field.name}>{t('centerNameLabel')}</FieldLabel>
                                             <Input
                                                 id={field.name}
                                                 value={field.state.value}
@@ -257,7 +260,7 @@ const TenantDashboard = () => {
                                     const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
                                     return (
                                         <Field data-invalid={isInvalid}>
-                                            <FieldLabel htmlFor={field.name}>Owner first name</FieldLabel>
+                                            <FieldLabel htmlFor={field.name}>{t('ownerFirstNameLabel')}</FieldLabel>
                                             <Input
                                                 id={field.name}
                                                 value={field.state.value}
@@ -273,7 +276,7 @@ const TenantDashboard = () => {
                             <createForm.Field name="ownerLastName">
                                 {(field) => (
                                     <Field>
-                                        <FieldLabel htmlFor={field.name}>Owner last name (optional)</FieldLabel>
+                                        <FieldLabel htmlFor={field.name}>{t('ownerLastNameLabel')}</FieldLabel>
                                         <Input
                                             id={field.name}
                                             value={field.state.value}
@@ -289,7 +292,7 @@ const TenantDashboard = () => {
                                     const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
                                     return (
                                         <Field data-invalid={isInvalid}>
-                                            <FieldLabel htmlFor={field.name}>Owner phone</FieldLabel>
+                                            <FieldLabel htmlFor={field.name}>{t('ownerPhoneLabel')}</FieldLabel>
                                             <div className="flex items-center gap-2">
                                                 <span className="flex h-9 items-center rounded-md border bg-muted px-3 text-sm text-muted-foreground">
                                                     +998
@@ -315,14 +318,14 @@ const TenantDashboard = () => {
                                     const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
                                     return (
                                         <Field data-invalid={isInvalid}>
-                                            <FieldLabel htmlFor={field.name}>Owner password</FieldLabel>
+                                            <FieldLabel htmlFor={field.name}>{t('ownerPasswordLabel')}</FieldLabel>
                                             <Input
                                                 id={field.name}
                                                 type="password"
                                                 value={field.state.value}
                                                 onBlur={field.handleBlur}
                                                 onChange={(e) => field.handleChange(e.target.value)}
-                                                placeholder="Min. 6 characters"
+                                                placeholder={t('ownerPasswordPlaceholder')}
                                             />
                                             {isInvalid && <FieldError errors={field.state.meta.errors} />}
                                         </Field>
@@ -333,7 +336,7 @@ const TenantDashboard = () => {
                             <createForm.Field name="botToken">
                                 {(field) => (
                                     <Field>
-                                        <FieldLabel htmlFor={field.name}>Telegram bot token (optional)</FieldLabel>
+                                        <FieldLabel htmlFor={field.name}>{t('botTokenLabel')}</FieldLabel>
                                         <Input
                                             id={field.name}
                                             value={field.state.value}
@@ -347,10 +350,10 @@ const TenantDashboard = () => {
 
                         <DialogFooter>
                             <DialogClose asChild>
-                                <Button variant="outline" type="button">Cancel</Button>
+                                <Button variant="outline" type="button">{tCommon('cancel')}</Button>
                             </DialogClose>
                             <Button type="submit" disabled={createTenantMutation.isPending}>
-                                {createTenantMutation.isPending ? 'Creating…' : 'Create'}
+                                {createTenantMutation.isPending ? t('creating') : t('create')}
                             </Button>
                         </DialogFooter>
                     </form>
@@ -361,17 +364,17 @@ const TenantDashboard = () => {
             <Dialog open={!!createdOwner} onOpenChange={(open) => !open && setCreatedOwner(null)}>
                 <DialogContent className="sm:max-w-sm">
                     <DialogHeader>
-                        <DialogTitle>Center created</DialogTitle>
+                        <DialogTitle>{t('centerCreatedTitle')}</DialogTitle>
                         <DialogDescription>
-                            Share these credentials with the owner - they won&apos;t be shown again.
+                            {t('centerCreatedDescription')}
                         </DialogDescription>
                     </DialogHeader>
                     <div className="rounded-md border p-3 space-y-1 text-sm">
-                        <p><span className="text-muted-foreground">Phone:</span> {createdOwner?.owner.phone}</p>
-                        <p><span className="text-muted-foreground">Password:</span> {createForm.state.values.ownerPassword}</p>
+                        <p><span className="text-muted-foreground">{tCommon('phone')}:</span> {createdOwner?.owner.phone}</p>
+                        <p><span className="text-muted-foreground">{t('passwordLabel')}:</span> {createForm.state.values.ownerPassword}</p>
                     </div>
                     <DialogFooter>
-                        <Button onClick={() => setCreatedOwner(null)}>Done</Button>
+                        <Button onClick={() => setCreatedOwner(null)}>{t('done')}</Button>
                     </DialogFooter>
                 </DialogContent>
             </Dialog>
@@ -380,22 +383,24 @@ const TenantDashboard = () => {
             <Dialog open={openDeleteConfirm} onOpenChange={setOpenDeleteConfirm}>
                 <DialogContent className="sm:max-w-sm">
                     <DialogHeader>
-                        <DialogTitle>Delete Center</DialogTitle>
+                        <DialogTitle>{t('deleteDialogTitle')}</DialogTitle>
                         <DialogDescription>
-                            Delete <strong>{deleteTarget?.name}</strong>? This only works if the center has no
-                            students, teachers, groups or other data.
+                            {t.rich('deleteDialogDescription', {
+                                name: deleteTarget?.name ?? '',
+                                b: (chunks) => <strong>{chunks}</strong>,
+                            })}
                         </DialogDescription>
                     </DialogHeader>
                     <DialogFooter>
                         <DialogClose asChild>
-                            <Button variant="outline">Cancel</Button>
+                            <Button variant="outline">{tCommon('cancel')}</Button>
                         </DialogClose>
                         <Button
                             variant="destructive"
                             onClick={() => deleteTarget && deleteMutation.mutate(deleteTarget.id)}
                             disabled={deleteMutation.isPending}
                         >
-                            {deleteMutation.isPending ? 'Deleting…' : 'Delete'}
+                            {deleteMutation.isPending ? t('deleting') : t('delete')}
                         </Button>
                     </DialogFooter>
                 </DialogContent>
@@ -408,15 +413,16 @@ const TenantDashboard = () => {
             >
                 <DialogContent className="sm:max-w-sm">
                     <DialogHeader>
-                        <DialogTitle>Permanently delete everything?</DialogTitle>
+                        <DialogTitle>{t('purgeDialogTitle')}</DialogTitle>
                         <DialogDescription>
-                            <strong>{deleteTarget?.name}</strong> still has students, teachers, groups, or other
-                            data. Deleting it this way <strong>permanently destroys all of it</strong> - this cannot
-                            be undone. Type the center&apos;s name to confirm.
+                            {t.rich('purgeDialogDescription', {
+                                name: deleteTarget?.name ?? '',
+                                b: (chunks) => <strong>{chunks}</strong>,
+                            })}
                         </DialogDescription>
                     </DialogHeader>
                     <Field>
-                        <FieldLabel htmlFor="purge-confirm">Center name</FieldLabel>
+                        <FieldLabel htmlFor="purge-confirm">{t('centerNameLabel')}</FieldLabel>
                         <Input
                             id="purge-confirm"
                             value={purgeConfirmText}
@@ -426,14 +432,14 @@ const TenantDashboard = () => {
                     </Field>
                     <DialogFooter>
                         <DialogClose asChild>
-                            <Button variant="outline">Cancel</Button>
+                            <Button variant="outline">{tCommon('cancel')}</Button>
                         </DialogClose>
                         <Button
                             variant="destructive"
                             onClick={() => deleteTarget && purgeMutation.mutate(deleteTarget.id)}
                             disabled={purgeConfirmText !== deleteTarget?.name || purgeMutation.isPending}
                         >
-                            {purgeMutation.isPending ? 'Deleting…' : 'Permanently delete'}
+                            {purgeMutation.isPending ? t('deleting') : t('permanentlyDelete')}
                         </Button>
                     </DialogFooter>
                 </DialogContent>
