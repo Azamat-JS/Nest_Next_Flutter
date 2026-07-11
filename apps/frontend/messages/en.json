@@ -1,0 +1,20 @@
+{
+    "Header": {
+        "nav": {
+            "users": "Users",
+            "groups": "Groups",
+            "payments": "Payments",
+            "leaderboard": "Leaderboard",
+            "profile": "Profile"
+        }
+    },
+    "ModeToggle": {
+        "toggleTheme": "Toggle theme",
+        "light": "Light",
+        "dark": "Dark",
+        "system": "System"
+    },
+    "LanguageSwitcher": {
+        "changeLanguage": "Change language"
+    }
+}

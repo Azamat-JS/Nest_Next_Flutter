@@ -1,0 +1,20 @@
+{
+    "Header": {
+        "nav": {
+            "users": "Foydalanuvchilar",
+            "groups": "Guruhlar",
+            "payments": "To'lovlar",
+            "leaderboard": "Reyting",
+            "profile": "Profil"
+        }
+    },
+    "ModeToggle": {
+        "toggleTheme": "Mavzuni almashtirish",
+        "light": "Yorug'",
+        "dark": "Tungi",
+        "system": "Tizim"
+    },
+    "LanguageSwitcher": {
+        "changeLanguage": "Tilni o'zgartirish"
+    }
+}

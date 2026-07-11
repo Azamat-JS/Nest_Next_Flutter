@@ -2,21 +2,24 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { useTranslations } from "next-intl"
 import { ModeToggle } from "./mode-toggle"
+import { LanguageSwitcher } from "./language-switcher"
 import { DropdownMenuDemo } from "./DropDownMenu"
 import { GraduationCap } from "lucide-react"
 import { useAuthStore } from "@/lib/stores/authStore"
 
 const navLinks = [
-    { name: 'Users', href: '/home' },
-    { name: 'Groups', href: '/groups' },
-    { name: 'Payments', href: '/payments' },
-    { name: 'Leaderboard', href: '/leaderboard' },
-    { name: 'Profile', href: '/profile' },
-]
+    { key: 'users', href: '/home' },
+    { key: 'groups', href: '/groups' },
+    { key: 'payments', href: '/payments' },
+    { key: 'leaderboard', href: '/leaderboard' },
+    { key: 'profile', href: '/profile' },
+] as const
 
 export const Header = () => {
     const pathname = usePathname()
+    const t = useTranslations('Header.nav')
     const isAuthenticated = useAuthStore((state) => state.isAuthenticated)
 
     // The Telegram mini app has its own bottom navigation.
@@ -36,14 +39,14 @@ export const Header = () => {
                         const isActive = pathname === link.href
                         return (
                             <Link
-                                key={link.name}
+                                key={link.key}
                                 href={link.href}
                                 className={`relative px-3 py-2 text-sm font-medium rounded-md transition-colors ${isActive
                                     ? 'text-primary bg-primary/10'
                                     : 'text-muted-foreground hover:text-foreground hover:bg-muted'
                                     }`}
                             >
-                                {link.name}
+                                {t(link.key)}
                                 {isActive && (
                                     <span className="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 w-4 rounded-full bg-primary" />
                                 )}
@@ -54,6 +57,7 @@ export const Header = () => {
 
                 <div className="flex items-center gap-2">
                     <ModeToggle />
+                    <LanguageSwitcher />
                     <DropdownMenuDemo />
                 </div>
             </div>

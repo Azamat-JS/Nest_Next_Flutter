@@ -1,0 +1,20 @@
+{
+    "Header": {
+        "nav": {
+            "users": "Пользователи",
+            "groups": "Группы",
+            "payments": "Платежи",
+            "leaderboard": "Рейтинг",
+            "profile": "Профиль"
+        }
+    },
+    "ModeToggle": {
+        "toggleTheme": "Переключить тему",
+        "light": "Светлая",
+        "dark": "Тёмная",
+        "system": "Системная"
+    },
+    "LanguageSwitcher": {
+        "changeLanguage": "Сменить язык"
+    }
+}

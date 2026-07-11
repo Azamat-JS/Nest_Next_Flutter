@@ -267,13 +267,12 @@ the backend and the Next dev server.
 
 ## 7. Security decisions & open items
 
-- **Manual phone entry is unverified.** Anyone can type someone else's number
-  and, if it matches, gain access to that family's scores and payment history.
-  Contact-share is safe (Telegram attests `contact.user_id === from.id`).
-  Recommended: treat manual entry as **pending** (`verified=false`) and gate
-  it with one cheap check before activating — best fit here is asking for the
-  account **password** (users already have one, issued by the centre), or an
-  admin approval list. Decision needed before Phase 1 ships to real users.
+- **Manual phone entry is password-gated** (implemented in Phase 4). A typed
+  phone creates a pending link (`verified=false`); the bot asks for the
+  account password, deletes the password message from the chat, allows 5
+  attempts (then discards the pending link), and only then activates the
+  link. `/telegram/auth` rejects unverified links. Contact-share still links
+  instantly (Telegram attests `contact.user_id === from.id`).
 - **Webhook forgery** is prevented only by the `secret_token` check — it is
   mandatory, not optional.
 - **initData freshness** (`auth_date` ≤ 5 min) prevents replay of captured
