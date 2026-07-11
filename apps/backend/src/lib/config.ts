@@ -43,4 +43,10 @@ export class AppConfig {
     @IsString()
     @Value("MINI_APP_URL")
     MINI_APP_URL?: string;
+
+    // Override for tests/mocks only; defaults to the real Bot API.
+    @IsOptional()
+    @IsString()
+    @Value("TELEGRAM_API_BASE")
+    TELEGRAM_API_BASE?: string;
 }

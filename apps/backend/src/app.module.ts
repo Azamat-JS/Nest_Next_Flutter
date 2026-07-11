@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtModule } from '@nestjs/jwt';
 import { ClsModule } from 'nestjs-cls';
+import { ThrottlerModule } from '@nestjs/throttler';
 import { PrismaModule } from './prisma/prisma.module';
 import { UsersModule } from './users/users.module';
 import { ConfigifyModule } from '@itgorillaz/configify';
@@ -21,6 +22,9 @@ import { AppConfig } from './lib/config';
 @Module({
   imports: [
     ClsModule.forRoot({ global: true, middleware: { mount: true } }),
+    // No global guard - throttling is opted into per controller (currently
+    // only the public telegram endpoints).
+    ThrottlerModule.forRoot([{ name: 'default', ttl: 60_000, limit: 30 }]),
     ConfigifyModule.forRootAsync(),
     JwtModule.registerAsync({
       inject: [AppConfig],

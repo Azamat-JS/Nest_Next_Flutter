@@ -64,6 +64,12 @@ export class TelegramAuthService {
         if (!link) {
             throw new UnauthorizedException('Telegram account is not linked - send /start to the bot first');
         }
+        // Manually-typed phones stay unverified until the account password is
+        // confirmed in the bot chat; they must not grant access to payments
+        // and scores.
+        if (!link.verified) {
+            throw new UnauthorizedException('Phone number is not confirmed yet - please finish verification in the bot chat');
+        }
 
         const user = link.user;
         const payload = {

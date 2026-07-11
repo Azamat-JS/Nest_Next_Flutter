@@ -1,4 +1,5 @@
-import { Body, Controller, Headers, HttpCode, Logger, Param, Post, UnauthorizedException } from '@nestjs/common';
+import { Body, Controller, Headers, HttpCode, Logger, Param, Post, UnauthorizedException, UseGuards } from '@nestjs/common';
+import { Throttle, ThrottlerGuard } from '@nestjs/throttler';
 import { createHash, timingSafeEqual } from 'crypto';
 import { Public } from 'src/lib/shared/decorators/public';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -14,6 +15,10 @@ export class TelegramWebhookController {
         private readonly linkService: TelegramLinkService,
     ) { }
 
+    // Generous limit - real updates from Telegram are one per user action -
+    // but enough to blunt scripted floods against the public route.
+    @UseGuards(ThrottlerGuard)
+    @Throttle({ default: { ttl: 60_000, limit: 120 } })
     @Public()
     @Post('webhook/:tenantId')
     @HttpCode(200)

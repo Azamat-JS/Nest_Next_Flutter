@@ -19,6 +19,8 @@ export const Header = () => {
     const pathname = usePathname()
     const isAuthenticated = useAuthStore((state) => state.isAuthenticated)
 
+    // The Telegram mini app has its own bottom navigation.
+    if (pathname.startsWith('/tg')) return null
     if (!isAuthenticated) return null
 
     return (

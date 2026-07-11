@@ -1,7 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { AppConfig } from 'src/lib/config';
 
-const TELEGRAM_API_BASE = 'https://api.telegram.org';
+const DEFAULT_TELEGRAM_API_BASE = 'https://api.telegram.org';
 
 export interface TelegramBotInfo {
     id: number;
@@ -18,7 +18,8 @@ export class TelegramBotService {
     constructor(private readonly config: AppConfig) { }
 
     async callApi<T = unknown>(botToken: string, method: string, payload: Record<string, unknown> = {}): Promise<T> {
-        const response = await fetch(`${TELEGRAM_API_BASE}/bot${botToken}/${method}`, {
+        const apiBase = this.config.TELEGRAM_API_BASE ?? DEFAULT_TELEGRAM_API_BASE;
+        const response = await fetch(`${apiBase}/bot${botToken}/${method}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload),
@@ -40,6 +41,17 @@ export class TelegramBotService {
             secret_token: secretToken,
             allowed_updates: ['message'],
         });
+    }
+
+    // Passwords are typed into the chat during verification; removing the
+    // message keeps them out of the visible history. Best-effort - bots can
+    // delete user messages in private chats for 48h.
+    async deleteMessage(botToken: string, chatId: string, messageId: number) {
+        try {
+            await this.callApi(botToken, 'deleteMessage', { chat_id: chatId, message_id: messageId });
+        } catch (error) {
+            this.logger.warn(`Could not delete message ${messageId} in chat ${chatId}`);
+        }
     }
 
     async sendMessage(botToken: string, chatId: string, text: string, replyMarkup?: Record<string, unknown>) {
