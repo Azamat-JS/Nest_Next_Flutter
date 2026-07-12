@@ -1,0 +1,97 @@
+
+> frontend@0.1.0 dev /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend
+> next dev --turbopack -p 4008
+
+[1m[38;2;173;127;168m▲ Next.js 16.2.10[39m[22m (Turbopack)
+- Local:         http://localhost:4008
+- Network:       http://192.168.13.116:4008
+- Environments: .env.local
+[32m[1m✓[22m[39m Ready in 283ms
+
+ GET /groups/cmrbzd48c00011pv2aufbsk9j/cmrajq5cd0000eiv272zorsym [32m200[39m in 133ms
+ GET /groups/cmrbzd48c00011pv2aufbsk9j/cmrajq5cd0000eiv272zorsym [32m200[39m in 150ms[2m (next.js: 8ms, application-code: 141ms)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+ GET /groups [32m200[39m in 51ms[2m (next.js: 32ms, application-code: 19ms)[22m
+ GET /groups/cmrbzd48c00011pv2aufbsk9j [32m200[39m in 218ms[2m (next.js: 201ms, application-code: 17ms)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+ GET /groups/cmrbzd48c00011pv2aufbsk9j/cmrajq5cd0000eiv272zorsym [32m200[39m in 41ms[2m (next.js: 10ms, application-code: 31ms)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+ POST /groups/cmrbzd48c00011pv2aufbsk9j/cmrajq5cd0000eiv272zorsym [32m200[39m in 72ms[2m (next.js: 8ms, application-code: 64ms)[22m
+  └─ ƒ setLocale("en") in 6ms [2msrc/i18n/actions.ts[22m
+ GET /groups/cmrbzd48c00011pv2aufbsk9j/cmrajq5cd0000eiv272zorsym [32m200[39m in 50ms[2m (next.js: 1837µs, application-code: 49ms)[22m
+ POST /groups/cmrbzd48c00011pv2aufbsk9j/cmrajq5cd0000eiv272zorsym [32m200[39m in 63ms[2m (next.js: 9ms, application-code: 54ms)[22m
+  └─ ƒ setLocale("uz") in 3ms [2msrc/i18n/actions.ts[22m
+ GET /groups/cmrbzd48c00011pv2aufbsk9j/cmrajq5cd0000eiv272zorsym [32m200[39m in 41ms[2m (next.js: 1625µs, application-code: 39ms)[22m
+ GET /payments [32m200[39m in 46ms[2m (next.js: 22ms, application-code: 23ms)[22m
+ GET /payments/cmrbzg0jz00051pv24utwi4tz [32m200[39m in 253ms[2m (next.js: 239ms, application-code: 14ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+ GET /payments/cmrbzg0jz00051pv24utwi4tz [32m200[39m in 15ms[2m (next.js: 3ms, application-code: 12ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+ GET /leaderboard [32m200[39m in 137ms[2m (next.js: 112ms, application-code: 25ms)[22m
+[32m[1m✓[22m[39m Compiled in 432ms
+ GET /groups [32m200[39m in 20ms[2m (next.js: 3ms, application-code: 17ms)[22m
+[32m[1m✓[22m[39m Compiled in 32ms
+ GET /groups/cmrbzhcvw00081pv2v85hei0t [32m200[39m in 22ms[2m (next.js: 5ms, application-code: 18ms)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+ GET /groups/cmrbzhcvw00081pv2v85hei0t/cmrajq5cd0000eiv272zorsym [32m200[39m in 40ms[2m (next.js: 9ms, application-code: 31ms)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+ GET /payments [32m200[39m in 54ms[2m (next.js: 10ms, application-code: 44ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+ GET /payments/cmrbzg0jz00051pv24utwi4tz [32m200[39m in 41ms[2m (next.js: 11ms, application-code: 29ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+ GET /groups [32m200[39m in 32ms[2m (next.js: 8ms, application-code: 24ms)[22m

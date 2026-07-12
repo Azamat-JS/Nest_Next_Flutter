@@ -147,6 +147,10 @@ const StudentPaymentHistory = ({ studentId }: { studentId: string }) => {
     const meta: PaginationType = data?.meta ?? {}
     const lastPage = meta?.last_page ?? 1
     const groups: GroupType[] = groupsData?.data ?? []
+    const studentGroups = useMemo(
+        () => groups.filter((g) => g.students?.some((s) => s.id === studentId)),
+        [groups, studentId]
+    )
 
     const currentYear = new Date().getFullYear()
     const years = Array.from({ length: 10 }, (_, i) => currentYear - 2 + i)
@@ -402,7 +406,7 @@ const StudentPaymentHistory = ({ studentId }: { studentId: string }) => {
                     <AddPaymentDrawer
                         openCreate={openCreate}
                         setOpenCreate={setOpenCreate}
-                        groups={groups}
+                        groups={studentGroups}
                         preselectedStudentId={studentId}
                         onPaymentAdded={() => {
                             queryClient.invalidateQueries({ queryKey: ['student-payments', studentId] })
