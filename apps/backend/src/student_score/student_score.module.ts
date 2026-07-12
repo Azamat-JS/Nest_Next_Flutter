@@ -5,6 +5,7 @@ import { ConfigifyModule } from '@itgorillaz/configify';
 import { JwtModule } from '@nestjs/jwt';
 import { AppConfig } from 'src/lib/config';
 import { BulkAddScoreUseCase, UpdateScoreUseCase } from './usecases';
+import { PortalAccessService } from 'src/portal/portal-access.service';
 
 
 @Module({
@@ -19,6 +20,6 @@ import { BulkAddScoreUseCase, UpdateScoreUseCase } from './usecases';
     }),
   ],
   controllers: [StudentScoreController],
-  providers: [StudentScoreRepository, UpdateScoreUseCase, BulkAddScoreUseCase],
+  providers: [StudentScoreRepository, UpdateScoreUseCase, BulkAddScoreUseCase, PortalAccessService],
 })
 export class StudentScoreModule { }
