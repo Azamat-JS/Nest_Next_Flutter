@@ -25,12 +25,16 @@ export class GroupRepository {
     });
   }
 
-  async findAll(query: PaginationDto) {
+  async findAll(query: PaginationDto, requester?: { userId: string; role: UserRole }) {
     const { limit = 10, page = 1 } = query;
     const skip = (page - 1) * limit;
+    const where = requester?.role === UserRole.STUDENT
+      ? { students: { some: { studentId: requester.userId } } }
+      : {};
 
     const [data, total] = await Promise.all([
       this.prisma.groups.findMany({
+        where,
         skip,
         take: limit,
         select: {
@@ -62,7 +66,7 @@ export class GroupRepository {
           },
         },
       }),
-      this.prisma.groups.count(),
+      this.prisma.groups.count({ where }),
     ]);
 
     return {

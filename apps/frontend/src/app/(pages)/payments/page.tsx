@@ -5,6 +5,7 @@ import { ErrorBoundary } from "react-error-boundary"
 import { Suspense } from "react"
 import ErrorHandler from "@/components/utils/ErrorHandler"
 import { SkeletonDemo } from "@/components/utils/Skeleton"
+import { RequireStaff } from "@/components/RequireStaff"
 
 const PaymentsComponent = dynamic(
     () => import('@/components/pageContents/PaymentsComponent'),
@@ -13,11 +14,13 @@ const PaymentsComponent = dynamic(
 
 const PaymentsPage = () => {
     return (
-        <ErrorBoundary fallback={<ErrorHandler />}>
-            <Suspense fallback={<SkeletonDemo />}>
-                <PaymentsComponent />
-            </Suspense>
-        </ErrorBoundary>
+        <RequireStaff>
+            <ErrorBoundary fallback={<ErrorHandler />}>
+                <Suspense fallback={<SkeletonDemo />}>
+                    <PaymentsComponent />
+                </Suspense>
+            </ErrorBoundary>
+        </RequireStaff>
     )
 }
 

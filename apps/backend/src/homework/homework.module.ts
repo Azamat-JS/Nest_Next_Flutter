@@ -4,6 +4,7 @@ import { HomeworkController } from './homework.controller';
 import { ConfigifyModule } from '@itgorillaz/configify';
 import { JwtModule } from '@nestjs/jwt';
 import { AppConfig } from 'src/lib/config';
+import { PortalAccessService } from 'src/portal/portal-access.service';
 
 @Module({
   imports: [
@@ -17,6 +18,6 @@ import { AppConfig } from 'src/lib/config';
     }),
   ],
   controllers: [HomeworkController],
-  providers: [HomeworkRepository],
+  providers: [HomeworkRepository, PortalAccessService],
 })
 export class HomeworkModule { }

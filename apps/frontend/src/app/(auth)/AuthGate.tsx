@@ -1,22 +1,24 @@
 'use client'
 
 import { useAuthStore } from '@/lib/stores/authStore'
+import { usePathname } from 'next/navigation'
 import { LoginForm } from '@/components/LoginForm'
 import ChangePasswordScreen from '@/components/pageContents/ChangePasswordScreen'
 import { GraduationCap } from 'lucide-react'
-import dynamic from 'next/dynamic'
 import { useTranslations } from 'next-intl'
 
-const HomePage = dynamic(() => import('../(pages)/home/page'), { ssr: false })
-
-export default function AuthWrapper() {
+export function AuthGate({ children }: { children: React.ReactNode }) {
+    const pathname = usePathname()
     const isAuthenticated = useAuthStore((state) => state.isAuthenticated)
     const mustChangePassword = useAuthStore((state) => state.mustChangePassword)
     const t = useTranslations('LoginForm')
 
+    // The Telegram mini app has its own auth flow.
+    if (pathname.startsWith('/tg')) return <>{children}</>
+
     if (isAuthenticated && mustChangePassword) return <ChangePasswordScreen />
 
-    if (isAuthenticated) return <HomePage />
+    if (isAuthenticated) return <>{children}</>
 
     return (
         <div className="flex min-h-[calc(100vh-4rem)] items-center justify-center">

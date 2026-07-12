@@ -61,6 +61,7 @@ import { Badge } from '../ui/badge';
 import GroupLineGraph from '../GroupLineGraph';
 import api from '@/lib/api';
 import { Home, ListChecks, Medal } from 'lucide-react';
+import { useAuthStore } from '@/lib/stores/authStore';
 
 const date = new Date().toISOString().split('T')[0];
 
@@ -82,6 +83,8 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
     const [comment, setComment] = useState<string | null>(null);
     const queryClient = useQueryClient();
     const { data: students = [] } = useStudents();
+    const role = useAuthStore((state) => state.role);
+    const canManage = role === 'ADMIN' || role === 'TEACHER';
 
     const { data: groupStudentsData } = useSuspenseQuery({
         queryKey: ["group-students", groupId, page, limit],
@@ -214,31 +217,33 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
                                 <TableCell className="text-center">{date}</TableCell>
                                 <TableCell className="text-center font-semibold">{score?.total ?? 0}</TableCell>
                                 <TableCell className="text-center">
-                                    <DropdownMenu>
-                                        <DropdownMenuTrigger asChild>
-                                            <Button variant="ghost" size="icon" className="h-8 w-8">
-                                                <MoreHorizontal className="h-4 w-4" />
-                                            </Button>
-                                        </DropdownMenuTrigger>
-                                        <DropdownMenuContent align="end">
-                                            <DropdownMenuGroup>
-                                                <DropdownMenuItem onClick={() => {
-                                                    setOpenUpdate(true);
-                                                    setSelectedStudent(s);
-                                                    setValue(score?.homework ?? 0);
-                                                    setComment(score?.comment ?? null);
-                                                }}>
-                                                    <Edit className="h-4 w-4" /> {t('updateScoreAction')}
-                                                </DropdownMenuItem>
-                                                <DropdownMenuItem
-                                                    onClick={() => { setOpenDelete(true); setSelectedStudent(s); }}
-                                                    className="text-destructive focus:text-destructive"
-                                                >
-                                                    <Trash className="h-4 w-4" /> {t('removeAction')}
-                                                </DropdownMenuItem>
-                                            </DropdownMenuGroup>
-                                        </DropdownMenuContent>
-                                    </DropdownMenu>
+                                    {canManage && (
+                                        <DropdownMenu>
+                                            <DropdownMenuTrigger asChild>
+                                                <Button variant="ghost" size="icon" className="h-8 w-8">
+                                                    <MoreHorizontal className="h-4 w-4" />
+                                                </Button>
+                                            </DropdownMenuTrigger>
+                                            <DropdownMenuContent align="end">
+                                                <DropdownMenuGroup>
+                                                    <DropdownMenuItem onClick={() => {
+                                                        setOpenUpdate(true);
+                                                        setSelectedStudent(s);
+                                                        setValue(score?.homework ?? 0);
+                                                        setComment(score?.comment ?? null);
+                                                    }}>
+                                                        <Edit className="h-4 w-4" /> {t('updateScoreAction')}
+                                                    </DropdownMenuItem>
+                                                    <DropdownMenuItem
+                                                        onClick={() => { setOpenDelete(true); setSelectedStudent(s); }}
+                                                        className="text-destructive focus:text-destructive"
+                                                    >
+                                                        <Trash className="h-4 w-4" /> {t('removeAction')}
+                                                    </DropdownMenuItem>
+                                                </DropdownMenuGroup>
+                                            </DropdownMenuContent>
+                                        </DropdownMenu>
+                                    )}
                                 </TableCell>
                             </TableRow>
                         );
@@ -246,18 +251,20 @@ const GroupDetailsComponent = ({ groupId }: { groupId: string }) => {
                 </TableBody>
             </Table>
 
-            <div className="flex gap-2 justify-end mt-4">
-                <AddScoreDrawer
-                    openCreate={openCreate}
-                    setOpenCreate={setOpenCreate}
-                    students={groupStudents}
-                    groupId={groupId}
-                    onScoreAdded={() => queryClient.invalidateQueries({ queryKey: ['today-scores', groupId] })}
-                />
-                <Button variant="outline" onClick={() => setOpenAddStudents(true)} className="gap-1">
-                    <UserPlus className="h-4 w-4" /> {t('addStudents')}
-                </Button>
-            </div>
+            {canManage && (
+                <div className="flex gap-2 justify-end mt-4">
+                    <AddScoreDrawer
+                        openCreate={openCreate}
+                        setOpenCreate={setOpenCreate}
+                        students={groupStudents}
+                        groupId={groupId}
+                        onScoreAdded={() => queryClient.invalidateQueries({ queryKey: ['today-scores', groupId] })}
+                    />
+                    <Button variant="outline" onClick={() => setOpenAddStudents(true)} className="gap-1">
+                        <UserPlus className="h-4 w-4" /> {t('addStudents')}
+                    </Button>
+                </div>
+            )}
 
             {/* Pagination */}
             <div className="grid grid-cols-2 items-center mt-4">

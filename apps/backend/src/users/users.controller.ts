@@ -57,14 +57,14 @@ export class UsersController {
   }
 
   @UseGuards(RolesGuard)
-  @Roles('ADMIN', 'TEACHER')
+  @Roles('ADMIN', 'TEACHER', 'STUDENT')
   @Get('teachers')
   async getAllTeachers() {
     return this.usersService.getAllTeachers();
   }
 
   @UseGuards(RolesGuard)
-  @Roles('ADMIN', 'TEACHER')
+  @Roles('ADMIN', 'TEACHER', 'STUDENT')
   @Get('students')
   async getAllStudents() {
     return this.usersService.getAllStudents();

@@ -36,6 +36,7 @@ import {
     PaginationNext,
     PaginationPrevious,
 } from "@/components/ui/pagination"
+import { useAuthStore } from "@/lib/stores/authStore"
 
 const formatDueDate = (value: string) => {
     const date = new Date(value)
@@ -53,6 +54,8 @@ const GroupHomeworks = ({ groupId }: { groupId: string }) => {
     const search = searchParams.get('search') ?? ''
     const [searchInput, setSearchInput] = useState(search)
     const [openAddHomework, setOpenAddHomework] = useState(false)
+    const role = useAuthStore((state) => state.role)
+    const canManage = role === 'ADMIN' || role === 'TEACHER'
 
     useEffect(() => {
         const handler = setTimeout(() => {
@@ -118,14 +121,16 @@ const GroupHomeworks = ({ groupId }: { groupId: string }) => {
                 </TableBody>
             </Table>
 
-            <div className="flex gap-2 justify-end">
-                <AddHomeworkDrawer
-                    openCreate={openAddHomework}
-                    setOpenCreate={setOpenAddHomework}
-                    groupId={groupId}
-                    onHomeworkAdded={() => queryClient.invalidateQueries({ queryKey: ['group-homeworks', groupId] })}
-                />
-            </div>
+            {canManage && (
+                <div className="flex gap-2 justify-end">
+                    <AddHomeworkDrawer
+                        openCreate={openAddHomework}
+                        setOpenCreate={setOpenAddHomework}
+                        groupId={groupId}
+                        onHomeworkAdded={() => queryClient.invalidateQueries({ queryKey: ['group-homeworks', groupId] })}
+                    />
+                </div>
+            )}
 
             <div className="grid grid-cols-2 items-center">
                 <div className="flex justify-center">

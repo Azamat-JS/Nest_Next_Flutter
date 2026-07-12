@@ -21,10 +21,17 @@ export const Header = () => {
     const pathname = usePathname()
     const t = useTranslations('Header.nav')
     const isAuthenticated = useAuthStore((state) => state.isAuthenticated)
+    const mustChangePassword = useAuthStore((state) => state.mustChangePassword)
+    const role = useAuthStore((state) => state.role)
 
     // The Telegram mini app has its own bottom navigation.
     if (pathname.startsWith('/tg')) return null
     if (!isAuthenticated) return null
+    if (mustChangePassword) return null
+
+    const visibleLinks = role === 'STUDENT'
+        ? navLinks.filter((link) => link.key !== 'users' && link.key !== 'payments')
+        : navLinks
 
     return (
         <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
@@ -35,7 +42,7 @@ export const Header = () => {
                 </Link>
 
                 <nav className="flex items-center gap-1">
-                    {navLinks.map((link) => {
+                    {visibleLinks.map((link) => {
                         const isActive = pathname === link.href
                         return (
                             <Link

@@ -6,6 +6,7 @@ import { AddStudentUseCase } from './usecases/add-student-usecase';
 import { PaginationDto } from 'src/lib/shared/dto/pagination.dto';
 import { RolesGuard } from 'src/lib/guards/roles.guard';
 import { Roles } from 'src/lib/shared/decorators/roles';
+import { PortalAccessService } from 'src/portal/portal-access.service';
 
 @Controller('group')
 export class GroupController {
@@ -13,6 +14,7 @@ export class GroupController {
     private readonly updateGroupUseCase: UpdateGroupUseCase,
     private readonly addStudentUseCase: AddStudentUseCase,
     private readonly removeStudentFromGroupUseCase: RemoveStudentFromGroupUseCase,
+    private readonly portalAccess: PortalAccessService,
   ) { }
 
   private assertCanManageGroup(req, group: { teacherId: string }) {
@@ -30,17 +32,23 @@ export class GroupController {
   }
 
   @Get('all')
-  findAll(@Query() query: PaginationDto) {
-    return this.groupService.findAll(query);
+  findAll(@Req() req, @Query() query: PaginationDto) {
+    return this.groupService.findAll(query, req.user);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  async findOne(@Req() req, @Param('id') id: string) {
+    if (req.user.role === 'STUDENT') {
+      await this.portalAccess.assertCanViewGroup(req.user, id);
+    }
     return this.groupService.findOne(id);
   }
 
   @Get(':id/students')
-  findGroupStudents(@Param('id') id: string, @Query() query: PaginationDto) {
+  async findGroupStudents(@Req() req, @Param('id') id: string, @Query() query: PaginationDto) {
+    if (req.user.role === 'STUDENT') {
+      await this.portalAccess.assertCanViewGroup(req.user, id);
+    }
     return this.groupService.findGroupStudents(id, query.page, query.limit);
   }
 

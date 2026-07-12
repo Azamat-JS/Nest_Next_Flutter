@@ -7,6 +7,7 @@ import { Toaster } from "sonner";
 import { Header } from "@/components/Header";
 import Providers from "@/components/providers";
 import { ThemeProvider } from "@/components/theme-provider";
+import { AuthGate } from "@/app/(auth)/AuthGate";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -47,7 +48,7 @@ export default async function RootLayout({
                         <Providers>
                             <Header />
                             <main className="flex-1 px-4 sm:px-6 lg:px-10 py-6">
-                                {children}
+                                <AuthGate>{children}</AuthGate>
                             </main>
                         </Providers>
                         <Toaster richColors position="top-center" closeButton />

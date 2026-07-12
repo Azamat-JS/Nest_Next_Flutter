@@ -6,6 +6,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { AppConfig } from 'src/lib/config';
 import { AddStudentUseCase, CreateGroupUseCase, RemoveStudentFromGroupUseCase, UpdateGroupUseCase } from './usecases';
 import { StudentScoreRepository } from 'src/student_score/student_score.service';
+import { PortalAccessService } from 'src/portal/portal-access.service';
 
 @Module({
   imports: [
@@ -19,6 +20,6 @@ import { StudentScoreRepository } from 'src/student_score/student_score.service'
     }),
   ],
   controllers: [GroupController],
-  providers: [GroupRepository, CreateGroupUseCase, UpdateGroupUseCase, RemoveStudentFromGroupUseCase, StudentScoreRepository, AddStudentUseCase],
+  providers: [GroupRepository, CreateGroupUseCase, UpdateGroupUseCase, RemoveStudentFromGroupUseCase, StudentScoreRepository, AddStudentUseCase, PortalAccessService],
 })
 export class GroupModule { }

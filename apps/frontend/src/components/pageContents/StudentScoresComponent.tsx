@@ -55,6 +55,7 @@ import { toast } from "sonner";
 import { Input } from "../ui/input";
 import api from "@/lib/api";
 import { useTranslations } from "next-intl";
+import { useAuthStore } from "@/lib/stores/authStore";
 
 const StudentScoresComponent = ({ groupId, studentId }: { groupId: string; studentId: string }) => {
     const t = useTranslations('StudentScoresComponent');
@@ -64,6 +65,8 @@ const StudentScoresComponent = ({ groupId, studentId }: { groupId: string; stude
     const limit = Number(searchParams.get('limit') ?? 10);
     const { data: students = [] } = useStudents();
     const router = useRouter();
+    const role = useAuthStore((state) => state.role);
+    const canManage = role === 'ADMIN' || role === 'TEACHER';
     const [openUpdate, setOpenUpdate] = useState(false);
     const [comment, setComment] = useState<string>("");
     const [value, setValue] = useState<number>(0);
@@ -131,7 +134,7 @@ const StudentScoresComponent = ({ groupId, studentId }: { groupId: string; stude
                         <TableHead className="text-center font-semibold">{t('attendance')}</TableHead>
                         <TableHead className="text-center font-semibold">{t('total')}</TableHead>
                         <TableHead className="text-center font-semibold">{t('comment')}</TableHead>
-                        <TableHead className="w-16 text-center font-semibold">{tCommon('actions')}</TableHead>
+                        {canManage && <TableHead className="w-16 text-center font-semibold">{tCommon('actions')}</TableHead>}
                     </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -159,41 +162,43 @@ const StudentScoresComponent = ({ groupId, studentId }: { groupId: string; stude
                                 </TableCell>
                                 <TableCell className="text-center font-semibold">{row.total}</TableCell>
                                 <TableCell className="text-center text-muted-foreground">{comment || "—"}</TableCell>
-                                <TableCell className="text-center">
-                                    <DropdownMenu>
-                                        <DropdownMenuTrigger asChild>
-                                            <Button variant="ghost" size="icon" className="h-8 w-8">
-                                                <MoreHorizontal className="h-4 w-4" />
-                                            </Button>
-                                        </DropdownMenuTrigger>
-                                        <DropdownMenuContent align="end">
-                                            <DropdownMenuGroup>
-                                                <DropdownMenuItem
-                                                    disabled={row.homework === null}
-                                                    onClick={() => {
-                                                        setOpenUpdate(true);
-                                                        setType("HOMEWORK");
-                                                        setValue(row.homework ?? 0);
-                                                        setSelectedDate(row.date);
-                                                        setComment(row.homeworkComment ?? "");
-                                                    }}>
-                                                    <Edit className="h-4 w-4" /> {t('editHomework')}
-                                                </DropdownMenuItem>
-                                                <DropdownMenuItem
-                                                    disabled={row.attendance === null}
-                                                    onClick={() => {
-                                                        setOpenUpdate(true);
-                                                        setType("ATTENDANCE");
-                                                        setValue(row.attendance ?? 0);
-                                                        setSelectedDate(row.date);
-                                                        setComment(row.attendanceComment ?? "");
-                                                    }}>
-                                                    <Edit className="h-4 w-4" /> {t('editAttendance')}
-                                                </DropdownMenuItem>
-                                            </DropdownMenuGroup>
-                                        </DropdownMenuContent>
-                                    </DropdownMenu>
-                                </TableCell>
+                                {canManage && (
+                                    <TableCell className="text-center">
+                                        <DropdownMenu>
+                                            <DropdownMenuTrigger asChild>
+                                                <Button variant="ghost" size="icon" className="h-8 w-8">
+                                                    <MoreHorizontal className="h-4 w-4" />
+                                                </Button>
+                                            </DropdownMenuTrigger>
+                                            <DropdownMenuContent align="end">
+                                                <DropdownMenuGroup>
+                                                    <DropdownMenuItem
+                                                        disabled={row.homework === null}
+                                                        onClick={() => {
+                                                            setOpenUpdate(true);
+                                                            setType("HOMEWORK");
+                                                            setValue(row.homework ?? 0);
+                                                            setSelectedDate(row.date);
+                                                            setComment(row.homeworkComment ?? "");
+                                                        }}>
+                                                        <Edit className="h-4 w-4" /> {t('editHomework')}
+                                                    </DropdownMenuItem>
+                                                    <DropdownMenuItem
+                                                        disabled={row.attendance === null}
+                                                        onClick={() => {
+                                                            setOpenUpdate(true);
+                                                            setType("ATTENDANCE");
+                                                            setValue(row.attendance ?? 0);
+                                                            setSelectedDate(row.date);
+                                                            setComment(row.attendanceComment ?? "");
+                                                        }}>
+                                                        <Edit className="h-4 w-4" /> {t('editAttendance')}
+                                                    </DropdownMenuItem>
+                                                </DropdownMenuGroup>
+                                            </DropdownMenuContent>
+                                        </DropdownMenu>
+                                    </TableCell>
+                                )}
                             </TableRow>
                         );
                     })}
