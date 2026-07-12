@@ -44,6 +44,15 @@ export class StudentScoreController {
     return this.studentScoreRepo.findOneStudentScores(studentId, groupId, query);
   }
 
+  @Get('one-student/grouped/:studentId/:groupId')
+  async getOneStudentScoreGrouped(
+    @Param('studentId') studentId: string,
+    @Param('groupId') groupId: string,
+    @Query() query: PaginationDto
+  ) {
+    return this.studentScoreRepo.findOneStudentScoresGrouped(studentId, groupId, query);
+  }
+
   @Get('chart/:studentId/:groupId')
   async getScoreHistoryForChart(@Param('studentId') studentId: string, @Param("groupId") groupId: string, @Query() query: ChartDateDto) {
     return this.studentScoreRepo.getScoreHistoryForChart(studentId, groupId, query);

@@ -74,7 +74,7 @@ const StudentScoresComponent = ({ groupId, studentId }: { groupId: string; stude
     const { data: studentScoreReport } = useSuspenseQuery<StudentScoreResponse>({
         queryKey: ["studentScores", studentId, groupId, page, limit],
         queryFn: async () => {
-            const res = await api.get(`/student-score/one-student/${studentId}/${groupId}`, { params: { page, limit } });
+            const res = await api.get(`/student-score/one-student/grouped/${studentId}/${groupId}`, { params: { page, limit } });
             return res.data;
         },
         staleTime: 1000 * 60 * 5,
@@ -126,53 +126,77 @@ const StudentScoresComponent = ({ groupId, studentId }: { groupId: string; stude
                 <TableHeader>
                     <TableRow>
                         <TableHead className="w-12 text-center font-semibold">#</TableHead>
-                        <TableHead className="text-center font-semibold">{t('type')}</TableHead>
-                        <TableHead className="text-center font-semibold">{t('score')}</TableHead>
                         <TableHead className="text-center font-semibold">{t('date')}</TableHead>
+                        <TableHead className="text-center font-semibold">{t('homework')}</TableHead>
+                        <TableHead className="text-center font-semibold">{t('attendance')}</TableHead>
                         <TableHead className="text-center font-semibold">{t('total')}</TableHead>
                         <TableHead className="text-center font-semibold">{t('comment')}</TableHead>
                         <TableHead className="w-16 text-center font-semibold">{tCommon('actions')}</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {rows.map((row, idx) => (
-                        <TableRow key={idx}>
-                            <TableCell className="text-center">{(page - 1) * limit + idx + 1}</TableCell>
-                            <TableCell className="text-center">
-                                <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${row.type === 'HOMEWORK' ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300' : 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300'}`}>
-                                    {row.type}
-                                </span>
-                            </TableCell>
-                            <TableCell className="text-center">{row.value}</TableCell>
-                            <TableCell className="text-center">
-                                {new Date(row.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-                            </TableCell>
-                            <TableCell className="text-center font-semibold">{row.total}</TableCell>
-                            <TableCell className="text-center text-muted-foreground">{row.comment ?? "—"}</TableCell>
-                            <TableCell className="text-center">
-                                <DropdownMenu>
-                                    <DropdownMenuTrigger asChild>
-                                        <Button variant="ghost" size="icon" className="h-8 w-8">
-                                            <MoreHorizontal className="h-4 w-4" />
-                                        </Button>
-                                    </DropdownMenuTrigger>
-                                    <DropdownMenuContent align="end">
-                                        <DropdownMenuGroup>
-                                            <DropdownMenuItem onClick={() => {
-                                                setOpenUpdate(true);
-                                                setType(row.type);
-                                                setValue(row.value);
-                                                setSelectedDate(row.date);
-                                                setComment(row.comment ?? "");
-                                            }}>
-                                                <Edit className="h-4 w-4" /> {t('edit')}
-                                            </DropdownMenuItem>
-                                        </DropdownMenuGroup>
-                                    </DropdownMenuContent>
-                                </DropdownMenu>
-                            </TableCell>
-                        </TableRow>
-                    ))}
+                    {rows.map((row, idx) => {
+                        const comment = [row.homeworkComment, row.attendanceComment].filter(Boolean).join(' / ');
+                        return (
+                            <TableRow key={idx}>
+                                <TableCell className="text-center">{(page - 1) * limit + idx + 1}</TableCell>
+                                <TableCell className="text-center">
+                                    {new Date(row.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                                </TableCell>
+                                <TableCell className="text-center">
+                                    {row.homework !== null ? (
+                                        <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300">
+                                            {row.homework}
+                                        </span>
+                                    ) : "—"}
+                                </TableCell>
+                                <TableCell className="text-center">
+                                    {row.attendance !== null ? (
+                                        <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300">
+                                            {row.attendance}
+                                        </span>
+                                    ) : "—"}
+                                </TableCell>
+                                <TableCell className="text-center font-semibold">{row.total}</TableCell>
+                                <TableCell className="text-center text-muted-foreground">{comment || "—"}</TableCell>
+                                <TableCell className="text-center">
+                                    <DropdownMenu>
+                                        <DropdownMenuTrigger asChild>
+                                            <Button variant="ghost" size="icon" className="h-8 w-8">
+                                                <MoreHorizontal className="h-4 w-4" />
+                                            </Button>
+                                        </DropdownMenuTrigger>
+                                        <DropdownMenuContent align="end">
+                                            <DropdownMenuGroup>
+                                                <DropdownMenuItem
+                                                    disabled={row.homework === null}
+                                                    onClick={() => {
+                                                        setOpenUpdate(true);
+                                                        setType("HOMEWORK");
+                                                        setValue(row.homework ?? 0);
+                                                        setSelectedDate(row.date);
+                                                        setComment(row.homeworkComment ?? "");
+                                                    }}>
+                                                    <Edit className="h-4 w-4" /> {t('editHomework')}
+                                                </DropdownMenuItem>
+                                                <DropdownMenuItem
+                                                    disabled={row.attendance === null}
+                                                    onClick={() => {
+                                                        setOpenUpdate(true);
+                                                        setType("ATTENDANCE");
+                                                        setValue(row.attendance ?? 0);
+                                                        setSelectedDate(row.date);
+                                                        setComment(row.attendanceComment ?? "");
+                                                    }}>
+                                                    <Edit className="h-4 w-4" /> {t('editAttendance')}
+                                                </DropdownMenuItem>
+                                            </DropdownMenuGroup>
+                                        </DropdownMenuContent>
+                                    </DropdownMenu>
+                                </TableCell>
+                            </TableRow>
+                        );
+                    })}
                 </TableBody>
             </Table>
 

@@ -13,9 +13,10 @@ export type StudentScoreRow = {
 
 export type ScoreEvent = {
     date: string;
-    type: ScoreType;
-    value: number;
-    comment: string | null;
+    homework: number | null;
+    attendance: number | null;
+    homeworkComment: string | null;
+    attendanceComment: string | null;
     total: number
 }
 

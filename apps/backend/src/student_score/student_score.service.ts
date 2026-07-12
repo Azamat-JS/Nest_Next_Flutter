@@ -88,6 +88,88 @@ export class StudentScoreRepository {
         };
     }
 
+    async findOneStudentScoresGrouped(
+        studentId: string,
+        groupId: string,
+        query: PaginationDto
+    ) {
+        const { limit = 10, page = 1 } = query;
+
+        const [events, total] = await this.prisma.$transaction([
+            this.prisma.scoreEvent.findMany({
+                where: {
+                    studentId,
+                    groupId,
+                },
+                orderBy: {
+                    date: 'desc',
+                },
+                select: {
+                    date: true,
+                    type: true,
+                    value: true,
+                    comment: true,
+                },
+            }),
+            this.prisma.studentScore.findUnique({
+                where: {
+                    studentId_groupId: {
+                        studentId,
+                        groupId
+                    }
+                },
+                select: {
+                    total: true
+                }
+            })
+        ])
+
+        const map = new Map<string, {
+            date: string,
+            homework: number | null,
+            attendance: number | null,
+            homeworkComment: string | null,
+            attendanceComment: string | null,
+        }>();
+
+        for (const e of events) {
+            const date = e.date.toISOString().split('T')[0];
+
+            if (!map.has(date)) {
+                map.set(date, { date, homework: null, attendance: null, homeworkComment: null, attendanceComment: null });
+            }
+            const entry = map.get(date)!;
+
+            if (e.type === 'HOMEWORK') {
+                entry.homework = e.value;
+                entry.homeworkComment = e.comment;
+            }
+
+            if (e.type === 'ATTENDANCE') {
+                entry.attendance = e.value;
+                entry.attendanceComment = e.comment;
+            }
+        }
+
+        const grouped = Array.from(map.values()).map(g => ({
+            ...g,
+            total: (g.homework ?? 0) + (g.attendance ?? 0),
+        }));
+
+        const totalCount = grouped.length;
+        const skip = (page - 1) * limit;
+        const scores = grouped.slice(skip, skip + limit);
+
+        return {
+            scores,
+            total,
+            page,
+            limit,
+            total_count: totalCount,
+            last_page: Math.max(1, Math.ceil(totalCount / limit)),
+        };
+    }
+
     async addScore(tx: Prisma.TransactionClient, dto: ScoreDto) {
         await tx.scoreEvent.create({
             data: {
