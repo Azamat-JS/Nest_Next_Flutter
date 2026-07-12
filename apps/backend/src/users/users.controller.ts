@@ -78,14 +78,14 @@ export class UsersController {
   }
 
   @UseGuards(RolesGuard)
-  @Roles('ADMIN', 'TEACHER')
+  @Roles('ADMIN')
   @Put(':id')
-  async updateUser(@Body() updateUserDto: UpdateUserDto, @Param('id') id: string) {
-    return this.usersService.updateUser(id, updateUserDto);
+  async updateUser(@Req() req, @Body() updateUserDto: UpdateUserDto, @Param('id') id: string) {
+    return this.usersService.updateUser(id, updateUserDto, req.user.userId);
   }
 
   @UseGuards(RolesGuard)
-  @Roles('ADMIN', 'TEACHER')
+  @Roles('ADMIN')
   @Delete(':id')
   async deleteUser(@Param('id') id: string) {
     return this.usersService.deleteUser(id);

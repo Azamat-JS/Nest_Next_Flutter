@@ -187,7 +187,8 @@
         "selectAtLeastOneStudent": "Kamida bitta o'quvchini tanlang",
         "userUpdated": "Foydalanuvchi muvaffaqiyatli yangilandi",
         "userDeleted": "Foydalanuvchi muvaffaqiyatli o'chirildi",
-        "userCreated": "Foydalanuvchi muvaffaqiyatli yaratildi"
+        "userCreated": "Foydalanuvchi muvaffaqiyatli yaratildi",
+        "cannotChangeOwnRole": "O'zingizning rolingizni o'zgartira olmaysiz"
     },
     "WaitingListTab": {
         "phoneInvalid": "9 xonali to'g'ri telefon raqamini kiriting",
@@ -334,6 +335,7 @@
         "groupNameLabel": "Guruh nomi",
         "selectATeacherPlaceholder": "O'qituvchini tanlang",
         "selectTeacherLabel": "O'qituvchini tanlash",
+        "onlyAdminCanReassign": "Faqat adminlar guruhni boshqa o'qituvchiga topshira oladi",
         "saving": "Saqlanmoqda…",
         "save": "Saqlash",
         "selectStudentsToAddFor": "<strong>{name}</strong>ga qo'shish uchun o'quvchilarni tanlang",

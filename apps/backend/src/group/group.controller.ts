@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Delete, Put, UseGuards, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Put, UseGuards, Query, Req, ForbiddenException } from '@nestjs/common';
 import { GroupRepository } from './group.service';
 import { AddStudentsDto, CreateGroupDto, UpdateGroupDto } from './dto/group.dto';
 import { CreateGroupUseCase, UpdateGroupUseCase, RemoveStudentFromGroupUseCase } from './usecases';
@@ -14,6 +14,13 @@ export class GroupController {
     private readonly addStudentUseCase: AddStudentUseCase,
     private readonly removeStudentFromGroupUseCase: RemoveStudentFromGroupUseCase,
   ) { }
+
+  private assertCanManageGroup(req, group: { teacherId: string }) {
+    const { role, userId } = req.user;
+    if (role === 'ADMIN') return;
+    if (role === 'TEACHER' && group.teacherId === userId) return;
+    throw new ForbiddenException('You do not have permission to manage this group');
+  }
 
   @UseGuards(RolesGuard)
   @Roles('ADMIN', 'TEACHER')
@@ -40,7 +47,9 @@ export class GroupController {
   @UseGuards(RolesGuard)
   @Roles('ADMIN', 'TEACHER')
   @Post(":id/add-students")
-  addStudents(@Param('id') id: string, @Body() body: AddStudentsDto) {
+  async addStudents(@Req() req, @Param('id') id: string, @Body() body: AddStudentsDto) {
+    const group = await this.groupService.findOne(id);
+    this.assertCanManageGroup(req, group);
     return this.addStudentUseCase.execute(id, body);
   }
 
@@ -48,20 +57,27 @@ export class GroupController {
   @UseGuards(RolesGuard)
   @Roles('ADMIN', 'TEACHER')
   @Put(':id')
-  update(@Param('id') id: string, @Body() updateGroupDto: UpdateGroupDto) {
+  async update(@Req() req, @Param('id') id: string, @Body() updateGroupDto: UpdateGroupDto) {
+    const group = await this.groupService.findOne(id);
+    this.assertCanManageGroup(req, group);
+    if (updateGroupDto.teacherId && updateGroupDto.teacherId !== group.teacherId && req.user.role !== 'ADMIN') {
+      throw new ForbiddenException('Only admins can reassign a group to another teacher');
+    }
     return this.updateGroupUseCase.execute(id, updateGroupDto);
   }
 
   @UseGuards(RolesGuard)
   @Roles('ADMIN', 'TEACHER')
   @Delete("delete/:studentId/:groupId")
-  async deleteStudent(@Param('studentId') studentId: string, @Param('groupId') groupId: string) {
+  async deleteStudent(@Req() req, @Param('studentId') studentId: string, @Param('groupId') groupId: string) {
+    const group = await this.groupService.findOne(groupId);
+    this.assertCanManageGroup(req, group);
     return this.removeStudentFromGroupUseCase.execute(studentId, groupId);
   }
 
 
   @UseGuards(RolesGuard)
-  @Roles('ADMIN', 'TEACHER')
+  @Roles('ADMIN')
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.groupService.remove(id);

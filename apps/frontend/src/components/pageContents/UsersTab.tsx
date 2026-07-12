@@ -85,6 +85,7 @@ const UsersTab = () => {
     const [openDelete, setOpenDelete] = useState(false)
     const [selectedUser, setSelectedUser] = useState<TokenPayload | null>(null)
     const creatableRoles = CREATABLE_ROLES[me?.role ?? ""] ?? []
+    const isAdmin = me?.role === 'ADMIN'
     const router = useRouter()
     const searchParams = useSearchParams()
     const queryClient = useQueryClient()
@@ -275,26 +276,28 @@ const UsersTab = () => {
                                     </Badge>
                                 </TableCell>
                                 <TableCell className="text-center">
-                                    <DropdownMenu>
-                                        <DropdownMenuTrigger asChild>
-                                            <Button variant="ghost" size="icon" className="h-8 w-8">
-                                                <MoreHorizontal className="h-4 w-4" />
-                                            </Button>
-                                        </DropdownMenuTrigger>
-                                        <DropdownMenuContent align="end">
-                                            <DropdownMenuGroup>
-                                                <DropdownMenuItem onClick={() => { setOpenUpdate(true); setSelectedUser(u) }}>
-                                                    <Edit className="h-4 w-4" /> {t('edit')}
-                                                </DropdownMenuItem>
-                                                <DropdownMenuItem
-                                                    onClick={() => { setOpenDelete(true); setSelectedUser(u) }}
-                                                    className="text-destructive focus:text-destructive"
-                                                >
-                                                    <Trash className="h-4 w-4" /> {t('delete')}
-                                                </DropdownMenuItem>
-                                            </DropdownMenuGroup>
-                                        </DropdownMenuContent>
-                                    </DropdownMenu>
+                                    {isAdmin && (
+                                        <DropdownMenu>
+                                            <DropdownMenuTrigger asChild>
+                                                <Button variant="ghost" size="icon" className="h-8 w-8">
+                                                    <MoreHorizontal className="h-4 w-4" />
+                                                </Button>
+                                            </DropdownMenuTrigger>
+                                            <DropdownMenuContent align="end">
+                                                <DropdownMenuGroup>
+                                                    <DropdownMenuItem onClick={() => { setOpenUpdate(true); setSelectedUser(u) }}>
+                                                        <Edit className="h-4 w-4" /> {t('edit')}
+                                                    </DropdownMenuItem>
+                                                    <DropdownMenuItem
+                                                        onClick={() => { setOpenDelete(true); setSelectedUser(u) }}
+                                                        className="text-destructive focus:text-destructive"
+                                                    >
+                                                        <Trash className="h-4 w-4" /> {t('delete')}
+                                                    </DropdownMenuItem>
+                                                </DropdownMenuGroup>
+                                            </DropdownMenuContent>
+                                        </DropdownMenu>
+                                    )}
                                 </TableCell>
                             </TableRow>
                         )
@@ -558,11 +561,27 @@ const UsersTab = () => {
                         </Field>
                         <Field>
                             <Label htmlFor="edit-role">{tCommon('role')}</Label>
-                            <Input
-                                id="edit-role"
-                                value={selectedUser?.role?.toLowerCase() ?? ""}
-                                onChange={(e) => setSelectedUser(prev => prev ? { ...prev, role: e.target.value.toUpperCase() } : prev)}
-                            />
+                            <Select
+                                value={selectedUser?.role ?? ""}
+                                disabled={selectedUser?.phone === me?.phone}
+                                onValueChange={(val) => setSelectedUser(prev => prev ? { ...prev, role: val } : prev)}
+                            >
+                                <SelectTrigger id="edit-role">
+                                    <SelectValue placeholder={t('selectRole')} />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <SelectGroup>
+                                        {Object.keys(roleVariant).map((r) => (
+                                            <SelectItem key={r} value={r} className="capitalize">
+                                                {r.toLowerCase()}
+                                            </SelectItem>
+                                        ))}
+                                    </SelectGroup>
+                                </SelectContent>
+                            </Select>
+                            {selectedUser?.phone === me?.phone && (
+                                <p className="text-xs text-muted-foreground">{t('cannotChangeOwnRole')}</p>
+                            )}
                         </Field>
                     </FieldGroup>
                     <DialogFooter>

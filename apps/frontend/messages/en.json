@@ -187,7 +187,8 @@
         "selectAtLeastOneStudent": "Select at least one student",
         "userUpdated": "User updated successfully",
         "userDeleted": "User deleted successfully",
-        "userCreated": "User created successfully"
+        "userCreated": "User created successfully",
+        "cannotChangeOwnRole": "You cannot change your own role"
     },
     "WaitingListTab": {
         "phoneInvalid": "Enter a valid 9-digit phone number",
@@ -334,6 +335,7 @@
         "groupNameLabel": "Group name",
         "selectATeacherPlaceholder": "Select a teacher",
         "selectTeacherLabel": "Select teacher",
+        "onlyAdminCanReassign": "Only admins can reassign a group to another teacher",
         "saving": "Saving…",
         "save": "Save",
         "selectStudentsToAddFor": "Select students to add to <strong>{name}</strong>",

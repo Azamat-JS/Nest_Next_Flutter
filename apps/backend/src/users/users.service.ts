@@ -239,7 +239,7 @@ export class UsersService {
         return { message: 'Password changed successfully' };
     }
 
-    async updateUser(id: string, updateUserInput: UpdateUserDto) {
+    async updateUser(id: string, updateUserInput: UpdateUserDto, callerId: string) {
 
         const foundUser = await this.prisma.users.findUnique({
             where: { id },
@@ -247,6 +247,13 @@ export class UsersService {
 
         if (!foundUser) {
             throw new NotFoundException('User not found');
+        }
+
+        if (updateUserInput.role && id === callerId) {
+            const normalizedRole = updateUserInput.role.toString().toUpperCase() as UserRole;
+            if (normalizedRole !== foundUser.role) {
+                throw new ForbiddenException('You cannot change your own role');
+            }
         }
 
         if (typeof updateUserInput.password === 'string') {

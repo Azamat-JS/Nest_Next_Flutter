@@ -187,7 +187,8 @@
         "selectAtLeastOneStudent": "Выберите хотя бы одного студента",
         "userUpdated": "Пользователь успешно обновлён",
         "userDeleted": "Пользователь успешно удалён",
-        "userCreated": "Пользователь успешно создан"
+        "userCreated": "Пользователь успешно создан",
+        "cannotChangeOwnRole": "Вы не можете изменить свою собственную роль"
     },
     "WaitingListTab": {
         "phoneInvalid": "Введите корректный 9-значный номер телефона",
@@ -334,6 +335,7 @@
         "groupNameLabel": "Название группы",
         "selectATeacherPlaceholder": "Выберите преподавателя",
         "selectTeacherLabel": "Выбрать преподавателя",
+        "onlyAdminCanReassign": "Только администраторы могут передавать группу другому преподавателю",
         "saving": "Сохранение…",
         "save": "Сохранить",
         "selectStudentsToAddFor": "Выберите студентов для добавления в <strong>{name}</strong>",

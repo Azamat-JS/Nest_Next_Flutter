@@ -57,6 +57,8 @@ import { useMutation, useQueryClient, useSuspenseQuery } from '@tanstack/react-q
 import { useStudents } from "@/lib/hooks/studentsHook"
 import api from "@/lib/api"
 import { useTranslations } from "next-intl"
+import { useAuthStore } from "@/lib/stores/authStore"
+import { jwtDecode } from "jwt-decode"
 
 const GroupComponent = () => {
     const t = useTranslations('Group')
@@ -65,6 +67,11 @@ const GroupComponent = () => {
     const searchParams = useSearchParams()
     const page = Number(searchParams.get('page') ?? 1)
     const limit = Number(searchParams.get('limit') ?? 10)
+    const token = useAuthStore((state) => state.token)
+    const me = token ? jwtDecode<TokenPayload>(token) : null
+    const isAdmin = me?.role === 'ADMIN'
+    const canCreate = isAdmin || me?.role === 'TEACHER'
+    const canManageGroup = (group: GroupType) => isAdmin || (me?.role === 'TEACHER' && me?.phone === group.teacher?.phone)
     const [selectedTeacher, setSelectedTeacher] = useState<TokenPayload | null>(null)
     const [openUpdate, setOpenUpdate] = useState(false)
     const [openAddStudents, setOpenAddStudents] = useState(false)
@@ -191,42 +198,50 @@ const GroupComponent = () => {
                             <TableCell className="text-center text-muted-foreground">{[u.teacher?.firstName, u.teacher?.lastName].filter(Boolean).join(' ')}</TableCell>
                             <TableCell className="text-center text-muted-foreground">{u.students?.length ?? 0}</TableCell>
                             <TableCell className="text-center">
-                                <DropdownMenu>
-                                    <DropdownMenuTrigger asChild>
-                                        <Button variant="ghost" size="icon" className="h-8 w-8">
-                                            <MoreHorizontal className="h-4 w-4" />
-                                        </Button>
-                                    </DropdownMenuTrigger>
-                                    <DropdownMenuContent align="end">
-                                        <DropdownMenuGroup>
-                                            <DropdownMenuItem onClick={(e) => {
-                                                e.stopPropagation()
-                                                setSelectedGroup(u)
-                                                setOpenAddStudents(true)
-                                            }}>
-                                                <UserPlus className="h-4 w-4" /> {t('addStudents')}
-                                            </DropdownMenuItem>
-                                            <DropdownMenuItem onClick={(e) => {
-                                                e.stopPropagation()
-                                                setSelectedGroup(u)
-                                                setSelectedTeacher(u.teacher ?? null)
-                                                setOpenUpdate(true)
-                                            }}>
-                                                <Edit className="h-4 w-4" /> {t('edit')}
-                                            </DropdownMenuItem>
-                                            <DropdownMenuItem
-                                                onClick={(e) => {
-                                                    e.stopPropagation()
-                                                    setOpenDelete(true)
-                                                    setSelectedGroup(u)
-                                                }}
-                                                className="text-destructive focus:text-destructive"
-                                            >
-                                                <Trash className="h-4 w-4" /> {t('delete')}
-                                            </DropdownMenuItem>
-                                        </DropdownMenuGroup>
-                                    </DropdownMenuContent>
-                                </DropdownMenu>
+                                {(canManageGroup(u) || isAdmin) && (
+                                    <DropdownMenu>
+                                        <DropdownMenuTrigger asChild>
+                                            <Button variant="ghost" size="icon" className="h-8 w-8">
+                                                <MoreHorizontal className="h-4 w-4" />
+                                            </Button>
+                                        </DropdownMenuTrigger>
+                                        <DropdownMenuContent align="end">
+                                            <DropdownMenuGroup>
+                                                {canManageGroup(u) && (
+                                                    <>
+                                                        <DropdownMenuItem onClick={(e) => {
+                                                            e.stopPropagation()
+                                                            setSelectedGroup(u)
+                                                            setOpenAddStudents(true)
+                                                        }}>
+                                                            <UserPlus className="h-4 w-4" /> {t('addStudents')}
+                                                        </DropdownMenuItem>
+                                                        <DropdownMenuItem onClick={(e) => {
+                                                            e.stopPropagation()
+                                                            setSelectedGroup(u)
+                                                            setSelectedTeacher(u.teacher ?? null)
+                                                            setOpenUpdate(true)
+                                                        }}>
+                                                            <Edit className="h-4 w-4" /> {t('edit')}
+                                                        </DropdownMenuItem>
+                                                    </>
+                                                )}
+                                                {isAdmin && (
+                                                    <DropdownMenuItem
+                                                        onClick={(e) => {
+                                                            e.stopPropagation()
+                                                            setOpenDelete(true)
+                                                            setSelectedGroup(u)
+                                                        }}
+                                                        className="text-destructive focus:text-destructive"
+                                                    >
+                                                        <Trash className="h-4 w-4" /> {t('delete')}
+                                                    </DropdownMenuItem>
+                                                )}
+                                            </DropdownMenuGroup>
+                                        </DropdownMenuContent>
+                                    </DropdownMenu>
+                                )}
                             </TableCell>
                         </TableRow>
                     ))}
@@ -298,6 +313,7 @@ const GroupComponent = () => {
                             <Label>{t('teacher')}</Label>
                             <Select
                                 value={selectedTeacher?.id ?? ""}
+                                disabled={!isAdmin}
                                 onValueChange={(val) => {
                                     const teacher = teachers.find(t => t.id === val) || null
                                     setSelectedTeacher(teacher)
@@ -316,6 +332,9 @@ const GroupComponent = () => {
                                     </SelectGroup>
                                 </SelectContent>
                             </Select>
+                            {!isAdmin && (
+                                <p className="text-xs text-muted-foreground">{t('onlyAdminCanReassign')}</p>
+                            )}
                         </Field>
                     </FieldGroup>
                     <DialogFooter>
@@ -404,15 +423,17 @@ const GroupComponent = () => {
                 </DialogContent>
             </Dialog>
 
-            <div className="flex justify-end pt-2">
-                <GroupDrawer
-                    openCreate={openCreate}
-                    setOpenCreate={setOpenCreate}
-                    teachers={teachers}
-                    students={students}
-                    onGroupCreated={() => queryClient.invalidateQueries({ queryKey: ['groups'] })}
-                />
-            </div>
+            {canCreate && (
+                <div className="flex justify-end pt-2">
+                    <GroupDrawer
+                        openCreate={openCreate}
+                        setOpenCreate={setOpenCreate}
+                        teachers={teachers}
+                        students={students}
+                        onGroupCreated={() => queryClient.invalidateQueries({ queryKey: ['groups'] })}
+                    />
+                </div>
+            )}
         </div>
     )
 }
