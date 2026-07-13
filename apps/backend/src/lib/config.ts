@@ -49,4 +49,15 @@ export class AppConfig {
     @IsString()
     @Value("TELEGRAM_API_BASE")
     TELEGRAM_API_BASE?: string;
+
+    // Synced into the PlatformAdmin table on every boot - see PlatformAdminService.onModuleInit.
+    @IsOptional()
+    @IsString()
+    @Value("SUPERADMIN_PHONE")
+    SUPERADMIN_PHONE?: string;
+
+    @IsOptional()
+    @IsString()
+    @Value("SUPERADMIN_PASSWORD")
+    SUPERADMIN_PASSWORD?: string;
 }

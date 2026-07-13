@@ -1,4 +1,4 @@
-import { BadRequestException, Inject, Injectable, Logger, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, Inject, Injectable, Logger, NotFoundException, OnModuleInit, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Prisma, UserRole } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
@@ -11,7 +11,7 @@ import { TelegramBotService } from 'src/telegram/telegram-bot.service';
 import { CreateTenantDto, PlatformAdminLoginDto, SetTenantBotDto, UpdateTenantStatusDto } from './dto/platform-admin.dto';
 
 @Injectable()
-export class PlatformAdminService {
+export class PlatformAdminService implements OnModuleInit {
     private readonly logger = new Logger(PlatformAdminService.name);
 
     constructor(
@@ -21,6 +21,22 @@ export class PlatformAdminService {
         private readonly config: AppConfig,
         private readonly telegramBot: TelegramBotService,
     ) { }
+
+    // Keeps the PlatformAdmin row in sync with SUPERADMIN_PHONE/PASSWORD on every
+    // boot, so editing .env and restarting is enough - no manual seed script run.
+    async onModuleInit() {
+        const { SUPERADMIN_PHONE, SUPERADMIN_PASSWORD } = this.config;
+        if (!SUPERADMIN_PHONE || !SUPERADMIN_PASSWORD) {
+            return;
+        }
+
+        const hashed = await bcrypt.hash(SUPERADMIN_PASSWORD, 10);
+        await this.rawPrisma.platformAdmin.upsert({
+            where: { phone: SUPERADMIN_PHONE },
+            update: { password: hashed },
+            create: { phone: SUPERADMIN_PHONE, password: hashed },
+        });
+    }
 
     async login(dto: PlatformAdminLoginDto) {
         const admin = await this.rawPrisma.platformAdmin.findUnique({ where: { phone: dto.phone } });
