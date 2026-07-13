@@ -59,7 +59,7 @@ export function AddPaymentDrawer({ openCreate, setOpenCreate, groups, onPaymentA
         month: z.number().min(1).max(12),
         year: z.number().min(2000),
         amount: z.number().positive(t('amountPositive')),
-        comment: z.string().optional(),
+        comment: z.string(),
     }), [t])
 
     const form = useForm({

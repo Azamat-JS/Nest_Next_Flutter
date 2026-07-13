@@ -33,6 +33,7 @@ jobs:
             pnpm install --frozen-lockfile
             pnpm --filter backend exec prisma generate
             pnpm --filter backend exec prisma migrate deploy
-            pnpm turbo run build
+            pnpm --filter backend run build
+            pnpm --filter frontend run build
             pm2 startOrReload ecosystem.config.js --update-env
             pm2 save
