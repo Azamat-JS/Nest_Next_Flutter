@@ -15,13 +15,12 @@ import { useRouter } from "next/navigation"
 import { useTranslations } from "next-intl"
 
 export function DropdownMenuDemo() {
-    const setToken = useAuthStore((state) => state.setToken);
+    const logout = useAuthStore((state) => state.logout);
     const router = useRouter();
     const t = useTranslations("AccountMenu");
 
     const handleLogout = () => {
-        setToken(null);
-        localStorage.setItem("token", "");
+        logout();
         router.push('/');
     }
     return (

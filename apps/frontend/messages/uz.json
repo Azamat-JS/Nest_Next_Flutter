@@ -120,7 +120,7 @@
         "attendanceScoreLabel": "Davomat balli",
         "globalScorePlaceholder": "Umumiy davomat balli",
         "selectAll": "Barchasini tanlash",
-        "submit": "Yuborish",
+        "submit": "Saqlash",
         "cancel": "Bekor qilish",
         "success": "Baholar muvaffaqiyatli qo'shildi",
         "error": "Nimadir xato ketdi"
@@ -132,7 +132,7 @@
         "topicPlaceholder": "masalan, 5-bob mashqlari",
         "dueDateLabel": "Topshirish sanasi",
         "hourLabel": "Soat",
-        "submit": "Yuborish",
+        "submit": "Saqlash",
         "cancel": "Bekor qilish",
         "topicRequired": "Mavzu talab qilinadi",
         "dueDateRequired": "Topshirish sanasini kiriting",

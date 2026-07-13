@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo } from "react"
+import { useMemo, useState } from "react"
 import { Button } from "@/components/ui/button"
 import {
     Drawer,
@@ -30,8 +30,16 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "@/components/ui/popover"
+import { Calendar } from "@/components/ui/calendar"
+import { cn } from "@/lib/utils"
 import api from "@/lib/api"
-import { NotebookPen } from "lucide-react"
+import { CalendarIcon, NotebookPen } from "lucide-react"
+import { format } from "date-fns"
 
 const hourOptions = Array.from({ length: 24 }, (_, i) => String(i).padStart(2, "0"))
 
@@ -42,6 +50,7 @@ const AddHomeworkDrawer = ({ openCreate, setOpenCreate, groupId, onHomeworkAdded
     onHomeworkAdded: () => void
 }) => {
     const t = useTranslations('AddHomeworkDrawer')
+    const [dueDateOpen, setDueDateOpen] = useState(false)
 
     const schema = useMemo(() => z.object({
         topic: z.string().min(1, t('topicRequired')),
@@ -110,13 +119,37 @@ const AddHomeworkDrawer = ({ openCreate, setOpenCreate, groupId, onHomeworkAdded
                                         return (
                                             <Field data-invalid={isInvalid} className="flex-1">
                                                 <FieldLabel htmlFor={field.name}>{t('dueDateLabel')}</FieldLabel>
-                                                <Input
-                                                    id={field.name}
-                                                    type="date"
-                                                    value={field.state.value}
-                                                    onBlur={field.handleBlur}
-                                                    onChange={(e) => field.handleChange(e.target.value)}
-                                                />
+                                                <Popover open={dueDateOpen} onOpenChange={setDueDateOpen}>
+                                                    <PopoverTrigger asChild>
+                                                        <Button
+                                                            id={field.name}
+                                                            type="button"
+                                                            variant="outline"
+                                                            onBlur={field.handleBlur}
+                                                            className={cn(
+                                                                "w-full justify-start gap-2 font-normal",
+                                                                !field.state.value && "text-muted-foreground"
+                                                            )}
+                                                        >
+                                                            <CalendarIcon className="h-4 w-4" />
+                                                            {field.state.value
+                                                                ? format(new Date(`${field.state.value}T00:00:00`), "PPP")
+                                                                : t('dueDateLabel')}
+                                                        </Button>
+                                                    </PopoverTrigger>
+                                                    <PopoverContent className="w-auto p-0">
+                                                        <Calendar
+                                                            mode="single"
+                                                            selected={field.state.value ? new Date(`${field.state.value}T00:00:00`) : undefined}
+                                                            onSelect={(date) => {
+                                                                if (!date) return
+                                                                field.handleChange(format(date, "yyyy-MM-dd"))
+                                                                setDueDateOpen(false)
+                                                            }}
+                                                            autoFocus
+                                                        />
+                                                    </PopoverContent>
+                                                </Popover>
                                                 {isInvalid && <FieldError errors={field.state.meta.errors} />}
                                             </Field>
                                         )

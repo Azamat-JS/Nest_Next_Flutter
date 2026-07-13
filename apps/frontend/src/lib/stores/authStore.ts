@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { jwtDecode } from 'jwt-decode';
 import { TokenPayload } from '@/lib/types/token_payload';
+import { queryClient } from '@/lib/queryClient';
 
 interface AuthState {
     token: string | null;
@@ -25,6 +26,7 @@ export const useAuthStore = create<AuthState>()(
         mustChangePassword: false,
         setToken: (token, refreshToken) => {
             const decoded = token ? jwtDecode<TokenPayload>(token) : null;
+            queryClient.clear();
             set({
                 token,
                 isAuthenticated: !!token,
@@ -35,14 +37,17 @@ export const useAuthStore = create<AuthState>()(
             });
         },
         setMustChangePassword: (value) => set({ mustChangePassword: value }),
-        logout: () => set({
-            token: null,
-            refreshToken: null,
-            isAuthenticated: false,
-            role: null,
-            tenantId: null,
-            mustChangePassword: false,
-        })
+        logout: () => {
+            queryClient.clear();
+            set({
+                token: null,
+                refreshToken: null,
+                isAuthenticated: false,
+                role: null,
+                tenantId: null,
+                mustChangePassword: false,
+            });
+        }
     }), {
         name: 'auth-storage',
     })
