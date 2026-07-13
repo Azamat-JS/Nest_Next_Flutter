@@ -1,6 +1,7 @@
 'use client'
 
-import { useMemo } from "react"
+import { useMemo, useState } from "react"
+import { Eye, EyeOff } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
     Card,
@@ -26,6 +27,7 @@ import { usePlatformAuthStore } from "@/lib/stores/platformAuthStore"
 export function SuperAdminLoginForm() {
     const setPlatformToken = usePlatformAuthStore((state) => state.setPlatformToken)
     const t = useTranslations("SuperAdminLoginForm")
+    const [showPassword, setShowPassword] = useState(false)
 
     const loginSchema = useMemo(() => z.object({
         phone: z.string().min(1, t("required")),
@@ -83,14 +85,25 @@ export function SuperAdminLoginForm() {
                                 return (
                                     <Field data-invalid={isInvalid}>
                                         <FieldLabel htmlFor={field.name}>{t("passwordLabel")}</FieldLabel>
-                                        <Input
-                                            id={field.name}
-                                            type="password"
-                                            value={field.state.value}
-                                            onBlur={field.handleBlur}
-                                            onChange={(e) => field.handleChange(e.target.value)}
-                                            autoComplete="current-password"
-                                        />
+                                        <div className="relative">
+                                            <Input
+                                                id={field.name}
+                                                type={showPassword ? "text" : "password"}
+                                                value={field.state.value}
+                                                onBlur={field.handleBlur}
+                                                onChange={(e) => field.handleChange(e.target.value)}
+                                                autoComplete="current-password"
+                                                className="pr-10"
+                                            />
+                                            <button
+                                                type="button"
+                                                onClick={() => setShowPassword((prev) => !prev)}
+                                                className="absolute inset-y-0 right-0 flex items-center px-3 text-muted-foreground hover:text-foreground"
+                                                tabIndex={-1}
+                                            >
+                                                {showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
+                                            </button>
+                                        </div>
                                         {isInvalid && <FieldError errors={field.state.meta.errors} />}
                                     </Field>
                                 )
