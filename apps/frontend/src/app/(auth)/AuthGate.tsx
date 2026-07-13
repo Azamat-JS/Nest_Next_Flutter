@@ -13,8 +13,8 @@ export function AuthGate({ children }: { children: React.ReactNode }) {
     const mustChangePassword = useAuthStore((state) => state.mustChangePassword)
     const t = useTranslations('LoginForm')
 
-    // The Telegram mini app has its own auth flow.
-    if (pathname.startsWith('/tg')) return <>{children}</>
+    // The Telegram mini app and the superadmin portal have their own auth flows.
+    if (pathname.startsWith('/tg') || pathname.startsWith('/superadmin')) return <>{children}</>
 
     if (isAuthenticated && mustChangePassword) return <ChangePasswordScreen />
 
