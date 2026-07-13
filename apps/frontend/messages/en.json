@@ -465,7 +465,8 @@
         "errorTitle": "Could not sign you in",
         "tabGroup": "Group",
         "tabPayments": "Payments",
-        "tabLeaderboard": "Leaderboard"
+        "tabLeaderboard": "Leaderboard",
+        "toggleTheme": "Toggle theme"
     },
     "TgHome": {
         "loadError": "Something went wrong. Please reopen the app.",
@@ -482,6 +483,7 @@
     "TgGroupDetail": {
         "accessDenied": "You do not have access to this group.",
         "loadError": "Could not load this group.",
+        "back": "Back",
         "teacherLine": "Teacher: {teacherName}",
         "tabLeaderboard": "Leaderboard",
         "tabHomework": "Homework",

@@ -5,7 +5,7 @@ import Script from "next/script"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useTheme } from "next-themes"
-import { Users, Wallet, Trophy, Loader2 } from "lucide-react"
+import { Users, Wallet, Trophy, Loader2, Sun, Moon } from "lucide-react"
 import axios from "axios"
 import { useTranslations } from "next-intl"
 import { cn } from "@/lib/utils"
@@ -16,7 +16,7 @@ import { getTelegramWebApp } from "@/lib/telegram/telegram"
 export default function TelegramLayout({ children }: { children: React.ReactNode }) {
     const { status, error, setStatus, selectedGroupId, selectedStudentId } = useTgStore()
     const setToken = useAuthStore((s) => s.setToken)
-    const { setTheme } = useTheme()
+    const { theme, setTheme } = useTheme()
     const pathname = usePathname()
     const t = useTranslations('TgLayout')
 
@@ -85,6 +85,14 @@ export default function TelegramLayout({ children }: { children: React.ReactNode
 
     return (
         <div className="mx-auto w-full max-w-lg pb-20">
+            <button
+                type="button"
+                onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                aria-label={t('toggleTheme')}
+                className="fixed right-4 top-4 z-50 flex h-9 w-9 items-center justify-center rounded-full border bg-background/95 text-foreground shadow-sm backdrop-blur transition-colors hover:bg-muted"
+            >
+                {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            </button>
             {children}
             <nav className="fixed inset-x-0 bottom-0 z-50 border-t bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
                 <div className="mx-auto flex max-w-lg items-stretch justify-around">

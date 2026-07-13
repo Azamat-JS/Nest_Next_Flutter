@@ -465,7 +465,8 @@
         "errorTitle": "Не удалось выполнить вход",
         "tabGroup": "Группа",
         "tabPayments": "Платежи",
-        "tabLeaderboard": "Рейтинг"
+        "tabLeaderboard": "Рейтинг",
+        "toggleTheme": "Переключить тему"
     },
     "TgHome": {
         "loadError": "Что-то пошло не так. Пожалуйста, откройте приложение заново.",
@@ -482,6 +483,7 @@
     "TgGroupDetail": {
         "accessDenied": "У вас нет доступа к этой группе.",
         "loadError": "Не удалось загрузить эту группу.",
+        "back": "Назад",
         "teacherLine": "Преподаватель: {teacherName}",
         "tabLeaderboard": "Рейтинг",
         "tabHomework": "Домашнее задание",

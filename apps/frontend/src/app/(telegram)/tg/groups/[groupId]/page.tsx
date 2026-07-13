@@ -3,7 +3,7 @@
 import { use, useEffect } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { useQuery } from "@tanstack/react-query"
-import { Loader2, Trophy, Medal, Award, BookOpen, GraduationCap } from "lucide-react"
+import { Loader2, Trophy, Medal, Award, BookOpen, GraduationCap, ArrowLeft } from "lucide-react"
 import { useTranslations } from "next-intl"
 import api from "@/lib/api"
 import { cn } from "@/lib/utils"
@@ -96,10 +96,32 @@ export default function TgGroupPage({ params }: { params: Promise<{ groupId: str
     const childName = bootstrap?.role === 'PARENT'
         ? bootstrap.children?.find((c) => c.id === studentId)
         : null
+    // Admins/teachers land on the group at large, with no pre-selected
+    // student - tapping a leaderboard row is how they drill into Scores.
+    const canDrillIntoStudent = bootstrap?.role === 'ADMIN' || bootstrap?.role === 'TEACHER'
+
+    // Only show a way back to the picker if there was actually a choice to
+    // make - e.g. a parent with children spread across multiple groups.
+    const destinationCount = !bootstrap
+        ? 0
+        : bootstrap.role === 'PARENT'
+            ? (bootstrap.children ?? []).reduce((sum, child) => sum + child.groups.length, 0)
+            : (bootstrap.groups ?? []).length
+    const canGoBackToPicker = destinationCount > 1
 
     return (
         <div className="space-y-4 py-4">
             <div>
+                {canGoBackToPicker && (
+                    <button
+                        type="button"
+                        onClick={() => router.push('/tg')}
+                        className="mb-2 flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                    >
+                        <ArrowLeft className="h-4 w-4" />
+                        {t('back')}
+                    </button>
+                )}
                 <h1 className="flex items-center gap-2 text-xl font-bold">
                     <GraduationCap className="h-5 w-5 text-primary" />
                     {group?.name}
@@ -132,14 +154,9 @@ export default function TgGroupPage({ params }: { params: Promise<{ groupId: str
                             {rows.map((row, idx) => (
                                 <TableRow
                                     key={idx}
-                                    className={cn(
-                                        idx < 3 && 'font-semibold',
-                                        // Admins have no pre-selected student - tapping a row is
-                                        // how they drill into that student's Scores tab.
-                                        bootstrap?.role === 'ADMIN' && 'cursor-pointer',
-                                    )}
+                                    className={cn(idx < 3 && 'font-semibold', canDrillIntoStudent && 'cursor-pointer')}
                                     onClick={() => {
-                                        if (bootstrap?.role !== 'ADMIN') return
+                                        if (!canDrillIntoStudent) return
                                         router.push(`/tg/groups/${groupId}?student=${row.student.id}`)
                                     }}
                                 >

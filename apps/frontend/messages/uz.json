@@ -465,7 +465,8 @@
         "errorTitle": "Tizimga kirib bo'lmadi",
         "tabGroup": "Guruh",
         "tabPayments": "To'lovlar",
-        "tabLeaderboard": "Reyting"
+        "tabLeaderboard": "Reyting",
+        "toggleTheme": "Mavzuni almashtirish"
     },
     "TgHome": {
         "loadError": "Nimadir xato ketdi. Ilovani qaytadan oching.",
@@ -482,6 +483,7 @@
     "TgGroupDetail": {
         "accessDenied": "Sizda ushbu guruhga kirish huquqi yo'q.",
         "loadError": "Ushbu guruhni yuklab bo'lmadi.",
+        "back": "Orqaga",
         "teacherLine": "O'qituvchi: {teacherName}",
         "tabLeaderboard": "Reyting",
         "tabHomework": "Uy vazifasi",

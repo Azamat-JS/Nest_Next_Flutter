@@ -38,9 +38,9 @@ export default function TgPaymentsPage() {
     }
 
     const payments: PortalPayment[] = data?.data ?? []
-    // Both roles see payments across multiple students, so the student name
+    // These roles see payments across multiple students, so the student name
     // is needed to tell rows apart; a student only ever sees their own.
-    const showStudentName = bootstrap?.role === 'PARENT' || bootstrap?.role === 'ADMIN'
+    const showStudentName = bootstrap?.role === 'PARENT' || bootstrap?.role === 'ADMIN' || bootstrap?.role === 'TEACHER'
 
     return (
         <div className="space-y-3 py-4">
