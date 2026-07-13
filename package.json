@@ -4,6 +4,7 @@
   },
     "name": "full-stack-turbo",
     "private": true,
+    "packageManager": "pnpm@10.16.1",
     "devDependencies": {
         "pnpm": "^10.16.1",
         "turbo": "^1.13.4",
