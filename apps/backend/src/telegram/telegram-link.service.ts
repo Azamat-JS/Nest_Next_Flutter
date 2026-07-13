@@ -4,7 +4,8 @@ import * as bcrypt from 'bcrypt';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { normalizePhone } from 'src/lib/shared/helper/normalize_phone';
 import { TelegramBotService } from './telegram-bot.service';
-import { TelegramMessage, TelegramUpdate } from './types/telegram-update.types';
+import { BOT_LANGUAGE_LABELS, BotLanguage, isBotLanguage, t } from './telegram-i18n';
+import { TelegramCallbackQuery, TelegramMessage, TelegramUpdate } from './types/telegram-update.types';
 
 const MAX_PASSWORD_ATTEMPTS = 5;
 
@@ -30,6 +31,11 @@ export class TelegramLinkService {
     ) { }
 
     async handleUpdate(tenant: Tenant, update: TelegramUpdate) {
+        if (update.callback_query) {
+            await this.handleCallbackQuery(tenant, update.callback_query);
+            return;
+        }
+
         const message = update.message;
         if (!message?.from || message.chat.type !== 'private' || message.from.is_bot) {
             return;
@@ -38,20 +44,26 @@ export class TelegramLinkService {
         const botToken = tenant.botToken!;
         const chatId = String(message.chat.id);
         const telegramUserId = String(message.from.id);
+        const lang = await this.getLanguage(tenant.id, telegramUserId);
 
         if (message.contact) {
             // Telegram only sets contact.user_id when the contact is a Telegram
             // user; requiring it to match the sender rejects forwarded contacts.
             if (message.contact.user_id !== message.from.id) {
-                await this.bot.sendMessage(botToken, chatId, 'Please share your own contact using the button below, or type your phone number.');
+                await this.bot.sendMessage(botToken, chatId, t(lang, 'ownContactOnly'));
                 return;
             }
-            await this.linkVerifiedByContact(tenant, { telegramUserId, chatId, rawPhone: message.contact.phone_number });
+            await this.linkVerifiedByContact(tenant, { telegramUserId, chatId, rawPhone: message.contact.phone_number, lang });
             return;
         }
 
         const text = message.text?.trim();
         if (!text) return;
+
+        if (text.startsWith('/language')) {
+            await this.bot.sendLanguageKeyboard(botToken, chatId, t(lang, 'languagePrompt'));
+            return;
+        }
 
         const link = await this.rawPrisma.telegramLink.findUnique({
             where: { tenantId_telegramUserId: { tenantId: tenant.id, telegramUserId } },
@@ -60,11 +72,11 @@ export class TelegramLinkService {
 
         if (text.startsWith('/start')) {
             if (link?.verified) {
-                await this.bot.sendMiniAppButton(botToken, chatId, link.user.firstName);
+                await this.bot.sendMiniAppButton(botToken, chatId, link.user.firstName, lang);
             } else if (link) {
-                await this.bot.sendMessage(botToken, chatId, 'Almost done! Please type your account password to confirm the phone number, or share your contact with the button instead.');
+                await this.bot.sendMessage(botToken, chatId, t(lang, 'almostDone'));
             } else {
-                await this.bot.sendPhoneRequest(botToken, chatId);
+                await this.bot.sendPhoneRequest(botToken, chatId, lang);
             }
             return;
         }
@@ -74,42 +86,76 @@ export class TelegramLinkService {
         // escape hatch when the wrong number was entered.
         const phone = normalizePhone(text);
         if (phone) {
-            await this.beginManualLink(tenant, { telegramUserId, chatId, phone });
+            await this.beginManualLink(tenant, { telegramUserId, chatId, phone, lang });
             return;
         }
 
         if (link && !link.verified) {
-            await this.handlePasswordAttempt(tenant, link, message);
+            await this.handlePasswordAttempt(tenant, link, message, lang);
             return;
         }
 
-        await this.bot.sendMessage(botToken, chatId, 'That does not look like a phone number. Please type it like +998901234567, or use the share button.');
+        await this.bot.sendMessage(botToken, chatId, t(lang, 'notAPhoneNumber'));
+    }
+
+    private async handleCallbackQuery(tenant: Tenant, callbackQuery: TelegramCallbackQuery) {
+        const botToken = tenant.botToken!;
+        const chatId = callbackQuery.message ? String(callbackQuery.message.chat.id) : undefined;
+        const match = callbackQuery.data?.match(/^set_lang:(en|ru|uz)$/);
+
+        if (!match || !chatId) {
+            await this.bot.answerCallbackQuery(botToken, callbackQuery.id);
+            return;
+        }
+
+        const lang = match[1] as BotLanguage;
+        const telegramUserId = String(callbackQuery.from.id);
+        await this.setLanguage(tenant.id, telegramUserId, lang);
+
+        const confirmation = t(lang, 'languageChanged', BOT_LANGUAGE_LABELS[lang]);
+        await this.bot.answerCallbackQuery(botToken, callbackQuery.id, confirmation);
+        await this.bot.sendMessage(botToken, chatId, confirmation);
+    }
+
+    private async getLanguage(tenantId: string, telegramUserId: string): Promise<BotLanguage> {
+        const pref = await this.rawPrisma.telegramUserLanguage.findUnique({
+            where: { tenantId_telegramUserId: { tenantId, telegramUserId } },
+        });
+        return isBotLanguage(pref?.language) ? pref.language : 'en';
+    }
+
+    private async setLanguage(tenantId: string, telegramUserId: string, language: BotLanguage) {
+        await this.rawPrisma.telegramUserLanguage.upsert({
+            where: { tenantId_telegramUserId: { tenantId, telegramUserId } },
+            create: { tenantId, telegramUserId, language },
+            update: { language },
+        });
     }
 
     private async linkVerifiedByContact(
         tenant: Tenant,
-        args: { telegramUserId: string; chatId: string; rawPhone: string },
+        args: { telegramUserId: string; chatId: string; rawPhone: string; lang: BotLanguage },
     ) {
         const botToken = tenant.botToken!;
         const phone = normalizePhone(args.rawPhone);
         const user = phone ? await this.findPortalUser(tenant, phone) : null;
         if (!phone || !user) {
-            await this.sendNotRegistered(botToken, args.chatId);
+            await this.sendNotRegistered(botToken, args.chatId, args.lang);
             return;
         }
 
         await this.upsertLink(tenant.id, { ...args, phone, userId: user.id, verified: true });
-        await this.bot.sendMiniAppButton(botToken, args.chatId, user.firstName);
+        await this.bot.sendMiniAppButton(botToken, args.chatId, user.firstName, args.lang);
     }
 
     private async beginManualLink(
         tenant: Tenant,
-        args: { telegramUserId: string; chatId: string; phone: string },
+        args: { telegramUserId: string; chatId: string; phone: string; lang: BotLanguage },
     ) {
         const botToken = tenant.botToken!;
         const user = await this.findPortalUser(tenant, args.phone);
         if (!user) {
-            await this.sendNotRegistered(botToken, args.chatId);
+            await this.sendNotRegistered(botToken, args.chatId, args.lang);
             return;
         }
 
@@ -117,7 +163,7 @@ export class TelegramLinkService {
         await this.bot.sendMessage(
             botToken,
             args.chatId,
-            `This number belongs to ${user.firstName}. To confirm it is really you, please type your account password (the one used to sign in). Sharing your contact with the button instead confirms instantly.`,
+            t(args.lang, 'confirmPhoneBelongsTo', user.firstName),
         );
     }
 
@@ -125,6 +171,7 @@ export class TelegramLinkService {
         tenant: Tenant,
         link: { id: string; verifyAttempts: number; user: { id: string; firstName: string; password: string } },
         message: TelegramMessage,
+        lang: BotLanguage,
     ) {
         const botToken = tenant.botToken!;
         const chatId = String(message.chat.id);
@@ -138,7 +185,7 @@ export class TelegramLinkService {
                 where: { id: link.id },
                 data: { verified: true, verifyAttempts: 0 },
             });
-            await this.bot.sendMiniAppButton(botToken, chatId, link.user.firstName);
+            await this.bot.sendMiniAppButton(botToken, chatId, link.user.firstName, lang);
             return;
         }
 
@@ -146,8 +193,8 @@ export class TelegramLinkService {
         if (attempts >= MAX_PASSWORD_ATTEMPTS) {
             await this.rawPrisma.telegramLink.delete({ where: { id: link.id } });
             this.logger.warn(`Too many failed password attempts for tenant ${tenant.id}, telegram user ${message.from!.id}`);
-            await this.bot.sendPhoneRequest(botToken, chatId);
-            await this.bot.sendMessage(botToken, chatId, 'Too many wrong attempts. Please share your contact with the button, or start over with your phone number.');
+            await this.bot.sendPhoneRequest(botToken, chatId, lang);
+            await this.bot.sendMessage(botToken, chatId, t(lang, 'tooManyAttempts'));
             return;
         }
 
@@ -155,7 +202,7 @@ export class TelegramLinkService {
             where: { id: link.id },
             data: { verifyAttempts: attempts },
         });
-        await this.bot.sendMessage(botToken, chatId, `Wrong password, please try again (${MAX_PASSWORD_ATTEMPTS - attempts} attempts left). You can also share your contact with the button instead.`);
+        await this.bot.sendMessage(botToken, chatId, t(lang, 'wrongPassword', MAX_PASSWORD_ATTEMPTS - attempts));
     }
 
     // Phone is globally unique, so the lookup itself is cross-tenant; the
@@ -195,11 +242,7 @@ export class TelegramLinkService {
         });
     }
 
-    private async sendNotRegistered(botToken: string, chatId: string) {
-        await this.bot.sendMessage(
-            botToken,
-            chatId,
-            'This phone number is not registered in the system. Please contact your learning centre, then try again.',
-        );
+    private async sendNotRegistered(botToken: string, chatId: string, lang: BotLanguage) {
+        await this.bot.sendMessage(botToken, chatId, t(lang, 'notRegistered'));
     }
 }

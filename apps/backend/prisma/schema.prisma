@@ -116,6 +116,22 @@ model TelegramLink {
   @@map("TelegramLink")
 }
 
+// Bot language preference per Telegram user, independent of TelegramLink so
+// it can be set (via /language) before a phone-linked account exists.
+model TelegramUserLanguage {
+  id String @id @default(cuid())
+
+  tenantId       String
+  telegramUserId String
+  language       String @default("en")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([tenantId, telegramUserId])
+  @@map("TelegramUserLanguage")
+}
+
 model WaitingList {
   id        String   @id @default(cuid())
   firstName String

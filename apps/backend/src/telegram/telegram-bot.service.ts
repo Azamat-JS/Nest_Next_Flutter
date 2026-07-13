@@ -1,5 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { AppConfig } from 'src/lib/config';
+import { BOT_LANGUAGE_LABELS, BOT_LANGUAGES, BotLanguage, t } from './telegram-i18n';
 
 const DEFAULT_TELEGRAM_API_BASE = 'https://api.telegram.org';
 
@@ -39,7 +40,7 @@ export class TelegramBotService {
         return this.callApi(botToken, 'setWebhook', {
             url,
             secret_token: secretToken,
-            allowed_updates: ['message'],
+            allowed_updates: ['message', 'callback_query'],
         });
     }
 
@@ -62,13 +63,13 @@ export class TelegramBotService {
         });
     }
 
-    async sendPhoneRequest(botToken: string, chatId: string) {
+    async sendPhoneRequest(botToken: string, chatId: string, lang: BotLanguage) {
         return this.sendMessage(
             botToken,
             chatId,
-            'Welcome! To connect your account, share your phone number with the button below, or type it like +998901234567.',
+            t(lang, 'sharePhonePrompt'),
             {
-                keyboard: [[{ text: '📱 Share my phone number', request_contact: true }]],
+                keyboard: [[{ text: t(lang, 'sharePhoneButton'), request_contact: true }]],
                 resize_keyboard: true,
                 one_time_keyboard: true,
             },
@@ -78,18 +79,33 @@ export class TelegramBotService {
     // Removes the contact keyboard, then sends the mini-app launch button.
     // Two messages because remove_keyboard and inline_keyboard cannot be
     // combined in a single reply_markup.
-    async sendMiniAppButton(botToken: string, chatId: string, firstName: string) {
+    async sendMiniAppButton(botToken: string, chatId: string, firstName: string, lang: BotLanguage) {
         const miniAppUrl = this.config.MINI_APP_URL;
         if (!miniAppUrl) {
             this.logger.warn('MINI_APP_URL is not configured - sending confirmation without the mini app button');
-            await this.sendMessage(botToken, chatId, `You are connected, ${firstName}! The app will be available here soon.`, {
+            await this.sendMessage(botToken, chatId, t(lang, 'appComingSoon', firstName), {
                 remove_keyboard: true,
             });
             return;
         }
-        await this.sendMessage(botToken, chatId, `You are connected, ${firstName}! ✅`, { remove_keyboard: true });
-        await this.sendMessage(botToken, chatId, 'Tap the button below to open the app:', {
-            inline_keyboard: [[{ text: '🚀 Open App', web_app: { url: miniAppUrl } }]],
+        await this.sendMessage(botToken, chatId, t(lang, 'connected', firstName), { remove_keyboard: true });
+        await this.sendMessage(botToken, chatId, t(lang, 'openAppPrompt'), {
+            inline_keyboard: [[{ text: t(lang, 'openAppButton'), web_app: { url: miniAppUrl } }]],
+        });
+    }
+
+    async answerCallbackQuery(botToken: string, callbackQueryId: string, text?: string) {
+        return this.callApi(botToken, 'answerCallbackQuery', {
+            callback_query_id: callbackQueryId,
+            ...(text ? { text } : {}),
+        });
+    }
+
+    async sendLanguageKeyboard(botToken: string, chatId: string, promptText: string) {
+        return this.sendMessage(botToken, chatId, promptText, {
+            inline_keyboard: BOT_LANGUAGES.map((code) => [
+                { text: BOT_LANGUAGE_LABELS[code], callback_data: `set_lang:${code}` },
+            ]),
         });
     }
 }
