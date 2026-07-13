@@ -18,6 +18,7 @@ module.exports = {
       cwd: './apps/frontend',
       script: 'node_modules/.bin/next',
       args: 'start -p 4008',
+      interpreter: 'none',
       instances: 1,
       exec_mode: 'fork',
       env: {

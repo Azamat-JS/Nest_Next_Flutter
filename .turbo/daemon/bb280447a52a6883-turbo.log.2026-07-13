@@ -1087,3 +1087,5 @@
 2026-07-13T12:29:06.304127Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
 2026-07-13T12:37:36.003366Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".github/workflows/deploy.yml"), AnchoredSystemPathBuf(".github/workflows/deploy.yml.tmp.26424.eb91b8020e03")}
 2026-07-13T12:37:36.003394Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2026-07-13T14:02:38.624316Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("ecosystem.config.js"), AnchoredSystemPathBuf("ecosystem.config.js.tmp.26424.52b382d7349a")}
+2026-07-13T14:02:38.624327Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
