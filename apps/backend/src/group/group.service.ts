@@ -30,7 +30,9 @@ export class GroupRepository {
     const skip = (page - 1) * limit;
     const where = requester?.role === UserRole.STUDENT
       ? { students: { some: { studentId: requester.userId } } }
-      : {};
+      : requester?.role === UserRole.TEACHER
+        ? { teacherId: requester.userId }
+        : {};
 
     const [data, total] = await Promise.all([
       this.prisma.groups.findMany({

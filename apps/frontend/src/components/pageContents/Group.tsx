@@ -71,7 +71,7 @@ const GroupComponent = () => {
     const me = token ? jwtDecode<TokenPayload>(token) : null
     const isAdmin = me?.role === 'ADMIN'
     const canCreate = isAdmin || me?.role === 'TEACHER'
-    const canManageGroup = (group: GroupType) => isAdmin || (me?.role === 'TEACHER' && me?.phone === group.teacher?.phone)
+    const canManageGroup = (group: GroupType) => isAdmin || (me?.role === 'TEACHER' && me?.id === group.teacherId)
     const [selectedTeacher, setSelectedTeacher] = useState<TokenPayload | null>(null)
     const [openUpdate, setOpenUpdate] = useState(false)
     const [openAddStudents, setOpenAddStudents] = useState(false)

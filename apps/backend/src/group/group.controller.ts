@@ -41,13 +41,21 @@ export class GroupController {
     if (req.user.role === 'STUDENT') {
       await this.portalAccess.assertCanViewGroup(req.user, id);
     }
-    return this.groupService.findOne(id);
+    const group = await this.groupService.findOne(id);
+    if (req.user.role === 'TEACHER') {
+      this.assertCanManageGroup(req, group);
+    }
+    return group;
   }
 
   @Get(':id/students')
   async findGroupStudents(@Req() req, @Param('id') id: string, @Query() query: PaginationDto) {
     if (req.user.role === 'STUDENT') {
       await this.portalAccess.assertCanViewGroup(req.user, id);
+    }
+    if (req.user.role === 'TEACHER') {
+      const group = await this.groupService.findOne(id);
+      this.assertCanManageGroup(req, group);
     }
     return this.groupService.findGroupStudents(id, query.page, query.limit);
   }
