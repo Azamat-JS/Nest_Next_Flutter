@@ -46,6 +46,24 @@ export class PortalService {
             return { role: user.role, me, groups: memberships.map((m) => m.group) };
         }
 
+        // Admins have no "own" groups or children - they browse every group
+        // in the tenant, same shape as the student branch above.
+        if (user.role === UserRole.ADMIN) {
+            const groups = await this.prisma.groups.findMany({
+                select: groupSelect.group.select,
+            });
+            return { role: user.role, me, groups };
+        }
+
+        // Teachers browse the groups they teach, same shape again.
+        if (user.role === UserRole.TEACHER) {
+            const groups = await this.prisma.groups.findMany({
+                where: { teacherId: user.userId },
+                select: groupSelect.group.select,
+            });
+            return { role: user.role, me, groups };
+        }
+
         const relations = await this.prisma.parentStudent.findMany({
             where: { parentId: user.userId },
             select: {
@@ -115,7 +133,7 @@ export class PortalService {
         const studentIds = await this.access.visibleStudentIds(user);
         const { page = 1, limit = 20 } = query;
         const skip = (page - 1) * limit;
-        const where = { studentId: { in: studentIds } };
+        const where = studentIds ? { studentId: { in: studentIds } } : {};
 
         const [data, total] = await Promise.all([
             this.prisma.studentPayment.findMany({

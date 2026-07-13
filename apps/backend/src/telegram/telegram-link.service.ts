@@ -162,8 +162,9 @@ export class TelegramLinkService {
     // user must still belong to the tenant that owns this bot.
     private async findPortalUser(tenant: Tenant, phone: string) {
         const user = await this.rawPrisma.users.findUnique({ where: { phone } });
-        const isPortalRole = user?.role === UserRole.PARENT || user?.role === UserRole.STUDENT;
-        if (!user || user.tenantId !== tenant.id || !isPortalRole) {
+        const isMiniAppRole = user?.role === UserRole.PARENT || user?.role === UserRole.STUDENT
+            || user?.role === UserRole.ADMIN || user?.role === UserRole.TEACHER;
+        if (!user || user.tenantId !== tenant.id || !isMiniAppRole) {
             this.logger.log(`Link attempt with unregistered phone for tenant ${tenant.id}`);
             return null;
         }
@@ -198,7 +199,7 @@ export class TelegramLinkService {
         await this.bot.sendMessage(
             botToken,
             chatId,
-            'This phone number is not registered as a parent or student. Please contact your learning centre, then try again.',
+            'This phone number is not registered in the system. Please contact your learning centre, then try again.',
         );
     }
 }

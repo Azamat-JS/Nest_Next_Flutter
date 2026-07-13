@@ -32,12 +32,14 @@ export default function TgEntryPage() {
 
     const choices = useMemo<GroupChoice[]>(() => {
         if (!data) return []
-        if (data.role === 'STUDENT') {
+        if (data.role === 'STUDENT' || data.role === 'ADMIN') {
             return (data.groups ?? []).map((g) => ({
                 groupId: g.id,
                 groupName: g.name,
                 teacherName: `${g.teacher.firstName} ${g.teacher.lastName ?? ''}`.trim(),
-                studentId: data.me.id,
+                // Admins aren't enrolled in a group, so there is no single
+                // "own" student - the group page shows the group at large.
+                studentId: data.role === 'STUDENT' ? data.me.id : null,
                 studentName: null,
             }))
         }
@@ -77,7 +79,9 @@ export default function TgEntryPage() {
         return (
             <div className="flex min-h-[60vh] flex-col items-center justify-center gap-2 text-center">
                 <Users className="h-10 w-10 text-muted-foreground" />
-                <p className="font-semibold">{data?.role === 'PARENT' ? t('noGroupsParent') : t('noGroupsStudent')}</p>
+                <p className="font-semibold">
+                    {data?.role === 'PARENT' ? t('noGroupsParent') : data?.role === 'ADMIN' ? t('noGroupsAdmin') : t('noGroupsStudent')}
+                </p>
                 <p className="text-sm text-muted-foreground">{t('contactCenter')}</p>
             </div>
         )
@@ -86,7 +90,7 @@ export default function TgEntryPage() {
     return (
         <div className="space-y-3 py-4">
             <h1 className="text-lg font-bold">
-                {data?.role === 'PARENT' ? t('chooseGroupParent') : t('chooseGroupStudent')}
+                {data?.role === 'PARENT' ? t('chooseGroupParent') : data?.role === 'ADMIN' ? t('chooseGroupAdmin') : t('chooseGroupStudent')}
             </h1>
             {choices.map((choice) => (
                 <Card

@@ -38,7 +38,9 @@ export default function TgPaymentsPage() {
     }
 
     const payments: PortalPayment[] = data?.data ?? []
-    const isParent = bootstrap?.role === 'PARENT'
+    // Both roles see payments across multiple students, so the student name
+    // is needed to tell rows apart; a student only ever sees their own.
+    const showStudentName = bootstrap?.role === 'PARENT' || bootstrap?.role === 'ADMIN'
 
     return (
         <div className="space-y-3 py-4">
@@ -52,7 +54,7 @@ export default function TgPaymentsPage() {
                         <div>
                             <p className="font-medium">{tMonths(monthKey(payment.month))} {payment.year}</p>
                             <p className="text-sm text-muted-foreground">
-                                {isParent && <>{payment.student.firstName} {payment.student.lastName ?? ''} · </>}
+                                {showStudentName && <>{payment.student.firstName} {payment.student.lastName ?? ''} · </>}
                                 {payment.group.name}
                             </p>
                             {payment.comment && <p className="text-xs text-muted-foreground">{payment.comment}</p>}

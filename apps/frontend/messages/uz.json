@@ -471,9 +471,11 @@
         "loadError": "Nimadir xato ketdi. Ilovani qaytadan oching.",
         "noGroupsParent": "Farzandlaringiz uchun guruhlar hali topilmadi",
         "noGroupsStudent": "Siz hali hech qanday guruhda emassiz",
+        "noGroupsAdmin": "Bu markaz uchun guruhlar hali topilmadi",
         "contactCenter": "Iltimos, o'quv markazingiz bilan bog'laning.",
         "chooseGroupParent": "Farzand guruhini tanlang",
         "chooseGroupStudent": "Guruhingizni tanlang",
+        "chooseGroupAdmin": "Guruhni tanlang",
         "studentTeacher": "{studentName} · O'qituvchi: {teacherName}",
         "teacherOnly": "O'qituvchi: {teacherName}"
     },

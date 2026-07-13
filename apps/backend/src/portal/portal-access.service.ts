@@ -8,19 +8,31 @@ export interface RequestUser {
     role: UserRole;
 }
 
-// Single source of truth for what a PARENT or STUDENT may read: students see
+// Single source of truth for what each role may read: students see
 // themselves and their own groups; parents see their children and the groups
-// those children attend. Staff roles pass everything.
+// those children attend; teachers see the groups they teach and the students
+// in them (read-only - this service never authorizes writes); admins pass
+// everything.
 @Injectable()
 export class PortalAccessService {
     constructor(@Inject(PRISMA_CLIENT) private readonly prisma: TenantScopedPrismaClient) { }
 
     async assertCanViewStudent(requester: RequestUser, studentId: string) {
-        if (this.isStaff(requester.role)) return;
+        if (requester.role === UserRole.ADMIN) return;
 
         if (requester.role === UserRole.STUDENT) {
             if (studentId !== requester.userId) {
                 throw new ForbiddenException('You can only view your own data');
+            }
+            return;
+        }
+
+        if (requester.role === UserRole.TEACHER) {
+            const membership = await this.prisma.studentGroup.findFirst({
+                where: { studentId, group: { teacherId: requester.userId } },
+            });
+            if (!membership) {
+                throw new ForbiddenException('You can only view students in your own groups');
             }
             return;
         }
@@ -34,7 +46,7 @@ export class PortalAccessService {
     }
 
     async assertCanViewGroup(requester: RequestUser, groupId: string) {
-        if (this.isStaff(requester.role)) return;
+        if (requester.role === UserRole.ADMIN) return;
 
         if (requester.role === UserRole.STUDENT) {
             const membership = await this.prisma.studentGroup.findFirst({
@@ -42,6 +54,16 @@ export class PortalAccessService {
             });
             if (!membership) {
                 throw new ForbiddenException('You are not a member of this group');
+            }
+            return;
+        }
+
+        if (requester.role === UserRole.TEACHER) {
+            const group = await this.prisma.groups.findFirst({
+                where: { id: groupId, teacherId: requester.userId },
+            });
+            if (!group) {
+                throw new ForbiddenException('You do not teach this group');
             }
             return;
         }
@@ -57,19 +79,26 @@ export class PortalAccessService {
         }
     }
 
-    // Which students' payments/scores the requester may see, for list queries.
-    async visibleStudentIds(requester: RequestUser): Promise<string[]> {
+    // Which students' payments/scores the requester may see, for list
+    // queries. Null means "no restriction" (admins see every student).
+    async visibleStudentIds(requester: RequestUser): Promise<string[] | null> {
         if (requester.role === UserRole.STUDENT) {
             return [requester.userId];
+        }
+        if (requester.role === UserRole.ADMIN) {
+            return null;
+        }
+        if (requester.role === UserRole.TEACHER) {
+            const members = await this.prisma.studentGroup.findMany({
+                where: { group: { teacherId: requester.userId } },
+                select: { studentId: true },
+            });
+            return [...new Set(members.map((m) => m.studentId))];
         }
         const children = await this.prisma.parentStudent.findMany({
             where: { parentId: requester.userId },
             select: { studentId: true },
         });
         return children.map((c) => c.studentId);
-    }
-
-    private isStaff(role: UserRole) {
-        return role === UserRole.ADMIN || role === UserRole.TEACHER;
     }
 }

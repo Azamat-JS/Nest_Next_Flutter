@@ -23,7 +23,7 @@ export type LeaderBoardType = {
     total: number;
     attendance: number;
     homework: number;
-    student: { firstName: string; lastName?: string | null };
+    student: { id?: string; firstName: string; lastName?: string | null };
     group?: { name: string };
 }
 

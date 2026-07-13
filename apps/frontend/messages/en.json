@@ -471,9 +471,11 @@
         "loadError": "Something went wrong. Please reopen the app.",
         "noGroupsParent": "No groups found for your children yet",
         "noGroupsStudent": "You are not in a group yet",
+        "noGroupsAdmin": "No groups found for this centre yet",
         "contactCenter": "Please contact your learning centre.",
         "chooseGroupParent": "Choose a child's group",
         "chooseGroupStudent": "Choose your group",
+        "chooseGroupAdmin": "Choose a group",
         "studentTeacher": "{studentName} · Teacher: {teacherName}",
         "teacherOnly": "Teacher: {teacherName}"
     },

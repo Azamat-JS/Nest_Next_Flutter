@@ -550,6 +550,7 @@ export class StudentScoreRepository {
                 attendance: true,
                 student: {
                     select: {
+                        id: true,
                         firstName: true,
                         lastName: true,
                     }

@@ -1,7 +1,7 @@
 "use client"
 
 import { use, useEffect } from "react"
-import { useSearchParams } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import { useQuery } from "@tanstack/react-query"
 import { Loader2, Trophy, Medal, Award, BookOpen, GraduationCap } from "lucide-react"
 import { useTranslations } from "next-intl"
@@ -33,6 +33,7 @@ const rankIcon = (idx: number) => {
 export default function TgGroupPage({ params }: { params: Promise<{ groupId: string }> }) {
     const { groupId } = use(params)
     const searchParams = useSearchParams()
+    const router = useRouter()
     const setSelection = useTgStore((s) => s.setSelection)
     const t = useTranslations('TgGroupDetail')
 
@@ -129,7 +130,19 @@ export default function TgGroupPage({ params }: { params: Promise<{ groupId: str
                         </TableHeader>
                         <TableBody>
                             {rows.map((row, idx) => (
-                                <TableRow key={idx} className={cn(idx < 3 && 'font-semibold')}>
+                                <TableRow
+                                    key={idx}
+                                    className={cn(
+                                        idx < 3 && 'font-semibold',
+                                        // Admins have no pre-selected student - tapping a row is
+                                        // how they drill into that student's Scores tab.
+                                        bootstrap?.role === 'ADMIN' && 'cursor-pointer',
+                                    )}
+                                    onClick={() => {
+                                        if (bootstrap?.role !== 'ADMIN') return
+                                        router.push(`/tg/groups/${groupId}?student=${row.student.id}`)
+                                    }}
+                                >
                                     <TableCell className="text-center">{rankIcon(idx)}</TableCell>
                                     <TableCell>{row.student.firstName} {row.student.lastName ?? ''}</TableCell>
                                     <TableCell className="text-center">{row.homework}</TableCell>

@@ -9,7 +9,7 @@ import { PortalService } from './portal.service';
 // Read-only API for the Telegram mini app. Row-level scoping (own data /
 // own children only) is enforced in PortalService via PortalAccessService.
 @UseGuards(RolesGuard)
-@Roles('PARENT', 'STUDENT')
+@Roles('PARENT', 'STUDENT', 'ADMIN', 'TEACHER')
 @Controller('portal')
 export class PortalController {
     constructor(private readonly portalService: PortalService) { }

@@ -9,7 +9,7 @@ export type PortalProfile = {
     firstName: string
     lastName?: string | null
     phone: string
-    role: 'PARENT' | 'STUDENT'
+    role: 'PARENT' | 'STUDENT' | 'ADMIN' | 'TEACHER'
     avatarUrl?: string | null
 }
 
@@ -22,7 +22,7 @@ export type PortalChild = {
 }
 
 export type PortalBootstrap = {
-    role: 'PARENT' | 'STUDENT'
+    role: 'PARENT' | 'STUDENT' | 'ADMIN' | 'TEACHER'
     me: PortalProfile
     groups?: PortalGroup[]
     children?: PortalChild[]

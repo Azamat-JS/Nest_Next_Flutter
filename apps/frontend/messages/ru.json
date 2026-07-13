@@ -471,9 +471,11 @@
         "loadError": "Что-то пошло не так. Пожалуйста, откройте приложение заново.",
         "noGroupsParent": "Группы для ваших детей пока не найдены",
         "noGroupsStudent": "Вы пока не состоите ни в одной группе",
+        "noGroupsAdmin": "Группы для этого центра пока не найдены",
         "contactCenter": "Пожалуйста, свяжитесь с вашим учебным центром.",
         "chooseGroupParent": "Выберите группу ребёнка",
         "chooseGroupStudent": "Выберите свою группу",
+        "chooseGroupAdmin": "Выберите группу",
         "studentTeacher": "{studentName} · Преподаватель: {teacherName}",
         "teacherOnly": "Преподаватель: {teacherName}"
     },
