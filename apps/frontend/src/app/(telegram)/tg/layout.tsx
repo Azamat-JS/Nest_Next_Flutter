@@ -21,6 +21,8 @@ export default function TelegramLayout({ children }: { children: React.ReactNode
     const t = useTranslations('TgLayout')
 
     const authenticate = useCallback(async () => {
+        if (useTgStore.getState().status === 'ready') return // already authed; don't re-sync theme over a manual toggle
+
         const webApp = getTelegramWebApp()
         if (!webApp) return // script not loaded yet
 
