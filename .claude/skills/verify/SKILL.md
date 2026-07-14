@@ -20,6 +20,12 @@ description: Build, run, and drive this monorepo (NestJS backend + Next.js front
   `~/Library/Caches/ms-playwright/chromium-1228/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing`.
 - Toasts are sonner: assert on `[data-sonner-toast]` text.
 
+## Telegram mini app (/tg routes)
+
+- The layout gates on `window.Telegram.WebApp.initData` and exchanges it at `POST /telegram/auth`, validated by HMAC against each tenant's `botToken`. To drive it in Playwright: seed the test tenant with a known `botToken` plus a `TelegramLink` row (`verified: true`) for a STUDENT user, then forge initData in Node:
+  `secret = HMAC-SHA256(key='WebAppData', msg=botToken)`, `hash = HMAC-SHA256(key=secret, msg=dataCheckString)` where dataCheckString is the sorted `k=v` params (auth_date, query_id, user JSON) joined with `\n`. Inject via `context.addInitScript` as `window.Telegram = { WebApp: { initData, initDataUnsafe: {}, colorScheme: 'light', ready(){}, expand(){} } }` and **abort requests to `https://telegram.org/**`** — the real SDK script otherwise overwrites the stub with empty initData.
+- initData older than 300s is rejected; forge it fresh per run.
+
 ## Gotchas
 
 - `PUT /group/:id` (and similar update usecases) return stale data: the final `findOne` inside `$transaction` uses the outer client, so the response reflects pre-commit state. Verify writes with a follow-up GET, not the PUT response body.

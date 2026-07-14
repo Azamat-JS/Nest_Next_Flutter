@@ -517,7 +517,16 @@
         "totalScoreLabel": "Umumiy ball:",
         "date": "Sana",
         "type": "Turi",
-        "score": "Ball"
+        "score": "Ball",
+        "daysShort": {
+            "1": "Du",
+            "2": "Se",
+            "3": "Chor",
+            "4": "Pay",
+            "5": "Ju",
+            "6": "Sha",
+            "7": "Yak"
+        }
     },
     "TgLeaderboard": {
         "loadError": "Reytingni yuklab bo'lmadi.",

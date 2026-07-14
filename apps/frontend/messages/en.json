@@ -517,7 +517,16 @@
         "totalScoreLabel": "Total score:",
         "date": "Date",
         "type": "Type",
-        "score": "Score"
+        "score": "Score",
+        "daysShort": {
+            "1": "Mon",
+            "2": "Tue",
+            "3": "Wed",
+            "4": "Thu",
+            "5": "Fri",
+            "6": "Sat",
+            "7": "Sun"
+        }
     },
     "TgLeaderboard": {
         "loadError": "Could not load the leaderboard.",

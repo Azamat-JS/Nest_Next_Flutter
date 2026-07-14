@@ -3,7 +3,7 @@
 import { use, useEffect } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { useQuery } from "@tanstack/react-query"
-import { Loader2, Trophy, Medal, Award, BookOpen, GraduationCap, ArrowLeft } from "lucide-react"
+import { Loader2, Trophy, Medal, Award, BookOpen, GraduationCap, ArrowLeft, CalendarClock } from "lucide-react"
 import { useTranslations } from "next-intl"
 import api from "@/lib/api"
 import { cn } from "@/lib/utils"
@@ -23,6 +23,9 @@ import {
     TableRow,
 } from "@/components/ui/table"
 
+// ISO-8601 weekday keys: index 0 = Monday ... 6 = Sunday
+const dayKeys = ["1", "2", "3", "4", "5", "6", "7"] as const
+
 const rankIcon = (idx: number) => {
     if (idx === 0) return <Trophy className="h-4 w-4 text-yellow-500" />
     if (idx === 1) return <Medal className="h-4 w-4 text-gray-400" />
@@ -36,6 +39,7 @@ export default function TgGroupPage({ params }: { params: Promise<{ groupId: str
     const router = useRouter()
     const setSelection = useTgStore((s) => s.setSelection)
     const t = useTranslations('TgGroupDetail')
+    const tDays = useTranslations('TgGroupDetail.daysShort')
 
     const { data: bootstrap } = useQuery({
         queryKey: ['tg-bootstrap'],
@@ -130,6 +134,12 @@ export default function TgGroupPage({ params }: { params: Promise<{ groupId: str
                     {t('teacherLine', { teacherName: `${group?.teacher.firstName ?? ''} ${group?.teacher.lastName ?? ''}`.trim() })}
                     {childName && <> · {childName.firstName} {childName.lastName ?? ''}</>}
                 </p>
+                {(group?.lessonSchedules?.length ?? 0) > 0 && (
+                    <p className="mt-1 flex items-center gap-1.5 text-sm text-muted-foreground">
+                        <CalendarClock className="h-4 w-4 shrink-0 text-primary" />
+                        {group!.lessonSchedules!.map((s) => `${tDays(dayKeys[s.dayOfWeek - 1])} ${s.time}`).join(' · ')}
+                    </p>
+                )}
             </div>
 
             <Tabs defaultValue="leaderboard">

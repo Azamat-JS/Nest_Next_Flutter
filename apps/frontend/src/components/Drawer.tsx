@@ -39,6 +39,8 @@ import { Plus } from "lucide-react"
 // ISO-8601 weekday numbering: 1 = Monday ... 7 = Sunday
 const WEEK_DAYS = [1, 2, 3, 4, 5, 6, 7] as const
 const DEFAULT_LESSON_TIME = "18:00"
+const hourOptions = Array.from({ length: 24 }, (_, i) => String(i).padStart(2, "0"))
+const minuteOptions = Array.from({ length: 12 }, (_, i) => String(i * 5).padStart(2, "0"))
 
 type LessonSchedule = { dayOfWeek: number; time: string }
 
@@ -157,6 +159,14 @@ export function GroupDrawer({ openCreate, setOpenCreate, teachers, students, onG
                                         <div className="rounded-md border p-3 space-y-2">
                                             {WEEK_DAYS.map((day) => {
                                                 const schedule = field.state.value.find(s => s.dayOfWeek === day)
+                                                const [hour, minute] = (schedule?.time ?? ":").split(":")
+                                                const setTime = (time: string) => {
+                                                    field.handleChange(
+                                                        field.state.value.map(s =>
+                                                            s.dayOfWeek === day ? { ...s, time } : s
+                                                        )
+                                                    )
+                                                }
                                                 return (
                                                     <div key={day} className="flex items-center justify-between gap-3">
                                                         <label className="flex items-center gap-2 cursor-pointer">
@@ -173,19 +183,37 @@ export function GroupDrawer({ openCreate, setOpenCreate, teachers, students, onG
                                                             />
                                                             <span className="text-sm">{t(`days.${day}`)}</span>
                                                         </label>
-                                                        <Input
-                                                            type="time"
-                                                            className="w-28"
-                                                            disabled={!schedule}
-                                                            value={schedule?.time ?? ""}
-                                                            onChange={(e) => {
-                                                                field.handleChange(
-                                                                    field.state.value.map(s =>
-                                                                        s.dayOfWeek === day ? { ...s, time: e.target.value } : s
-                                                                    )
-                                                                )
-                                                            }}
-                                                        />
+                                                        <div className="flex items-center gap-1">
+                                                            <Select
+                                                                disabled={!schedule}
+                                                                value={hour}
+                                                                onValueChange={(h) => setTime(`${h}:${minute}`)}
+                                                            >
+                                                                <SelectTrigger className="w-18">
+                                                                    <SelectValue placeholder="--" />
+                                                                </SelectTrigger>
+                                                                <SelectContent>
+                                                                    {hourOptions.map((h) => (
+                                                                        <SelectItem key={h} value={h}>{h}</SelectItem>
+                                                                    ))}
+                                                                </SelectContent>
+                                                            </Select>
+                                                            <span className="text-sm text-muted-foreground">:</span>
+                                                            <Select
+                                                                disabled={!schedule}
+                                                                value={minute}
+                                                                onValueChange={(m) => setTime(`${hour}:${m}`)}
+                                                            >
+                                                                <SelectTrigger className="w-18">
+                                                                    <SelectValue placeholder="--" />
+                                                                </SelectTrigger>
+                                                                <SelectContent>
+                                                                    {minuteOptions.map((m) => (
+                                                                        <SelectItem key={m} value={m}>{m}</SelectItem>
+                                                                    ))}
+                                                                </SelectContent>
+                                                            </Select>
+                                                        </div>
                                                     </div>
                                                 )
                                             })}

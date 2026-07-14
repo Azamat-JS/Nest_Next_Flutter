@@ -2,6 +2,7 @@ export type PortalGroup = {
     id: string
     name: string
     teacher: { id: string; firstName: string; lastName?: string | null }
+    lessonSchedules?: { dayOfWeek: number; time: string }[]
 }
 
 export type PortalProfile = {
