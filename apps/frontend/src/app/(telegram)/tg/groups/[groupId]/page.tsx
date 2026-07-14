@@ -4,7 +4,7 @@ import { use, useEffect } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { useQuery } from "@tanstack/react-query"
 import { Loader2, Trophy, Medal, Award, BookOpen, GraduationCap, ArrowLeft, CalendarClock } from "lucide-react"
-import { useTranslations } from "next-intl"
+import { useFormatter, useTranslations } from "next-intl"
 import api from "@/lib/api"
 import { cn } from "@/lib/utils"
 import { useTgStore } from "@/lib/stores/tgStore"
@@ -40,6 +40,7 @@ export default function TgGroupPage({ params }: { params: Promise<{ groupId: str
     const setSelection = useTgStore((s) => s.setSelection)
     const t = useTranslations('TgGroupDetail')
     const tDays = useTranslations('TgGroupDetail.daysShort')
+    const formatter = useFormatter()
 
     const { data: bootstrap } = useQuery({
         queryKey: ['tg-bootstrap'],
@@ -191,6 +192,11 @@ export default function TgGroupPage({ params }: { params: Promise<{ groupId: str
                                 <BookOpen className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
                                 <div className="min-w-0">
                                     <p className="font-medium break-words">{hw.topic}</p>
+                                    {hw.lessonDate && (
+                                        <p className="text-sm text-muted-foreground">
+                                            {t('lessonDay', { date: formatter.dateTime(new Date(hw.lessonDate), { weekday: 'short', day: 'numeric', month: 'short', timeZone: 'UTC' }) })}
+                                        </p>
+                                    )}
                                     <p className="text-sm text-muted-foreground">{t('due', { date: new Date(hw.dueDate).toLocaleDateString() })}</p>
                                 </div>
                             </CardContent>

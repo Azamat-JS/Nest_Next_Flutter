@@ -130,6 +130,8 @@
         "title": "Add Homework",
         "topicLabel": "Topic",
         "topicPlaceholder": "e.g. Chapter 5 exercises",
+        "lessonDayLabel": "Lesson day",
+        "selectLessonDay": "Select a lesson day",
         "dueDateLabel": "Due date",
         "hourLabel": "Hour",
         "submit": "Submit",
@@ -137,6 +139,7 @@
         "topicRequired": "Topic is required",
         "dueDateRequired": "Due date is required",
         "hourRequired": "Select an hour",
+        "lessonDayRequired": "Select a lesson day",
         "success": "Homework added successfully",
         "error": "Something went wrong"
     },
@@ -335,7 +338,7 @@
         "showingHomeworks": "Showing {count} of {total} homeworks",
         "topicHeader": "Topic",
         "dueDateHeader": "Due Date",
-        "createdAtHeader": "Created At",
+        "lessonDayHeader": "Lesson day",
         "rowsPerPage": "Rows per page"
     },
     "Group": {
@@ -526,7 +529,8 @@
             "5": "Fri",
             "6": "Sat",
             "7": "Sun"
-        }
+        },
+        "lessonDay": "Lesson day: {date}"
     },
     "TgLeaderboard": {
         "loadError": "Could not load the leaderboard.",

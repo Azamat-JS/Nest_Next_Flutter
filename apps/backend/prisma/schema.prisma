@@ -358,6 +358,9 @@ model Homework {
   id      String   @id @default(cuid())
   topic   String
   dueDate DateTime
+  // The scheduled lesson day this homework was assigned on, stored at UTC
+  // midnight of that calendar date. Null on rows created before the field existed.
+  lessonDate DateTime?
 
   groupId String
   group   Groups @relation(fields: [groupId], references: [id], onDelete: Cascade)

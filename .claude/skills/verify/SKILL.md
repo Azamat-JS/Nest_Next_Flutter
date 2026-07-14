@@ -30,3 +30,4 @@ description: Build, run, and drive this monorepo (NestJS backend + Next.js front
 
 - `PUT /group/:id` (and similar update usecases) return stale data: the final `findOne` inside `$transaction` uses the outer client, so the response reflects pre-commit state. Verify writes with a follow-up GET, not the PUT response body.
 - Check nothing is already on ports 3002/4008 before starting (`lsof -i :3002 -sTCP:LISTEN`).
+- Stopping the background `npm run start`/`npm run dev` task kills the npm wrapper but can orphan the node child holding the port — after stopping, `lsof -ti :3002 -sTCP:LISTEN | xargs kill` (same for 4008) or the next start fails with EADDRINUSE.

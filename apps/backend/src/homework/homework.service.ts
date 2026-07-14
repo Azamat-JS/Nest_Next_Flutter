@@ -12,6 +12,14 @@ export class HomeworkRepository {
         return this.prisma.homework.create({ data });
     }
 
+    async findGroupScheduleDays(groupId: string): Promise<number[]> {
+        const schedules = await this.prisma.groupLessonSchedule.findMany({
+            where: { groupId },
+            select: { dayOfWeek: true },
+        });
+        return schedules.map(s => s.dayOfWeek);
+    }
+
     async findByGroup(groupId: string, query: HomeworkQueryDto) {
         const { limit = 10, page = 1, search } = query;
         const skip = (page - 1) * limit;

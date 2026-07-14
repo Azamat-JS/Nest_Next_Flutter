@@ -130,6 +130,8 @@
         "title": "Uy vazifasi qo'shish",
         "topicLabel": "Mavzu",
         "topicPlaceholder": "masalan, 5-bob mashqlari",
+        "lessonDayLabel": "Dars kuni",
+        "selectLessonDay": "Dars kunini tanlang",
         "dueDateLabel": "Topshirish sanasi",
         "hourLabel": "Soat",
         "submit": "Saqlash",
@@ -137,6 +139,7 @@
         "topicRequired": "Mavzu talab qilinadi",
         "dueDateRequired": "Topshirish sanasini kiriting",
         "hourRequired": "Soatni tanlang",
+        "lessonDayRequired": "Dars kunini tanlang",
         "success": "Uy vazifasi muvaffaqiyatli qo'shildi",
         "error": "Nimadir xato ketdi"
     },
@@ -335,7 +338,7 @@
         "showingHomeworks": "{total} tadan {count} uy vazifasi ko'rsatilmoqda",
         "topicHeader": "Mavzu",
         "dueDateHeader": "Topshirish sanasi",
-        "createdAtHeader": "Yaratilgan sana",
+        "lessonDayHeader": "Dars kuni",
         "rowsPerPage": "Har sahifada"
     },
     "Group": {
@@ -526,7 +529,8 @@
             "5": "Ju",
             "6": "Sha",
             "7": "Yak"
-        }
+        },
+        "lessonDay": "Dars kuni: {date}"
     },
     "TgLeaderboard": {
         "loadError": "Reytingni yuklab bo'lmadi.",

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { useSuspenseQuery, useQueryClient } from "@tanstack/react-query"
 import { useRouter, useSearchParams } from "next/navigation"
 import { Search } from "lucide-react"
-import { useTranslations } from "next-intl"
+import { useFormatter, useTranslations } from "next-intl"
 import api from "@/lib/api"
 import { HomeworkType } from "@/lib/types/homework"
 import { PaginationType } from "@/lib/types/groups"
@@ -46,6 +46,7 @@ const formatDueDate = (value: string) => {
 const GroupHomeworks = ({ groupId }: { groupId: string }) => {
     const t = useTranslations('GroupHomeworks')
     const tCommon = useTranslations('Common')
+    const formatter = useFormatter()
     const router = useRouter()
     const searchParams = useSearchParams()
     const queryClient = useQueryClient()
@@ -106,7 +107,7 @@ const GroupHomeworks = ({ groupId }: { groupId: string }) => {
                         <TableHead className="w-12 text-center font-semibold">#</TableHead>
                         <TableHead className="text-center font-semibold">{t('topicHeader')}</TableHead>
                         <TableHead className="text-center font-semibold">{t('dueDateHeader')}</TableHead>
-                        <TableHead className="text-center font-semibold">{t('createdAtHeader')}</TableHead>
+                        <TableHead className="text-center font-semibold">{t('lessonDayHeader')}</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -115,7 +116,11 @@ const GroupHomeworks = ({ groupId }: { groupId: string }) => {
                             <TableCell className="text-center">{(page - 1) * limit + idx + 1}</TableCell>
                             <TableCell className="text-center font-medium">{h.topic}</TableCell>
                             <TableCell className="text-center">{formatDueDate(h.dueDate)}</TableCell>
-                            <TableCell className="text-center text-muted-foreground">{new Date(h.createdAt).toLocaleDateString()}</TableCell>
+                            <TableCell className="text-center text-muted-foreground">
+                                {h.lessonDate
+                                    ? formatter.dateTime(new Date(h.lessonDate), { weekday: 'short', day: 'numeric', month: 'short', timeZone: 'UTC' })
+                                    : '—'}
+                            </TableCell>
                         </TableRow>
                     ))}
                 </TableBody>

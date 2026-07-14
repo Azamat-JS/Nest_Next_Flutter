@@ -15,7 +15,9 @@ import { Input } from "@/components/ui/input"
 import * as z from "zod"
 import { toast } from "sonner"
 import { useForm } from "@tanstack/react-form"
-import { useTranslations } from "next-intl"
+import { useQuery } from "@tanstack/react-query"
+import { useFormatter, useTranslations } from "next-intl"
+import { GroupType } from "@/lib/types/groups"
 import {
     Field,
     FieldError,
@@ -50,21 +52,51 @@ const AddHomeworkDrawer = ({ openCreate, setOpenCreate, groupId, onHomeworkAdded
     onHomeworkAdded: () => void
 }) => {
     const t = useTranslations('AddHomeworkDrawer')
+    const formatter = useFormatter()
     const [dueDateOpen, setDueDateOpen] = useState(false)
+
+    const { data: group } = useQuery<GroupType>({
+        queryKey: ["group", groupId],
+        queryFn: async () => (await api.get(`/group/${groupId}`)).data,
+        staleTime: 1000 * 60 * 5,
+    })
+
+    // Selectable lesson days: the group's scheduled weekdays mapped onto the
+    // previous and current calendar weeks (ISO weeks, Monday first).
+    const lessonDayOptions = useMemo(() => {
+        const schedules = group?.lessonSchedules ?? []
+        if (schedules.length === 0) return []
+        const now = new Date()
+        const isoToday = now.getDay() === 0 ? 7 : now.getDay()
+        const monday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - (isoToday - 1))
+        return schedules
+            .flatMap(({ dayOfWeek }) => [
+                new Date(monday.getFullYear(), monday.getMonth(), monday.getDate() + dayOfWeek - 1 - 7),
+                new Date(monday.getFullYear(), monday.getMonth(), monday.getDate() + dayOfWeek - 1),
+            ])
+            .sort((a, b) => a.getTime() - b.getTime())
+            .map((date) => format(date, "yyyy-MM-dd"))
+    }, [group])
 
     const schema = useMemo(() => z.object({
         topic: z.string().min(1, t('topicRequired')),
         dueDate: z.string().min(1, t('dueDateRequired')),
         dueHour: z.string().min(1, t('hourRequired')),
-    }), [t])
+        lessonDate: lessonDayOptions.length > 0 ? z.string().min(1, t('lessonDayRequired')) : z.string(),
+    }), [t, lessonDayOptions])
 
     const form = useForm({
-        defaultValues: { topic: "", dueDate: "", dueHour: "09" },
+        defaultValues: { topic: "", dueDate: "", dueHour: "09", lessonDate: "" },
         validators: { onSubmit: schema },
         onSubmit: async ({ value }) => {
             try {
                 const dueDate = new Date(`${value.dueDate}T${value.dueHour}:00:00`)
-                await api.post('/homework', { groupId, topic: value.topic, dueDate: dueDate.toISOString() })
+                await api.post('/homework', {
+                    groupId,
+                    topic: value.topic,
+                    dueDate: dueDate.toISOString(),
+                    ...(value.lessonDate && { lessonDate: value.lessonDate }),
+                })
                 form.reset()
                 onHomeworkAdded()
                 setOpenCreate(false)
@@ -111,6 +143,34 @@ const AddHomeworkDrawer = ({ openCreate, setOpenCreate, groupId, onHomeworkAdded
                                     )
                                 }}
                             </form.Field>
+
+                            {lessonDayOptions.length > 0 && (
+                                <form.Field name="lessonDate">
+                                    {(field) => {
+                                        const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
+                                        return (
+                                            <Field data-invalid={isInvalid}>
+                                                <FieldLabel htmlFor={field.name}>{t('lessonDayLabel')}</FieldLabel>
+                                                <Select value={field.state.value} onValueChange={(val) => field.handleChange(val)}>
+                                                    <SelectTrigger id={field.name} className="w-full">
+                                                        <SelectValue placeholder={t('selectLessonDay')} />
+                                                    </SelectTrigger>
+                                                    <SelectContent>
+                                                        <SelectGroup>
+                                                            {lessonDayOptions.map((day) => (
+                                                                <SelectItem key={day} value={day}>
+                                                                    {formatter.dateTime(new Date(`${day}T00:00:00`), { weekday: 'short', day: 'numeric', month: 'short' })}
+                                                                </SelectItem>
+                                                            ))}
+                                                        </SelectGroup>
+                                                    </SelectContent>
+                                                </Select>
+                                                {isInvalid && <FieldError errors={field.state.meta.errors} />}
+                                            </Field>
+                                        )
+                                    }}
+                                </form.Field>
+                            )}
 
                             <div className="flex gap-2">
                                 <form.Field name="dueDate">

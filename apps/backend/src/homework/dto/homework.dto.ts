@@ -13,6 +13,13 @@ export class CreateHomeworkDto {
     @IsNotEmpty()
     @IsDate()
     dueDate!: Date;
+
+    // Calendar date ("yyyy-MM-dd") of the scheduled lesson this homework
+    // belongs to; must land on one of the group's scheduled weekdays within
+    // the current or previous week.
+    @IsOptional()
+    @IsDate()
+    lessonDate?: Date;
 }
 
 export class HomeworkQueryDto extends PaginationDto {

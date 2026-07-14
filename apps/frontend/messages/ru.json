@@ -130,6 +130,8 @@
         "title": "Добавить домашнее задание",
         "topicLabel": "Тема",
         "topicPlaceholder": "напр. Упражнения из главы 5",
+        "lessonDayLabel": "День занятия",
+        "selectLessonDay": "Выберите день занятия",
         "dueDateLabel": "Срок сдачи",
         "hourLabel": "Час",
         "submit": "Отправить",
@@ -137,6 +139,7 @@
         "topicRequired": "Тема обязательна",
         "dueDateRequired": "Укажите срок сдачи",
         "hourRequired": "Выберите час",
+        "lessonDayRequired": "Выберите день занятия",
         "success": "Домашнее задание успешно добавлено",
         "error": "Что-то пошло не так"
     },
@@ -335,7 +338,7 @@
         "showingHomeworks": "Показано {count} из {total} домашних заданий",
         "topicHeader": "Тема",
         "dueDateHeader": "Срок сдачи",
-        "createdAtHeader": "Дата создания",
+        "lessonDayHeader": "День занятия",
         "rowsPerPage": "Строк на странице"
     },
     "Group": {
@@ -526,7 +529,8 @@
             "5": "Пт",
             "6": "Сб",
             "7": "Вс"
-        }
+        },
+        "lessonDay": "День занятия: {date}"
     },
     "TgLeaderboard": {
         "loadError": "Не удалось загрузить рейтинг.",
