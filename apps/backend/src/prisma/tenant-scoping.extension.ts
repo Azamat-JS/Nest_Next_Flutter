@@ -23,6 +23,7 @@ const TENANT_SCOPED_MODELS = new Set([
     'WaitingList',
     'Homework',
     'TelegramLink',
+    'GroupLessonSchedule',
 ]);
 
 const WHERE_FILTERED_OPERATIONS = new Set([

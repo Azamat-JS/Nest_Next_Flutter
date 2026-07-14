@@ -38,6 +38,7 @@ model Tenant {
   waitingList     WaitingList[]
   homeworks       Homework[]
   telegramLinks   TelegramLink[]
+  lessonSchedules GroupLessonSchedule[]
 
   @@map("Tenant")
 }
@@ -247,11 +248,35 @@ model Groups {
   studentScores   StudentScore[]
   studentPayments StudentPayment[]
   homeworks       Homework[]
+  lessonSchedules GroupLessonSchedule[]
 
   @@unique([tenantId, name])
   @@index([teacherId])
   @@index([tenantId])
   @@map("Groups")
+}
+
+// Weekly lesson slots for a group: which days lessons run and at what time.
+// dayOfWeek follows ISO-8601: 1 = Monday ... 7 = Sunday. time is "HH:mm" (24h).
+model GroupLessonSchedule {
+  id String @id @default(cuid())
+
+  groupId String
+  group   Groups @relation(fields: [groupId], references: [id], onDelete: Cascade)
+
+  tenantId String
+  tenant   Tenant @relation(fields: [tenantId], references: [id])
+
+  dayOfWeek Int
+  time      String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([groupId, dayOfWeek])
+  @@index([groupId])
+  @@index([tenantId])
+  @@map("GroupLessonSchedule")
 }
 
 model ScoreEvent {

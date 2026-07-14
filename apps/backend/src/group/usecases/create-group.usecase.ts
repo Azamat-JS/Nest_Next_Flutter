@@ -44,6 +44,17 @@ export class CreateGroupUseCase {
                     }))
                 )
             }
+
+            if (dto.lessonSchedules && dto.lessonSchedules.length > 0) {
+                await this.groupRepo.createLessonSchedules(tx,
+                    dto.lessonSchedules.map(({ dayOfWeek, time }) => ({
+                        dayOfWeek,
+                        time,
+                        groupId: group.id,
+                        tenantId,
+                    }))
+                )
+            }
             return group;
         })
     }

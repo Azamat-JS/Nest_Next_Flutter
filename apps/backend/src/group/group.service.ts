@@ -19,6 +19,20 @@ export class GroupRepository {
     return tx.studentGroup.createMany({ data })
   }
 
+  async createLessonSchedules(tx: TenantScopedTransactionClient, data: Prisma.GroupLessonScheduleCreateManyInput[]) {
+    return tx.groupLessonSchedule.createMany({ data })
+  }
+
+  async replaceLessonSchedules(tx: TenantScopedTransactionClient, groupId: string, schedules: { dayOfWeek: number; time: string }[]) {
+    const tenantId = this.tenantContext.getTenantId()!;
+    await tx.groupLessonSchedule.deleteMany({ where: { groupId } });
+    if (schedules.length > 0) {
+      await tx.groupLessonSchedule.createMany({
+        data: schedules.map(schedule => ({ ...schedule, groupId, tenantId })),
+      });
+    }
+  }
+
   async findTeacherById(id: string) {
     return this.prisma.users.findFirst({
       where: { id, role: UserRole.TEACHER }
@@ -66,6 +80,13 @@ export class GroupRepository {
               }
             }
           },
+          lessonSchedules: {
+            select: {
+              dayOfWeek: true,
+              time: true,
+            },
+            orderBy: { dayOfWeek: 'asc' },
+          },
         },
       }),
       this.prisma.groups.count({ where }),
@@ -101,6 +122,13 @@ export class GroupRepository {
             phone: true,
             role: true,
           }
+        },
+        lessonSchedules: {
+          select: {
+            dayOfWeek: true,
+            time: true,
+          },
+          orderBy: { dayOfWeek: 'asc' },
         },
       }
     })

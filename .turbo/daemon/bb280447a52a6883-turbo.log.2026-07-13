@@ -1869,3 +1869,12 @@
 2026-07-13T15:19:12.813143Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/frontend/tsconfig.tsbuildinfo")}
 2026-07-13T15:19:12.813156Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("frontend"), path: AnchoredSystemPathBuf("apps/frontend") }}))
 2026-07-13T15:19:12.813212Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2026-07-13T15:19:47.312608Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/frontend/.next/dev/lock")}
+2026-07-13T15:19:47.312619Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("frontend"), path: AnchoredSystemPathBuf("apps/frontend") }}))
+2026-07-13T15:19:47.330554Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2026-07-13T15:19:47.412790Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/frontend/.next/dev/_events_39842.json"), AnchoredSystemPathBuf("apps/backend/.turbo/turbo-dev.log"), AnchoredSystemPathBuf("apps/frontend/.next/dev/trace"), AnchoredSystemPathBuf("apps/frontend/.turbo/turbo-dev.log")}
+2026-07-13T15:19:47.412798Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("frontend"), path: AnchoredSystemPathBuf("apps/frontend") }, WorkspacePackage { name: Other("backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2026-07-13T15:19:47.412874Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2026-07-13T15:19:48.113801Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/frontend/.next/dev/_events_39842.json")}
+2026-07-13T15:19:48.113811Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("frontend"), path: AnchoredSystemPathBuf("apps/frontend") }}))
+2026-07-13T15:19:48.113860Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun

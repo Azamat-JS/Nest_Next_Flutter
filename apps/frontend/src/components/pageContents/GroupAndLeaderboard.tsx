@@ -8,15 +8,19 @@ import GroupDetailsComponent from "./GroupDetailsComponent"
 import GroupLeaderBoard from "./GroupLeaderBoard"
 import GroupHomeworks from "./GroupHomeworks"
 import api from "@/lib/api"
-import { Users, Trophy, NotebookPen } from "lucide-react"
+import { Users, Trophy, NotebookPen, CalendarClock } from "lucide-react"
 import { Button } from "../ui/button"
 import { useTranslations } from "next-intl"
 
 type GroupTab = "students" | "leaderboard" | "homeworks"
 
+// ISO-8601 weekday keys: index 0 = Monday ... 6 = Sunday
+const dayKeys = ["1", "2", "3", "4", "5", "6", "7"] as const
+
 const GroupAndLeaderboard = ({ groupId }: { groupId: string }) => {
     const [activeTab, setActiveTab] = useState<GroupTab>("students")
     const t = useTranslations('GroupAndLeaderboard')
+    const tDays = useTranslations('GroupAndLeaderboard.daysShort')
 
     const { data } = useSuspenseQuery({
         queryKey: ["group", groupId],
@@ -37,6 +41,12 @@ const GroupAndLeaderboard = ({ groupId }: { groupId: string }) => {
                 <Badge variant="outline" className="px-4 py-1.5 text-sm">
                     {t('teacherLabel', { name: [group?.teacher?.firstName, group?.teacher?.lastName].filter(Boolean).join(' ') })}
                 </Badge>
+                {(group?.lessonSchedules?.length ?? 0) > 0 && (
+                    <Badge variant="outline" className="gap-1.5 px-4 py-1.5 text-sm">
+                        <CalendarClock className="h-3.5 w-3.5" />
+                        {group.lessonSchedules!.map((s) => `${tDays(dayKeys[s.dayOfWeek - 1])} ${s.time}`).join(' · ')}
+                    </Badge>
+                )}
                 <div className="flex gap-2">
                     <Button
                         variant={activeTab === "students" ? "default" : "outline"}

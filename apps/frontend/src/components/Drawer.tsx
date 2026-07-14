@@ -36,6 +36,12 @@ import { TokenPayload } from "@/lib/types/token_payload"
 import api from "@/lib/api"
 import { Plus } from "lucide-react"
 
+// ISO-8601 weekday numbering: 1 = Monday ... 7 = Sunday
+const WEEK_DAYS = [1, 2, 3, 4, 5, 6, 7] as const
+const DEFAULT_LESSON_TIME = "18:00"
+
+type LessonSchedule = { dayOfWeek: number; time: string }
+
 export function GroupDrawer({ openCreate, setOpenCreate, teachers, students, onGroupCreated }: {
     openCreate: boolean
     setOpenCreate: (open: boolean) => void
@@ -51,12 +57,17 @@ export function GroupDrawer({ openCreate, setOpenCreate, teachers, students, onG
             name: "",
             teacherId: "",
             studentIds: [] as string[],
+            lessonSchedules: [] as LessonSchedule[],
         },
         validators: {
             onSubmit: z.object({
                 name: z.string().min(2),
                 teacherId: z.string().min(1),
                 studentIds: z.array(z.string()),
+                lessonSchedules: z.array(z.object({
+                    dayOfWeek: z.number().min(1).max(7),
+                    time: z.string().regex(/^([01]\d|2[0-3]):[0-5]\d$/),
+                })),
             }),
         },
         onSubmit: async ({ value }) => {
@@ -135,6 +146,50 @@ export function GroupDrawer({ openCreate, setOpenCreate, teachers, students, onG
                                                 </SelectGroup>
                                             </SelectContent>
                                         </Select>
+                                    </Field>
+                                )}
+                            </form.Field>
+
+                            <form.Field name="lessonSchedules">
+                                {(field) => (
+                                    <Field>
+                                        <Label>{t('scheduleLabel')}</Label>
+                                        <div className="rounded-md border p-3 space-y-2">
+                                            {WEEK_DAYS.map((day) => {
+                                                const schedule = field.state.value.find(s => s.dayOfWeek === day)
+                                                return (
+                                                    <div key={day} className="flex items-center justify-between gap-3">
+                                                        <label className="flex items-center gap-2 cursor-pointer">
+                                                            <input
+                                                                type="checkbox"
+                                                                checked={!!schedule}
+                                                                onChange={(e) => {
+                                                                    field.handleChange(
+                                                                        e.target.checked
+                                                                            ? [...field.state.value, { dayOfWeek: day, time: DEFAULT_LESSON_TIME }].sort((a, b) => a.dayOfWeek - b.dayOfWeek)
+                                                                            : field.state.value.filter(s => s.dayOfWeek !== day)
+                                                                    )
+                                                                }}
+                                                            />
+                                                            <span className="text-sm">{t(`days.${day}`)}</span>
+                                                        </label>
+                                                        <Input
+                                                            type="time"
+                                                            className="w-28"
+                                                            disabled={!schedule}
+                                                            value={schedule?.time ?? ""}
+                                                            onChange={(e) => {
+                                                                field.handleChange(
+                                                                    field.state.value.map(s =>
+                                                                        s.dayOfWeek === day ? { ...s, time: e.target.value } : s
+                                                                    )
+                                                                )
+                                                            }}
+                                                        />
+                                                    </div>
+                                                )
+                                            })}
+                                        </div>
                                     </Field>
                                 )}
                             </form.Field>

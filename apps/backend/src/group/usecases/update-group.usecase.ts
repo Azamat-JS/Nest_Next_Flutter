@@ -37,6 +37,10 @@ export class UpdateGroupUseCase {
 
             });
 
+            if (dto.lessonSchedules) {
+                await this.groupRepo.replaceLessonSchedules(tx, id, dto.lessonSchedules);
+            }
+
             // if (dto.studentIds) {
             //     await tx.studentGroup.deleteMany({
             //         where: {

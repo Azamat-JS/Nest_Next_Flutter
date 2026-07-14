@@ -149,6 +149,16 @@
         "selectTeacher": "O'qituvchini tanlang",
         "teachersLabel": "O'qituvchilar",
         "studentsLabel": "O'quvchilar (ixtiyoriy)",
+        "scheduleLabel": "Dars jadvali (ixtiyoriy)",
+        "days": {
+            "1": "Dushanba",
+            "2": "Seshanba",
+            "3": "Chorshanba",
+            "4": "Payshanba",
+            "5": "Juma",
+            "6": "Shanba",
+            "7": "Yakshanba"
+        },
         "submit": "Guruh yaratish",
         "cancel": "Bekor qilish",
         "success": "Guruh muvaffaqiyatli yaratildi",
@@ -278,7 +288,16 @@
         "teacherLabel": "O'qituvchi: {name}",
         "students": "O'quvchilar",
         "leaderboard": "Reyting",
-        "homeworks": "Uy vazifalari"
+        "homeworks": "Uy vazifalari",
+        "daysShort": {
+            "1": "Du",
+            "2": "Se",
+            "3": "Chor",
+            "4": "Pay",
+            "5": "Ju",
+            "6": "Sha",
+            "7": "Yak"
+        }
     },
     "GroupDetailsComponent": {
         "scoreUpdateSuccess": "Ball muvaffaqiyatli yangilandi",
