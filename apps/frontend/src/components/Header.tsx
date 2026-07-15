@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl"
 import { ModeToggle } from "./mode-toggle"
 import { LanguageSwitcher } from "./language-switcher"
 import { DropdownMenuDemo } from "./DropDownMenu"
+import { SettingsNavMenu } from "./SettingsNavMenu"
 import { GraduationCap } from "lucide-react"
 import { useAuthStore } from "@/lib/stores/authStore"
 
@@ -60,6 +61,7 @@ export const Header = () => {
                             </Link>
                         )
                     })}
+                    {role === 'ADMIN' && <SettingsNavMenu />}
                 </nav>
 
                 <div className="flex items-center gap-2">

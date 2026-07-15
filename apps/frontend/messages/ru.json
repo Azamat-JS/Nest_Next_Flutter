@@ -57,7 +57,8 @@
             "groups": "Группы",
             "payments": "Платежи",
             "leaderboard": "Рейтинг",
-            "profile": "Профиль"
+            "profile": "Профиль",
+            "settings": "Настройки"
         }
     },
     "ModeToggle": {
@@ -500,6 +501,21 @@
     },
     "Profile": {
         "loginRequired": "Войдите, чтобы просмотреть свой профиль."
+    },
+    "Settings": {
+        "groups": {
+            "office": "Офис",
+            "general": "Общие"
+        },
+        "sidebar": {
+            "general": "Общие настройки",
+            "staff": "Персонал",
+            "roles": "Роли",
+            "courses": "Курсы",
+            "rooms": "Кабинеты",
+            "holidays": "Праздники"
+        },
+        "comingSoon": "Этот раздел скоро появится."
     },
     "ChangePasswordScreen": {
         "currentPasswordRequired": "Обязательное поле",

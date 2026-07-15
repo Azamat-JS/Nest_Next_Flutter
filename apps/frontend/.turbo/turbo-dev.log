@@ -1,0 +1,16 @@
+
+> frontend@0.1.0 dev /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend
+> next dev --turbopack -p 4008
+
+[31m[1m⨯[22m[39m Failed to start server
+Error: listen EADDRINUSE: address already in use :::4008
+    at <unknown> (Error: listen EADDRINUSE: address already in use :::4008)
+    at new Promise (<anonymous>) {
+  code: [32m'EADDRINUSE'[39m,
+  errno: [33m-48[39m,
+  syscall: [32m'listen'[39m,
+  address: [32m'::'[39m,
+  port: [33m4008[39m
+}
+[?25h
+[41m[30m ELIFECYCLE [39m[49m [31mCommand failed with exit code 1.[39m

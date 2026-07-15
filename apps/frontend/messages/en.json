@@ -57,7 +57,8 @@
             "groups": "Groups",
             "payments": "Payments",
             "leaderboard": "Leaderboard",
-            "profile": "Profile"
+            "profile": "Profile",
+            "settings": "Settings"
         }
     },
     "ModeToggle": {
@@ -500,6 +501,21 @@
     },
     "Profile": {
         "loginRequired": "Please log in to view your profile."
+    },
+    "Settings": {
+        "groups": {
+            "office": "Office",
+            "general": "General"
+        },
+        "sidebar": {
+            "general": "General settings",
+            "staff": "Staff",
+            "roles": "Roles",
+            "courses": "Courses",
+            "rooms": "Rooms",
+            "holidays": "Holidays"
+        },
+        "comingSoon": "This section is coming soon."
     },
     "ChangePasswordScreen": {
         "currentPasswordRequired": "Required",

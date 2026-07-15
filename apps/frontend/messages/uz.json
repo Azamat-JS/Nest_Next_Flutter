@@ -57,7 +57,8 @@
             "groups": "Guruhlar",
             "payments": "To'lovlar",
             "leaderboard": "Reyting",
-            "profile": "Profil"
+            "profile": "Profil",
+            "settings": "Sozlamalar"
         }
     },
     "ModeToggle": {
@@ -500,6 +501,21 @@
     },
     "Profile": {
         "loginRequired": "Profilingizni ko'rish uchun tizimga kiring."
+    },
+    "Settings": {
+        "groups": {
+            "office": "Ofis",
+            "general": "Umumiy"
+        },
+        "sidebar": {
+            "general": "Umumiy sozlamalar",
+            "staff": "Xodimlar",
+            "roles": "Rollar",
+            "courses": "Kurslar",
+            "rooms": "Xonalar",
+            "holidays": "Bayramlar"
+        },
+        "comingSoon": "Bu bo'lim tez orada qo'shiladi."
     },
     "ChangePasswordScreen": {
         "currentPasswordRequired": "Majburiy maydon",
