@@ -14,6 +14,29 @@
             "11": "Noyabr",
             "12": "Dekabr"
         },
+        "monthsShort": {
+            "1": "Yan",
+            "2": "Fev",
+            "3": "Mar",
+            "4": "Apr",
+            "5": "May",
+            "6": "Iyun",
+            "7": "Iyul",
+            "8": "Avg",
+            "9": "Sen",
+            "10": "Okt",
+            "11": "Noy",
+            "12": "Dek"
+        },
+        "daysShort": {
+            "1": "Du",
+            "2": "Se",
+            "3": "Chor",
+            "4": "Pay",
+            "5": "Ju",
+            "6": "Sha",
+            "7": "Yak"
+        },
         "errorGeneric": "Nimadir xato ketdi",
         "cancel": "Bekor qilish",
         "actions": "Amallar",

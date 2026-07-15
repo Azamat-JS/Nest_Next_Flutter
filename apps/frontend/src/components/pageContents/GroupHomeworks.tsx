@@ -4,8 +4,9 @@ import { useEffect, useState } from "react"
 import { useSuspenseQuery, useQueryClient } from "@tanstack/react-query"
 import { useRouter, useSearchParams } from "next/navigation"
 import { Search } from "lucide-react"
-import { useFormatter, useTranslations } from "next-intl"
+import { useTranslations } from "next-intl"
 import api from "@/lib/api"
+import { formatShortWeekdayDate } from "@/lib/helper/format_lesson_date"
 import { HomeworkType } from "@/lib/types/homework"
 import { PaginationType } from "@/lib/types/groups"
 import AddHomeworkDrawer from "../AddHomeworkDrawer"
@@ -46,7 +47,6 @@ const formatDueDate = (value: string) => {
 const GroupHomeworks = ({ groupId }: { groupId: string }) => {
     const t = useTranslations('GroupHomeworks')
     const tCommon = useTranslations('Common')
-    const formatter = useFormatter()
     const router = useRouter()
     const searchParams = useSearchParams()
     const queryClient = useQueryClient()
@@ -118,7 +118,7 @@ const GroupHomeworks = ({ groupId }: { groupId: string }) => {
                             <TableCell className="text-center">{formatDueDate(h.dueDate)}</TableCell>
                             <TableCell className="text-center text-muted-foreground">
                                 {h.lessonDate
-                                    ? formatter.dateTime(new Date(h.lessonDate), { weekday: 'short', day: 'numeric', month: 'short', timeZone: 'UTC' })
+                                    ? formatShortWeekdayDate(new Date(h.lessonDate), tCommon, { utc: true })
                                     : '—'}
                             </TableCell>
                         </TableRow>

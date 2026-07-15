@@ -16,8 +16,9 @@ import * as z from "zod"
 import { toast } from "sonner"
 import { useForm } from "@tanstack/react-form"
 import { useQuery } from "@tanstack/react-query"
-import { useFormatter, useTranslations } from "next-intl"
+import { useTranslations } from "next-intl"
 import { GroupType } from "@/lib/types/groups"
+import { formatShortWeekdayDate } from "@/lib/helper/format_lesson_date"
 import {
     Field,
     FieldError,
@@ -52,7 +53,7 @@ const AddHomeworkDrawer = ({ openCreate, setOpenCreate, groupId, onHomeworkAdded
     onHomeworkAdded: () => void
 }) => {
     const t = useTranslations('AddHomeworkDrawer')
-    const formatter = useFormatter()
+    const tCommon = useTranslations('Common')
     const [dueDateOpen, setDueDateOpen] = useState(false)
 
     const { data: group } = useQuery<GroupType>({
@@ -159,7 +160,7 @@ const AddHomeworkDrawer = ({ openCreate, setOpenCreate, groupId, onHomeworkAdded
                                                     <SelectGroup>
                                                         {lessonDayOptions.map((day) => (
                                                             <SelectItem key={day} value={day}>
-                                                                {formatter.dateTime(new Date(`${day}T00:00:00`), { weekday: 'short', day: 'numeric', month: 'short' })}
+                                                                {formatShortWeekdayDate(new Date(`${day}T00:00:00`), tCommon)}
                                                             </SelectItem>
                                                         ))}
                                                     </SelectGroup>

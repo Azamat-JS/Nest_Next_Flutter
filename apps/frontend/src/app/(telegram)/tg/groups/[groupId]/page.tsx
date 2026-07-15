@@ -4,8 +4,9 @@ import { use, useEffect } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { useQuery } from "@tanstack/react-query"
 import { Loader2, Trophy, Medal, Award, BookOpen, GraduationCap, ArrowLeft, CalendarClock } from "lucide-react"
-import { useFormatter, useTranslations } from "next-intl"
+import { useTranslations } from "next-intl"
 import api from "@/lib/api"
+import { formatShortWeekdayDate } from "@/lib/helper/format_lesson_date"
 import { cn } from "@/lib/utils"
 import { useTgStore } from "@/lib/stores/tgStore"
 import { PortalBootstrap, PortalGroup, PortalScoreEvent } from "@/lib/types/portal"
@@ -40,7 +41,7 @@ export default function TgGroupPage({ params }: { params: Promise<{ groupId: str
     const setSelection = useTgStore((s) => s.setSelection)
     const t = useTranslations('TgGroupDetail')
     const tDays = useTranslations('TgGroupDetail.daysShort')
-    const formatter = useFormatter()
+    const tCommon = useTranslations('Common')
 
     const { data: bootstrap } = useQuery({
         queryKey: ['tg-bootstrap'],
@@ -194,7 +195,7 @@ export default function TgGroupPage({ params }: { params: Promise<{ groupId: str
                                     <p className="font-medium break-words">{hw.topic}</p>
                                     {hw.lessonDate && (
                                         <p className="text-sm text-muted-foreground">
-                                            {t('lessonDay', { date: formatter.dateTime(new Date(hw.lessonDate), { weekday: 'short', day: 'numeric', month: 'short', timeZone: 'UTC' }) })}
+                                            {t('lessonDay', { date: formatShortWeekdayDate(new Date(hw.lessonDate), tCommon, { utc: true }) })}
                                         </p>
                                     )}
                                     <p className="text-sm text-muted-foreground">{t('due', { date: new Date(hw.dueDate).toLocaleDateString() })}</p>
