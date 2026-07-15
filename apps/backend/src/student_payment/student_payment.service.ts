@@ -1,4 +1,5 @@
-import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 import { PRISMA_CLIENT } from 'src/prisma/prisma.module';
 import type { TenantScopedPrismaClient } from 'src/prisma/tenant-scoping.extension';
 import { LatestPaymentsQueryDto, StudentPaymentDto, UpdatePaymentDto } from './dto/student_payment.dto';
@@ -21,18 +22,25 @@ export class StudentPaymentService {
         if (!group) {
             throw new NotFoundException("Group not found")
         }
-        return await this.prisma.studentPayment.create({
-            data: {
-                ...dto,
-                groupId: group.id,
-                studentId: student.id,
-                tenantId: this.tenantContext.getTenantId()!,
-            },
-            include: {
-                student: { select: { id: true, firstName: true, lastName: true, phone: true } },
-                group: { select: { id: true, name: true } },
+        try {
+            return await this.prisma.studentPayment.create({
+                data: {
+                    ...dto,
+                    groupId: group.id,
+                    studentId: student.id,
+                    tenantId: this.tenantContext.getTenantId()!,
+                },
+                include: {
+                    student: { select: { id: true, firstName: true, lastName: true, phone: true } },
+                    group: { select: { id: true, name: true } },
+                }
+            })
+        } catch (error) {
+            if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2002') {
+                throw new BadRequestException('A payment for this student in this group for this month/year already exists');
             }
-        })
+            throw error;
+        }
     }
 
     async getAllPayments(query: PaginationDto) {

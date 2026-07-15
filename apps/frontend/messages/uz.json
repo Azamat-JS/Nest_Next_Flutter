@@ -126,9 +126,6 @@
         "studentRequired": "O'quvchi talab qilinadi",
         "groupRequired": "Guruh talab qilinadi",
         "amountPositive": "Summa musbat bo'lishi kerak",
-        "existingPaymentWarning": "Bu o'quvchida allaqachon to'lov mavjud. Uni to'lovlar tarixi sahifasidan qo'shing.",
-        "existingPaymentWarningNamed": "{name} uchun to'lov allaqachon qo'shilgan. Jadvalda uni toping va yangi to'lov qo'shish uchun to'lovlar tarixini oching.",
-        "existingPaymentFieldError": "Bu o'quvchi uchun to'lov allaqachon qo'shilgan. Jadvalda uni toping va yangi to'lov qo'shish uchun to'lovlar tarixini oching.",
         "success": "To'lov muvaffaqiyatli qo'shildi",
         "error": "Nimadir xato ketdi"
     },

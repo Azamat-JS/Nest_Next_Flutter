@@ -1,7 +1,6 @@
 'use client'
 
-import { useEffect, useMemo } from 'react'
-import { useQuery } from '@tanstack/react-query'
+import { useMemo } from 'react'
 import { Button } from "@/components/ui/button"
 import {
     Drawer,
@@ -34,7 +33,6 @@ import {
 } from "@/components/ui/select"
 import { Label } from "./ui/label"
 import { GroupType } from "@/lib/types/groups"
-import { StudentPaymentsResponse } from "@/lib/types/payment_type"
 import api from "@/lib/api"
 import { Plus } from "lucide-react"
 import { Textarea } from "./ui/textarea"
@@ -73,10 +71,6 @@ export function AddPaymentDrawer({ openCreate, setOpenCreate, groups, onPaymentA
         },
         validators: { onSubmit: schema },
         onSubmit: async ({ value }) => {
-            if (hasExistingPayment) {
-                toast.warning(t('existingPaymentWarning'))
-                return
-            }
             try {
                 const { studentId, groupId, month, year, amount, comment } = value
                 await api.post(`/student-payment/create-payment/${studentId}/${groupId}`, {
@@ -99,29 +93,6 @@ export function AddPaymentDrawer({ openCreate, setOpenCreate, groups, onPaymentA
 
     const selectedGroupId = useStore(form.store, (state) => state.values.groupId)
     const groupStudents = groups.find((g) => g.id === selectedGroupId)?.students ?? []
-
-    const selectedStudentId = useStore(form.store, (state) => state.values.studentId)
-    const selectedStudent = groupStudents.find((s) => s.id === selectedStudentId)
-
-    const { data: existingPaymentsData, isFetching: isCheckingExistingPayments } = useQuery<StudentPaymentsResponse>({
-        queryKey: ['student-payments', selectedStudentId, 'exists-check'],
-        queryFn: async () => {
-            const res = await api.get(`/student-payment/student-payments/${selectedStudentId}`, { params: { limit: 1 } })
-            return res.data
-        },
-        enabled: !preselectedStudentId && !!selectedStudentId,
-        staleTime: 1000 * 30,
-    })
-
-    const hasExistingPayment = !preselectedStudentId && !!selectedStudentId && (existingPaymentsData?.meta?.total ?? 0) > 0
-
-    useEffect(() => {
-        if (hasExistingPayment && selectedStudent) {
-            toast.warning(
-                t('existingPaymentWarningNamed', { name: [selectedStudent.firstName, selectedStudent.lastName].filter(Boolean).join(' ') })
-            )
-        }
-    }, [hasExistingPayment, selectedStudentId])
 
     return (
         <Drawer direction="right" open={openCreate} onOpenChange={setOpenCreate}>
@@ -203,11 +174,6 @@ export function AddPaymentDrawer({ openCreate, setOpenCreate, groups, onPaymentA
                                                     </SelectContent>
                                                 </Select>
                                                 {isInvalid && <FieldError errors={field.state.meta.errors} />}
-                                                {hasExistingPayment && (
-                                                    <p className="text-sm text-destructive">
-                                                        {t('existingPaymentFieldError')}
-                                                    </p>
-                                                )}
                                             </Field>
                                         )
                                     }}
@@ -310,7 +276,6 @@ export function AddPaymentDrawer({ openCreate, setOpenCreate, groups, onPaymentA
                     <Button
                         type="submit"
                         form="add-payment-form"
-                        disabled={hasExistingPayment || isCheckingExistingPayments}
                     >
                         {t('trigger')}
                     </Button>
