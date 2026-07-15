@@ -38,6 +38,7 @@ import { Plus } from "lucide-react"
 import { Textarea } from "./ui/textarea"
 
 const monthValues = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"] as const
+const paymentMethodValues = ["CASH", "CREDIT_CARD", "CLICK"] as const
 
 export function AddPaymentDrawer({ openCreate, setOpenCreate, groups, onPaymentAdded, preselectedStudentId }: {
     openCreate: boolean
@@ -50,6 +51,7 @@ export function AddPaymentDrawer({ openCreate, setOpenCreate, groups, onPaymentA
     const currentMonth = new Date().getMonth() + 1
     const t = useTranslations('AddPaymentDrawer')
     const tMonths = useTranslations('Common.months')
+    const tPaymentMethods = useTranslations('Common.paymentMethods')
 
     const schema = useMemo(() => z.object({
         studentId: z.string().min(1, t('studentRequired')),
@@ -57,6 +59,7 @@ export function AddPaymentDrawer({ openCreate, setOpenCreate, groups, onPaymentA
         month: z.number().min(1).max(12),
         year: z.number().min(2000),
         amount: z.number().positive(t('amountPositive')),
+        paymentMethod: z.enum(paymentMethodValues, { message: t('paymentMethodRequired') }),
         comment: z.string(),
     }), [t])
 
@@ -67,16 +70,18 @@ export function AddPaymentDrawer({ openCreate, setOpenCreate, groups, onPaymentA
             month: currentMonth,
             year: currentYear,
             amount: 0,
+            paymentMethod: 'CASH' as (typeof paymentMethodValues)[number],
             comment: '',
         },
         validators: { onSubmit: schema },
         onSubmit: async ({ value }) => {
             try {
-                const { studentId, groupId, month, year, amount, comment } = value
+                const { studentId, groupId, month, year, amount, paymentMethod, comment } = value
                 await api.post(`/student-payment/create-payment/${studentId}/${groupId}`, {
                     month,
                     year,
                     amount,
+                    paymentMethod,
                     comment: comment?.trim() || undefined,
                 })
                 form.reset()
@@ -248,6 +253,35 @@ export function AddPaymentDrawer({ openCreate, setOpenCreate, groups, onPaymentA
                                                 onChange={(e) => field.handleChange(Number(e.target.value))}
                                                 placeholder="0.00"
                                             />
+                                            {isInvalid && <FieldError errors={field.state.meta.errors} />}
+                                        </Field>
+                                    )
+                                }}
+                            </form.Field>
+
+                            <form.Field name="paymentMethod">
+                                {(field) => {
+                                    const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
+                                    return (
+                                        <Field data-invalid={isInvalid}>
+                                            <FieldLabel>{t('paymentMethodLabel')}</FieldLabel>
+                                            <Select
+                                                value={field.state.value}
+                                                onValueChange={(v) => field.handleChange(v as (typeof paymentMethodValues)[number])}
+                                            >
+                                                <SelectTrigger>
+                                                    <SelectValue placeholder={t('selectPaymentMethod')} />
+                                                </SelectTrigger>
+                                                <SelectContent>
+                                                    <SelectGroup>
+                                                        {paymentMethodValues.map((m) => (
+                                                            <SelectItem key={m} value={m}>
+                                                                {tPaymentMethods(m)}
+                                                            </SelectItem>
+                                                        ))}
+                                                    </SelectGroup>
+                                                </SelectContent>
+                                            </Select>
                                             {isInvalid && <FieldError errors={field.state.meta.errors} />}
                                         </Field>
                                     )

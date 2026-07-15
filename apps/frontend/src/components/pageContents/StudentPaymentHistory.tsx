@@ -61,11 +61,14 @@ import { jwtDecode } from "jwt-decode"
 import api from "@/lib/api"
 import { useTranslations } from "next-intl"
 
+const paymentMethodValues = ["CASH", "CREDIT_CARD", "CLICK"] as const
+
 const StudentPaymentHistory = ({ studentId }: { studentId: string }) => {
     const router = useRouter()
     const t = useTranslations('StudentPaymentHistory')
     const tCommon = useTranslations('Common')
     const tMonths = useTranslations('Common.months')
+    const tPaymentMethods = useTranslations('Common.paymentMethods')
     const monthKey = (m: number) => String(m) as Parameters<typeof tMonths>[0]
     const searchParams = useSearchParams()
     const page = Number(searchParams.get('page') ?? 1)
@@ -75,7 +78,7 @@ const StudentPaymentHistory = ({ studentId }: { studentId: string }) => {
     const [openUpdate, setOpenUpdate] = useState(false)
     const [openDelete, setOpenDelete] = useState(false)
     const [selectedPayment, setSelectedPayment] = useState<StudentPaymentType | null>(null)
-    const [editForm, setEditForm] = useState({ month: 1, year: new Date().getFullYear(), amount: 0, comment: '' })
+    const [editForm, setEditForm] = useState({ month: 1, year: new Date().getFullYear(), amount: 0, paymentMethod: 'CASH' as (typeof paymentMethodValues)[number], comment: '' })
 
     const queryClient = useQueryClient()
     const token = useAuthStore((s) => s.token)
@@ -114,6 +117,7 @@ const StudentPaymentHistory = ({ studentId }: { studentId: string }) => {
                 month: data.month,
                 year: data.year,
                 amount: data.amount,
+                paymentMethod: data.paymentMethod,
                 comment: data.comment?.trim() || undefined,
             })
         },
@@ -183,6 +187,7 @@ const StudentPaymentHistory = ({ studentId }: { studentId: string }) => {
                         <TableHead className="text-center font-semibold">{t('monthYearHeader')}</TableHead>
                         <TableHead className="text-center font-semibold">{t('amountHeader')}</TableHead>
                         <TableHead className="text-center font-semibold">{t('groupHeader')}</TableHead>
+                        <TableHead className="text-center font-semibold">{t('paymentMethodHeader')}</TableHead>
                         <TableHead className="text-center font-semibold">{t('commentHeader')}</TableHead>
                         {canEdit && <TableHead className="w-16 text-center font-semibold">{tCommon('actions')}</TableHead>}
                     </TableRow>
@@ -190,7 +195,7 @@ const StudentPaymentHistory = ({ studentId }: { studentId: string }) => {
                 <TableBody>
                     {payments.length === 0 ? (
                         <TableRow>
-                            <TableCell colSpan={canEdit ? 6 : 5} className="text-center text-muted-foreground py-8">
+                            <TableCell colSpan={canEdit ? 7 : 6} className="text-center text-muted-foreground py-8">
                                 {t('noPaymentsFound')}
                             </TableCell>
                         </TableRow>
@@ -205,6 +210,9 @@ const StudentPaymentHistory = ({ studentId }: { studentId: string }) => {
                             </TableCell>
                             <TableCell className="text-center text-muted-foreground">
                                 {p.group?.name ?? '—'}
+                            </TableCell>
+                            <TableCell className="text-center text-muted-foreground">
+                                {tPaymentMethods(p.paymentMethod)}
                             </TableCell>
                             <TableCell className="text-center text-muted-foreground max-w-40 truncate">
                                 {p.comment ?? '—'}
@@ -225,6 +233,7 @@ const StudentPaymentHistory = ({ studentId }: { studentId: string }) => {
                                                         month: p.month,
                                                         year: p.year,
                                                         amount: Number(p.amount),
+                                                        paymentMethod: p.paymentMethod,
                                                         comment: p.comment ?? '',
                                                     })
                                                     setOpenUpdate(true)
@@ -352,6 +361,24 @@ const StudentPaymentHistory = ({ studentId }: { studentId: string }) => {
                                 value={editForm.amount}
                                 onChange={(e) => setEditForm(prev => ({ ...prev, amount: Number(e.target.value) }))}
                             />
+                        </Field>
+                        <Field>
+                            <Label>{t('paymentMethodLabel')}</Label>
+                            <Select
+                                value={editForm.paymentMethod}
+                                onValueChange={(v) => setEditForm(prev => ({ ...prev, paymentMethod: v as (typeof paymentMethodValues)[number] }))}
+                            >
+                                <SelectTrigger>
+                                    <SelectValue />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <SelectGroup>
+                                        {paymentMethodValues.map((m) => (
+                                            <SelectItem key={m} value={m}>{tPaymentMethods(m)}</SelectItem>
+                                        ))}
+                                    </SelectGroup>
+                                </SelectContent>
+                            </Select>
                         </Field>
                         <Field>
                             <Label>{t('commentOptionalLabel')}</Label>

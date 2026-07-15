@@ -1,5 +1,7 @@
 import { PaginationType } from "./groups";
 
+export type PaymentMethod = 'CASH' | 'CREDIT_CARD' | 'CLICK';
+
 export type StudentPaymentType = {
     id: string;
     studentId: string;
@@ -7,6 +9,7 @@ export type StudentPaymentType = {
     month: number;
     year: number;
     amount: number;
+    paymentMethod: PaymentMethod;
     comment?: string | null;
     createdAt: string;
     updatedAt: string;

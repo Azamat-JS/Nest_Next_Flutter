@@ -1,6 +1,7 @@
 import { Type } from "class-transformer";
-import { IsInt, IsNotEmpty, IsNumber, IsOptional, IsPositive, IsString, Max, Min } from "class-validator";
+import { IsEnum, IsInt, IsNotEmpty, IsNumber, IsOptional, IsPositive, IsString, Max, Min } from "class-validator";
 import { PaginationDto } from "src/lib/shared/dto/pagination.dto";
+import { PaymentMethod } from "@prisma/client";
 
 export class LatestPaymentsQueryDto extends PaginationDto {
     @IsOptional()
@@ -31,6 +32,10 @@ export class StudentPaymentDto {
     @Type(() => Number)
     amount!: number;
 
+    @IsEnum(PaymentMethod)
+    @IsNotEmpty()
+    paymentMethod!: PaymentMethod;
+
     @IsOptional()
     @IsString()
     comment?: string;
@@ -53,6 +58,10 @@ export class UpdatePaymentDto {
     @IsPositive()
     @Type(() => Number)
     amount?: number;
+
+    @IsOptional()
+    @IsEnum(PaymentMethod)
+    paymentMethod?: PaymentMethod;
 
     @IsOptional()
     @IsString()

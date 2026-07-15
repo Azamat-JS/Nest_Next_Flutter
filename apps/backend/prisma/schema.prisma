@@ -342,6 +342,8 @@ model StudentPayment {
 
   amount Decimal @db.Decimal(10, 2)
 
+  paymentMethod PaymentMethod @default(CASH)
+
   comment String?
 
   createdAt DateTime @default(now())
@@ -494,4 +496,10 @@ enum ScoreType {
   ATTENDANCE
   EXAM
   QUIZ
+}
+
+enum PaymentMethod {
+  CASH
+  CREDIT_CARD
+  CLICK
 }

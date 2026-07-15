@@ -14,6 +14,7 @@ const formatAmount = (amount: string) =>
 export default function TgPaymentsPage() {
     const t = useTranslations('TgPayments')
     const tMonths = useTranslations('Common.months')
+    const tPaymentMethods = useTranslations('Common.paymentMethods')
     const monthKey = (m: number) => String(m) as Parameters<typeof tMonths>[0]
     const { data: bootstrap } = useQuery({
         queryKey: ['tg-bootstrap'],
@@ -59,7 +60,10 @@ export default function TgPaymentsPage() {
                             </p>
                             {payment.comment && <p className="text-xs text-muted-foreground">{payment.comment}</p>}
                         </div>
-                        <Badge className="text-sm">{formatAmount(payment.amount)}</Badge>
+                        <div className="flex flex-col items-end gap-1">
+                            <Badge className="text-sm">{formatAmount(payment.amount)}</Badge>
+                            <Badge variant="outline" className="text-xs">{tPaymentMethods(payment.paymentMethod)}</Badge>
+                        </div>
                     </CardContent>
                 </Card>
             ))}

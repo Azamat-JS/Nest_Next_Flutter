@@ -34,6 +34,7 @@ export type PortalPayment = {
     month: number
     year: number
     amount: string
+    paymentMethod: 'CASH' | 'CREDIT_CARD' | 'CLICK'
     comment?: string | null
     createdAt: string
     student: { id: string; firstName: string; lastName?: string | null }
