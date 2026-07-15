@@ -41,13 +41,14 @@ export class HomeworkController {
         });
     }
 
-    // The lesson day must be one of the group's scheduled weekdays and fall
-    // within the current or previous ISO week. Dates arrive as "yyyy-MM-dd"
-    // (UTC midnight), so all calendar math here is done in UTC.
+    // The lesson day must be one of the group's scheduled weekdays (any
+    // weekday if the group has no schedule configured) and fall within the
+    // current or previous ISO week. Dates arrive as "yyyy-MM-dd" (UTC
+    // midnight), so all calendar math here is done in UTC.
     private async assertValidLessonDate(groupId: string, lessonDate: Date) {
         const scheduleDays = await this.homeworkRepo.findGroupScheduleDays(groupId);
         const isoDay = lessonDate.getUTCDay() === 0 ? 7 : lessonDate.getUTCDay();
-        if (!scheduleDays.includes(isoDay)) {
+        if (scheduleDays.length > 0 && !scheduleDays.includes(isoDay)) {
             throw new BadRequestException('lessonDate is not one of the group\'s scheduled lesson days');
         }
 

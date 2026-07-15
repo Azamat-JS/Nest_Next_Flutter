@@ -62,15 +62,16 @@ const AddHomeworkDrawer = ({ openCreate, setOpenCreate, groupId, onHomeworkAdded
     })
 
     // Selectable lesson days: the group's scheduled weekdays mapped onto the
-    // previous and current calendar weeks (ISO weeks, Monday first).
+    // previous and current calendar weeks (ISO weeks, Monday first). Groups
+    // without a configured schedule fall back to every day of both weeks.
     const lessonDayOptions = useMemo(() => {
-        const schedules = group?.lessonSchedules ?? []
-        if (schedules.length === 0) return []
+        const scheduledDays = (group?.lessonSchedules ?? []).map(s => s.dayOfWeek)
+        const days = scheduledDays.length > 0 ? scheduledDays : [1, 2, 3, 4, 5, 6, 7]
         const now = new Date()
         const isoToday = now.getDay() === 0 ? 7 : now.getDay()
         const monday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - (isoToday - 1))
-        return schedules
-            .flatMap(({ dayOfWeek }) => [
+        return days
+            .flatMap((dayOfWeek) => [
                 new Date(monday.getFullYear(), monday.getMonth(), monday.getDate() + dayOfWeek - 1 - 7),
                 new Date(monday.getFullYear(), monday.getMonth(), monday.getDate() + dayOfWeek - 1),
             ])
@@ -82,8 +83,8 @@ const AddHomeworkDrawer = ({ openCreate, setOpenCreate, groupId, onHomeworkAdded
         topic: z.string().min(1, t('topicRequired')),
         dueDate: z.string().min(1, t('dueDateRequired')),
         dueHour: z.string().min(1, t('hourRequired')),
-        lessonDate: lessonDayOptions.length > 0 ? z.string().min(1, t('lessonDayRequired')) : z.string(),
-    }), [t, lessonDayOptions])
+        lessonDate: z.string().min(1, t('lessonDayRequired')),
+    }), [t])
 
     const form = useForm({
         defaultValues: { topic: "", dueDate: "", dueHour: "09", lessonDate: "" },
@@ -144,33 +145,31 @@ const AddHomeworkDrawer = ({ openCreate, setOpenCreate, groupId, onHomeworkAdded
                                 }}
                             </form.Field>
 
-                            {lessonDayOptions.length > 0 && (
-                                <form.Field name="lessonDate">
-                                    {(field) => {
-                                        const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
-                                        return (
-                                            <Field data-invalid={isInvalid}>
-                                                <FieldLabel htmlFor={field.name}>{t('lessonDayLabel')}</FieldLabel>
-                                                <Select value={field.state.value} onValueChange={(val) => field.handleChange(val)}>
-                                                    <SelectTrigger id={field.name} className="w-full">
-                                                        <SelectValue placeholder={t('selectLessonDay')} />
-                                                    </SelectTrigger>
-                                                    <SelectContent>
-                                                        <SelectGroup>
-                                                            {lessonDayOptions.map((day) => (
-                                                                <SelectItem key={day} value={day}>
-                                                                    {formatter.dateTime(new Date(`${day}T00:00:00`), { weekday: 'short', day: 'numeric', month: 'short' })}
-                                                                </SelectItem>
-                                                            ))}
-                                                        </SelectGroup>
-                                                    </SelectContent>
-                                                </Select>
-                                                {isInvalid && <FieldError errors={field.state.meta.errors} />}
-                                            </Field>
-                                        )
-                                    }}
-                                </form.Field>
-                            )}
+                            <form.Field name="lessonDate">
+                                {(field) => {
+                                    const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
+                                    return (
+                                        <Field data-invalid={isInvalid}>
+                                            <FieldLabel htmlFor={field.name}>{t('lessonDayLabel')}</FieldLabel>
+                                            <Select value={field.state.value} onValueChange={(val) => field.handleChange(val)}>
+                                                <SelectTrigger id={field.name} className="w-full">
+                                                    <SelectValue placeholder={t('selectLessonDay')} />
+                                                </SelectTrigger>
+                                                <SelectContent>
+                                                    <SelectGroup>
+                                                        {lessonDayOptions.map((day) => (
+                                                            <SelectItem key={day} value={day}>
+                                                                {formatter.dateTime(new Date(`${day}T00:00:00`), { weekday: 'short', day: 'numeric', month: 'short' })}
+                                                            </SelectItem>
+                                                        ))}
+                                                    </SelectGroup>
+                                                </SelectContent>
+                                            </Select>
+                                            {isInvalid && <FieldError errors={field.state.meta.errors} />}
+                                        </Field>
+                                    )
+                                }}
+                            </form.Field>
 
                             <div className="flex gap-2">
                                 <form.Field name="dueDate">
