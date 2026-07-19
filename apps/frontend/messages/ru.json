@@ -668,5 +668,30 @@
     "deleteDescription": "«{name}» будет удалён.",
     "delete": "Удалить",
     "deleting": "Удаление..."
+  },
+  "HolidaysSettings": {
+    "title": "Выходные дни",
+    "description": "Дни, когда в вашем центре не проводятся занятия",
+    "createHoliday": "Добавить выходной",
+    "empty": "Выходных дней пока нет. Добавьте первый, чтобы начать.",
+    "dateHeader": "Дата",
+    "reasonHeader": "Причина",
+    "createTitle": "Новый выходной",
+    "editTitle": "Редактировать выходной",
+    "dateLabel": "Дата",
+    "datePlaceholder": "Выберите дату",
+    "reasonLabel": "Причина",
+    "reasonPlaceholder": "напр. Новый год",
+    "dateRequired": "Выберите дату",
+    "reasonRequired": "Укажите причину",
+    "save": "Сохранить",
+    "saving": "Сохранение...",
+    "created": "Выходной добавлен",
+    "updated": "Выходной обновлён",
+    "deleted": "Выходной удалён",
+    "deleteTitle": "Удалить выходной?",
+    "deleteDescription": "Выходной {date} будет удалён.",
+    "delete": "Удалить",
+    "deleting": "Удаление..."
   }
 }

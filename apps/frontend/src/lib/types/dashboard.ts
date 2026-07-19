@@ -37,6 +37,13 @@ export type CourseType = {
     createdAt?: string;
 }
 
+export type HolidayType = {
+    id: string;
+    date: string; // ISO date string
+    reason: string;
+    createdAt?: string;
+}
+
 export type ScheduleLesson = {
     id: string;
     dayOfWeek: number; // ISO-8601: 1 = Monday ... 7 = Sunday

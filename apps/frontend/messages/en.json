@@ -668,5 +668,30 @@
     "deleteDescription": "\"{name}\" will be removed.",
     "delete": "Delete",
     "deleting": "Deleting..."
+  },
+  "HolidaysSettings": {
+    "title": "Holidays",
+    "description": "Days off when your center does not hold lessons",
+    "createHoliday": "Create Holiday",
+    "empty": "No holidays yet. Create your first holiday to get started.",
+    "dateHeader": "Date",
+    "reasonHeader": "Reason",
+    "createTitle": "Create a holiday",
+    "editTitle": "Edit holiday",
+    "dateLabel": "Date",
+    "datePlaceholder": "Pick a date",
+    "reasonLabel": "Reason",
+    "reasonPlaceholder": "e.g. New Year",
+    "dateRequired": "Date is required",
+    "reasonRequired": "Reason is required",
+    "save": "Save",
+    "saving": "Saving...",
+    "created": "Holiday created",
+    "updated": "Holiday updated",
+    "deleted": "Holiday deleted",
+    "deleteTitle": "Delete holiday?",
+    "deleteDescription": "The holiday on {date} will be removed.",
+    "delete": "Delete",
+    "deleting": "Deleting..."
   }
 }

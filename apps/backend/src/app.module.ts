@@ -16,6 +16,7 @@ import { TelegramModule } from './telegram/telegram.module';
 import { PortalModule } from './portal/portal.module';
 import { RoomModule } from './room/room.module';
 import { CourseModule } from './course/course.module';
+import { HolidayModule } from './holiday/holiday.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { TenantModule } from './lib/tenant/tenant.module';
 import { JwtAuthGuard } from './lib/guards/jwt.guard';
@@ -49,6 +50,7 @@ import { AppConfig } from './lib/config';
     PortalModule,
     RoomModule,
     CourseModule,
+    HolidayModule,
     DashboardModule,
   ],
   controllers: [],

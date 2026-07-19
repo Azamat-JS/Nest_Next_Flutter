@@ -668,5 +668,30 @@
     "deleteDescription": "\"{name}\" o'chiriladi.",
     "delete": "O'chirish",
     "deleting": "O'chirilmoqda..."
+  },
+  "HolidaysSettings": {
+    "title": "Dam olish kunlari",
+    "description": "Markazingizda darslar o'tkazilmaydigan kunlar",
+    "createHoliday": "Dam olish kuni qo'shish",
+    "empty": "Dam olish kunlari hali yo'q. Boshlash uchun birinchisini qo'shing.",
+    "dateHeader": "Sana",
+    "reasonHeader": "Sabab",
+    "createTitle": "Yangi dam olish kuni",
+    "editTitle": "Dam olish kunini tahrirlash",
+    "dateLabel": "Sana",
+    "datePlaceholder": "Sanani tanlang",
+    "reasonLabel": "Sabab",
+    "reasonPlaceholder": "masalan, Yangi yil",
+    "dateRequired": "Sanani tanlang",
+    "reasonRequired": "Sababni kiriting",
+    "save": "Saqlash",
+    "saving": "Saqlanmoqda...",
+    "created": "Dam olish kuni qo'shildi",
+    "updated": "Dam olish kuni yangilandi",
+    "deleted": "Dam olish kuni o'chirildi",
+    "deleteTitle": "Dam olish kuni o'chirilsinmi?",
+    "deleteDescription": "{date} sanasidagi dam olish kuni o'chiriladi.",
+    "delete": "O'chirish",
+    "deleting": "O'chirilmoqda..."
   }
 }

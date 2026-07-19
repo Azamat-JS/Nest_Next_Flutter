@@ -41,6 +41,7 @@ model Tenant {
   lessonSchedules GroupLessonSchedule[]
   rooms           Room[]
   courses         Course[]
+  holidays        Holiday[]
 
   @@map("Tenant")
 }
@@ -324,6 +325,22 @@ model Course {
   @@unique([tenantId, name])
   @@index([tenantId])
   @@map("Course")
+}
+
+model Holiday {
+  id     String   @id @default(cuid())
+  date   DateTime @db.Date
+  reason String
+
+  tenantId String
+  tenant   Tenant @relation(fields: [tenantId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([tenantId, date])
+  @@index([tenantId])
+  @@map("Holiday")
 }
 
 model ScoreEvent {
