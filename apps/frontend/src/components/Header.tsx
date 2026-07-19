@@ -11,6 +11,7 @@ import { GraduationCap } from "lucide-react"
 import { useAuthStore } from "@/lib/stores/authStore"
 
 const navLinks = [
+    { key: 'dashboard', href: '/dashboard' },
     { key: 'users', href: '/home' },
     { key: 'groups', href: '/groups' },
     { key: 'payments', href: '/payments' },
@@ -31,7 +32,7 @@ export const Header = () => {
     if (mustChangePassword) return null
 
     const visibleLinks = role === 'STUDENT'
-        ? navLinks.filter((link) => link.key !== 'users' && link.key !== 'payments')
+        ? navLinks.filter((link) => link.key !== 'users' && link.key !== 'payments' && link.key !== 'dashboard')
         : navLinks
 
     return (

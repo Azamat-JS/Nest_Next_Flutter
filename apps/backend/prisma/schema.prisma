@@ -39,6 +39,7 @@ model Tenant {
   homeworks       Homework[]
   telegramLinks   TelegramLink[]
   lessonSchedules GroupLessonSchedule[]
+  rooms           Room[]
 
   @@map("Tenant")
 }
@@ -269,6 +270,11 @@ model GroupLessonSchedule {
 
   dayOfWeek Int
   time      String
+  // Lesson length in minutes; used to draw room-occupancy blocks.
+  durationMinutes Int @default(90)
+
+  roomId String?
+  room   Room?   @relation(fields: [roomId], references: [id], onDelete: SetNull)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -276,7 +282,27 @@ model GroupLessonSchedule {
   @@unique([groupId, dayOfWeek])
   @@index([groupId])
   @@index([tenantId])
+  @@index([roomId])
   @@map("GroupLessonSchedule")
+}
+
+// Physical classroom of a tenant; lessons are assigned to rooms to build the
+// occupancy timetable on the dashboard.
+model Room {
+  id   String @id @default(cuid())
+  name String
+
+  tenantId String
+  tenant   Tenant @relation(fields: [tenantId], references: [id])
+
+  lessonSchedules GroupLessonSchedule[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([tenantId, name])
+  @@index([tenantId])
+  @@map("Room")
 }
 
 model ScoreEvent {

@@ -2,15 +2,212 @@
 > frontend@0.1.0 dev /Users/azamatabdullayev/Desktop/full-stack-turbo/apps/frontend
 > next dev --turbopack -p 4008
 
-[31m[1m⨯[22m[39m Failed to start server
-Error: listen EADDRINUSE: address already in use :::4008
-    at <unknown> (Error: listen EADDRINUSE: address already in use :::4008)
-    at new Promise (<anonymous>) {
-  code: [32m'EADDRINUSE'[39m,
-  errno: [33m-48[39m,
-  syscall: [32m'listen'[39m,
-  address: [32m'::'[39m,
-  port: [33m4008[39m
-}
-[?25h
-[41m[30m ELIFECYCLE [39m[49m [31mCommand failed with exit code 1.[39m
+[1m[38;2;173;127;168m▲ Next.js 16.2.10[39m[22m (Turbopack)
+- Local:         http://localhost:4008
+- Network:       http://192.168.13.118:4008
+- Environments: .env.local
+[32m[1m✓[22m[39m Ready in 309ms
+
+ GET / [32m200[39m in 749ms[2m (next.js: 454ms, application-code: 296ms)[22m
+ GET /?tab=waiting-list [32m200[39m in 47ms[2m (next.js: 11ms, application-code: 36ms)[22m
+ GET /?tab=waiting-list [32m200[39m in 12ms[2m (next.js: 1524µs, application-code: 10ms)[22m
+ GET /?tab=users [32m200[39m in 42ms[2m (next.js: 7ms, application-code: 35ms)[22m
+ GET /?tab=users [32m200[39m in 15ms[2m (next.js: 2ms, application-code: 13ms)[22m
+[32m[1m✓[22m[39m Compiled in 281ms
+[32m[1m✓[22m[39m Compiled in 632ms
+[32m[1m✓[22m[39m Compiled in 338ms
+[32m[1m✓[22m[39m Compiled in 79ms
+ GET /?tab=users [32m200[39m in 127ms[2m (next.js: 64ms, application-code: 63ms)[22m
+ GET /?tab=users [32m200[39m in 23ms[2m (next.js: 1181µs, application-code: 22ms)[22m
+ GET /?tab=users [32m200[39m in 12ms[2m (next.js: 1004µs, application-code: 11ms)[22m
+[32m[1m✓[22m[39m Compiled in 69ms
+[32m[1m✓[22m[39m Compiled in 106ms
+[32m[1m✓[22m[39m Compiled in 41ms
+ GET /?tab=users [32m200[39m in 117ms[2m (next.js: 43ms, application-code: 73ms)[22m
+ GET /?tab=users [32m200[39m in 49ms[2m (next.js: 1250µs, application-code: 47ms)[22m
+ GET /?tab=users [32m200[39m in 41ms[2m (next.js: 1101µs, application-code: 40ms)[22m
+ GET /?tab=users [32m200[39m in 33ms[2m (next.js: 1013µs, application-code: 32ms)[22m
+ GET /?tab=users [32m200[39m in 22ms[2m (next.js: 892µs, application-code: 21ms)[22m
+ GET /?tab=users [32m200[39m in 13ms[2m (next.js: 2ms, application-code: 11ms)[22m
+ GET /?tab=users [32m200[39m in 80ms[2m (next.js: 37ms, application-code: 44ms)[22m
+ GET /?tab=users [32m200[39m in 18ms[2m (next.js: 4ms, application-code: 14ms)[22m
+[36m[browser][39m [31mError: MISSING_MESSAGE: Could not resolve `Header.nav.dashboard` in messages for locale `uz`.[39m
+[31m    at eval (src/components/Header.tsx:58:34)
+    at Array.map (<anonymous>)
+    at Header (src/components/Header.tsx:47:35)
+    at Set.forEach (<anonymous>)
+    at RootLayout (src/app/layout.tsx:49:29)[39m
+  [90m56 |[0m                                     [32m}`[0m}
+  [90m57 |[0m                             >
+[31m[1m>[0m [90m58 |[0m                                 {t(link.key)}
+  [90m   |[0m                                  [31m[1m^[0m
+  [90m59 |[0m                                 {isActive && (
+  [90m60 |[0m                                     <span className=[32m"absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 w-4 rounded-full...[0m
+  [90m61 |[0m                                 )} [2m(src/components/Header.tsx:58:34)[22m
+[36m[browser][39m [31mError: MISSING_MESSAGE: Could not resolve `Header.nav.dashboard` in messages for locale `uz`.[39m
+[31m    at eval (src/components/Header.tsx:58:34)
+    at Array.map (<anonymous>)
+    at Header (src/components/Header.tsx:47:35)
+    at Set.forEach (<anonymous>)
+    at RootLayout (src/app/layout.tsx:49:29)[39m
+  [90m56 |[0m                                     [32m}`[0m}
+  [90m57 |[0m                             >
+[31m[1m>[0m [90m58 |[0m                                 {t(link.key)}
+  [90m   |[0m                                  [31m[1m^[0m
+  [90m59 |[0m                                 {isActive && (
+  [90m60 |[0m                                     <span className=[32m"absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 w-4 rounded-full...[0m
+  [90m61 |[0m                                 )} [2m(src/components/Header.tsx:58:34)[22m
+[36m[browser][39m [31mError: MISSING_MESSAGE: Could not resolve `Header.nav.dashboard` in messages for locale `uz`.[39m
+[31m    at eval (src/components/Header.tsx:58:34)
+    at Array.map (<anonymous>)
+    at Header (src/components/Header.tsx:47:35)
+    at Set.forEach (<anonymous>)
+    at RootLayout (src/app/layout.tsx:49:29)[39m
+  [90m56 |[0m                                     [32m}`[0m}
+  [90m57 |[0m                             >
+[31m[1m>[0m [90m58 |[0m                                 {t(link.key)}
+  [90m   |[0m                                  [31m[1m^[0m
+  [90m59 |[0m                                 {isActive && (
+  [90m60 |[0m                                     <span className=[32m"absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 w-4 rounded-full...[0m
+  [90m61 |[0m                                 )} [2m(src/components/Header.tsx:58:34)[22m
+[36m[browser][39m [31mError: MISSING_MESSAGE: Could not resolve `Header.nav.dashboard` in messages for locale `uz`.[39m
+[31m    at eval (src/components/Header.tsx:58:34)
+    at Array.map (<anonymous>)
+    at Header (src/components/Header.tsx:47:35)
+    at Set.forEach (<anonymous>)
+    at RootLayout (src/app/layout.tsx:49:29)[39m
+  [90m56 |[0m                                     [32m}`[0m}
+  [90m57 |[0m                             >
+[31m[1m>[0m [90m58 |[0m                                 {t(link.key)}
+  [90m   |[0m                                  [31m[1m^[0m
+  [90m59 |[0m                                 {isActive && (
+  [90m60 |[0m                                     <span className=[32m"absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 w-4 rounded-full...[0m
+  [90m61 |[0m                                 )} [2m(src/components/Header.tsx:58:34)[22m
+[36m[browser][39m [31mError: MISSING_MESSAGE: Could not resolve `Header.nav.dashboard` in messages for locale `uz`.[39m
+[31m    at eval (src/components/Header.tsx:58:34)
+    at Array.map (<anonymous>)
+    at Header (src/components/Header.tsx:47:35)
+    at RootLayout (src/app/layout.tsx:49:29)[39m
+  [90m56 |[0m                                     [32m}`[0m}
+  [90m57 |[0m                             >
+[31m[1m>[0m [90m58 |[0m                                 {t(link.key)}
+  [90m   |[0m                                  [31m[1m^[0m
+  [90m59 |[0m                                 {isActive && (
+  [90m60 |[0m                                     <span className=[32m"absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 w-4 rounded-full...[0m
+  [90m61 |[0m                                 )} [2m(src/components/Header.tsx:58:34)[22m
+[36m[browser][39m [31mError: MISSING_MESSAGE: Could not resolve `Header.nav.dashboard` in messages for locale `uz`.[39m
+[31m    at eval (src/components/Header.tsx:58:34)
+    at Array.map (<anonymous>)
+    at Header (src/components/Header.tsx:47:35)
+    at RootLayout (src/app/layout.tsx:49:29)[39m
+  [90m56 |[0m                                     [32m}`[0m}
+  [90m57 |[0m                             >
+[31m[1m>[0m [90m58 |[0m                                 {t(link.key)}
+  [90m   |[0m                                  [31m[1m^[0m
+  [90m59 |[0m                                 {isActive && (
+  [90m60 |[0m                                     <span className=[32m"absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 w-4 rounded-full...[0m
+  [90m61 |[0m                                 )} [2m(src/components/Header.tsx:58:34)[22m
+[36m[browser][39m [31mError: MISSING_MESSAGE: Could not resolve `Header.nav.dashboard` in messages for locale `uz`.[39m
+[31m    at eval (src/components/Header.tsx:58:34)
+    at Array.map (<anonymous>)
+    at Header (src/components/Header.tsx:47:35)
+    at RootLayout (src/app/layout.tsx:49:29)[39m
+  [90m56 |[0m                                     [32m}`[0m}
+  [90m57 |[0m                             >
+[31m[1m>[0m [90m58 |[0m                                 {t(link.key)}
+  [90m   |[0m                                  [31m[1m^[0m
+  [90m59 |[0m                                 {isActive && (
+  [90m60 |[0m                                     <span className=[32m"absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 w-4 rounded-full...[0m
+  [90m61 |[0m                                 )} [2m(src/components/Header.tsx:58:34)[22m
+[36m[browser][39m [31mError: MISSING_MESSAGE: Could not resolve `Header.nav.dashboard` in messages for locale `uz`.[39m
+[31m    at eval (src/components/Header.tsx:58:34)
+    at Array.map (<anonymous>)
+    at Header (src/components/Header.tsx:47:35)
+    at RootLayout (src/app/layout.tsx:49:29)[39m
+  [90m56 |[0m                                     [32m}`[0m}
+  [90m57 |[0m                             >
+[31m[1m>[0m [90m58 |[0m                                 {t(link.key)}
+  [90m   |[0m                                  [31m[1m^[0m
+  [90m59 |[0m                                 {isActive && (
+  [90m60 |[0m                                     <span className=[32m"absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 w-4 rounded-full...[0m
+  [90m61 |[0m                                 )} [2m(src/components/Header.tsx:58:34)[22m
+ GET /?tab=users [32m200[39m in 24ms[2m (next.js: 8ms, application-code: 16ms)[22m
+ GET / [32m200[39m in 161ms[2m (next.js: 3ms, application-code: 157ms)[22m
+ GET /dashboard [32m200[39m in 118ms[2m (next.js: 53ms, application-code: 65ms)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+ GET /settings/rooms [32m200[39m in 52ms[2m (next.js: 16ms, application-code: 36ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+ GET /dashboard [32m200[39m in 34ms[2m (next.js: 3ms, application-code: 31ms)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+ GET / [32m200[39m in 51ms[2m (next.js: 2ms, application-code: 49ms)[22m
+ GET /groups [32m200[39m in 120ms[2m (next.js: 36ms, application-code: 84ms)[22m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+[36m[browser][39m [33mWarning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.[39m
+ GET /dashboard [32m200[39m in 56ms[2m (next.js: 3ms, application-code: 52ms)[22m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m

@@ -23,13 +23,24 @@ export class GroupRepository {
     return tx.groupLessonSchedule.createMany({ data })
   }
 
-  async replaceLessonSchedules(tx: TenantScopedTransactionClient, groupId: string, schedules: { dayOfWeek: number; time: string }[]) {
+  async replaceLessonSchedules(tx: TenantScopedTransactionClient, groupId: string, schedules: { dayOfWeek: number; time: string; durationMinutes?: number; roomId?: string }[]) {
     const tenantId = this.tenantContext.getTenantId()!;
     await tx.groupLessonSchedule.deleteMany({ where: { groupId } });
     if (schedules.length > 0) {
       await tx.groupLessonSchedule.createMany({
         data: schedules.map(schedule => ({ ...schedule, groupId, tenantId })),
       });
+    }
+  }
+
+  async assertRoomsExist(roomIds: string[]) {
+    if (roomIds.length === 0) return;
+    const rooms = await this.prisma.room.findMany({
+      where: { id: { in: roomIds } },
+      select: { id: true },
+    });
+    if (rooms.length !== roomIds.length) {
+      throw new NotFoundException('Some rooms not found');
     }
   }
 
@@ -127,6 +138,9 @@ export class GroupRepository {
           select: {
             dayOfWeek: true,
             time: true,
+            durationMinutes: true,
+            roomId: true,
+            room: { select: { id: true, name: true } },
           },
           orderBy: { dayOfWeek: 'asc' },
         },

@@ -11,6 +11,16 @@ export class LessonScheduleDto {
     @IsString()
     @Matches(/^([01]\d|2[0-3]):[0-5]\d$/, { message: 'time must be in HH:mm format' })
     time!: string;
+
+    @IsOptional()
+    @IsInt()
+    @Min(15)
+    @Max(600)
+    durationMinutes?: number;
+
+    @IsOptional()
+    @IsString()
+    roomId?: string;
 }
 
 export class CreateGroupDto {

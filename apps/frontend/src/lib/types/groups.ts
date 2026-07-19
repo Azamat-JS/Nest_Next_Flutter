@@ -3,6 +3,9 @@ import { TokenPayload } from "./token_payload";
 export type LessonScheduleType = {
     dayOfWeek: number; // ISO-8601: 1 = Monday ... 7 = Sunday
     time: string; // "HH:mm"
+    durationMinutes?: number;
+    roomId?: string | null;
+    room?: { id: string; name: string } | null;
 }
 
 export type GroupType = {

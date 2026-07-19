@@ -14,6 +14,8 @@ import { WaitingListModule } from './waiting-list/waiting-list.module';
 import { HomeworkModule } from './homework/homework.module';
 import { TelegramModule } from './telegram/telegram.module';
 import { PortalModule } from './portal/portal.module';
+import { RoomModule } from './room/room.module';
+import { DashboardModule } from './dashboard/dashboard.module';
 import { TenantModule } from './lib/tenant/tenant.module';
 import { JwtAuthGuard } from './lib/guards/jwt.guard';
 import { AppConfig } from './lib/config';
@@ -44,6 +46,8 @@ import { AppConfig } from './lib/config';
     HomeworkModule,
     TelegramModule,
     PortalModule,
+    RoomModule,
+    DashboardModule,
   ],
   controllers: [],
   providers: [

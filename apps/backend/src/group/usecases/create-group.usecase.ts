@@ -22,6 +22,9 @@ export class CreateGroupUseCase {
 
         const studentIds = dto.studentIds?.filter(Boolean) ?? [];
 
+        const roomIds = [...new Set(dto.lessonSchedules?.map(s => s.roomId).filter((id): id is string => !!id) ?? [])];
+        await this.groupRepo.assertRoomsExist(roomIds);
+
         const tenantId = this.tenantContext.getTenantId()!;
 
         return await this.prisma.$transaction(async (tx) => {
@@ -47,9 +50,11 @@ export class CreateGroupUseCase {
 
             if (dto.lessonSchedules && dto.lessonSchedules.length > 0) {
                 await this.groupRepo.createLessonSchedules(tx,
-                    dto.lessonSchedules.map(({ dayOfWeek, time }) => ({
+                    dto.lessonSchedules.map(({ dayOfWeek, time, durationMinutes, roomId }) => ({
                         dayOfWeek,
                         time,
+                        durationMinutes,
+                        roomId,
                         groupId: group.id,
                         tenantId,
                     }))

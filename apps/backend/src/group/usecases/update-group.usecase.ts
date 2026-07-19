@@ -21,6 +21,9 @@ export class UpdateGroupUseCase {
             }
         }
 
+        const roomIds = [...new Set(dto.lessonSchedules?.map(s => s.roomId).filter((id): id is string => !!id) ?? [])];
+        await this.groupRepo.assertRoomsExist(roomIds);
+
         return await this.prisma.$transaction(async (tx) => {
             await this.groupRepo.update(tx, id, {
                 ...(dto.name && {
