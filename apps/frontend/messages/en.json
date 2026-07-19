@@ -693,5 +693,31 @@
     "deleteDescription": "The holiday on {date} will be removed.",
     "delete": "Delete",
     "deleting": "Deleting..."
+  },
+  "GeneralSettings": {
+    "title": "General settings",
+    "description": "Organization profile, branches and working hours",
+    "orgTitle": "Organization",
+    "nameLabel": "Organization name:",
+    "namePlaceholder": "e.g. EduCenter",
+    "logoLabel": "Logo:",
+    "uploadLogo": "Update",
+    "logoTooLarge": "Image is too large. Please choose a smaller one.",
+    "saved": "Settings saved",
+    "branchesTitle": "Branches",
+    "addBranch": "New branch",
+    "branchNamePlaceholder": "e.g. Main branch",
+    "branchesEmpty": "No branches yet.",
+    "branchCreated": "Branch created",
+    "branchUpdated": "Branch updated",
+    "branchDeleted": "Branch deleted",
+    "deleteBranchTitle": "Delete branch?",
+    "deleteBranchDescription": "\"{name}\" will be removed.",
+    "delete": "Delete",
+    "deleting": "Deleting...",
+    "hoursTitle": "Working hours",
+    "startLabel": "Opening time:",
+    "endLabel": "Closing time:",
+    "hoursInvalid": "Closing time must be after opening time"
   }
 }

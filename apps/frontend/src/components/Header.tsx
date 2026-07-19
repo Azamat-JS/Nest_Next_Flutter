@@ -8,7 +8,10 @@ import { LanguageSwitcher } from "./language-switcher"
 import { DropdownMenuDemo } from "./DropDownMenu"
 import { SettingsNavMenu } from "./SettingsNavMenu"
 import { GraduationCap } from "lucide-react"
+import { useQuery } from "@tanstack/react-query"
+import api from "@/lib/api"
 import { useAuthStore } from "@/lib/stores/authStore"
+import { OrganizationSettings } from "@/lib/types/dashboard"
 
 const navLinks = [
     { key: 'dashboard', href: '/dashboard' },
@@ -26,6 +29,13 @@ export const Header = () => {
     const mustChangePassword = useAuthStore((state) => state.mustChangePassword)
     const role = useAuthStore((state) => state.role)
 
+    const { data: org } = useQuery<OrganizationSettings>({
+        queryKey: ['organization'],
+        queryFn: async () => (await api.get('/organization')).data,
+        staleTime: 1000 * 60 * 5,
+        enabled: isAuthenticated && !mustChangePassword && !pathname.startsWith('/tg'),
+    })
+
     // The Telegram mini app has its own bottom navigation.
     if (pathname.startsWith('/tg')) return null
     if (!isAuthenticated) return null
@@ -39,8 +49,13 @@ export const Header = () => {
         <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
             <div className="flex h-16 items-center justify-between px-4 sm:px-6 lg:px-10">
                 <Link href="/home" className="flex items-center gap-2 font-bold text-xl hover:opacity-80 transition-opacity">
-                    <GraduationCap className="h-6 w-6 text-primary" />
-                    <span>EduCenter</span>
+                    {org?.logoUrl ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={org.logoUrl} alt="" className="h-8 w-8 rounded object-contain" />
+                    ) : (
+                        <GraduationCap className="h-6 w-6 text-primary" />
+                    )}
+                    <span>{org?.name ?? 'EduCenter'}</span>
                 </Link>
 
                 <nav className="flex items-center gap-1">

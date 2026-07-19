@@ -27,6 +27,7 @@ const TENANT_SCOPED_MODELS = new Set([
     'Room',
     'Course',
     'Holiday',
+    'Branch',
 ]);
 
 const WHERE_FILTERED_OPERATIONS = new Set([

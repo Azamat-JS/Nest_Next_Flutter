@@ -211,3 +211,90 @@
        please check the style of container, or the props width(100%) and height(100%),
        or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
        height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+[36m[browser][39m [33mThe width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.[39m
+ GET /dashboard [32m200[39m in 35ms[2m (next.js: 9ms, application-code: 26ms)[22m
+ GET /settings/rooms [32m200[39m in 31ms[2m (next.js: 6ms, application-code: 25ms)[22m
+ GET /settings/courses [32m200[39m in 60ms[2m (next.js: 36ms, application-code: 24ms)[22m
+ GET /settings/holidays [32m200[39m in 68ms[2m (next.js: 50ms, application-code: 18ms)[22m
+ GET /settings/staff [32m200[39m in 48ms[2m (next.js: 25ms, application-code: 23ms)[22m
+ GET /settings/roles [32m200[39m in 54ms[2m (next.js: 35ms, application-code: 19ms)[22m
+ GET /settings/roles [32m200[39m in 21ms[2m (next.js: 2ms, application-code: 19ms)[22m
+[32m[1m✓[22m[39m Compiled in 201ms
+ GET /settings/roles [32m200[39m in 134ms[2m (next.js: 57ms, application-code: 77ms)[22m
+ GET /settings/roles [32m200[39m in 34ms[2m (next.js: 1536µs, application-code: 32ms)[22m
+ GET /settings/roles [32m200[39m in 13ms[2m (next.js: 1111µs, application-code: 12ms)[22m
+ GET /settings/roles [32m200[39m in 71ms[2m (next.js: 3ms, application-code: 67ms)[22m
+ GET /settings/roles [32m200[39m in 67ms[2m (next.js: 1092µs, application-code: 66ms)[22m
+ GET /settings/roles [32m200[39m in 94ms[2m (next.js: 1024µs, application-code: 93ms)[22m
+ GET /settings/roles [32m200[39m in 81ms[2m (next.js: 876µs, application-code: 80ms)[22m
+ GET /settings/roles [32m200[39m in 70ms[2m (next.js: 788µs, application-code: 69ms)[22m
+ GET /settings/roles [32m200[39m in 59ms[2m (next.js: 1811µs, application-code: 57ms)[22m
+ GET /settings/roles [32m200[39m in 43ms[2m (next.js: 2ms, application-code: 41ms)[22m
+ GET /settings/roles [32m200[39m in 20ms[2m (next.js: 7ms, application-code: 13ms)[22m
+ GET /settings/courses [32m200[39m in 53ms[2m (next.js: 26ms, application-code: 27ms)[22m
+[32m[1m✓[22m[39m Compiled in 62ms
+[32m[1m✓[22m[39m Compiled in 28ms
+ GET /settings/courses [32m200[39m in 20ms[2m (next.js: 3ms, application-code: 17ms)[22m
+[32m[1m✓[22m[39m Compiled in 839ms
+ GET /settings/courses [32m200[39m in 126ms[2m (next.js: 57ms, application-code: 69ms)[22m
+ GET /settings/courses [32m200[39m in 34ms[2m (next.js: 1324µs, application-code: 33ms)[22m
+ GET /settings/courses [32m200[39m in 13ms[2m (next.js: 971µs, application-code: 12ms)[22m
+ GET /settings/courses [32m200[39m in 74ms[2m (next.js: 8ms, application-code: 66ms)[22m
+ GET /settings/courses [32m200[39m in 65ms[2m (next.js: 876µs, application-code: 64ms)[22m
+ GET /settings/courses [32m200[39m in 79ms[2m (next.js: 855µs, application-code: 78ms)[22m
+ GET /settings/courses [32m200[39m in 71ms[2m (next.js: 929µs, application-code: 70ms)[22m
+ GET /settings/courses [32m200[39m in 64ms[2m (next.js: 917µs, application-code: 63ms)[22m
+ GET /settings/courses [32m200[39m in 51ms[2m (next.js: 829µs, application-code: 51ms)[22m
+ GET /settings/courses [32m200[39m in 40ms[2m (next.js: 2ms, application-code: 38ms)[22m
+ GET /settings/courses [32m200[39m in 26ms[2m (next.js: 1854µs, application-code: 24ms)[22m
+ GET /settings/holidays [32m200[39m in 48ms[2m (next.js: 23ms, application-code: 25ms)[22m
+ GET /settings [32m200[39m in 53ms[2m (next.js: 32ms, application-code: 21ms)[22m
+[32m[1m✓[22m[39m Compiled in 67ms
+ GET /settings [32m200[39m in 346ms[2m (next.js: 158ms, application-code: 187ms)[22m
+ GET /settings [32m200[39m in 112ms[2m (next.js: 47ms, application-code: 65ms)[22m
+ GET /settings [32m200[39m in 30ms[2m (next.js: 1114µs, application-code: 29ms)[22m
+ GET /settings [32m200[39m in 17ms[2m (next.js: 2ms, application-code: 15ms)[22m
+[32m[1m✓[22m[39m Compiled in 48ms
+[32m[1m✓[22m[39m Compiled in 1128ms
+ GET /settings [32m200[39m in 391ms[2m (next.js: 100ms, application-code: 290ms)[22m
+ GET /settings [32m200[39m in 231ms[2m (next.js: 162ms, application-code: 68ms)[22m
+ GET /settings [32m200[39m in 15ms[2m (next.js: 3ms, application-code: 12ms)[22m
+ GET /settings [32m200[39m in 236ms[2m (next.js: 42ms, application-code: 194ms)[22m
+[32m[1m✓[22m[39m Compiled in 47ms
+ GET /settings [32m200[39m in 106ms[2m (next.js: 24ms, application-code: 83ms)[22m
+ GET /settings [32m200[39m in 81ms[2m (next.js: 1319µs, application-code: 80ms)[22m
+ GET /settings [32m200[39m in 80ms[2m (next.js: 1111µs, application-code: 79ms)[22m
+ GET /settings [32m200[39m in 79ms[2m (next.js: 1010µs, application-code: 78ms)[22m
+ GET /settings [32m200[39m in 69ms[2m (next.js: 1192µs, application-code: 68ms)[22m
+ GET /settings [32m200[39m in 55ms[2m (next.js: 1011µs, application-code: 54ms)[22m
+ GET /settings [32m200[39m in 43ms[2m (next.js: 1008µs, application-code: 42ms)[22m
+ GET /settings [32m200[39m in 29ms[2m (next.js: 1262µs, application-code: 28ms)[22m
+ GET /settings [32m200[39m in 16ms[2m (next.js: 1042µs, application-code: 15ms)[22m
+[?25h

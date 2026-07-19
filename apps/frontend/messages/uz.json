@@ -693,5 +693,31 @@
     "deleteDescription": "{date} sanasidagi dam olish kuni o'chiriladi.",
     "delete": "O'chirish",
     "deleting": "O'chirilmoqda..."
+  },
+  "GeneralSettings": {
+    "title": "Umumiy sozlamalar",
+    "description": "Tashkilot profili, filiallar va ish vaqti",
+    "orgTitle": "Tashkilot",
+    "nameLabel": "Tashkilot nomi:",
+    "namePlaceholder": "masalan, Zo'r Ta'lim",
+    "logoLabel": "Logo:",
+    "uploadLogo": "Yangilash",
+    "logoTooLarge": "Rasm juda katta. Kichikroq rasm tanlang.",
+    "saved": "Sozlamalar saqlandi",
+    "branchesTitle": "Filiallar",
+    "addBranch": "Yangi filial",
+    "branchNamePlaceholder": "masalan, Markaziy filial",
+    "branchesEmpty": "Hozircha filiallar yo'q.",
+    "branchCreated": "Filial qo'shildi",
+    "branchUpdated": "Filial yangilandi",
+    "branchDeleted": "Filial o'chirildi",
+    "deleteBranchTitle": "Filial o'chirilsinmi?",
+    "deleteBranchDescription": "\"{name}\" o'chiriladi.",
+    "delete": "O'chirish",
+    "deleting": "O'chirilmoqda...",
+    "hoursTitle": "Ish vaqti",
+    "startLabel": "Ish boshlanish vaqti:",
+    "endLabel": "Ish tugash vaqti:",
+    "hoursInvalid": "Tugash vaqti boshlanish vaqtidan keyin bo'lishi kerak"
   }
 }

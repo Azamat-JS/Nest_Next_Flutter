@@ -693,5 +693,31 @@
     "deleteDescription": "Выходной {date} будет удалён.",
     "delete": "Удалить",
     "deleting": "Удаление..."
+  },
+  "GeneralSettings": {
+    "title": "Общие настройки",
+    "description": "Профиль организации, филиалы и часы работы",
+    "orgTitle": "Организация",
+    "nameLabel": "Название организации:",
+    "namePlaceholder": "например, EduCenter",
+    "logoLabel": "Логотип:",
+    "uploadLogo": "Обновить",
+    "logoTooLarge": "Изображение слишком большое. Выберите файл поменьше.",
+    "saved": "Настройки сохранены",
+    "branchesTitle": "Филиалы",
+    "addBranch": "Новый филиал",
+    "branchNamePlaceholder": "например, Главный филиал",
+    "branchesEmpty": "Филиалов пока нет.",
+    "branchCreated": "Филиал создан",
+    "branchUpdated": "Филиал обновлён",
+    "branchDeleted": "Филиал удалён",
+    "deleteBranchTitle": "Удалить филиал?",
+    "deleteBranchDescription": "«{name}» будет удалён.",
+    "delete": "Удалить",
+    "deleting": "Удаление...",
+    "hoursTitle": "Часы работы",
+    "startLabel": "Время открытия:",
+    "endLabel": "Время закрытия:",
+    "hoursInvalid": "Время закрытия должно быть позже времени открытия"
   }
 }

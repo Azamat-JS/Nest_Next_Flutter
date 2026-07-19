@@ -61,3 +61,16 @@ export type DashboardSchedule = {
     rooms: { id: string; name: string }[];
     lessons: ScheduleLesson[];
 }
+
+export type OrganizationSettings = {
+    name: string;
+    logoUrl: string | null;
+    workStartTime: string; // "HH:mm"
+    workEndTime: string; // "HH:mm"
+}
+
+export type BranchType = {
+    id: string;
+    name: string;
+    createdAt?: string;
+}

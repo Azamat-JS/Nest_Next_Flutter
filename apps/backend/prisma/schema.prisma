@@ -18,6 +18,11 @@ model Tenant {
   botToken      String?
   botUsername   String?
   webhookSecret String?
+  // Small logo image stored inline as a data URL (no file storage backend).
+  logoUrl       String?
+  // Working hours of the center, "HH:mm" (24h).
+  workStartTime String       @default("08:00")
+  workEndTime   String       @default("20:00")
   createdAt     DateTime     @default(now())
   updatedAt     DateTime     @updatedAt
 
@@ -42,8 +47,25 @@ model Tenant {
   rooms           Room[]
   courses         Course[]
   holidays        Holiday[]
+  branches        Branch[]
 
   @@map("Tenant")
+}
+
+// Physical branch (filial) of a tenant's educational center.
+model Branch {
+  id   String @id @default(cuid())
+  name String
+
+  tenantId String
+  tenant   Tenant @relation(fields: [tenantId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([tenantId, name])
+  @@index([tenantId])
+  @@map("Branch")
 }
 
 model PlatformAdmin {
