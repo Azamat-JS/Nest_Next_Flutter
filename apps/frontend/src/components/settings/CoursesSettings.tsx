@@ -68,11 +68,13 @@ const CoursesSettings = () => {
     }), [t])
 
     const form = useForm({
+        // Derived from editTarget: useForm re-applies defaultValues on render,
+        // so static defaults would wipe values set imperatively via reset().
         defaultValues: {
-            name: '',
-            price: 0,
-            durationMonths: 1,
-            description: '',
+            name: editTarget?.name ?? '',
+            price: editTarget ? Number(editTarget.price) : 0,
+            durationMonths: editTarget?.durationMonths ?? 1,
+            description: editTarget?.description ?? '',
         },
         validators: { onSubmit: schema },
         onSubmit: async ({ value }) => {
@@ -105,12 +107,7 @@ const CoursesSettings = () => {
 
     const openEdit = (course: CourseType) => {
         setEditTarget(course)
-        form.reset({
-            name: course.name,
-            price: Number(course.price),
-            durationMonths: course.durationMonths,
-            description: course.description ?? '',
-        })
+        form.reset()
         setOpenForm(true)
     }
 
