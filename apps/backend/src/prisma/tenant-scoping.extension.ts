@@ -25,6 +25,7 @@ const TENANT_SCOPED_MODELS = new Set([
     'TelegramLink',
     'GroupLessonSchedule',
     'Room',
+    'Course',
 ]);
 
 const WHERE_FILTERED_OPERATIONS = new Set([

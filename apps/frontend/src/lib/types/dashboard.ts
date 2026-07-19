@@ -28,6 +28,15 @@ export type RoomType = {
     _count?: { lessonSchedules: number };
 }
 
+export type CourseType = {
+    id: string;
+    name: string;
+    price: string; // Prisma Decimal serialized as string
+    durationMonths: number;
+    description: string | null;
+    createdAt?: string;
+}
+
 export type ScheduleLesson = {
     id: string;
     dayOfWeek: number; // ISO-8601: 1 = Monday ... 7 = Sunday
